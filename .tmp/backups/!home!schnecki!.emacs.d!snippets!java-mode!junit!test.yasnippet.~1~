@@ -1,0 +1,40 @@
+package qm.test;
+
+import junit.framework.JUnit4TestAdapter;
+import org.junit.Assert;
+import static org.junit.Assert.*;
+import org.junit.Test;
+
+/**
+*  Unit Test for class est
+ *
+ *
+ * Created: Wed Oct 16 18:08:23 2013
+ *
+ * @author <a href="mailto:manuel.schneckenreither@student.uibk.ac.at">Manuel Schneckenreither</a>
+ * @version 1.0
+ */
+ public class test {
+
+ /** 
+ * Creates a new <code>test</code> instance.
+ *
+ * @param name test name
+ */
+ public test() {
+ }
+
+ /**
+ * @return a <code>TestMethod</code>
+ */
+ @Test
+ public void testMethod() {
+ }
+
+ /** 
+ * Test Adapter 
+ */ 
+ public static junit.framework.Test suite() {
+ return new JUnit4TestAdapter(test.class);
+ }
+ }// test

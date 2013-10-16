@@ -1,0 +1,10 @@
+(add-to-list 'load-path (concat package_folder "eldoc/"))
+
+
+;; ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+;; ++++++++++++++++++++++++++++ ELDOC CONFIG ++++++++++++++++++++++++++++
+;; ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+;; eldoc for c
+(load-file (concat package_folder "eldoc/c-eldoc.el"))
+(add-hook 'c-mode-hook 'c-turn-on-eldoc-mode)

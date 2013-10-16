@@ -1,0 +1,43 @@
+// Main.java --- 
+// 
+// Filename: Main.java
+// Description: 
+// Author: Manuel Schneckenreither
+// Maintainer: 
+// Created: Di Okt 15 10:11:20 2013 (+0200)
+// Version: 
+// Package-Requires: ()
+// Last-Updated: Di Okt 15 10:12:00 2013 (+0200)
+//           By: Manuel Schneckenreither
+//     Update #: 1
+// URL: 
+// Doc URL: 
+// Keywords: 
+// Compatibility: 
+// 
+// 
+
+// Commentary: 
+// 
+// 
+// 
+// 
+
+// Change Log:
+// 
+// 
+// 
+// 
+
+// Code:
+
+package at.ac.ubik.test;
+
+public class Main {
+    public static void main(String[] args) {
+        System.out.println("Hello world!");
+    }
+}
+
+// 
+// Main.java ends here

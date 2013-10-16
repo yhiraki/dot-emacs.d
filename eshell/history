@@ -1,0 +1,128 @@
+ls
+rm haskell-mode2/
+rm haskell-mode2/ -r
+ls
+cd haskell-mode/
+ls
+cd ..
+cd 02
+cd 01/
+ls
+ls
+cd 01_02_Schneckenreither/
+ls
+cat TAGS 
+rm TAGS 
+mv ~/Downloads/junit-4.11.jar src/
+mv ~/Documents/hardangervidda_map.gif src/
+cd ...
+cd ....
+mv Software\ Qualität/ Sofware_Quality
+mv Sofware_Quality/ Software\ Quality
+ls
+rm object.yasnippet 
+ls -l
+cd src/
+rm *.class
+ls
+cd ..
+mkdir lib
+ls
+ls
+ls ../classes/
+ls -l
+rm hardangervidda_map.gif 
+mv ~/Downloads/hamcrest-all-1.3.jar.
+mv ~/Downloads/hamcrest-all-1.3.jar .
+ls -l
+cd ..
+ls 
+ls
+rm ../Stack.class 
+ls 
+ls classes/
+ls src/
+ls
+ls ..
+rm *.class
+rm ../*.class
+ls 
+ls
+ls
+ls classes/
+rm classes/Stack.class 
+rm Stack.class 
+ls classes/
+ls 
+ls classes/
+rm -r classes/*
+ls classes/
+cd .....
+cd src/
+ll
+ls
+rm test/
+rm -r test/
+ls
+cd ..
+ls
+mv src/junit-4.11.jar lib/
+mv src/hamcrest-all-1.3.jar lib/
+cd ../classes/
+ll
+ls
+cd ../src/
+ls
+java -cp .:/usr/share/java/junit.jar org.junit.runner.JUnitCore StackTest.java
+java -cp .:/usr/share/java/junit.jar org.junit.runner.JUnitCore ./StackTest.java
+java -cp .:/usr/share/java/junit.jar org.junit.runner.JUnitCore ~/Documents/UIBK/5.Semester/Software Quality/PS/01/01_02_Schneckenreither/src/Stac
+pwd
+java -cp .:/usr/share/java/junit.jar org.junit.runner.JUnitCore /home/schnecki/Documents/UIBK/5.Semester/Software Quality/PS/01/01_02_Schneckenreither/src/StackTest.java
+java -cp .:/usr/share/java/junit.jar org.junit.runner.JUnitCore /home/schnecki/Documents/UIBK/5.Semester/Software\ Quality/PS/01/01_02_Schneckenreither/src/StackTest.java
+ls
+java -cp .:/usr/share/java/junit.jar org.junit.runner.JUnitCore /home/schnecki/Documents/UIBK/5.Semester/Software\ Quality/PS/01/01_02_Schneckenreither/src/StackTest
+java -cp .:/usr/share/java/junit.jar org.junit.runner.JUnitCore StackTest
+java -cp .:/usr/share/java/junit.jar org.junit.runner.JUnitCore StackTest.java
+cd ../classes/
+ls
+cd qm/
+ls
+java -cp .:/usr/share/java/junit.jar org.junit.runner.JUnitCore Stack.java
+java -cp .:/usr/share/java/junit.jar org.junit.runner.JUnitCore Stack
+cd /usr/lib/jvm/java-1.7.0
+ls
+ls include/
+ls
+cd lib/
+ls
+cd ..
+find . -name "*.jar"
+cd ../
+cd classes/
+ls
+java -cp .:/usr/share/java/junit.jar org.junit.runner.JUnitCore StackTest
+java -cp .:/usr/share/java/junit.jar org.junit.runner.JUnitCore StackTest
+cd ../src/
+ls
+mkdir test
+mv StackTest.java test/
+mkdir main
+mv Stack.java main/
+cd main/
+mkdir qm
+mv Stack.java qm/
+cd ~/Programmierung/Java/
+ls
+mkdir junit
+ls
+cd junit
+cd ..
+mv get.yasnippet getter.yasnippet
+ls
+rm -r .git/
+rm .gitignore
+rm README.org
+rm LICENSE
+ls -l
+exit
+mv testsuite.java  testsuite.yasnippet

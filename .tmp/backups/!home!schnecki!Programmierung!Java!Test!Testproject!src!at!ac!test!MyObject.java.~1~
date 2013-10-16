@@ -1,0 +1,50 @@
+package at.ac.test;
+
+public class MyObject {
+
+    private String name;
+    private Integer number;
+
+    public MyObject(String name, Integer number) {
+        
+    }
+
+    
+    /**
+     * Gets the value of number
+     *
+     * @return the value of number
+     */
+    public Integer getNumber() {
+        return number;
+    }
+    
+    /**
+     * Sets the value of number
+     *
+     * @param argNumber Value to assign to this.number
+     */
+    public void setNumber(Integer argNumber) {
+        this.number = argNumber;
+    }
+
+    
+    /**
+     * Gets the value of name
+     *
+     * @return the value of name
+     */
+    public String getName() {
+        return name;
+    }
+    
+    /**
+     * Sets the value of name
+     *
+     * @param argName Value to assign to this.name
+     */
+    public void setName(String argName) {
+        this.name = argName;
+    }
+
+}

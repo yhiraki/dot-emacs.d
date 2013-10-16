@@ -1,0 +1,34 @@
+-- filter.hs --- 
+-- 
+-- Filename: filter.hs
+-- Description: 
+-- Author: Manuel Schneckenreither
+-- Maintainer: 
+-- Created: Mi Okt  9 22:50:25 2013 (+0200)
+-- Version: 
+-- Package-Requires: ()
+-- Last-Updated: Mi Okt  9 22:51:17 2013 (+0200)
+--           By: Manuel Schneckenreither
+--     Update #: 1
+-- URL: 
+-- Doc URL: 
+-- Keywords: 
+-- Compatibility: 
+-- 
+-- 
+
+-- Commentary: 
+-- 
+-- 
+-- 
+-- 
+
+-- Change Log:
+-- 
+-- Code:
+
+
+main = interact (unlines . filter (elem 'a') . lines)
+
+-- 
+-- filter.hs ends here

@@ -1,0 +1,40 @@
+import java.util.Stack;
+
+
+/**
+ *  Unit Test for class Stack
+ *
+ *
+ * Created: Tue Oct 15 20:00:32 2013
+ *
+ * @author <a href="mailto:manuel.schneckenreither@student.uibk.ac.at">Manuel Schneckenreither</a>
+ * @version 1.0
+ */
+public class StackTest {
+
+
+    @Before
+    public void before() {
+
+    }
+
+    /**
+     * @return a <code>TestMethod</code>
+     */
+    @Test
+    public void testIsEmpty() {
+        Stack tmp = new Stack();
+
+        assertTrue(tmp.isEmpty(), true);
+
+    }
+
+    /**
+     * Test Adapter
+     */
+    // public static junit.framework.Test suite() {
+    //     return new JUnit4TestAdapter(StackTest.class);
+    // }
+}// StackTest
+
+

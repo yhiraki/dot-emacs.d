@@ -1,0 +1,62 @@
+%%% backup_slides.tex ---
+%%
+%% Filename: backup_slides.tex
+%% Status:
+%% Author: Manuel Schneckenreither
+%% Created: Di Okt  1 18:59:29 2013 (+0200)
+%% Version:
+%% Last-Updated: Di Okt  1 20:39:36 2013 (+0200)
+%%           By: Manuel Schneckenreither
+%%     Update #: 48
+%% URL:
+%% Description:
+%%
+%%
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%%% Code:
+
+
+
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: "main"
+%%% End:
+
+
+
+  \newcommand{\sectiontitle}{Backup Slides}
+
+  {
+    \newcommand{\mypagetitle}{Term Rewrite Systems}
+    \begin{frame}[noframenumbering]
+      \frametitle{\mypagetitle}
+      \framesubtitle{\sectiontitle}
+
+      \begin{itemize}
+      \item A term rewrite system (TRS for
+        short) is an ES with the property that all its equations are rewrite rules.
+      \item Rules are only allowed to be used in one direction.
+      \item TRSs are turing-complete.
+        \vspace{0.5cm}
+      \end{itemize}
+
+      \textbf{Example:} \\
+      $plus(0, y)  \rightarrow  y$ \\
+      $plus(succ(x), y)  \rightarrow   succ(plus(x, y))$ \\
+      \vspace{0.5cm}       $plus(1,1) \rightarrow succ(plus(0,1)) \rightarrow succ(1)$
+
+      \vfill
+      \center{
+        {\footnotesize Where succ(x) is the successor function.}
+      }
+
+    \end{frame}
+  }
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% backup_slides.tex ends here

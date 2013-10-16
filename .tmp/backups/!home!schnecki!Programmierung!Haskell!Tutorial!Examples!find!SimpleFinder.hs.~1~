@@ -1,0 +1,40 @@
+-- SimpleFinder.hs --- 
+-- 
+-- Filename: SimpleFinder.hs
+-- Description: 
+-- Author: Manuel Schneckenreither
+-- Maintainer: 
+-- Created: Sa Okt 12 13:24:46 2013 (+0200)
+-- Version: 
+-- Package-Requires: ()
+-- Last-Updated: Sa Okt 12 13:26:24 2013 (+0200)
+--           By: Manuel Schneckenreither
+--     Update #: 1
+-- URL: 
+-- Doc URL: 
+-- Keywords: 
+-- Compatibility: 
+-- 
+-- 
+
+-- Commentary: 
+-- 
+-- 
+-- 
+-- 
+
+-- Change Log:
+-- 
+-- 
+-- Code:
+
+import RecursiveContents (getRecursiveContents)
+
+simpleFind :: (FilePath -> Bool) -> FilePath -> IO [FilePath]
+simpleFind p path = do
+  names <- getRecursiveContents path
+  return (filter p names)
+
+
+-- 
+-- SimpleFinder.hs ends here

@@ -1,0 +1,65 @@
+;;; emacs_lisp_config.el --- 
+;; 
+;; Filename: emacs_lisp_config.el
+;; Description: 
+;; Author: Manuel Schneckenreither
+;; Maintainer: 
+;; Created: So Okt 13 22:47:58 2013 (+0200)
+;; Version: 
+;; Package-Requires: ()
+;; Last-Updated: So Okt 13 22:50:58 2013 (+0200)
+;;           By: Manuel Schneckenreither
+;;     Update #: 12
+;; URL: 
+;; Doc URL: 
+;; Keywords: 
+;; Compatibility: 
+;; 
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; 
+;;; Commentary: 
+;; 
+;; 
+;; 
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; 
+;;; Change Log:
+;; 
+;; 
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; 
+;;; Code:
+
+
+;; ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+;; ++++++++++++++++++++++++++++ EMACS LISP  +++++++++++++++++++++++++++++
+;; ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+
+;; Function to make tags file
+(defun make-emacs-lisp-tags ()
+  "This function reloads the tags by using an async shell command."
+  (interactive)
+    (async-shell-command
+	 (concat "cd "
+			 (nth 0 (split-string buffer-file-name emacsversion))
+			 " && find . -name \"*.el\" -print | etags -") t)
+	)
+
+;; MINOR MODE HOOK
+(defun emacs-lisp-minor-mode ()
+  "Minor mode hook for Emacs Lisp."
+
+  ;; KEYS
+  (local-set-key (kbd "C-x x e r") 'eval-region)
+  (local-set-key (kbd "C-x x e b") 'eval-buffer)
+
+  ;; tags file
+  (add-hook 'after-save-hook 'make-emacs-lisp-tags)
+  )
+
+(add-hook 'emacs-lisp-mode-hook 'emacs-lisp-minor-mode)
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;; emacs_lisp_config.el ends here

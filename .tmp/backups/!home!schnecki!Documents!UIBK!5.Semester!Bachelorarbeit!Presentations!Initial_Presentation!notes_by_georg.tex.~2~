@@ -1,0 +1,58 @@
+%%% notes_by_georg.tex ---
+%%
+%% Filename: notes_by_georg.tex
+%% Status:
+%% Author: Manuel Schneckenreither
+%% Created: Fr Sep 20 18:47:47 2013 (+0200)
+%% Version:
+%% Last-Updated: Mo Okt  7 12:55:45 2013 (+0200)
+%%           By: Manuel Schneckenreither
+%%     Update #: 126
+%% URL:
+%% Description:
+%%
+%%
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%%% Code:
+
+
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: "main"
+%%% End:
+
+
+
+
+{
+  \newcommand{\sectiontitle}{Georg Moser's Notes on Amortised Cost Analysis}
+
+  \section{\sectiontitle}
+
+  {
+    \newcommand{\mypagetitle}{The Idea}
+    \begin{frame}
+      \frametitle{\mypagetitle}
+      \framesubtitle{\sectiontitle}
+      \subsection{\mypagetitle}
+
+      \textbf{Goal:}
+      \newline Adapt amortised cost analysis to (typed) Term Rewrite Systems $\mathcal{R}$
+      \vspace{0.5cm} \newline
+      \textbf{Methods to achieve the goal were developed by Georg Moser in \cite{MoserNotes}.
+      }
+      % the types assigned to the constructors and defined symbols
+      % of  $\mathcal{F}$ provide us with sufficient
+      % information to bound the runtime of $\mathcal{R}$. `` \cite{MoserNotes}
+
+    \end{frame}
+  }
+
+}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% notes_by_georg.tex ends here

@@ -1,0 +1,100 @@
+;;; emacs.el ---
+;;
+;; Filename: emacs.el
+;; Status:
+;; Author: Manuel Schneckenreither
+;; Created: Tue Dec 11 00:43:14 2012 (+0100)
+;; Version:
+;; Last-Updated: Mo Sep  2 17:26:55 2013 (+0200)
+;;           By: Manuel Schneckenreither
+;;     Update #: 206
+;; URL:
+;; Description:
+;;
+;;
+;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;
+;;; Code:
+
+
+;; AUTOCOMPILE EVERYTHING IF NOT EXISTING
+;; (defun byte-compile-all-el-files ()
+;;   (interactive)
+;;   (byte-recompile-directory folder 0))
+
+;; (if (not (file-exists-p (concat folder "emacs.elc")))
+;;     (byte-compile-all-el-files))
+
+
+;; SET VARIABLES
+ ;; (setq package_folder (concat folder "packages/"))
+ ;; (setq package_conf_folder (concat folder "packages_configs/"))
+ ;; (setq language_conf_folder (concat folder "language_configs/"))
+
+
+;; ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+;; ++++++++++++++++++++++++++++++ BASICS ++++++++++++++++++++++++++++++++
+;; ++++++++++++++ which means no extra package needed +++++++++++++++++++
+;; ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+(load (concat folder "basics.el"))
+
+;; ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+;; +++++++++++++++++++++++++ SPECIAL PACKAGES ++++++++++++++++++++++++++
+;; ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+;; RFINGE FLYMAKE EXTENSIONI - rfinge (position of errors) and enhancements C-c d etc.
+;; (load (concat package_conf_folder "rfinge_config.el"))
+;; GLOBAL
+;; (load (concat package_conf_folder "global_config.el"))
+;; CEDET - semantic, EDE, etc. // TODO CEHCK COMPILATION
+;; CEDET gets loaded in ~/.emacs
+;;     (load (concat package_conf_folder "cedet_config.el"))
+;; TUAREG MODE - OCaml code stuff
+;; (load (concat package_conf_folder "tuareg_config.el"))
+;; THESAURUS - choose synonym and replace
+;; (load (concat package_conf_folder "thesaurus_config.el"))
+;; PAGER - excellent package for better scrolling in emacs
+;; (load (concat package_conf_folder "pager_config.el"))
+;; HEADER 2 - Enter a header in the files
+;; ;; (load (concat package_conf_folder "header2_config.el"))
+;; UNDO TREE - undo/redo improvement and compilcation :)
+;; (load (concat package_conf_folder "undo_tree_config.el"))
+;; WINDOW NUMBER MODE - change windows by C-x C-j [NUMBER] or  META-[NUMBER]
+;; (load (concat package_conf_folder "window-number_config.el"))
+;; ELDOC -- load the latest eldoc mode for c
+;; (load (concat package_conf_folder "eldoc_config.el"))
+;; TINY TOOLS
+;; (load-file (concat package_conf_folder "tiny_tools_config.el"))
+;; OPENGL EXTENSIONS - opengl and shader language mode
+;; (load-file (concat package_conf_folder "opengl_config.el"))
+;; IDO - minibuffer helper
+;; (load-file (concat package_conf_folder "ido_config.el"))
+;; (load-file (concat package_conf_folder "flycheck_config.el"))
+
+;; ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+;; +++++++++++++++++ LOAD LANGUAGE SPECIFIC SETTINGS ++++++++++++++++++++
+;; ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+;; C, C++
+;; (load-file (concat language_conf_folder "c_config.el"))
+;; (load-file (concat language_conf_folder "haskell_config.el"))
+;; (load-file (concat language_conf_folder "java_config.el"))
+;; (load-file (concat language_conf_folder "emacs_lisp_config.el"))
+;; (load-file (concat language_conf_folder "ocaml_config.el"))
+;; (load-file (concat language_conf_folder "makefile_config.el"))
+;; (load-file (concat language_conf_folder "latex_config.el"))
+
+
+;; ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+;; ++++++++++++++++++++++++++ LOAD KEYBINDINGS ++++++++++++++++++++++++++
+;; ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+
+
+;; (load (concat folder "basic_keys.el"))
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;; emacs.el ends here

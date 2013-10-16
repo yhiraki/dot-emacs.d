@@ -1,0 +1,13 @@
+# -*- mode: snippet -*-
+# name: setter
+# key: set
+# --
+/**
+* Sets the value of ${3:$(concat (downcase (substring yas/text 0 1))}.
+*
+* @param arg${2:$(upcase-initials yas/text)} Value to assign to this.${3:$(concat (downcase (substring yas/text 0 1))}.
+*/
+public void set${1:Name}(${2:String} ${3:name}) {
+       this.${3:$(concat (downcase (substring yas/text 0 1)) (substring yas/text 1))}$0 = $3;
+}
+

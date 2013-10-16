@@ -1,0 +1,71 @@
+{-# LANGUAGE UnicodeSyntax #-}
+-- eqclasses.hs ---
+--
+-- Filename: eqclasses.hs
+-- Status:
+-- Author: Manuel Schneckenreither
+-- Created: Di Sep 10 10:43:13 2013 (+0200)
+-- Version:
+-- Last-Updated:
+--           By:
+--     Update #: 25
+-- URL:
+-- Description:
+--
+--
+--
+--
+
+-- Code:
+
+data Color = Green | Red | Blue
+-- automatic derivation would be available for:
+-- Read, Show, Eq, Ord, Enum, Bounded
+
+
+
+class BasicEq a where
+  isEqual     ∷ a → a → Bool
+  isEqual x y = not (isNotEqual x y)
+
+  isNotEqual ∷ a → a → Bool
+  isNotEqual x y = not (isEqual x y)
+
+
+
+instance BasicEq Bool where
+  isEqual True True = True
+  isEqual False False = True
+  isEqual _     _     = False
+
+
+instance BasicEq Color where
+  isEqual Red Red = True
+  isEqual Green Green = True
+  isEqual Blue Blue = True
+  isEqual _    _    = False
+
+instance Show Color where
+  show Red = "Red"
+  show Green = "Green"
+  show Blue = "Blue"
+
+instance Read Color where
+  -- reads Prec is the ain function for parsing input
+  readsPrec _ value =
+    -- We pass tryParse a list of pairs. Each pair has a string
+    -- and the desired return value. tryParse will try to match the input
+    -- to one of these strings
+    tryParse [("Red", Red), ("Green", Green), ("Blue", Blue)]
+    where tryParse [] = [] -- if there is nothing left to try -> fail
+          tryParse ((attempt, result):xs) =
+            -- Compare the start of the string to be parsed to the
+            -- text we are looking for.
+            if (take (length attempt) value) == attempt
+               then [(result, drop (length attempt) value)]
+            else  tryParse xs
+
+
+
+--
+-- eqclasses.hs ends here

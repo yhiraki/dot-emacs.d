@@ -1,0 +1,9 @@
+
+
+;; ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+;; ++++++=+++++++++++++++++++ SMART TABS MODE +++++++++++++++++++++++++++
+;; ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+(define-key ac-completing-map [(tab)] 'ac-complete) ;; enable completing by tab
+(define-key ac-completing-map "\r" nil) ;; disable completing by enter
+(icomplete-mode +1) ;; complete mode in minibuffer

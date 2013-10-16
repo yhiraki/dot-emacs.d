@@ -1,0 +1,236 @@
+%%% my_work.tex ---
+%%
+%% Filename: my_work.tex
+%% Status:
+%% Author: Manuel Schneckenreither
+%% Created: Fr Sep 20 18:54:36 2013 (+0200)
+%% Version:
+%% Last-Updated: Mo Okt  7 18:34:41 2013 (+0200)
+%%           By: Manuel Schneckenreither
+%%     Update #: 287
+%% URL:
+%% Description:
+%%
+%%
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%%% Code:
+
+
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: "main"
+%%% End:
+
+
+
+
+{
+  \newcommand{\sectiontitle}{Bachelor thesis: Amortised Resource
+    Analysis and Carbon Credits}
+  \section{\sectiontitle}
+
+  % {
+  %   \newcommand{\mypagetitle}{The Idea}
+  %   \begin{frame}
+  %     \frametitle{\mypagetitle}
+  %     \framesubtitle{\sectiontitle}
+  %     \subsection{\mypagetitle}
+
+  %   \end{frame}
+  % }
+
+
+  {
+    \newcommand{\mypagetitle}{Requirement 1}
+    \begin{frame}
+      \frametitle{\mypagetitle}
+      \framesubtitle{\sectiontitle}
+      % \subsection{\mypagetitle}
+
+      \center{
+        \textbf{Complexity Analyser for typed TRSs}
+      }
+
+      \vspace{0.5cm}
+      Planned Way of Proceeding:
+      \vspace{0.2cm}
+
+      \hspace*{2.4cm}
+      \begin{tikzpicture}[>=latex,font=\sffamily]
+
+        % nodes
+        \node [text width=4.5cm,text centered,minimum width=1cm,minimum height=1.5em,outer
+        sep=0pt,draw=black,fill=blue!10,semithick] at (0,5) (A) {typed TRS};
+
+        \node [text width=4.5cm,text centered,minimum width=1cm,minimum height=1.5em,outer
+        sep=0pt,draw=black,fill=blue!10,semithick] at (0,3) (B)
+        {Annotated Types};
+
+        \node [text width=4.5cm,text centered,minimum width=1cm,minimum height=1.5em,outer
+        sep=0pt,draw=black,fill=blue!10,semithick] at (0,1) (C) {Costs
+          (Runtime)};
+
+        % arrows
+        \draw [->,shorten >=2pt,shorten <=2pt,semithick] (A.south) --
+        +(0,-1.7em) -| (B) node [text width=4.5cm,right,midway] {\footnotesize Amortised\,Analysis (Adjusted Type Inference of Paper)};
+        \draw [->,shorten >=2pt,shorten <=2pt,semithick] (B.south) --
+        +(0,-1.7em) -| (C) node [right,midway] {\footnotesize
+          trivial};
+
+      \end{tikzpicture}
+
+    \end{frame}
+  }
+
+  {
+    \newcommand{\mypagetitle}{Requirement 2}
+    \begin{frame}
+      \frametitle{\mypagetitle}
+      \framesubtitle{\sectiontitle}
+      % \subsection{\mypagetitle}
+
+      \center{
+        \textbf{Extend Existing Techniques for the Synthesis of
+          Polynomial Interpretations to typed TRSs}
+      }
+
+
+      \vspace{0.5cm}
+      Planned Way of Proceeding:
+      \vspace{0.2cm}
+
+      \hspace*{2.4cm}
+      \begin{tikzpicture}[>=latex,font=\sffamily]
+
+        
+        % nodes
+        \node [text width=4.5cm,text centered,minimum width=1cm,minimum height=1.5em,outer
+        sep=0pt,draw=black,fill=blue!10,semithick] at (0,5) (A) {typed TRS};
+
+        \node [text width=4.5cm,text centered,minimum width=1cm,minimum height=1.5em,outer
+        sep=0pt,draw=black,fill=blue!10,semithick] at (0,3) (B)
+        {polynomial Interpretation of typed TRS};
+
+        \node [text width=4.5cm,text centered,minimum width=1cm,minimum height=1.5em,outer
+        sep=0pt,draw=black,fill=blue!10,semithick] at (0,1) (C) {Costs
+          (Runtime)};
+
+        % arrows
+        \draw [->,shorten >=2pt,shorten <=2pt,semithick] (A.south) --
+        +(0,-1.7em) -| (B) node [text width=4.5cm,right,midway,text depth=0.2cm] {\footnotesize SAT};
+        \draw [->,shorten >=2pt,shorten <=2pt,semithick] (B.south) --
+        +(0,-1.7em) -| (C) node [right,midway,text depth=0.3cm] {\footnotesize
+          trivial};
+
+      \end{tikzpicture}
+
+
+    \end{frame}
+  }
+  {
+    \newcommand{\mypagetitle}{Requirement 3}
+    \begin{frame}
+      \frametitle{\mypagetitle}
+      \framesubtitle{\sectiontitle}
+      % \subsection{\mypagetitle}
+
+      \center{
+        \textbf{Compare the Viability of these Approaches}
+      }
+
+      \vspace{1cm}
+      \begin{columns}
+        \column{0.38\textwidth}
+        \hspace{1.68cm}
+        {\footnotesize Requirement 1:}
+        \column{0.6\textwidth}
+        \hspace{1.6cm}
+        {\footnotesize Requirement 2:}
+        \end{columns}
+        \vspace{0.3cm}
+
+        \hspace{0.5cm}
+        \scalebox{0.6}{
+          \begin{tikzpicture}[>=latex,font=\sffamily]
+
+
+
+            % nodes
+            \node [text width=4.5cm,text centered,minimum width=1cm,minimum height=1.5em,outer
+            sep=0pt,draw=black,fill=blue!10,semithick] at (-4,5) (A) {typed TRS};
+
+            \node [text width=4.5cm,text centered,minimum width=1cm,minimum height=1.5em,outer
+            sep=0pt,draw=black,fill=blue!10,semithick] at (-4,3) (B)
+            {Annotated Types};
+
+            \node [text width=4.5cm,text centered,minimum width=1cm,minimum height=1.5em,outer
+            sep=0pt,draw=black,fill=blue!10,semithick] at (-4,1) (C) {Costs
+              (Runtime)};
+
+            % arrows
+            \draw [->,shorten >=2pt,shorten <=2pt,semithick] (A.south) --
+            +(0,-1.7em) -| (B) node [text width=4.5cm,right,midway] {\footnotesize Amortised\,Analysis (Adjusted Type Inference of Paper)};
+            \draw [->,shorten >=2pt,shorten <=2pt,semithick] (B.south) --
+            +(0,-1.7em) -| (C) node [right,midway] {\footnotesize
+              trivial};
+
+
+
+            % nodes
+            % \node [text width=4.5cm,text centered,minimum width=1cm,minimum height=1.5em,outer
+            % sep=0pt,draw=black,fill=blue!10,semithick] at (-3,5) (A)
+            % {Types/typed TRS};
+
+            % \node [text width=4.5cm,text centered,minimum width=1cm,minimum height=1.5em,outer
+            % sep=0pt,draw=black,fill=blue!10,semithick] at (-3,3) (B)
+            % {Types (Extracted)};
+
+
+            % \node [text width=4.5cm,text centered,minimum width=1cm,minimum height=1.5em,outer
+            % sep=0pt,draw=black,fill=blue!10,semithick] at (-3,1) (C)
+            % {Annotated Types};
+
+            % \node [text width=4.5cm,text centered,minimum width=1cm,minimum height=1.5em,outer
+            % sep=0pt,draw=black,fill=blue!10,semithick] at (4,4) (D)
+            % {polynomial Interpretation for Types};
+
+            % \node [text width=4.5cm,text centered, minimum width=1cm,minimum height=1.5em,outer
+            % sep=0pt,draw=black,fill=blue!10,semithick] at (4,2) (E)
+            % {Costs\\(Runtime)};
+
+            % nodes
+            \node [text width=4.5cm,text centered,minimum width=1cm,minimum height=1.5em,outer
+            sep=0pt,draw=black,fill=blue!10,semithick] at (4,5) (A) {typed TRS};
+
+            \node [text width=4.5cm,text centered,minimum width=1cm,minimum height=1.5em,outer
+            sep=0pt,draw=black,fill=blue!10,semithick] at (4,3) (B)
+            {polynomial Interpretation of typed TRS};
+
+            \node [text width=4.5cm,text centered,minimum width=1cm,minimum height=1.5em,outer
+            sep=0pt,draw=black,fill=blue!10,semithick] at (4,1) (C) {Costs
+              (Runtime)};
+
+            % arrows
+            \draw [->,shorten >=2pt,shorten <=2pt,semithick] (A.south) --
+            +(0,-1.7em) -| (B) node [text width=4.5cm,right,midway,text depth=0.2cm] {\footnotesize SAT};
+            \draw [->,shorten >=2pt,shorten <=2pt,semithick] (B.south) --
+            +(0,-1.7em) -| (C) node [right,midway,text depth=0.3cm] {\footnotesize
+              trivial};
+
+          \end{tikzpicture}
+
+        }
+
+
+
+    \end{frame}
+  }
+
+}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% my_work.tex ends here

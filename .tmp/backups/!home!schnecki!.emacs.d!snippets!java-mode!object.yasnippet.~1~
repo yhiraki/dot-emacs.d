@@ -1,0 +1,11 @@
+# -*- mode: snippet -*-
+# name: toString
+# key: tos
+# --
+/**
+* {@inheritDoc}
+*/
+@Override
+public String toString() {
+    return $0;
+}

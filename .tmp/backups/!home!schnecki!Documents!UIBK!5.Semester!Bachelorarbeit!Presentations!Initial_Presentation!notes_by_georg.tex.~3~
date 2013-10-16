@@ -1,0 +1,69 @@
+%%% notes_by_georg.tex ---
+%%
+%% Filename: notes_by_georg.tex
+%% Status:
+%% Author: Manuel Schneckenreither
+%% Created: Fr Sep 20 18:47:47 2013 (+0200)
+%% Version:
+%% Last-Updated: Mo Okt  7 19:44:50 2013 (+0200)
+%%           By: Manuel Schneckenreither
+%%     Update #: 140
+%% URL:
+%% Description:
+%%
+%%
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%%% Code:
+
+
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: "main"
+%%% End:
+
+
+
+
+{
+  \newcommand{\sectiontitle}{Georg Moser's Notes on Amortised Cost Analysis}
+
+  \section{\sectiontitle}
+
+  {
+    \newcommand{\mypagetitle}{The Idea}
+    \begin{frame}
+      \frametitle{\mypagetitle}
+      \framesubtitle{\sectiontitle}
+      % \subsection{\mangetout}
+
+
+      % \textbf{Methods to achieve the goal were developed by Georg Moser in \cite{MoserNotes}. }
+      % the types assigned to the constructors and defined symbols
+      % of  $\mathcal{F}$ provide us with sufficient
+      % information to bound the runtime of $\mathcal{R}$. `` \cite{MoserNotes}
+
+      \textbf{Georg Moser showed} that there is a connection
+      between amortised cost analysis and polynomial interpretations \cite{MoserNotes}.
+      \vspace{0.5cm} \newline
+      \textbf{Main Goal:}
+      \newline Adapt amortised cost analysis to (typed) Term Rewrite Systems $\mathcal{R}$
+
+      
+      % *) ABER, wir brauchen polynomielle interpretationen für TRS mit typen 
+      % (also Nat) und annotationen (also Nat(2)).
+
+      % *) deshalb ziel: (1) amortisierte kostenanalyse für getypte TRS und (2) 
+      % synthese von polynomiellen interpretationen für getypte TRS.
+
+      
+    \end{frame}
+  }
+
+}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% notes_by_georg.tex ends here

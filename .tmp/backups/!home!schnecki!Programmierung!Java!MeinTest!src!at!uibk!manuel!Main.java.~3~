@@ -1,0 +1,53 @@
+// Main.java ---
+//
+// Filename: Main.java
+// Description:
+// Author: Manuel Schneckenreither
+// Maintainer:
+// Created: Mo Okt 14 22:56:59 2013 (+0200)
+// Version:
+// Package-Requires: ()
+// Last-Updated: Mo Okt 14 23:21:27 2013 (+0200)
+//           By: Manuel Schneckenreither
+//     Update #: 19
+// URL:
+// Doc URL:
+// Keywords:
+// Compatibility:
+//
+//
+
+// Commentary:
+//
+//
+//
+//
+
+// Change Log:
+//
+//
+// Code:
+
+package at.uibk.manuel;
+
+import java.util.HashSet;
+import java.util.Set;
+
+public class Main {
+    public static void main(String[] args) {
+        System.out.println("Hello World");
+
+        Set<String> set = new HashSet<String>(); // this is a test
+
+
+
+
+
+
+    }
+}
+
+
+
+//
+// Main.java ends here

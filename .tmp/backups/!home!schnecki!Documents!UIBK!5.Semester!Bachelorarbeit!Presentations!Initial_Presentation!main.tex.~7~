@@ -1,0 +1,268 @@
+%%% Main.tex --- Main file, which includes all sub-pages
+%%
+%% Filename: main.tex
+%% Status:
+%% Author: Manuel Schneckenreither
+%% Created: Wed May  8 15:10:48 2013 (+0200)
+%% Version:
+%% Last-Updated: Fr Okt  4 22:17:27 2013 (+0200)
+%% By: Manuel Schneckenreither
+%% Update #: 38
+%% URL:
+%% Description: This is the main file of the final paper in
+%% `Intro to scientific writing.
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%%% Code:
+
+% !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!1
+
+
+
+% TODO:
+% + spell check everything
+
+% !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!1111
+
+\documentclass[t]{beamer}
+
+% HEADER
+% #####################################################################
+
+
+% DEFINES
+% -------------------------------------------------------------------
+
+% title of paper
+\newcommand{\thetitle}{Amortised Resource Analysis and Typed Term
+  Rewriting}
+\newcommand{\theauthor}{Manuel Schneckenreither}
+\newcommand{\supervisor}{Assoc. Prof. Dr. Georg Moser}
+\newcommand{\theinstitute}{Supervisor: \supervisor
+  \newline University of Innsbruck - Bachelor Program  for Computer
+  Science}
+
+% inlcude the presentation style setup file
+\include{presentation_setup}
+
+\title{\thetitle}
+\author{\theauthor}
+\institute{\theinstitute}
+\date{October 08, 2013}
+
+% PACKAGE CONFIGURATIONS
+% -------------------------------------------------------------------
+
+% init colors
+\usepackage{xcolor}
+\definecolor{exmplcolor}{rgb}{0,.1,.2}
+\newcommand{\exampleBox}[1]
+{
+  \begin{framed}
+    \textcolor{exmplcolor}{
+      #1
+    }
+  \end{framed}
+}
+
+% \usepackage[usenames,dvipsnames]{color}
+
+% drawings
+\usepackage{tikz}
+
+
+% boxes
+% \usepackage{fancyvrb}
+
+% encoding
+\usepackage[utf8]{inputenc}
+
+% \usepackage[bookmarks]{hyperref}
+% create command to restart the numbering
+% \newcommand{\sectionnumbering}[1]{%
+% \setcounter{section}{0}%
+% \renewcommand{\thesection}{\csname #1\endcsname{section}}}
+
+
+% graphics information
+% \usepackage{graphicx}
+% \DeclareGraphicsExtensions{.pdf,.png,.jpg}
+% \graphicspath{ {./images/} }
+
+% % % wrapping figures
+% \usepackage{wrapfig}
+% \usepackage[font={footnotesize, it}]{caption}
+
+
+% % % listings
+% \usepackage{listings}
+% % \lstset{
+% % numbers=left,
+% % stepnumber=1,
+% % firstnumber=1,
+% % numberfirstline=true
+% % }
+
+
+%   use boxes with the package framed
+\usepackage{framed}
+
+% % figure numbering: section.figure
+\makeatletter
+\@addtoreset{figure}{section}
+\makeatother
+\renewcommand\thefigure{\arabic{section}.\arabic{figure}}
+
+
+% BEGIN OF DOCUMENT
+% #####################################################################
+\begin{document}
+
+% titlepage
+\frame{\maketitle}
+
+% table of contents command
+\newcommand{\showtoc}{
+  \frame{
+    \frametitle{Table of Contents}
+    \tableofcontents
+  }
+}
+
+
+% TITLE PAGE
+% -------------------------------------------------------------------
+% \include{titlepage}
+
+
+% % ABSTRACT
+% % -------------------------------------------------------------------
+% \input{abstract}
+
+
+
+% % TABLE OF contents
+% % -------------------------------------------------------------------
+% \tableofcontents
+% \pagebreak
+
+
+% INPUT PAGES
+% -------------------------------------------------------------------
+
+% change line numbering to arabic
+% \pagenumbering{arabic}
+% \sectionnumbering{arabic}
+
+% motivation
+\showtoc
+\input{basics}
+
+
+% Introduction
+% \showtoc
+\input{carbon_credits}
+
+
+% Notes by Georg
+% \showtoc
+\input{notes_by_georg}
+
+
+
+% bachelor thesis
+% \showtoc
+\input{my_work}
+
+
+% bachelor thesis
+\input{questions}
+
+
+
+% inlcude backup slides
+\input{backup_slides}
+
+
+
+% BIBLIOGRAPHY
+% #####################################################################
+
+
+% Note the lack of whitespace between the commas and the next bib file.
+\bibliographystyle{apalike}
+\bibliography{bib/db}
+% \bibliography{bib/*}
+
+% \include{bibliography}
+
+
+
+% {
+% \newcommand{\sectiontitle}{Amortised Resource Analysis}
+% \section{\sectiontitle}
+
+% \begin{frame}
+%   \frametitle{What do those words mean at all?}
+%   \framesubtitle{\sectiontitle}
+%   \subsection{Word Definition}
+
+
+%   \begin{itemize}
+%   \item \textbf{Amortised} \newline...the average of the
+%     running time per operation over a sequence of operations.
+%     (TODO: Add reference to paper of Tarjan)
+%   \end{itemize}
+%     %   \begin{columns}[T]
+
+%     %     \column{.65\textwidth}
+
+%     %     \begin{itemize}
+%     %     \item Oil spill \textbf{simulation} from ocean ground up to surface takes
+%     %       \textbf{48h to simulate 15 secs}.
+%     %     \item In reality: Takes about 20h until oil reaches surface
+%     %       \begin{itemize}
+%     %       \item \textbf{ 30 years of computation time} for simulation
+%     %         (non GPU based, but using current technology).
+%     %       \end{itemize}
+%     %     \end{itemize}
+%     %     \vspace{20 mm}
+%     %     \begin{itemize}
+%     %     \item Similar context: Weather forecast
+%     %     \end{itemize}
+
+
+%     %     \column{0.35\textwidth}
+%     %     \begin{figure}[t!]
+%     %       \centering
+%     %     %       \includegraphics{deepwater}
+%     %       \caption{Deepwater Horizon Oil Spill in 2010\newline Source:
+%     %       wikipedia.org \newline Licence: Public domain.}
+%     %     \end{figure}
+
+
+%     %   \end{columns}
+
+% \end{frame}
+
+% }
+
+
+
+\end{document}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% main.tex ends here
+
+% Ideas on how to do this:
+
+
+% - what is amortised resource analysis
+% + amortised resouce analyisis
+% - paper
+% - results
+% + notes by moser
+% - idea
+% + my work
+% - requierements

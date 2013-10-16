@@ -1,0 +1,50 @@
+-- QC-basics.hs --- 
+-- 
+-- Filename: QC-basics.hs
+-- Description: 
+-- Author: Manuel Schneckenreither
+-- Maintainer: 
+-- Created: Sa Okt 12 22:23:03 2013 (+0200)
+-- Version: 
+-- Package-Requires: ()
+-- Last-Updated: So Okt 13 13:10:05 2013 (+0200)
+--           By: Manuel Schneckenreither
+--     Update #: 8
+-- URL: 
+-- Doc URL: 
+-- Keywords: 
+-- Compatibility: 
+-- 
+-- 
+
+-- Commentary: 
+-- 
+-- 
+-- 
+-- 
+
+-- Change Log:
+-- 
+-- 
+-- Code:
+
+
+import Test.QuickCheck
+import Data.List
+
+
+qsort :: Ord a => [a] -> [a]
+qsort [] = []
+qsort (x:xs) = qsort lhs ++ [x] ++ qsort rhs
+  where
+    lhs = filter (< x) xs
+    rhs = filter (>= x) xs
+
+
+prop_idempotent xs = qsort (qsort xs) == qsort xs
+
+
+
+
+-- 
+-- QC-basics.hs ends here

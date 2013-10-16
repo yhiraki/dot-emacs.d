@@ -1,0 +1,20 @@
+(jde-project-file-version "1.0")
+(jde-set-variables)
+
+
+;; get all classes from ./src
+
+(let ((tmp (nth 0 (split-string default-directory "src"))))
+  (setq root (replace-regexp-in-string " " "\\\\ " tmp))
+  (setq src (expand-file-name root "src"))
+  (setq classes (expand-file-name root "classes"))
+
+  (setq subdirs (shell-command-to-string
+                 (concat "find " src " -type d -print")))
+  (add-to-list 'jde-compile-option-classpath subdirs)
+
+  (setq jde-compile-option-directory classes)
+  (setq jde-run-option-classpath classes)
+  )
+
+

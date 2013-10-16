@@ -1,0 +1,74 @@
+;;; column_marker_config.el ---
+;;
+;; Filename: column_marker_config.el
+;; Description:
+;; Author: Manuel Schneckenreither
+;; Maintainer:
+;; Created: Mo Okt 14 18:48:42 2013 (+0200)
+;; Version:
+;; Package-Requires: ()
+;; Last-Updated: Mo Okt 14 18:48:55 2013 (+0200)
+;;           By: Manuel Schneckenreither
+;;     Update #: 2
+;; URL:
+;; Doc URL:
+;; Keywords:
+;; Compatibility:
+;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;
+;;; Commentary:
+;;
+;;
+;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;
+;;; Change Log:
+;;
+;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;
+;;; Code:
+
+
+(require 'column-marker)
+
+;; M-x column-marker-1 highlights the column where the cursor is, in
+;; face `column-marker-1'.
+
+;; C-u 70 M-x column-marker-2 highlights column 70 in face
+;; `column-marker-2'.
+
+;; C-u 70 M-x column-marker-3 highlights column 70 in face
+;; `column-marker-3'.  The face `column-marker-2' highlighting no
+;; longer shows.
+
+;; C-u M-x column-marker-3 turns off highlighting for column-marker-3,
+;; so face `column-marker-2' highlighting shows again for column 70.
+
+;; C-u C-u M-x column-marker-1 (or -2 or -3) erases all column
+;; highlighting.
+
+;; These commands use `font-lock-fontify-buffer', so syntax
+;; highlighting (`font-lock-mode') must be turned on.  There might be
+;; a performance impact during refontification.
+
+
+;; Installation: Place this file on your load path, and put this in
+;; your init file (`.emacs'):
+
+;; (require 'column-marker)
+
+;; Other init file suggestions (examples):
+
+;; Highlight column 80 in foo mode.
+;; (add-hook ' (lambda () (interactive) (column-marker-1 80)))
+
+;; Use `C-c m' interactively to highlight with face `column-marker-1'.
+;; (global-set-key [?\C-c ?m] 'column-marker-1)
+
+
+(column-marker-1 80)
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;; column_marker_config.el ends here

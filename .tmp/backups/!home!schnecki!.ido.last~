@@ -1,0 +1,312 @@
+;;; -*- coding: utf-8 -*-
+
+;; ----- ido-last-directory-list -----
+(
+ ("/home/schnecki/Programmierung/Java/testpr/" . "src/")
+ ("/home/schnecki/Documents/UIBK/5.Semester/Software Quality/PS/01/01_02_Schneckenreither/src/main/" . "qm/")
+ ("/home/schnecki/Documents/UIBK/5.Semester/Software Quality/PS/01/01_02_Schneckenreither/src/test/asdfsdf/" . "at/")
+ ("/home/schnecki/Documents/UIBK/5.Semester/Software Quality/PS/01/01_02_Schneckenreither/src/test/" . "asdfsdf/")
+ ("/home/schnecki/Documents/UIBK/5.Semester/Software Quality/PS/01/01_02_Schneckenreither/src/" . "test/")
+ ("/home/schnecki/Documents/UIBK/5.Semester/Software Quality/PS/01/01_02_Schneckenreither/" . "src/")
+ ("/home/schnecki/Documents/UIBK/5.Semester/Software Quality/PS/01/" . "01_02_Schneckenreither/")
+ ("/home/schnecki/Documents/UIBK/5.Semester/Software Quality/PS/" . "01/")
+ ("/home/schnecki/Documents/UIBK/5.Semester/Software Quality/" . "PS/")
+ ("/home/schnecki/Documents/UIBK/5.Semester/Sofware_Quality/PS/01/01_02_Schneckenreither/" . "src/")
+ ("/home/schnecki/Documents/UIBK/5.Semester/Sofware_Quality/PS/01/" . "01_02_Schneckenreither/")
+ ("/home/schnecki/Documents/UIBK/5.Semester/Sofware_Quality/PS/" . "01/")
+ ("/home/schnecki/Documents/UIBK/5.Semester/Sofware_Quality/" . "PS/")
+ ("/home/schnecki/Documents/UIBK/5.Semester/Software Qualität/PS/01/01_02_Schneckenreither/" . "src/")
+ ("/home/schnecki/Documents/UIBK/5.Semester/Software Qualität/PS/" . "01/")
+ ("/home/schnecki/Documents/UIBK/5.Semester/Software Qualität/" . "PS/")
+ ("/home/schnecki/Documents/UIBK/5.Semester/" . "Software Quality/")
+ ("/home/schnecki/Documents/UIBK/" . "5.Semester/")
+ ("/home/schnecki/Documents/" . "UIBK/")
+ ("/home/schnecki/Programmierung/Haskell/Tutorial/src/" . "ch10/")
+ ("/home/schnecki/.emacs.d/snippets/haskell-mode/" . "haskell-mode/")
+ ("/home/schnecki/.emacs.d/24/packages/jdee-2.4.1/" . "lisp/")
+ ("/home/schnecki/Programmierung/Java/Helllo/src/at/ac/" . "uibk/")
+ ("/home/schnecki/Programmierung/Java/Helllo/src/at/" . "ac/")
+ ("/home/schnecki/Programmierung/Java/Helllo/src/" . "at/")
+ ("/home/schnecki/Programmierung/Java/Helllo/" . "src/")
+ ("/home/schnecki/Programmierung/Java/TestProject/" . "src/")
+ ("/home/schnecki/Programmierung/Java/MainTest/" . "src/")
+ ("/home/schnecki/.emacs.d/snippets/java-mode/" . "classes/")
+ ("/home/schnecki/.emacs.d/snippets/" . "java-mode/")
+ ("/home/schnecki/Programmierung/Java/MeinTest/src/at/uibk/" . "manuel/")
+ ("/home/schnecki/Programmierung/Java/MeinTest/src/at/" . "uibk/")
+ ("/home/schnecki/Programmierung/Java/MeinTest/src/" . "at/")
+ ("/home/schnecki/Programmierung/Java/MeinTest/" . "src/")
+ ("/home/schnecki/.emacs.d/24/packages/" . "jdee-2.4.1/")
+ ("/home/schnecki/Programmierung/Java/maven/src/main/java/at/ac/uibk/csap3804/" . "testing/")
+ ("/home/schnecki/Programmierung/Java/maven/src/main/java/at/ac/uibk/" . "csap3804/")
+ ("/home/schnecki/Programmierung/Java/maven/src/main/java/at/ac/" . "uibk/")
+ ("/home/schnecki/Programmierung/Java/maven/src/main/java/at/" . "ac/")
+ ("/home/schnecki/Programmierung/Java/maven/src/main/java/" . "at/")
+ ("/home/schnecki/Programmierung/Java/maven/src/main/" . "java/")
+ ("/home/schnecki/Programmierung/Java/maven/src/" . "main/")
+ ("/home/schnecki/Programmierung/Java/maven/" . "src/")
+ ("/home/schnecki/Programmierung/Java/endlessLoop/" . "src/")
+ ("/home/schnecki/.emacs.d/" . "snippets/")
+ ("/home/" . "schnecki/")
+ ("/home/schnecki/Programmierung/Java/Test2/ms.test.maven/src/test/java/ms/" . "test/")
+ ("/home/schnecki/Programmierung/Java/Test2/ms.test.maven/src/test/java/" . "ms/")
+ ("/home/schnecki/Programmierung/Java/Test2/ms.test.maven/src/test/" . "java/")
+ ("/home/schnecki/Programmierung/Java/Test2/ms.test.maven/src/main/java/ms/" . "test/")
+ ("/home/schnecki/Programmierung/Java/Test2/ms.test.maven/src/main/java/" . "ms/")
+ ("/home/schnecki/Programmierung/Java/Test2/ms.test.maven/src/main/" . "java/")
+ ("/home/schnecki/Programmierung/Java/Test2/ms.test.maven/src/" . "main/")
+ ("/home/schnecki/Programmierung/Java/Test2/ms.test.maven/" . "src/")
+ ("/home/schnecki/Programmierung/Java/Test2/" . "ms.test.maven/")
+ ("/home/schnecki/Programmierung/Haskell/Tutorial/Examples/find/" . "JavaDoc/")
+ ("/home/schnecki/Programmierung/Haskell/Tutorial/Examples/" . "find/")
+ ("/home/schnecki/Programmierung/Haskell/Tutorial/" . "src/")
+ ("/home/schnecki/Programmierung/Haskell/" . "Tutorial/")
+ ("/home/schnecki/Programmierung/Java/Test/Testproject/" . "src/")
+ ("/home/schnecki/Programmierung/Java/Test/" . "Testproject/")
+ ("/home/schnecki/Programmierung/Java/" . "testpr/")
+ ("/home/schnecki/Programmierung/" . "Java/")
+ ("/home/schnecki/" . "Programmierung/")
+ ("/home/schnecki/.emacs.d/24/" . "packages_configs/")
+)
+
+;; ----- ido-work-directory-list -----
+(
+ "/home/schnecki/.emacs.d/"
+ "/home/schnecki/Documents/UIBK/5.Semester/Software Quality/PS/01/01_02_Schneckenreither/src/test/"
+ "/home/schnecki/.emacs.d/snippets/java-mode/"
+ "/home/schnecki/.emacs.d/24/packages_configs/"
+ "/home/schnecki/.emacs.d/24/"
+ "/home/schnecki/.emacs.d/snippets/java-mode/junit/"
+ "/home/schnecki/.emacs.d/snippets/java-mode/classes/"
+ "/home/schnecki/Documents/UIBK/5.Semester/Software Quality/PS/01/01_02_Schneckenreither/src/main/qm/"
+ "/home/schnecki/.emacs.d/24/language_configs/"
+ "/home/schnecki/Programmierung/Java/testpr/"
+ "/home/schnecki/Programmierung/Java/testpr/src/"
+ "/home/schnecki/Documents/UIBK/5.Semester/Software Quality/PS/01/01_02_Schneckenreither/"
+ "/home/schnecki/Documents/UIBK/5.Semester/Software Quality/PS/01/01_02_Schneckenreither/src/"
+ "/home/schnecki/Documents/UIBK/5.Semester/Software Quality/PS/01/"
+ "/home/schnecki/Documents/UIBK/5.Semester/Software Quality/PS/01/01_02_Schneckenreither/src/test/asdfsdf/at/"
+ "/home/schnecki/Documents/UIBK/5.Semester/Sofware_Quality/PS/01/01_02_Schneckenreither/src/"
+ "/home/schnecki/Documents/UIBK/5.Semester/Software Qualität/PS/01/01_02_Schneckenreither/src/"
+ "/home/schnecki/Documents/UIBK/5.Semester/Software Qualität/PS/01/"
+ "/home/schnecki/.emacs.d/snippets/text-mode/"
+ "/home/schnecki/Programmierung/Haskell/Tutorial/src/ch10/"
+ "/home/schnecki/.emacs.d/snippets/haskell-mode/"
+ "/home/schnecki/.emacs.d/snippets/haskell-mode/haskell-mode/"
+ "/home/schnecki/Programmierung/Java/Test/Testproject/src/"
+ "/home/schnecki/Programmierung/Java/Test/Testproject/"
+ "/home/schnecki/.emacs.d/24/packages/jdee-2.4.1/lisp/"
+ "/home/schnecki/Programmierung/Java/Helllo/src/at/ac/uibk/"
+ "/home/schnecki/Programmierung/Java/MainTest/src/at/ac/ubik/test/"
+ "/home/schnecki/Programmierung/Java/MeinTest/src/at/uibk/manuel/"
+ "/home/schnecki/Programmierung/Haskell/Tutorial/Examples/find/"
+ "/home/schnecki/Programmierung/Java/maven/src/main/java/at/ac/uibk/csap3804/testing/"
+ "/home/schnecki/.emacs.d/24/packages/jdee-2.4.1/"
+ "/home/schnecki/Programmierung/Java/endlessLoop/src/"
+ "/home/schnecki/Programmierung/Java/endlessLoop/src/test/"
+ "/home/schnecki/Programmierung/Java/Test2/ms.test.maven/src/test/java/ms/test/"
+ "/home/schnecki/Programmierung/Java/Test2/ms.test.maven/src/main/java/ms/test/"
+ "/home/schnecki/Programmierung/Java/Test2/ms.test.maven/"
+)
+
+;; ----- ido-work-file-list -----
+(
+ ".gitignore"
+ "README.md"
+ "init.el"
+ "settings.el"
+ "StackTestSuite.java"
+ "testsuite.yasnippet"
+ "testclass.yasnippet"
+ "jdee_config.el"
+ "StackTestParameterized.java"
+ "StackTestPara}meterized.java"
+)
+
+;; ----- ido-dir-file-cache -----
+(
+ ("/home/schnecki/.emacs.d/" (21087 11 264263 760000) "../" "ac-comphist.dat" "24/" "elpa/" "README.md" ".gitignore" "ede-projects.el" "init.el~" ".tmp/" "srecode-map.el" ".git/" "session.10c6b30c59fcb52a9138132445499957100000017260059" "settings.el" "./" "auto-save-list/" "TAGS" ".ido.last" "eshell/" "init.el" ".mc-lists.el" ".ac-dict/" "snippets/" "abbrev_defs")
+
+ ("/home/schnecki/" (21086 65319 675810 828000) ".subversion/" "../" "Documents/" ".bash_profile" ".xournal/" ".macromedia/" ".wine/" ".thumbnails/" "Music/" ".lingot/" ".cabbage/" ".leksah-0.12/" ".gnupg/" "emacs.tar.gz" "VirtualBox VMs/" ".cache/" ".eclipse/" ".aspell.en.pws" ".bashrc" ".gnome2_private/" ".dbus/" ".clamtk/" ".smex-items" ".calibre/" ".stylish-haskell.yaml" "emacsdotbackup.tar.gz" ".swt/" ".m2/" ".java_base.tag" ".erc/" ".gconf/" "Public/" "leksah.lkshw" ".emacs.desktop" ".ido.last~" ".cups/" ".texlive2013/" ".pulse-cookie" ".wireshark/" ".local/" "RMAIL" "Programmierung/" ".ghc/" ".pki/" "bin/" "eBooks/" ".zotero/" ".semanticdb/" ".ccache/" ".gstreamer-0.10/" ".lyx/" ".emacs-places" ".emacs.d.bak_02.08.2013/" ".pgadmin3" ".gimp-2.8/" ".bash_history" ".mozilla/" ".e16/" ".audacity-data/" "Desktop/" ".root_hist" "Pictures/" "Videos/" "./" ".newsrc" "emacs.d.bakup.u1.tar.gz" ".nv/" "Ubuntu One/" ".osmo/" ".bashrc~" ".emacs.bak" ".jython-cache/" ".mysql_history" ".kde/" ".VirtualBox/" ".config/" ".newsrc.eld" ".pgpass" "AndroidSDK/" ".texlive2012/" "TAGS" ".emac.d.bak_04.08.2013/" ".lesshst" "Templates/" ".fgfs/" ".esd_auth" ".globash/" ".android/" "Bash Scripts/" ".emacs~" ".emacs.bak.02.08.2013" ".ICEauthority" ".authinfo" "Audiobooks/" ".emacs.d.old-20130902-174615/" ".mplayer/" ".FBReader/" ".fltk/" ".cabal/" ".nbprofiler/" ".cert/" ".ido.last" ".avidemux6/" ".nvidia-settings-rc" ".gnome2/" "emacs.d-master.zip" ".java/" "csap3804@zid-gpl.uibk.ac.at" ".bzr.log" ".aspell.en.prepl" ".gitconfig" ".ecb-tip-of-day.el" ".pgadmin_histoqueries" ".emacs.d/" ".bash_logout" ".pulse/" "backup_home_error.log" ".mysql/" ".gtk-bookmarks" ".emacs.desktop.lock" ".visualvm/" "News/" "Downloads/" ".gphoto/" ".newsrc-dribble" ".emacs.d.bak/" "chicken.pdf" "Mail/" ".ssh/" ".adobe/" "leksah.lkshs" "output.pdf" ".recentf" ".filezilla/")
+
+ ("/home/schnecki/Documents/UIBK/5.Semester/Software Quality/PS/01/" (21086 61222 116737 742000) "../" "01_02_Schneckenreither/" "01_02_Schneckenreither.tar.gz" "./" "01_01_Schneckenreither.txt")
+
+ ("/home/schnecki/Documents/UIBK/5.Semester/Software Quality/PS/01/01_02_Schneckenreither/src/test/" (21086 61050 110942 832000) "../" "StackTestParameterized.java" "./" "StackTest.java" "StackTestSuite.java")
+
+ ("/home/schnecki/.emacs.d/snippets/java-mode/" (21086 60963 575567 604000) "../" "println.yasnippet" "synchronized.yasnippet" "main-exception.yasnippet" "hello_world.yasnippet" "servlet.yasnippet" "this.yasnippet" "new.yasnippet" "testclass.yasnippet" "set.yasnippet" "testsuite.yasnippet" "setter.yasnippet" "list.yasnippet" "classes/" "sleep.yasnippet" "control flow/" "./" ".yas-make-groups" "main.yasnippet" "TAGS" "reader.yasnippet" "servletfilter.yasnippet" "writer.yasnippet" "map.yasnippet" "junit/" "import.yasnippet" "tostring.yasnippet" "modifiers/" "exceptions/" "thread.yasnippet" "package.yasnippet" "types/" "getter.yasnippet")
+
+ ("/home/schnecki/.emacs.d/24/packages_configs/" (21086 60115 930070 647000) "../" "ido_config.el" "whitespace_config.el" "flyspell_config.el" "auto_complete_config.el" "window-number_config.el" ".emacs.desktop" "jdb-sourcepath.el" "cedet_config.el~" "ido_config.el~" "./" "ecb_config.el" "yasnippet_config.el" "thesaurus_config.el" "jdee_config.el" "header2_config.el" "flycheck_config.el" "cedet_config.el" "eldoc_config.el")
+
+ ("/home/schnecki/.emacs.d/24/" (21086 57996 74829 141000) "../" "emacs.el" "language_configs/" ".emacs.desktop" "packages_configs/" "./" "emacs.el~" "basic_keys.el" "packages/" "basics.el~" "basics.el")
+
+ ("/home/schnecki/Documents/UIBK/5.Semester/Software Quality/PS/01/01_02_Schneckenreither/src/main/qm/" (21086 56459 17146 777000) "../" "./" "Stack.java")
+
+ ("/home/schnecki/.emacs.d/snippets/java-mode/junit/" (21086 51949 884448 505000) "../" "test.yasnippet" "./")
+
+ ("/home/schnecki/.emacs.d/24/language_configs/" (21086 48305 522857 986000) "../" "java_config.el" "init-cc-compiler.el" "emacs_lisp_config.el" "c_config.el" "./" "haskell_config.el" "makefile_config.el" "latex_config.el" "ocaml_config.el" "init-cc-mode-syntax-check.el")
+
+ ("/home/schnecki/.emacs.d/snippets/java-mode/classes/" (21086 48954 70733 871000) "../" "property.yasnippet" "./" "extends.yasnippet" "implements.yasnippet" "interface.java" "constructor.yasnippet" "class.yasnippet")
+
+ ("/home/schnecki/.emacs.d/24/packages/jdee-2.4.1/lisp/" (21086 46390 956886 172000) "efc.elc" "../" "jde-ant.elc" "which.el" "regress.el" "jde-stat.el" "jde-gen.elc" "jde-parse-expr.el" "jde-jdb.el" "jde-junit.elc" "jde-junit.el" "jde-project-file.el" "jde-refactor.el" "jde-import.el" "jde-run.el" "jde-annotations.elc" "jde-javadoc.elc" "jde-dbo.el" "jde-dbs.elc" "jde-parse.el" "jde-util.elc" "jde-package.el" "jde-juci.elc" "jde-tree-widget.el" "jde-javadoc-gen.elc" "jde-which-method.el" "jde-package.elc" "jde-run.elc" "jtags" "jde-which-method.elc" "jde-annotations.el" "jde.el" "jde-ecj-flymake.el" "jde-db.elc" "jde-stat.elc" "jde-bookmark.el" "jde-sregex.elc" "jde-refactor.elc" "jde-tree-widget.elc" "jde-make.el" "efc.el" "jde-class.elc" "jde-db.el" "jde-javadoc-gen.el" "jde.elc" "jde-autoload.elc" "jde-ecj-flymake.elc" "jde-javadoc.el" "beanshell.elc" "jde-bug.el" "jde-juci.el" "jde-parse-class.elc" "jde-compat.el" "jde-help.elc" "jde-sregex.el" "jde-checkstyle.el" "jde-checkstyle.elc" "./" "jde-complete.elc" "jde-help.el" "jde-wiz.el" "jde-util.el" "jde-java-font-lock.el" "jde-xref.elc" "jde-parse-class.el" "jcomplete.el" "jde-widgets.el" "jde-dbo.elc" "jde-custom.elc" "jde-plugins.el" "jde-wiz.elc" "jde-plugins.elc" "jde-imenu.elc" "jde-import.elc" "jde-imenu.el" "jde-bsh.elc" "jde-autoload.el" "jde-custom.el" "jde-make.elc" "jde-ejb.el" "jde-bsh.el" "jde-java-grammar.el" "jcomplete.elc" "jde-open-source.elc" "jde-parse.elc" "jde-parse-expr.elc" "jde-compile.elc" "jde-widgets.elc" "jde-bug.elc" "jde-gen.el" "regress.elc" "jde-java-font-lock.elc" "jde-dbs.el" "jde-complete.el" "jde-java-properties.elc" "jde-ejb.elc" "jtags.csh" "jde-java-grammar.elc" "jde-xref.el" "jde-bookmark.elc" "jde-java-properties.el" "jde-class.el" "jde-jdb.elc" "jde-project-file.elc" "jde-compat.elc" "jde-project.elc" "jde-ant.el" "jde-project.el" "beanshell.el" "jde-open-source.el" "which.elc" "jde-compile.el")
+
+ ("/home/schnecki/Documents/UIBK/5.Semester/Software Quality/PS/01/01_02_Schneckenreither/" (21086 45619 99124 934000) "../" "classes/" "prj.el" "src/" "./" "TAGS" "lib/")
+
+ ("/home/schnecki/Programmierung/Java/testpr/" (21086 46468 330653 545000) "../" "classes/" "prj.el" "src/" "./" "TAGS")
+
+ ("/home/schnecki/Programmierung/Java/testpr/src/" (21086 43951 251718 404000) "../" "./")
+
+ ("/home/schnecki/Programmierung/Java/" (21086 43951 251718 404000) "../" "HelloEffects/" "Helllo/" "Test/" "Test2/" "./" "PiratesOfTheAlps/" ".metadata/" "testpr/" "endlessLoop/")
+
+ ("/home/schnecki/Documents/UIBK/5.Semester/Software Quality/PS/01/01_02_Schneckenreither/src/" (21086 41686 757501 711000) "../" "main/" "./" "test/")
+
+ ("/home/schnecki/Documents/UIBK/5.Semester/Software Quality/PS/01/01_02_Schneckenreither/src/main/" (21086 41696 692085 586000) "../" "./" "qm/")
+
+ ("/home/schnecki/Programmierung/Haskell/Tutorial/src/ch10/" (21085 39486 398283 286000) "../" "PNM.hs" "./")
+
+ ("/home/schnecki/Documents/UIBK/5.Semester/Software Quality/PS/01/01_02_Schneckenreither/src/test/asdfsdf/at/" (21086 27452 523882 296000) "../" "Main.java" "./")
+
+ ("/home/schnecki/Documents/UIBK/5.Semester/Software Quality/PS/01/01_02_Schneckenreither/src/test/asdfsdf/" (21085 35424 562376 247000) "../" "./" "at/")
+
+ ("/home/schnecki/Documents/UIBK/5.Semester/Software Quality/PS/" (21085 26777 951375 184000) "../" "01/" "./")
+
+ ("/home/schnecki/Documents/UIBK/5.Semester/Software Quality/" (21085 26777 951375 184000) "../" "./" "PS/" "Folien/")
+
+ ("/home/schnecki/Documents/UIBK/5.Semester/" (21085 32954 398389 792000) "../" "Schedule.pdf" "Nebenläufige Programmierung/" "./" "Software Quality/" "Schedule.ods" "Bachelorarbeit/")
+
+ ("/home/schnecki/Documents/UIBK/5.Semester/Sofware_Quality/PS/01/01_02_Schneckenreither/src/" (21085 32847 643870 774000) "../" "./" ".#Stack.java" "Stack.java" "hardangervidda_map.gif" "junit-4.11.jar")
+
+ ("/home/schnecki/Documents/UIBK/5.Semester/Sofware_Quality/PS/01/01_02_Schneckenreither/" (21085 32103 615614 9000) "../" "classes/" "src/" "./" "TAGS")
+
+ ("/home/schnecki/Documents/UIBK/5.Semester/Sofware_Quality/PS/01/" (21085 30718 731782 550000) "../" "01_02_Schneckenreither/" "./" "01_01_Schneckenreither.txt")
+
+ ("/home/schnecki/Documents/UIBK/5.Semester/Sofware_Quality/PS/" (21085 26777 951375 184000) "../" "01/" "./")
+
+ ("/home/schnecki/Documents/UIBK/5.Semester/Sofware_Quality/" (21085 26777 951375 184000) "../" "./" "PS/" "Folien/")
+
+ ("/home/schnecki/Documents/UIBK/5.Semester/Software Qualität/PS/01/01_02_Schneckenreither/src/" (21085 32202 978346 5000) "../" "./" "Stack.java" "hardangervidda_map.gif" "junit-4.11.jar")
+
+ ("/home/schnecki/Documents/UIBK/5.Semester/Software Qualität/PS/01/01_02_Schneckenreither/" (21085 30718 731782 550000) "../" "classes/" "src/" "./")
+
+ ("/home/schnecki/Documents/UIBK/5.Semester/Software Qualität/PS/01/" (21085 30718 731782 550000) "../" "01_02_Schneckenreither/" "./" "01_01_Schneckenreither.txt")
+
+ ("/home/schnecki/Documents/UIBK/5.Semester/Software Qualität/PS/" (21085 26777 951375 184000) "../" "01/" "./")
+
+ ("/home/schnecki/Documents/UIBK/5.Semester/Software Qualität/" (21085 26777 951375 184000) "../" "./" "PS/" "Folien/")
+
+ ("/home/schnecki/.emacs.d/snippets/text-mode/" (21085 28167 747242 681000) "../" "./" "email" "time")
+
+ ("/home/schnecki/.emacs.d/snippets/" (21085 16177 285361 371000) "../" "objc-mode/" "nxml-mode/" "js-mode/" "latex-mode/" "c-mode/" "sql-mode/" "cc-mode/" "ruby-mode/" "markdown-mode/" "./" "rst-mode/" "java-mode/" "f90-mode/" "erlang-mode/" "haskell-mode/" "python-mode/" "csharp-mode/" "c++-mode/" "snippet-mode/" "cperl-mode/" "emacs-lisp-mode/" "text-mode/" "css-mode/" "perl-mode/" "scala-mode/" "html-mode/")
+
+ ("/home/schnecki/Documents/UIBK/" (21019 34311 98111 822000) "Sync_UIBK" "../" "4.Semester/" "Zusammenfassungen/" "Skripte/" "Bestätigungen/" "./" "p_12/" ".backup/" "2.Semester/" "Sync_UIBK~" "ocaml ebook.pdf" "5.Semester/" "costs.xhb~" "Sonstiges/" "Buch: Grundlagen der Informatik/" "Installationen/" "1.Semster/" "costs.xhb" "3.Semester/" "Test usw./" "test/")
+
+ ("/home/schnecki/Documents/" (21065 39731 972089 772000) "../" "Nutrution/" "jde-ug-content.pdf" "Tarjan85_AmortizedComplexity.pdf" "Soccer/" "Online Courses/" "Handelsagentur Schneckenreither/" "PP University/" "./" "Bewerbungen/" "Rechnungen/" "GSoC/" "UIBK/" "Installationen/" "Interesting eBooks/" "Urlaub/" "ubuntu-12.04.2-desktop-amd64.iso" "hardangervidda_map.gif" "HTL Rankweil/" "Schneckenreither_Manuel_documents/" "TheoretischeInformatik.pdf" "tst.gif" "Homepages/")
+
+ ("/home/schnecki/Programmierung/Haskell/Tutorial/src/" (21085 15925 236117 249000) "../" "./" "ch10/")
+
+ ("/home/schnecki/Programmierung/Haskell/Tutorial/" (21085 15941 507422 888000) "../" "toupper-lazy3.hs" "filter.hs" "toupper-lazy4.hs" "book.realworldhaskell.org/" "toupper-lazy1.hs" "src/" "./" "Examples/" "TAGS" "toupper-lazy2.hs" "toupper-lazy5.hs")
+
+ ("/home/schnecki/.emacs.d/snippets/haskell-mode/" (21085 17237 410122 665000) "../" "import" "lang-pragma" "case" "module.exports" "fn.clause" "import.qualified" "if.inline" "module" "data.record" "newtype" "data.inline" "instance" "main" "let" "lambda" "./" ".yas-make-groups" "constraint" "fn.guarded" "get" "if.block" "comment.block" ".yas-ignore-filenames-as-triggers" "fn")
+
+ ("/home/schnecki/.emacs.d/snippets/haskell-mode/haskell-mode/" (21082 58675 339185 193000) "../" "import" "lang-pragma" "case" "module.exports" "fn.clause" "import.qualified" "if.inline" "module" "data.record" "newtype" "data.inline" "instance" "main" "let" "lambda" "./" ".yas-make-groups" "constraint" "fn.guarded" "get" "if.block" "comment.block" ".yas-ignore-filenames-as-triggers" "fn")
+
+ ("/home/schnecki/Programmierung/Java/Test/Testproject/" (21085 2004 799708 853000) "../" "classes/" "prj.el" "src/" "./" "TAGS")
+
+ ("/home/schnecki/Programmierung/Java/Test/Testproject/src/" (21085 2808 688939 83000) "../" "MyObject.java" "Main.java" "Main.class" "./" "at/" "MyObject.class")
+
+ ("/home/schnecki/Programmierung/Java/Helllo/src/at/ac/" (21084 64398 315837 97000) "../" "uibk/" "./")
+
+ ("/home/schnecki/Programmierung/Java/Helllo/src/at/" (21084 64398 315837 97000) "../" "ac/" "./")
+
+ ("/home/schnecki/Programmierung/Java/Helllo/src/" (21084 64398 315837 97000) "../" "./" "at/")
+
+ ("/home/schnecki/Programmierung/Java/Helllo/" (21084 64524 575292 734000) "../" "classes/" "prj.el" "src/" "./" "TAGS")
+
+ ("/home/schnecki/Programmierung/Java/Helllo/src/at/ac/uibk/" (21084 64982 494121 265000) "../" "Main.java" "Main.class" "./")
+
+ ("/home/schnecki/Programmierung/Java/TestProject/src/" (21084 63859 158320 296000) "../" "./")
+
+ ("/home/schnecki/Programmierung/Java/TestProject/" (21084 63859 158320 296000) "../" "classes/" "src/" "./")
+
+ ("/home/schnecki/Programmierung/Java/MainTest/src/at/ac/ubik/test/" (21084 63637 536645 146000) "../" "./")
+
+ ("/home/schnecki/Programmierung/Java/MainTest/src/" (21084 63023 513279 632000) "../" "./")
+
+ ("/home/schnecki/Programmierung/Java/MainTest/" (21084 63023 528279 7000) "../" "classes/" "src/" "./")
+
+ ("/home/schnecki/Programmierung/Java/MeinTest/src/at/uibk/manuel/" (21084 62663 718464 628000) "../" "Main.java" "Main.class" "./")
+
+ ("/home/schnecki/.emacs.d/24/packages/jdee-2.4.1/" (21084 31550 486605 671000) "../" "java/" "./" "lisp/" "etc/" "jde-maven.el")
+
+ ("/home/schnecki/Programmierung/Haskell/Tutorial/Examples/find/" (21084 31577 210465 294000) "../" "RecursiveContents.hs" "BetterPredicate.hs" "ControlledVisit.hs" "SimpleFinder.hs" "JavaDoc/" "./" "TAGS" "FoldDir.hs")
+
+ ("/home/schnecki/Programmierung/Java/endlessLoop/src/" (21084 25146 516196 826000) "../" "TEndlessLoop.java" "EndlessLoop.class" "./" "EndlessLoop.java" "test/")
+
+ ("/home/schnecki/Programmierung/Java/MeinTest/" (21084 23223 216676 326000) "../" "classes/" "src/" "./" "TAGS")
+
+ ("/home/schnecki/Programmierung/Java/MeinTest/src/" (21084 23188 260164 61000) "../" "./" "at/")
+
+ ("/home/schnecki/Programmierung/Java/MeinTest/src/at/" (21084 23188 261164 18000) "../" "uibk/" "./")
+
+ ("/home/schnecki/Programmierung/Java/MeinTest/src/at/uibk/" (21084 23188 261164 18000) "../" "manuel/" "./")
+
+ ("/home/schnecki/Programmierung/Java/maven/src/main/java/at/ac/uibk/csap3804/testing/" (21084 22977 778122 300000) "../" "Main.java" "Main.class" "./")
+
+ ("/home/schnecki/Programmierung/Java/maven/" (21084 21714 841859 644000) ".xmvn/" "../" "pom.xml" ".xmvn-builddep" "classes/" "src/" "./" "TAGS" ".mfiles" "target/")
+
+ ("/home/schnecki/.emacs.d/24/packages/" (21084 3835 725459 876000) "../" "jdee-2.4.1/" "./" "cedet/" "tex_texify/")
+
+ ("/home/schnecki/Programmierung/Java/maven/src/main/java/at/ac/uibk/csap3804/" (21084 21395 884428 313000) "../" "testing/" "./")
+
+ ("/home/schnecki/Programmierung/Java/maven/src/main/java/at/ac/uibk/" (21084 21395 884428 313000) "../" "./" "csap3804/")
+
+ ("/home/schnecki/Programmierung/Java/maven/src/main/java/at/ac/" (21084 21395 884428 313000) "../" "uibk/" "./")
+
+ ("/home/schnecki/Programmierung/Java/maven/src/main/java/at/" (21084 21395 884428 313000) "../" "ac/" "./")
+
+ ("/home/schnecki/Programmierung/Java/maven/src/main/java/" (21084 21395 884428 313000) "../" "./" "at/")
+
+ ("/home/schnecki/Programmierung/Java/maven/src/main/" (21084 21395 884428 313000) "../" "java/" "./")
+
+ ("/home/schnecki/Programmierung/Java/maven/src/" (21084 21395 885428 271000) "../" "main/" "./" "test/")
+
+ ("/home/schnecki/Programmierung/Java/endlessLoop/src/test/" (21084 12150 752801 721000) "../" "./" "test.java")
+
+ ("/home/schnecki/Programmierung/Java/endlessLoop/" (21084 5032 55213 86000) "../" "classes/" "src/" "./" "TAGS")
+
+ ("/home/schnecki/Programmierung/Java/Test2/ms.test.maven/src/test/java/ms/test/" (21084 3767 58360 84000) "../" "AppTest.java" "./")
+
+ ("/home/schnecki/Programmierung/Java/Test2/ms.test.maven/src/main/java/ms/test/" (21084 3723 599198 605000) "../" "./" "App.java")
+
+ ("/home/" (20954 32461 0 0) "../" ".cache/" ".local/" "./" ".config/" "lost+found/" "schnecki/")
+
+ ("/home/schnecki/Programmierung/Java/Test2/ms.test.maven/" (21084 940 383580 840000) "../" "pom.xml" "src/" "./" "TAGS")
+
+ ("/home/schnecki/Programmierung/Java/Test2/ms.test.maven/src/test/java/ms/" (21083 65317 177289 527000) "../" "./" "test/")
+
+ ("/home/schnecki/Programmierung/Java/Test2/ms.test.maven/src/test/java/" (21083 65317 177289 527000) "../" "./" "ms/")
+
+ ("/home/schnecki/Programmierung/Java/Test2/ms.test.maven/src/test/" (21083 65317 177289 527000) "../" "java/" "./")
+
+ ("/home/schnecki/Programmierung/Java/Test2/ms.test.maven/src/main/java/ms/" (21083 65317 176289 567000) "../" "./" "test/")
+
+ ("/home/schnecki/Programmierung/Java/Test2/ms.test.maven/src/main/java/" (21083 65317 176289 567000) "../" "./" "ms/")
+
+ ("/home/schnecki/Programmierung/Java/Test2/ms.test.maven/src/main/" (21083 65317 176289 567000) "../" "java/" "./")
+
+ ("/home/schnecki/Programmierung/Java/Test2/ms.test.maven/src/" (21083 65317 177289 527000) "../" "main/" "./" "test/")
+
+ ("/home/schnecki/Programmierung/Java/Test2/" (21083 65317 166289 965000) "../" "ms.test.maven/" "./")
+
+ ("/home/schnecki/Programmierung/Haskell/Tutorial/Examples/find/JavaDoc/" (21082 59281 879317 771000) "../" "./")
+
+ ("/home/schnecki/Programmierung/Haskell/Tutorial/Examples/" (21083 11151 46003 214000) "InteractWith.o" "../" "Plus.hs" "GlobRegexInsensitive.hs" "WC.hs" "test.hs" "Glob.hs" "QC-basics.hs" "InteractWith.hs" "BookStore.hs" "InteractWith" "find/" "eqclasses.hs" "Newtype.hs" "actions.el" "Exercises_ch4.hs" "toupper-imp.hs" "JSONLib/" "HighestClose.hs" "WC_flymake.hs" "actions2.el" "Lending.hs" "SumFile.hs" "./" "myDrop.hs" "GlobRegex.hs" "nums.txt" "InteractWith.hi" "#WC.hs#" "ElfMagic.hs" "quux.txt" "naiveeq.hs" "FixLines.hi" "output.txt" "FixLines" "tempfile.hs" "Map.hs" "read.hs" "FixLines.o" "Excersices_ch3.hs" "IntParse.hs" "gpl-3.0.txt" "*haskell*" "basicio.hs" "Tree.hs" "FixLines.hs" "add.hs" "Nullable.hs" "prices.csv" "test" "callingpure.hs" "input.txt")
+
+ ("/home/schnecki/Programmierung/Haskell/" (21024 42022 820739 754000) "../" "./" "Tutorial/")
+
+ ("/home/schnecki/Programmierung/" (21082 41416 181511 188000) "../" "external Software/" "Java/" "C++/" "C/" "MainActivity.java" "opengl/" "hackthissite/" "./" "PiratesOfTheAlps/" "Metrics.java" ".metadata/" "OrientationActivity.java" "HMatrix.java" "Makefiles/" "Haskell/")
+
+ ("/home/schnecki/Programmierung/Java/Test/" (21082 42333 291525 796000) "Testproject/" "../" "./")
+)
+
+;; ----- ido-unc-hosts-cache -----
+t

@@ -1,0 +1,140 @@
+package at.ac.uibk.sch_sch_str.colorbasedtracker;
+
+import org.opencv.core.Core;
+import org.opencv.core.Mat;
+import org.opencv.core.MatOfDouble;
+
+import android.util.Log;
+
+public class HMatrix {
+
+	private ChessboardCalibrator mCalibrator = null;
+	
+	private Mat H = null;
+
+	private static HMatrix instance = null;
+	
+	private HMatrix() {
+	}
+	
+	/**
+	 * get singleton instance.
+	 * @return
+	 * 		the instance of this object.
+	 */
+	public static HMatrix getInstance() {
+		if (instance == null)
+			instance = new HMatrix();
+		
+		return instance;
+	}
+	
+	/**
+	 * Get the realCoordinates according to the provided image coordinates.
+	 * 
+	 * @param imgCoordinate
+	 * 				The image coordinate matrix.
+	 * @return
+	 * 		The real coordinates.
+	 */
+	public Mat getRealCoordinates(Mat imgCoordinate) {
+		if (H == null)
+			throw new IllegalAccessError("You need to set the H matrix first!");
+		
+		Mat realCoordinate = new MatOfDouble();
+		
+		// realCoordinates = H * imgCoordinates
+		Core.gemm(H, imgCoordinate, 1, new Mat(), 0, realCoordinate);
+		return realCoordinate;
+	}
+	
+	/**
+	 * get the calibrator
+	 * @return
+	 */
+	public ChessboardCalibrator getmCalibrator() {
+		return mCalibrator;
+	}
+
+	/**
+	 * Print the h matrix.
+	 */
+	public void printHMatrix() {
+		printMat("H", H);
+	}
+	
+	/**
+	 * return h matrix.
+	 * 
+	 * @param mCalibrator
+	 * 			calibrator
+	 * @param calibImg
+	 * 			image to calibrate
+	 * @return
+	 */
+	public Mat calculateHMatix(ChessboardCalibrator mCalibrator, Mat calibImg) {
+		this.mCalibrator = mCalibrator;
+		 H = mCalibrator.calibrate(calibImg);
+		 
+//		 printMat("imgCoords", imgCoordinate);
+//		 printMat("H", H);
+		 
+		 return H;
+	}
+	
+	/**
+	 * Print a formatted String of the matrix m.
+	 * 
+	 * @param name
+	 *            name of the matrix
+	 * @param m
+	 *            the matrix
+	 */
+	private static void printMat(String name, Mat m) {
+
+		StringBuilder builder = new StringBuilder();
+
+		int arrSize;
+		double[] value;
+
+		Log.i(name, "Matrix: " + name);
+
+		for (int i = 0; i < m.rows(); i++) {
+			builder.append("[ ");
+
+			for (int j = 0; j < m.cols(); j++) {
+
+				value = m.get(i, j);
+
+				arrSize = value.length;
+
+				// print brackets only with coordinates
+				if (arrSize > 1)
+					builder.append("(");
+
+				for (int k = 0; k < arrSize; k++) {
+					builder.append(value[k]);
+
+					if (k != arrSize - 1)
+						builder.append(", ");
+
+				}
+
+				if (arrSize > 1)
+					builder.append(") ");
+
+				builder.append("  ");
+			}
+
+			builder.append("]");
+			Log.i(name, builder.toString());
+			builder = new StringBuilder();
+
+		}
+
+		// Log.d(TAG, builder.toString());
+
+	}
+	
+	
+}

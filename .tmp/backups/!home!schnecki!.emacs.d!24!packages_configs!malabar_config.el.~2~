@@ -1,0 +1,11 @@
+
+
+
+(add-to-list 'load-path (concat package_folder "malabar-1.5-SNAPSHOT/lisp"))
+
+(require 'cedet)
+(semantic-load-enable-minimum-features) ;; or enable more if you wish
+(require 'malabar-mode)
+(add-to-list 'load-path (concat package_folder "malabar-1.5-SNAPSHOT/lib"))
+;; (setq malabar-groovy-lib-dir "/path/to/malabar/lib")
+(add-to-list 'auto-mode-alist '("\\.java\\'" . malabar-mode))

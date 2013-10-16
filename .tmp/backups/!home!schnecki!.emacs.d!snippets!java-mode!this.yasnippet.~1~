@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: setter
+# key: =        
+# --
+this.${3:$(concat (downcase (substring yas/text 0 1)) (substring yas/text 1))}$0 = $3;

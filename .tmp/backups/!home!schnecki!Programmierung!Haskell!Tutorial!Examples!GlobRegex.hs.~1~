@@ -1,0 +1,42 @@
+-- GlobRegex.hs --- 
+-- 
+-- Filename: GlobRegex.hs
+-- Description: 
+-- Author: Manuel Schneckenreither
+-- Maintainer: 
+-- Created: Fr Okt 11 11:03:03 2013 (+0200)
+-- Version: 
+-- Package-Requires: ()
+-- Last-Updated: Fr Okt 11 11:06:29 2013 (+0200)
+--           By: Manuel Schneckenreither
+--     Update #: 1
+-- URL: 
+-- Doc URL: 
+-- Keywords: 
+-- Compatibility: 
+-- 
+-- 
+
+-- Commentary: 
+-- 
+-- 
+-- 
+-- 
+
+-- Change Log:
+-- 
+-- Code:
+
+
+module GlobRegex
+    ( globToRegex
+    , mathesGlob
+    ) where
+
+import Text.Regex.Posix ((=~))
+
+
+
+
+-- 
+-- GlobRegex.hs ends here

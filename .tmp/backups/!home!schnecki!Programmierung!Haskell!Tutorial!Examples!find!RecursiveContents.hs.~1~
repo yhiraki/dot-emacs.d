@@ -1,0 +1,41 @@
+-- RecursiveContents.hs ---
+-- 
+-- Filename: RecursiveContents.hs
+-- Description: 
+-- Author: Manuel Schneckenreither
+-- Maintainer: 
+-- Created: Sa Okt 12 12:48:44 2013 (+0200)
+-- Version: 
+-- Package-Requires: ()
+-- Last-Updated: Sa Okt 12 12:49:25 2013 (+0200)
+--           By: Manuel Schneckenreither
+--     Update #: 1
+-- URL: 
+-- Doc URL: 
+-- Keywords: 
+-- Compatibility: 
+-- 
+-- 
+
+-- Commentary: 
+-- 
+-- 
+-- 
+-- 
+
+-- Change Log:
+-- 
+-- 
+-- Code:
+
+
+module RecursiveContents
+    ( getRecursiveContents
+    ) where
+
+
+
+
+
+-- 
+-- RecursiveContents.hs ends here

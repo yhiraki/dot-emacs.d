@@ -1,0 +1,13 @@
+# -*- mode: snippet -*-
+# name: property
+# key: get
+# --
+/**
+* Gets the value of $2
+*
+* @return the value of $2
+*/
+public $1 get${2:Name}() {
+    return ${2:$(concat (substring yas/text 0 1) (substring yas/text 1));
+}
+

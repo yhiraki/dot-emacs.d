@@ -1,0 +1,28 @@
+
+Aufgabe 1: Qualitätsmodelle und Software-Fehler
+----------------------------------------------------------------------
+
+a) Security - Safety nach ISO 9126
+
+Security: Wenn es um Sicherheit geht, bei der kein Personenschaden in Aussicht
+steht.
+
+Safety: Bei möglichen Gefahren von Leib und Leben (Personenschaden).
+
+b) Korrelation
+
+Safety - Reliability:
+       postiv korreliert - Hohe Sicherheit erfordert ebenso hohe Zuverlsigkeit
+
+Efficiency - Portability:
+       negativ korreliert - Hohe Effizienz bedeuted, alles aus dem System heraus
+                            zu bekommen. D.h. man muss genau auf das darunter
+                            liegende System/die darunter liegende Hardware
+                            eingehen. Dabei leidet natürlich die Portierbarkeit
+                            darunter.
+
+Maintainability - Reliability:
+       positiv korreliert - Hohe Wartbarkeit bedeutet gut strukturierten und 
+                            dokumentierter Code. Daher ist die Zuverlässigkeit
+                            von solchem Code auch höher.
+

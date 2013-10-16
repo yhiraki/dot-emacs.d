@@ -1,0 +1,39 @@
+import junit.framework.JUnit4TestAdapter;
+import org.junit.Assert;
+import static org.junit.Assert.*;
+import org.junit.Test;
+
+/**
+ *  Unit Test for class Stack
+ *
+ *
+ * Created: Tue Oct 15 20:00:32 2013
+ *
+ * @author <a href="mailto:manuel.schneckenreither@student.uibk.ac.at">Manuel Schneckenreither</a>
+ * @version 1.0
+ */
+public class TStack {
+
+    /** 
+     * Creates a new <code>TStack</code> instance.
+     *
+     * @param name test name
+     */
+    public TStack() {
+    }
+
+    /**
+     * @return a <code>TestMethod</code>
+     */
+    @Test
+    public void testMethod() {
+        
+    }
+
+    /** 
+     * Test Adapter 
+     */ 
+    public static junit.framework.Test suite() {
+        return new JUnit4TestAdapter(TStack.class);
+    }
+}// TStack

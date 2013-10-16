@@ -1,0 +1,139 @@
+%%% word_definitions.tex ---
+%%
+%% Filename: word_definitions.tex
+%% Status:
+%% Author: Manuel Schneckenreither
+%% Created: Fr Sep 20 17:09:14 2013 (+0200)
+%% Version:
+%% Last-Updated: Di Okt  1 18:58:29 2013 (+0200)
+%%           By: Manuel Schneckenreither
+%%     Update #: 298
+%% URL:
+%% Description:
+%%
+%%
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%%% Code:
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: "main"
+%%% End:
+
+
+
+{
+  \newcommand{\sectiontitle}{Basics}
+  \section{\sectiontitle}
+
+
+  % {
+  %   \newcommand{\mypagetitle}{Resource Analysis - Problem}
+  %   \begin{frame}
+  %     \frametitle{\mypagetitle}
+  %     \framesubtitle{\sectiontitle}
+  %     \subsection{\mypagetitle}
+
+
+  %     \begin{itemize}
+  %     \item \textbf{Resource Analysis}
+  %       \newline Analysis of Resource Consumption, like memory (heap,
+  %       stack), time...
+  %       \newline e.g. How much does it cost to put an integer on the
+  %       heap.
+  %       \newline\newline
+  %       However, when analysing a program, this leads to a problem:
+  %       \newline Summing up all of the costs for each single operation
+  %       is inaccurate. \newline
+
+  %       \begin{framed}
+  %         Example Memory Analysis of Program from \cite{tarjan85}:\newline
+  %         Some function f only temporarly allocates a lot of memory.
+  %         \newline Summing up all costs including temporarly used one
+  %         is very pessimistic.
+  %       \end{framed}
+
+
+
+
+  %     \end{itemize}
+
+  %   \end{frame}
+  % }
+
+
+  {
+    \newcommand{\mypagetitle}{Resource Analysis - Problem}
+    \begin{frame}
+      \frametitle{\mypagetitle}
+      \framesubtitle{\sectiontitle}
+      \subsection{\mypagetitle}
+
+
+      \textbf{Resource Analysis}
+      \newline Analysis of Resource Consumption, like memory (heap,
+      stack), time...
+      \newline e.g. How much does it cost to put an integer on the
+      heap.
+      \newline
+
+        \textbf{Problems} shown by \cite{tarjan85}:
+        \begin {itemize}
+        \item Sum of Worst-Case Costs (e.g Times) may be Unduly
+            Pessimistic
+          \newline \footnotesize{It ignores correlated effects of the
+            operations on the data structure.}
+        \item \normalsize {Average-Case Analysis may be Inaccurate}
+          \newline \footnotesize {Probabilistic Assumptions needed to
+            carry out the analysis may be false.}
+          \end{itemize}
+    \end{frame}
+
+  }
+
+  {
+    \newcommand{\mypagetitle}{Amortised Resource Analysis - Solution}
+    \begin{frame}
+      \frametitle{\mypagetitle}
+      \framesubtitle{\sectiontitle}
+      \subsection{\mypagetitle}
+
+
+      \textbf{Amortised Resource Analysis}  \cite{tarjan85} \newline
+      average of costs per operation over a sequence of operations
+
+      \begin{itemize}
+        \item \textbf{Banker's View:} Credit operated computer.
+          \newline Program is not
+          allowed to use more than the given amount of credits. Unused
+          credits carry over to later operations.
+        \item \textbf{Physicist's View:} Potential Function $\Phi$.
+          \newline Maps any configuration of the data structure into a
+          real number.
+        \end{itemize}
+
+        \exampleBox{
+          Example:\newline
+          A sequence of operations need $x$ credits for execution.
+          Therefore, it can only be called, if at
+          least $x$ credits are available. Afterwards it
+          might leave some credits for later operations (which may have
+          been used temporally).
+        }
+
+
+    \end{frame}
+  }
+
+
+
+
+
+}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% word_definitions.tex ends here

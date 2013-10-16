@@ -1,0 +1,66 @@
+%%% notes_by_georg.tex ---
+%%
+%% Filename: notes_by_georg.tex
+%% Status:
+%% Author: Manuel Schneckenreither
+%% Created: Fr Sep 20 18:47:47 2013 (+0200)
+%% Version:
+%% Last-Updated: Di Okt  1 15:04:32 2013 (+0200)
+%%           By: Manuel Schneckenreither
+%%     Update #: 116
+%% URL:
+%% Description:
+%%
+%%
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%%% Code:
+
+
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: "main"
+%%% End:
+
+
+
+
+{
+  \newcommand{\sectiontitle}{Georg Moser's Notes on Amortised Cost Analysis}
+
+  \section{\sectiontitle}
+
+  {
+    \newcommand{\mypagetitle}{The Idea}
+    \begin{frame}
+      \frametitle{\mypagetitle}
+      \framesubtitle{\sectiontitle}
+      \subsection{\mypagetitle}
+
+      \textbf{We need:}
+      \begin{itemize}
+      \item to assign resource information to types (and constructors)
+      \item a well-typed (annotated typed) TRS $\mathcal{R}$
+      \end{itemize}
+
+      \vspace{0.5cm}
+      \textbf{to bound the runtime of $\mathcal{R}$}
+
+      \vspace{3.5cm}\footnotesize
+      \center{
+        This was developed by Georg Moser in \cite{MoserNotes}.
+      }
+      % the types assigned to the constructors and defined symbols
+      % of  $\mathcal{F}$ provide us with sufficient
+      % information to bound the runtime of $\mathcal{R}$. `` \cite{MoserNotes}
+
+    \end{frame}
+  }
+
+}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% notes_by_georg.tex ends here
