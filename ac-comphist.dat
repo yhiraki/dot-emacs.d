@@ -1,408 +1,408 @@
-((("elc" .
+((("tmp" .
    [1 0 0])
-  ("el" .
-   [1 0])
-  ("classes" .
-   [3 0 0 0 0 0 0])
-  ("src" .
-   [1 0 0])
-  ("jde-compile-option-directory" .
-   [1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0])
-  ("esdir" .
-   [1 0 0 0 0])
-  ("ac-source-features" .
-   [1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0])
-  ("ac-source-ghc-mod" .
-   [0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 1])
-  ("+" .
-   [1])
-  ("1024" .
+  ("jde-compile-option-classpath" .
+   [0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0])
+  ("jde-run-option-classpath" .
+   [0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0])
+  ("root" .
    [1 0 0 0])
-  ("collapse-blank-lines" .
-   [0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0])
-  ("asdf" .
-   [2 0 0 0])
-  ("point-max" .
+  ("ac-sources" .
+   [0 0 0 0 0 0 1 0 0 0])
+  ("pa" .
+   [3 0])
+  ("&optional" .
    [1 0 0 0 0 0 0 0 0])
-  ("blank" .
-   [1 0 0 0 0])
-  ("InputStreamReader" .
-   [2 0 0 0 1 0 0 0 0 0 0 0 1 0 0 0 1])
-  ("new" .
-   [2 0 0])
-  ("void" .
-   [0 0 1 0])
-  ("static" .
-   [0 0 0 1 0 0])
-  ("pub" .
-   [0 0 1])
-  ("project-file" .
+  ("package-name" .
    [0 0 0 0 0 0 0 0 0 0 1 0])
-  ("expand-file-name" .
-   [0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0])
-  ("expand" .
+  ("oref" .
+   [1 0 0 0])
+  ("project" .
+   [2 0 0 0 0 0 0])
+  ("name" .
+   [3 0 0 0])
+  ("package" .
+   [2 0 0 0 0 0 1])
+  ("2" .
+   [1])
+  ("shell-command" .
+   [0 0 0 0 0 0 0 0 0 0 1 0 0])
+  ("format" .
    [1 0 0 0 0 0])
-  ("a" .
-   [2])
-  ("load-file" .
-   [1 0 0 0 0 0 0 0 0])
-  ("jde-project" .
-   [1 0 0 0 0 0 0 0 0 0 0])
-  ("whitespace" .
-   [1 0 0 0 0 1 0 0 0 0])
-  ("highlight-80+-mode" .
-   [0 0 0 0 0 0 2 0 0 0 0 0 0 0 0 0 0 0])
-  ("throw" .
+  ("empty" .
    [0 0 0 0 1])
-  ("sync" .
-   [0 0 1 0])
-  ("testApp" .
-   [1 0 0 0 0 0 0])
-  ("this" .
-   [9 0 0 0])
-  ("super" .
-   [0 1 1 0 0])
-  ("mode" .
-   [2 0 0 0])
-  ("tree" .
-   [2 0 0 0])
-  ("undo" .
-   [1 0 0 0])
-  ("show" .
-   [1 0 0 0])
-  ("undo-tree-mode" .
-   [1 0 0 0 0 0 0 0 0 0 0 0 0 0])
-  ("kdb" .
-   [1 0 0])
-  ("TAGS" .
-   [1 0 0 0])
-  ("ac-define-source" .
-   [1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0])
-  ("jde-source" .
-   [2 0 0 0 0 0 0 0 0 0])
-  ("auto-complete" .
-   [1 0 0 0 0 0 0 0 0 0 0 0 0])
-  ("size" .
-   [1 0 1 0])
-  ("toString" .
-   [1 0 0 0 0 0 0 0])
-  ("l" .
-   [3])
-  ("my/java-minor-mode" .
-   [0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0])
-  ("make-java-tags" .
-   [0 0 0 0 0 0 0 1 0 0 0 0 0 0])
-  ("m" .
-   [2])
-  ("t" .
-   [4])
-  ("nil" .
-   [5 0 0])
-  ("kill-emacs" .
-   [1 0 0 0 0 0 0 0 0 0])
-  ("after-save-hook" .
-   [0 0 0 0 0 0 0 0 1 0 0 0 0 0 0])
-  ("_" .
-   [2])
-  ("f" .
+  ("emacs-lisp-mode-hook" .
+   [0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0])
+  ("haskell-mode-hook" .
+   [0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0])
+  ("1" .
    [1])
-  ("path" .
-   [2 0 0 0])
-  ("save-my-window-configuration" .
-   [0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0])
-  ("kill-emacs-hook" .
+  ("column-marker" .
+   [0 0 0 0 0 0 0 0 0 1 0 0 0])
+  ("column" .
+   [1 0 0 0 0 0])
+  ("emacs-lisp-mode" .
    [1 0 0 0 0 0 0 0 0 0 0 0 0 0 0])
-  ("file" .
-   [3 0 0 0])
-  ("make" .
+  ("emacs-lisp" .
+   [0 0 0 0 0 0 0 0 1 0])
+  ("h" .
+   [2])
+  ("test" .
    [1 0 0 0])
-  ("java" .
-   [3 0 0 0])
-  ("jde-mode" .
-   [1 0 0 0 0 0 0 0])
-  ("message-box" .
+  ("ac-source-etags" .
+   [1 0 0 0 0 0 0 0 0 0 0 0 1 0 0])
+  ("jde-complete-minibuf" .
+   [0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0])
+  ("credmp/flymake-display-err-minibuf" .
+   [0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0])
+  ("jde-sourcepath" .
+   [0 0 0 0 0 0 0 1 0 0 0 0 0 0])
+  ("car" .
+   [2 0 0])
+  ("tags-reset-tags-tables" .
+   [1 0 0 0 0 0 2 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0])
+  ("Set" .
+   [0 0 1])
+  ("set" .
+   [7 0 0])
+  ("glasses-mode" .
+   [1 0 0 0 0 0 0 0 0 0 0 0])
+  ("java-mode-hook" .
+   [1 0 0 0 0 0 0 0 0 0 0 0 0 0])
+  ("jde-mode-hook" .
+   [0 0 0 0 0 0 1 0 1 0 0 0 0])
+  ("restore-my-window-configuration" .
+   [0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0])
+  ("defun" .
+   [2 0 0 0 0])
+  ("to" .
+   [1 0])
+  ("eval" .
+   [1 0 0 0])
+  ("color-theme-standard" .
+   [2 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0])
+  ("color-theme-wheat" .
+   [1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0])
+  ("color-theme-hober" .
+   [1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0])
+  ("jde" .
+   [3 0 0])
+  ("default-directory" .
+   [3 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0])
+  ("return" .
+   [2 0 0 0 0 0])
+  ("add-to-list" .
+   [0 0 0 0 0 0 1 0 0 1 0])
+  ("set-default" .
    [1 0 0 0 0 0 0 0 0 0 0])
-  ("visit-tags-table" .
-   [1 0 0 0 0 2 0 0 0 0 1 0 0 0 0 0])
-  ("dir" .
-   [9 0 0])
-  ("d" .
-   [2])
-  ("let" .
-   [5 0 0])
-  ("emacs-lisp-minor-mode" .
-   [0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0])
-  ("tags" .
-   [2 0 0 0])
-  ("keys" .
-   [1 0 0 0])
-  ("make-emacs-lisp-tags" .
-   [0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0])
-  ("defalias" .
-   [0 0 0 0 0 1 0 0])
-  ("gtags-mode" .
+  ("BetterPredicate.hs" .
+   [0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0])
+  ("export" .
+   [1 0 0 0 0 0])
+  ("eldoc-mode" .
    [0 0 0 0 1 0 0 0 0 0])
-  ("S" .
-   [1])
-  ("Sm" .
-   [0 1])
-  ("s" .
-   [18])
-  ("interactive" .
-   [1 0 0 0 0 0 0 0 1 0 0])
-  ("intern" .
-   [0 0 0 0 0 1])
-  ("yas/current-snippet-table" .
-   [0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0])
-  ("pathP" .
-   [1 0 1 0 1])
-  ("ecb-auto-activate-hook" .
-   [0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0])
-  ("concat" .
-   [6 0 0 0 0 1])
-  ("adjoin" .
-   [0 0 1 0 0 0])
-  ("add-hook" .
-   [3 0 0 2 2 0 0 0])
-  ("|" .
+  ("ecb-activate" .
+   [0 0 0 0 0 0 0 0 1 1 0 0])
+  ("load" .
+   [5 0 0 0])
+  ("Package-Requires:" .
+   [0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0])
+  ("xs" .
+   [5 0])
+  ("filter" .
+   [1 0 0 0 0 0])
+  ("rhs" .
+   [1 0 0])
+  ("lhs" .
+   [2 0 0])
+  ("qsort" .
+   [7 0 0 0 0])
+  (":" .
    [2])
-  ("unEither" .
-   [1 0 0 0 0 0 0 0])
-  ("where" .
-   [1 0 0 0 0])
-  ("Left" .
+  ("addChar" .
+   [0 0 0 1 1 1 2])
+  ("matchesGlob" .
+   [0 0 0 0 0 0 0 1 0 0 0])
+  ("sensitive" .
+   [0 0 0 0 1 0 0 0 0])
+  ("toLower" .
+   [0 0 0 1 1 1 0])
+  ("toUpper" .
+   [0 0 3 0 0 0 0])
+  ("sens" .
+   [24 0 0 0])
+  ("Bool" .
    [4 0 0 0])
-  ("otherwise" .
-   [0 0 0 0 0 1 0 0 0])
-  ("GlobalError" .
-   [0 0 0 0 0 0 1 0 0 0 0])
-  ("data" .
+  ("lines" .
+   [1 0 1 0 0])
+  ("Manuel" .
+   [0 0 0 2 0 0])
+  ("inpStr" .
+   [0 0 0 2 0 0])
+  ("inh" .
+   [1 1 0])
+  ("interact" .
+   [2 0 0 1 0 0 0 0])
+  ("flyspell-mode-on" .
+   [1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0])
+  ("equal" .
+   [1 0 0 0 0])
+  ("latex-mode" .
+   [1 0 0 0 0 0 0 0 0 0])
+  ("require" .
+   [4 0 0 0 0 0 0])
+  ("global-flycheck-mode" .
+   [0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0])
+  ("setq" .
+   [12 0 0 0])
+  ("fci-mode" .
+   [0 0 0 1 0 0 0 0])
+  ("global-whitespace-mode" .
+   [0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1])
+  ("global-set-key" .
+   [1 0 0 0 0 0 0 0 0 2 1 0 1 0])
+  ("c-mode" .
+   [1 0 0 0 0 0])
+  ("global-unset-key" .
+   [0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0])
+  ("message" .
+   [11 0 0 0 0 0 0])
+  ("color-theme-gnome" .
+   [1 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0])
+  ("color-theme-dark-gnus" .
+   [0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0])
+  ("turn-on-fci-mode" .
+   [0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0])
+  ("ac-complete" .
+   [1 0 0 0 0 0 0 0 0 0 0])
+  ("ac-expand" .
+   [1 0 0 0 0 0 0 0 0])
+  ("map" .
+   [2 0 2])
+  ("main" .
+   [41 0 4 1])
+  ("in" .
+   [9 4])
+  ("kbd" .
+   [2 0 1])
+  ("n" .
+   [1])
+  ("module" .
+   [1 0 0 1 0 0])
+  ("import" .
+   [5 0 0 0 0 0])
+  ("=" .
+   [11])
+  ("globToRegex" .
+   [0 0 0 0 5 0 3 0 0 0 0])
+  ("::" .
+   [3 0])
+  ("->" .
+   [9 2])
+  ("str" .
+   [6 0 1])
+  ("String" .
+   [10 0 0 0 0 1])
+  ("cs" .
+   [3 0])
+  ("++" .
+   [7 0])
+  ("Either" .
+   [6 0 0 0 0 0])
+  ("GlobError" .
+   [10 0 0 0 0 1 0 1 0])
+  ("Right" .
+   [6 0 0 0 0])
+  ("<-" .
+   [2 0])
+  ("case" .
+   [3 0 0 0])
+  ("res" .
+   [4 0 0])
+  ("of" .
+   [3 0])
+  ("c" .
+   [7])
+  ("Glob" .
    [1 0 0 0])
   ("txt" .
    [1 0 0])
-  ("Glob" .
+  ("data" .
    [1 0 0 0])
-  ("c" .
-   [7])
-  ("of" .
-   [3 0])
-  ("res" .
-   [4 0 0])
-  ("case" .
-   [3 0 0 0])
-  ("<-" .
-   [2 0])
-  ("Right" .
-   [6 0 0 0 0])
-  ("GlobError" .
-   [10 0 0 0 0 1 0 1 0])
-  ("Either" .
-   [6 0 0 0 0 0])
-  ("++" .
-   [7 0])
-  ("cs" .
-   [3 0])
-  ("String" .
-   [10 0 0 0 0 1])
-  ("str" .
-   [6 0 1])
-  ("->" .
-   [9 2])
-  ("::" .
-   [3 0])
-  ("globToRegex" .
-   [0 0 0 0 5 0 3 0 0 0 0])
-  ("=" .
-   [11])
-  ("import" .
-   [5 0 0 0 0 0])
-  ("module" .
-   [1 0 0 1 0 0])
-  ("n" .
-   [1])
-  ("kbd" .
-   [2 0 1])
-  ("in" .
-   [9 4])
-  ("main" .
-   [41 0 4 1])
-  ("map" .
-   [2 0 2])
-  ("ac-expand" .
-   [1 0 0 0 0 0 0 0 0])
-  ("ac-complete" .
-   [1 0 0 0 0 0 0 0 0 0 0])
-  ("turn-on-fci-mode" .
-   [0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0])
-  ("color-theme-dark-gnus" .
-   [0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0])
-  ("color-theme-gnome" .
-   [1 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0])
-  ("message" .
-   [11 0 0 0 0 0 0])
-  ("global-unset-key" .
-   [0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0])
-  ("c-mode" .
-   [1 0 0 0 0 0])
-  ("global-set-key" .
-   [1 0 0 0 0 0 0 0 0 2 1 0 1 0])
-  ("global-whitespace-mode" .
-   [0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1])
-  ("fci-mode" .
-   [0 0 0 1 0 0 0 0])
-  ("setq" .
-   [12 0 0 0])
-  ("global-flycheck-mode" .
-   [0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0])
-  ("require" .
-   [4 0 0 0 0 0 0])
-  ("latex-mode" .
-   [1 0 0 0 0 0 0 0 0 0])
-  ("equal" .
-   [1 0 0 0 0])
-  ("flyspell-mode-on" .
-   [1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0])
-  ("interact" .
-   [2 0 0 1 0 0 0 0])
-  ("inh" .
-   [1 1 0])
-  ("inpStr" .
-   [0 0 0 2 0 0])
-  ("Manuel" .
-   [0 0 0 2 0 0])
-  ("lines" .
-   [1 0 1 0 0])
-  ("Bool" .
+  ("GlobalError" .
+   [0 0 0 0 0 0 1 0 0 0 0])
+  ("otherwise" .
+   [0 0 0 0 0 1 0 0 0])
+  ("Left" .
    [4 0 0 0])
-  ("sens" .
-   [24 0 0 0])
-  ("toUpper" .
-   [0 0 3 0 0 0 0])
-  ("toLower" .
-   [0 0 0 1 1 1 0])
-  ("sensitive" .
-   [0 0 0 0 1 0 0 0 0])
-  ("matchesGlob" .
-   [0 0 0 0 0 0 0 1 0 0 0])
-  ("addChar" .
-   [0 0 0 1 1 1 2])
-  (":" .
+  ("where" .
+   [1 0 0 0 0])
+  ("unEither" .
+   [1 0 0 0 0 0 0 0])
+  ("|" .
    [2])
-  ("qsort" .
-   [7 0 0 0 0])
-  ("lhs" .
-   [2 0 0])
-  ("rhs" .
-   [1 0 0])
-  ("filter" .
-   [1 0 0 0 0 0])
-  ("xs" .
-   [5 0])
-  ("Package-Requires:" .
-   [0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0])
-  ("load" .
-   [5 0 0 0])
-  ("ecb-activate" .
-   [0 0 0 0 0 0 0 0 1 1 0 0])
-  ("eldoc-mode" .
+  ("add-hook" .
+   [3 0 0 2 2 0 0 0])
+  ("adjoin" .
+   [0 0 1 0 0 0])
+  ("concat" .
+   [6 0 0 0 0 1])
+  ("ecb-auto-activate-hook" .
+   [0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0])
+  ("pathP" .
+   [1 0 1 0 1])
+  ("yas/current-snippet-table" .
+   [0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0])
+  ("intern" .
+   [0 0 0 0 0 1])
+  ("interactive" .
+   [1 0 0 0 0 0 0 0 1 0 0])
+  ("s" .
+   [18])
+  ("Sm" .
+   [0 1])
+  ("S" .
+   [1])
+  ("gtags-mode" .
    [0 0 0 0 1 0 0 0 0 0])
-  ("export" .
-   [1 0 0 0 0 0])
-  ("BetterPredicate.hs" .
-   [0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0])
-  ("set-default" .
-   [1 0 0 0 0 0 0 0 0 0 0])
-  ("add-to-list" .
-   [0 0 0 0 0 0 1 0 0 1 0])
-  ("return" .
-   [2 0 0 0 0 0])
-  ("default-directory" .
-   [3 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0])
-  ("jde" .
-   [3 0 0])
-  ("color-theme-hober" .
-   [1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0])
-  ("color-theme-wheat" .
-   [1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0])
-  ("color-theme-standard" .
-   [2 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0])
-  ("eval" .
+  ("defalias" .
+   [0 0 0 0 0 1 0 0])
+  ("make-emacs-lisp-tags" .
+   [0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0])
+  ("keys" .
    [1 0 0 0])
-  ("to" .
-   [1 0])
-  ("defun" .
-   [2 0 0 0 0])
-  ("restore-my-window-configuration" .
-   [0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0])
-  ("jde-mode-hook" .
-   [0 0 0 0 0 0 1 0 1 0 0 0 0])
-  ("java-mode-hook" .
-   [1 0 0 0 0 0 0 0 0 0 0 0 0 0])
-  ("glasses-mode" .
-   [1 0 0 0 0 0 0 0 0 0 0 0])
-  ("set" .
-   [7 0 0])
-  ("Set" .
-   [0 0 1])
-  ("tags-reset-tags-tables" .
-   [1 0 0 0 0 0 2 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0])
-  ("car" .
-   [2 0 0])
-  ("jde-sourcepath" .
-   [0 0 0 0 0 0 0 1 0 0 0 0 0 0])
-  ("credmp/flymake-display-err-minibuf" .
-   [0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0])
-  ("jde-complete-minibuf" .
-   [0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0])
-  ("ac-source-etags" .
-   [1 0 0 0 0 0 0 0 0 0 0 0 1 0 0])
-  ("test" .
-   [1 0 0 0])
-  ("h" .
+  ("tags" .
+   [2 0 0 0])
+  ("emacs-lisp-minor-mode" .
+   [0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0])
+  ("let" .
+   [5 0 0])
+  ("d" .
    [2])
-  ("emacs-lisp" .
-   [0 0 0 0 0 0 0 0 1 0])
-  ("emacs-lisp-mode" .
-   [1 0 0 0 0 0 0 0 0 0 0 0 0 0 0])
-  ("column" .
-   [1 0 0 0 0 0])
-  ("column-marker" .
-   [0 0 0 0 0 0 0 0 0 1 0 0 0])
-  ("1" .
-   [1])
-  ("haskell-mode-hook" .
-   [0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0])
-  ("emacs-lisp-mode-hook" .
-   [0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0])
-  ("empty" .
-   [0 0 0 0 1])
-  ("format" .
-   [1 0 0 0 0 0])
-  ("shell-command" .
-   [0 0 0 0 0 0 0 0 0 0 1 0 0])
-  ("2" .
-   [1])
-  ("package" .
-   [2 0 0 0 0 0 1])
-  ("name" .
+  ("dir" .
+   [9 0 0])
+  ("visit-tags-table" .
+   [1 0 0 0 0 2 0 0 0 0 1 0 0 0 0 0])
+  ("message-box" .
+   [1 0 0 0 0 0 0 0 0 0 0])
+  ("jde-mode" .
+   [1 0 0 0 0 0 0 0])
+  ("java" .
    [3 0 0 0])
-  ("project" .
-   [2 0 0 0 0 0 0])
-  ("oref" .
+  ("make" .
    [1 0 0 0])
-  ("package-name" .
-   [0 0 0 0 0 0 0 0 0 0 1 0])
-  ("&optional" .
+  ("file" .
+   [3 0 0 0])
+  ("kill-emacs-hook" .
+   [1 0 0 0 0 0 0 0 0 0 0 0 0 0 0])
+  ("save-my-window-configuration" .
+   [0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0])
+  ("path" .
+   [2 0 0 0])
+  ("f" .
+   [1])
+  ("_" .
+   [2])
+  ("after-save-hook" .
+   [0 0 0 0 0 0 0 0 1 0 0 0 0 0 0])
+  ("kill-emacs" .
+   [1 0 0 0 0 0 0 0 0 0])
+  ("nil" .
+   [5 0 0])
+  ("t" .
+   [4])
+  ("m" .
+   [2])
+  ("make-java-tags" .
+   [0 0 0 0 0 0 0 1 0 0 0 0 0 0])
+  ("my/java-minor-mode" .
+   [0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0])
+  ("l" .
+   [3])
+  ("toString" .
+   [1 0 0 0 0 0 0 0])
+  ("size" .
+   [1 0 1 0])
+  ("auto-complete" .
+   [1 0 0 0 0 0 0 0 0 0 0 0 0])
+  ("jde-source" .
+   [2 0 0 0 0 0 0 0 0 0])
+  ("ac-define-source" .
+   [1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0])
+  ("TAGS" .
+   [1 0 0 0])
+  ("kdb" .
+   [1 0 0])
+  ("undo-tree-mode" .
+   [1 0 0 0 0 0 0 0 0 0 0 0 0 0])
+  ("show" .
+   [1 0 0 0])
+  ("undo" .
+   [1 0 0 0])
+  ("tree" .
+   [2 0 0 0])
+  ("mode" .
+   [2 0 0 0])
+  ("super" .
+   [0 1 1 0 0])
+  ("this" .
+   [9 0 0 0])
+  ("testApp" .
+   [1 0 0 0 0 0 0])
+  ("sync" .
+   [0 0 1 0])
+  ("throw" .
+   [0 0 0 0 1])
+  ("highlight-80+-mode" .
+   [0 0 0 0 0 0 2 0 0 0 0 0 0 0 0 0 0 0])
+  ("whitespace" .
+   [1 0 0 0 0 1 0 0 0 0])
+  ("jde-project" .
+   [1 0 0 0 0 0 0 0 0 0 0])
+  ("load-file" .
    [1 0 0 0 0 0 0 0 0])
-  ("pa" .
-   [3 0])
-  ("ac-sources" .
-   [0 0 0 0 0 0 1 0 0 0])
-  ("root" .
+  ("a" .
+   [2])
+  ("expand" .
+   [1 0 0 0 0 0])
+  ("expand-file-name" .
+   [0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0])
+  ("project-file" .
+   [0 0 0 0 0 0 0 0 0 0 1 0])
+  ("pub" .
+   [0 0 1])
+  ("static" .
+   [0 0 0 1 0 0])
+  ("void" .
+   [0 0 1 0])
+  ("new" .
+   [2 0 0])
+  ("InputStreamReader" .
+   [2 0 0 0 1 0 0 0 0 0 0 0 1 0 0 0 1])
+  ("blank" .
+   [1 0 0 0 0])
+  ("point-max" .
+   [1 0 0 0 0 0 0 0 0])
+  ("asdf" .
+   [2 0 0 0])
+  ("collapse-blank-lines" .
+   [0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0])
+  ("1024" .
    [1 0 0 0])
-  ("jde-run-option-classpath" .
-   [0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0])
-  ("jde-compile-option-classpath" .
-   [0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0])
-  ("tmp" .
+  ("+" .
+   [1])
+  ("ac-source-ghc-mod" .
+   [0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 1])
+  ("ac-source-features" .
+   [1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0])
+  ("esdir" .
+   [1 0 0 0 0])
+  ("jde-compile-option-directory" .
+   [1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0])
+  ("src" .
+   [1 0 0])
+  ("classes" .
+   [3 0 0 0 0 0 0])
+  ("el" .
+   [1 0])
+  ("elc" .
    [1 0 0])))

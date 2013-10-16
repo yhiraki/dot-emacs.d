@@ -111,23 +111,23 @@
 
 ;; ----- ido-work-file-list -----
 (
- ".gitignore"
- "README.md"
  "init.el"
  "settings.el"
+ "settings.el.example"
+ ".gitignore"
+ "README.md"
  "StackTestSuite.java"
  "testsuite.yasnippet"
  "testclass.yasnippet"
  "jdee_config.el"
  "StackTestParameterized.java"
- "StackTestPara}meterized.java"
 )
 
 ;; ----- ido-dir-file-cache -----
 (
- ("/home/schnecki/.emacs.d/" (21087 11 264263 760000) "../" "ac-comphist.dat" "24/" "elpa/" "README.md" ".gitignore" "ede-projects.el" "init.el~" ".tmp/" "srecode-map.el" ".git/" "session.10c6b30c59fcb52a9138132445499957100000017260059" "settings.el" "./" "auto-save-list/" "TAGS" ".ido.last" "eshell/" "init.el" ".mc-lists.el" ".ac-dict/" "snippets/" "abbrev_defs")
+ ("/home/schnecki/.emacs.d/" (21087 822 23257 225000) "../" "ac-comphist.dat" ".#settings.el" "24/" "elpa/" "README.md" ".gitignore" "ede-projects.el" "init.el~" ".tmp/" "srecode-map.el" "settings.el.example" ".git/" "flycheck-settings.el" ".gitignore~" "session.10c6b30c59fcb52a9138132445499957100000017260059" "settings.el" "./" "auto-save-list/" "TAGS" ".ido.last" "eshell/" "init.el" "settings.el~" ".mc-lists.el" ".ac-dict/" "snippets/" "abbrev_defs")
 
- ("/home/schnecki/" (21086 65319 675810 828000) ".subversion/" "../" "Documents/" ".bash_profile" ".xournal/" ".macromedia/" ".wine/" ".thumbnails/" "Music/" ".lingot/" ".cabbage/" ".leksah-0.12/" ".gnupg/" "emacs.tar.gz" "VirtualBox VMs/" ".cache/" ".eclipse/" ".aspell.en.pws" ".bashrc" ".gnome2_private/" ".dbus/" ".clamtk/" ".smex-items" ".calibre/" ".stylish-haskell.yaml" "emacsdotbackup.tar.gz" ".swt/" ".m2/" ".java_base.tag" ".erc/" ".gconf/" "Public/" "leksah.lkshw" ".emacs.desktop" ".ido.last~" ".cups/" ".texlive2013/" ".pulse-cookie" ".wireshark/" ".local/" "RMAIL" "Programmierung/" ".ghc/" ".pki/" "bin/" "eBooks/" ".zotero/" ".semanticdb/" ".ccache/" ".gstreamer-0.10/" ".lyx/" ".emacs-places" ".emacs.d.bak_02.08.2013/" ".pgadmin3" ".gimp-2.8/" ".bash_history" ".mozilla/" ".e16/" ".audacity-data/" "Desktop/" ".root_hist" "Pictures/" "Videos/" "./" ".newsrc" "emacs.d.bakup.u1.tar.gz" ".nv/" "Ubuntu One/" ".osmo/" ".bashrc~" ".emacs.bak" ".jython-cache/" ".mysql_history" ".kde/" ".VirtualBox/" ".config/" ".newsrc.eld" ".pgpass" "AndroidSDK/" ".texlive2012/" "TAGS" ".emac.d.bak_04.08.2013/" ".lesshst" "Templates/" ".fgfs/" ".esd_auth" ".globash/" ".android/" "Bash Scripts/" ".emacs~" ".emacs.bak.02.08.2013" ".ICEauthority" ".authinfo" "Audiobooks/" ".emacs.d.old-20130902-174615/" ".mplayer/" ".FBReader/" ".fltk/" ".cabal/" ".nbprofiler/" ".cert/" ".ido.last" ".avidemux6/" ".nvidia-settings-rc" ".gnome2/" "emacs.d-master.zip" ".java/" "csap3804@zid-gpl.uibk.ac.at" ".bzr.log" ".aspell.en.prepl" ".gitconfig" ".ecb-tip-of-day.el" ".pgadmin_histoqueries" ".emacs.d/" ".bash_logout" ".pulse/" "backup_home_error.log" ".mysql/" ".gtk-bookmarks" ".emacs.desktop.lock" ".visualvm/" "News/" "Downloads/" ".gphoto/" ".newsrc-dribble" ".emacs.d.bak/" "chicken.pdf" "Mail/" ".ssh/" ".adobe/" "leksah.lkshs" "output.pdf" ".recentf" ".filezilla/")
+ ("/home/schnecki/" (21087 751 621209 953000) ".subversion/" "../" "Documents/" ".bash_profile" ".xournal/" ".macromedia/" ".wine/" ".thumbnails/" "Music/" ".lingot/" ".cabbage/" ".leksah-0.12/" ".gnupg/" "emacs.tar.gz" "VirtualBox VMs/" ".cache/" ".eclipse/" ".aspell.en.pws" ".bashrc" ".gnome2_private/" ".dbus/" ".clamtk/" ".smex-items" ".calibre/" ".stylish-haskell.yaml" "emacsdotbackup.tar.gz" ".swt/" ".m2/" ".java_base.tag" ".erc/" ".gconf/" "Public/" "leksah.lkshw" ".emacs.desktop" ".ido.last~" ".cups/" ".texlive2013/" ".pulse-cookie" ".wireshark/" ".local/" "RMAIL" "Programmierung/" ".ghc/" ".pki/" "bin/" "eBooks/" ".zotero/" ".semanticdb/" ".ccache/" ".gstreamer-0.10/" ".lyx/" ".emacs-places" ".emacs.d.bak_02.08.2013/" ".pgadmin3" ".gimp-2.8/" ".bash_history" ".mozilla/" ".e16/" ".audacity-data/" "Desktop/" ".root_hist" "Pictures/" "Videos/" "./" ".newsrc" "emacs.d.bakup.u1.tar.gz" ".nv/" "Ubuntu One/" ".osmo/" ".bashrc~" ".emacs.bak" ".jython-cache/" ".mysql_history" ".kde/" ".VirtualBox/" ".config/" ".newsrc.eld" ".pgpass" "AndroidSDK/" ".texlive2012/" "TAGS" ".emac.d.bak_04.08.2013/" ".lesshst" "Templates/" ".fgfs/" ".esd_auth" ".globash/" ".android/" "Bash Scripts/" ".emacs~" ".emacs.bak.02.08.2013" ".ICEauthority" ".authinfo" "Audiobooks/" ".emacs.d.old-20130902-174615/" ".mplayer/" ".FBReader/" ".fltk/" ".cabal/" ".nbprofiler/" ".cert/" ".ido.last" ".avidemux6/" ".nvidia-settings-rc" ".gnome2/" "emacs.d-master.zip" ".java/" "csap3804@zid-gpl.uibk.ac.at" ".bzr.log" ".aspell.en.prepl" ".gitconfig" ".ecb-tip-of-day.el" ".pgadmin_histoqueries" ".emacs.d/" ".bash_logout" ".pulse/" "backup_home_error.log" ".mysql/" ".gtk-bookmarks" ".emacs.desktop.lock" ".visualvm/" "News/" "Downloads/" ".gphoto/" ".newsrc-dribble" ".emacs.d.bak/" "chicken.pdf" "Mail/" ".ssh/" ".adobe/" "leksah.lkshs" "output.pdf" ".recentf" ".filezilla/")
 
  ("/home/schnecki/Documents/UIBK/5.Semester/Software Quality/PS/01/" (21086 61222 116737 742000) "../" "01_02_Schneckenreither/" "01_02_Schneckenreither.tar.gz" "./" "01_01_Schneckenreither.txt")
 
