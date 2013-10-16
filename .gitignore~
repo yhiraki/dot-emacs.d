@@ -5,7 +5,7 @@ session.*
 ./thumbs
 ./tramp
 .tmp/**
-./eshell
-./auto-save-list
+eshell/**
+auto-save-list/**
 ./abbrev_defs
 *settings.el*

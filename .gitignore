@@ -9,3 +9,4 @@ eshell/**
 auto-save-list/**
 ./abbrev_defs
 *settings.el*
+./.mc-lists.el
