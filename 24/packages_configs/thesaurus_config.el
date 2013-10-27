@@ -8,4 +8,5 @@
 
 
 ;; KEYS search synonym
-(define-key global-map (kbd "C-x x s s") 'thesaurus-choose-synonym-and-replace)
+(define-key global-map (kbd (concat prefix-command-key " s s"))
+  'thesaurus-choose-synonym-and-replace)

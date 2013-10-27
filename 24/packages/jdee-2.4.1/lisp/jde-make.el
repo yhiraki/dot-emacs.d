@@ -35,7 +35,7 @@
  :group 'jde-make
  :type 'string)
 
-(defcustom jde-make-working-directory ""
+(defcustom jde-make-working-directory "./"
   "*Path of the working directory to use in 'make' build mode. This
 string must end in a slash, for example, c:/foo/bar/ or ./  .
 If this string is empty, the 'make' build mode uses the current file
@@ -157,7 +157,8 @@ enter to the make program along with the arguments specified by
 	(setq compilation-finish-functions nil)))
 
     (cd default-directory)
-    (compile-internal make-command "No more errors")
+    ;; (compile-internal make-command "No more errors")
+    (compilation-start make-command)
     (cd save-default-directory)))
 
 ;;;###autoload

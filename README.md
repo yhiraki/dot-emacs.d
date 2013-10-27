@@ -7,3 +7,8 @@ If you can't wait:
  - you need to create a settings.el file in ./emacs.d/settings.el
  - you need to fire up emacs - all packages will be downloaded
  - you need to restart emacs (cedet doesn't like it, when new packages get installed)
+
+
+ Dependencies: gnuplot
+
+ Fedora: sudo yum install gnuplot emacs 

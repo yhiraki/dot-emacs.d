@@ -7,9 +7,9 @@
 ;; Created: Mo Okt 14 18:17:43 2013 (+0200)
 ;; Version:
 ;; Package-Requires: ()
-;; Last-Updated: Mi Okt 16 18:03:01 2013 (+0200)
+;; Last-Updated: Do Okt 24 13:45:48 2013 (+0200)
 ;;           By: Manuel Schneckenreither
-;;     Update #: 29
+;;     Update #: 38
 ;; URL:
 ;; Doc URL:
 ;; Keywords:
@@ -64,7 +64,10 @@
 
 ;; MINOR MODE HOOK
 (defun my/java-minor-mode ()
-  "Minor mode hook for Haskell."
+  "Minor mode hook for Java."
+
+  ;; auto complete mode
+  (add-to-list 'ac-sources 'ac-source-etags)
 
   ;; CREATE AND SET TAGS FILE
   (add-hook 'after-save-hook 'make-java-tags nil t)
@@ -289,6 +292,88 @@ it)"
 (custom-set-faces
  '(flymake-errline ((((class color)) (:underline "red"))))
  '(flymake-warnline ((((class color)) (:underline "yellow")))))
+
+
+;; ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+;; ++++++++++++++ ENHANCEMENTS FOR DISPLAYING FLYMAKE ERRORS ++++++++++++
+;; ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+;; (defun flymake:display-err-minibuf-for-current-line ()
+;;   "Displays the error/warning for the current line in the minibuffer"
+;;   (interactive)
+;;   (let* ((line-no            (flymake-current-line-no))
+;;          (line-err-info-list (nth 0 (flymake-find-err-info flymake-err-info line-no)))
+;;          (count              (length line-err-info-list)))
+;;     (while (> count 0)
+;;       (when line-err-info-list
+;;         (let* ((text       (flymake-ler-text (nth (1- count) line-err-info-list)))
+;;                (line       (flymake-ler-line (nth (1- count) line-err-info-list))))
+;;           (message "[%s] %s" line text)))
+;;       (setq count (1- count))))
+;;   )
+
+(defun flymake:display-err-popup-for-current-line ()
+  "Display a menu with errors/warnings for current line if it has errors and/or warnings."
+  (interactive)
+  (let* ((line-no            (flymake-current-line-no))
+         (line-err-info-list (nth 0 (flymake-find-err-info flymake-err-info line-no)))
+         (menu-data          (flymake-make-err-menu-data line-no line-err-info-list)))
+    (if menu-data
+        (popup-tip (mapconcat (lambda (e) (nth 0 e))
+                              (nth 1 menu-data)
+                              "\n")))
+    )
+  )
+
+;; ;; SHOW NEXT ERROR FUNCTION
+;; (defun my-flymake-show-next-error()
+;;   (interactive)
+;;   (flymake-goto-next-error)
+;;   ;; (flymake:display-err-popup-for-current-line)
+;;   (flymake-display-err-menu-for-current-line)
+;;   )
+
+;; ;; SHOW PREV ERROR FUNCTION
+;; (defun my-flymake-show-prev-error()
+;;   (interactive)
+;;   (flymake-goto-prev-error)
+;;   (flymake:display-err-popup-for-current-line)
+;;   ;;(flymake-display-err-menu-for-current-line)
+;;   )
+
+;; Overwrite flymake-display-warning so that no annoying dialog box is
+;; used.
+
+;; This version uses lwarn instead of message-box in the original version.
+;; lwarn will open another window, and display the warning in there.
+;; (defun flymake-display-warning (warning)
+;;   "Display a warning to the user, using lwarn"
+;;   (lwarn 'flymake :warning warning))
+
+;; Using lwarn might be kind of annoying on its own, popping up windows and
+;; what not. If you prefer to recieve the warnings in the mini-buffer, use:
+;; (defun flymake-display-warning (warning)
+;;   "Display a warning to the user, using lwarn"
+;;   (message warning))
+
+;; ;; FLYMAKE TEMP FOLDER
+;; (make-directory "~/.emacs.d/.tmp/flymake/" t)
+;; (setq temporary-file-directory "~/.emacs.d/.tmp/flymake/")
+
+
+;; ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+;; +++++++++++++++++++++++ FLYMAKE CONFIGURATION ++++++++++++++++++++++++
+;; ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+
+;;FLYMAKE (ENHANCEMENTS)
+;; (global-set-key (kbd (concat prefix-command-key " n")) 'my-flymake-show-next-error)
+;; (global-set-key (kbd (concat prefix-command-key " p")) 'my-flymake-show-prev-error)
+
+;;ASOCIATE KEY FOR CURRENT ERROR POPUP/MINIBUFFER
+(global-set-key (kbd (concat prefix-command-key " e")) 'flymake:display-err-popup-for-current-line)
+;; (global-set-key (kbd (concat prefix-command-key " e")) 'flymake:display-err-minibuf-for-current-line)
+
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; java_config.el ends here

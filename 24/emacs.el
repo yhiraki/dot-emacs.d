@@ -1,3 +1,5 @@
+
+
 ;;; emacs.el ---
 ;;
 ;; Filename: emacs.el
@@ -5,9 +7,9 @@
 ;; Author: Manuel Schneckenreither
 ;; Created: Tue Dec 11 00:43:14 2012 (+0100)
 ;; Version:
-;; Last-Updated: Di Okt 15 19:44:24 2013 (+0200)
+;; Last-Updated: So Okt 27 09:48:50 2013 (+0100)
 ;;           By: Manuel Schneckenreither
-;;     Update #: 311
+;;     Update #: 321
 ;; URL:
 ;; Description:
 ;;
@@ -45,6 +47,8 @@
 (load (concat package_conf_folder "header2_config.el"))
 ;; IDO - minibuffer helper
 (load (concat package_conf_folder "ido_config.el"))
+;; MULTIPLE CURSORS - use multiple cursors to edit the buffers
+(load (concat package_conf_folder "multiple_cursors_config.el"))
 ;; THESAURUS - choose synonym and replace
 (load (concat package_conf_folder "thesaurus_config.el"))
 ;; WINDOW NUMBER MODE - change windows by C-x C-j [NUMBER] or  META-[NUMBER]
@@ -53,10 +57,18 @@
 (load (concat package_conf_folder "yasnippet_config.el"))
 ;; JDEE Mode
 (load (concat package_conf_folder "jdee_config.el"))
-;; AUTO COMPLETE - completion
+;; COLUMN MAKER -- mark columns
+(load (concat package_conf_folder "org_mode_config.el"))
+;; AUTO COMPLETE - completion - You should not disable this, you know what you
+;; are doing
 (load (concat package_conf_folder "auto_complete_config.el"))
 ;; COLUMN MAKER -- mark columns
 (load (concat package_conf_folder "whitespace_config.el"))
+;; COLUMN MAKER -- mark columns
+(load (concat package_conf_folder "backup_each_save_config.el"))
+;; MAGIT - git for emacs
+(load (concat package_conf_folder "magit_config.el"))
+
 
 ;; ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 ;; +++++++++++++++++ LOAD LANGUAGE SPECIFIC SETTINGS ++++++++++++++++++++

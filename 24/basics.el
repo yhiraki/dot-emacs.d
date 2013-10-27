@@ -5,9 +5,9 @@
 ;; Author: Manuel Schneckenreither
 ;; Created: Mon Dec 10 22:51:09 2012 (+0100)
 ;; Version:
-;; Last-Updated: Mi Okt 16 21:01:31 2013 (+0200)
+;; Last-Updated: So Okt 27 17:13:19 2013 (+0100)
 ;;           By: Manuel Schneckenreither
-;;     Update #: 446
+;;     Update #: 522
 ;; URL:
 ;; Description:
 ;;    Basic configuration for emacs. In here are all configs of
@@ -63,14 +63,25 @@
 ;; SPECIFY FUNCTION
 (setq compilation-exit-message-function 'compilation-exit-autoclose)
 
-;; ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-;; ++++++++++++++++++++++++ BUILT IN SEMANTICS ++++++++++++++++++++++++++
-;; ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
-;; enable built in sematnic tools
-;; (global-ede-mode 1)
-;; (require 'semantic/sb)
-;; (semantic-mode 1)
+;; get the makefile above
+(defun get-above-makefile ()
+  (loop as d = default-directory then (expand-file-name
+       ".." d) if (file-exists-p (expand-file-name "Makefile" d)) return
+       d))
+
+
+;; COMPILE CLOSES MAKEFILE
+(defun compile-closest-Makefile ()
+  (interactive)
+  (compile
+   (concat "make -C " (loop as d = default-directory then (expand-file-name
+       ".." d) if (file-exists-p (expand-file-name "Makefile" d)) return
+       d))))
+
+;; bind compiling with get-above-makefile to f5
+(global-set-key [f5] 'compile-closest-Makefile)
+
 
 ;; ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 ;; ++++++++++++++++++++++++ YES AND NO PROMPTS ++++++++++++++++++++++++++
@@ -253,13 +264,14 @@
 ;; (setq backup-directory-alist `(("." . "~/.saves")))
 (setq backup-by-copying t)
 (setq delete-old-versions nil
-      kept-new-versions 1024
+      kept-new-versions 10000
       kept-old-versions 1024
       version-control t)
 
 ;; ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 ;; +++++++++++++++++++++++++ CLIPBOARD TRACKING++++++++++++++++++++++++++
 ;; ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
 (setq x-select-enable-clipboard t)
 
 ;; ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -293,27 +305,6 @@
     (my-fullscreen)))
 
 ;; ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-;; +++++++++++++++++++++++ INDICATE OVERWRITE MODE ++++++++++++++++++++++
-;; ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-
-;; (setq hcz-set-cursor-color-color "")
-;; (setq hcz-set-cursor-color-buffer "")
-
-;; (defun hcz-set-cursor-color-according-to-mode ()
-;;   "change cursor color according to some minor modes."
-;;   ;; set-cursor-color is somewhat costly, so we only call it when needed:
-;;   (let ((color
-;;          (if buffer-read-only "black"
-;;            (if overwrite-mode "blue"
-;;              "red"))))
-;;     (unless (and
-;;              (string= color hcz-set-cursor-color-color)
-;;              (string= (buffer-name) hcz-set-cursor-color-buffer))
-;;       (set-cursor-color (setq hcz-set-cursor-color-color color))
-;;       (setq hcz-set-cursor-color-buffer (buffer-name)))))
-;; (add-hook 'post-command-hook 'hcz-set-cursor-color-according-to-mode)
-
-;; ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 ;; ++++++++++++ STOP ASKING EXISTING PROCESS EXISTS STUFF +++++++++++++++
 ;; ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
@@ -321,92 +312,12 @@
   "Prevent annoying \"Active processes exist\" query when you quit Emacs."
   (flet ((process-list ())) ad-do-it))
 
-;; comments only
-
-;; ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-;; ++++++++++++++ ENHANCEMENTS FOR DISPLAYING FLYMAKE ERRORS ++++++++++++
-;; ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-
-;; (defun flymake:display-err-minibuf-for-current-line ()
-;;   "Displays the error/warning for the current line in the minibuffer"
-;;   (interactive)
-;;   (let* ((line-no            (flymake-current-line-no))
-;;          (line-err-info-list (nth 0 (flymake-find-err-info flymake-err-info line-no)))
-;;          (count              (length line-err-info-list)))
-;;     (while (> count 0)
-;;       (when line-err-info-list
-;;         (let* ((text       (flymake-ler-text (nth (1- count) line-err-info-list)))
-;;                (line       (flymake-ler-line (nth (1- count) line-err-info-list))))
-;;           (message "[%s] %s" line text)))
-;;       (setq count (1- count))))
-;;   )
-
-;; (defun flymake:display-err-popup-for-current-line ()
-;;   "Display a menu with errors/warnings for current line if it has errors and/or warnings."
-;;   (interactive)
-;;   (let* ((line-no            (flymake-current-line-no))
-;;          (line-err-info-list (nth 0 (flymake-find-err-info flymake-err-info line-no)))
-;;          (menu-data          (flymake-make-err-menu-data line-no line-err-info-list)))
-;;     (if menu-data
-;;         (popup-tip (mapconcat (lambda (e) (nth 0 e))
-;;                               (nth 1 menu-data)
-;;                               "\n")))
-;;     )
-;;   )
-
-;; ;; SHOW NEXT ERROR FUNCTION
-;; (defun my-flymake-show-next-error()
-;;   (interactive)
-;;   (flymake-goto-next-error)
-;;   ;; (flymake:display-err-popup-for-current-line)
-;;   (flymake-display-err-menu-for-current-line)
-;;   )
-
-;; ;; SHOW PREV ERROR FUNCTION
-;; (defun my-flymake-show-prev-error()
-;;   (interactive)
-;;   (flymake-goto-prev-error)
-;;   (flymake:display-err-popup-for-current-line)
-;;   ;;(flymake-display-err-menu-for-current-line)
-;;   )
-
-;; Overwrite flymake-display-warning so that no annoying dialog box is
-;; used.
-
-;; This version uses lwarn instead of message-box in the original version.
-;; lwarn will open another window, and display the warning in there.
-;; (defun flymake-display-warning (warning)
-;;   "Display a warning to the user, using lwarn"
-;;   (lwarn 'flymake :warning warning))
-
-;; Using lwarn might be kind of annoying on its own, popping up windows and
-;; what not. If you prefer to recieve the warnings in the mini-buffer, use:
-;; (defun flymake-display-warning (warning)
-;;   "Display a warning to the user, using lwarn"
-;;   (message warning))
-
-;; ;; FLYMAKE TEMP FOLDER
-;; (make-directory "~/.emacs.d/.tmp/flymake/" t)
-;; (setq temporary-file-directory "~/.emacs.d/.tmp/flymake/")
-
 ;; ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 ;; ++++++++++++++++++ AUTOMATICALLY WRAP LONG LINES +++++++++++++++++++++
 ;; ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
-;; add to all file hooks
-(setq auto-mode-alist (cons '("*" . auto-fill-mode) auto-mode-alist))
 ;; set the wrapping length to column x
-(set-fill-column 80)
-
-;; ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-;; +++++++++++++++++++++++++ WHITESPACE MODE ++++++++++++++++++++++++++++
-;; ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-
-(require 'whitespace)
-;; highlight all columns > 80 (default value)
-;; (setq whitespace-style '(face empty tabs lines-tail trailing))
-(setq whitespace-style '(face  tabs lines-tail trailing))
-(global-whitespace-mode t)
+(setq fill-column 80)
 
 ;; ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 ;; ++++++++++++++++++++++++++ UNIQUIFY MODE +++++++++++++++++++++++++++++
@@ -449,7 +360,13 @@
 (electric-pair-mode 1)
 
 ;; HIGHLIGH CURRENT LINE
-(highlight-current-line-minor-mode 1)
+(highlight-current-line-minor-mode)
+
+;; VISUAL LINE MODE - WRAP LONG LINES
+(global-visual-line-mode)
+
+;; ENABLE REGION SELECTING, USE C-ENTER
+;; (cua-mode 1)
 
 ;; STACK TRACE IN CASE OF AN ERROR
 (setq stack-trace-on-error t)

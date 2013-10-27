@@ -9,6 +9,12 @@
         jde-backward-kill-camel-tok
         jde-kill-camel-tok
         kill-region
+        org-beginning-of-line
+        org-end-of-line
+        org-force-self-insert
+        org-kill-line
+        org-self-insert-command
+        org-yank
         string-rectangle
         yas-expand
         ))

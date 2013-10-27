@@ -7,9 +7,9 @@
 ;; Created: Fr Okt  4 20:33:29 2013 (+0200)
 ;; Version:
 ;; Package-Requires: ()
-;; Last-Updated: Mi Okt 16 23:01:39 2013 (+0200)
+;; Last-Updated: Sa Okt 26 21:13:39 2013 (+0200)
 ;;           By: Manuel Schneckenreither
-;;     Update #: 127
+;;     Update #: 174
 ;; URL:
 ;; Doc URL:
 ;; Keywords:
@@ -55,6 +55,11 @@
 (setq emacsd "~/.emacs.d/")
 (load-file (concat emacsd "settings.el"))
 
+
+(autoload 'cflow-mode "cflow-mode")
+(setq auto-mode-alist (append auto-mode-alist
+                              '(("\\.cflow$" . cflow-mode))))
+
 ;; ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 ;; +++++++++++++++++++++++++++ LOAD PACKAGES ++++++++++++++++++++++++++++
 ;; ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -73,10 +78,13 @@
         auctex
         auto-complete
         auto-dictionary
+        ;; backup-each-save ;;; solved differently, see backup_each_save_config.el
         backup-walker
         ecb
         emacs-eclim
         flycheck
+        gnuplot
+        gnuplot-mode
         haskell-mode
         header2
         javadoc-lookup
@@ -85,6 +93,7 @@
         magit
         multiple-cursors
         org
+        org-plus-contrib
         popup
         thesaurus
         undo-tree
@@ -172,6 +181,7 @@
  '(ecb-jde-set-directories-buffer-to-jde-sourcepath (quote replace))
  '(ecb-layout-window-sizes (quote (("left8" (ecb-directories-buffer-name 0.15126050420168066 . 0.29411764705882354) (ecb-sources-buffer-name 0.15126050420168066 . 0.23529411764705882) (ecb-methods-buffer-name 0.15126050420168066 . 0.29411764705882354) (ecb-history-buffer-name 0.15126050420168066 . 0.16176470588235295)))))
  '(ecb-options-version "2.40")
+ '(haskell-font-lock-haddock t)
  '(jde-compile-option-directory "./../classes")
  '(jde-compiler (quote ("javac")))
  '(jde-flymake-option-jikes-source "1.7")
@@ -179,6 +189,9 @@
  '(jde-jdk (quote ("1.6")))
  '(jde-jdk-registry (quote (("1.6" . "/usr/lib/jvm/java-1.7.0") ("1.6OpenJDK" . "/usr/lib/jvm/java-1.7.0-openjdk"))))
  '(jde-sourcepath (quote ("./src/main" "./src/test")))
+ '(org-agenda-files (quote ("~/Documents/Planning/planning_time.org" "~/Documents/Planning/university.org" "~/Documents/Planning/bachelorarbeit.org" "~/Documents/Planning/ProjectIdeas.org" "~/Documents/Planning/freetime.org" "~/Documents/Planning/lists.org" "~/Documents/Planning/Emacs.org")))
+ ;; '(org-agenda-skip-additional-timestamps-same-entry t)
+ ;; '(org-agenda-skip-scheduled-if-deadline-is-shown (quote repeated-after-deadline))
  '(size-indication-mode t)
  '(tool-bar-mode nil)
  '(user-full-name your-full-name)

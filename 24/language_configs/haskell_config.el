@@ -8,7 +8,7 @@
 ;; Version:
 ;; Last-Updated:
 ;;           By:
-;;     Update #: 77
+;;     Update #: 149
 ;; URL:
 ;; Description:
 ;;
@@ -22,17 +22,24 @@
 ;; +++++++++++++++++++++++++++ HASKELL CONFIGS ++++++++++++++++++++++++++
 ;; ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
+
+;; (autoload 'haskell-refac-mode "haskell-refac"
+;;   "Minor mode for refactoring Haskell programs" t)
+;; (add-hook 'haskell-mode-hook 'turn-on-font-lock)        ;高亮模式
+;; (add-hook 'haskell-mode-hook 'turn-on-haskell-indent)   ;智能缩进模式
+;; (add-hook 'haskell-mode-hook 'turn-on-haskell-ghci)     ;GHCi 交互模式
+;; (add-hook 'haskell-mode-hook 'turn-on-haskell-doc-mode) ;文档模式
+;; (add-hook 'haskell-mode-hook 'haskell-refac-mode)       ;重构
+;; (add-hook 'haskell-mode-hook 'hs-lint-mode-hook)
+
 ;; modules to add
 (add-hook 'haskell-mode-hook 'turn-on-haskell-doc-mode)
-(add-hook 'haskell-mode-hook 'turn-on-haskell-decl-scan-mode)
-;; identation mode
-(add-hook 'haskell-mode-hook 'turn-on-haskell-indentation)
-;; (add-hook 'haskell-mode-hook 'turn-on-haskell-indent)
-;;(add-hook 'haskell-mode-hook 'turn-on-haskell-simple-indent)
+;; (add-hook 'haskell-mode-hook 'turn-on-haskell-decl-scan-mode)
 
-;; stylish mode
-;; (define-key haskell-mode-map (kbd "C-x C-s") 'haskell-mode-save-buffer)
-;; (setq haskell-stylish-on-save t)
+;; identation mode
+;; (add-hook 'haskell-mode-hook 'turn-on-haskell-indentation)
+(add-hook 'haskell-mode-hook 'turn-on-haskell-indent)
+;;(add-hook 'haskell-mode-hook 'turn-on-haskell-simple-indent)
 
 ;; [==:INIT ghc-mod==]
 ;; (autoload 'ghc-init "ghc" nil t)
@@ -51,11 +58,6 @@
 ;; (defun my-haskell-ac-init ()
 ;;   (when (member (file-name-extension buffer-file-name) '("hs" "lhs"))
 
-;;     (setq ac-sources '(ac-source-words-in-same-mode-buffers
-;;                        ac-source-dictionary
-;;                        ac-source-ghc-mod))))
-;; (add-hook 'find-file-hook 'my-haskell-ac-init)
-
 ;; ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 ;; +++++++++++++++++++++++++++++ MINOR MODE +++++++++++++++++++++++++++++
 ;; ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -72,15 +74,37 @@
     (visit-tags-table (concat dir "TAGS")))
   )
 
+(defun haskell-source-code-align()
+  "Format souce coude nicely."
+  (interactive)
+  (save-excursion
+      (push-mark (point))
+      (push-mark (point-max) nil t)
+      (goto-char (point-min))
+      (haskell-indent-align-def t 'guard)
+      (haskell-indent-align-def t 'rhs)
+  ))
+
+
 ;; MINOR MODE HOOK
 (defun my/haskell-minor-mode ()
   "Minor mode hook for Haskell."
 
   ;; add auto-complete mode
   (add-to-list 'ac-sources 'ac-source-ghc-mod)
+  (add-to-list 'ac-sources 'ac-source-etags)
+
+  ;; format source code in sensible way
+  ;; (add-hook 'before-save-hook 'haskell-source-code-align nil t)
+
+  ;; you need to have org mode enabled!
+  (local-set-key (kbd "RET")  'org-return-indent)
+
 
   ;; CREATE AND SET TAGS FILE
-  (add-hook 'after-save-hook 'make-haskell-tags nil t))
+  (add-hook 'after-save-hook 'make-haskell-tags nil t)
+  )
+
 
 (add-hook 'haskell-mode-hook 'my/haskell-minor-mode)
 

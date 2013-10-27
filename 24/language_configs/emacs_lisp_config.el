@@ -7,9 +7,9 @@
 ;; Created: So Okt 13 22:47:58 2013 (+0200)
 ;; Version:
 ;; Package-Requires: ()
-;; Last-Updated: Mi Okt 16 18:19:38 2013 (+0200)
+;; Last-Updated: So Okt 20 12:34:59 2013 (+0200)
 ;;           By: Manuel Schneckenreither
-;;     Update #: 54
+;;     Update #: 57
 ;; URL:
 ;; Doc URL:
 ;; Keywords:
@@ -53,15 +53,15 @@
   "Minor mode hook for Emacs Lisp."
 
   ;; KEYS
-  (local-set-key (kbd "C-x x e r") 'eval-region)
-  (local-set-key (kbd "C-x x e b") 'eval-buffer)
+  (local-set-key (kbd (concat prefix-command-key " e r")) 'eval-region)
+  (local-set-key (kbd (concat prefix-command-key " e b")) 'eval-buffer)
 
   ;; AUTO COMPLETE MODE SOURCES
   (add-to-list 'ac-sources 'ac-source-features)
   (add-to-list 'ac-sources 'ac-source-functions)
   (add-to-list 'ac-sources 'ac-source-symbols)
   (add-to-list 'ac-sources 'ac-source-variables)
-
+  ;; (add-to-list 'ac-sources 'ac-source-etags)
   ;; CREATE AND SET TAGS FILE --- disabled for el files
   (add-hook 'after-save-hook 'make-emacs-lisp-tags nil t)
 )

@@ -8,7 +8,7 @@
 ;; Version:
 ;; Last-Updated:
 ;;           By:
-;;     Update #: 12
+;;     Update #: 13
 ;; URL:
 ;; Description:
 ;;
@@ -19,25 +19,12 @@
 ;;; Code:
 
 
-
 ;; ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 ;; ++++++++++++++++++++++++++ FLYCHECK COONFIG ++++++++++++++++++++++++++
 ;; ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 
 ;; Enable flycheck for all buffers
-;; (add-hook 'after-init-hook 'global-flycheck-mode)
-
-;; (add-hook 'flycheck-mode-hook 'flycheck-color-mode-line-mode)
-
-
-;; (require 'flycheck-color-mode-line)
-
-;; (eval-after-load "flycheck"
-;;   (add-hook 'flycheck-mode-hook 'flycheck-color-mode-line-mode))
-
-
-
 (global-flycheck-mode t)
 
 

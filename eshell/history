@@ -1,128 +1,128 @@
 ls
-rm haskell-mode2/
-rm haskell-mode2/ -r
-ls
-cd haskell-mode/
-ls
 cd ..
-cd 02
-cd 01/
 ls
+cd ~/.emacs.d/.tmp/
+ls autosaves/
+cd backups
 ls
-cd 01_02_Schneckenreither/
-ls
-cat TAGS 
-rm TAGS 
-mv ~/Downloads/junit-4.11.jar src/
-mv ~/Documents/hardangervidda_map.gif src/
-cd ...
-cd ....
-mv Software\ Qualität/ Sofware_Quality
-mv Sofware_Quality/ Software\ Quality
-ls
-rm object.yasnippet 
-ls -l
-cd src/
-rm *.class
-ls
-cd ..
-mkdir lib
-ls
-ls
-ls ../classes/
-ls -l
-rm hardangervidda_map.gif 
-mv ~/Downloads/hamcrest-all-1.3.jar.
-mv ~/Downloads/hamcrest-all-1.3.jar .
-ls -l
-cd ..
+ls | grep Makefile
 ls 
-ls
-rm ../Stack.class 
-ls 
-ls classes/
-ls src/
-ls
-ls ..
-rm *.class
-rm ../*.class
-ls 
-ls
-ls
-ls classes/
-rm classes/Stack.class 
-rm Stack.class 
-ls classes/
-ls 
-ls classes/
-rm -r classes/*
-ls classes/
-cd .....
-cd src/
-ll
-ls
-rm test/
-rm -r test/
-ls
 cd ..
+make 
 ls
-mv src/junit-4.11.jar lib/
-mv src/hamcrest-all-1.3.jar lib/
-cd ../classes/
-ll
-ls
-cd ../src/
-ls
-java -cp .:/usr/share/java/junit.jar org.junit.runner.JUnitCore StackTest.java
-java -cp .:/usr/share/java/junit.jar org.junit.runner.JUnitCore ./StackTest.java
-java -cp .:/usr/share/java/junit.jar org.junit.runner.JUnitCore ~/Documents/UIBK/5.Semester/Software Quality/PS/01/01_02_Schneckenreither/src/Stac
-pwd
-java -cp .:/usr/share/java/junit.jar org.junit.runner.JUnitCore /home/schnecki/Documents/UIBK/5.Semester/Software Quality/PS/01/01_02_Schneckenreither/src/StackTest.java
-java -cp .:/usr/share/java/junit.jar org.junit.runner.JUnitCore /home/schnecki/Documents/UIBK/5.Semester/Software\ Quality/PS/01/01_02_Schneckenreither/src/StackTest.java
-ls
-java -cp .:/usr/share/java/junit.jar org.junit.runner.JUnitCore /home/schnecki/Documents/UIBK/5.Semester/Software\ Quality/PS/01/01_02_Schneckenreither/src/StackTest
-java -cp .:/usr/share/java/junit.jar org.junit.runner.JUnitCore StackTest
-java -cp .:/usr/share/java/junit.jar org.junit.runner.JUnitCore StackTest.java
-cd ../classes/
-ls
-cd qm/
-ls
-java -cp .:/usr/share/java/junit.jar org.junit.runner.JUnitCore Stack.java
-java -cp .:/usr/share/java/junit.jar org.junit.runner.JUnitCore Stack
-cd /usr/lib/jvm/java-1.7.0
-ls
-ls include/
-ls
-cd lib/
-ls
+cd doc
+time "java -cp ../classes/ Main 1000" 
+cd ../../01-02-ThreadPool-Alternative-01/doc/
+time "java -cp ../classes/ Main 1000" 
 cd ..
-find . -name "*.jar"
-cd ../
-cd classes/
-ls
-java -cp .:/usr/share/java/junit.jar org.junit.runner.JUnitCore StackTest
-java -cp .:/usr/share/java/junit.jar org.junit.runner.JUnitCore StackTest
-cd ../src/
-ls
-mkdir test
-mv StackTest.java test/
-mkdir main
-mv Stack.java main/
-cd main/
-mkdir qm
-mv Stack.java qm/
-cd ~/Programmierung/Java/
-ls
-mkdir junit
-ls
-cd junit
+make
+mkdir classes
+make
+cd doc
+time "java -cp ../classes/ Main 1000" 
 cd ..
-mv get.yasnippet getter.yasnippet
-ls
-rm -r .git/
-rm .gitignore
-rm README.org
-rm LICENSE
+java -cp .classes Main 1000
 ls -l
-exit
-mv testsuite.java  testsuite.yasnippet
+java -cp classes Main 1000
+cd ../01-02-ThreadPool-Alternative-01/
+java -cp classes Main 1000
+cd ..
+make
+cd doc
+java -cp ,,/classes Main 1000
+java -cp ../classes Main 1000
+cd ..
+make clean
+make
+java -cp ../classes Main 1000
+java -cp classes Main 1000
+cd doc/
+ls -l
+ls -la
+cd ..
+java -cp classes Main 1000
+ls classes
+java -cp classes/** Main 1000
+ls -l
+pdflatex 01-Team09-Schneckenreither.tex
+ls
+cd -02
+cd 01-02-TheadPool-Alternative
+ls
+make clean 
+make
+java -c classes Main
+java -cp classes Main 10000
+java -cp classes main.PIWorker.Main 10000
+java -cp classes main.PIWorker.Main 10000000
+java -cp classes main.PIWorker.Main 10000000 8 4
+time "java -cp classes main.PIWorker.Main 10000000 8 4"
+time "java -cp classes main.PIWorker.Main 10000000 8 4 > /dev/null"
+\p
+cd doc
+time "java -cp ../classes main.PIWorker.Main 10000000 8 4 > /dev/null"
+time "java -cp ../classes main.PIWorker.Main 100000000 8 4 > /dev/null"
+time "java > /dev/null -cp ../classes main.PIWorker.Main 100000000 8 4"
+time "java 1 > /dev/null -cp ../classes main.PIWorker.Main 100000000 8 4"
+time "java 1 > /dev/null -cp ../classes main.PIWorker.Main 1000000000000 8 4"
+time "java -cp ../classes main.PIWorker.Main 1000000000000 8 4"
+time "java -cp ../classes main.PIWorker.Main 100000000 8 4"
+java -classpath /home/schnecki/Documents/UIBK/5.Semester/NP/PS/01/02_ThreadPool/classes:/home/schnecki/Documents/UIBK/5.Semester/NP/PS/01/02_ThreadPool/lib main.PIWorker.Main 4
+man time
+time "java -cp ../classes main.PIWorker.Main 1000000000000 8 4 > /dev/null"
+time "java -cp ../classes main.PIWorker.Main 10000000 8 4 > /dev/null"
+time "java -cp ../classes main.PIWorker.Main 100000000 8 4 > /dev/null"
+time "java -cp ../classes main.PIWorker.Main 100000000 1 4 > /dev/null"
+time "java -cp ../classes main.PIWorker.Main 100000000 8 4"
+java -cp ~/Documents/UIBK/5.Semester/NP/Git/01/01-02-ThreadPool-Alternative-01/classes main.PIWorker.Main 100000000 1 4
+time java -cp ~/Documents/UIBK/5.Semester/NP/Git/01/01-02-ThreadPool-Alternative-01/classes main.PIWorker.Main 100000000 1 4
+time java -cp main.PIWorker.Main 100000000 1 4 1 >> time.txt
+cat time.txt
+sh tests.sh
+rm *.txt
+sh tests.sh
+cat time.txt 
+time  java -cp ../classes main.PIWorker.Main 1000 $threads $steps
+time -p %e java -cp ../classes main.PIWorker.Main 1000 $threads $steps
+time -p "%e" java -cp ../classes main.PIWorker.Main 1000 $threads $steps
+time -f "%e" java -cp ../classes main.PIWorker.Main 1000 $threads $steps
+time -f"%e" java -cp ../classes main.PIWorker.Main 1000 $threads $steps
+time  java -cp ../classes main.PIWorker.Main 1000 $threads $steps
+time -f "%e" "java -cp ../classes main.PIWorker.Main 1000 $threads $steps"
+time -f "%e" "java -cp ../classes main.PIWorker.Main 1000 8 4"
+time --format="%e" "java -cp ../classes main.PIWorker.Main 1000 8 4"
+time -f "%e" "java -cp ../classes main.PIWorker.Main 1000 8 4"
+rm *.txt
+sh tests.sh 
+cat tests.sh 
+cat time.txt 
+sh tests.sh 
+cat time.txt 
+sh tests.sh 
+cat time.txt 
+sh tests.sh 
+rm time.txt 
+sh tests.sh 
+cat time.txt 
+rm time.txt 
+sh tests.sh 
+cat time.txt 
+cd ..
+java -cp classes main.PIWorker.Main 1000000 8 8 
+java -cp classes main.PIWorker.Main 1000000 8 8 
+cp * ~/Programmierung/Java/Junit/
+mkdir ~/Programmierung/Java/Junit/
+cp * ~/Programmierung/Java/Junit/
+echo $CLASSPATH
+echo $CLASSPATH
+man javac
+man javac
+make
+echo $CLASSPATH
+make
+make
+make
+make
+mv lib ..
+cd ..
+rm lib -r

@@ -7,9 +7,9 @@
 ;; Created: Fr Okt  4 20:40:17 2013 (+0200)
 ;; Version:
 ;; Package-Requires: ()
-;; Last-Updated: Mo Okt 14 19:55:37 2013 (+0200)
+;; Last-Updated: So Okt 20 14:55:13 2013 (+0200)
 ;;           By: Manuel Schneckenreither
-;;     Update #: 53
+;;     Update #: 99
 ;; URL:
 ;; Doc URL:
 ;; Keywords:
@@ -49,19 +49,55 @@
 
 
 (require 'auto-dictionary)
-;; (add-hook 'flyspell-mode-hook (lambda () (auto-dictionary-mode 1)))
-;; (setq flyspell-issue-welcome-flag nil) ;; fix flyspell problem
 
-;; (autoload 'flyspell-mode "flyspell" "On-the-fly spelling checker." t)
+
+;; AUTOMATICALLY GESS DICTIONARY
+(require 'auto-dictionary)
+(add-hook 'flyspell-mode-hook (lambda () (auto-dictionary-mode 1)))
+
+
+;; message mode hook
 (add-hook 'message-mode-hook 'turn-on-flyspell)
+;; text mode hook
 (add-hook 'text-mode-hook 'turn-on-flyspell)
+;; latex mode hook
+(add-hook 'latex-mode-hook 'turn-on-flyspell)
+
+
+;; MINOR MODE HOOK
+(defun my/flyspell-minor-mode ()
+  "Minor mode hook for flyspell."
+
+  ;; KEYS
+  (local-set-key (kbd (concat prefix-command-key "s w")) 'ispell-word)
+  (local-set-key (kbd (concat prefix-command-key "s b")) 'flyspell-buffer)
+  )
+
+;; global set key to enable/disable flyspell mode
+(global-set-key (kbd (concat prefix-command-key "s m")) 'flyspell-mode)
+(global-set-key (kbd (concat prefix-command-key "s p")) 'flyspell-prog-mode)
+
+(add-hook 'flyspell-mode-hook 'my/flyspell-minor-mode)
+
+(defun flyspell-switch-dictionary()
+    (interactive)
+    (let* ((dic ispell-current-dictionary)
+           (change (if (string= dic "german") "english" "german")))
+      (ispell-change-dictionary change)
+      (message "Dictionary switched from %s to %s" dic change)
+      ))
+
+(global-set-key (kbd "<f8>") 'flyspell-switch-dictionary)
+
+
+(setq flyspell-issue-message-flag nil)
 
 ;; ;; WHEN ENABLED IT BREAKS AUTO-COMPLETION (AUTO-COMPLETE) FOR JAVA - workaround
 ;; ;; in auto_complete_config.el needs therefore to be enabled!
 ;; (add-hook 'jde-mode-hook (lambda () (flyspell-mode))) ;; prog for
 
 ;; (add-hook 'tcl-mode-hook 'flyspell-mode)
-(add-hook 'latex-mode-hook (lambda () (flyspell-mode)))
+
 ;; (add-hook 'org-mode-hook (lambda () (flyspell-mode)))
 ;; (add-hook 'c++-mode-hook (lambda () (flyspell-mode)))
 ;; (add-hook 'c-mode-hook (lambda () (flyspell-mode)))

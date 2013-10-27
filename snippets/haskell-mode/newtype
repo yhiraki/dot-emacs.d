@@ -1,7 +1,8 @@
 # -*- mode: snippet -*-
-# key: new
+# key: newtype
 # name: newtype
-# condition: (= (length "new") (current-column))
 # contributor: Luke Hoersten <luke@hoersten.org>
 # --
-newtype ${1:Type} = $1 { un$1 :: ${2:a} } ${3:deriving (${4:Show, Eq})}
+newtype ${1:Type} ${2:a} = $1 {
+    ${3:name} :: ${4:type}$0
+} ${5:deriving (${6:Show, Eq})}
