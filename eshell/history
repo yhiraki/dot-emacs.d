@@ -1,128 +1,128 @@
+java -jar ~/Programmierung/Java/JUnit/simple-jester.jar -buildCommand make -source jesterTest
 ls
-cd ..
+mkdir jester
+mv jesterTest jester
+cp Makefile jester/
+mkdir jester/classes
 ls
-cd ~/.emacs.d/.tmp/
-ls autosaves/
-cd backups
+rm jester.log jesterReport.xml
 ls
-ls | grep Makefile
-ls 
-cd ..
-make 
+cd jesterTest
+cd jester
 ls
-cd doc
-time "java -cp ../classes/ Main 1000" 
-cd ../../01-02-ThreadPool-Alternative-01/doc/
-time "java -cp ../classes/ Main 1000" 
-cd ..
+mv jesterTest src
+java -jar ~/Programmierung/Java/JUnit/simple-jester.jar -buildCommand make -source jesterTest
+java -jar ~/Programmierung/Java/JUnit/simple-jester.jar -buildCommand make -source src
+ls
+java -classpath ~/Programmierung/Java/JUnit/*:./classes: junit.textui.TestRunner nu.xom.tests.AttributeTest
+java -classpath ~/Programmierung/Java/JUnit/*:./classes: junit.textui.TestRunner qm.SchneckenreitherMyMathTest
 make
-mkdir classes
-make
-cd doc
-time "java -cp ../classes/ Main 1000" 
-cd ..
-java -cp .classes Main 1000
+java -classpath ~/Programmierung/Java/JUnit/*:./classes: junit.textui.TestRunner qm.SchneckenreitherMyMathTest
+ls classes
+ls classes/qm/
+java -classpath ~/Programmierung/Java/JUnit/*:./classes: junit.textui.TestRunner qm.SchneckenreitherMyMathTest
+java jester.TestTester org.jaxen.JaxenTests src/SchneckenreitherMyMathTest
+java -jar ~/Programmierung/Java/JUnit/simple-jester.jar -buildCommand "make all" -source src/
 ls -l
-java -cp classes Main 1000
-cd ../01-02-ThreadPool-Alternative-01/
-java -cp classes Main 1000
+cat jesterR
+cat jesterReport.xml 
+cat jester.log
+make all
+java -jar ~/Programmierung/Java/JUnit/simple-jester.jar -buildCommand "make all" -source src/
+cat jester.log
+cat jesterReport.xml
+java -jar ~/Programmierung/Java/JUnit/simple-jester.jar -buildCommand "make 1 > /dev/null" -source src/
+make 1>/dev/null
+java -jar ~/Programmierung/Java/JUnit/simple-jester.jar -buildCommand "make 1>/dev/null" -source src/
+java -jar ~/Programmierung/Java/JUnit/simple-jester.jar -buildCommand "make >/dev/null" -source src/
+java -jar ~/Programmierung/Java/JUnit/simple-jester.jar -buildCommand "make -silent" -source src/
+make --help
+java -jar ~/Programmierung/Java/JUnit/simple-jester.jar -buildCommand "make --silent" -source src/
+cat jester.log
+cat jesterReport.xml
+java -jar ~/Programmierung/Java/JUnit/simple-jester.jar 
+java -cp $CLASSPATH emmarun -r html 
+java -cp $CLASSPATH emmarun -r html src/SchneckenreitherMyMathTest
+java -cp $CLASSPATH emmarun -r html src/SchneckenreitherMyMathTest.java
+java -cp $CLASSPATH emmarun -r html classes/qm/SchneckenreitherMyMathTest.class
+java -cp $CLASSPATH emmarun -r html -cp classes/qm/
+java -cp $CLASSPATH emmarun -r html -cp classes/qm/ SchneckenreitherMyMathTest.java
+java -cp $CLASSPATH emmarun -r html -cp classes/ qm.SchneckenreitherMyMathTest.java
+java -cp $CLASSPATH emmarun -r html -cp classes/ qm.SchneckenreitherMyMathTest
+java -cp $CLASSPATH emmarun -r html -cp classes/ qm.
+java -cp $CLASSPATH emmarun -r html -cp classes/ qm.MyMaths
+java -cp $CLASSPATH emmarun -r html -cp classes/ src/SchneckenreitherMyMathTest
+java -cp $CLASSPATH emmarun -r html -cp classes/ src/SchneckenreitherMyMathTest.java
 cd ..
-make
-cd doc
-java -cp ,,/classes Main 1000
-java -cp ../classes Main 1000
+rm -r jester
+ls
+java -cp classes qm.MyMaths
+java -cp classes qm.SchneckenreitherMyMathTest
+java -cp classes  org.junit.runner.JUnitCore qm.SchneckenreitherMyMathTest
+java -cp $CLASSPATH:classes  org.junit.runner.JUnitCore qm.SchneckenreitherMyMathTest
+java -cp $CLASSPATH:classes  org.junit.runner.JUnitCore 
+java -cp $CLASSPATH:classes  org.junit.runner.JUnitCore --hlep
+java -cp $CLASSPATH:classes  org.junit.runner.JUnitCore --help
+java -cp $CLASSPATH:classes  org.junit.runner.JUnitCore --help
+rm ~/Programmierung/Java/JUnit/emma.jar
+ls
+cp src/* MyMath/src/
+sudo emacs /etc/crontab
+sudo emacs /etc/crontab
+rm *.class
+ls
+cd ..
+ls
+mkdir classes
+ls classes
+cd classes
 cd ..
 make clean
 make
-java -cp ../classes Main 1000
-java -cp classes Main 1000
-cd doc/
-ls -l
-ls -la
+mkdir NP
+mv * NP
 cd ..
-java -cp classes Main 1000
-ls classes
-java -cp classes/** Main 1000
-ls -l
-pdflatex 01-Team09-Schneckenreither.tex
+make clean
+make
+make
+make clean
+cd src
 ls
-cd -02
-cd 01-02-TheadPool-Alternative
+rm Consumer.java
+cd NP/
 ls
-make clean 
-make
-java -c classes Main
-java -cp classes Main 10000
-java -cp classes main.PIWorker.Main 10000
-java -cp classes main.PIWorker.Main 10000000
-java -cp classes main.PIWorker.Main 10000000 8 4
-time "java -cp classes main.PIWorker.Main 10000000 8 4"
-time "java -cp classes main.PIWorker.Main 10000000 8 4 > /dev/null"
-\p
-cd doc
-time "java -cp ../classes main.PIWorker.Main 10000000 8 4 > /dev/null"
-time "java -cp ../classes main.PIWorker.Main 100000000 8 4 > /dev/null"
-time "java > /dev/null -cp ../classes main.PIWorker.Main 100000000 8 4"
-time "java 1 > /dev/null -cp ../classes main.PIWorker.Main 100000000 8 4"
-time "java 1 > /dev/null -cp ../classes main.PIWorker.Main 1000000000000 8 4"
-time "java -cp ../classes main.PIWorker.Main 1000000000000 8 4"
-time "java -cp ../classes main.PIWorker.Main 100000000 8 4"
-java -classpath /home/schnecki/Documents/UIBK/5.Semester/NP/PS/01/02_ThreadPool/classes:/home/schnecki/Documents/UIBK/5.Semester/NP/PS/01/02_ThreadPool/lib main.PIWorker.Main 4
-man time
-time "java -cp ../classes main.PIWorker.Main 1000000000000 8 4 > /dev/null"
-time "java -cp ../classes main.PIWorker.Main 10000000 8 4 > /dev/null"
-time "java -cp ../classes main.PIWorker.Main 100000000 8 4 > /dev/null"
-time "java -cp ../classes main.PIWorker.Main 100000000 1 4 > /dev/null"
-time "java -cp ../classes main.PIWorker.Main 100000000 8 4"
-java -cp ~/Documents/UIBK/5.Semester/NP/Git/01/01-02-ThreadPool-Alternative-01/classes main.PIWorker.Main 100000000 1 4
-time java -cp ~/Documents/UIBK/5.Semester/NP/Git/01/01-02-ThreadPool-Alternative-01/classes main.PIWorker.Main 100000000 1 4
-time java -cp main.PIWorker.Main 100000000 1 4 1 >> time.txt
-cat time.txt
-sh tests.sh
-rm *.txt
-sh tests.sh
-cat time.txt 
-time  java -cp ../classes main.PIWorker.Main 1000 $threads $steps
-time -p %e java -cp ../classes main.PIWorker.Main 1000 $threads $steps
-time -p "%e" java -cp ../classes main.PIWorker.Main 1000 $threads $steps
-time -f "%e" java -cp ../classes main.PIWorker.Main 1000 $threads $steps
-time -f"%e" java -cp ../classes main.PIWorker.Main 1000 $threads $steps
-time  java -cp ../classes main.PIWorker.Main 1000 $threads $steps
-time -f "%e" "java -cp ../classes main.PIWorker.Main 1000 $threads $steps"
-time -f "%e" "java -cp ../classes main.PIWorker.Main 1000 8 4"
-time --format="%e" "java -cp ../classes main.PIWorker.Main 1000 8 4"
-time -f "%e" "java -cp ../classes main.PIWorker.Main 1000 8 4"
-rm *.txt
-sh tests.sh 
-cat tests.sh 
-cat time.txt 
-sh tests.sh 
-cat time.txt 
-sh tests.sh 
-cat time.txt 
-sh tests.sh 
-rm time.txt 
-sh tests.sh 
-cat time.txt 
-rm time.txt 
-sh tests.sh 
-cat time.txt 
+cd ../../cl
+cd ../../classes/
+ls
 cd ..
-java -cp classes main.PIWorker.Main 1000000 8 8 
-java -cp classes main.PIWorker.Main 1000000 8 8 
-cp * ~/Programmierung/Java/Junit/
-mkdir ~/Programmierung/Java/Junit/
-cp * ~/Programmierung/Java/Junit/
-echo $CLASSPATH
-echo $CLASSPATH
-man javac
-man javac
-make
-echo $CLASSPATH
-make
-make
-make
-make
-mv lib ..
+make clena
+make clean
 cd ..
-rm lib -r
+cd ..
+rm -r Nebenläufige\ Programmierung/
+rm -r Software\ Qualität
+ls -l
+ls -l
+cd Vertiefungsseminar
+ls -l
+cd Paper
+ls -l
+ls -l
+evince main.pdf
+latex main.tex
+latex main
+latex Seminararbeit
+latex seminararbeit
+latex seminararbeit.tex
+gnome-terminal . &
+ls
+rm seminar*
+ll
+ls
+ls -l
+rm texput.log 
+mkdir src
+mv * src
+ls -l
+cd ../packages/
+ls

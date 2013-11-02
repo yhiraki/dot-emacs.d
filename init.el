@@ -7,9 +7,9 @@
 ;; Created: Fr Okt  4 20:33:29 2013 (+0200)
 ;; Version:
 ;; Package-Requires: ()
-;; Last-Updated: Sa Okt 26 21:13:39 2013 (+0200)
+;; Last-Updated: Sa Nov  2 16:28:24 2013 (+0100)
 ;;           By: Manuel Schneckenreither
-;;     Update #: 174
+;;     Update #: 179
 ;; URL:
 ;; Doc URL:
 ;; Keywords:
@@ -90,10 +90,13 @@
         javadoc-lookup
         javap-mode
         latex-pretty-symbols
+        latex-extra
         magit
         multiple-cursors
         org
         org-plus-contrib
+        pager
+        pager-default-keybindings
         popup
         thesaurus
         undo-tree
@@ -214,3 +217,4 @@
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; init.el ends here
+(put 'dired-find-alternate-file 'disabled nil)

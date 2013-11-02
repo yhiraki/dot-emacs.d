@@ -42,6 +42,14 @@
 ;; require for export to pdf
 ;; (require 'ox-groff)
 
+;; easy follow links
+(setq org-return-follows-link t)
+
+;; open text files in org mode
+(add-to-list 'auto-mode-alist '("\\.txt$" . org-mode))
+
+;; open unknown files in org mode
+(setq-default major-mode 'org-mode)
 
 ;; ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 ;; +++++++++++++++++++++++++++++ MINOR MODE +++++++++++++++++++++++++++++

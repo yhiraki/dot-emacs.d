@@ -7,9 +7,9 @@
 ;; Author: Manuel Schneckenreither
 ;; Created: Tue Dec 11 00:43:14 2012 (+0100)
 ;; Version:
-;; Last-Updated: So Okt 27 09:48:50 2013 (+0100)
+;; Last-Updated: Sa Nov  2 16:18:58 2013 (+0100)
 ;;           By: Manuel Schneckenreither
-;;     Update #: 321
+;;     Update #: 325
 ;; URL:
 ;; Description:
 ;;
@@ -64,10 +64,14 @@
 (load (concat package_conf_folder "auto_complete_config.el"))
 ;; COLUMN MAKER -- mark columns
 (load (concat package_conf_folder "whitespace_config.el"))
-;; COLUMN MAKER -- mark columns
+;; MAKE BACKUPS
 (load (concat package_conf_folder "backup_each_save_config.el"))
 ;; MAGIT - git for emacs
 (load (concat package_conf_folder "magit_config.el"))
+;; DIRED - file mangement for emacs
+(load (concat package_conf_folder "dired_config.el"))
+;; PAGER -- better scrolling
+(load (concat package_conf_folder "pager_config.el"))
 
 
 ;; ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -81,7 +85,7 @@
 (load-file (concat language_conf_folder "emacs_lisp_config.el"))
 ;; (load-file (concat language_conf_folder "ocaml_config.el"))
 (load-file (concat language_conf_folder "makefile_config.el"))
-;; (load-file (concat language_conf_folder "latex_config.el"))
+(load-file (concat language_conf_folder "latex_config.el"))
 
 ;; ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 ;; ++++++++++++++++++++++++++ LOAD KEYBINDINGS ++++++++++++++++++++++++++

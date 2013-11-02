@@ -1,29 +1,65 @@
+;;; latex_config.el ---
+;;
+;; Filename: latex_config.el
+;; Description:
+;; Author: Manuel Schneckenreither
+;; Maintainer:
+;; Created: Sa Nov  2 16:14:09 2013 (+0100)
+;; Version:
+;; Package-Requires: ()
+;; Last-Updated: Sa Nov  2 16:37:05 2013 (+0100)
+;;           By: Manuel Schneckenreither
+;;     Update #: 21
+;; URL:
+;; Doc URL:
+;; Keywords:
+;; Compatibility:
+;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;
+;;; Commentary:
+;;
+;;
+;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;
+;;; Change Log:
+;;
+;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;
+;; This program is free software; you can redistribute it and/or
+;; modify it under the terms of the GNU General Public License as
+;; published by the Free Software Foundation; either version 3, or
+;; (at your option) any later version.
+;;
+;; This program is distributed in the hope that it will be useful,
+;; but WITHOUT ANY WARRANTY; without even the implied warranty of
+;; MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+;; General Public License for more details.
+;;
+;; You should have received a copy of the GNU General Public License
+;; along with this program; see the file COPYING.  If not, write to
+;; the Free Software Foundation, Inc., 51 Franklin Street, Fifth
+;; Floor, Boston, MA 02110-1301, USA.
+;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;
+;;; Code:
+
 
 (load-file (concat package_folder "tex_texify/tex_texify.el"))
-
 
 
 ;; ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 ;; ++++++++++++++++++++++++++++ LATEX CONFIG ++++++++++++++++++++++++++++
 ;; ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
-
 (setq TeX-auto-save t)
 (setq TeX-parse-self t)
 (setq TeX-save-query nil)
 (setq preview-auto-cache-preamble nil)
 (setq TeX-PDF-mode t)
-
-;; (require 'flymake)
-
-;; (defun flymake-get-tex-args (file-name)
-;;   (list "pdflatex"
-;;         (list "-file-line-error" "-draftmode" "-interaction=nonstopmode" file-name)))
-
-;; (add-hook 'LaTeX-mode-hook 'flymake-mode)
-
-(setq ispell-program-name "ispell") ; could be ispell as well, depending on your preferences
-(setq ispell-dictionary "english") ; this can obviously be set to any language your spell-checking program supports
 
 
 (require 'tex-site)
@@ -56,10 +92,6 @@
         LaTeX-section-label))
 
 
-;; always update pdf in docView // better use evince !
-;; (add-hook 'doc-view-mode-hook 'auto-revert-mode)
-
-
 ;; set tex master by guessing
 ;;; Code:
 (defun guess-TeX-master (filename)
@@ -83,16 +115,6 @@
     candidate))
 
 
-(add-hook 'LaTeX-mode-hook
-          (lambda()
-            (TeX-PDF-mode t)
-            (setq TeX-master (guess-TeX-master (buffer-file-name)))
-            (flyspell-mode)
-            (flyspell-buffer)
-            ;; (turn-on-outline-minor-mode)
-            ;; (define-key LaTeX-mode-map (kbd "M-.") 'TeX-complete-symbol)
-            ))
-
 ;; sync between evince and emacs auctex
 (setq TeX-source-correlate-mode t)
 
@@ -105,9 +127,9 @@
   "Comile latex and show in evince"
   (interactive)
   (TeX-texify)
-  ;; (async-shell-command "rm -rf *.aux *.bbl *.log *.blg *.toc *.out *.dvi *.backup *.exl *.exls *.ps 1>/dev/null 2>/dev/null" t)
-  (TeX-command "View" 'TeX-active-master 0))
-
+  (TeX-command "View" 'TeX-active-master 0)
+  (async-shell-command "rm -rf *.aux *.bbl *.log *.blg *.toc *.out *.dvi *.backup *.exl *.exls *.ps 1>/dev/null 2>/dev/null" t)
+  )
 
 
 (setq TeX-view-program-selection
@@ -116,22 +138,44 @@
         (output-dvi "Evince")))
 
 
-;; KEYBINDINGSp
-;; (add-hook 'LaTeX-mode-hook (lambda () (local-set-key (kbd "C-c C-SPC") 'compile-show-latex)))
-
-
-;; (defun turn-on-outline-minor-mode ()
-;;  (outline-minor-mode 1))
-;; (setq outline-minor-mode-prefix "\C-c \C-o") ; Or something else
-
-
-
-(defun my-latex (action)
+(defun make-tex-tags ()
+  "This function reloads the tags by using the command 'make tags'."
   (interactive)
-  (if (buffer-modified-p) (save-buffer))
-  (let ((f1 (current-frame-configuration))
-        (retcode (shell-command (concat "~/bin/my-latex " action " " buffer-file-name))))
-    (if (= retcode 0) (set-frame-configuration f1))))
+  (let ((dir (nth 0 (split-string default-directory "src"))))
+    (setq esdir (replace-regexp-in-string " " "\\\\ " dir))
+    (shell-command
+     (concat "cd " esdir " && find . -name \"*.tex\" -print | etags - 1>/dev/null 2>/dev/null") t)
+    (visit-tags-table (concat dir "TAGS"))
+    )
+  )
 
-(global-set-key  (kbd "<f8>") '(lambda () (interactive) (my-latex "preview")))
-(global-set-key (kbd "C-c C-SPC") '(lambda () (interactive) (my-latex "create")))
+
+;; MINOR MODE HOOK
+(defun my/latex-minor-mode ()
+  "Minor mode hook for Latex."
+
+  (TeX-PDF-mode t)
+  (setq TeX-master (guess-TeX-master (buffer-file-name)))
+  (flyspell-mode)
+  (flyspell-buffer)
+
+  ;; auto complete mode
+  (add-to-list 'ac-sources 'ac-source-etags)
+
+  ;; create and set tags file
+  (add-hook 'after-save-hook 'make-tex-tags nil t)
+
+  ;; set keys
+  (local-set-key (kbd "C-c SPC") 'compile-show-latex)
+
+  )
+
+(add-hook 'LaTeX-mode-hook 'my/latex-minor-mode)
+
+
+;; latex extras
+(eval-after-load 'latex '(latex/setup-keybinds))
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;; latex_config.el ends here
