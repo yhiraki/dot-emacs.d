@@ -3,19 +3,29 @@
 
 (setq mc/cmds-to-run-for-all
       '(
+        LaTeX-babel-insert-hyphen
+        TeX-font
+        TeX-insert-backslash
+        beginning-of-visual-line
         c-electric-delete-forward
         c-electric-paren
         c-electric-semi&comma
+        comment-or-uncomment-region
+        end-of-visual-line
         jde-backward-kill-camel-tok
         jde-kill-camel-tok
         kill-region
+        kill-visual-line
         org-beginning-of-line
+        org-delete-char
         org-end-of-line
         org-force-self-insert
         org-kill-line
         org-self-insert-command
         org-yank
+        reindent-then-newline-and-indent
         string-rectangle
+        upcase-region
         yas-expand
         ))
 

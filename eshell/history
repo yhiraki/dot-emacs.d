@@ -1,128 +1,128 @@
-java -jar ~/Programmierung/Java/JUnit/simple-jester.jar -buildCommand make -source jesterTest
+cd ..
+cd ..
+mkdir Presentation
+cd Presentation
+mkdir src
+cd sr
+cd src/
 ls
-mkdir jester
-mv jesterTest jester
-cp Makefile jester/
-mkdir jester/classes
-ls
-rm jester.log jesterReport.xml
-ls
-cd jesterTest
-cd jester
-ls
-mv jesterTest src
-java -jar ~/Programmierung/Java/JUnit/simple-jester.jar -buildCommand make -source jesterTest
-java -jar ~/Programmierung/Java/JUnit/simple-jester.jar -buildCommand make -source src
-ls
-java -classpath ~/Programmierung/Java/JUnit/*:./classes: junit.textui.TestRunner nu.xom.tests.AttributeTest
-java -classpath ~/Programmierung/Java/JUnit/*:./classes: junit.textui.TestRunner qm.SchneckenreitherMyMathTest
-make
-java -classpath ~/Programmierung/Java/JUnit/*:./classes: junit.textui.TestRunner qm.SchneckenreitherMyMathTest
-ls classes
-ls classes/qm/
-java -classpath ~/Programmierung/Java/JUnit/*:./classes: junit.textui.TestRunner qm.SchneckenreitherMyMathTest
-java jester.TestTester org.jaxen.JaxenTests src/SchneckenreitherMyMathTest
-java -jar ~/Programmierung/Java/JUnit/simple-jester.jar -buildCommand "make all" -source src/
 ls -l
-cat jesterR
-cat jesterReport.xml 
-cat jester.log
-make all
-java -jar ~/Programmierung/Java/JUnit/simple-jester.jar -buildCommand "make all" -source src/
-cat jester.log
-cat jesterReport.xml
-java -jar ~/Programmierung/Java/JUnit/simple-jester.jar -buildCommand "make 1 > /dev/null" -source src/
-make 1>/dev/null
-java -jar ~/Programmierung/Java/JUnit/simple-jester.jar -buildCommand "make 1>/dev/null" -source src/
-java -jar ~/Programmierung/Java/JUnit/simple-jester.jar -buildCommand "make >/dev/null" -source src/
-java -jar ~/Programmierung/Java/JUnit/simple-jester.jar -buildCommand "make -silent" -source src/
-make --help
-java -jar ~/Programmierung/Java/JUnit/simple-jester.jar -buildCommand "make --silent" -source src/
-cat jester.log
-cat jesterReport.xml
-java -jar ~/Programmierung/Java/JUnit/simple-jester.jar 
-java -cp $CLASSPATH emmarun -r html 
-java -cp $CLASSPATH emmarun -r html src/SchneckenreitherMyMathTest
-java -cp $CLASSPATH emmarun -r html src/SchneckenreitherMyMathTest.java
-java -cp $CLASSPATH emmarun -r html classes/qm/SchneckenreitherMyMathTest.class
-java -cp $CLASSPATH emmarun -r html -cp classes/qm/
-java -cp $CLASSPATH emmarun -r html -cp classes/qm/ SchneckenreitherMyMathTest.java
-java -cp $CLASSPATH emmarun -r html -cp classes/ qm.SchneckenreitherMyMathTest.java
-java -cp $CLASSPATH emmarun -r html -cp classes/ qm.SchneckenreitherMyMathTest
-java -cp $CLASSPATH emmarun -r html -cp classes/ qm.
-java -cp $CLASSPATH emmarun -r html -cp classes/ qm.MyMaths
-java -cp $CLASSPATH emmarun -r html -cp classes/ src/SchneckenreitherMyMathTest
-java -cp $CLASSPATH emmarun -r html -cp classes/ src/SchneckenreitherMyMathTest.java
-cd ..
-rm -r jester
-ls
-java -cp classes qm.MyMaths
-java -cp classes qm.SchneckenreitherMyMathTest
-java -cp classes  org.junit.runner.JUnitCore qm.SchneckenreitherMyMathTest
-java -cp $CLASSPATH:classes  org.junit.runner.JUnitCore qm.SchneckenreitherMyMathTest
-java -cp $CLASSPATH:classes  org.junit.runner.JUnitCore 
-java -cp $CLASSPATH:classes  org.junit.runner.JUnitCore --hlep
-java -cp $CLASSPATH:classes  org.junit.runner.JUnitCore --help
-java -cp $CLASSPATH:classes  org.junit.runner.JUnitCore --help
-rm ~/Programmierung/Java/JUnit/emma.jar
-ls
-cp src/* MyMath/src/
-sudo emacs /etc/crontab
-sudo emacs /etc/crontab
-rm *.class
-ls
-cd ..
-ls
-mkdir classes
-ls classes
-cd classes
-cd ..
-make clean
-make
-mkdir NP
-mv * NP
-cd ..
-make clean
-make
-make
-make clean
-cd src
-ls
-rm Consumer.java
-cd NP/
-ls
-cd ../../cl
-cd ../../classes/
-ls
-cd ..
-make clena
-make clean
-cd ..
-cd ..
-rm -r Nebenläufige\ Programmierung/
-rm -r Software\ Qualität
+cp ../../Paper/src/* .
+cp ../../Paper/src/* . -r
+cp -r ../../Paper/src/* . 
 ls -l
 ls -l
-cd Vertiefungsseminar
-ls -l
-cd Paper
-ls -l
-ls -l
+cp presentation_setup.tex ../../../VS/Presentation/src/
+pdflatex main.tex
+pdflatex main.tex
+pdflatex main.tex
 evince main.pdf
-latex main.tex
-latex main
-latex Seminararbeit
-latex seminararbeit
-latex seminararbeit.tex
-gnome-terminal . &
+ls 
+rm *aux
+rm *log
+rm *PDF
+rm *pdf
+rm *gz
 ls
-rm seminar*
+ls -l
+rm TAGS
+cd ..
+cp 02 ../../
+cp -r 02 ../PS/02
+nautilus .
+cd 02/
+ls
+mv 02-Schneckenreither-Team09.tex 02-Team09.tex 
+cp ../../../../4.Semester/EidwA/Praesentation/
+cp ../../../../4.Semester/EidwA/Praesentation/presentation_setup.tex .
+pdflatex main
+pdflatex main
+pdflatex main
+pdflatex main
+cd ..
+cd src
+ls 
+javac -cp ../../../classes/ ex2.java
+cd ../../../classes/
 ll
 ls
+cd ..
+java -cp classes Process
+cd classes
+cd classes
 ls -l
-rm texput.log 
-mkdir src
-mv * src
-ls -l
-cd ../packages/
+cd aufg3/
+java -cp classes Process
+cd classes
 ls
+ls
+ls -l
+java Process
+java --classpath . Process
+java -cp . Process
+ls -l
+java --help
+java -h
+cd ..
+java -cp classes/* Process
+java -cp classes/* main
+java -cp classes/* blatt2.aufg3.Process
+java -cp classes/* blatt2.aufg3.Process
+java -cp classes/ blatt2.aufg3.Process
+history | grep java -cp
+history | grep "java -cp"""
+ls -l classes
+ls -l
+cd aufg3
+ls -l
+java  blatt2.aufg3.Process
+java -cp .  blatt2.aufg3.Process
+ls ../../../ 
+javac ex2.java
+ls -l
+java -cp Process
+java Process
+java blatt2Process
+java blatt2.aufg3.Process
+java -cp . Process
+java -h
+rm *.class
+ls 
+cd ../../../
+mkdir classes
+javac -h
+javac --help
+javac -cp classes/ src/blatt2/aufg3/ex2.java
+ls -l
+ls classes
+javac --help
+javac -help
+cp ~/Programmierung/Makefiles/Makefile_Java Makefile
+make
+make
+rm src/blatt2/aufg3/.\#ex2.java 
+make
+ls -l
+ls -l classes
+ls src/blatt2/aufg3/
+rm src/blatt2/aufg3/*.class 
+ls src/blatt2/aufg3/
+java -cp ./classes blatt2.aufg3.Process
+javac -help
+cleanup
+java -cp ./classes blatt2.aufg3.Process
+cd ..
+rm -r themes
+ls
+ls ..
+cd ..
+ls
+pdflatex main
+evince main.pdf &
+ls -l
+cd 03
+ls -l
+mv test.raml trs
+nautilus .
+gcc 06-02-a-Schneckenreither.c -o test
+./test

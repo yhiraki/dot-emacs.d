@@ -1,0 +1,6 @@
+# contributor: Manuel Schneckenreither
+# name: node
+# key: node
+# --
+n_${1:name} [shape=${2:box}, ${3:fillcolor=${4:lightblue}, style=${5:filled},} label="${5:Text}"]
+$0

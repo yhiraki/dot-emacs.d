@@ -7,9 +7,9 @@
 ;; Author: Manuel Schneckenreither
 ;; Created: Tue Dec 11 00:43:14 2012 (+0100)
 ;; Version:
-;; Last-Updated: Sa Nov  2 16:18:58 2013 (+0100)
+;; Last-Updated: Sa Nov 16 12:22:40 2013 (+0100)
 ;;           By: Manuel Schneckenreither
-;;     Update #: 325
+;;     Update #: 328
 ;; URL:
 ;; Description:
 ;;
@@ -72,6 +72,12 @@
 (load (concat package_conf_folder "dired_config.el"))
 ;; PAGER -- better scrolling
 (load (concat package_conf_folder "pager_config.el"))
+;; RAINBOW DELIMITERS - show parenthesis in different colors
+(load (concat package_conf_folder "rainbow_del_config.el"))
+;; RAINBOW MODE - background of color names in specified color
+(load (concat package_conf_folder "rainbow_mode_config.el"))
+;; POWERLINE - better modline
+(load (concat package_conf_folder "powerline_config.el"))
 
 
 ;; ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++

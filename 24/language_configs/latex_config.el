@@ -7,9 +7,9 @@
 ;; Created: Sa Nov  2 16:14:09 2013 (+0100)
 ;; Version:
 ;; Package-Requires: ()
-;; Last-Updated: Sa Nov  2 16:37:05 2013 (+0100)
+;; Last-Updated: So Nov  3 20:48:24 2013 (+0100)
 ;;           By: Manuel Schneckenreither
-;;     Update #: 21
+;;     Update #: 29
 ;; URL:
 ;; Doc URL:
 ;; Keywords:
@@ -165,16 +165,15 @@
   ;; create and set tags file
   (add-hook 'after-save-hook 'make-tex-tags nil t)
 
+  ;; add to hook
+  (add-hook 'LaTeX-mode-hook 'turn-on-auto-fill nil t)
+
   ;; set keys
   (local-set-key (kbd "C-c SPC") 'compile-show-latex)
 
   )
 
 (add-hook 'LaTeX-mode-hook 'my/latex-minor-mode)
-
-
-;; latex extras
-(eval-after-load 'latex '(latex/setup-keybinds))
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;

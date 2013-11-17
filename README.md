@@ -9,7 +9,7 @@ If you can't wait:
  - you need to restart emacs (cedet doesn't like it, when new packages get installed)
 
 
-Fedora: sudo yum install ctags-etags gnuplot emacs evince texlive
+Fedora: sudo yum install ctags-etags gnuplot emacs evince texlive graphviz
 
 Dependencies:
 
@@ -19,6 +19,7 @@ Dependencies:
 
 + Org Mode
   - gnuplot (optional)
+  - graphviz
 
 + Latex:
   - evince (change latex_config.el to use other pdf-viewer)

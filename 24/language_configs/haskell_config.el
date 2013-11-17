@@ -8,7 +8,7 @@
 ;; Version:
 ;; Last-Updated:
 ;;           By:
-;;     Update #: 149
+;;     Update #: 165
 ;; URL:
 ;; Description:
 ;;
@@ -25,11 +25,11 @@
 
 ;; (autoload 'haskell-refac-mode "haskell-refac"
 ;;   "Minor mode for refactoring Haskell programs" t)
-;; (add-hook 'haskell-mode-hook 'turn-on-font-lock)        ;高亮模式
-;; (add-hook 'haskell-mode-hook 'turn-on-haskell-indent)   ;智能缩进模式
-;; (add-hook 'haskell-mode-hook 'turn-on-haskell-ghci)     ;GHCi 交互模式
-;; (add-hook 'haskell-mode-hook 'turn-on-haskell-doc-mode) ;文档模式
-;; (add-hook 'haskell-mode-hook 'haskell-refac-mode)       ;重构
+;; (add-hook 'haskell-mode-hook 'turn-on-font-lock)
+;; (add-hook 'haskell-mode-hook 'turn-on-haskell-indent)
+;; (add-hook 'haskell-mode-hook 'turn-on-haskell-ghci)
+;; (add-hook 'haskell-mode-hook 'turn-on-haskell-doc-mode)
+;; (add-hook 'haskell-mode-hook 'haskell-refac-mode)
 ;; (add-hook 'haskell-mode-hook 'hs-lint-mode-hook)
 
 ;; modules to add
@@ -97,9 +97,12 @@
   ;; format source code in sensible way
   ;; (add-hook 'before-save-hook 'haskell-source-code-align nil t)
 
-  ;; you need to have org mode enabled!
-  (local-set-key (kbd "RET")  'org-return-indent)
-
+  ;; KEYS
+  ;; fix return behaviour
+  (local-set-key (kbd "RET")  'newline-and-indent)
+  ;; set special keys
+  (local-set-key (kbd "=") 'haskell-indent-insert-equal)
+  (local-set-key (kbd "|") 'haskell-indent-insert-guard)
 
   ;; CREATE AND SET TAGS FILE
   (add-hook 'after-save-hook 'make-haskell-tags nil t)

@@ -1,0 +1,12 @@
+# contributor: Manuel Schneckenreither
+# name: columns
+# key: col
+# --
+\begin{columns}[${1:T}]
+
+    \column{${2:0.7}\textwidth}
+    $0
+
+    \column{${3:0.3}\textwidth}
+
+\end{columns}

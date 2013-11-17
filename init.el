@@ -7,9 +7,9 @@
 ;; Created: Fr Okt  4 20:33:29 2013 (+0200)
 ;; Version:
 ;; Package-Requires: ()
-;; Last-Updated: Sa Nov  2 16:28:24 2013 (+0100)
+;; Last-Updated: Sa Nov 16 12:18:10 2013 (+0100)
 ;;           By: Manuel Schneckenreither
-;;     Update #: 179
+;;     Update #: 207
 ;; URL:
 ;; Doc URL:
 ;; Keywords:
@@ -98,6 +98,9 @@
         pager
         pager-default-keybindings
         popup
+        powerline
+        rainbow-delimiters
+        rainbow-mode
         thesaurus
         undo-tree
         window-number
@@ -184,6 +187,7 @@
  '(ecb-jde-set-directories-buffer-to-jde-sourcepath (quote replace))
  '(ecb-layout-window-sizes (quote (("left8" (ecb-directories-buffer-name 0.15126050420168066 . 0.29411764705882354) (ecb-sources-buffer-name 0.15126050420168066 . 0.23529411764705882) (ecb-methods-buffer-name 0.15126050420168066 . 0.29411764705882354) (ecb-history-buffer-name 0.15126050420168066 . 0.16176470588235295)))))
  '(ecb-options-version "2.40")
+ '(frame-background-mode (quote dark))
  '(haskell-font-lock-haddock t)
  '(jde-compile-option-directory "./../classes")
  '(jde-compiler (quote ("javac")))
@@ -192,9 +196,7 @@
  '(jde-jdk (quote ("1.6")))
  '(jde-jdk-registry (quote (("1.6" . "/usr/lib/jvm/java-1.7.0") ("1.6OpenJDK" . "/usr/lib/jvm/java-1.7.0-openjdk"))))
  '(jde-sourcepath (quote ("./src/main" "./src/test")))
- '(org-agenda-files (quote ("~/Documents/Planning/planning_time.org" "~/Documents/Planning/university.org" "~/Documents/Planning/bachelorarbeit.org" "~/Documents/Planning/ProjectIdeas.org" "~/Documents/Planning/freetime.org" "~/Documents/Planning/lists.org" "~/Documents/Planning/Emacs.org")))
- ;; '(org-agenda-skip-additional-timestamps-same-entry t)
- ;; '(org-agenda-skip-scheduled-if-deadline-is-shown (quote repeated-after-deadline))
+ '(org-agenda-files (quote ("~/Documents/Planning/planning_time.org" "~/Documents/Planning/university.org" "~/Documents/Planning/bachelorarbeit.org" "~/Documents/Planning/ProjectIdeas.org" "~/Documents/Planning/freetime.org" "~/Documents/Planning/lists.org" "~/Documents/Planning/anniverseries.org" "~/Documents/Planning/Emacs.org")))
  '(size-indication-mode t)
  '(tool-bar-mode nil)
  '(user-full-name your-full-name)
@@ -210,11 +212,21 @@
  '(column-marker-1 ((t nil)))
  '(flymake-errline ((((class color)) (:underline "red"))))
  '(flymake-warnline ((((class color)) (:underline "yellow"))))
- '(highlight-current-line-face ((t (:background "gray5")))))
+ '(highlight-current-line-face ((t (:background "gray5"))))
+ '(rainbow-delimiters-depth-1-face ((t (:foreground "red"))))
+ '(rainbow-delimiters-depth-2-face ((t (:foreground "magenta"))))
+ '(rainbow-delimiters-depth-3-face ((t (:foreground "cyan"))))
+ '(rainbow-delimiters-depth-4-face ((t (:foreground "brown"))))
+ '(rainbow-delimiters-depth-5-face ((t (:foreground "violet"))))
+ '(rainbow-delimiters-depth-6-face ((t (:foreground "green"))))
+ '(rainbow-delimiters-depth-7-face ((t (:foreground "yellow"))))
+ '(rainbow-delimiters-depth-9-face ((t (:foreground "orange")))))
+
 
 (put 'upcase-region 'disabled nil)
 (put 'downcase-region 'disabled nil)
+(put 'dired-find-alternate-file 'disabled nil)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; init.el ends here
-(put 'dired-find-alternate-file 'disabled nil)
+

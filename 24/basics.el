@@ -5,9 +5,9 @@
 ;; Author: Manuel Schneckenreither
 ;; Created: Mon Dec 10 22:51:09 2012 (+0100)
 ;; Version:
-;; Last-Updated: So Okt 27 17:13:19 2013 (+0100)
+;; Last-Updated: Do Nov 14 13:23:56 2013 (+0100)
 ;;           By: Manuel Schneckenreither
-;;     Update #: 522
+;;     Update #: 527
 ;; URL:
 ;; Description:
 ;;    Basic configuration for emacs. In here are all configs of
@@ -243,10 +243,11 @@
 ;; ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 ;; ++++++++++++++++++ CONFIGURE IN MINIBUFFER INFO ++++++++++++++++++++++
 ;; ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+(display-time-mode t)
 (column-number-mode t)
 (line-number-mode t)
-(size-indication-mode)
-(display-time-mode)
+(size-indication-mode t)
+
 
 ;; ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 ;; ++++++++++++++++++++++++++++ BACKUP INFO +++++++++++++++++++++++++++++
