@@ -1,5 +1,4 @@
 cd ..
-cd ..
 mkdir Presentation
 cd Presentation
 mkdir src
@@ -126,3 +125,4 @@ mv test.raml trs
 nautilus .
 gcc 06-02-a-Schneckenreither.c -o test
 ./test
+pkill -9 git
