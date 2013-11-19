@@ -8,7 +8,7 @@
 ;; Version:
 ;; Last-Updated:
 ;;           By:
-;;     Update #: 165
+;;     Update #: 301
 ;; URL:
 ;; Description:
 ;;
@@ -85,6 +85,27 @@
       (haskell-indent-align-def t 'rhs)
   ))
 
+(defun haskell-insert-equals ()
+  "Insert and aligns equals sign."
+  (interactive)
+
+  (if (not (s-contains? (char-to-string (char-before (- (point) 1))) "=><" ))
+      (haskell-indent-insert-equal)
+    (delete-backward-char 1 nil)
+    (insert "= ")
+    ))
+
+
+(defun haskell-insert-guard ()
+  "Insert and aligns guard sign."
+  (interactive)
+
+  (if (not (s-contains? (char-to-string (char-before (- (point) 1))) "|><" ))
+      (haskell-indent-insert-guard)
+    (delete-backward-char 1 nil)
+    (insert "| ")
+    ))
+
 
 ;; MINOR MODE HOOK
 (defun my/haskell-minor-mode ()
@@ -101,8 +122,8 @@
   ;; fix return behaviour
   (local-set-key (kbd "RET")  'newline-and-indent)
   ;; set special keys
-  (local-set-key (kbd "=") 'haskell-indent-insert-equal)
-  (local-set-key (kbd "|") 'haskell-indent-insert-guard)
+  (local-set-key (kbd "=")  'haskell-insert-equals)
+  (local-set-key (kbd "|") 'haskell-insert-guard)
 
   ;; CREATE AND SET TAGS FILE
   (add-hook 'after-save-hook 'make-haskell-tags nil t)

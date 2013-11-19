@@ -123,19 +123,19 @@
  ("/home/schnecki/Programmierung/Java/Test/" . "Testproject/")
  ("/home/schnecki/Programmierung/Java/" . "Junit/")
  ("/home/schnecki/Programmierung/" . "Haskell/")
- ("/home/schnecki/" . "Documents/")
+ ("/home/schnecki/" . ".emacs.d/")
  ("/home/schnecki/.emacs.d/24/" . "packages_configs/")
 )
 
 ;; ----- ido-work-directory-list -----
 (
+ "/home/schnecki/.emacs.d/24/language_configs/"
+ "/home/schnecki/.emacs.d/"
+ "/home/schnecki/Programmierung/Haskell/SimpleSillyTRSSolver/src/"
  "/home/schnecki/Documents/UIBK/1.Semster/Dokumente_uibk/EP/Aufgaben/"
  "/home/schnecki/.emacs.d/24/packages_configs/"
  "/home/schnecki/.emacs.d/24/"
- "/home/schnecki/.emacs.d/"
  "/home/schnecki/.emacs.d/snippets/haskell-mode/"
- "/home/schnecki/.emacs.d/24/language_configs/"
- "/home/schnecki/Programmierung/Haskell/SimpleSillyTRSSolver/src/"
  "/home/schnecki/Documents/UIBK/5.Semester/NP/Git/03/"
  "/home/schnecki/Documents/UIBK/5.Semester/NP/Git/"
  "/home/schnecki/Documents/UIBK/5.Semester/VS/Presentation/src/"
@@ -183,6 +183,8 @@
 
 ;; ----- ido-work-file-list -----
 (
+ "haskell_config.el"
+ "Main.hs"
  "test.c"
  "test"
  "06-02-a-Schneckenreither.c"
@@ -191,33 +193,31 @@
  "init.el"
  "otherwise"
  "class"
- "haskell_config.el"
- "org_mode_config.el"
 )
 
 ;; ----- ido-dir-file-cache -----
 (
- ("/home/schnecki/Documents/UIBK/1.Semster/Dokumente_uibk/EP/Aufgaben/" (21128 48083 266722 900000) "../" "07-01-a-Schneckenreither" "08-01-a-Schneckenreither.c" "06-01-a-Schneckenreither" "09/" "07-03-a-Schneckenreither_take2.c" "07-03-a-Schneckenreither.c" "untitled" "08-03-a-Schneckenreither.txt" "10_/" "07-02-a-Schneckenreither.c" "12/" "07-03-a-Schneckenreither" "07-01-a-Schneckenreither.c" "test.c" "08-02-a-Schneckenreither.c" "make" "07-03-a-Schneckenreither_take2" "07-02-a-Schneckenreither" "a.out" "07-03-neururer.c" "./" "untitled.c" "11/" ".#06-02-a-Schneckenreither.c" "6-4-neururer" "06-01-a-Schneckenreither.c" ".metadata/" "08-01-a-Schneckenreither" "08-04-a-Schneckenreither" "06-04-a-Schneckenreither.o" "mylib.tar.gz" "06-04-a-Schneckenreither.c" "06-02-a-Schneckenreither.c" "06-02-a-Schneckenreither.o" "06-03-a-Schneckenreither.txt" "lib/" "08-04-a-Schneckenreither.c" "06-04-a-Schneckenreither" "10/" "08-04-a-Schneckenreither.c~" "06-02-a-Schneckenreither" "6-4-neururer.c" "01-05/" "Katja/" "08-02-a-Schneckenreither")
+ ("/home/schnecki/.emacs.d/24/language_configs/" (21129 10219 277088 124000) "../" "java_config.el" "init-cc-compiler.el" "emacs_lisp_config.el" "c_config.el" "./" "haskell_config.el" "TAGS" ".#haskell_config.el" "makefile_config.el" "latex_config.el" "ocaml_config.el" "init-cc-mode-syntax-check.el")
+
+ ("/home/schnecki/Documents/UIBK/5.Semester/Bachelorarbeit/Early Stage/RelevantWork/raml/Raml/" (21129 5772 770444 643000) "../" "CallGraph.hs" "Analyse.hs" "Eval.o" "Monoid.hi" ".hdevtools.sock" "RAMLTypes.hi" "SimpleTypes.hs" "MultivariatePol.hs" "MultivariatePol.o" "Parser.hi" "Eval.hi" "ATypes.hi" "Cplex.hi" "SimpleTypes.hi" "MultivariatePol.hi" "Transform.hi" "LPSolve.o" "Sharing.o" "SimpleTypes.o" "CallGraph.o" "LPSolve.hi" "MBinomial.hi" "Analyse.o" "Cplex.o" "./" "Cplex.hs" "Expressions.hs" "Util.o" "TAGS" "Nat.hs" "Monoid.o" "Parser.o" "Eval.hs" "Sharing.hs" "Util.hs" "Analyse.hi" "Clp.o" "Monoid.hs" "Nat.hi" "Clp.hi" "ATypes.o" "MBinomial.hs" "CallGraph.hi" "LPSolve.hs" "Nat.o" "Util.hi" "Ast.hs" "Transform.hs" "Clp.hs" "Expressions.hi" "ATypes.hs" "MBinomial.o" "Sharing.hi" "RAMLTypes.hs" "RAMLTypes.o" "PPrint.hs" "Expressions.o" "Transform.o" "Parser.hs")
+
+ ("/home/schnecki/.emacs.d/24/" (21129 5772 803443 564000) "../" "emacs.el" "language_configs/" ".emacs.desktop" "packages_configs/" "./" "emacs.el~" "basic_keys.el" "packages/" "basics.el~" "basics.el")
+
+ ("/home/schnecki/.emacs.d/24/packages_configs/" (21129 5772 801443 630000) "../" "dired_config.el" "ido_config.el" "gnuplot_config.el" "whitespace_config.el" "flyspell_config.el" "auto_complete_config.el" "powerline_config.el" "window-number_config.el" ".emacs.desktop" "jdb-sourcepath.el" "cedet_config.el~" "ido_config.el~" "./" "ecb_config.el" "yasnippet_config.el" "multiple_cursors_config.el" "thesaurus_config.el" "jdee_config.el" "header2_config.el" "org_mode_config.el" "flycheck_config.el" "pager_config.el" "backup_each_save_config.el" "cedet_config.el" "eldoc_config.el" "rainbow_del_config.el" "rainbow_mode_config.el" "magit_config.el")
+
+ ("/home/schnecki/Documents/UIBK/1.Semster/Dokumente_uibk/EP/Aufgaben/" (21128 48586 856706 268000) "../" "07-01-a-Schneckenreither" "08-01-a-Schneckenreither.c" "06-01-a-Schneckenreither" "09/" "07-03-a-Schneckenreither_take2.c" "07-03-a-Schneckenreither.c" "untitled" "08-03-a-Schneckenreither.txt" "10_/" "07-02-a-Schneckenreither.c" "12/" "07-03-a-Schneckenreither" "07-01-a-Schneckenreither.c" "test.c" "08-02-a-Schneckenreither.c" "make" "07-03-a-Schneckenreither_take2" "07-02-a-Schneckenreither" "a.out" "07-03-neururer.c" "./" "untitled.c" "11/" "6-4-neururer" "06-01-a-Schneckenreither.c" ".metadata/" "08-01-a-Schneckenreither" "08-04-a-Schneckenreither" "06-04-a-Schneckenreither.o" "mylib.tar.gz" "06-04-a-Schneckenreither.c" "06-02-a-Schneckenreither.c" "06-02-a-Schneckenreither.o" "06-03-a-Schneckenreither.txt" "lib/" "08-04-a-Schneckenreither.c" "06-04-a-Schneckenreither" "10/" "08-04-a-Schneckenreither.c~" "06-02-a-Schneckenreither" "test" "6-4-neururer.c" "01-05/" "Katja/" "08-02-a-Schneckenreither")
+
+ ("/home/schnecki/Programmierung/Haskell/SimpleSillyTRSSolver/src/" (21129 6280 760178 359000) "../" ".hdevtools.sock" ".#Executer.hs" "Main.hs" "Reader.hs" "./" "trs" "Data.hs" "Executer.hs" "Parser.hs")
+
+ ("/home/schnecki/.emacs.d/" (21129 5772 794443 859000) "../" "ac-comphist.dat" "24/" "elpa/" "README.md" ".gitignore" "ede-projects.el" ".tmp/" ".#session.10eab475bb880d7cfc138443022034967600000016330046" "srecode-map.el" "url/" "settings.el.example" "thumbs/" ".git/" ".gitignore~" "session.10c6b30c59fcb52a9138132445499957100000017260059" "settings.el" "./" "tramp" "auto-save-list/" "TAGS" "eshell/" "init.el" ".org-id-locations" ".mc-lists.el" ".ac-dict/" "snippets/" "abbrev_defs" "image-dired/")
+
+ ("/home/schnecki/" (21129 5772 627449 306000) ".subversion/" "../" "Documents/" ".bash_profile" ".xournal/" ".macromedia/" ".wine/" ".thumbnails/" "Music/" ".lingot/" ".cabbage/" ".leksah-0.12/" ".gnupg/" "emacs.tar.gz" "VirtualBox VMs/" "texput.log" ".gnuplot_history" ".cache/" ".eclipse/" "nvvp_workspace/" ".aspell.en.pws" ".bashrc" ".gnome2_private/" ".mcop/" ".gnome/" ".dbus/" ".clamtk/" ".smex-items" ".calibre/" ".stylish-haskell.yaml" "emacsdotbackup.tar.gz" ".swt/" ".m2/" ".java_base.tag" ".erc/" ".gconf/" "Public/" "leksah.lkshw" ".emacs.desktop" ".ido.last~" ".cups/" ".texlive2013/" ".pulse-cookie" ".wireshark/" ".local/" "RMAIL" "Programmierung/" ".ghc/" ".pki/" "bin/" ".notes" "eBooks/" ".zotero/" ".semanticdb/" ".ccache/" ".gstreamer-0.10/" ".lyx/" "hs_err_pid11049.log" ".emacs-places" ".emacs.d.bak_02.08.2013/" ".pgadmin3" ".gimp-2.8/" ".bash_history" ".mozilla/" ".e16/" ".audacity-data/" "Desktop/" ".root_hist" "Pictures/" "Videos/" "./" "library/" ".newsrc" "emacs.d.bakup.u1.tar.gz" ".nv/" ".backups/" "Ubuntu One/" ".osmo/" ".bashrc~" ".emacs.bak" ".jython-cache/" ".mysql_history" ".kde/" ".VirtualBox/" ".config/" ".newsrc.eld" ".pgpass" "AndroidSDK/" ".texlive2012/" "TAGS" ".emac.d.bak_04.08.2013/" ".lesshst" "Templates/" ".fgfs/" ".esd_auth" ".globash/" ".android/" "Bash Scripts/" ".emacs~" ".emacs.bak.02.08.2013" ".ICEauthority" ".authinfo" "Audiobooks/" ".emacs.d.old-20130902-174615/" ".xdvirc" ".mplayer/" ".FBReader/" ".fltk/" ".cabal/" ".hunspell_de_DE" ".nbprofiler/" ".cert/" ".ido.last" ".avidemux6/" ".nvidia-settings-rc" ".gnome2/" "emacs.d-master.zip" ".java/" "csap3804@zid-gpl.uibk.ac.at" ".bzr.log" ".aspell.en.prepl" ".qt/" ".gitconfig" ".gem/" ".ecb-tip-of-day.el" ".pgadmin_histoqueries" ".emacs.d/" ".bash_logout" ".pulse/" "backup_home_error.log" "dehnen1.pdf" "test.pdf" ".hunspell_en_US" ".mysql/" ".mcoprc" ".gtk-bookmarks" ".emacs.desktop.lock" ".visualvm/" "News/" "Downloads/" ".gphoto/" ".newsrc-dribble" ".emacs.d.bak/" "chicken.pdf" "Mail/" ".ssh/" ".adobe/" "leksah.lkshs" "output.pdf" ".recentf" ".filezilla/")
 
  ("/home/schnecki/Documents/UIBK/1.Semster/Dokumente_uibk/EP/" (20765 56159 835570 0) "../" "Aufgaben/" "Pruefung/" "./" "codeblock test/" "Vorlesung/")
 
  ("/home/schnecki/Documents/UIBK/1.Semster/Dokumente_uibk/" (20765 56164 695562 0) "../" "string_format_attack.c" "ETeI/" "EPI/" "Programmierung/" "EThI/" "./" "Lin Alg/" "string_format_attack" "EP/")
 
  ("/home/schnecki/Documents/UIBK/1.Semster/" (20765 56165 148771 0) "../" "01 Semster/" "Technische Informatik/" "Dokumente_uibk/" "./" "Lineare Algebra/")
-
- ("/home/schnecki/Documents/UIBK/5.Semester/Bachelorarbeit/Early Stage/RelevantWork/raml/Raml/" (21128 47459 705950 289000) "../" "CallGraph.hs" "Analyse.hs" "Eval.o" "Monoid.hi" ".hdevtools.sock" "RAMLTypes.hi" "SimpleTypes.hs" "MultivariatePol.hs" "MultivariatePol.o" "Parser.hi" "Eval.hi" "ATypes.hi" "Cplex.hi" "SimpleTypes.hi" "MultivariatePol.hi" "Transform.hi" "LPSolve.o" "Sharing.o" "SimpleTypes.o" "CallGraph.o" "LPSolve.hi" "MBinomial.hi" "Analyse.o" "Cplex.o" "./" "Cplex.hs" "Expressions.hs" "Util.o" "TAGS" "Nat.hs" "Monoid.o" "Parser.o" "Eval.hs" "Sharing.hs" "Util.hs" "Analyse.hi" "Clp.o" "Monoid.hs" "Nat.hi" "Clp.hi" "ATypes.o" "MBinomial.hs" "CallGraph.hi" "LPSolve.hs" "Nat.o" "Util.hi" "Ast.hs" "Transform.hs" "Clp.hs" "Expressions.hi" "ATypes.hs" "MBinomial.o" "Sharing.hi" "RAMLTypes.hs" "RAMLTypes.o" "PPrint.hs" "Expressions.o" "Transform.o" "Parser.hs")
-
- ("/home/schnecki/Programmierung/Haskell/SimpleSillyTRSSolver/src/" (21128 47863 980306 890000) "../" ".hdevtools.sock" ".#Executer.hs" "Main.hs" "Reader.hs" "./" "trs" "Data.hs" "Executer.hs" "Parser.hs")
-
- ("/home/schnecki/.emacs.d/24/packages_configs/" (21128 47458 137018 744000) "../" "dired_config.el" "ido_config.el" "gnuplot_config.el" "whitespace_config.el" "flyspell_config.el" "auto_complete_config.el" "powerline_config.el" "window-number_config.el" ".emacs.desktop" "jdb-sourcepath.el" "cedet_config.el~" "ido_config.el~" "./" "ecb_config.el" "yasnippet_config.el" "multiple_cursors_config.el" "thesaurus_config.el" "jdee_config.el" "header2_config.el" "org_mode_config.el" "flycheck_config.el" "pager_config.el" "backup_each_save_config.el" "cedet_config.el" "eldoc_config.el" "rainbow_del_config.el" "rainbow_mode_config.el" "magit_config.el")
-
- ("/home/schnecki/" (21128 47457 981025 550000) ".subversion/" "../" "Documents/" ".bash_profile" ".xournal/" ".macromedia/" ".wine/" ".thumbnails/" "Music/" ".lingot/" ".cabbage/" ".leksah-0.12/" ".gnupg/" "emacs.tar.gz" "VirtualBox VMs/" "texput.log" ".gnuplot_history" ".cache/" ".eclipse/" "nvvp_workspace/" ".aspell.en.pws" ".bashrc" ".gnome2_private/" ".mcop/" ".gnome/" ".dbus/" ".clamtk/" ".smex-items" ".calibre/" ".stylish-haskell.yaml" "emacsdotbackup.tar.gz" ".swt/" ".m2/" ".java_base.tag" ".erc/" ".gconf/" "Public/" "leksah.lkshw" ".emacs.desktop" ".ido.last~" ".cups/" ".texlive2013/" ".pulse-cookie" ".wireshark/" ".local/" "RMAIL" "Programmierung/" ".ghc/" ".pki/" "bin/" ".notes" "eBooks/" ".zotero/" ".semanticdb/" ".ccache/" ".gstreamer-0.10/" ".lyx/" "hs_err_pid11049.log" ".emacs-places" ".emacs.d.bak_02.08.2013/" ".pgadmin3" ".gimp-2.8/" ".bash_history" ".mozilla/" ".e16/" ".audacity-data/" "Desktop/" ".root_hist" "Pictures/" "Videos/" "./" "library/" ".newsrc" "emacs.d.bakup.u1.tar.gz" ".nv/" ".backups/" "Ubuntu One/" ".osmo/" ".bashrc~" ".emacs.bak" ".jython-cache/" ".mysql_history" ".kde/" ".VirtualBox/" ".config/" ".newsrc.eld" ".pgpass" "AndroidSDK/" ".texlive2012/" "TAGS" ".emac.d.bak_04.08.2013/" ".lesshst" "Templates/" ".fgfs/" ".esd_auth" ".globash/" ".android/" "Bash Scripts/" ".emacs~" ".emacs.bak.02.08.2013" ".ICEauthority" ".authinfo" "Audiobooks/" ".emacs.d.old-20130902-174615/" ".xdvirc" ".mplayer/" ".FBReader/" ".fltk/" ".cabal/" ".hunspell_de_DE" ".nbprofiler/" ".cert/" ".ido.last" ".avidemux6/" ".nvidia-settings-rc" ".gnome2/" "emacs.d-master.zip" ".java/" "csap3804@zid-gpl.uibk.ac.at" ".bzr.log" ".aspell.en.prepl" ".qt/" ".gitconfig" ".gem/" ".ecb-tip-of-day.el" ".pgadmin_histoqueries" ".emacs.d/" ".bash_logout" ".pulse/" "backup_home_error.log" "dehnen1.pdf" "test.pdf" ".hunspell_en_US" ".mysql/" ".mcoprc" ".gtk-bookmarks" ".emacs.desktop.lock" ".visualvm/" "News/" "Downloads/" ".gphoto/" ".newsrc-dribble" ".emacs.d.bak/" "chicken.pdf" "Mail/" ".ssh/" ".adobe/" "leksah.lkshs" "output.pdf" ".recentf" ".filezilla/")
-
- ("/home/schnecki/.emacs.d/" (21128 47458 128019 136000) "../" "ac-comphist.dat" "24/" "elpa/" "README.md" ".gitignore" "ede-projects.el" ".tmp/" ".#session.10eab475bb880d7cfc138443022034967600000016330046" "srecode-map.el" "url/" "settings.el.example" "thumbs/" ".git/" ".gitignore~" "session.10c6b30c59fcb52a9138132445499957100000017260059" "settings.el" "./" "tramp" "auto-save-list/" "TAGS" "eshell/" "init.el" ".org-id-locations" ".mc-lists.el" ".ac-dict/" "snippets/" "abbrev_defs" "image-dired/")
-
- ("/home/schnecki/.emacs.d/24/" (21128 47458 138018 700000) "../" "emacs.el" "language_configs/" ".emacs.desktop" "packages_configs/" "./" "emacs.el~" "basic_keys.el" "packages/" "basics.el~" "basics.el")
-
- ("/home/schnecki/.emacs.d/24/language_configs/" (21128 47828 121874 154000) "../" "java_config.el" "init-cc-compiler.el" "emacs_lisp_config.el" "c_config.el" "./" "haskell_config.el" "TAGS" ".#haskell_config.el" "makefile_config.el" "latex_config.el" "ocaml_config.el" "init-cc-mode-syntax-check.el")
 
  ("/home/schnecki/.emacs.d/snippets/haskell-mode/" (21127 21284 713141 78000) "../" "import" "lang-pragma" "case" "module.exports" "fn.clause" "import.qualified" "if.inline" "module" "data.record" "newtype" "data.inline" "instance" "main" "let" "lambda" "./" ".yas-make-groups" "constraint" "fn.guarded" "class" "get" "otherwise" "if.block" "comment.block" ".yas-ignore-filenames-as-triggers" "fn")
 
