@@ -1,8 +1,8 @@
-Instructions will follow.
+Instructions will follow. However, might take a while...
 
 --
 
-If you can't wait:
+If you can't wait/or just don't want to:
  - you need to compile cedet. ~/.emacs.d/24/packages/cedet
  - you need to create a settings.el file in ./emacs.d/settings.el
  - you need to fire up emacs - all packages will be downloaded
@@ -24,3 +24,10 @@ Dependencies:
 + Latex:
   - evince (change latex_config.el to use other pdf-viewer)
   - texlive
+
++ Haskell
+  - cabal (of course)
+  - hasktags ($ cabal install hasktags)
+
+
+If you got questions, don't hesitate to contact me at "manuel.schneckiXYZgmail.com" [XYZ -> @]

@@ -7,9 +7,9 @@
 ;; Author: Manuel Schneckenreither
 ;; Created: Tue Dec 11 00:43:14 2012 (+0100)
 ;; Version:
-;; Last-Updated: Sa Nov 16 12:22:40 2013 (+0100)
+;; Last-Updated: Mi Nov 27 15:44:01 2013 (+0100)
 ;;           By: Manuel Schneckenreither
-;;     Update #: 328
+;;     Update #: 332
 ;; URL:
 ;; Description:
 ;;
@@ -57,7 +57,7 @@
 (load (concat package_conf_folder "yasnippet_config.el"))
 ;; JDEE Mode
 (load (concat package_conf_folder "jdee_config.el"))
-;; COLUMN MAKER -- mark columns
+;; ORG Mode
 (load (concat package_conf_folder "org_mode_config.el"))
 ;; AUTO COMPLETE - completion - You should not disable this, you know what you
 ;; are doing
@@ -78,7 +78,8 @@
 (load (concat package_conf_folder "rainbow_mode_config.el"))
 ;; POWERLINE - better modline
 (load (concat package_conf_folder "powerline_config.el"))
-
+;; ANDROID MODE
+(load (concat package_conf_folder "android_mode_config.el"))
 
 ;; ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 ;; +++++++++++++++++ LOAD LANGUAGE SPECIFIC SETTINGS ++++++++++++++++++++

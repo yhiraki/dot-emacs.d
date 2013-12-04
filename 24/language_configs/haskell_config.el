@@ -8,7 +8,7 @@
 ;; Version:
 ;; Last-Updated:
 ;;           By:
-;;     Update #: 301
+;;     Update #: 326
 ;; URL:
 ;; Description:
 ;;
@@ -70,7 +70,7 @@
     (setq esdir (replace-regexp-in-string " " "\\\\ " dir))
     (shell-command
      (concat "cd " esdir
-             " && find . -name \"*.hs\" -print | etags - 2>/dev/null 1>/dev/null") t)
+             " && hasktags -e . 2>/dev/null 1>/dev/null") t)
     (visit-tags-table (concat dir "TAGS")))
   )
 
@@ -90,9 +90,12 @@
   (interactive)
 
   (if (not (s-contains? (char-to-string (char-before (- (point) 1))) "=><" ))
-      (haskell-indent-insert-equal)
-    (delete-backward-char 1 nil)
-    (insert "= ")
+      (apply
+       (haskell-indent-insert-equal)
+       (delete-backward-char 1 nil))
+    (if (s-contains? (char-to-string (char-before (- (point) 1))) " " )
+        (delete-backward-char 1 nil))
+    (insert "=")
     ))
 
 
@@ -101,11 +104,21 @@
   (interactive)
 
   (if (not (s-contains? (char-to-string (char-before (- (point) 1))) "|><" ))
-      (haskell-indent-insert-guard)
-    (delete-backward-char 1 nil)
-    (insert "| ")
+      (apply
+       (haskell-indent-insert-guard)
+       (delete-backward-char 1 nil))
+    (if (s-contains? (char-to-string (char-before (- (point) 1))) " " )
+        (delete-backward-char 1 nil))
+    (insert "|")
     ))
 
+
+(defun haskell-newline ()
+  "Enter for haskell with ; at beginning."
+  (interactive)
+  (newline-and-indent)
+  (insert "; ")
+  )
 
 ;; MINOR MODE HOOK
 (defun my/haskell-minor-mode ()
@@ -120,6 +133,7 @@
 
   ;; KEYS
   ;; fix return behaviour
+  (local-set-key (kbd "C-j")  'haskell-newline)
   (local-set-key (kbd "RET")  'newline-and-indent)
   ;; set special keys
   (local-set-key (kbd "=")  'haskell-insert-equals)

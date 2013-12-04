@@ -7,9 +7,9 @@
 ;; Created: Fr Okt  4 20:33:29 2013 (+0200)
 ;; Version:
 ;; Package-Requires: ()
-;; Last-Updated: Sa Nov 16 12:18:10 2013 (+0100)
+;; Last-Updated: Mi Nov 27 00:43:00 2013 (+0100)
 ;;           By: Manuel Schneckenreither
-;;     Update #: 207
+;;     Update #: 214
 ;; URL:
 ;; Doc URL:
 ;; Keywords:
@@ -75,6 +75,7 @@
       '(
         ac-dabbrev
         ac-math
+        android-mode
         auctex
         auto-complete
         auto-dictionary
@@ -196,7 +197,7 @@
  '(jde-jdk (quote ("1.6")))
  '(jde-jdk-registry (quote (("1.6" . "/usr/lib/jvm/java-1.7.0") ("1.6OpenJDK" . "/usr/lib/jvm/java-1.7.0-openjdk"))))
  '(jde-sourcepath (quote ("./src/main" "./src/test")))
- '(org-agenda-files (quote ("~/Documents/Planning/planning_time.org" "~/Documents/Planning/university.org" "~/Documents/Planning/bachelorarbeit.org" "~/Documents/Planning/ProjectIdeas.org" "~/Documents/Planning/freetime.org" "~/Documents/Planning/lists.org" "~/Documents/Planning/anniverseries.org" "~/Documents/Planning/Emacs.org")))
+ '(org-agenda-files (quote ("~/Documents/Planning/planning_time.org" "~/Documents/Planning/university.org" "~/Documents/Planning/bachelorarbeit.org" "~/Documents/Planning/ProjectIdeas.org" "~/Documents/Planning/freetime.org" "~/Documents/Planning/lists.org" "~/Documents/Planning/anniverseries.org" "~/Documents/Planning/Emacs.org" "~/Programmierung/App/Documentation/app-brainstorming.txt")))
  '(size-indication-mode t)
  '(tool-bar-mode nil)
  '(user-full-name your-full-name)

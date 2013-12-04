@@ -7,9 +7,9 @@
 ;; Created: So Okt 13 13:22:28 2013 (+0200)
 ;; Version:
 ;; Package-Requires: ()
-;; Last-Updated: So Okt 27 17:15:42 2013 (+0100)
+;; Last-Updated: Fr Nov 22 10:17:48 2013 (+0100)
 ;;           By: Manuel Schneckenreither
-;;     Update #: 352
+;;     Update #: 353
 ;; URL:
 ;; Doc URL:
 ;; Keywords:
@@ -72,7 +72,6 @@
     (add-to-list 'ac-sources 'ac-source-semantic)
 
     ;; (gtags-mode t)
-    (glasses-mode t)
     ;; (auto-complete-mode t)
     ;; (add-to-list 'ac-sources ac-source-gtags)
     (local-set-key [f8] 'gud-next)

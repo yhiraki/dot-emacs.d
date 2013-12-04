@@ -7,9 +7,9 @@
 ;; Created: Mo Okt 14 18:17:43 2013 (+0200)
 ;; Version:
 ;; Package-Requires: ()
-;; Last-Updated: Do Okt 24 13:45:48 2013 (+0200)
+;; Last-Updated: Fr Nov 22 10:21:28 2013 (+0100)
 ;;           By: Manuel Schneckenreither
-;;     Update #: 38
+;;     Update #: 40
 ;; URL:
 ;; Doc URL:
 ;; Keywords:
@@ -68,6 +68,10 @@
 
   ;; auto complete mode
   (add-to-list 'ac-sources 'ac-source-etags)
+
+  ;; glasses mode
+  ;; (glasses-mode t)
+
 
   ;; CREATE AND SET TAGS FILE
   (add-hook 'after-save-hook 'make-java-tags nil t)

@@ -12,15 +12,19 @@
         c-electric-semi&comma
         comment-or-uncomment-region
         end-of-visual-line
+        eval-print-last-sexp
         jde-backward-kill-camel-tok
         jde-kill-camel-tok
         kill-region
         kill-visual-line
+        org-backward-sentence
         org-beginning-of-line
         org-delete-char
         org-end-of-line
         org-force-self-insert
+        org-forward-sentence
         org-kill-line
+        org-return-indent
         org-self-insert-command
         org-yank
         reindent-then-newline-and-indent
