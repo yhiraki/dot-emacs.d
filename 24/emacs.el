@@ -7,9 +7,9 @@
 ;; Author: Manuel Schneckenreither
 ;; Created: Tue Dec 11 00:43:14 2012 (+0100)
 ;; Version:
-;; Last-Updated: Mi Nov 27 15:44:01 2013 (+0100)
+;; Last-Updated: So Dez  8 16:22:15 2013 (+0100)
 ;;           By: Manuel Schneckenreither
-;;     Update #: 332
+;;     Update #: 342
 ;; URL:
 ;; Description:
 ;;
@@ -79,18 +79,17 @@
 ;; POWERLINE - better modline
 (load (concat package_conf_folder "powerline_config.el"))
 ;; ANDROID MODE
-(load (concat package_conf_folder "android_mode_config.el"))
+;; (load (concat package_conf_folder "android_mode_config.el"))
 
 ;; ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 ;; +++++++++++++++++ LOAD LANGUAGE SPECIFIC SETTINGS ++++++++++++++++++++
 ;; ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
-;; C, C++
 ;; (load-file (concat language_conf_folder "c_config.el"))
 (load-file (concat language_conf_folder "haskell_config.el"))
 (load-file (concat language_conf_folder "java_config.el"))
 (load-file (concat language_conf_folder "emacs_lisp_config.el"))
-;; (load-file (concat language_conf_folder "ocaml_config.el"))
+(load-file (concat language_conf_folder "ocaml_config.el"))
 (load-file (concat language_conf_folder "makefile_config.el"))
 (load-file (concat language_conf_folder "latex_config.el"))
 

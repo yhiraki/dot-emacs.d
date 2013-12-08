@@ -13,3 +13,7 @@ auto-save-list/*
 *~
 eshell/history
 eshell/lastdir
+/.mc-lists.el
+/.tmp/*
+/eshell/*
+/ac-comphist.dat

@@ -7,9 +7,9 @@
 ;; Created: So Okt 13 13:22:28 2013 (+0200)
 ;; Version:
 ;; Package-Requires: ()
-;; Last-Updated: Fr Nov 22 10:17:48 2013 (+0100)
+;; Last-Updated: Mi Dez  4 15:15:55 2013 (+0100)
 ;;           By: Manuel Schneckenreither
-;;     Update #: 353
+;;     Update #: 356
 ;; URL:
 ;; Doc URL:
 ;; Keywords:
@@ -79,13 +79,15 @@
     ;; (local-set-key (kbd "M-/") 'hippie-expand)
     (local-set-key (kbd "M-n") 'jde-complete-minibuf)
 
+    (local-set-key (kbd "C-c i") 'jde-import-find-and-import)
+
     ;; locally overwrite build command
     (local-set-key (kbd "C-c C-v C-b") 'compile-closest-Makefile)
 
     (add-hook 'before-save-hook
               (lambda ()
-                (jde-import-all)
-                (jde-import-organize)
+                ;; (jde-import-all)
+                ;; (jde-import-organize)
                 ;; (jde-import-kill-extra-imports)
                 )
               nil t)

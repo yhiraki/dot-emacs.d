@@ -7,9 +7,9 @@
 ;; Created: Fr Okt  4 20:33:29 2013 (+0200)
 ;; Version:
 ;; Package-Requires: ()
-;; Last-Updated: Mi Nov 27 00:43:00 2013 (+0100)
+;; Last-Updated: So Dez  8 16:22:32 2013 (+0100)
 ;;           By: Manuel Schneckenreither
-;;     Update #: 214
+;;     Update #: 224
 ;; URL:
 ;; Doc URL:
 ;; Keywords:
@@ -51,8 +51,13 @@
 ;; +++++++++++++++++++++++++ PERSONAL SETTINGS ++++++++++++++++++++++++++
 ;; ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
+
 ;; Edit your settings in settings.el
-(setq emacsd "~/.emacs.d/")
+
+(setq directory_path default-directory)
+(setq emacsd (concat directory_path ".emacs.d/"))
+(setq user-emacs-directory emacsd)
+
 (load-file (concat emacsd "settings.el"))
 
 
@@ -81,6 +86,7 @@
         auto-dictionary
         ;; backup-each-save ;;; solved differently, see backup_each_save_config.el
         backup-walker
+        color-theme
         ecb
         emacs-eclim
         flycheck
@@ -164,10 +170,10 @@
 ;; eval following to use standard theme:
 ;; (color-theme-standard)
 
-(defun color-my-emacs-default ()
-  "Revert to default emacs theme."
-  (interactive)
-  (color-theme-standard))
+;; (defun color-my-emacs-default ()
+;;   "Revert to default emacs theme."
+;;   (interactive)
+;;   (color-theme-standard))
 
 ;; ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 ;; ++++++++++++++++++++++++++++ BASIC INFO ++++++++++++++++++++++++++++++

@@ -5,9 +5,9 @@
 ;; Author: Manuel Schneckenreither
 ;; Created: Mon Dec 10 22:51:09 2012 (+0100)
 ;; Version:
-;; Last-Updated: Do Nov 14 13:23:56 2013 (+0100)
+;; Last-Updated: So Dez  8 15:13:27 2013 (+0100)
 ;;           By: Manuel Schneckenreither
-;;     Update #: 527
+;;     Update #: 529
 ;; URL:
 ;; Description:
 ;;    Basic configuration for emacs. In here are all configs of
@@ -361,7 +361,7 @@
 (electric-pair-mode 1)
 
 ;; HIGHLIGH CURRENT LINE
-(highlight-current-line-minor-mode)
+;; (highlight-current-line-minor-mode)
 
 ;; VISUAL LINE MODE - WRAP LONG LINES
 (global-visual-line-mode)

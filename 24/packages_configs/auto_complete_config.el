@@ -7,9 +7,9 @@
 ;; ;; Created: So Okt 13 19:43:26 2013 (+0200)
 ;; ;; Version:
 ;; ;; Package-Requires: ()
-;; ;; Last-Updated: Mi Okt 23 17:58:06 2013 (+0200)
+;; ;; Last-Updated: So Dez  8 16:10:03 2013 (+0100)
 ;; ;;           By: Manuel Schneckenreither
-;; ;;     Update #: 86
+;; ;;     Update #: 88
 ;; ;; URL:
 ;; ;; Doc URL:
 ;; ;; Keywords:
@@ -33,6 +33,8 @@
 ;; ;; ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 ;; ;; ++++++=+++++++++++++++++++ SMART TABS MODE +++++++++++++++++++++++++++
 ;; ;; ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+(require 'auto-complete)
 
 (define-key ac-completing-map [(tab)] 'ac-complete) ;; enable completing by tab
 (define-key ac-completing-map "\r" nil) ;; disable completing by enter
