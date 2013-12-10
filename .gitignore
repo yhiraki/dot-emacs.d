@@ -17,3 +17,7 @@ eshell/lastdir
 /.tmp/*
 /eshell/*
 /ac-comphist.dat
+/.emacs.desktop
+/.emacs.desktop.lock
+/eshell/*
+/tramp

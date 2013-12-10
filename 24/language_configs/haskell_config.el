@@ -8,7 +8,7 @@
 ;; Version:
 ;; Last-Updated:
 ;;           By:
-;;     Update #: 326
+;;     Update #: 348
 ;; URL:
 ;; Description:
 ;;
@@ -58,6 +58,23 @@
 ;; (defun my-haskell-ac-init ()
 ;;   (when (member (file-name-extension buffer-file-name) '("hs" "lhs"))
 
+
+;; ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+;; +++++++++++++++++++++++++++ FLYCHECK MODE ++++++++++++++++++++++++++++
+;; ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+
+(defun delete-hdevtools-socket-file ()
+  "Delete the socket file for hdevtools."
+  (interactive)
+  (shell-command "rm -f .hdevtools.sock")
+  )
+
+(add-hook 'open-file 'delete-hdevtools-socket-file)
+
+;; enable flycheck
+;; (eval-after-load 'flycheck '(require 'flycheck-hdevtools))
+
 ;; ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 ;; +++++++++++++++++++++++++++++ MINOR MODE +++++++++++++++++++++++++++++
 ;; ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -89,12 +106,12 @@
   "Insert and aligns equals sign."
   (interactive)
 
-  (if (not (s-contains? (char-to-string (char-before (- (point) 1))) "=><" ))
+  (if (not (s-contains? (char-to-string (char-before (point))) "=><" ))
       (apply
        (haskell-indent-insert-equal)
        (delete-backward-char 1 nil))
-    (if (s-contains? (char-to-string (char-before (- (point) 1))) " " )
-        (delete-backward-char 1 nil))
+    ;; (if (s-contains? (char-to-string (char-before (- (point) 1))) " " )
+    ;;     (delete-backward-char 1 nil))
     (insert "=")
     ))
 
@@ -103,12 +120,12 @@
   "Insert and aligns guard sign."
   (interactive)
 
-  (if (not (s-contains? (char-to-string (char-before (- (point) 1))) "|><" ))
+  (if (not (s-contains? (char-to-string (char-before (point))) "|><" ))
       (apply
        (haskell-indent-insert-guard)
        (delete-backward-char 1 nil))
-    (if (s-contains? (char-to-string (char-before (- (point) 1))) " " )
-        (delete-backward-char 1 nil))
+    ;; (if (s-contains? (char-to-string (char-before (- (point) 1))) " " )
+    ;;     (delete-backward-char 1 nil))
     (insert "|")
     ))
 
@@ -119,6 +136,7 @@
   (newline-and-indent)
   (insert "; ")
   )
+
 
 ;; MINOR MODE HOOK
 (defun my/haskell-minor-mode ()
