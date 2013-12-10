@@ -1,7 +1,0 @@
-
-
-
-(ecb-activate t)
-
-
-(setq ecb-tip-of-the-day nil)

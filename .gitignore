@@ -4,9 +4,8 @@ session.*
 ./ac-comphist.dat
 ./thumbs
 ./tramp
-.tmp/*
 eshell/**
-auto-save-list/*
+/auto-save-list/*
 ./abbrev_defs
 *settings.el*
 ./.mc-lists.el
@@ -21,3 +20,9 @@ eshell/lastdir
 /.emacs.desktop.lock
 /eshell/*
 /tramp
+/image-dired*
+/url*
+/.ac-dict*
+/.org-id-locations
+/abbrev_defs
+/ede-projects.el

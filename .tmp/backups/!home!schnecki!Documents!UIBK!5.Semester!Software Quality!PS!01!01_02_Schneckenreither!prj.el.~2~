@@ -1,9 +1,0 @@
-(jde-project-file-version "1.0")
-(jde-set-variables)
-
-
-;; get all classes from ./src
-
-(add-to-list 'jde-compile-option-classpath
-             '(split-string (shell-command-to-string "find ./src -type d -print")))
-
