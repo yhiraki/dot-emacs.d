@@ -8,7 +8,7 @@
 ;; Version:
 ;; Last-Updated:
 ;;           By:
-;;     Update #: 348
+;;     Update #: 357
 ;; URL:
 ;; Description:
 ;;
@@ -106,7 +106,7 @@
   "Insert and aligns equals sign."
   (interactive)
 
-  (if (not (s-contains? (char-to-string (char-before (point))) "=><" ))
+  (if (not (s-contains? (char-to-string (char-before (point))) "=/><(|" ))
       (apply
        (haskell-indent-insert-equal)
        (delete-backward-char 1 nil))
@@ -120,7 +120,7 @@
   "Insert and aligns guard sign."
   (interactive)
 
-  (if (not (s-contains? (char-to-string (char-before (point))) "|><" ))
+  (if (not (s-contains? (char-to-string (char-before (point))) "|><=()" ))
       (apply
        (haskell-indent-insert-guard)
        (delete-backward-char 1 nil))

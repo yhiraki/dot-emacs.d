@@ -7,9 +7,9 @@
 ;; Created: Fr Okt  4 20:33:29 2013 (+0200)
 ;; Version:
 ;; Package-Requires: ()
-;; Last-Updated: So Dez  8 16:22:32 2013 (+0100)
+;; Last-Updated: Do Dez 19 15:20:34 2013 (+0100)
 ;;           By: Manuel Schneckenreither
-;;     Update #: 224
+;;     Update #: 225
 ;; URL:
 ;; Doc URL:
 ;; Keywords:
@@ -94,6 +94,8 @@
         gnuplot-mode
         haskell-mode
         header2
+        ido-hacks
+        ido-ubiquitous
         javadoc-lookup
         javap-mode
         latex-pretty-symbols
