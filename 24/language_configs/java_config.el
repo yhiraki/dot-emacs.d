@@ -7,9 +7,9 @@
 ;; Created: Mo Okt 14 18:17:43 2013 (+0200)
 ;; Version:
 ;; Package-Requires: ()
-;; Last-Updated: Fr Nov 22 10:21:28 2013 (+0100)
+;; Last-Updated: Mo Jan 20 23:26:51 2014 (+0100)
 ;;           By: Manuel Schneckenreither
-;;     Update #: 40
+;;     Update #: 93
 ;; URL:
 ;; Doc URL:
 ;; Keywords:
@@ -40,11 +40,17 @@
 (require 'flymake)
 (add-hook 'java-mode-hook 'flymake-mode-on)
 
+(when (require 'flymake)
+  (set-variable 'flymake-log-level 9)
+  (setq flymake-start-syntax-check-on-newline nil)
+  (setq flymake-no-changes-timeout 1)
+  (add-hook 'java-mode-hook 'flymake-mode-on))
+
 (defun my-java-flymake-init ()
   (list "javac" (list (flymake-init-create-temp-buffer-copy
                        'flymake-create-temp-with-folder-structure))))
 
-(add-to-list 'flymake-allowed-file-name-masks '("\\.java$" my-java-flymake-init flymake-simple-cleanup))
+;; (add-to-list 'flymake-allowed-file-name-masks '("\\.java$" my-java-flymake-init flymake-simple-cleanup))
 
 ;; ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 ;; +++++++++++++++++++++++++++++ MINOR MODE +++++++++++++++++++++++++++++
@@ -72,10 +78,22 @@
   ;; glasses mode
   ;; (glasses-mode t)
 
+  ;; flymake init
+  (my-java-flymake-init)
+
+  ;;FLYMAKE (ENHANCEMENTS)
+  (local-set-key (kbd  "C-c ! n") 'my-flymake-show-next-error)
+  (local-set-key (kbd "C-c ! p") 'my-flymake-show-prev-error)
+
+  ;;ASOCIATE KEY FOR CURRENT ERROR POPUP/MINIBUFFER
+  (local-set-key (kbd (concat prefix-command-key " e")) 'flymake:display-err-popup-for-current-line)
+  ;; (local-set-key (kbd (concat prefix-command-key " e")) 'flymake:display-err-minibuf-for-current-line)
+
 
   ;; CREATE AND SET TAGS FILE
   (add-hook 'after-save-hook 'make-java-tags nil t)
   )
+
 
 (add-hook 'java-mode-hook 'my/java-minor-mode)
 (add-hook 'jde-mode-hook 'my/java-minor-mode)
@@ -85,6 +103,11 @@
 ;; ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 ;; FLYMAKE CONFIG -- FLYCHECK DOES NOT SUPPORT JAVA YET!
+
+;; FLYMAKE TEMP FOLDER
+(make-directory "~/.emacs.d/.tmp/flymake/" t)
+(setq temporary-file-directory "~/.emacs.d/.tmp/flymake/")
+
 
 ;; (require 'flymake)
 ;; (add-hook 'java-mode-hook 'flymake-mode-on)
@@ -174,147 +197,157 @@
 ;;       source-file-name))))
 
 
-(require 'cl)
-
-(defvar flyc--e-at-point nil
-  "Error at point, after last command")
-
-(defvar flyc--e-display-timer nil
-  "A timer; when it fires, it displays the stored error message.")
-
-(defun flyc/maybe-fixup-message (errore)
-  "pyflake is flakey if it has compile problems, this adjusts the
-message to display, so there is one ;)"
-  (cond ((not (or (eq major-mode 'Python) (eq major-mode 'python-mode) t)))
-        ((null (flymake-ler-file errore))
-         ;; normal message do your thing
-         (flymake-ler-text errore))
-        (t ;; could not compile error
-         (format "compile error, problem on line %s" (flymake-ler-line errore)))))
-
-(defun flyc/show-stored-error-now ()
-  "Displays the stored error in the minibuffer."
-  (interactive)
-  (let ((editing-p (= (minibuffer-depth) 0)))
-   (if (and flyc--e-at-point editing-p)
-       (progn
-         (message "%s" (flyc/maybe-fixup-message flyc--e-at-point))
-         (setq flyc--e-display-timer nil)))))
-
-(defun flyc/-get-error-at-point ()
-  "Gets the first flymake error on the line at point."
-  (let ((line-no (line-number-at-pos))
-        flyc-e)
-    (dolist (elem flymake-err-info)
-      (if (eq (car elem) line-no)
-          (setq flyc-e (car (second elem)))))
-    flyc-e))
-
-;;;###autoload
-(defun flyc/show-fly-error-at-point-now ()
-  "If the cursor is sitting on a flymake error, display
-the error message in the  minibuffer."
-  (interactive)
-  (if flyc--e-display-timer
-      (progn
-        (cancel-timer flyc--e-display-timer)
-        (setq flyc--e-display-timer nil)))
-  (let ((error-at-point (flyc/-get-error-at-point)))
-    (if error-at-point
-        (progn
-          (setq flyc--e-at-point error-at-point)
-          (flyc/show-stored-error-now)))))
-
-;;;###autoload
-(defun flyc/show-fly-error-at-point-pretty-soon ()
-  "If the cursor is sitting on a flymake error, grab the error,
-and set a timer for \"pretty soon\". When the timer fires, the error
-message will be displayed in the minibuffer.
-
-This allows a post-command-hook to NOT cause the minibuffer to be
-updated 10,000 times as a user scrolls through a buffer
-quickly. Only when the user pauses on a line for more than a
-second, does the flymake error message (if any) get displayed.
-
-"
-  (if flyc--e-display-timer
-      (cancel-timer flyc--e-display-timer))
-
-  (let ((error-at-point (flyc/-get-error-at-point)))
-    (if error-at-point
-        (setq flyc--e-at-point error-at-point
-              flyc--e-display-timer
-              (run-at-time "0.9 sec" nil 'flyc/show-stored-error-now))
-      (setq flyc--e-at-point nil
-            flyc--e-display-timer nil))))
-
-;;;###autoload
-(eval-after-load "flymake"
-  '(progn
-
-     (defadvice flymake-goto-next-error (after flyc/display-message-1 activate compile)
-       "Display the error in the mini-buffer rather than having to mouse over it"
-       (flyc/show-fly-error-at-point-now))
-
-     (defadvice flymake-goto-prev-error (after flyc/display-message-2 activate compile)
-       "Display the error in the mini-buffer rather than having to mouse over it"
-       (flyc/show-fly-error-at-point-now))
-
-     (defadvice flymake-mode (before flyc/post-command-fn activate compile)
-       "Add functionality to the post command hook so that if the
-cursor is sitting on a flymake error the error information is
-displayed in the minibuffer (rather than having to mouse over
-it)"
-       (add-hook 'post-command-hook 'flyc/show-fly-error-at-point-pretty-soon t t))))
-
-(defun credmp/flymake-display-err-minibuf ()
-  "Displays the error/warning for the current line in the minibuffer"
-  (interactive)
-  (let* ((line-no             (flymake-current-line-no))
-         (line-err-info-list  (nth 0 (flymake-find-err-info
-                                      flymake-err-info line-no)))
-         (count               (length line-err-info-list))
-         )
-    (while (> count 0)
-      (when line-err-info-list
-        (let* ((file       (flymake-ler-file (nth (1- count)
-                                                  line-err-info-list)))
-               (full-file  (flymake-ler-full-file (nth (1- count)
-                                                       line-err-info-list)))
-               (text (flymake-ler-text (nth (1- count) line-err-info-list)))
-               (line       (flymake-ler-line (nth (1- count)
-                                                  line-err-info-list))))
-          (message "[%s] %s" line text)
-          )
-        )
-      (setq count (1- count)))))
-
-(setq help-at-pt-timer-delay 0.2)
-;; (setq help-at-pt-display-when-idle '(flymake-overlay))
-(setq help-at-pt-display-when-idle '(credmp/flymake-display-err-minibuf))
-
-(custom-set-faces
- '(flymake-errline ((((class color)) (:underline "red"))))
- '(flymake-warnline ((((class color)) (:underline "yellow")))))
+;; ------------------------------------------------------------------
 
 
-;; ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-;; ++++++++++++++ ENHANCEMENTS FOR DISPLAYING FLYMAKE ERRORS ++++++++++++
-;; ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+;; (require 'cl)
 
-;; (defun flymake:display-err-minibuf-for-current-line ()
+;; (defvar flyc--e-at-point nil
+;;   "Error at point, after last command")
+
+;; (defvar flyc--e-display-timer nil
+;;   "A timer; when it fires, it displays the stored error message.")
+
+;; (defun flyc/maybe-fixup-message (errore)
+;;   "pyflake is flakey if it has compile problems, this adjusts the
+;; message to display, so there is one ;)"
+;;   (cond ((not (or (eq major-mode 'Python) (eq major-mode 'python-mode) t)))
+;;         ((null (flymake-ler-file errore))
+;;          ;; normal message do your thing
+;;          (flymake-ler-text errore))
+;;         (t ;; could not compile error
+;;          (format "compile error, problem on line %s" (flymake-ler-line errore)))))
+
+;; (defun flyc/show-stored-error-now ()
+;;   "Displays the stored error in the minibuffer."
+;;   (interactive)
+;;   (let ((editing-p (= (minibuffer-depth) 0)))
+;;    (if (and flyc--e-at-point editing-p)
+;;        (progn
+;;          (message "%s" (flyc/maybe-fixup-message flyc--e-at-point))
+;;          (setq flyc--e-display-timer nil)))))
+
+;; (defun flyc/-get-error-at-point ()
+;;   "Gets the first flymake error on the line at point."
+;;   (let ((line-no (line-number-at-pos))
+;;         flyc-e)
+;;     (dolist (elem flymake-err-info)
+;;       (if (eq (car elem) line-no)
+;;           (setq flyc-e (car (second elem)))))
+;;     flyc-e))
+
+;; ;;;###autoload
+;; (defun flyc/show-fly-error-at-point-now ()
+;;   "If the cursor is sitting on a flymake error, display
+;; the error message in the  minibuffer."
+;;   (interactive)
+;;   (if flyc--e-display-timer
+;;       (progn
+;;         (cancel-timer flyc--e-display-timer)
+;;         (setq flyc--e-display-timer nil)))
+;;   (let ((error-at-point (flyc/-get-error-at-point)))
+;;     (if error-at-point
+;;         (progn
+;;           (setq flyc--e-at-point error-at-point)
+;;           (flyc/show-stored-error-now)))))
+
+;; ;;;###autoload
+;; (defun flyc/show-fly-error-at-point-pretty-soon ()
+;;   "If the cursor is sitting on a flymake error, grab the error,
+;; and set a timer for \"pretty soon\". When the timer fires, the error
+;; message will be displayed in the minibuffer.
+
+;; This allows a post-command-hook to NOT cause the minibuffer to be
+;; updated 10,000 times as a user scrolls through a buffer
+;; quickly. Only when the user pauses on a line for more than a
+;; second, does the flymake error message (if any) get displayed.
+
+;; "
+;;   (if flyc--e-display-timer
+;;       (cancel-timer flyc--e-display-timer))
+
+;;   (let ((error-at-point (flyc/-get-error-at-point)))
+;;     (if error-at-point
+;;         (setq flyc--e-at-point error-at-point
+;;               flyc--e-display-timer
+;;               (run-at-time "0.9 sec" nil 'flyc/show-stored-error-now))
+;;       (setq flyc--e-at-point nil
+;;             flyc--e-display-timer nil))))
+
+;; ;;;###autoload
+;; (eval-after-load "flymake"
+;;   '(progn
+
+;;      (defadvice flymake-goto-next-error (after flyc/display-message-1 activate compile)
+;;        "Display the error in the mini-buffer rather than having to mouse over it"
+;;        (flyc/show-fly-error-at-point-now))
+
+;;      (defadvice flymake-goto-prev-error (after flyc/display-message-2 activate compile)
+;;        "Display the error in the mini-buffer rather than having to mouse over it"
+;;        (flyc/show-fly-error-at-point-now))
+
+;;      (defadvice flymake-mode (before flyc/post-command-fn activate compile)
+;;        "Add functionality to the post command hook so that if the
+;; cursor is sitting on a flymake error the error information is
+;; displayed in the minibuffer (rather than having to mouse over
+;; it)"
+;;        (add-hook 'post-command-hook 'flyc/show-fly-error-at-point-pretty-soon t t))))
+
+;; (defun credmp/flymake-display-err-minibuf ()
 ;;   "Displays the error/warning for the current line in the minibuffer"
 ;;   (interactive)
-;;   (let* ((line-no            (flymake-current-line-no))
-;;          (line-err-info-list (nth 0 (flymake-find-err-info flymake-err-info line-no)))
-;;          (count              (length line-err-info-list)))
+;;   (let* ((line-no             (flymake-current-line-no))
+;;          (line-err-info-list  (nth 0 (flymake-find-err-info
+;;                                       flymake-err-info line-no)))
+;;          (count               (length line-err-info-list))
+;;          )
 ;;     (while (> count 0)
 ;;       (when line-err-info-list
-;;         (let* ((text       (flymake-ler-text (nth (1- count) line-err-info-list)))
-;;                (line       (flymake-ler-line (nth (1- count) line-err-info-list))))
-;;           (message "[%s] %s" line text)))
-;;       (setq count (1- count))))
-;;   )
+;;         (let* ((file       (flymake-ler-file (nth (1- count)
+;;                                                   line-err-info-list)))
+;;                (full-file  (flymake-ler-full-file (nth (1- count)
+;;                                                        line-err-info-list)))
+;;                (text (flymake-ler-text (nth (1- count) line-err-info-list)))
+;;                (line       (flymake-ler-line (nth (1- count)
+;;                                                   line-err-info-list))))
+;;           (message "[%s] %s" line text)
+;;           )
+;;         )
+;;       (setq count (1- count)))))
+
+;; (setq help-at-pt-timer-delay 0.2)
+;; (setq help-at-pt-display-when-idle '(flymake-overlay))
+;; (setq help-at-pt-display-when-idle '(credmp/flymake-display-err-minibuf))
+
+;; (custom-set-faces
+;;  '(flymake-errline ((((class color)) (:underline
+;;                                      (:style wave :color "Red1")))))
+;;  '(flymake-warnline ((((class color)) (:underline
+;;                                       (:style wave :color "DarkOrange")))))
+;;  )
+
+
+;; ;; ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+;; ;; ++++++++++++++ ENHANCEMENTS FOR DISPLAYING FLYMAKE ERRORS ++++++++++++
+;; ;; ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+(defun flymake:display-err-minibuf-for-current-line ()
+  "Displays the error/warning for the current line in the minibuffer"
+  (interactive)
+  (let* ((line-no            (flymake-current-line-no))
+         (line-err-info-list (nth 0 (flymake-find-err-info flymake-err-info line-no)))
+         (count              (length line-err-info-list)))
+    (while (> count 0)
+      (when line-err-info-list
+        (let* ((text       (flymake-ler-text (nth (1- count) line-err-info-list)))
+               (line       (flymake-ler-line (nth (1- count) line-err-info-list))))
+          (message "[%s] %s" line text)))
+      (setq count (1- count))))
+  )
+
+(custom-set-variables
+ '(help-at-pt-timer-delay 0.1)
+ '(help-at-pt-display-when-idle '(flymake-overlay)))
 
 (defun flymake:display-err-popup-for-current-line ()
   "Display a menu with errors/warnings for current line if it has errors and/or warnings."
@@ -329,21 +362,23 @@ it)"
     )
   )
 
-;; ;; SHOW NEXT ERROR FUNCTION
-;; (defun my-flymake-show-next-error()
-;;   (interactive)
-;;   (flymake-goto-next-error)
-;;   ;; (flymake:display-err-popup-for-current-line)
-;;   (flymake-display-err-menu-for-current-line)
-;;   )
+;; ------------------------------------------------------------------
 
-;; ;; SHOW PREV ERROR FUNCTION
-;; (defun my-flymake-show-prev-error()
-;;   (interactive)
-;;   (flymake-goto-prev-error)
-;;   (flymake:display-err-popup-for-current-line)
-;;   ;;(flymake-display-err-menu-for-current-line)
-;;   )
+;; SHOW NEXT ERROR FUNCTION
+(defun my-flymake-show-next-error()
+  (interactive)
+  (flymake-goto-next-error)
+  ;; (flymake:display-err-popup-for-current-line)
+  (flymake-display-err-menu-for-current-line)
+  )
+
+;; SHOW PREV ERROR FUNCTION
+(defun my-flymake-show-prev-error()
+  (interactive)
+  (flymake-goto-prev-error)
+  (flymake:display-err-popup-for-current-line)
+  ;;(flymake-display-err-menu-for-current-line)
+  )
 
 ;; Overwrite flymake-display-warning so that no annoying dialog box is
 ;; used.
@@ -368,15 +403,6 @@ it)"
 ;; ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 ;; +++++++++++++++++++++++ FLYMAKE CONFIGURATION ++++++++++++++++++++++++
 ;; ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-
-
-;;FLYMAKE (ENHANCEMENTS)
-;; (global-set-key (kbd (concat prefix-command-key " n")) 'my-flymake-show-next-error)
-;; (global-set-key (kbd (concat prefix-command-key " p")) 'my-flymake-show-prev-error)
-
-;;ASOCIATE KEY FOR CURRENT ERROR POPUP/MINIBUFFER
-(global-set-key (kbd (concat prefix-command-key " e")) 'flymake:display-err-popup-for-current-line)
-;; (global-set-key (kbd (concat prefix-command-key " e")) 'flymake:display-err-minibuf-for-current-line)
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;

@@ -8,7 +8,7 @@
 ;; Version:
 ;; Last-Updated:
 ;;           By:
-;;     Update #: 357
+;;     Update #: 376
 ;; URL:
 ;; Description:
 ;;
@@ -57,6 +57,9 @@
 ;; ;; [==:INIT fnd-file-hook==]
 ;; (defun my-haskell-ac-init ()
 ;;   (when (member (file-name-extension buffer-file-name) '("hs" "lhs"))
+
+;; set DEBUG constant in haskell interpreter
+(setq haskell-program-name "ghci -DDEBUG")
 
 
 ;; ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -156,6 +159,15 @@
   ;; set special keys
   (local-set-key (kbd "=")  'haskell-insert-equals)
   (local-set-key (kbd "|") 'haskell-insert-guard)
+
+  (local-set-key (kbd "C-c =") (defun insertEquals ()
+                                (interactive)
+                                (insert "=")))
+
+  (local-set-key (kbd "C-c |") (defun insertGuard ()
+                                (interactive)
+                                (insert "|")))
+
 
   ;; CREATE AND SET TAGS FILE
   (add-hook 'after-save-hook 'make-haskell-tags nil t)

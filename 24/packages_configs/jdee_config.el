@@ -7,9 +7,9 @@
 ;; Created: So Okt 13 13:22:28 2013 (+0200)
 ;; Version:
 ;; Package-Requires: ()
-;; Last-Updated: Mi Dez  4 15:15:55 2013 (+0100)
+;; Last-Updated: Fr Jan  3 19:33:48 2014 (+0100)
 ;;           By: Manuel Schneckenreither
-;;     Update #: 356
+;;     Update #: 357
 ;; URL:
 ;; Doc URL:
 ;; Keywords:
@@ -82,7 +82,7 @@
     (local-set-key (kbd "C-c i") 'jde-import-find-and-import)
 
     ;; locally overwrite build command
-    (local-set-key (kbd "C-c C-v C-b") 'compile-closest-Makefile)
+    ;; (local-set-key (kbd "C-c C-v C-b") 'compile-closest-Makefile)
 
     (add-hook 'before-save-hook
               (lambda ()

@@ -5,9 +5,9 @@
 ;; Author: Manuel Schneckenreither
 ;; Created: Mon Dec 10 22:51:09 2012 (+0100)
 ;; Version:
-;; Last-Updated: So Dez  8 15:13:27 2013 (+0100)
+;; Last-Updated: Mi Jan  8 20:49:27 2014 (+0100)
 ;;           By: Manuel Schneckenreither
-;;     Update #: 529
+;;     Update #: 541
 ;; URL:
 ;; Description:
 ;;    Basic configuration for emacs. In here are all configs of
@@ -209,6 +209,16 @@
 ;; ++++++++++++++++++++++++ TAGS INFORMATION ++++++++++++++++++++++++++++
 ;; ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
+;;; View tags other window
+(defun view-tag-other-window (tagname &optional next-p regexp-p)
+  "Same as `find-tag-other-window' but doesn't move the point"
+  (interactive (find-tag-interactive "View tag other window: "))
+  (let ((window (get-buffer-window)))
+    (find-tag-other-window tagname next-p regexp-p)
+    (recenter 10)
+    (select-window window)))
+
+
 ;; RECREATE TAGS
 (defun recreate-tags ()
   "This function reloads the tags by using the command 'make tags'"
@@ -263,11 +273,24 @@
  '(backup-directory-alist '((".*" . "~/.emacs.d/.tmp/backups/"))))
 
 ;; (setq backup-directory-alist `(("." . "~/.saves")))
-(setq backup-by-copying t)
-(setq delete-old-versions nil
-      kept-new-versions 10000
-      kept-old-versions 1024
-      version-control t)
+;; (setq backup-by-copying t)
+;; (setq delete-old-versions nil
+;;       kept-new-versions 10000
+;;       kept-old-versions 1024
+;;       version-control t)
+
+
+(setq make-backup-files t               ; backup of a file the first time it is saved.
+      backup-by-copying t               ; don't clobber symlinks
+      version-control t                 ; version numbers for backup files
+      delete-old-versions t             ; delete excess backup files silently
+      delete-by-moving-to-trash t
+      kept-old-versions 1024            ; oldest versions to keep when a new numbered backup is made (default: 2)
+      kept-new-versions 10000           ; newest versions to keep when a new numbered backup is made (default: 2)
+      auto-save-default t               ; auto-save every buffer that visits a file
+      auto-save-timeout 20              ; number of seconds idle time before auto-save (default: 30)
+      auto-save-interval 200            ; number of keystrokes between auto-saves (default: 300)
+      )
 
 ;; ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 ;; +++++++++++++++++++++++++ CLIPBOARD TRACKING++++++++++++++++++++++++++
@@ -319,6 +342,15 @@
 
 ;; set the wrapping length to column x
 (setq fill-column 80)
+
+;; ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+;; ++++++++++++++++ JUMP TO BEGGINING AFTER SEARCHING +++++++++++++++++++
+;; ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+(defun my-goto-match-beginning ()
+      (when (and isearch-forward isearch-other-end (not isearch-mode-end-hook-quit))
+        (goto-char isearch-other-end)))
+(add-hook 'isearch-mode-end-hook 'my-goto-match-beginning)
 
 ;; ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 ;; ++++++++++++++++++++++++++ UNIQUIFY MODE +++++++++++++++++++++++++++++

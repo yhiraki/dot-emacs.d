@@ -7,9 +7,9 @@
 ;; Created: Fr Okt  4 20:33:29 2013 (+0200)
 ;; Version:
 ;; Package-Requires: ()
-;; Last-Updated: Do Dez 19 15:20:34 2013 (+0100)
+;; Last-Updated: Mo Jan 20 23:27:01 2014 (+0100)
 ;;           By: Manuel Schneckenreither
-;;     Update #: 225
+;;     Update #: 227
 ;; URL:
 ;; Doc URL:
 ;; Keywords:
@@ -90,6 +90,7 @@
         ecb
         emacs-eclim
         flycheck
+        flycheck-hdevtools
         gnuplot
         gnuplot-mode
         haskell-mode
@@ -229,7 +230,14 @@
  '(rainbow-delimiters-depth-5-face ((t (:foreground "violet"))))
  '(rainbow-delimiters-depth-6-face ((t (:foreground "green"))))
  '(rainbow-delimiters-depth-7-face ((t (:foreground "yellow"))))
- '(rainbow-delimiters-depth-9-face ((t (:foreground "orange")))))
+ '(rainbow-delimiters-depth-9-face ((t (:foreground "orange"))))
+ '(flymake-errline ((((class color)) (:underline
+                                     (:style wave :color "Red1")))))
+ '(flymake-warnline ((((class color)) (:underline
+                                      (:style wave :color "DarkOrange")))))
+
+
+ )
 
 
 (put 'upcase-region 'disabled nil)

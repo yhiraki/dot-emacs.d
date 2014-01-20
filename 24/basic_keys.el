@@ -7,7 +7,7 @@
 ;; Version:
 ;; Last-Updated:
 ;;           By:
-;;     Update #: 68
+;;     Update #: 74
 ;; URL:
 ;; Description:
 ;;
@@ -33,7 +33,7 @@
 (global-set-key [C-S-iso-lefttab] 'bs-cycle-previous) ;; previous buffer
 (global-set-key (kbd "C-x C-b") 'ibuffer)  ;; ibuffer
 (global-set-key [f11] 'my-toggle-fullscreen) ;; defined in basics.el
-
+(define-key isearch-mode-map [(control h)] 'isearch-mode-help) ;; help during search
 
 ;; ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 ;; ++++++++++++++++++++++++++++ BASICS KEYS +++++++++++++++++++++++++++++
@@ -60,6 +60,11 @@
 
 ;; AUTO FILL COLUMN
 (global-set-key (kbd (concat prefix-command-key " a"))  'auto-fill-mode)
+
+
+;; TAGS
+(global-set-key (kbd "C-.") 'view-tag-other-window)
+
 
 ;; comment uncomment
 (global-set-key (kbd "C-c c") 'comment-or-uncomment-region) ;; un/comment region
