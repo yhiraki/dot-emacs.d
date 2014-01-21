@@ -1,33 +1,33 @@
-;;; ecb_config.el --- 
-;; 
+;;; ecb_config.el ---
+;;
 ;; Filename: ecb_config.el
-;; Description: 
+;; Description:
 ;; Author: Manuel Schneckenreither
-;; Maintainer: 
+;; Maintainer:
 ;; Created: So Okt 13 16:30:34 2013 (+0200)
-;; Version: 
+;; Version:
 ;; Package-Requires: ()
-;; Last-Updated: So Okt 13 17:29:17 2013 (+0200)
+;; Last-Updated: Di Jan 21 23:45:41 2014 (+0100)
 ;;           By: Manuel Schneckenreither
-;;     Update #: 6
-;; URL: 
-;; Doc URL: 
-;; Keywords: 
-;; Compatibility: 
-;; 
+;;     Update #: 8
+;; URL:
+;; Doc URL:
+;; Keywords:
+;; Compatibility:
+;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; 
-;;; Commentary: 
-;; 
-;; 
-;; 
+;;
+;;; Commentary:
+;;
+;;
+;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; 
+;;
 ;;; Change Log:
-;; 
-;; 
+;;
+;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; 
+;;
 ;;; Code:
 
 
@@ -38,6 +38,8 @@
 (ecb-activate)
 
 
+;; rest of ecb config can be found in init.el
+;; under BASIC INFO in custom-set-variables!
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;

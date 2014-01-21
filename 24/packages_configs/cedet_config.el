@@ -7,9 +7,9 @@
 ;; Created: So Okt 13 11:05:43 2013 (+0200)
 ;; Version:
 ;; Package-Requires: ()
-;; Last-Updated: Di Jan 21 20:55:32 2014 (+0100)
+;; Last-Updated: Di Jan 21 23:18:54 2014 (+0100)
 ;;           By: Manuel Schneckenreither
-;;     Update #: 33
+;;     Update #: 35
 ;; URL:
 ;; Doc URL:
 ;; Keywords:
@@ -98,11 +98,13 @@
 (defun my/c-mode-cedet-hook ()
   (local-set-key "\C-ct" 'eassist-switch-h-cpp)
   (local-set-key "\C-xt" 'eassist-switch-h-cpp)
-  (local-set-key "\C-ce" 'eassist-list-methods)
+
   (local-set-key "\C-c\C-r" 'semantic-symref)
   )
 
 (add-hook 'c-mode-common-hook 'my/c-mode-cedet-hook)
+
+(global-set-key "\C-cl" 'eassist-list-methods)
 
 (semanticdb-enable-gnu-global-databases 'c-mode t)
 (semanticdb-enable-gnu-global-databases 'c++-mode t)

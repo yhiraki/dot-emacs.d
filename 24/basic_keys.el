@@ -7,7 +7,7 @@
 ;; Version:
 ;; Last-Updated:
 ;;           By:
-;;     Update #: 74
+;;     Update #: 76
 ;; URL:
 ;; Description:
 ;;
@@ -35,6 +35,11 @@
 (global-set-key [f11] 'my-toggle-fullscreen) ;; defined in basics.el
 (define-key isearch-mode-map [(control h)] 'isearch-mode-help) ;; help during search
 
+;; window resizing
+(global-set-key (kbd "S-C-<left>") 'shrink-window-horizontally)
+(global-set-key (kbd "S-C-<right>") 'enlarge-window-horizontally)
+(global-set-key (kbd "S-C-<down>") 'shrink-window)
+(global-set-key (kbd "S-C-<up>") 'enlarge-window)
 ;; ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 ;; ++++++++++++++++++++++++++++ BASICS KEYS +++++++++++++++++++++++++++++
 ;; ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++

@@ -7,9 +7,9 @@
 ;; Created: So Okt 13 22:47:58 2013 (+0200)
 ;; Version:
 ;; Package-Requires: ()
-;; Last-Updated: Di Jan 21 03:34:41 2014 (+0100)
+;; Last-Updated: Di Jan 21 21:48:33 2014 (+0100)
 ;;           By: Manuel Schneckenreither
-;;     Update #: 58
+;;     Update #: 59
 ;; URL:
 ;; Doc URL:
 ;; Keywords:
@@ -39,7 +39,7 @@
   "This function reloads the tags by using the command 'make tags'."
   (interactive)
 
-  (let ((dir (nth 0 (split-string default-directory emacsversion))))
+  (let ((dir (nth 0 (split-string default-directory load-emacsversion))))
     (setq esdir (replace-regexp-in-string " " "\\\\ " dir))
     (shell-command
      (concat "cd " esdir

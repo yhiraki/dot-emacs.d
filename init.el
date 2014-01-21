@@ -7,9 +7,9 @@
 ;; Created: Fr Okt  4 20:33:29 2013 (+0200)
 ;; Version:
 ;; Package-Requires: ()
-;; Last-Updated: Di Jan 21 21:18:11 2014 (+0100)
+;; Last-Updated: Di Jan 21 23:43:33 2014 (+0100)
 ;;           By: Manuel Schneckenreither
-;;     Update #: 266
+;;     Update #: 315
 ;; URL:
 ;; Doc URL:
 ;; Keywords:
@@ -197,9 +197,19 @@
  '(column-number-mode t)
  '(dired-kept-versions 10)
  '(display-time-mode t)
+ '(ecb-auto-expand-tag-tree (quote all))
+ '(ecb-auto-expand-tag-tree-collapse-other (quote only-if-on-tag))
+ '(ecb-display-image-icons-for-semantic-tags nil)
+ '(ecb-expand-methods-switch-off-auto-expand nil)
  '(ecb-jde-set-directories-buffer-to-jde-sourcepath (quote replace))
- '(ecb-layout-window-sizes (quote (("left8" (ecb-directories-buffer-name 0.15126050420168066 . 0.29411764705882354) (ecb-sources-buffer-name 0.15126050420168066 . 0.23529411764705882) (ecb-methods-buffer-name 0.15126050420168066 . 0.29411764705882354) (ecb-history-buffer-name 0.15126050420168066 . 0.16176470588235295)))))
+ '(ecb-layout-name "left-methods-sources")
+ '(ecb-layout-window-sizes (quote (("left-methods-sources" (ecb-methods-buffer-name 0.15546218487394958 . 0.6911764705882353) (ecb-sources-buffer-name 0.15546218487394958 . 0.29411764705882354)) ("left8" (ecb-directories-buffer-name 0.15126050420168066 . 0.29411764705882354) (ecb-sources-buffer-name 0.15126050420168066 . 0.23529411764705882) (ecb-methods-buffer-name 0.15126050420168066 . 0.29411764705882354) (ecb-history-buffer-name 0.15126050420168066 . 0.16176470588235295)))))
+ '(ecb-method-face (quote ecb-default-highlight-face))
+ '(ecb-methods-general-face (quote ecb-default-general-face))
  '(ecb-options-version "2.40")
+ '(ecb-source-path (quote (("/" "/"))))
+ '(ecb-type-tag-expansion (quote ((default) (c-mode "struct"))))
+ '(ecb-use-speedbar-instead-native-tree-buffer nil)
  '(flymake-compilation-prevents-syntax-check nil)
  '(flymake-gui-warnings-enabled nil)
  '(frame-background-mode (quote dark))
@@ -226,6 +236,7 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(column-marker-1 ((t nil)))
+ '(ecb-default-highlight-face ((t (:background "gray30"))))
  '(flymake-errline ((((class color)) (:underline (:style wave :color "Red1")))))
  '(flymake-warnline ((((class color)) (:underline (:style wave :color "DarkOrange")))))
  '(highlight-current-line-face ((t (:background "gray5"))))
