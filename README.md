@@ -48,8 +48,9 @@ Dependencies:
   - therefore: cpan -fi RPC::EPC::Service DBI DBD::SQLite DBD::Pg DBD::mysql
   - connection parameters for edbi:
      sqlite : dbi:SQLite:dbname=/path/to/database.sqlite
-     postgresql : dbi:Pg:dbname=localhost
-     mysql : dbi:mysql:localhost
+     postgresql : dbi:Pg:dbname=mydb
+     mysql : dbi:mysql:mydb
+  - more information: https://github.com/kiwanami/emacs-edbi
 
 
 If you got questions, don't hesitate to contact me at "manuel.schneckiXYZgmail.com" [Q/XYZ]
