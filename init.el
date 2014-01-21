@@ -7,9 +7,9 @@
 ;; Created: Fr Okt  4 20:33:29 2013 (+0200)
 ;; Version:
 ;; Package-Requires: ()
-;; Last-Updated: Di Jan 21 21:05:51 2014 (+0100)
+;; Last-Updated: Di Jan 21 21:18:11 2014 (+0100)
 ;;           By: Manuel Schneckenreither
-;;     Update #: 265
+;;     Update #: 266
 ;; URL:
 ;; Doc URL:
 ;; Keywords:
@@ -53,11 +53,9 @@
 
 
 ;; Edit your settings in settings.el
-;; (setq load-directory_path default-directory)
 ;; (defvar load-directory_path (default-directory) "The directory to look for .emacs.d/ .")
-;; ;; (setq directory_path default-directory)
+;; (setq directory_path default-directory)
 (defvar load-emacsd (concat default-directory ".emacs.d/") "The .emacs.d folder path.")
-;; (setq load-emacsd (concat directory_path ".emacs.d/"))
 (setq user-emacs-directory load-emacsd)        ;; set the emacs directory
 
 (load-file (concat load-emacsd "settings.el"))
