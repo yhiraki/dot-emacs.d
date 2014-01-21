@@ -27,3 +27,5 @@ eshell/lastdir
 /abbrev_defs
 /ede-projects.el
 /.#session.*
+/.edbi-ds-history
+/abrt_checker_*

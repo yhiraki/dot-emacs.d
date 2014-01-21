@@ -7,9 +7,9 @@
 ;; Created: So Okt 13 13:22:28 2013 (+0200)
 ;; Version:
 ;; Package-Requires: ()
-;; Last-Updated: Fr Jan  3 19:33:48 2014 (+0100)
+;; Last-Updated: Di Jan 21 20:55:59 2014 (+0100)
 ;;           By: Manuel Schneckenreither
-;;     Update #: 357
+;;     Update #: 358
 ;; URL:
 ;; Doc URL:
 ;; Keywords:
@@ -51,7 +51,7 @@
 ;; ++++++++++++++++++++++++++++ JDEE CONFIG +++++++++++++++++++++++++++++
 ;; ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
-(add-to-list 'load-path (concat package_folder "jdee-2.4.1/lisp"))
+(add-to-list 'load-path (concat package-folder "jdee-2.4.1/lisp"))
 (autoload 'jde-mode "jde" "JDE mode" t)
 (setq auto-mode-alist
       (append '(("\\.java\\'" . jde-mode)) auto-mode-alist))
@@ -110,7 +110,7 @@
 (setq jde-junit-testrunner-type "org.junit.runner.JUnitCore")
 
 ;; FIX PROJECT SETUP
-(load-file (concat package_folder "jdee-2.4.1/lisp/jde-project-file.el"))
+(load-file (concat package-folder "jdee-2.4.1/lisp/jde-project-file.el"))
 
 (setq jde-project-text
       "(jde-project-file-version \\\"1.0\\\")

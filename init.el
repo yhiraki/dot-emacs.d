@@ -7,9 +7,9 @@
 ;; Created: Fr Okt  4 20:33:29 2013 (+0200)
 ;; Version:
 ;; Package-Requires: ()
-;; Last-Updated: Mo Jan 20 23:27:01 2014 (+0100)
+;; Last-Updated: Di Jan 21 21:05:51 2014 (+0100)
 ;;           By: Manuel Schneckenreither
-;;     Update #: 227
+;;     Update #: 265
 ;; URL:
 ;; Doc URL:
 ;; Keywords:
@@ -53,12 +53,14 @@
 
 
 ;; Edit your settings in settings.el
+;; (setq load-directory_path default-directory)
+;; (defvar load-directory_path (default-directory) "The directory to look for .emacs.d/ .")
+;; ;; (setq directory_path default-directory)
+(defvar load-emacsd (concat default-directory ".emacs.d/") "The .emacs.d folder path.")
+;; (setq load-emacsd (concat directory_path ".emacs.d/"))
+(setq user-emacs-directory load-emacsd)        ;; set the emacs directory
 
-(setq directory_path default-directory)
-(setq emacsd (concat directory_path ".emacs.d/"))
-(setq user-emacs-directory emacsd)
-
-(load-file (concat emacsd "settings.el"))
+(load-file (concat load-emacsd "settings.el"))
 
 
 (autoload 'cflow-mode "cflow-mode")
@@ -75,6 +77,7 @@
   (add-to-list 'package-archives '("melpa" . "http://melpa.milkbox.net/packages/") t)
   (add-to-list 'package-archives '("org" . "http://orgmode.org/elpa/")))
 
+
 ;; packages to be loaded
 (setq jpk-packages
       '(
@@ -88,9 +91,12 @@
         backup-walker
         color-theme
         ecb
+        edbi
         emacs-eclim
         flycheck
         flycheck-hdevtools
+        git-commit-mode
+        git-rebase-mode
         gnuplot
         gnuplot-mode
         haskell-mode
@@ -146,13 +152,13 @@
 ;; +++++++++++++++++++++++ SET FOLDER VARIABLE ++++++++++++++++++++++++++
 ;; ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
-(setq emacsversion (eval '(substring (emacs-version nil) 10 12) "/"))
-(setq folder
-      (concat emacsd emacsversion "/"))
-;; TODO (setq folder "24/") ;; emacs-major-version)
-(setq package_folder (concat folder "packages/"))
-(setq package_conf_folder (concat folder "packages_configs/"))
-(setq language_conf_folder (concat folder "language_configs/"))
+(defvar load-emacsversion (eval '(substring (emacs-version nil) 10 12) "/"))
+(defvar load-folder (concat load-emacsd load-emacsversion "/"))
+
+(defvar package-folder (concat load-folder "packages/"))
+(defvar package-conf-folder (concat load-folder "packages_configs/"))
+(defvar language-conf-folder (concat load-folder "language_configs/"))
+
 
 ;; ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 ;; +++++++++++++++++++++++ LOAD EMACS CONFIGS +++++++++++++++++++++++++++
@@ -161,7 +167,7 @@
 ;; load cedet
 ;; (load (concat package_conf_folder "cedet_config.el"))
 ;; init everything else
-(load (concat folder "emacs.el"))
+(load (concat load-folder "emacs.el"))
 
 ;; ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 ;; ++++++++++++++++++++++++++++ COLOR THEME +++++++++++++++++++++++++++++
@@ -190,28 +196,30 @@
  ;; If there is more than one, they won't work right.
  '(ac-quick-help-delay 0.1)
  '(ac-show-menu-immediately-on-auto-complete t)
- '(auto-save-file-name-transforms (quote ((".*" "~/.emacs.d/.tmp/autosaves/\\1" t))))
- '(backup-directory-alist (quote ((".*" . "~/.emacs.d/.tmp/backups/"))))
  '(column-number-mode t)
+ '(dired-kept-versions 10)
  '(display-time-mode t)
  '(ecb-jde-set-directories-buffer-to-jde-sourcepath (quote replace))
  '(ecb-layout-window-sizes (quote (("left8" (ecb-directories-buffer-name 0.15126050420168066 . 0.29411764705882354) (ecb-sources-buffer-name 0.15126050420168066 . 0.23529411764705882) (ecb-methods-buffer-name 0.15126050420168066 . 0.29411764705882354) (ecb-history-buffer-name 0.15126050420168066 . 0.16176470588235295)))))
  '(ecb-options-version "2.40")
+ '(flymake-compilation-prevents-syntax-check nil)
+ '(flymake-gui-warnings-enabled nil)
  '(frame-background-mode (quote dark))
  '(haskell-font-lock-haddock t)
+ '(help-at-pt-display-when-idle (quote (flymake-overlay)) nil (help-at-pt))
+ '(help-at-pt-timer-delay 0.1)
  '(jde-compile-option-directory "./../classes")
  '(jde-compiler (quote ("javac")))
- '(jde-flymake-option-jikes-source "1.7")
  '(jde-global-classpath (quote ("./../classes" "./../lib")))
  '(jde-jdk (quote ("1.6")))
  '(jde-jdk-registry (quote (("1.6" . "/usr/lib/jvm/java-1.7.0") ("1.6OpenJDK" . "/usr/lib/jvm/java-1.7.0-openjdk"))))
  '(jde-sourcepath (quote ("./src/main" "./src/test")))
+ '(kept-new-versions 5000)
  '(org-agenda-files (quote ("~/Documents/Planning/planning_time.org" "~/Documents/Planning/university.org" "~/Documents/Planning/bachelorarbeit.org" "~/Documents/Planning/ProjectIdeas.org" "~/Documents/Planning/freetime.org" "~/Documents/Planning/lists.org" "~/Documents/Planning/anniverseries.org" "~/Documents/Planning/Emacs.org" "~/Programmierung/App/Documentation/app-brainstorming.txt")))
  '(size-indication-mode t)
  '(tool-bar-mode nil)
  '(user-full-name your-full-name)
  '(user-mail-address your-mail-address)
- '(version-control t)
  '(yas-prompt-functions (quote (yas-ido-prompt yas-dropdown-prompt yas-completing-prompt yas-x-prompt yas-no-prompt))))
 
 (custom-set-faces
@@ -220,8 +228,8 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(column-marker-1 ((t nil)))
- '(flymake-errline ((((class color)) (:underline "red"))))
- '(flymake-warnline ((((class color)) (:underline "yellow"))))
+ '(flymake-errline ((((class color)) (:underline (:style wave :color "Red1")))))
+ '(flymake-warnline ((((class color)) (:underline (:style wave :color "DarkOrange")))))
  '(highlight-current-line-face ((t (:background "gray5"))))
  '(rainbow-delimiters-depth-1-face ((t (:foreground "red"))))
  '(rainbow-delimiters-depth-2-face ((t (:foreground "magenta"))))
@@ -230,14 +238,7 @@
  '(rainbow-delimiters-depth-5-face ((t (:foreground "violet"))))
  '(rainbow-delimiters-depth-6-face ((t (:foreground "green"))))
  '(rainbow-delimiters-depth-7-face ((t (:foreground "yellow"))))
- '(rainbow-delimiters-depth-9-face ((t (:foreground "orange"))))
- '(flymake-errline ((((class color)) (:underline
-                                     (:style wave :color "Red1")))))
- '(flymake-warnline ((((class color)) (:underline
-                                      (:style wave :color "DarkOrange")))))
-
-
- )
+ '(rainbow-delimiters-depth-9-face ((t (:foreground "orange")))))
 
 
 (put 'upcase-region 'disabled nil)

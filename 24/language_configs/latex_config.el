@@ -7,9 +7,9 @@
 ;; Created: Sa Nov  2 16:14:09 2013 (+0100)
 ;; Version:
 ;; Package-Requires: ()
-;; Last-Updated: So Nov  3 20:48:24 2013 (+0100)
+;; Last-Updated: Di Jan 21 20:56:57 2014 (+0100)
 ;;           By: Manuel Schneckenreither
-;;     Update #: 29
+;;     Update #: 31
 ;; URL:
 ;; Doc URL:
 ;; Keywords:
@@ -48,7 +48,7 @@
 ;;; Code:
 
 
-(load-file (concat package_folder "tex_texify/tex_texify.el"))
+(load-file (concat package-folder "tex_texify/tex_texify.el"))
 
 
 ;; ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -128,7 +128,7 @@
   (interactive)
   (TeX-texify)
   (TeX-command "View" 'TeX-active-master 0)
-  (async-shell-command "rm -rf *.aux *.bbl *.log *.blg *.toc *.out *.dvi *.backup *.exl *.exls *.ps 1>/dev/null 2>/dev/null" t)
+  (async-shell-command "rm -rf *.aux *.bbl *.log *.blg *.toc *.out *.dvi *.backup *.exl *.exls *.ps 1>/dev/null 2>/dev/null" nil)
   )
 
 
@@ -144,7 +144,7 @@
   (let ((dir (nth 0 (split-string default-directory "src"))))
     (setq esdir (replace-regexp-in-string " " "\\\\ " dir))
     (shell-command
-     (concat "cd " esdir " && find . -name \"*.tex\" -print | etags - 1>/dev/null 2>/dev/null") t)
+     (concat "cd " esdir " && find . -name \"*.tex\" -print | etags - 1>/dev/null 2>/dev/null") nil)
     (visit-tags-table (concat dir "TAGS"))
     )
   )

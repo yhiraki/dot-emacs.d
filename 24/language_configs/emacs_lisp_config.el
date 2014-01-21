@@ -7,9 +7,9 @@
 ;; Created: So Okt 13 22:47:58 2013 (+0200)
 ;; Version:
 ;; Package-Requires: ()
-;; Last-Updated: So Okt 20 12:34:59 2013 (+0200)
+;; Last-Updated: Di Jan 21 03:34:41 2014 (+0100)
 ;;           By: Manuel Schneckenreither
-;;     Update #: 57
+;;     Update #: 58
 ;; URL:
 ;; Doc URL:
 ;; Keywords:
@@ -43,7 +43,7 @@
     (setq esdir (replace-regexp-in-string " " "\\\\ " dir))
     (shell-command
      (concat "cd " esdir
-             " && find . -name '*.el' -print | etags - 1>/dev/null 2>/dev/null") t)
+             " && find . -name '*.el' -print | etags - 1>/dev/null 2>/dev/null") nil)
     (visit-tags-table (concat dir "TAGS")))
   )
 

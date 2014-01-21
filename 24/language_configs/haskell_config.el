@@ -8,7 +8,7 @@
 ;; Version:
 ;; Last-Updated:
 ;;           By:
-;;     Update #: 376
+;;     Update #: 379
 ;; URL:
 ;; Description:
 ;;
@@ -70,7 +70,7 @@
 (defun delete-hdevtools-socket-file ()
   "Delete the socket file for hdevtools."
   (interactive)
-  (shell-command "rm -f .hdevtools.sock")
+  (shell-command "rm -f .hdevtools.sock" nil)
   )
 
 (add-hook 'open-file 'delete-hdevtools-socket-file)
@@ -90,7 +90,7 @@
     (setq esdir (replace-regexp-in-string " " "\\\\ " dir))
     (shell-command
      (concat "cd " esdir
-             " && hasktags -e . 2>/dev/null 1>/dev/null") t)
+             " && hasktags -e . 2>/dev/null 1>/dev/null") nil)
     (visit-tags-table (concat dir "TAGS")))
   )
 

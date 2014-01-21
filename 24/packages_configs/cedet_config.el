@@ -7,9 +7,9 @@
 ;; Created: So Okt 13 11:05:43 2013 (+0200)
 ;; Version:
 ;; Package-Requires: ()
-;; Last-Updated: So Okt 20 14:50:09 2013 (+0200)
+;; Last-Updated: Di Jan 21 20:55:32 2014 (+0100)
 ;;           By: Manuel Schneckenreither
-;;     Update #: 32
+;;     Update #: 33
 ;; URL:
 ;; Doc URL:
 ;; Keywords:
@@ -39,13 +39,13 @@
 ;; ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 ;; (defun byte-compile-cedet ()
-;;   (load (concat package_folder "cedet-1.1/cedet-build.el"))
+;;   (load (concat package-folder "cedet-1.1/cedet-build.el"))
 ;;   (cedet-build-in-default-emacs)
 ;;   (message "CEDET BUILT"))
 
 
 ;; ;; DO ONLY IF NOT BUILT YET
-;; (if (not (file-exists-p (concat package_folder
+;; (if (not (file-exists-p (concat package-folder
 ;;                                 "cedet-1.1/common/cedet.elc")))
 ;;     (byte-compile-cedet))
 
@@ -58,7 +58,7 @@
 ;; Load CEDET.
 ;; IMPORTANT: Tou must place this *before* any CEDET component (including
 ;; EIEIO) gets activated by another package (Gnus, auth-source, ...).
-(setq cedet-root-path (file-name-as-directory (concat package_folder "cedet/")))
+(setq cedet-root-path (file-name-as-directory (concat package-folder "cedet/")))
 (load-file (concat cedet-root-path "cedet-devel-load.el"))
 (add-to-list 'load-path (concat cedet-root-path "contrib"))
 

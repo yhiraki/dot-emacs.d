@@ -77,8 +77,8 @@
 ;; ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 
-(setq org-ditaa-jar-path (concat package_folder "java_files/ditaa0_9.jar"))
-(setq org-plantuml-jar-path (concat package_folder "java_files/plantuml.jar"))
+(setq org-ditaa-jar-path (concat package-folder "java_files/ditaa0_9.jar"))
+(setq org-plantuml-jar-path (concat package-folder "java_files/plantuml.jar"))
 
 (add-hook 'org-babel-after-execute-hook 'bh/display-inline-images 'append)
 

@@ -5,9 +5,9 @@
 ;; Author: Manuel Schneckenreither
 ;; Created: Mon Dec 10 22:51:09 2012 (+0100)
 ;; Version:
-;; Last-Updated: Mi Jan  8 20:49:27 2014 (+0100)
+;; Last-Updated: Di Jan 21 20:57:01 2014 (+0100)
 ;;           By: Manuel Schneckenreither
-;;     Update #: 541
+;;     Update #: 556
 ;; URL:
 ;; Description:
 ;;    Basic configuration for emacs. In here are all configs of
@@ -67,8 +67,8 @@
 ;; get the makefile above
 (defun get-above-makefile ()
   (loop as d = default-directory then (expand-file-name
-       ".." d) if (file-exists-p (expand-file-name "Makefile" d)) return
-       d))
+                                       ".." d) if (file-exists-p (expand-file-name "Makefile" d)) return
+                                       d))
 
 
 ;; COMPILE CLOSES MAKEFILE
@@ -76,8 +76,8 @@
   (interactive)
   (compile
    (concat "make -C " (loop as d = default-directory then (expand-file-name
-       ".." d) if (file-exists-p (expand-file-name "Makefile" d)) return
-       d))))
+                                                           ".." d) if (file-exists-p (expand-file-name "Makefile" d)) return
+                                                           d))))
 
 ;; bind compiling with get-above-makefile to f5
 (global-set-key [f5] 'compile-closest-Makefile)
@@ -110,7 +110,7 @@
               (highlight-changes-remove-highlight (point-min) (point-max)))))
 
 ;; (global-highlight-changes-mode t)
-  ;; (setq highlight-changes-remove-highlight t)
+;; (setq highlight-changes-remove-highlight t)
 ;; (add-hook 'after-save-hook 'highlight-changes-remove-after-save)
 
 ;; ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -209,23 +209,23 @@
 ;; ++++++++++++++++++++++++ TAGS INFORMATION ++++++++++++++++++++++++++++
 ;; ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
-;;; View tags other window
-(defun view-tag-other-window (tagname &optional next-p regexp-p)
-  "Same as `find-tag-other-window' but doesn't move the point"
-  (interactive (find-tag-interactive "View tag other window: "))
-  (let ((window (get-buffer-window)))
-    (find-tag-other-window tagname next-p regexp-p)
-    (recenter 10)
-    (select-window window)))
+;; ;;; View tags other window
+;; (defun view-tag-other-window (tagname &optional next-p regexp-p)
+;;   "Same as `find-tag-other-window' but doesn't move the point"
+;;   (interactive (find-tag-interactive "View tag other window: "))
+;;   (let ((window (get-buffer-window)))
+;;     (find-tag-other-window tagname next-p regexp-p)
+;;     (recenter 10)
+;;     (select-window window)))
 
 
-;; RECREATE TAGS
-(defun recreate-tags ()
-  "This function reloads the tags by using the command 'make tags'"
-  (interactive)
-  (with-temp-buffer
-    (async-shell-command "make tags 1>/dev/null 2>/dev/null" t)
-    ))
+;; ;; RECREATE TAGS
+;; (defun recreate-tags ()
+;;   "This function reloads the tags by using the command 'make tags'"
+;;   (interactive)
+;;   (with-temp-buffer
+;;     (async-shell-command "make tags 1>/dev/null 2>/dev/null" t)
+;;     ))
 
 ;; FIND CLOSEST TAGS FILE
 ;; (defun* get-closest-pathname (&optional (file "TAGS"))
@@ -247,8 +247,6 @@
 ;;       (if (not (equal nil (get-closest-pathname "TAGS")))
 ;;           (setq tags-file-name (get-closest-pathname "TAGS")))))
 
-;; (if (eq 1 use_tags)
-;;     (add-hook 'after-save-hook 'set-visit-tags-table))
 
 ;; ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 ;; ++++++++++++++++++ CONFIGURE IN MINIBUFFER INFO ++++++++++++++++++++++
@@ -263,34 +261,30 @@
 ;; ++++++++++++++++++++++++++++ BACKUP INFO +++++++++++++++++++++++++++++
 ;; ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
-;; create the autosave dir if necessary, since emacs won't.
+;; create the autosave and backup dirs if necessary, since emacs won't.
 (make-directory "~/.emacs.d/.tmp/autosaves/" t)
 (make-directory "~/.emacs.d/.tmp/backups/" t)
 
-;; Put autosave files (ie #foo#) and backup files (ie foo~) in ~/.emacs.d/.
-(custom-set-variables
- '(auto-save-file-name-transforms '((".*" "~/.emacs.d/.tmp/autosaves/\\1" t)))
- '(backup-directory-alist '((".*" . "~/.emacs.d/.tmp/backups/"))))
-
-;; (setq backup-directory-alist `(("." . "~/.saves")))
-;; (setq backup-by-copying t)
-;; (setq delete-old-versions nil
-;;       kept-new-versions 10000
-;;       kept-old-versions 1024
-;;       version-control t)
-
+;; Put autosave files (ie #foo#) and backup files (ie foo~) in ~/.emacs.d/.tmp/...
+(setq auto-save-file-name-transforms (quote ((".*" "~/.emacs.d/.tmp/autosaves/\\1" t)))
+      backup-directory-alist (quote ((".*" . "~/.emacs.d/.tmp/backups/")))
+      )
 
 (setq make-backup-files t               ; backup of a file the first time it is saved.
       backup-by-copying t               ; don't clobber symlinks
       version-control t                 ; version numbers for backup files
-      delete-old-versions t             ; delete excess backup files silently
+      delete-old-versions 0             ; delete excess backup files silently
       delete-by-moving-to-trash t
-      kept-old-versions 1024            ; oldest versions to keep when a new numbered backup is made (default: 2)
-      kept-new-versions 10000           ; newest versions to keep when a new numbered backup is made (default: 2)
+      kept-old-versions 32              ; oldest versions to keep when a new numbered backup is made (default: 2)
+      kept-new-versions 4096            ; newest versions to keep when a new numbered backup is made (default: 2)
+      vc-make-backup-files t            ; make backups even when file is in version control (e.g. git)
+
+
       auto-save-default t               ; auto-save every buffer that visits a file
       auto-save-timeout 20              ; number of seconds idle time before auto-save (default: 30)
       auto-save-interval 200            ; number of keystrokes between auto-saves (default: 300)
       )
+
 
 ;; ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 ;; +++++++++++++++++++++++++ CLIPBOARD TRACKING++++++++++++++++++++++++++
@@ -348,8 +342,8 @@
 ;; ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 (defun my-goto-match-beginning ()
-      (when (and isearch-forward isearch-other-end (not isearch-mode-end-hook-quit))
-        (goto-char isearch-other-end)))
+  (when (and isearch-forward isearch-other-end (not isearch-mode-end-hook-quit))
+    (goto-char isearch-other-end)))
 (add-hook 'isearch-mode-end-hook 'my-goto-match-beginning)
 
 ;; ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
