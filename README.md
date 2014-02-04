@@ -137,23 +137,23 @@ If you got any questions, don't hesitate to contact me at "manuel.schneckiXYZgma
 How is this package built up?
 =============================
 
-.emacs.d
-   - README.md               This file.
-   + snippets                Snippets folder.
-       - ...                 Folders for different modes (programming languages)
-   + .tmp                    Backup and flymake files.
-       - ...
-   - init.el ***             The start point of the config. Sets package list.
-   + 24  [Emacs Version]
-       - emacs.el            The start point inside of this folder, loads following:
-       - basics.el           Some basic functions and settings (mostly for built in tools).
-       - basic_keys.el       Basic key sequences (mostly for built in functions).
-       + package_configs     Contains configuration files for packages (loaded by emacs.el).
-          - ...              Check it out!
-       + packages            All additional packages (not available from Pamela).
-          - ...              Check it out!
-       + language_configs    Own configuration for each (programming) language.
-          - ...              Check it out!
+    .emacs.d
+        README.md               This file.
+        snippets                Snippets folder.
+            ...                 Folders for different modes (programming languages)
+        .tmp                    Backup and flymake files.
+            ...
+        init.el                 The start point of the config. Sets package list.
+        24                      or any other emacs version
+            emacs.el            The start point inside of this folder, loads following:
+            basics.el           Some basic functions and settings (mostly for built in tools).
+            basic_keys.el       Basic key sequences (mostly for built in functions).
+            package_configs     Contains configuration files for packages (loaded by emacs.el).
+               ...              Check it out!
+            packages            All additional packages (not available from Pamela).
+               ...              Check it out!
+            language_configs    Own configuration for each (programming) language.
+               ...              Check it out!
 
 
 OK, when starting up Emacs following chain is used for loading the
