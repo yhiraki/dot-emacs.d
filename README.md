@@ -52,12 +52,12 @@ Have a look at ~/.emacs.d/24/basic_keys.el for the main keys.
 
 Example (with prefix beeing C-x x):
 
-| Key       | Function                | Description                                 |
-|-----------+-------------------------+---------------------------------------------|
-| C-x x C-q | save-buffers-kill-emacs | close emacs                                 |
-| C-x x c   | eshell                  | a shell inside of emacs                     |
-| C-x x r   | replace-regexp          | find and replace using a REGular EXpression |
-| ...       |                         | check out the files and get used to them    |
+    | Key       | Function                | Description                                 |
+    |-----------+-------------------------+---------------------------------------------|
+    | C-x x C-q | save-buffers-kill-emacs | close emacs                                 |
+    | C-x x c   | eshell                  | a shell inside of emacs                     |
+    | C-x x r   | replace-regexp          | find and replace using a REGular EXpression |
+    | ...       |                         | check out the files and get used to them    |
 
 
 How to Install
@@ -74,16 +74,16 @@ If you can't wait/or just don't want to:
 Fedora:
 -------
 
-su -c "yum install ctags-etags gnuplot emacs graphviz \                # main tools
-w3m && \                                                               # browser for links
-texlive evince &&  \                                                   # LaTeX
-cabal install hasktags && \                                            # Haskell
-perl-CPAN mariadb-devel && cpan -fi Module::Build::Compat && \         # database tools
-cpan -fi RPC::EPC::Service DBI DBD::SQLite DBD::Pg DBD::mysql" && \    # database tools
-echo "(load-file \"~/.emacs.d/gnus.el\")" > ~/.gnus.el && \            # create gnus file
-# cd ~/.emacs.d/24/packages/cedet/ && make && \                          # compile cedet
-mv ~/.emacs.d/settings.el.example ~/.emacs.d/settings.el && \          # settings.el
-&& emacs -mm                                                           # start emacs maximized
+    su -c "yum install ctags-etags gnuplot emacs graphviz \                # main tools
+    w3m && \                                                               # browser for links
+    texlive evince &&  \                                                   # LaTeX
+    cabal install hasktags && \                                            # Haskell
+    perl-CPAN mariadb-devel && cpan -fi Module::Build::Compat && \         # database tools
+    cpan -fi RPC::EPC::Service DBI DBD::SQLite DBD::Pg DBD::mysql" && \    # database tools
+    echo "(load-file \"~/.emacs.d/gnus.el\")" > ~/.gnus.el && \            # create gnus file
+    # cd ~/.emacs.d/24/packages/cedet/ && make && \                          # compile cedet
+    mv ~/.emacs.d/settings.el.example ~/.emacs.d/settings.el && \          # settings.el
+    && emacs -mm                                                           # start emacs maximized
 
 
 1. Wait until packages are downloaded and installed.
