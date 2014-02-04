@@ -512,10 +512,33 @@ tag is not something you can complete from within TYPE."
 	(leftover nil)
 	)
     (dolist (S allslots)
-      (when (or (not (semantic-tag-of-class-p S 'function))
-		(not (semantic-tag-function-parent S)))
-	(setq leftover (cons S leftover)))
-      )
+      ;; We have to specially deal with 'using' tags here, since those
+      ;; pull in namespaces or classes into the current scope.
+      ;; (Should this go into c.el? If so, into which override?)
+      (if (semantic-tag-of-class-p S 'using)
+	  (let* ((fullname (semantic-analyze-unsplit-name
+			    (list (semantic-tag-name type)
+				  (semantic-tag-name S))))
+		 ;; Search the typecache, first for the unqualified name
+		 (usingtype (or
+			      (semanticdb-typecache-find (semantic-tag-name S))
+			      ;; If that didn't return anything, use
+			      ;; fully qualified name
+			      (semanticdb-typecache-find fullname)))
+		 (filename (when usingtype (semantic-tag-file-name usingtype))))
+	    (when usingtype
+	      ;; Use recursion to examine that namespace or class
+	      (let ((tags (semantic-completable-tags-from-type usingtype)))
+		(if filename
+		    ;; If we have a filename, copy the tags with it
+		    (dolist (cur tags)
+		      (setq leftover (cons (semantic-tag-copy cur nil filename)
+					   leftover)))
+		  ;; Otherwise just run with it
+		  (setq leftover (append tags leftover))))))
+	(when (or (not (semantic-tag-of-class-p S 'function))
+		  (not (semantic-tag-function-parent S)))
+	  (setq leftover (cons S leftover)))))
     (nreverse leftover)))
 
 (defun semantic-analyze-scoped-type-parts (type &optional scope noinherit protection)

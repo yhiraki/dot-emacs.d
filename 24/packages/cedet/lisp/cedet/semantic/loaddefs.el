@@ -77,7 +77,7 @@ Report debug info for checking STARTFILE for up-to-date tags.
 ;;;***
 
 ;;;### (autoloads (semantic-analyze-current-context) "semantic/analyze"
-;;;;;;  "analyze.el" (21082 24880 905122 0))
+;;;;;;  "analyze.el" (21232 45306 315692 0))
 ;;; Generated autoloads from analyze.el
 
 (autoload 'semantic-analyze-current-context "semantic/analyze" "\
@@ -132,7 +132,7 @@ in a buffer.
 ;;;***
 
 ;;;### (autoloads (semantic-analyze-proto-impl-toggle semantic-analyze-current-tag)
-;;;;;;  "semantic/analyze/refs" "analyze/refs.el" (21082 24880 905122
+;;;;;;  "semantic/analyze/refs" "analyze/refs.el" (21232 45306 315692
 ;;;;;;  0))
 ;;; Generated autoloads from analyze/refs.el
 
@@ -167,7 +167,7 @@ list of semantic tokens found.
 ;;;***
 
 ;;;### (autoloads (semantic-c-add-preprocessor-symbol semantic-default-c-setup)
-;;;;;;  "semantic/bovine/c" "bovine/c.el" (21082 24880 905122 0))
+;;;;;;  "semantic/bovine/c" "bovine/c.el" (21232 45306 315692 0))
 ;;; Generated autoloads from bovine/c.el
 
 (autoload 'semantic-default-c-setup "semantic/bovine/c" "\
@@ -216,7 +216,7 @@ Set up a buffer for semantic parsing of the F90 language.
 ;;;***
 
 ;;;### (autoloads (semantic-gcc-setup) "semantic/bovine/gcc" "bovine/gcc.el"
-;;;;;;  (21082 24880 905122 0))
+;;;;;;  (21232 45306 315692 0))
 ;;; Generated autoloads from bovine/gcc.el
 
 (autoload 'semantic-gcc-setup "semantic/bovine/gcc" "\
@@ -268,7 +268,7 @@ Setup hook function for Emacs Lisp files and Semantic.
 ;;;;;;  semantic-complete-analyze-and-replace semantic-complete-jump-local-members
 ;;;;;;  semantic-complete-jump semantic-complete-jump-local semantic-displayor-tooltip-initial-max-tags
 ;;;;;;  semantic-displayor-tooltip-mode) "semantic/complete" "complete.el"
-;;;;;;  (21082 24880 905122 0))
+;;;;;;  (21232 45306 315692 0))
 ;;; Generated autoloads from complete.el
 
 (defvar semantic-displayor-tooltip-mode 'standard "\
@@ -423,7 +423,7 @@ If TAG is not provided, then the tag under point is used.
 ;;;***
 
 ;;;### (autoloads (semanticdb-file-table-object) "semantic/db" "db.el"
-;;;;;;  (21082 24880 905122 0))
+;;;;;;  (21232 45306 315692 0))
 ;;; Generated autoloads from db.el
 
 (defvar semanticdb-current-database nil "\
@@ -646,7 +646,7 @@ associated with that tag should be loaded into a buffer.
 ;;;***
 
 ;;;### (autoloads (semanticdb-enable-gnu-global-databases) "semantic/db-global"
-;;;;;;  "db-global.el" (21082 24880 905122 0))
+;;;;;;  "db-global.el" (21232 45306 315692 0))
 ;;; Generated autoloads from db-global.el
 
 (autoload 'semanticdb-enable-gnu-global-databases "semantic/db-global" "\
@@ -678,7 +678,7 @@ into the tags)
 ;;;***
 
 ;;;### (autoloads (global-semanticdb-minor-mode semanticdb-minor-mode-p)
-;;;;;;  "semantic/db-mode" "db-mode.el" (21082 24880 905122 0))
+;;;;;;  "semantic/db-mode" "db-mode.el" (21232 45306 315692 0))
 ;;; Generated autoloads from db-mode.el
 
 (autoload 'semanticdb-minor-mode-p "semantic/db-mode" "\
@@ -850,7 +850,7 @@ Class to create when building a debug parser object.")
 
 ;;;### (autoloads (semantic-decoration-unparsed-include-do-reset
 ;;;;;;  semantic-decoration-include-visit) "semantic/decorate/include"
-;;;;;;  "decorate/include.el" (21082 24880 905122 0))
+;;;;;;  "decorate/include.el" (21232 45306 315692 0))
 ;;; Generated autoloads from decorate/include.el
 
 (autoload 'semantic-decoration-include-visit "semantic/decorate/include" "\
@@ -866,7 +866,7 @@ Do a reset of unparsed includes in the current buffer.
 ;;;***
 
 ;;;### (autoloads (global-semantic-decoration-mode) "semantic/decorate/mode"
-;;;;;;  "decorate/mode.el" (21082 24880 905122 0))
+;;;;;;  "decorate/mode.el" (21232 45306 315692 0))
 ;;; Generated autoloads from decorate/mode.el
 
 (defvar global-semantic-decoration-mode nil "\
@@ -995,7 +995,7 @@ Convert the output tags into Semantic tags.
 ;;;***
 
 ;;;### (autoloads (cedet-ectag-version-check) "semantic/ectags/util"
-;;;;;;  "ectags/util.el" (21082 24880 905122 0))
+;;;;;;  "ectags/util.el" (21232 45306 315692 0))
 ;;; Generated autoloads from ectags/util.el
 
 (autoload 'cedet-ectag-version-check "semantic/ectags/util" "\
@@ -1137,7 +1137,7 @@ TABLE is a tag table.  See `semantic-something-to-tag-table'.
 
 ;;;### (autoloads (semantic-format-tag-concise-prototype semantic-format-tag-prototype
 ;;;;;;  semantic-format-tag-summarize semantic-format-tag-name) "semantic/format"
-;;;;;;  "format.el" (21082 24880 905122 0))
+;;;;;;  "format.el" (21232 45306 315692 0))
 ;;; Generated autoloads from format.el
 
 (autoload 'semantic-format-tag-name "semantic/format" "\
@@ -1188,8 +1188,8 @@ Set up a buffer for parsing of HTML files.
 ;;;### (autoloads (semantic-ia-describe-class semantic-ia-show-doc
 ;;;;;;  semantic-ia-fast-mouse-jump semantic-ia-fast-jump semantic-ia-show-variants
 ;;;;;;  semantic-ia-show-summary semantic-ia-complete-tip semantic-ia-complete-symbol-menu
-;;;;;;  semantic-ia-complete-symbol) "semantic/ia" "ia.el" (21082
-;;;;;;  24880 905122 0))
+;;;;;;  semantic-ia-complete-symbol) "semantic/ia" "ia.el" (21232
+;;;;;;  45306 315692 0))
 ;;; Generated autoloads from ia.el
 
 (autoload 'semantic-ia-complete-symbol "semantic/ia" "\
@@ -1357,7 +1357,7 @@ scanning, use `narrow-to-region'.
 ;;;***
 
 ;;;### (autoloads (semantic-lex-spp-table-write-slot-value) "semantic/lex-spp"
-;;;;;;  "lex-spp.el" (21082 24880 905122 0))
+;;;;;;  "lex-spp.el" (21232 45306 315692 0))
 ;;; Generated autoloads from lex-spp.el
 
 (autoload 'semantic-lex-spp-table-write-slot-value "semantic/lex-spp" "\
@@ -1417,7 +1417,7 @@ If ARG is positive or nil, enable, if it is negative, disable.
 ;;;***
 
 ;;;### (autoloads (semantic-calculate-scope) "semantic/scope" "scope.el"
-;;;;;;  (21082 24880 905122 0))
+;;;;;;  (21232 45306 315692 0))
 ;;; Generated autoloads from scope.el
 
 (autoload 'semantic-calculate-scope "semantic/scope" "\
@@ -1618,7 +1618,7 @@ include the default behavior, and merely extend your own.
 ;;;### (autoloads (semantic-symref-find-text semantic-symref-find-file-references-by-name
 ;;;;;;  semantic-symref-find-tags-by-completion semantic-symref-find-tags-by-regexp
 ;;;;;;  semantic-symref-find-tags-by-name semantic-symref-find-references-by-name)
-;;;;;;  "semantic/symref" "symref.el" (21082 24880 905122 0))
+;;;;;;  "semantic/symref" "symref.el" (21232 45306 315692 0))
 ;;; Generated autoloads from symref.el
 
 (autoload 'semantic-symref-find-references-by-name "semantic/symref" "\
@@ -2094,14 +2094,17 @@ Setup buffer for parse.
 ;;;***
 
 ;;;### (autoloads nil nil ("analyze/debug.el" "analyze/fcn.el" "ast.el"
-;;;;;;  "bovine/debug.el" "bovine/erlang.el" "bovine/grammar-macros.el"
-;;;;;;  "canned-configs.el" "chart.el" "db-debug.el" "db-ebrowse.el"
-;;;;;;  "db-el.el" "db-javascript.el" "db-mk.el" "db-ref.el" "decorate.el"
-;;;;;;  "ede-grammar.el" "fw.el" "gram-wy-fallback.el" "grammar.el"
-;;;;;;  "java.el" "sb.el" "symref/filter.el" "util.el" "wisent.el"
+;;;;;;  "bovine/c-by.el" "bovine/debug.el" "bovine/erlang-by.el"
+;;;;;;  "bovine/erlang.el" "bovine/f90-by.el" "bovine/grammar-macros.el"
+;;;;;;  "bovine/make-by.el" "bovine/scm-by.el" "canned-configs.el"
+;;;;;;  "chart.el" "db-debug.el" "db-ebrowse.el" "db-el.el" "db-javascript.el"
+;;;;;;  "db-mk.el" "db-ref.el" "decorate.el" "ede-grammar.el" "fw.el"
+;;;;;;  "gram-wy-fallback.el" "grammar-wy.el" "grammar.el" "java.el"
+;;;;;;  "sb.el" "symref/filter.el" "util.el" "wisent.el" "wisent/calc-wy.el"
 ;;;;;;  "wisent/comp.el" "wisent/expr.el" "wisent/grammar-macros.el"
-;;;;;;  "wisent/java.el" "wisent/wisent.el") (21082 25524 537057
-;;;;;;  443000))
+;;;;;;  "wisent/java-tags-wy.el" "wisent/java-wy.el" "wisent/java.el"
+;;;;;;  "wisent/javascript-wy.el" "wisent/python-wy.el" "wisent/wisent.el")
+;;;;;;  (21233 16880 890240 41000))
 
 ;;;***
 

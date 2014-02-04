@@ -3,9 +3,9 @@ lang-support-guide.texi.
 
 This manual documents Application Development with Semantic.
 
-Copyright (C) 1999, 2000, 2001, 2002, 2003, 2004, 2005, 2007, 2008, 2012
-Eric M. Ludlam Copyright (C) 2001, 2002, 2003, 2004 David Ponce
-Copyright (C) 2002, 2003 Richard Y. Kim
+Copyright (C) 1999, 2000, 2001, 2002, 2003, 2004, 2005, 2007, 2008,
+2012, 2013 Eric M. Ludlam Copyright (C) 2001, 2002, 2003, 2004 David
+Ponce Copyright (C) 2002, 2003 Richard Y. Kim
 
      Permission is granted to copy, distribute and/or modify this
      document under the terms of the GNU Free Documentation License,
@@ -1157,8 +1157,8 @@ and you want to be sure that the correct information was captured.
  -- Command: bovinate &optional clear
      Bovinate the current buffer.  Show output in a temp buffer.
      Optional argument CLEAR will clear the cache before bovinating.  If
-     CLEAR is negative, it will do a full reparse, and also not display
-     the output buffer.
+     CLEAR is negative, it will do a full reparse, and also display the
+     output buffer.
 
 
 File: semantic-langdev.info,  Node: Bovine Parser Debugging,  Next: Wisent Parser Debugging,  Prev: Parser Output tools,  Up: Debugging
@@ -1848,54 +1848,54 @@ Index
 
 
 Tag Table:
-Node: Top1144
-Node: Tag Structure2351
-Node: Language Support Overview4317
-Node: Semantic Overload Mechanism5586
-Node: Semantic Parser Structure11461
-Node: Application API Structure11765
-Node: Semantic Analyzer Support13302
-Node: Writing Lexers13464
-Ref: semantic-lex14299
-Node: Lexer Overview15511
-Node: Lexer Output16746
-Node: Lexer Construction20603
-Ref: define-lex21008
-Node: Lexer Built In Analyzers21858
-Node: Lexer Analyzer Construction25355
-Node: Keywords29531
-Node: Keyword Properties31106
-Node: Writing Parsers31983
-Node: External Parsers33467
-Node: Grammar Programming Environment34078
-Node: Parser Backend Support34671
-Node: Parsing a language file35421
-Ref: semantic-fetch-tags35795
-Ref: semantic-fetch-available-tags36565
-Ref: semantic-clear-toplevel-cache37015
-Node: Example Backend File37226
-Node: Tag Expansion39503
-Ref: semantic-tag-expand-function39829
-Node: Debugging41480
-Node: Lexical Debugging42039
-Ref: semantic-lex-debug42455
-Node: Parser Output tools42928
-Ref: semantic-show-unmatched-syntax-mode43427
-Ref: semantic-show-tag-boundaries-mode44363
-Ref: semantic-highlight-by-attribute-mode44996
-Ref: bovinate45706
-Node: Bovine Parser Debugging45941
-Ref: semantic-debug46415
-Node: Wisent Parser Debugging47915
-Node: Overlay Debugging48305
-Ref: semantic-tag-components-with-overlays49026
-Node: Incremental Parser Debugging49769
-Ref: semantic-highlight-edits-mode50538
-Ref: semantic-show-parser-state-mode51273
-Ref: semantic-edits-verbose-flag52291
-Node: Semantic 1.4 Doc52426
-Node: Parser Error Handling54197
-Node: GNU Free Documentation License54390
-Node: Index74047
+Node: Top1150
+Node: Tag Structure2357
+Node: Language Support Overview4323
+Node: Semantic Overload Mechanism5592
+Node: Semantic Parser Structure11467
+Node: Application API Structure11771
+Node: Semantic Analyzer Support13308
+Node: Writing Lexers13470
+Ref: semantic-lex14305
+Node: Lexer Overview15517
+Node: Lexer Output16752
+Node: Lexer Construction20609
+Ref: define-lex21014
+Node: Lexer Built In Analyzers21864
+Node: Lexer Analyzer Construction25361
+Node: Keywords29537
+Node: Keyword Properties31112
+Node: Writing Parsers31989
+Node: External Parsers33473
+Node: Grammar Programming Environment34084
+Node: Parser Backend Support34677
+Node: Parsing a language file35427
+Ref: semantic-fetch-tags35801
+Ref: semantic-fetch-available-tags36571
+Ref: semantic-clear-toplevel-cache37021
+Node: Example Backend File37232
+Node: Tag Expansion39509
+Ref: semantic-tag-expand-function39835
+Node: Debugging41486
+Node: Lexical Debugging42045
+Ref: semantic-lex-debug42461
+Node: Parser Output tools42934
+Ref: semantic-show-unmatched-syntax-mode43433
+Ref: semantic-show-tag-boundaries-mode44369
+Ref: semantic-highlight-by-attribute-mode45002
+Ref: bovinate45712
+Node: Bovine Parser Debugging45943
+Ref: semantic-debug46417
+Node: Wisent Parser Debugging47917
+Node: Overlay Debugging48307
+Ref: semantic-tag-components-with-overlays49028
+Node: Incremental Parser Debugging49771
+Ref: semantic-highlight-edits-mode50540
+Ref: semantic-show-parser-state-mode51275
+Ref: semantic-edits-verbose-flag52293
+Node: Semantic 1.4 Doc52428
+Node: Parser Error Handling54199
+Node: GNU Free Documentation License54392
+Node: Index74049
 
 End Tag Table

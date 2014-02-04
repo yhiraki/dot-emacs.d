@@ -7,9 +7,9 @@
 ;; Created: So Okt 13 22:47:58 2013 (+0200)
 ;; Version:
 ;; Package-Requires: ()
-;; Last-Updated: Di Jan 21 21:48:33 2014 (+0100)
+;; Last-Updated: Di Feb  4 13:37:08 2014 (+0100)
 ;;           By: Manuel Schneckenreither
-;;     Update #: 59
+;;     Update #: 89
 ;; URL:
 ;; Doc URL:
 ;; Keywords:
@@ -39,13 +39,16 @@
   "This function reloads the tags by using the command 'make tags'."
   (interactive)
 
-  (let ((dir (nth 0 (split-string default-directory load-emacsversion))))
-    (setq esdir (replace-regexp-in-string " " "\\\\ " dir))
-    (shell-command
-     (concat "cd " esdir
-             " && find . -name '*.el' -print | etags - 1>/dev/null 2>/dev/null") nil)
-    (visit-tags-table (concat dir "TAGS")))
-  )
+  ;; only create tags if we are not in the home folder
+  (if (> 1 (length (split-string default-directory home-folder)))
+
+      (let ((dir (nth 0 (split-string default-directory load-emacsversion))))
+        (setq esdir (replace-regexp-in-string " " "\\\\ " dir))
+        (shell-command
+         (concat "cd " esdir
+                 " && find . -name '*.el' -print | etags - 1>/dev/null 2>/dev/null") nil)
+        (visit-tags-table (concat dir "TAGS")))
+    ))
 
 
 ;; MINOR MODE HOOK

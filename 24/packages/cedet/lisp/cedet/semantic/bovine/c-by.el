@@ -3,7 +3,7 @@
 ;; Copyright (C) 1999-2012 Free Software Foundation, Inc.
 
 ;; Author: Schnecki <schnecki@schnecki.laptop>
-;; Created: 2013-10-13 11:12:06+0200
+;; Created: 2014-02-04 19:30:06+0100
 ;; Keywords: syntax
 ;; X-RCS: $Id$
 
@@ -1499,6 +1499,19 @@
       ,(semantic-lambda
 	(nth 0 vals))
       )
+     (semantic-list
+      arg-list
+      ,(semantic-lambda
+	(list
+	 (car
+	  (semantic-bovinate-from-nonterminal
+	   (car
+	    (nth 0 vals))
+	   (cdr
+	    (nth 0 vals))
+	   'function-pointer))
+	 (nth 1 vals)))
+      )
      (opt-stars
       ,(semantic-lambda
 	(list
@@ -2006,14 +2019,15 @@
       "("
       punctuation
       "\\`[*]\\'"
-      symbol
+      opt-symbol
       close-paren
       ")"
       ,(semantic-lambda
 	(list
 	 (concat
 	  "*"
-	  (nth 2 vals))))
+	  (car
+	   (nth 2 vals)))))
       )
      (open-paren
       "("
@@ -2100,6 +2114,12 @@
       close-paren)
      ) ;; end type-cast-list
 
+    (opt-brackets-after-symbol
+     (brackets-after-symbol)
+     ( ;;EMPTY
+      )
+     ) ;; end opt-brackets-after-symbol
+
     (brackets-after-symbol
      (semantic-list
       "^(")
@@ -2109,17 +2129,31 @@
 
     (multi-stage-dereference
      (namespace-symbol
-      brackets-after-symbol
+      opt-brackets-after-symbol
       punctuation
       "\\`[.]\\'"
       multi-stage-dereference)
      (namespace-symbol
-      brackets-after-symbol
+      opt-brackets-after-symbol
       punctuation
       "\\`[-]\\'"
       punctuation
       "\\`[>]\\'"
       multi-stage-dereference)
+     (namespace-symbol
+      opt-brackets-after-symbol
+      punctuation
+      "\\`[.]\\'"
+      namespace-symbol
+      opt-brackets-after-symbol)
+     (namespace-symbol
+      opt-brackets-after-symbol
+      punctuation
+      "\\`[-]\\'"
+      punctuation
+      "\\`[>]\\'"
+      namespace-symbol
+      opt-brackets-after-symbol)
      (namespace-symbol
       brackets-after-symbol)
      ) ;; end multi-stage-dereference

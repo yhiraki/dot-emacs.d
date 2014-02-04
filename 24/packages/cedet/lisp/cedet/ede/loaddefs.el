@@ -48,7 +48,7 @@ ROOTPROJ is nil, since there is only one project.
 ;;;***
 
 ;;;### (autoloads (ede-arduino-load ede-arduino-file ede-arduino-root)
-;;;;;;  "ede/arduino" "arduino.el" (21082 24880 905122 0))
+;;;;;;  "ede/arduino" "arduino.el" (21232 45306 315692 0))
 ;;; Generated autoloads from arduino.el
 
 (autoload 'ede-arduino-root "ede/arduino" "\
@@ -150,7 +150,7 @@ the current EDE project.
 ;;;***
 
 ;;;### (autoloads (ede-enable-generic-projects) "ede/generic" "generic.el"
-;;;;;;  (21082 24880 905122 0))
+;;;;;;  (21232 45306 315692 0))
 ;;; Generated autoloads from generic.el
 
 (autoload 'ede-enable-generic-projects "ede/generic" "\
@@ -210,7 +210,7 @@ ROOTPROJ is nil, since there is only one project.
 ;;;***
 
 ;;;### (autoloads (ede-linux-load ede-linux-project-root) "ede/linux"
-;;;;;;  "linux.el" (21082 24880 905122 0))
+;;;;;;  "linux.el" (21232 45306 315692 0))
 ;;; Generated autoloads from linux.el
 
 (autoload 'ede-linux-project-root "ede/linux" "\
@@ -356,7 +356,7 @@ Argument NEWVERSION is the version number to use in the current project.
 ;;;;;;  "proj-aux.el" "proj-comp.el" "proj-elisp.el" "proj-info.el"
 ;;;;;;  "proj-misc.el" "proj-obj.el" "proj-prog.el" "proj-scheme.el"
 ;;;;;;  "proj-shared.el" "proj.el" "project-am.el" "shell.el" "source.el"
-;;;;;;  "srecode.el") (21082 25525 99700 106000))
+;;;;;;  "srecode.el") (21233 16881 359929 52000))
 
 ;;;***
 

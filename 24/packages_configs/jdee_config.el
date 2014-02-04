@@ -7,9 +7,9 @@
 ;; Created: So Okt 13 13:22:28 2013 (+0200)
 ;; Version:
 ;; Package-Requires: ()
-;; Last-Updated: Di Jan 21 20:55:59 2014 (+0100)
+;; Last-Updated: Di Feb  4 11:27:58 2014 (+0100)
 ;;           By: Manuel Schneckenreither
-;;     Update #: 358
+;;     Update #: 362
 ;; URL:
 ;; Doc URL:
 ;; Keywords:
@@ -74,6 +74,7 @@
     ;; (gtags-mode t)
     ;; (auto-complete-mode t)
     ;; (add-to-list 'ac-sources ac-source-gtags)
+    (local-set-key [f1] 'jde-help-symbol)
     (local-set-key [f8] 'gud-next)
     (local-set-key [f9] 'gud-cont)
     ;; (local-set-key (kbd "M-/") 'hippie-expand)
@@ -117,7 +118,7 @@
 (jde-set-variables
 '(jde-compile-option-directory \\\"./classes\\\")
 '(jde-sourcepath (quote (\\\"./src/main\\\" \\\"./src/test\\\" \\\"./src\\\")))
-'(jde-global-classpath (quote (\\\"./classes\\\" \\\"./lib\\\"))))")
+'(jde-global-classpath (quote (\\\"./classes\\\" \\\"./lib\\\" \\\"~/Programmierung/Java/JUnit/*\\\"))))")
 
 
 (defun jde-save-project ()

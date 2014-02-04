@@ -1,33 +1,33 @@
-;;; ido_config.el --- 
-;; 
+;;; ido_config.el ---
+;;
 ;; Filename: ido_config.el
-;; Description: 
+;; Description:
 ;; Author: Manuel Schneckenreither
-;; Maintainer: 
+;; Maintainer:
 ;; Created: So Okt 13 23:25:02 2013 (+0200)
-;; Version: 
+;; Version:
 ;; Package-Requires: ()
-;; Last-Updated: Mo Okt 14 12:40:16 2013 (+0200)
+;; Last-Updated: Mo Feb  3 19:54:01 2014 (+0100)
 ;;           By: Manuel Schneckenreither
-;;     Update #: 13
-;; URL: 
-;; Doc URL: 
-;; Keywords: 
-;; Compatibility: 
-;; 
+;;     Update #: 16
+;; URL:
+;; Doc URL:
+;; Keywords:
+;; Compatibility:
+;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; 
-;;; Commentary: 
-;; 
-;; 
-;; 
+;;
+;;; Commentary:
+;;
+;;
+;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; 
+;;
 ;;; Change Log:
-;; 
-;; 
+;;
+;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; 
+;;
 ;;; Code:
 
 
@@ -49,24 +49,21 @@
   (define-key ido-completion-map (kbd "C-p") 'ido-prev-match))
 
 
-
 (add-hook 'ido-setup-hook 'ido-define-keys)
-
-
 
 
 ;; LET IDO MODE COMPLETE ALMOST EVERYTHING
 (defvar ido-enable-replace-completing-read t
       "If t, use ido-completing-read instead of completing-read if possible.
-    
+
     Set it to nil using let in around-advice for functions where the
     original completing-read is required.  For example, if a function
     foo absolutely must use the original completing-read, define some
     advice like this:
-    
+
     (defadvice foo (around original-completing-read-only activate)
       (let (ido-enable-replace-completing-read) ad-do-it))")
-    
+
     ;; Replace completing-read wherever possible, unless directed otherwise
     (defadvice completing-read
       (around use-ido-when-possible activate)
@@ -90,13 +87,12 @@
 			 (set (make-local-variable 'ido-enable-replace-completing-read) nil)))
 
 
-
 ;; SORT IDO FILELIST BY MTIME INSTEAD OF ALPHABETICALLY
 (add-hook 'ido-make-file-list-hook 'ido-sort-mtime)
 (add-hook 'ido-make-dir-list-hook 'ido-sort-mtime)
 (defun ido-sort-mtime ()
   (setq ido-temp-list
-		(sort ido-temp-list 
+		(sort ido-temp-list
 			  (lambda (a b)
 				(time-less-p
 				 (sixth (file-attributes (concat ido-current-directory b)))
@@ -105,7 +101,6 @@
    (delq nil (mapcar
 			  (lambda (x) (and (char-equal (string-to-char x) ?.) x))
 			  ido-temp-list))))
-
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;

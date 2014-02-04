@@ -5,9 +5,9 @@
 ;; Author: Manuel Schneckenreither
 ;; Created: Mon Dec 10 22:51:09 2012 (+0100)
 ;; Version:
-;; Last-Updated: Di Jan 21 20:57:01 2014 (+0100)
+;; Last-Updated: Di Feb  4 18:10:00 2014 (+0100)
 ;;           By: Manuel Schneckenreither
-;;     Update #: 556
+;;     Update #: 581
 ;; URL:
 ;; Description:
 ;;    Basic configuration for emacs. In here are all configs of
@@ -25,12 +25,6 @@
 ;; DESKTOP - Save and restore open buffers, point, mark, histories, other variables
 (desktop-save-mode 1)
 
-(defun my-desktop-save ()
-  (interactive)
-  ;; Don't call desktop-save-in-desktop-dir, as it prints a message.
-  (if (eq (desktop-owner) (emacs-pid))
-      (desktop-save desktop-dirname)))
-
 ;; ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 ;; ++++++++++++++++++++++++++++ COMPILATION +++++++++++++++++++++++++++++
 ;; ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -46,14 +40,15 @@
         (revert-buffer t t))
     (call-interactively 'compile)))
 
-;; CLOSE THE COMPILATION WINDOW IF THERE WAS NO ERROR AT ALL.
+;; CLOSE/BURY THE COMPILATION WINDOW IF THERE WAS NO ERROR AT ALL.
 (defun compilation-exit-autoclose (status code msg)
   ;; If M-x compile exists with a 0
   (when (and (eq status 'exit) (zerop code))
     ;; then bury the *compilation* buffer, so that C-x b doesn't go there
     (bury-buffer)
-    ;; and delete the *compilation* window
+    ;; and delete/burry the *compilation* window
     (replace-buffer-in-windows "*compilation*")
+    ;; (bury-buffer "*compilation*")
     (other-window 1)
     (eshell)
     (return)) ;; open compilation window
@@ -64,11 +59,11 @@
 (setq compilation-exit-message-function 'compilation-exit-autoclose)
 
 
-;; get the makefile above
-(defun get-above-makefile ()
-  (loop as d = default-directory then (expand-file-name
-                                       ".." d) if (file-exists-p (expand-file-name "Makefile" d)) return
-                                       d))
+;; get the closest makefile
+;; (defun get-above-makefile ()
+;;   (loop as d = default-directory then (expand-file-name
+;;                                        ".." d) if (file-exists-p (expand-file-name "Makefile" d)) return
+;;                                        d))
 
 
 ;; COMPILE CLOSES MAKEFILE
@@ -96,7 +91,7 @@
 
 (require 'linum)
 (global-linum-mode) ;; Turn on line numbers
-(setq linum-format "%3d|")
+(setq linum-format "%3d")
 
 ;; ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 ;; ++++++++++++++++++++++++++ HIGHLIGHT MODE +++++++++++++++++++++++++++=
@@ -113,12 +108,16 @@
 ;; (setq highlight-changes-remove-highlight t)
 ;; (add-hook 'after-save-hook 'highlight-changes-remove-after-save)
 
+;; HIGHLIGH CURRENT LINE
+;; (highlight-current-line-minor-mode)
+
+
 ;; ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 ;; ++++++++++++++++++++++++++ TAB SETTINGS ++++++++++++++++++++++++++++++
 ;; ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 ;; TAB WIDTH
-(setq-default tab-width 4) ; or any other preferred value
+(setq-default tab-width 4)
 (setq cua-auto-tabify-rectangles nil)
 
 ;; SMART TABS
@@ -166,7 +165,7 @@
 ;; +++++++++++++++++++++++++++ INDENT BUFFER ++++++++++++++++++++++++++++
 ;; ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
-;; format whole buffer
+;; format whole buffer - not bound to any key sequence
 (defun iwb ()
   "indent whole buffer"
   (interactive)
@@ -187,66 +186,27 @@
     )
   (forward-char))
 
+
+;; not bound to any key sequence
 (defun insert-apostrophes (posBegin posEnd)
   "Insert apostrophes at beginning and end of region."
   (interactive "r")
-  (region-insert-char posBegin posEnd "\"" "\"")
+  (region-insert-char posBegin posEnd "'" "'")
   )
 
-(defun insert-parenthesis (posBegin posEnd)
-  "Insert parenthesis at beginning and end of region."
-  (interactive "r")
-  (region-insert-char posBegin posEnd "(" ")")
-  )
-
-(defun insert-brackets (posBegin posEnd)
-  "Insert brackets at beginning and end of region."
-  (interactive "r")
-  (region-insert-char posBegin posEnd "[" "]")
-  )
 
 ;; ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 ;; ++++++++++++++++++++++++ TAGS INFORMATION ++++++++++++++++++++++++++++
 ;; ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
-;; ;;; View tags other window
-;; (defun view-tag-other-window (tagname &optional next-p regexp-p)
-;;   "Same as `find-tag-other-window' but doesn't move the point"
-;;   (interactive (find-tag-interactive "View tag other window: "))
-;;   (let ((window (get-buffer-window)))
-;;     (find-tag-other-window tagname next-p regexp-p)
-;;     (recenter 10)
-;;     (select-window window)))
-
-
-;; ;; RECREATE TAGS
-;; (defun recreate-tags ()
-;;   "This function reloads the tags by using the command 'make tags'"
-;;   (interactive)
-;;   (with-temp-buffer
-;;     (async-shell-command "make tags 1>/dev/null 2>/dev/null" t)
-;;     ))
-
-;; FIND CLOSEST TAGS FILE
-;; (defun* get-closest-pathname (&optional (file "TAGS"))
-;;   "Determine the pathname of the first instance of FILE starting from the current directory towards root.
-;; This may not do the correct thing in presence of links. If it does not find FILE, then it shall return the name
-;; of FILE in the current directory, suitable for creation"
-;;   (let ((root (expand-file-name "/"))) the win32 builds should translate this correctly
-;;     (expand-file-name file
-;;                       (loop
-;;                        for d = default-directory then (expand-file-name ".." d)
-;;                        if (file-exists-p (expand-file-name file d))
-;;                        return d
-;;                        if (equal d root)
-;;                        return nil))))
-
-;; (defun set-visit-tags-table ()
-;;   (interactive)
-;;   (if (not (equal tags-file-name nil))
-;;       (if (not (equal nil (get-closest-pathname "TAGS")))
-;;           (setq tags-file-name (get-closest-pathname "TAGS")))))
-
+;; View tags other window - Bound to C-. in basic_keys.el
+(defun view-tag-other-window (tagname &optional next-p regexp-p)
+  "Same as `find-tag-other-window' but doesn't move the point"
+  (interactive (find-tag-interactive "View tag other window: "))
+  (let ((window (get-buffer-window)))
+    (find-tag-other-window tagname next-p regexp-p)
+    (recenter 10)
+    (select-window window)))
 
 ;; ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 ;; ++++++++++++++++++ CONFIGURE IN MINIBUFFER INFO ++++++++++++++++++++++
@@ -330,6 +290,24 @@
   "Prevent annoying \"Active processes exist\" query when you quit Emacs."
   (flet ((process-list ())) ad-do-it))
 
+
+;; ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+;; +++++++++++++++++++ SHOW KILL RING WHEN YANKING ++++++++++++++++++++++
+;; ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+ (defun kill-ring-insert ()
+   (interactive)
+   (let (
+        (to_insert (completing-read "Yank : "
+                                    (delete-duplicates kill-ring :test #'equal)
+                                    )))
+     (when (and to_insert
+               (region-active-p))
+      ;; the currently highlighted section is to be replaced by the yank
+      (delete-region (region-beginning) (region-end)))
+     (insert to_insert))
+   )
+
 ;; ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 ;; ++++++++++++++++++ AUTOMATICALLY WRAP LONG LINES +++++++++++++++++++++
 ;; ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -338,7 +316,7 @@
 (setq fill-column 80)
 
 ;; ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-;; ++++++++++++++++ JUMP TO BEGGINING AFTER SEARCHING +++++++++++++++++++
+;; +++++++++++ JUMP TO BEGINNING AFTER MATCH IN SEARCHING +++++++++++++++
 ;; ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 (defun my-goto-match-beginning ()
@@ -361,6 +339,9 @@
 (menu-bar-mode 1) ;; MENUBAR
 (tool-bar-mode -1) ;; REMOVE TOOLBAR
 (scroll-bar-mode -1) ;; REMOVE SCROLLBARS
+
+;; DISABLE GUI DIALOG BOXES
+(setq use-dialog-box nil)
 
 ;; AUTOMATICALLY RELOAD ALL TAGS WITHOUT ASKING IN A GUI
 (setq tags-revert-without-query 1)
@@ -386,8 +367,6 @@
 ;; ELECTRIC PARENTHESIS PAIRS
 (electric-pair-mode 1)
 
-;; HIGHLIGH CURRENT LINE
-;; (highlight-current-line-minor-mode)
 
 ;; VISUAL LINE MODE - WRAP LONG LINES
 (global-visual-line-mode)
@@ -408,27 +387,6 @@
 
 (add-hook 'before-save-hook 'collapse-blank-lines)
 
-;; SAVE WINDOWS OF THE FRAME
-;; (defvar pre-ediff-window-configuration nil
-;;   "window configuration to use")
-;; (defvar new-ediff-frame-to-use nil
-;;   "new frame for ediff to use")
-;; (defun save-my-window-configuration ()
-;;   (interactive)
-;;   (setq pre-ediff-window-configuration (current-window-configuration))
-;;   (select-frame-set-input-focus (setq new-ediff-frame-to-use (new-frame))))
-;; (add-hook 'ediff-before-setup-hook 'save-my-window-configuration)
-;; (defun restore-my-window-configuration ()
-;;   (interactive)
-;;   (when (framep new-ediff-frame-to-use)
-;;      (delete-frame new-ediff-frame-to-use)
-;;      (setq new-ediff-frame-to-use nil))
-;;   (when (window-configuration-p pre-ediff-window-configuration
-;;                                  (set-window-configuration pre-ediff-window-configuration)))
-;;   (add-hook 'ediff-after-quit-hook-internal 'restore-my-window-configuration))
-
-;; (restore-my-window-configuration)
-;; (add-hook 'kill-emacs-hook 'save-my-window-configuration)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; basics.el ends here

@@ -1,6 +1,6 @@
 ;;; cedet-integ-test.el --- CEDET full integration tests.
 
-;; Copyright (C) 2008, 2009, 2010, 2011, 2012, 2013 Eric M. Ludlam
+;; Copyright (C) 2008, 2009, 2010, 2011, 2012, 2013, 2014 Eric M. Ludlam
 
 ;; Author: Eric M. Ludlam <eric@siege-engine.com>
 
@@ -93,13 +93,9 @@
 (require 'cogre)
 (require 'srecode/find)
 
-(eval-and-compile
-  (defvar cedet-integ-base
-    (if (eq system-type 'windows-nt)
-	(expand-file-name "CEDET_INTEG" temporary-file-directory)
-      "/tmp/CEDET_INTEG")
-    "Root of multiple project integration tests.")
-  )
+(defvar cedet-integ-base
+  (expand-file-name (make-temp-name "CEDET_INTEG-") temporary-file-directory)
+  "Root of multiple project integration tests.")
 
 (require 'cit-cpp)
 (require 'cit-symref)
@@ -113,6 +109,7 @@
 (require 'cit-arduino)
 (require 'cit-cpproot)
 (require 'cit-javaroot)
+(require 'cit-globalref)
 (require 'cit-dist)
 
 (defvar cedet-integ-target (expand-file-name "edeproj" cedet-integ-base)
@@ -183,6 +180,9 @@ Optional argument MAKE-TYPE is the style of EDE project to test."
     ;; Do some texinfo documentation.
     (cit-srecode-fill-texi)
 
+    ;; Make sure this test has ended
+    (sleep-for 2)
+
     ;; Test out EDE project local variables
     (cit-proj-variables)
 
@@ -190,6 +190,8 @@ Optional argument MAKE-TYPE is the style of EDE project to test."
     (find-file (expand-file-name "README" cedet-integ-target))
     (cit-make-dist)
 
+    ;; Delete the temporary directory
+    (delete-directory cedet-integ-base t)
     (cit-finish-message "PASSED" make-type)
     ))
 
@@ -245,6 +247,19 @@ Optional argument MAKE-TYPE is the style of EDE project to test."
     (cit-ede-javaroot-test)
 
     (cit-finish-message "PASSED" "javaroot")
+    ))
+
+(defun cedet-integ-test-globalref ()
+  "Run the tests using Global to find symbols.
+This test is about optimizing for minimal file loads."
+  (interactive)
+
+  (let ((ede-auto-add-method 'never))
+    (global-ede-mode 1)
+    ;; Do an EDE cpproot project. 
+    (cit-globalref-test)
+
+    (cit-finish-message "PASSED" "globalrefs")
     ))
 
 (defun cit-finish-message (message style)
@@ -447,7 +462,7 @@ Optional arguments can't be used."
 (defun cit-wait-for-compilation ()
   "Wait for a compilation to finish."
   (while compilation-in-progress
-    (accept-process-output)
+    (accept-process-output nil 1)
     ;; If sit for indicates that input is waiting, then
     ;; read and discard whatever it is that is going on.
     (when (not (sit-for 1))
@@ -461,6 +476,8 @@ If optional INVERSE is non-nil, then throw an error if the
 compilation succeeded."
   (save-excursion
     (set-buffer "*compilation*")
+    (when noninteractive
+      (message "%s" (buffer-string)))
     (goto-char (point-max))
 
     (if (re-search-backward "Compilation exited abnormally " nil t)

@@ -7,7 +7,7 @@
 ;; Version:
 ;; Last-Updated:
 ;;           By:
-;;     Update #: 76
+;;     Update #: 92
 ;; URL:
 ;; Description:
 ;;
@@ -40,6 +40,16 @@
 (global-set-key (kbd "S-C-<right>") 'enlarge-window-horizontally)
 (global-set-key (kbd "S-C-<down>") 'shrink-window)
 (global-set-key (kbd "S-C-<up>") 'enlarge-window)
+
+;; M-x withouth using the ALT key
+(global-set-key "\C-x\C-m" 'execute-extended-command)
+;; (global-set-key "\C-c\C-m" 'execute-extended-command)
+
+;; Kill words with C-w: the standard unix way
+(global-set-key "\C-w" 'backward-kill-word)
+(global-set-key "\C-x\C-k" 'kill-region)
+;; (global-set-key "\C-c\C-k" 'kill-region)
+
 ;; ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 ;; ++++++++++++++++++++++++++++ BASICS KEYS +++++++++++++++++++++++++++++
 ;; ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -66,6 +76,8 @@
 ;; AUTO FILL COLUMN
 (global-set-key (kbd (concat prefix-command-key " a"))  'auto-fill-mode)
 
+;; browse kill ring
+(global-set-key (kbd "C-c y") 'kill-ring-insert)
 
 ;; TAGS
 (global-set-key (kbd "C-.") 'view-tag-other-window)
@@ -83,10 +95,21 @@
 (global-set-key [M-up] 'windmove-up)              ; move to upper window
 (global-set-key [M-down] 'windmove-down)          ; move to downer window
 
-;; don't kill emacs that easily
+;; don't kill Emacs that easily
 (defun dont-kill-emacs ()
   (interactive)
   (error (substitute-command-keys "To exit emacs: \\[save-buffers-kill-emacs]")))
+
+
+;; quit gnus properly instead of leaving auto-save files around
+(defadvice save-buffers-kill-emacs (before quit-gnus (&rest args) activate)
+  (let (buf)
+    (when (and (fboundp 'gnus-alive-p)
+               (gnus-alive-p)
+               (bufferp (setq buf (get-buffer "*Group*"))))
+      (with-current-buffer buf
+        (gnus-group-exit)))))
+
 
 (global-set-key "\C-x\C-c" 'dont-kill-emacs)
 (global-set-key (kbd (concat prefix-command-key " C-q")) 'save-buffers-kill-emacs)

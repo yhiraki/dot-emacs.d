@@ -1,6 +1,6 @@
 ;;; ede/arduino.el --- EDE support for arduino projects / sketches
 ;;
-;; Copyright (C) 2012 Eric M. Ludlam
+;; Copyright (C) 2012, 2013 Eric M. Ludlam
 ;;
 ;; Author: Eric M. Ludlam <eric@siege-engine.com>
 ;;
@@ -100,27 +100,28 @@ in their sketch directory.
 If BASEFILE is non-nil, then convert root to the project basename also.
 
 Consider expanding this at some later date."
-  (let* ((prefs (ede-arduino-sync))
-	 (sketchroot (and prefs (oref prefs sketchbook)))
-	 )
-    (when (and
-	   sketchroot
-	   (< (length sketchroot) (length dir))
-	   (string= sketchroot (substring dir 0 (length sketchroot))))
-      ;; The subdir in DIR just below sketchroot is always the root of this
-      ;; project.
-      (let* ((dirtail (substring dir (length sketchroot)))
-	     (dirsplit (split-string dirtail "/" t))
-	     (root (expand-file-name (car dirsplit) sketchroot)))
-	(when (file-directory-p root)
-	  (if basefile
-	      (let ((tmp (expand-file-name (concat (car dirsplit) ".pde") root)))
-		;; Also check for the desired file in a buffer if the
-		;; user just made the file but not saved it yet.
-		(when (or (not (file-exists-p tmp)) (not (get-file-buffer tmp)))
-		  (setq tmp (expand-file-name (concat (car dirsplit) ".ino") root)))
-		tmp)
-	    root))))))
+  (when (ede-arduino-find-install) ;; Do nothing if tools aren't installed.
+    (let* ((prefs (ede-arduino-sync))
+	   (sketchroot (and prefs (oref prefs sketchbook)))
+	   )
+      (when (and
+	     sketchroot
+	     (< (length sketchroot) (length dir))
+	     (string= sketchroot (substring dir 0 (length sketchroot))))
+	;; The subdir in DIR just below sketchroot is always the root of this
+	;; project.
+	(let* ((dirtail (substring dir (length sketchroot)))
+	       (dirsplit (split-string dirtail "/" t))
+	       (root (expand-file-name (car dirsplit) sketchroot)))
+	  (when (file-directory-p root)
+	    (if basefile
+		(let ((tmp (expand-file-name (concat (car dirsplit) ".pde") root)))
+		  ;; Also check for the desired file in a buffer if the
+		  ;; user just made the file but not saved it yet.
+		  (when (or (not (file-exists-p tmp)) (not (get-file-buffer tmp)))
+		    (setq tmp (expand-file-name (concat (car dirsplit) ".ino") root)))
+		  tmp)
+	      root)))))))
 
 ;;;###autoload
 (defun ede-arduino-file (&optional dir)
@@ -478,27 +479,31 @@ This is also where Arduino.mk will be found."
 
     ;; Derive by looking up the arduino script.
     (let ((arduinofile ede-arduino-arduino-command))
-      (when (not (file-exists-p arduinofile))
+      (when (and arduinofile
+		 (not (file-exists-p arduinofile)))
 	;; Look up where it might be...
 	(setq arduinofile (locate-file arduinofile exec-path))
 
-	(when (not (file-exists-p arduinofile))
+	(when (and arduinofile
+		   (not (file-exists-p arduinofile)))
 	  (error "Cannot find arduino command location"))
 
-	(let ((buff (get-buffer-create "*arduino scratch*")))
-	  (with-current-buffer buff
-	    (erase-buffer)
-	    (insert-file-contents arduinofile)
+	(if (not arduinofile)
+	    nil
+	  (let ((buff (get-buffer-create "*arduino scratch*")))
+	    (with-current-buffer buff
+	      (erase-buffer)
+	      (insert-file-contents arduinofile)
+	      
+	      (goto-char (point-min))
 
-	    (goto-char (point-min))
+	      (when (not (re-search-forward "APPDIR=" nil t))
+		(error "Cannot find APPDIR from the arduino command"))
 
-	    (when (not (re-search-forward "APPDIR=" nil t))
-	      (error "Cannot find APPDIR from the arduino command"))
-
-	    (prog1
-		(setq ede-arduino-appdir
-		      (buffer-substring-no-properties (point) (point-at-eol)))
-	      (kill-buffer buff))))))))
+	      (prog1
+		  (setq ede-arduino-appdir
+			(buffer-substring-no-properties (point) (point-at-eol)))
+		(kill-buffer buff)))))))))
 
 (defun ede-arduino-Arduino.mk ()
   "Return the location of Arduino's makefile helper."
@@ -512,12 +517,17 @@ This is also where Arduino.mk will be found."
 	(erase-buffer)
 	(insert-file-contents vfile)
 	(goto-char (point-min))
-	(prog1 (buffer-substring-no-properties (point) (point-at-eol))
-	  (kill-buffer buff))))))
+	(prog1
+	    (if (looking-at "[0-1]+:\\([.0-9]+\\)\\+")
+		(match-string 1)
+	      (buffer-substring-no-properties (point) (point-at-eol)))
+	  (kill-buffer buff)
+	  )))))
 	  
 (defun ede-arduino-boards.txt ()
   "Return the location of Arduino's boards.txt file."
-  (expand-file-name "hardware/arduino/boards.txt" (ede-arduino-find-install)))
+  (file-expand-wildcards
+   (expand-file-name "hardware/*/boards.txt" (ede-arduino-find-install))))
 
 (defun ede-arduino-libdir (&optional library)
   "Return the full file location of LIBRARY.
@@ -572,11 +582,15 @@ Data returned is the intputs needed for the Makefile."
 	(size nil)
 	(mcu nil)
 	(f_cpu nil)
-	(core nil))
+	(core nil)
+	(boardfiles (ede-arduino-boards.txt))
+	)
 
     (with-current-buffer buff
       (erase-buffer)
-      (insert-file-contents (ede-arduino-boards.txt))
+      (while boardfiles
+	(insert-file-contents (car boardfiles))
+	(setq boardfiles (cdr boardfiles)))
 
       (goto-char (point-min))
       (when (not (re-search-forward (concat "^" boardname ".name=") nil t))

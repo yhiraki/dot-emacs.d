@@ -7,9 +7,9 @@
 ;; Created: Fr Okt  4 20:33:29 2013 (+0200)
 ;; Version:
 ;; Package-Requires: ()
-;; Last-Updated: Di Jan 21 23:43:33 2014 (+0100)
+;; Last-Updated: Di Feb  4 18:21:33 2014 (+0100)
 ;;           By: Manuel Schneckenreither
-;;     Update #: 315
+;;     Update #: 345
 ;; URL:
 ;; Doc URL:
 ;; Keywords:
@@ -55,7 +55,10 @@
 ;; Edit your settings in settings.el
 ;; (defvar load-directory_path (default-directory) "The directory to look for .emacs.d/ .")
 ;; (setq directory_path default-directory)
-(defvar load-emacsd (concat default-directory ".emacs.d/") "The .emacs.d folder path.")
+
+;; this is in the file being loaded
+(defvar home-folder (substitute-in-file-name "$HOME/"))
+(defvar load-emacsd (concat home-folder ".emacs.d/") "The .emacs.d folder path.")
 (setq user-emacs-directory load-emacsd)        ;; set the emacs directory
 
 (load-file (concat load-emacsd "settings.el"))
@@ -87,6 +90,7 @@
         auto-dictionary
         ;; backup-each-save ;;; solved differently, see backup_each_save_config.el
         backup-walker
+        bbdb
         color-theme
         ecb
         edbi
@@ -99,6 +103,7 @@
         gnuplot-mode
         haskell-mode
         header2
+        ido-gnus
         ido-hacks
         ido-ubiquitous
         javadoc-lookup
@@ -116,7 +121,9 @@
         rainbow-delimiters
         rainbow-mode
         thesaurus
+        tuareg
         undo-tree
+        w3m
         window-number
         yasnippet
         ))
@@ -210,6 +217,7 @@
  '(ecb-source-path (quote (("/" "/"))))
  '(ecb-type-tag-expansion (quote ((default) (c-mode "struct"))))
  '(ecb-use-speedbar-instead-native-tree-buffer nil)
+ '(ede-project-directories (quote ("/home/schnecki/Documents/UIBK/5.Semester/NP/PS/06/01-ThreadPoolExecutor/src" "/home/schnecki/Documents/UIBK/5.Semester/NP/PS/06/01-ThreadPoolExecutor" "/home/schnecki/Programmierung/Java/BetPredictionTest/src" "/home/schnecki/Programmierung/Java/BetPredictionTest" "/tmp/myproject/include" "/tmp/myproject/src" "/tmp/myproject")))
  '(flymake-compilation-prevents-syntax-check nil)
  '(flymake-gui-warnings-enabled nil)
  '(frame-background-mode (quote dark))
@@ -224,7 +232,10 @@
  '(jde-sourcepath (quote ("./src/main" "./src/test")))
  '(kept-new-versions 5000)
  '(org-agenda-files (quote ("~/Documents/Planning/planning_time.org" "~/Documents/Planning/university.org" "~/Documents/Planning/bachelorarbeit.org" "~/Documents/Planning/ProjectIdeas.org" "~/Documents/Planning/freetime.org" "~/Documents/Planning/lists.org" "~/Documents/Planning/anniverseries.org" "~/Documents/Planning/Emacs.org" "~/Programmierung/App/Documentation/app-brainstorming.txt")))
+ '(send-mail-function (quote smtpmail-send-it))
  '(size-indication-mode t)
+ '(smtpmail-smtp-server "smtp.uibk.ac.at")
+ '(smtpmail-smtp-service 587)
  '(tool-bar-mode nil)
  '(user-full-name your-full-name)
  '(user-mail-address your-mail-address)

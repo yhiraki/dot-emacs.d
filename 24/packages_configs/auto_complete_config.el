@@ -7,9 +7,9 @@
 ;; ;; Created: So Okt 13 19:43:26 2013 (+0200)
 ;; ;; Version:
 ;; ;; Package-Requires: ()
-;; ;; Last-Updated: So Dez  8 16:10:03 2013 (+0100)
+;; ;; Last-Updated: Di Jan 28 13:33:40 2014 (+0100)
 ;; ;;           By: Manuel Schneckenreither
-;; ;;     Update #: 88
+;; ;;     Update #: 90
 ;; ;; URL:
 ;; ;; Doc URL:
 ;; ;; Keywords:
@@ -92,7 +92,7 @@
 ;; (ac-config-default)
 ;; global sources
 (setq-default ac-sources
-   '(ac-source-abbrev
+   '(;; ac-source-abbrev          ;; edited
      ;; ac-source-css-property
      ac-source-dictionary
      ;; ac-source-eclim

@@ -7,9 +7,9 @@
 ;; Created: Mo Okt 14 18:17:43 2013 (+0200)
 ;; Version:
 ;; Package-Requires: ()
-;; Last-Updated: Di Jan 21 03:48:59 2014 (+0100)
+;; Last-Updated: Di Feb  4 01:09:03 2014 (+0100)
 ;;           By: Manuel Schneckenreither
-;;     Update #: 140
+;;     Update #: 146
 ;; URL:
 ;; Doc URL:
 ;; Keywords:
@@ -76,7 +76,10 @@
   (local-set-key (kbd "C-c ! e") 'flymake:display-err-popup-for-current-line)
 
   ;; (local-set-key (kbd (concat prefix-command-key " e")) 'flymake:display-err-minibuf-for-current-line)
-
+  (defvar-mode-local java-mode browse-url-browser-function #'w3m-browse-url)
+  (defvar-mode-local jde-mode browse-url-browser-function #'w3m-browse-url)
+  ;;
+  ;; (set-variable browse-url-browser-function #'w3m-browse-url)
 
   ;; CREATE AND SET TAGS FILE
   (add-hook 'after-save-hook 'make-java-tags nil t)
@@ -86,9 +89,24 @@
 (add-hook 'java-mode-hook 'my/java-minor-mode)
 (add-hook 'jde-mode-hook 'my/java-minor-mode)
 
-;; ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; ;; Java flymake
-;; ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; Java Compilation output - Make Emacs understand links
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+
+(require 'compile)
+(setq compilation-error-regexp-alist
+  (append (list
+     ;; works for jikes
+     '("^\\s-*\\[[^]]*\\]\\s-*\\(.+\\):\\([0-9]+\\):\\([0-9]+\\):[0-9]+:[0-9]+:" 1 2 3)
+     ;; works for javac
+     '("^\\s-*\\[[^]]*\\]\\s-*\\(.+\\):\\([0-9]+\\):" 1 2))
+  compilation-error-regexp-alist))
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; Java flymake
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 
 (when (require 'flymake)

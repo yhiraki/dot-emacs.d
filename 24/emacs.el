@@ -5,9 +5,9 @@
 ;; Author: Manuel Schneckenreither
 ;; Created: Tue Dec 11 00:43:14 2012 (+0100)
 ;; Version:
-;; Last-Updated: Di Jan 21 21:55:49 2014 (+0100)
+;; Last-Updated: Di Feb  4 20:33:40 2014 (+0100)
 ;;           By: Manuel Schneckenreither
-;;     Update #: 349
+;;     Update #: 353
 ;; URL:
 ;; Description:
 ;;
@@ -28,9 +28,7 @@
 ;; +++++++++++++++++++++++++ SPECIAL PACKAGES ++++++++++++++++++++++++++
 ;; ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
-;; GLOBAL - tags
-;; (load (concat package-conf-folder "global_config.el"))
-;; CEDET - semantic, EDE, etc. // TODO CEHCK COMPILATION
+;; CEDET - semantic, EDE, etc.
 ;; CEDET gets loaded in ~/.emacs
 (load (concat package-conf-folder "cedet_config.el"))
 ;; ECB - windows showing help
@@ -78,6 +76,10 @@
 (load (concat package-conf-folder "powerline_config.el"))
 ;; ANDROID MODE
 ;; (load (concat package-conf-folder "android_mode_config.el"))
+;; GNUS - Newsreader and Email Client
+(load (concat package-conf-folder "gnus_config.el"))
+;; BBDB - Address-Book Management
+(load (concat package-conf-folder "bbdb_config.el"))
 
 
 ;; ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
