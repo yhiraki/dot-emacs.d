@@ -1,5 +1,7 @@
-WARNING
-=======
+Emacs Configuration
+===================
+
+Warning:
 
 PATHS are given relative to ~/.emacs.d/!
 
