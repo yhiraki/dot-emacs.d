@@ -14,10 +14,13 @@ re)configure everything from here on.
 The concept of this configuration is:
    - Keep it simple and organized. And therefore,
    - Give a fuck about the starting time of Emacs (I got that 10
-     seconds). This is also why I don't compile my *.el-files to have
-     an increased start-up time.
-   - Make it easy to use Emacs.
-   - Make it easy to spread that Emacs configuration to several
+     seconds). This is also why I don't compile my *.el-files. That
+     might decrease the start up time, but might cause trouble when
+     changing the el files. an increased start-up time.
+   - Make it possible to dig into Emacs for beginners without starting
+     at zero. However, you will still need to understand the
+     configuration mechanism. At least when there are problems!
+   - Make it easy to spread this Emacs configuration to several
      machines.
 
 
@@ -175,8 +178,8 @@ configurations, the basic keys and finally the language configuration
 files.
 
 
-Where is the sense?
--------------------
+I got some Problems...
+======================
 
 Well, if you got a problem with one package. Then you go to
 24/emacs.el and disable the package before you try to find out what
