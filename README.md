@@ -73,6 +73,7 @@ If you can't wait/or just don't want to:
 
 Fedora:
 -------
+
 su -c "yum install ctags-etags gnuplot emacs graphviz \                # main tools
 w3m && \                                                               # browser for links
 texlive evince &&  \                                                   # LaTeX
@@ -159,12 +160,12 @@ OK, when starting up Emacs following chain is used for loading the
 configuration files: (Emacs automatically starts ~/.emacs.d/init.el)
 
 
- init.el    ->    24/emacs.el
-  \                \
-   \ settings.el    \ basics.el
-                     \ 24/package_config/*.el    ->     24/packages/*
-                      \ basic_keys.el
-                       \ language_configs/*.el
+.init.el....->....24/emacs.el........................................
+..\................\.................................................
+...\.settings.el....\.basics.el......................................
+.....................\.24/package_config/*.el....->.....24/packages/*
+......................\.basic_keys.el................................
+.......................\.language_configs/*.el.......................
 
 
 This means init.el is started and load settings.el, afterwards it
