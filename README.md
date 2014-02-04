@@ -144,6 +144,7 @@ How is this package built up?
         .tmp                    Backup and flymake files.
             ...
         init.el                 The start point of the config. Sets package list.
+        gnus.el                 Configuration file for news and mail-client named Gnus.
         24                      or any other emacs version
             emacs.el            The start point inside of this folder, loads following:
             basics.el           Some basic functions and settings (mostly for built in tools).
