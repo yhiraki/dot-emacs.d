@@ -170,7 +170,9 @@ configuration files: (Emacs automatically starts ~/.emacs.d/init.el)
 
 
 This means init.el is started and load settings.el, afterwards it
-loads 24/emacs.el. This file then lads basics.el
+loads 24/emacs.el. This file then loads basics.el, the package
+configurations, the basic keys and finally the language configuration
+files.
 
 
 Where is the sense?
