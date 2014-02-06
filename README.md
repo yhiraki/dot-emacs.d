@@ -79,7 +79,8 @@ Language Support
 + OCaml (might be broke; hasn't been used for ages)
 + Makefile support
 + Latex support
-+ any built in (no automatic TAGS generation)
++ all others built in to Emacs (no automatic TAGS generation)
+
 
 Keys (READ the 5 paragraphs!):
 ==============================
@@ -136,6 +137,11 @@ Nifty Tricks:
 
 How to Install
 ==============
+
+You need to have Emacs 24. Either check what Emacs version your
+distribution delivers or download it from http://www.gnu.org/software/emacs/.
+
+For some distribution the commands are listed below this section.
 
 0. Get the git repository
 
