@@ -7,9 +7,9 @@
 ;; Created: Di Feb  4 17:01:05 2014 (+0100)
 ;; Version:
 ;; Package-Requires: ()
-;; Last-Updated: Di Feb  4 17:40:50 2014 (+0100)
+;; Last-Updated: Do Feb  6 11:22:33 2014 (+0100)
 ;;           By: Manuel Schneckenreither
-;;     Update #: 10
+;;     Update #: 19
 ;; URL:
 ;; Doc URL:
 ;; Keywords:
@@ -48,15 +48,33 @@
 ;;; Code:
 
 ;; primary newsfeed
-(setq gnus-select-method '(nnimap "imap.gmail.com"))
+;; (setq gnus-select-method '(nnimap "imap.gmail.com"))
+
+;; ;; other newsfeeds
+;; (setq gnus-secondary-select-methods '(
+;;                                       (nnimap "UIBK"
+;;                                               (nnimap-stream ssl)
+;;                                               (nnimap-server-port 993)
+;;                                               (nnimap-address "mail2.uibk.ac.at"))
+;;                                       ))
+
+;; for searching imap folders (needs the call of (require 'nnir) in .emacs)
 
 ;; other newsfeeds
-(setq gnus-secondary-select-methods '(
-                                      (nnimap "UIBK"
-                                              (nnimap-stream ssl)
-                                              (nnimap-server-port 993)
-                                              (nnimap-address "mail2.uibk.ac.at"))
-                                      ))
+(setq gnus-select-method '(nnimap "UIBK"
+                                  (nnimap-stream ssl)
+                                  (nnimap-server-port 993)
+                                  (nnimap-address "mail2.uibk.ac.at")
+                                  ;(nnir-search-engine Imap)
+                                  ))
+
+(add-to-list 'gnus-secondary-select-methods '(nnimap "gmail"
+                                                     (nnimap-stream ssl)
+                                                     (nnimap-address "imap.gmail.com")
+                                                     (nnimap-server-port 993)
+                                        ;(nnir-search-engine Imap)
+                                                     ))
+
 
 ;; Periodically check for mail/news
 (gnus-demon-init)

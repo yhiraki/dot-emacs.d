@@ -7,9 +7,9 @@
 ;; Created: Di Feb  4 12:54:58 2014 (+0100)
 ;; Version:
 ;; Package-Requires: ()
-;; Last-Updated: Do Feb  6 08:36:54 2014 (+0100)
+;; Last-Updated: Do Feb  6 11:38:00 2014 (+0100)
 ;;           By: Manuel Schneckenreither
-;;     Update #: 47
+;;     Update #: 87
 ;; URL:
 ;; Doc URL:
 ;; Keywords:
@@ -100,11 +100,45 @@
 ;; (setq gnus-blocked-images "ads")
 (setq gnus-blocked-images 'gnus-block-private-groups)
 
-(setq gnus-html-cache-directory "~/.mail/.htmlcache")
+;; (setq gnus-html-cache-directory "~/.mail/.htmlcache")
 
+;; CHANGE GNUS DIRECTORY TO NOT CLUTTER THE HOME DIRECTORY
+
+;; archive
+(setq gnus-message-archive-method
+      '(nnfolder "archive"
+                 (nnfolder-inhibit-expiry t)
+                 (nnfolder-get-new-mail nil)
+                 (nnfolder-active-file "~/.mail/sent-mail/active")
+                 (nnfolder-directory "~/.mail/sent-mail/")
+                 ))
+
+(setq gnus-gcc-mark-as-read t)
+
+;; drafts
+(setq gnus-article-save-directory "~/.mail/News/")
+
+(setq gnus-home-directory "~/.mail/")
+(setq message-directory (concat gnus-home-directory "messages/"))
+(setq nnfolder-directory (concat gnus-home-directory "archive/"))
+(setq gnus-directory (concat gnus-home-directory "News/"))
+
+;; for searching through imap folders (rest of config in .gnus)
+(require 'nnir)
+
+
+;; bbdb
+(setq bbdb/news-auto-create-p t)
+
+;; search imap
+(setq nnir-imap-default-search-key "Imap")
+
+(setq nnir-method-default-engines '((nnimap . imap)
+                                    (nntp . gmane)
+                                    ))
 
 ;; ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-;; ++++++++++++++++++++++++ Signature on top ++++++++++++++++++++++++++++
+;; +++++++++++++++++++++++ Signature (on top) +++++++++++++++++++++++++++
 ;; ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 (setq mail-signature t)

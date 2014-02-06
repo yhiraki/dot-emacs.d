@@ -5,9 +5,9 @@
 ;; Author: Manuel Schneckenreither
 ;; Created: Tue Dec 11 00:43:14 2012 (+0100)
 ;; Version:
-;; Last-Updated: Di Feb  4 20:33:40 2014 (+0100)
+;; Last-Updated: Fr Feb  7 00:03:00 2014 (+0100)
 ;;           By: Manuel Schneckenreither
-;;     Update #: 353
+;;     Update #: 354
 ;; URL:
 ;; Description:
 ;;
@@ -58,7 +58,7 @@
 ;; AUTO COMPLETE - completion - You should not disable this, you know what you
 ;; are doing
 (load (concat package-conf-folder "auto_complete_config.el"))
-;; COLUMN MAKER -- mark columns
+;; WHITESPACE MODE -- mark 80'th+ columns
 (load (concat package-conf-folder "whitespace_config.el"))
 ;; MAKE BACKUPS
 (load (concat package-conf-folder "backup_each_save_config.el"))
@@ -86,7 +86,7 @@
 ;; +++++++++++++++++ LOAD LANGUAGE SPECIFIC SETTINGS ++++++++++++++++++++
 ;; ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
-;; (load-file (concat language-conf-folder "c_config.el"))
+(load-file (concat language-conf-folder "c_config.el"))
 (load-file (concat language-conf-folder "haskell_config.el"))
 (load-file (concat language-conf-folder "java_config.el"))
 (load-file (concat language-conf-folder "emacs_lisp_config.el"))

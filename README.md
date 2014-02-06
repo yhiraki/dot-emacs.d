@@ -3,7 +3,7 @@ Emacs Configuration
 
 Warning:
 
-PATHS are given relative to ~/.emacs.d/!
+Most PATHS are given relative to ~/.emacs.d/!
 
 
 Ideas
@@ -13,21 +13,69 @@ The idea is to provide a simple setup for Emacs. However, the key
 concept is to take it as a starting point and then (start to
 re)configure everything from here on.
 
-The concept of this configuration is:
-   - Keep it simple and organized. And therefore,
+The reasons and ideas why I created this package like it is were:
+
+   - I wanted to keep it simple and organized. And therefore,
    - Give a fuck about the starting time of Emacs (I got that 10
      seconds). This is also why I don't compile my *.el-files. That
-     might decrease the start up time, but might cause trouble when
-     changing the el files. an increased start-up time.
+     would decrease the start up time, but might cause trouble when
+     changing the el files.
    - Make it possible to dig into Emacs for beginners without starting
      at zero. However, you will still need to understand the
      configuration mechanism. At least when there are problems!
    - Make it easy to spread this Emacs configuration to several
-     machines.
+     machines with ease.
 
 
 BTW there is no way around learning at least a little bit of (emacs)
 lisp if you intend to use Emacs.
+
+
+Included Packages
+=================
+
++ CEDET development version - semantic, EDE (Projects), etc.
++ ECB - windows displaying information (similar to eclipse windows)
++ ELDOC - mode-line information when cursor is on point
++ FLYCHECK -- automatic syntax checking on-the-fly for most programming languages
++ FLYSPELL -- automatic spell checking on-the-fly
++ HEADER 2 - Enter a header and footer in the files (try it with M-x make-header)
++ IDO - minibuffer helper
++ MULTIPLE CURSORS - use multiple cursors to edit the several lines at once
++ THESAURUS - choose synonym and replace
++ WINDOW NUMBER MODE - change windows by C-x C-j [NUMBER] or  META-[NUMBER]
++ YASNIPPET - snippets easily handled
++ JDEE Mode - Java helper mode (might be replaced by Cedet in the future)
++ ORG Mode - organize your life with Emacs: Calendar, Time Tracking, etc.
++ AUTO COMPLETE - completion
++ WHITESPACE MODE - mark 80th+ columns, show unneeded white-spaces, etc
++ MAKE BACKUPS - make backup each time you save the file
++ BACKUP-WALKER - diff through all your backups
++ MAGIT - git for emacs
++ DIRED - (standard in Emacs) file mangement for emacs
++ PAGER -- better scrolling
++ RAINBOW DELIMITERS - show parenthesis in different colors
++ RAINBOW MODE - background of color names in specified color
++ POWERLINE - better mod-line
++ ANDROID MODE - disabled and not yet tested!
++ GNUS - Newsreader and Email Client (you might want to disable it, when you are a beginner)
++ BBDB - Address-Book Management
++ LATEX/AUCTEX - latex support
++ COLOR THEME - change the colors of your emacs (see init.el)
++ EDBI - nice DB tool viewer (and bit of management)
++ UNDO TREE - check all undo/redo branches displayed in a tree (with multiple branches)
++ AUTOMATIC TAG FILE GENERATION - automatic generation of tag files for each language
+
+Language Support
+================
+
++ C/C++ (not yet fully integrated; not tested; that should happen the next couple months)
++ Haskell
++ Java (Check my Makefile for flymake support, see other github projects)
++ Emacs Lisp (of course)
++ OCaml (might be broke; hasn't been used for ages)
++ Makefile support
++ Latex support
 
 
 Keys (READ the 5 paragraphs!):
@@ -68,20 +116,26 @@ Example (with prefix beeing C-x x):
 How to Install
 ==============
 
-If you can't wait/or just don't want to:
- - install all packages listed below.
- - you need to create a settings.el file in ./emacs.d/settings.el (see
+1. install all (needed) packages listed below.
+
+2. you need to create a settings.el file in ./emacs.d/settings.el (see
    settings.el.example)
- - you need to fire up emacs - all packages will be downloaded
- - it should automatically compile cedet. Check if that worked out!
- - you need to restart emacs (cedet doesn't like it, when new packages
+
+3. you need to fire up emacs - all emacs melpa packages will be
+   downloaded
+
+4. it should automatically compile cedet. Check if that worked out!
+
+5. you need to restart emacs (cedet doesn't like it, when new packages
    get installed)
- - you might want to disable (comment) the Gnus package for the first
-   start-up, see 24/emacs.el and search for gnus.
+
+6. you might want to disable (comment) the Gnus package for the first
+   real start-up, see 24/emacs.el and search for gnus. Otherwise you
+   definitely need configure it, see gnus.el.
 
 
-Fedora:
--------
+Fedora Command:
+---------------
 
     su -c "yum install ctags-etags gnuplot emacs graphviz \                # main tools
     w3m curl && \                                                          # browser for links
@@ -90,15 +144,15 @@ Fedora:
     perl-CPAN mariadb-devel && cpan -fi Module::Build::Compat && \         # database tools
     cpan -fi RPC::EPC::Service DBI DBD::SQLite DBD::Pg DBD::mysql" && \    # database tools
     echo "(load-file \"~/.emacs.d/gnus.el\")" > ~/.gnus.el && \            # create gnus file
-    # cd ~/.emacs.d/24/packages/cedet/ && make && \                          # compile cedet
     mv ~/.emacs.d/settings.el.example ~/.emacs.d/settings.el && \          # settings.el
     && emacs -mm                                                           # start emacs maximized
 
 
 1. Wait until packages are downloaded and installed.
 2. Then restart emacs.
-3. Edit ~/.emacs.d/settings.el to your needs
-4. Check the source files. You still need to know how to (re)configure Emacs works!
+3. Edit ~/.emacs.d/settings.el and ~/.emacs.d/gnus.el to your needs.
+4. Check the source files. When using Emacs you still need to know how to (re)configure
+   it!
 
 
 Dependencies:
@@ -153,8 +207,8 @@ How is this package built up?
     .emacs.d
         README.md               This file.
         snippets                Snippets folder.
-            ...                 Folders for different modes (programming languages)
-        .tmp                    Backup and flymake files.
+            ...                 Folders for different modes (programming languages).
+        .tmp                    Backup and flymake (for Java) files.
             ...
         init.el                 The start point of the config. Sets package list.
         gnus.el                 Configuration file for news and mail-client named Gnus.

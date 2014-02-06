@@ -7,9 +7,9 @@
 ;; Created: Fr Okt  4 20:33:29 2013 (+0200)
 ;; Version:
 ;; Package-Requires: ()
-;; Last-Updated: Di Feb  4 22:05:20 2014 (+0100)
+;; Last-Updated: Do Feb  6 23:57:37 2014 (+0100)
 ;;           By: Manuel Schneckenreither
-;;     Update #: 347
+;;     Update #: 348
 ;; URL:
 ;; Doc URL:
 ;; Keywords:
@@ -94,7 +94,6 @@
         color-theme
         ecb
         edbi
-        emacs-eclim
         flycheck
         flycheck-hdevtools
         git-commit-mode
