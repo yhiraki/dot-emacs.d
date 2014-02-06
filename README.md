@@ -34,6 +34,8 @@ lisp if you intend to use Emacs.
 Included Packages
 =================
 
+This is a list of some of the most important packages you will get.
+
 + CEDET development version - semantic, EDE (Projects), etc.
 + ECB - windows displaying information (similar to eclipse windows)
 + ELDOC - mode-line information when cursor is on point
@@ -64,7 +66,8 @@ Included Packages
 + COLOR THEME - change the colors of your emacs (see init.el)
 + EDBI - nice DB tool viewer (and bit of management)
 + UNDO TREE - check all undo/redo branches displayed in a tree (with multiple branches)
-+ AUTOMATIC TAG FILE GENERATION - automatic generation of tag files for each language
++ AUTOMATIC TAGS FILE GENERATION - automatic generation of tags files for various languages
+
 
 Language Support
 ================
@@ -76,7 +79,7 @@ Language Support
 + OCaml (might be broke; hasn't been used for ages)
 + Makefile support
 + Latex support
-
++ any built in (no automatic TAGS generation)
 
 Keys (READ the 5 paragraphs!):
 ==============================
@@ -113,30 +116,61 @@ Example (with prefix beeing C-x x):
     | ...       |                         | check out the files and get used to them    |
 
 
+Nifty Tricks:
+-------------
+
++ Use TAGS:
+  After saving a source code file (TAGS get automatically generated)
+  try C-. or M-. for jumping to interesting tags.
+
++ Use Info:
+  Try it with C-h i. You can get a lot of information about packages and related
+  stuff from it!
+
++ Use ORG mode:
+  Use the org mode for several things. Time tracking, calendar, todo lists,
+  brainstorming or just normal text files. It is awesome when you know how to
+  use it.
+
++ ...
+
 How to Install
 ==============
 
-1. install all (needed) packages listed below.
+0. Get the git repository
+
+1. install all (needed) packages listed below. Command might be found below.
 
 2. you need to create a settings.el file in ./emacs.d/settings.el (see
    settings.el.example)
 
-3. you need to fire up emacs - all emacs melpa packages will be
-   downloaded
-
-4. it should automatically compile cedet. Check if that worked out!
-
-5. you need to restart emacs (cedet doesn't like it, when new packages
-   get installed)
-
-6. you might want to disable (comment) the Gnus package for the first
+3. you might want to disable (comment) the Gnus package for the first
    real start-up, see 24/emacs.el and search for gnus. Otherwise you
    definitely need configure it, see gnus.el.
+
+4. you need to fire up emacs - all emacs melpa packages will be
+   downloaded
+
+    emacs -mm       # -mm for maximized
+
+5. it should automatically compile cedet. Check if that worked out!
+
+6. you need to restart emacs (cedet doesn't like it, when new packages
+   get installed)
+
+
+    C-x C-c         # to close emacs when an error occured
 
 
 Fedora Command:
 ---------------
 
+Steps 1 + 2 + 4  (3 not included!):
+
+    mv ~/.emacs.d ~/.emacs.d.bak && \                                      # backup
+    git clone https://github.com/schnecki/dot-emacs-4-everyone.git && \    # download
+    mv dot-emacs-4-everyone ~/.emacs.d && \                                # move to home
+    mv ~/.emacs.d/settings.el.backup ~/.emacs.d/settings.el && \           # copy settings.el
     su -c "yum install ctags-etags gnuplot emacs graphviz \                # main tools
     w3m curl && \                                                          # browser for links
     texlive evince &&  \                                                   # LaTeX
@@ -147,12 +181,7 @@ Fedora Command:
     mv ~/.emacs.d/settings.el.example ~/.emacs.d/settings.el && \          # settings.el
     && emacs -mm                                                           # start emacs maximized
 
-
-1. Wait until packages are downloaded and installed.
-2. Then restart emacs.
-3. Edit ~/.emacs.d/settings.el and ~/.emacs.d/gnus.el to your needs.
-4. Check the source files. When using Emacs you still need to know how to (re)configure
-   it!
+    # check step 3, 5, 6 from How To Install menu above!
 
 
 Dependencies:
