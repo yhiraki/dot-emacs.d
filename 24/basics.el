@@ -5,9 +5,9 @@
 ;; Author: Manuel Schneckenreither
 ;; Created: Mon Dec 10 22:51:09 2012 (+0100)
 ;; Version:
-;; Last-Updated: Di Feb  4 18:10:00 2014 (+0100)
+;; Last-Updated: Do Feb  6 08:49:24 2014 (+0100)
 ;;           By: Manuel Schneckenreither
-;;     Update #: 581
+;;     Update #: 582
 ;; URL:
 ;; Description:
 ;;    Basic configuration for emacs. In here are all configs of
@@ -386,6 +386,9 @@
   )
 
 (add-hook 'before-save-hook 'collapse-blank-lines)
+
+;; OPEN MARKDOWN FILES WITH THE MARKDOWN MODE
+(add-to-list 'auto-mode-alist '("\\.md$" . markdown-mode))
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;

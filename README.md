@@ -70,17 +70,21 @@ How to Install
 
 If you can't wait/or just don't want to:
  - install all packages listed below.
- - you need to create a settings.el file in ./emacs.d/settings.el (see settings.el.example)
+ - you need to create a settings.el file in ./emacs.d/settings.el (see
+   settings.el.example)
  - you need to fire up emacs - all packages will be downloaded
  - it should automatically compile cedet. Check if that worked out!
- - you need to restart emacs (cedet doesn't like it, when new packages get installed)
+ - you need to restart emacs (cedet doesn't like it, when new packages
+   get installed)
+ - you might want to disable (comment) the Gnus package for the first
+   start-up, see 24/emacs.el and search for gnus.
 
 
 Fedora:
 -------
 
     su -c "yum install ctags-etags gnuplot emacs graphviz \                # main tools
-    w3m && \                                                               # browser for links
+    w3m curl && \                                                          # browser for links
     texlive evince &&  \                                                   # LaTeX
     cabal install hasktags && \                                            # Haskell
     perl-CPAN mariadb-devel && cpan -fi Module::Build::Compat && \         # database tools
@@ -106,6 +110,10 @@ Dependencies:
 
 + Java
   - w3m (Javadoc Lookup inside of Emacs)
+
++ Gnus
+  - curl (fetch html stuff)
+  - w3m (display html mails)
 
 + Org Mode
   - gnuplot (optional)

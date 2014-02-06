@@ -7,9 +7,9 @@
 ;; Created: Di Feb  4 12:54:58 2014 (+0100)
 ;; Version:
 ;; Package-Requires: ()
-;; Last-Updated: Di Feb  4 19:26:23 2014 (+0100)
+;; Last-Updated: Do Feb  6 08:36:54 2014 (+0100)
 ;;           By: Manuel Schneckenreither
-;;     Update #: 41
+;;     Update #: 47
 ;; URL:
 ;; Doc URL:
 ;; Keywords:
@@ -90,11 +90,17 @@
 
 
 ;; ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-;; +++++++++++++++++++++++++++ Code CONFIG ++++++++++++++++++++++++++++++
+;; +++++++++++++++++++++++++++ GNUS CONFIG ++++++++++++++++++++++++++++++
 ;; ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 ;; show old messages also
 ;; (setq gnus-fetch-old-headers t)
+
+;; show all images, but the ones having "ads" in them.
+;; (setq gnus-blocked-images "ads")
+(setq gnus-blocked-images 'gnus-block-private-groups)
+
+(setq gnus-html-cache-directory "~/.mail/.htmlcache")
 
 
 ;; ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++

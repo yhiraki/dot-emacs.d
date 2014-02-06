@@ -7,9 +7,9 @@
 ;; Created: So Okt 13 23:25:02 2013 (+0200)
 ;; Version:
 ;; Package-Requires: ()
-;; Last-Updated: Mo Feb  3 19:54:01 2014 (+0100)
+;; Last-Updated: Di Feb  4 22:56:31 2014 (+0100)
 ;;           By: Manuel Schneckenreither
-;;     Update #: 16
+;;     Update #: 35
 ;; URL:
 ;; Doc URL:
 ;; Keywords:
@@ -36,6 +36,8 @@
 ;; ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 (require 'ido)
+
+;; enable ido mode
 (ido-mode t)
 
 
@@ -80,11 +82,11 @@
             ad-do-it))))
 
 (add-hook 'ediff-hook
-		  '(lambda ()
-			 (set (make-local-variable 'ido-enable-replace-completing-read) nil)))
+          '(lambda ()
+             (set (make-local-variable 'ido-enable-replace-completing-read) nil)))
 (add-hook 'dired-mode-hook
-		  '(lambda ()
-			 (set (make-local-variable 'ido-enable-replace-completing-read) nil)))
+          '(lambda ()
+             (set (make-local-variable 'ido-enable-replace-completing-read) nil)))
 
 
 ;; SORT IDO FILELIST BY MTIME INSTEAD OF ALPHABETICALLY
@@ -92,15 +94,34 @@
 (add-hook 'ido-make-dir-list-hook 'ido-sort-mtime)
 (defun ido-sort-mtime ()
   (setq ido-temp-list
-		(sort ido-temp-list
-			  (lambda (a b)
-				(time-less-p
-				 (sixth (file-attributes (concat ido-current-directory b)))
-				 (sixth (file-attributes (concat ido-current-directory a)))))))
+        (sort ido-temp-list
+              (lambda (a b)
+                (time-less-p
+                 (sixth (file-attributes (concat ido-current-directory b)))
+                 (sixth (file-attributes (concat ido-current-directory a)))))))
   (ido-to-end  ;; move . files to end (again)
    (delq nil (mapcar
-			  (lambda (x) (and (char-equal (string-to-char x) ?.) x))
-			  ido-temp-list))))
+              (lambda (x) (and (char-equal (string-to-char x) ?.) x))
+              ido-temp-list))))
+
+
+;; (add-hook 'ido-setup-hook
+;;           (lambda ()
+;;             (define-key ido-completion-map [tab] 'ido-complete)))
+
+;; ido fuzzy matching
+(setq ido-enable-flex-matching t)
+
+
+;; IDO Everywhere
+(ido-everywhere t)
+(ido-ubiquitous-mode)
+;; for find-file-at-point
+;; (setq ido-use-filename-at-point 'guess)
+;; look for URLs at point
+;; (setq ido-use-url-at-point t)
+;; stop asking me if I use a new name
+(setq ido-create-new-buffer 'always)  ;'always, 'prompt or 'never
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;

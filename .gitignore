@@ -29,3 +29,4 @@ eshell/lastdir
 /.#session.*
 /.edbi-ds-history
 /abrt_checker_*
+/var/pcache/ido-load-library

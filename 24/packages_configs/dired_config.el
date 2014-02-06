@@ -15,3 +15,12 @@
     (lambda () (interactive) (find-alternate-file "..")))
   ; was dired-up-directory
  ))
+
+
+;; distinguishing dired mode buffers from others
+(add-hook 'dired-mode-hook 'ensure-buffer-name-ends-in-slash)
+(defun ensure-buffer-name-ends-in-slash ()
+  "change buffer name to end with slash"
+  (let ((name (buffer-name)))
+    (if (not (string-match "/$" name))
+        (rename-buffer (concat name "/") t))))

@@ -7,7 +7,7 @@
 ;; Version:
 ;; Last-Updated:
 ;;           By:
-;;     Update #: 92
+;;     Update #: 94
 ;; URL:
 ;; Description:
 ;;
@@ -59,6 +59,9 @@
 (global-set-key (kbd "C-x SPC") 'compile-closest-Makefile) ;; compile
 (global-set-key (kbd "C-c SPC") 'compile-closest-Makefile) ;; compile
 (global-set-key [f1] 'man-follow) ;; find man page
+
+;; set new mail key C-x m using Gnus
+(global-set-key (kbd "C-x m") 'gnus-group-mail)
 
 (global-set-key (kbd (concat prefix-command-key " c")) 'eshell) ;;  start shell
 (global-set-key (kbd (concat prefix-command-key " r")) 'replace-regexp) ;; regex replace
