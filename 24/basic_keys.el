@@ -7,7 +7,7 @@
 ;; Version:
 ;; Last-Updated:
 ;;           By:
-;;     Update #: 94
+;;     Update #: 100
 ;; URL:
 ;; Description:
 ;;
@@ -63,7 +63,7 @@
 ;; set new mail key C-x m using Gnus
 (global-set-key (kbd "C-x m") 'gnus-group-mail)
 
-(global-set-key (kbd (concat prefix-command-key " c")) 'eshell) ;;  start shell
+(global-set-key (kbd (concat prefix-command-key " c")) 'shell) ;;  start shell
 (global-set-key (kbd (concat prefix-command-key " r")) 'replace-regexp) ;; regex replace
 (global-set-key (kbd (concat prefix-command-key " s l")) 'list-matching-lines) ;; Regex search and show in other buffer
 
@@ -85,10 +85,8 @@
 ;; TAGS
 (global-set-key (kbd "C-.") 'view-tag-other-window)
 
-
 ;; comment uncomment
 (global-set-key (kbd "C-c c") 'comment-or-uncomment-region) ;; un/comment region
-(global-set-key (kbd "C-c C-c") 'comment-or-uncomment-region) ;; un/comment region
 (global-set-key (kbd "C-c TAB") 'iwb) ;; intend whole buffer
 (global-set-key (kbd "C-x TAB") 'iwb) ;; intend whole buffer
 

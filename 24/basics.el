@@ -5,9 +5,9 @@
 ;; Author: Manuel Schneckenreither
 ;; Created: Mon Dec 10 22:51:09 2012 (+0100)
 ;; Version:
-;; Last-Updated: Do Feb  6 08:49:24 2014 (+0100)
+;; Last-Updated: So Mär  2 15:32:59 2014 (+0100)
 ;;           By: Manuel Schneckenreither
-;;     Update #: 582
+;;     Update #: 598
 ;; URL:
 ;; Description:
 ;;    Basic configuration for emacs. In here are all configs of
@@ -50,7 +50,7 @@
     (replace-buffer-in-windows "*compilation*")
     ;; (bury-buffer "*compilation*")
     (other-window 1)
-    (eshell)
+    (shell)
     (return)) ;; open compilation window
   ;; Always return the anticipated result of compilation-exit-message-function
   (cons msg code))
@@ -110,6 +110,19 @@
 
 ;; HIGHLIGH CURRENT LINE
 ;; (highlight-current-line-minor-mode)
+
+;; Highlight keywords
+(defun highlight-keywords ()
+  "This function highlights keywords in files."
+
+  (font-lock-add-keywords nil
+                          '(("\\<\\(FIXME\\|TODO\\|BUG\\):" 1 font-lock-warning-face t))))
+
+
+;; common c mode langauges like java, c, c++ are enabled with the
+;; following line. All others are enabled in their specific language
+;; configuration file, see the language_configs folder.
+(add-hook 'c-mode-common-hook 'highlight-keywords)
 
 
 ;; ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -225,6 +238,7 @@
 (make-directory "~/.emacs.d/.tmp/autosaves/" t)
 (make-directory "~/.emacs.d/.tmp/backups/" t)
 
+
 ;; Put autosave files (ie #foo#) and backup files (ie foo~) in ~/.emacs.d/.tmp/...
 (setq auto-save-file-name-transforms (quote ((".*" "~/.emacs.d/.tmp/autosaves/\\1" t)))
       backup-directory-alist (quote ((".*" . "~/.emacs.d/.tmp/backups/")))
@@ -331,6 +345,15 @@
 ;; display enough information to distinguish buffers with same names
 (require 'uniquify)
 (setq uniquify-buffer-name-style 'forward)
+
+;; ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+;; +++++++++++++++++++++++++++++ BOOKMARKS ++++++++++++++++++++++++++++++
+;; ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+(setq
+  bookmark-default-file (concat load-emacsd ".bookmarks") ;; keep my ~/ clean
+  bookmark-save-flag 1)                        ;; autosave each change
+
 
 ;; ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 ;; ++++++++++++++++++++++++++++ OTHER STUFF +++++++++++++++++++++++++++++

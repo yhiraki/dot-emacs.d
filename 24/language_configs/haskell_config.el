@@ -8,7 +8,7 @@
 ;; Version:
 ;; Last-Updated:
 ;;           By:
-;;     Update #: 379
+;;     Update #: 382
 ;; URL:
 ;; Description:
 ;;
@@ -154,7 +154,7 @@
 
   ;; KEYS
   ;; fix return behaviour
-  (local-set-key (kbd "C-j")  'haskell-newline)
+  ;; (local-set-key (kbd "C-j")  'haskell-newline)
   (local-set-key (kbd "RET")  'newline-and-indent)
   ;; set special keys
   (local-set-key (kbd "=")  'haskell-insert-equals)

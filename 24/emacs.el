@@ -5,9 +5,9 @@
 ;; Author: Manuel Schneckenreither
 ;; Created: Tue Dec 11 00:43:14 2012 (+0100)
 ;; Version:
-;; Last-Updated: Fr Feb  7 00:03:00 2014 (+0100)
+;; Last-Updated: So Mär  2 14:02:21 2014 (+0100)
 ;;           By: Manuel Schneckenreither
-;;     Update #: 354
+;;     Update #: 362
 ;; URL:
 ;; Description:
 ;;
@@ -23,6 +23,8 @@
 ;; ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 (load (concat load-folder "basics.el"))
+;; custom themes
+(load (concat load-folder "custom_themes.el"))
 
 ;; ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 ;; +++++++++++++++++++++++++ SPECIAL PACKAGES ++++++++++++++++++++++++++
@@ -76,10 +78,12 @@
 (load (concat package-conf-folder "powerline_config.el"))
 ;; ANDROID MODE
 ;; (load (concat package-conf-folder "android_mode_config.el"))
+;; BBDB - Address-Book Management (load before GNUS)
+(load (concat package-conf-folder "bbdb_config.el"))
 ;; GNUS - Newsreader and Email Client
 (load (concat package-conf-folder "gnus_config.el"))
-;; BBDB - Address-Book Management
-(load (concat package-conf-folder "bbdb_config.el"))
+;; CUA - use rectangle selections
+(load (concat package-conf-folder "cua_config.el"))
 
 
 ;; ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++

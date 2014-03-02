@@ -35,6 +35,7 @@
 (setq org-time-clocksum-format
       '(:hours "%d" :require-hours t :minutes ":%02d" :require-minutes t))
 
+
 ;; requiore export to taksjuggler
 (require 'ox-taskjuggler)
 
@@ -74,9 +75,23 @@
 
 
 ;; ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-;; +++++++++++++++++++++++++++ DRAW DIAGRAMS ++++++++++++++++++++++++++++
+;; ++++++++++++++++++++++++ CAPTURE/REMEMBER ++++++++++++++++++++++++++++
 ;; ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
+(setq org-directory (concat load-emacsd "org/"))
+(setq org-mode-capture-directory (concat org-directory "notes.org"))
+
+(make-directory org-directory t) ;; create directory
+
+(setq org-default-notes-file org-mode-capture-directory)
+(define-key global-map "\C-c\C-c" 'org-capture) ;; define keystroke
+
+
+;; ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+;; +++++++++++++++++++++++++++ DRAW DIAGRAMS ++++++++++++++++++++++++++++
+;; ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+(setq org-default-notes-file (concat org-directory "/notes.org"))
+     (define-key global-map "\C-cc" 'org-capture)
 
 (setq org-ditaa-jar-path (concat package-folder "java_files/ditaa0_9.jar"))
 (setq org-plantuml-jar-path (concat package-folder "java_files/plantuml.jar"))

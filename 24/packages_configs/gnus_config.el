@@ -7,9 +7,9 @@
 ;; Created: Di Feb  4 12:54:58 2014 (+0100)
 ;; Version:
 ;; Package-Requires: ()
-;; Last-Updated: Do Feb  6 11:38:00 2014 (+0100)
-;;           By: Manuel Schneckenreither
-;;     Update #: 87
+;; Last-Updated: So Mär  2 11:56:55 2014 (+0100)
+;;           By: Schnecki
+;;     Update #: 91
 ;; URL:
 ;; Doc URL:
 ;; Keywords:
@@ -149,6 +149,20 @@
                              (signature-file "~/.mail/signature")
                              (name "Manuel Schneckenreither"))
                             ))
+
+
+;; ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+;; +++++++++++++++++++++++++++++ CITES ++++++++++++++++++++++++++++++++++
+;; ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+
+(add-hook 'mail-citation-hook 'sc-cite-original)
+
+;; This prevents GNUS from inserting its default attribution header.
+;; Otherwise, both GNUS and Supercite will insert an attribution
+;; header:
+
+(setq news-reply-header-hook nil)
 
 
 ;; ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++

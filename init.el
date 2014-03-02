@@ -7,9 +7,9 @@
 ;; Created: Fr Okt  4 20:33:29 2013 (+0200)
 ;; Version:
 ;; Package-Requires: ()
-;; Last-Updated: Do Feb  6 23:57:37 2014 (+0100)
+;; Last-Updated: So Mär  2 15:17:12 2014 (+0100)
 ;;           By: Manuel Schneckenreither
-;;     Update #: 348
+;;     Update #: 363
 ;; URL:
 ;; Doc URL:
 ;; Keywords:
@@ -119,12 +119,14 @@
         powerline
         rainbow-delimiters
         rainbow-mode
+        color-theme-solarized
         thesaurus
         tuareg
         undo-tree
         w3m
         window-number
         yasnippet
+        zenburn-theme
         ))
 
 (package-initialize)
@@ -200,7 +202,9 @@
  ;; If there is more than one, they won't work right.
  '(ac-quick-help-delay 0.1)
  '(ac-show-menu-immediately-on-auto-complete t)
+ '(color-theme-legal-frame-parameters "\\(color\\|mode\\|font\\|height\\|width\\)$")
  '(column-number-mode t)
+ '(custom-safe-themes (quote ("0f0e3af1ec61d04ff92f238b165dbc6d2a7b4ade7ed9812b4ce6b075e08f49fe" "f350c66dcff6db73192c4819363b7c1992931841e5ab381b1ed57ef8257a498f" default)))
  '(dired-kept-versions 10)
  '(display-time-mode t)
  '(ecb-auto-expand-tag-tree (quote all))
@@ -235,7 +239,9 @@
  '(size-indication-mode t)
  '(smtpmail-smtp-server "smtp.uibk.ac.at")
  '(smtpmail-smtp-service 587)
+ '(solarized-contrast (quote high))
  '(tool-bar-mode nil)
+ '(tramp-default-method "ssh")
  '(user-full-name your-full-name)
  '(user-mail-address your-mail-address)
  '(yas-prompt-functions (quote (yas-ido-prompt yas-dropdown-prompt yas-completing-prompt yas-x-prompt yas-no-prompt))))
@@ -249,7 +255,7 @@
  '(ecb-default-highlight-face ((t (:background "gray30"))))
  '(flymake-errline ((((class color)) (:underline (:style wave :color "Red1")))))
  '(flymake-warnline ((((class color)) (:underline (:style wave :color "DarkOrange")))))
- '(highlight-current-line-face ((t (:background "gray5"))))
+ '(highlight-current-line-face ((t (:background "gray5"))) t)
  '(rainbow-delimiters-depth-1-face ((t (:foreground "red"))))
  '(rainbow-delimiters-depth-2-face ((t (:foreground "magenta"))))
  '(rainbow-delimiters-depth-3-face ((t (:foreground "cyan"))))
@@ -266,4 +272,3 @@
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; init.el ends here
-

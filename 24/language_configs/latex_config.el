@@ -7,9 +7,9 @@
 ;; Created: Sa Nov  2 16:14:09 2013 (+0100)
 ;; Version:
 ;; Package-Requires: ()
-;; Last-Updated: Di Jan 21 20:56:57 2014 (+0100)
+;; Last-Updated: Sa Feb 22 14:01:18 2014 (+0100)
 ;;           By: Manuel Schneckenreither
-;;     Update #: 31
+;;     Update #: 32
 ;; URL:
 ;; Doc URL:
 ;; Keywords:
@@ -128,7 +128,7 @@
   (interactive)
   (TeX-texify)
   (TeX-command "View" 'TeX-active-master 0)
-  (async-shell-command "rm -rf *.aux *.bbl *.log *.blg *.toc *.out *.dvi *.backup *.exl *.exls *.ps 1>/dev/null 2>/dev/null" nil)
+  (shell-command "rm -rf *.aux *.bbl *.log *.blg *.toc *.out *.dvi *.backup *.exl *.exls *.ps 1>/dev/null 2>/dev/null" nil)
   )
 
 

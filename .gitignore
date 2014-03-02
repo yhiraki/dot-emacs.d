@@ -30,3 +30,6 @@ eshell/lastdir
 /.edbi-ds-history
 /abrt_checker_*
 /var/pcache/ido-load-library
+/.bookmarks
+/24/custom_themes.el
+/24/packages_configs/cua_config.el

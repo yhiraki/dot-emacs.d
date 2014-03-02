@@ -7,9 +7,9 @@
 ;; Created: So Okt 13 23:25:02 2013 (+0200)
 ;; Version:
 ;; Package-Requires: ()
-;; Last-Updated: Di Feb  4 22:56:31 2014 (+0100)
+;; Last-Updated: So Mär  2 13:36:49 2014 (+0100)
 ;;           By: Manuel Schneckenreither
-;;     Update #: 35
+;;     Update #: 39
 ;; URL:
 ;; Doc URL:
 ;; Keywords:
@@ -122,6 +122,23 @@
 ;; (setq ido-use-url-at-point t)
 ;; stop asking me if I use a new name
 (setq ido-create-new-buffer 'always)  ;'always, 'prompt or 'never
+
+;; ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+;; +++++++++++++++++++++++ DISPLAY LINE NUMBERS +++++++++++++++++++++++++
+;; ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+
+(defun find-file-as-root ()
+  "Like `ido-find-file, but automatically edit the file with
+root-privileges (using tramp/sudo), if the file is not writable by
+user."
+  (interactive)
+  (let ((file (ido-read-file-name "Edit as root: ")))
+    (unless (file-writable-p file)
+      (setq file (concat "/sudo:root@localhost:" file)))
+    (find-file file)))
+;; or some other keybinding...
+(global-set-key (kbd "C-x F") 'find-file-as-root)
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;

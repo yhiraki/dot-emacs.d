@@ -7,9 +7,9 @@
 ;; Created: Di Feb  4 17:01:05 2014 (+0100)
 ;; Version:
 ;; Package-Requires: ()
-;; Last-Updated: Do Feb  6 11:22:33 2014 (+0100)
+;; Last-Updated: Mo Feb 10 10:03:57 2014 (+0100)
 ;;           By: Manuel Schneckenreither
-;;     Update #: 19
+;;     Update #: 20
 ;; URL:
 ;; Doc URL:
 ;; Keywords:
@@ -47,16 +47,6 @@
 ;;
 ;;; Code:
 
-;; primary newsfeed
-;; (setq gnus-select-method '(nnimap "imap.gmail.com"))
-
-;; ;; other newsfeeds
-;; (setq gnus-secondary-select-methods '(
-;;                                       (nnimap "UIBK"
-;;                                               (nnimap-stream ssl)
-;;                                               (nnimap-server-port 993)
-;;                                               (nnimap-address "mail2.uibk.ac.at"))
-;;                                       ))
 
 ;; for searching imap folders (needs the call of (require 'nnir) in .emacs)
 
