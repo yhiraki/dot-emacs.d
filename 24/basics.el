@@ -5,9 +5,9 @@
 ;; Author: Manuel Schneckenreither
 ;; Created: Mon Dec 10 22:51:09 2012 (+0100)
 ;; Version:
-;; Last-Updated: So Mär  2 15:32:59 2014 (+0100)
+;; Last-Updated: Mi Mär  5 17:27:01 2014 (+0100)
 ;;           By: Manuel Schneckenreither
-;;     Update #: 598
+;;     Update #: 599
 ;; URL:
 ;; Description:
 ;;    Basic configuration for emacs. In here are all configs of
@@ -116,7 +116,7 @@
   "This function highlights keywords in files."
 
   (font-lock-add-keywords nil
-                          '(("\\<\\(FIXME\\|TODO\\|BUG\\):" 1 font-lock-warning-face t))))
+                          '(("\\<\\(FIXME\\|TODO\\|BUG\\)" 1 font-lock-warning-face t))))
 
 
 ;; common c mode langauges like java, c, c++ are enabled with the

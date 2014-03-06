@@ -7,9 +7,9 @@
 ;; Created: Di Feb  4 12:54:58 2014 (+0100)
 ;; Version:
 ;; Package-Requires: ()
-;; Last-Updated: So Mär  2 11:56:55 2014 (+0100)
-;;           By: Schnecki
-;;     Update #: 91
+;; Last-Updated: Do Mär  6 19:15:35 2014 (+0100)
+;;           By: Manuel Schneckenreither
+;;     Update #: 121
 ;; URL:
 ;; Doc URL:
 ;; Keywords:
@@ -65,9 +65,9 @@
   "Quit reading news after updating .newsrc."
   (interactive)
   (progn
-        (gnus-save-newsrc-file gnus-startup-file)
-        (gnus-clear-system)
-        (nntp-close-server)))
+    (gnus-save-newsrc-file gnus-startup-file)
+    (gnus-clear-system)
+    (nntp-close-server)))
 
 ;; disable exiting with q
 (defun local-gnus-group-mode ()
@@ -75,10 +75,10 @@
   (local-set-key (kbd "q") (lambda ()
                              (interactive)
                              (error (substitute-command-keys (concat
-                                     "disabled! Use C-x k to "
-                                     "bury the buffer or "
-                                     "\\[gnus-group-exit] to quit "
-                                     "Gnus")))))
+                                                              "disabled! Use C-x k to "
+                                                              "bury the buffer or "
+                                                              "\\[gnus-group-exit] to quit "
+                                                              "Gnus")))))
   (local-set-key (kbd "C-x k") (lambda ()
                                  (interactive)
                                  (bury-buffer)))
@@ -100,7 +100,6 @@
 ;; (setq gnus-blocked-images "ads")
 (setq gnus-blocked-images 'gnus-block-private-groups)
 
-;; (setq gnus-html-cache-directory "~/.mail/.htmlcache")
 
 ;; CHANGE GNUS DIRECTORY TO NOT CLUTTER THE HOME DIRECTORY
 
@@ -121,7 +120,10 @@
 (setq gnus-home-directory "~/.mail/")
 (setq message-directory (concat gnus-home-directory "messages/"))
 (setq nnfolder-directory (concat gnus-home-directory "archive/"))
-(setq gnus-directory (concat gnus-home-directory "News/"))
+(setq gnus-directory (concat gnus-home-directory "news/"))
+(setq gnus-kill-files-directory (concat gnus-home-directory "score/"))
+(setq gnus-cache-directory (concat gnus-home-directory ".cache/"))
+(setq gnus-html-cache-directory (concat gnus-home-directory "htmlcache/"))
 
 ;; for searching through imap folders (rest of config in .gnus)
 (require 'nnir)
@@ -138,37 +140,68 @@
                                     ))
 
 ;; ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-;; +++++++++++++++++++++++ Signature (on top) +++++++++++++++++++++++++++
+;; +++++++++++++++++++++++++++ SIGNATURE ++++++++++++++++++++++++++++++++
 ;; ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 (setq mail-signature t)
 (setq mail-signature-file "~/.mail/signature")
-(setq message-cite-reply-position (quote above))
+(setq message-cite-reply-position (quote traditional))
 (setq gnus-posting-styles '(
                             (".*"
                              (signature-file "~/.mail/signature")
                              (name "Manuel Schneckenreither"))
                             ))
 
+;; ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+;; ++++++++++++++++++++++++++++ SCORES ++++++++++++++++++++++++++++++++++
+;; ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+(setq gnus-use-adaptive-scoring '(word line))
+
 
 ;; ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-;; +++++++++++++++++++++++++++++ CITES ++++++++++++++++++++++++++++++++++
+;; +++++++++++++++++++++ SENT MESSAGE FOLDERS +++++++++++++++++++++++++++
 ;; ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 
+;; Automatically put the sent messages in the input folder. This
+;; enables a nice history view of the topics.
+
+(setq gnus-message-archive-method '(nnml ""))
+
+(setq gnus-message-archive-group
+      '((lambda (x)
+          (cond
+           ;; Store personal mail messages in the same group I started
+           ;; out in
+           ((string-match "mail.*" group) group)
+           ;; I receive a copy of all messages I send to a list, so
+           ;; there's no need to archive
+           ((string-match "list.*" group) nil)
+           ;; Store everything else in misc until I can sort it out
+           (t "mail.misc")))))
+
+
+;; ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+;; +++++++++++++++++++++++++++++ CITING +++++++++++++++++++++++++++++++++
+;; ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+;; use the built in supercite for citing.
 (add-hook 'mail-citation-hook 'sc-cite-original)
 
 ;; This prevents GNUS from inserting its default attribution header.
 ;; Otherwise, both GNUS and Supercite will insert an attribution
 ;; header:
-
 (setq news-reply-header-hook nil)
 
+(setq mail-user-agent 'gnus-user-agent)
 
 ;; ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 ;; ++++++++++++++++++++++++ FINALLY OPEN GNUS +++++++++++++++++++++++++++
 ;; ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
+;; do not download everyting when gnus started
+(setq gnus-read-active-file 'some)
 ;; open gnus
 (gnus)
 

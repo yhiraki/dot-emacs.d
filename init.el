@@ -7,9 +7,9 @@
 ;; Created: Fr Okt  4 20:33:29 2013 (+0200)
 ;; Version:
 ;; Package-Requires: ()
-;; Last-Updated: So Mär  2 15:17:12 2014 (+0100)
+;; Last-Updated: Di Mär  4 13:43:47 2014 (+0100)
 ;;           By: Manuel Schneckenreither
-;;     Update #: 363
+;;     Update #: 367
 ;; URL:
 ;; Doc URL:
 ;; Keywords:
@@ -67,6 +67,23 @@
 (autoload 'cflow-mode "cflow-mode")
 (setq auto-mode-alist (append auto-mode-alist
                               '(("\\.cflow$" . cflow-mode))))
+
+;; ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+;; +++++++++++++++++++++++++++ EMACS SERVER +++++++++++++++++++++++++++++
+;; ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+
+;; start emacs as a server. You can then connect to it by invoking emacsclient.
+(server-start)
+
+;; and handle C-x k command just normally
+(add-hook 'server-switch-hook
+  (lambda ()
+    (local-set-key (kbd "C-x k") '(lambda ()
+                                    (interactive)
+                                    (if server-buffer-clients
+                                        (server-edit)
+                                      (ido-kill-buffer))))))
 
 ;; ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 ;; +++++++++++++++++++++++++++ LOAD PACKAGES ++++++++++++++++++++++++++++
@@ -272,3 +289,4 @@
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; init.el ends here
+(put 'narrow-to-region 'disabled nil)

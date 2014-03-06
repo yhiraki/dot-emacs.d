@@ -8,7 +8,7 @@
 ;; Version:
 ;; Last-Updated:
 ;;           By:
-;;     Update #: 382
+;;     Update #: 392
 ;; URL:
 ;; Description:
 ;;
@@ -59,7 +59,8 @@
 ;;   (when (member (file-name-extension buffer-file-name) '("hs" "lhs"))
 
 ;; set DEBUG constant in haskell interpreter
-(setq haskell-program-name "ghci -DDEBUG")
+;; (setq haskell-program-name "ghci -DDEBUG ")
+(setq haskell-program-name "ghci -DDEBUG -fbreak-on-error")
 
 
 ;; ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -175,6 +176,6 @@
 
 
 (add-hook 'haskell-mode-hook 'my/haskell-minor-mode)
-
+(add-hook 'haskell-mode-hook 'highlight-keywords)
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; haskell_config.el ends here
