@@ -7,9 +7,9 @@
 ;; Created: Di Feb  4 12:54:58 2014 (+0100)
 ;; Version:
 ;; Package-Requires: ()
-;; Last-Updated: Fr Mär  7 11:05:06 2014 (+0100)
+;; Last-Updated: Fr Mär  7 12:13:00 2014 (+0100)
 ;;           By: Manuel Schneckenreither
-;;     Update #: 122
+;;     Update #: 123
 ;; URL:
 ;; Doc URL:
 ;; Keywords:
@@ -138,6 +138,15 @@
 (setq nnir-method-default-engines '((nnimap . imap)
                                     (nntp . gmane)
                                     ))
+
+
+;; set custom timeout
+(defadvice gnus-demon-scan-news (around gnus-demon-timeout activate)
+  "Timeout for Gnus."
+  (with-timeout
+      (120 (message "Gnus timed out."))
+    ad-do-it))
+
 
 ;; ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 ;; +++++++++++++++++++++++++++ SIGNATURE ++++++++++++++++++++++++++++++++

@@ -7,9 +7,9 @@
 ;; Created: So Okt 13 16:30:34 2013 (+0200)
 ;; Version:
 ;; Package-Requires: ()
-;; Last-Updated: Di Jan 21 23:45:41 2014 (+0100)
+;; Last-Updated: Fr Mär  7 13:56:27 2014 (+0100)
 ;;           By: Manuel Schneckenreither
-;;     Update #: 8
+;;     Update #: 9
 ;; URL:
 ;; Doc URL:
 ;; Keywords:
@@ -40,6 +40,29 @@
 
 ;; rest of ecb config can be found in init.el
 ;; under BASIC INFO in custom-set-variables!
+
+
+;; ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+;; ++++++++++++++++++++++++++ MY LAYOUTS ++++++++++++++++++++++++++++++++
+;; ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+
+(ecb-layout-define "left-methods-sources" left nil
+  (if (fboundp (quote ecb-set-methods-buffer)) (ecb-set-methods-buffer) (ecb-set-default-ecb-buffer))
+  (dotimes (i 2) (other-window 1) (if (equal (selected-window) ecb-compile-window) (other-window 1)))
+  (ecb-split-ver 0.7083333333333334 t)
+  (if (fboundp (quote ecb-set-methods-buffer)) (ecb-set-methods-buffer) (ecb-set-default-ecb-buffer))
+  (dotimes (i 1) (other-window 1) (if (equal (selected-window) ecb-compile-window) (other-window 1)))
+  (dotimes (i 2) (other-window 1) (if (equal (selected-window) ecb-compile-window) (other-window 1)))
+  (if (fboundp (quote ecb-set-sources-buffer)) (ecb-set-sources-buffer) (ecb-set-default-ecb-buffer))
+  (dotimes (i 1) (other-window 1) (if (equal (selected-window) ecb-compile-window) (other-window 1)))
+  (dotimes (i 1) (other-window -1) (if (equal (selected-window) ecb-compile-window) (other-window -1)))
+  (if (fboundp (quote ecb-set-methods-buffer)) (ecb-set-methods-buffer) (ecb-set-default-ecb-buffer))
+  (dotimes (i 1) (other-window 1) (if (equal (selected-window) ecb-compile-window) (other-window 1)))
+  (if (fboundp (quote ecb-set-sources-buffer)) (ecb-set-sources-buffer) (ecb-set-default-ecb-buffer))
+  (dotimes (i 2) (other-window 1) (if (equal (selected-window) ecb-compile-window) (other-window 1)))
+  (dotimes (i 2) (other-window 1) (if (equal (selected-window) ecb-compile-window) (other-window 1)))
+  )
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
