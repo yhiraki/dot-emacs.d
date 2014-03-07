@@ -7,9 +7,9 @@
 ;; Created: Di Feb  4 12:54:58 2014 (+0100)
 ;; Version:
 ;; Package-Requires: ()
-;; Last-Updated: Do Mär  6 19:15:35 2014 (+0100)
+;; Last-Updated: Fr Mär  7 11:05:06 2014 (+0100)
 ;;           By: Manuel Schneckenreither
-;;     Update #: 121
+;;     Update #: 122
 ;; URL:
 ;; Doc URL:
 ;; Keywords:
@@ -180,6 +180,9 @@
            ((string-match "list.*" group) nil)
            ;; Store everything else in misc until I can sort it out
            (t "mail.misc")))))
+
+;; edit score for replying
+(add-hook 'message-sent-hook 'gnus-score-followup-thread)
 
 
 ;; ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++

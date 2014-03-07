@@ -7,9 +7,9 @@
 ;; Created: Fr Okt  4 20:33:29 2013 (+0200)
 ;; Version:
 ;; Package-Requires: ()
-;; Last-Updated: Di Mär  4 13:43:47 2014 (+0100)
+;; Last-Updated: Do Mär  6 22:24:39 2014 (+0100)
 ;;           By: Manuel Schneckenreither
-;;     Update #: 367
+;;     Update #: 368
 ;; URL:
 ;; Doc URL:
 ;; Keywords:
@@ -141,6 +141,7 @@
         tuareg
         undo-tree
         w3m
+        wide-n
         window-number
         yasnippet
         zenburn-theme
