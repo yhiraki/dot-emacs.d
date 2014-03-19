@@ -7,9 +7,9 @@
 ;; Created: So Okt 13 16:30:34 2013 (+0200)
 ;; Version:
 ;; Package-Requires: ()
-;; Last-Updated: Fr Mär  7 13:56:27 2014 (+0100)
+;; Last-Updated: Fr Mär  7 14:00:09 2014 (+0100)
 ;;           By: Manuel Schneckenreither
-;;     Update #: 9
+;;     Update #: 10
 ;; URL:
 ;; Doc URL:
 ;; Keywords:
@@ -46,6 +46,7 @@
 ;; ++++++++++++++++++++++++++ MY LAYOUTS ++++++++++++++++++++++++++++++++
 ;; ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
+;; normally user-defined layouts are loaded from ~/.ecb...
 
 (ecb-layout-define "left-methods-sources" left nil
   (if (fboundp (quote ecb-set-methods-buffer)) (ecb-set-methods-buffer) (ecb-set-default-ecb-buffer))

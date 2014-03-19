@@ -7,9 +7,9 @@
 ;; Created: Mo Okt 14 18:17:43 2013 (+0200)
 ;; Version:
 ;; Package-Requires: ()
-;; Last-Updated: Di Feb  4 01:09:03 2014 (+0100)
+;; Last-Updated: Mi Mär 19 15:35:06 2014 (+0100)
 ;;           By: Manuel Schneckenreither
-;;     Update #: 146
+;;     Update #: 148
 ;; URL:
 ;; Doc URL:
 ;; Keywords:
@@ -56,6 +56,7 @@
     )
   )
 
+
 ;; MINOR MODE HOOK
 (defun my/java-minor-mode ()
   "Minor mode hook for Java."
@@ -88,6 +89,9 @@
 
 (add-hook 'java-mode-hook 'my/java-minor-mode)
 (add-hook 'jde-mode-hook 'my/java-minor-mode)
+
+;; java tab width
+(add-hook 'java-mode-hook (lambda () (setq c-basic-offset 2)))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Java Compilation output - Make Emacs understand links

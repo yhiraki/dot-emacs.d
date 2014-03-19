@@ -5,12 +5,17 @@
 ;; ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 (org-babel-do-load-languages
-    'org-babel-load-languages
-    '((gnuplot . t)))
+ 'org-babel-load-languages
+ '((gnuplot . t)))
 
 ;; persistent clocking
 (setq org-clock-persisnt 'history)
 (org-clock-persistence-insinuate)
+
+(global-set-key (kbd "C-c C-x C-x") 'org-clock-in-last)
+(global-set-key (kbd "C-c C-x C-j") 'org-clock-goto)
+(global-set-key (kbd "C-c C-x C-o") 'org-clock-out)
+
 
 ;; personal agendas
 (setq org-agenda-custom-commands
@@ -84,14 +89,39 @@
 (make-directory org-directory t) ;; create directory
 
 (setq org-default-notes-file org-mode-capture-directory)
-(define-key global-map "\C-c\C-c" 'org-capture) ;; define keystroke
+;; (define-key global-map "\C-c\C-c" 'org-capture) ;; define keystroke
 
+;; automatically clock in and resume after finishing capture mode
+(setq org-capture-templates
+      (append '(("c" "Clocked Task" entry
+         (file+headline org-mode-capture-directory "Tasks")
+         "* TODO %^{Name of Task} %^g     \nAdded: %U  %i\n  %?\n"
+         :clock-in t :clock-resume t))))
 
-;; ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-;; +++++++++++++++++++++++++++ DRAW DIAGRAMS ++++++++++++++++++++++++++++
-;; ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 (setq org-default-notes-file (concat org-directory "/notes.org"))
-     (define-key global-map "\C-cc" 'org-capture)
+(define-key global-map "\C-cr" 'org-capture)
+
+
+(setq org-capture-templates
+      (append '(("l" "Ledger entries")
+                ("ld" "Debit Card" plain
+                 (file "~/Documents/Planning/accounting.ledger")
+                 "%(org-read-date) %^{Payee}
+  Liabilities:Debit Card
+  Expenses:%^{Account}  %^{Amount}
+")
+                ("lc" "Cash" plain
+                (file "~/Documents/Planning/accounting.ledger")
+	        "%(org-read-date) * %^{Payee}
+  Expenses:Cash
+  Expenses:%^{Account}  %^{Amount}
+"))
+       org-capture-templates))
+
+
+;; ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+;; ++++++++++++++++++++++++++++ OTHER STUFF +++++++++++++++++++++++++++++
+;; ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 (setq org-ditaa-jar-path (concat package-folder "java_files/ditaa0_9.jar"))
 (setq org-plantuml-jar-path (concat package-folder "java_files/plantuml.jar"))
@@ -99,7 +129,7 @@
 (add-hook 'org-babel-after-execute-hook 'bh/display-inline-images 'append)
 
 
-; Make babel results blocks lowercase
+                                        ; Make babel results blocks lowercase
 (setq org-babel-results-keyword "results")
 
 (defun bh/display-inline-images ()
@@ -123,12 +153,12 @@
          (plantuml . t)
          (latex . t))))
 
-; Do not prompt to confirm evaluation
-; This may be dangerous - make sure you understand the consequences
-; of setting this -- see the docstring for details
+                                        ; Do not prompt to confirm evaluation
+                                        ; This may be dangerous - make sure you understand the consequences
+                                        ; of setting this -- see the docstring for details
 (setq org-confirm-babel-evaluate nil)
 
-; Use fundamental mode when editing plantuml blocks with C-c '
+                                        ; Use fundamental mode when editing plantuml blocks with C-c '
 (add-to-list 'org-src-lang-modes (quote ("plantuml" . fundamental)))
 
 
@@ -149,6 +179,29 @@
 
 
 (setq org-startup-indented t)
+
+
+(add-to-list 'org-latex-classes
+             '("ds"
+               "[NO-DEFAULT-PACKAGES]
+               [NO-PACKAGES]
+               [NO-EXTRA]"
+               ("\\subsection{%s}" . "\\section*{%s}")
+               ("\\subsubsection{%s}" . "\\subsection*{%s}")
+               ("\\paragraph{%s}" . "\\paragraph*{%s}")
+               ("\\subparagraph{%s}" . "\\subparagraph*{%s}")
+               ("\\textbf{%s}" . "\\textbf{%s}")))
+
+(add-to-list 'org-latex-classes
+             '("empty"
+               "[NO-DEFAULT-PACKAGES]
+               [NO-PACKAGES]
+               [NO-EXTRA]"
+               ("\\section{%s}" . "\\section*{%s}")
+               ("\\subsection{%s}" . "\\subsection*{%s}")
+               ("\\subsubsection{%s}" . "\\subsubsection*{%s}")
+               ("\\paragraph{%s}" . "\\paragraph*{%s}")
+               ("\\subparagraph{%s}" . "\\subparagraph*{%s}")))
 
 
 ;; ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++

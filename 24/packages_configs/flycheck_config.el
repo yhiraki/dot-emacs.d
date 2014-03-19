@@ -8,7 +8,7 @@
 ;; Version:
 ;; Last-Updated:
 ;;           By:
-;;     Update #: 13
+;;     Update #: 20
 ;; URL:
 ;; Description:
 ;;
@@ -23,10 +23,17 @@
 ;; ++++++++++++++++++++++++++ FLYCHECK COONFIG ++++++++++++++++++++++++++
 ;; ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
-
 ;; Enable flycheck for all buffers
 (global-flycheck-mode t)
 
+;; HASKELL
+;; set in customize-set-variables in init.el
+
+;; LEDGER
+(eval-after-load 'flycheck '(require 'flycheck-ledger))
+
+;; FLYCHECK MODE LINE COLOR
+(add-hook 'flycheck-mode-hook 'flycheck-color-mode-line-mode)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; flycheck_config.el ends here

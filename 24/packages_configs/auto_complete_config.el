@@ -7,9 +7,9 @@
 ;; ;; Created: So Okt 13 19:43:26 2013 (+0200)
 ;; ;; Version:
 ;; ;; Package-Requires: ()
-;; ;; Last-Updated: Di Jan 28 13:33:40 2014 (+0100)
+;; ;; Last-Updated: Do Mär 20 00:27:12 2014 (+0100)
 ;; ;;           By: Manuel Schneckenreither
-;; ;;     Update #: 90
+;; ;;     Update #: 99
 ;; ;; URL:
 ;; ;; Doc URL:
 ;; ;; Keywords:
@@ -96,17 +96,18 @@
      ;; ac-source-css-property
      ac-source-dictionary
      ;; ac-source-eclim
-     ;; ac-source-etags
      ac-source-yasnippet
-     ac-source-filename
-     ac-source-files-in-current-dir
+     ac-source-symbols
+     ; ac-source-filename
+     ; ac-source-files-in-current-dir
      ;; ac-source-gtags
+     ac-source-etags
      ac-source-imenu
      ;; ac-source-semantic ;; slows down auto complete
      ;; ac-source-semantic-raw ;; slows down auto complete
      ;;ac-source-words-in-all-buffer
-     ac-source-words-in-buffer
-     ac-source-words-in-same-mode-buffers
+     ;; ac-source-words-in-buffer
+     ;; ac-source-words-in-same-mode-buffers
      ))
 
 

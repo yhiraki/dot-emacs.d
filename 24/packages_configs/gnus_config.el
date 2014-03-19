@@ -7,9 +7,9 @@
 ;; Created: Di Feb  4 12:54:58 2014 (+0100)
 ;; Version:
 ;; Package-Requires: ()
-;; Last-Updated: Fr Mär  7 12:13:00 2014 (+0100)
+;; Last-Updated: Mi Mär 19 17:52:06 2014 (+0100)
 ;;           By: Manuel Schneckenreither
-;;     Update #: 123
+;;     Update #: 142
 ;; URL:
 ;; Doc URL:
 ;; Keywords:
@@ -96,6 +96,9 @@
 ;; show old messages also
 ;; (setq gnus-fetch-old-headers t)
 
+(setq gnus-asynchronous t)
+(setq gnus-use-cache t)
+
 ;; show all images, but the ones having "ads" in them.
 ;; (setq gnus-blocked-images "ads")
 (setq gnus-blocked-images 'gnus-block-private-groups)
@@ -144,7 +147,7 @@
 (defadvice gnus-demon-scan-news (around gnus-demon-timeout activate)
   "Timeout for Gnus."
   (with-timeout
-      (120 (message "Gnus timed out."))
+      (15 (message "Gnus timed out."))
     ad-do-it))
 
 
@@ -209,11 +212,88 @@
 (setq mail-user-agent 'gnus-user-agent)
 
 ;; ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+;; ++++++++++++++++++++++++ SIGNING MESSAGES ++++++++++++++++++++++++++++
+;; ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+;; Always sign encrypted messages
+(setq mc-pgp-always-sign t)
+;; How long should mailcrypt remember your passphrase
+(setq mc-passwd-timeout 600)
+
+;; Automagically sign all messages
+(add-hook 'message-send-hook 'will-you-sign)
+(defun will-you-sign ()
+  (interactive)
+  (if (y-or-n-p "Do you want to sign this message? ")
+      (mml-secure-sign-pgp)))
+
+
+;; ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+;; +++++++++++++++++++++++++ FORMATING LISTS ++++++++++++++++++++++++++++
+;; ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+
+;; article lists
+(setq-default
+ gnus-summary-line-format "%U%R%z %(%&user-date;  %-15,15f  %B%s%)\n"
+ gnus-user-date-format-alist '((t . "%d.%m.%Y %H:%M"))
+ gnus-summary-thread-gathering-function 'gnus-gather-threads-by-references
+ gnus-thread-sort-functions '(gnus-thread-sort-by-date)
+ gnus-sum-thread-tree-false-root ""
+ gnus-sum-thread-tree-indent " "
+ gnus-sum-thread-tree-leaf-with-other "├► "
+ gnus-sum-thread-tree-root ""
+ gnus-sum-thread-tree-single-leaf "╰► "
+ gnus-sum-thread-tree-vertical "│")
+
+
+;; Coloring empty topics differently from non-empty topics is a nice idea.
+(setq gnus-topic-line-format "%i[ %u&topic-line; ] %v\n")
+
+;; this corresponds to a topic line format of "%n %A"
+(defun gnus-user-format-function-topic-line (dummy)
+  (let ((topic-face (if (zerop total-number-of-articles)
+                        'my-gnus-topic-empty-face
+                      'my-gnus-topic-face)))
+    (propertize
+     (format "%s %d" name total-number-of-articles)
+     'face topic-face)))
+
+
+;; Replacing common prefixes of group names with spaces
+;; (defvar gnus-user-format-function-g-prev "" "")
+;; (defun empty-common-prefix (left right)
+;;   "Given `left' '(\"foo\" \"bar\" \"fie\") and `right' '(\"foo\"
+;;     \"bar\" \"fum\"), return '(\"   \" \"   \" \"fum\")."
+;;   (if (and (cdr right)			; always keep the last part of right
+;;            (equal (car left) (car right)))
+;;       (cons (make-string (length (car left)) ? )
+;;             (empty-common-prefix (cdr left) (cdr right)))
+;;     right))
+;; (defun gnus-user-format-function-g (arg)
+;;   "The full group name, but if it starts with a previously seen
+;;     prefix, empty that prefix."
+;;   (if (equal gnus-user-format-function-g-prev gnus-tmp-group) ; line-format is updated on exiting the summary, making prev equal this
+;;       gnus-tmp-group
+;;     (let* ((prev (split-string-and-unquote gnus-user-format-function-g-prev "\\."))
+;;            (this (split-string-and-unquote gnus-tmp-group "\\.")))
+;;       (setq gnus-user-format-function-g-prev gnus-tmp-group)
+;;       (combine-and-quote-strings
+;;        (empty-common-prefix prev this)
+;;        "."))))
+;; (setq gnus-group-line-format "%M%S%p%P%5y:%B%(%ug%)\n")
+
+;; ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 ;; ++++++++++++++++++++++++ FINALLY OPEN GNUS +++++++++++++++++++++++++++
 ;; ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
-;; do not download everyting when gnus started
+;; do not download everyting when gnus starts
 (setq gnus-read-active-file 'some)
+
+
+;; set timeout so we don't get stuck
+(setq nntp-connection-timeout 3)
+
 ;; open gnus
 (gnus)
 

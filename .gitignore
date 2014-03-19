@@ -32,5 +32,5 @@ eshell/lastdir
 /var/pcache/ido-load-library
 /.bookmarks
 /org/notes.org
-
+/dist/*
 /.#init.el

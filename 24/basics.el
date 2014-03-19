@@ -5,9 +5,9 @@
 ;; Author: Manuel Schneckenreither
 ;; Created: Mon Dec 10 22:51:09 2012 (+0100)
 ;; Version:
-;; Last-Updated: Mi Mär  5 17:27:01 2014 (+0100)
+;; Last-Updated: Mi Mär 19 21:25:31 2014 (+0100)
 ;;           By: Manuel Schneckenreither
-;;     Update #: 599
+;;     Update #: 618
 ;; URL:
 ;; Description:
 ;;    Basic configuration for emacs. In here are all configs of
@@ -23,7 +23,21 @@
 ;; +++++++++++++++++++++++++ DESKTOP SESSIONS +++++++++++++++++++++++++++
 ;; ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 ;; DESKTOP - Save and restore open buffers, point, mark, histories, other variables
-(desktop-save-mode 1)
+;; (desktop-save-mode 1)
+
+(setq inhibit-splash-screen t)
+(setq inhibit-startup-message t)
+
+;; files/buffers not to be opened
+;; (setq desktop-buffers-not-to-save
+;;       (concat "\\("
+;;               "^nn\\.a[0-9]+\\|\\.log\\|(ftp)\\|^tags\\|^TAGS"
+;;               "\\|\\.emacs.*\\|\\.diary\\|\\.newsrc-dribble\\|\\.bbdb"
+;;               "\\)$"))
+;; (add-to-list 'desktop-modes-not-to-save 'dired-mode)
+;;(add-to-list 'desktop-modes-not-to-save 'Info-mode)
+;;(add-to-list 'desktop-modes-not-to-save 'info-lookup-mode)
+;;(add-to-list 'desktop-modes-not-to-save 'fundamental-mode)
 
 ;; ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 ;; ++++++++++++++++++++++++++++ COMPILATION +++++++++++++++++++++++++++++
@@ -130,7 +144,8 @@
 ;; ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 ;; TAB WIDTH
-(setq-default tab-width 4)
+(setq-default tab-width 2)
+;; (setq whitespace-tab-width 2)
 (setq cua-auto-tabify-rectangles nil)
 
 ;; SMART TABS
@@ -185,27 +200,6 @@
   (delete-trailing-whitespace)
   (indent-region (point-min) (point-max) nil)
   (untabify (point-min) (point-max)))
-
-;; ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-;; +++++++++++++++++++ APOSTROPHES AROUND REGION ++++++++++++++++++++++++
-;; ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-
-(defun region-insert-char (p1 p2 beg end)
-  (save-excursion
-    (goto-char p2)
-    (insert end)
-    (goto-char p1)
-    (insert beg)
-    )
-  (forward-char))
-
-
-;; not bound to any key sequence
-(defun insert-apostrophes (posBegin posEnd)
-  "Insert apostrophes at beginning and end of region."
-  (interactive "r")
-  (region-insert-char posBegin posEnd "'" "'")
-  )
 
 
 ;; ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -309,18 +303,18 @@
 ;; +++++++++++++++++++ SHOW KILL RING WHEN YANKING ++++++++++++++++++++++
 ;; ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
- (defun kill-ring-insert ()
-   (interactive)
-   (let (
+(defun kill-ring-insert ()
+  (interactive)
+  (let (
         (to_insert (completing-read "Yank : "
                                     (delete-duplicates kill-ring :test #'equal)
                                     )))
-     (when (and to_insert
+    (when (and to_insert
                (region-active-p))
       ;; the currently highlighted section is to be replaced by the yank
       (delete-region (region-beginning) (region-end)))
-     (insert to_insert))
-   )
+    (insert to_insert))
+  )
 
 ;; ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 ;; ++++++++++++++++++ AUTOMATICALLY WRAP LONG LINES +++++++++++++++++++++
@@ -351,8 +345,8 @@
 ;; ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 (setq
-  bookmark-default-file (concat load-emacsd ".bookmarks") ;; keep my ~/ clean
-  bookmark-save-flag 1)                        ;; autosave each change
+ bookmark-default-file (concat load-emacsd ".bookmarks") ;; keep my ~/ clean
+ bookmark-save-flag 1)                        ;; autosave each change
 
 
 ;; ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -363,13 +357,20 @@
 (tool-bar-mode -1) ;; REMOVE TOOLBAR
 (scroll-bar-mode -1) ;; REMOVE SCROLLBARS
 
+;; ENABLE UTF8
+(setq locale-coding-system 'utf-8)
+(set-terminal-coding-system 'utf-8-unix)
+(set-keyboard-coding-system 'utf-8)
+(set-selection-coding-system 'utf-8)
+(prefer-coding-system 'utf-8)
+
 ;; DISABLE GUI DIALOG BOXES
 (setq use-dialog-box nil)
 
 ;; AUTOMATICALLY RELOAD ALL TAGS WITHOUT ASKING IN A GUI
-(setq tags-revert-without-query 1)
+(setq tags-revert-without-query t)
 
-;; SHOW KEYSTROKES IN MINIBUFFER IMMEDIATEL
+;; SHOW KEYSTROKES IN MINIBUFFER IMMEDIATELY
 (setq echo-keystrokes 0.01)
 
 ;; END SENTENCES WITH ONE SPACE, NOT TWO (AFFECTS FILL COMMANDS)
@@ -390,17 +391,23 @@
 ;; ELECTRIC PARENTHESIS PAIRS
 (electric-pair-mode 1)
 
-
 ;; VISUAL LINE MODE - WRAP LONG LINES
 (global-visual-line-mode)
+
+;; KILL WHOLE LINE AND NEWLINE WITH C-k IF AT BEGINNING OF LINE ¶
+(setq kill-whole-line t)
 
 ;; ENABLE REGION SELECTING, USE C-ENTER
 ;; (cua-mode 1)
 
+;; ALWAYS USE THE ABSOUTE PATH WHEN VISTITING FILES (GETS RID OF SOME
+;; WEIRED BEHAVIOUR)
+(setq find-file-visit-truename t)
+
 ;; STACK TRACE IN CASE OF AN ERROR
 (setq stack-trace-on-error t)
 
-;; flush blank lines
+;; FLUSH BLANK LINES
 (defun collapse-blank-lines ()
   "Delete blank lines."
   (interactive)

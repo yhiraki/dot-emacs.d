@@ -7,9 +7,9 @@
 ;; Created: Di Feb  4 17:01:05 2014 (+0100)
 ;; Version:
 ;; Package-Requires: ()
-;; Last-Updated: Mo Feb 10 10:03:57 2014 (+0100)
+;; Last-Updated: Do Mär 20 00:15:22 2014 (+0100)
 ;;           By: Manuel Schneckenreither
-;;     Update #: 20
+;;     Update #: 23
 ;; URL:
 ;; Doc URL:
 ;; Keywords:
@@ -56,13 +56,18 @@
                                   (nnimap-server-port 993)
                                   (nnimap-address "mail2.uibk.ac.at")
                                   ;(nnir-search-engine Imap)
+                                  ;; if a connection to an IMAP server
+                                  ;; can't be closed, force close
+                                  ;; after 1s
+                                  (nnimap-logout-timeout 1.0)
                                   ))
 
 (add-to-list 'gnus-secondary-select-methods '(nnimap "gmail"
                                                      (nnimap-stream ssl)
                                                      (nnimap-address "imap.gmail.com")
                                                      (nnimap-server-port 993)
-                                        ;(nnir-search-engine Imap)
+                                                     ;;(nnir-search-engine Imap)
+                                                     (nnimap-logout-timeout 1.0)
                                                      ))
 
 

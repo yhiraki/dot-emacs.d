@@ -7,9 +7,9 @@
 ;; Created: Fr Okt  4 20:33:29 2013 (+0200)
 ;; Version:
 ;; Package-Requires: ()
-;; Last-Updated: Fr Mär  7 12:20:55 2014 (+0100)
+;; Last-Updated: Do Mär 20 00:20:57 2014 (+0100)
 ;;           By: Manuel Schneckenreither
-;;     Update #: 369
+;;     Update #: 458
 ;; URL:
 ;; Doc URL:
 ;; Keywords:
@@ -61,6 +61,7 @@
 (defvar load-emacsd (concat home-folder ".emacs.d/") "The .emacs.d folder path.")
 (setq user-emacs-directory load-emacsd)        ;; set the emacs directory
 
+
 (load-file (concat load-emacsd "settings.el"))
 
 
@@ -104,17 +105,23 @@
         android-mode
         auctex
         auto-complete
+        auto-complete-auctex
         auto-dictionary
         ;; backup-each-save ;;; solved differently, see backup_each_save_config.el
         backup-walker
         bbdb
+        bookmark+
         color-theme
         ecb
         edbi
         flycheck
-        flycheck-hdevtools
+        flycheck-haskell
+        flycheck-color-mode-line
+        flycheck-ledger
         git-commit-mode
         git-rebase-mode
+        ghc                 ;; ghc-mode
+        ghci-completion
         gnuplot
         gnuplot-mode
         haskell-mode
@@ -188,8 +195,6 @@
 ;; +++++++++++++++++++++++ LOAD EMACS CONFIGS +++++++++++++++++++++++++++
 ;; ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
-;; load cedet
-;; (load (concat package_conf_folder "cedet_config.el"))
 ;; init everything else
 (load (concat load-folder "emacs.el"))
 
@@ -202,6 +207,9 @@
 (color-theme-dark-laptop)
 ;; eval following to use standard theme:
 ;; (color-theme-standard)
+
+;; Color theme solarized
+;; (color-theme-solarized-dark)
 
 ;; (defun color-my-emacs-default ()
 ;;   "Revert to default emacs theme."
@@ -220,6 +228,7 @@
  ;; If there is more than one, they won't work right.
  '(ac-quick-help-delay 0.1)
  '(ac-show-menu-immediately-on-auto-complete t)
+ '(bmkp-last-as-first-bookmark-file "~/.emacs.d/.bookmarks")
  '(color-theme-legal-frame-parameters "\\(color\\|mode\\|font\\|height\\|width\\)$")
  '(column-number-mode t)
  '(custom-safe-themes (quote ("0f0e3af1ec61d04ff92f238b165dbc6d2a7b4ade7ed9812b4ce6b075e08f49fe" "f350c66dcff6db73192c4819363b7c1992931841e5ab381b1ed57ef8257a498f" default)))
@@ -243,6 +252,7 @@
  '(flymake-gui-warnings-enabled nil)
  '(frame-background-mode (quote dark))
  '(haskell-font-lock-haddock t)
+ '(haskell-program-name "ghci -DDEBUG -fbreak-on-error" t)
  '(help-at-pt-display-when-idle (quote (flymake-overlay)) nil (help-at-pt))
  '(help-at-pt-timer-delay 0.1)
  '(jde-compile-option-directory "./../classes")
@@ -252,7 +262,7 @@
  '(jde-jdk-registry (quote (("1.6" . "/usr/lib/jvm/java-1.7.0") ("1.6OpenJDK" . "/usr/lib/jvm/java-1.7.0-openjdk"))))
  '(jde-sourcepath (quote ("./src/main" "./src/test")))
  '(kept-new-versions 5000)
- '(org-agenda-files (quote ("~/Documents/Planning/planning_time.org" "~/Documents/Planning/university.org" "~/Documents/Planning/bachelorarbeit.org" "~/Documents/Planning/ProjectIdeas.org" "~/Documents/Planning/freetime.org" "~/Documents/Planning/lists.org" "~/Documents/Planning/anniverseries.org" "~/Documents/Planning/Emacs.org" "~/Programmierung/App/Documentation/app-brainstorming.txt")))
+ '(org-agenda-files (quote ("~/Documents/Planning/planning_time.org" "~/Documents/Planning/university.org" "~/Documents/Planning/bachelorarbeit.org" "~/Documents/Planning/ProjectIdeas.org" "~/Documents/Planning/freetime.org" "~/Documents/Planning/lists.org" "~/Documents/Planning/anniverseries.org" "~/Documents/Planning/Emacs.org" "~/Programmierung/App/Documentation/app-brainstorming.txt" "~/.emacs.d/org/notes.org")))
  '(send-mail-function (quote smtpmail-send-it))
  '(size-indication-mode t)
  '(smtpmail-smtp-server "smtp.uibk.ac.at")
