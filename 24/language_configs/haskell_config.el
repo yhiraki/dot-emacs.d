@@ -8,7 +8,7 @@
 ;; Version:
 ;; Last-Updated:
 ;;           By:
-;;     Update #: 392
+;;     Update #: 449
 ;; URL:
 ;; Description:
 ;;
@@ -17,6 +17,8 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;
 ;;; Code:
+
+(require 'haskell-mode)
 
 ;; ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 ;; +++++++++++++++++++++++++++ HASKELL CONFIGS ++++++++++++++++++++++++++
@@ -41,26 +43,63 @@
 (add-hook 'haskell-mode-hook 'turn-on-haskell-indent)
 ;;(add-hook 'haskell-mode-hook 'turn-on-haskell-simple-indent)
 
-;; [==:INIT ghc-mod==]
-;; (autoload 'ghc-init "ghc" nil t)
-;; (add-hook 'haskell-mode-hook
-;;           (lambda ()
-;;             (ghc-init)))
-
-;; [==:INIT auto-complete==]
-(ac-define-source ghc-mod
-  '((depends ghc)
-    (candidates . (ghc-select-completion-symbol))
-    (symbol . "s")
-    (cache)))
-
-;; ;; [==:INIT fnd-file-hook==]
-;; (defun my-haskell-ac-init ()
-;;   (when (member (file-name-extension buffer-file-name) '("hs" "lhs"))
 
 ;; set DEBUG constant in haskell interpreter
 ;; (setq haskell-program-name "ghci -DDEBUG ")
 (setq haskell-program-name "ghci -DDEBUG -fbreak-on-error")
+
+(setq haskell-process-args-ghci (quote ("-ferror-spans -DDEBUG -fbreak-on-error")))
+
+
+;; ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+;; ++++++++++++++++++++++++++++ GHC MODE ++++++++++++++++++++++++++++++++
+;; ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+
+(autoload 'ghc-init "ghc" nil t)
+(add-hook 'haskell-mode-hook (lambda () (ghc-init) (flymake-mode)))
+
+
+;; ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+;; +++++++++++++++++++++++ USE INTERACTIVE MODE +++++++++++++++++++++++++
+;; ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+;; see http://haskell.github.io/haskell-mode/manual/latest/#haskell_002dinteractive_002dmode
+
+;; (eval-after-load "haskell-mode"
+;;   '(progn
+;;     (define-key haskell-mode-map (kbd "C-x C-d") nil)
+;;     (define-key haskell-mode-map (kbd "C-c C-z") 'haskell-interactive-switch)
+;;     (define-key haskell-mode-map (kbd "C-c C-l") 'haskell-process-load-file)
+;;     (define-key haskell-mode-map (kbd "C-c C-b") 'haskell-interactive-switch)
+;;     (define-key haskell-mode-map (kbd "C-c C-t") 'haskell-process-do-type)
+;;     (define-key haskell-mode-map (kbd "C-c C-i") 'haskell-process-do-info)
+;;     (define-key haskell-mode-map (kbd "C-c M-.") nil)
+;;     (define-key haskell-mode-map (kbd "C-c C-d") nil)))
+
+
+;; ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+;; ++++++++++++++++++++++++++ OTHER FEATURES ++++++++++++++++++++++++++++
+;; ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+
+;;(eval-after-load "haskell-mode"
+;;  (define-key haskell-mode-map (kbd "C-c v c") 'haskell-cabal-visit-file))
+
+
+;;(eval-after-load "haskell-mode"
+;;    '(define-key haskell-mode-map (kbd "C-x SPC") 'haskell-compile))
+
+;;(eval-after-load "haskell-cabal"
+;;    '(define-key haskell-cabal-mode-map (kbd "C-x SPC") 'haskell-compile))
+
+(add-hook 'haskell-mode-hook 'turn-on-haskell-decl-scan)
+
+;; (setq haskell-stylish-on-save t)
+
+;; (eval-after-load "haskell-mode"
+;;   '(progn
+;;      (define-key haskell-mode-map (kbd "C-,") 'haskell-move-nested-left)
+;;      (define-key haskell-mode-map (kbd "C-.") 'haskell-move-nested-right)))
 
 
 ;; ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -68,13 +107,15 @@
 ;; ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 
-(defun delete-hdevtools-socket-file ()
-  "Delete the socket file for hdevtools."
-  (interactive)
-  (shell-command "rm -f .hdevtools.sock" nil)
-  )
+;; (eval-after-load 'flycheck '(require 'flycheck-hdevtools))
 
-(add-hook 'open-file 'delete-hdevtools-socket-file)
+;; (defun delete-hdevtools-socket-file ()
+;;   "Delete the socket file for hdevtools."
+;;   (interactive)
+;;   (shell-command "rm -f .hdevtools.sock" nil)
+;;   )
+
+;; (add-hook 'open-file 'delete-hdevtools-socket-file)
 
 ;; enable flycheck
 ;; (eval-after-load 'flycheck '(require 'flycheck-hdevtools))
@@ -99,12 +140,13 @@
   "Format souce coude nicely."
   (interactive)
   (save-excursion
-      (push-mark (point))
-      (push-mark (point-max) nil t)
-      (goto-char (point-min))
-      (haskell-indent-align-def t 'guard)
-      (haskell-indent-align-def t 'rhs)
-  ))
+    (haskell-mode-stylish-buffer)
+    ;; (push-mark (point))
+    ;; (push-mark (point-max) nil t)
+    ;; (goto-char (point-min))
+    ;; (haskell-indent-align-def t 'guard)
+    ;; (haskell-indent-align-def t 'rhs)
+    ))
 
 (defun haskell-insert-equals ()
   "Insert and aligns equals sign."
@@ -141,7 +183,6 @@
   (insert "; ")
   )
 
-
 ;; MINOR MODE HOOK
 (defun my/haskell-minor-mode ()
   "Minor mode hook for Haskell."
@@ -149,6 +190,7 @@
   ;; add auto-complete mode
   (add-to-list 'ac-sources 'ac-source-ghc-mod)
   (add-to-list 'ac-sources 'ac-source-etags)
+  (add-to-list 'ac-sources 'ac-source-symbols)
 
   ;; format source code in sensible way
   ;; (add-hook 'before-save-hook 'haskell-source-code-align nil t)
@@ -162,12 +204,12 @@
   (local-set-key (kbd "|") 'haskell-insert-guard)
 
   (local-set-key (kbd "C-c =") (defun insertEquals ()
-                                (interactive)
-                                (insert "=")))
+                                 (interactive)
+                                 (insert "=")))
 
   (local-set-key (kbd "C-c |") (defun insertGuard ()
-                                (interactive)
-                                (insert "|")))
+                                 (interactive)
+                                 (insert "|")))
 
 
   ;; CREATE AND SET TAGS FILE
@@ -176,6 +218,10 @@
 
 
 (add-hook 'haskell-mode-hook 'my/haskell-minor-mode)
-(add-hook 'haskell-mode-hook 'highlight-keywords)
+;; (add-hook 'haskell-mode-hook 'highlight-keywords)
+
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; haskell_config.el ends here
+
+
