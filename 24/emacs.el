@@ -5,9 +5,9 @@
 ;; Author: Manuel Schneckenreither
 ;; Created: Tue Dec 11 00:43:14 2012 (+0100)
 ;; Version:
-;; Last-Updated: Mi Mär 19 21:52:55 2014 (+0100)
+;; Last-Updated: Sa Mär 22 14:02:15 2014 (+0100)
 ;;           By: Manuel Schneckenreither
-;;     Update #: 370
+;;     Update #: 380
 ;; URL:
 ;; Description:
 ;;
@@ -35,7 +35,7 @@
 ;; CEDET - semantic, EDE, etc. (needs to be done pretty early!)
 (load (concat package-conf-folder "cedet_config.el"))
 ;; ECB - windows showing help
-(load (concat package-conf-folder "ecb_config.el"))
+;; (load (concat package-conf-folder "ecb_config.el"))
 ;; Eldoc config
 (load (concat package-conf-folder "eldoc_config.el"))
 ;; FLYCHECK -- automatic syntax checking on-the-fly
@@ -58,8 +58,8 @@
 (load (concat package-conf-folder "jdee_config.el"))
 ;; ORG Mode
 (load (concat package-conf-folder "org_mode_config.el"))
-;; AUTO COMPLETE - completion - You should not disable this, you know what you
-;; are doing
+;; AUTO COMPLETE - completion - You should not disable this, unless
+;; you know what you are doing
 (load (concat package-conf-folder "auto_complete_config.el"))
 ;; WHITESPACE MODE -- mark 80'th+ columns
 (load (concat package-conf-folder "whitespace_config.el"))
@@ -85,10 +85,9 @@
 (load (concat package-conf-folder "gnus_config.el"))
 ;; CUA - use rectangle selections
 (load (concat package-conf-folder "cua_config.el"))
-;; BOOKMARKS+ - bookmark extendsion
+;; BOOKMARKS+ - bookmark extendsion, multiple desktops
 (load (concat package-conf-folder "bmkp_config.el"))
-;; GHC MODE - listes as GHC ins init file
-(load (concat package-conf-folder "ghc_mode_config.el"))
+
 
 ;; ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 ;; +++++++++++++++++ LOAD LANGUAGE SPECIFIC SETTINGS ++++++++++++++++++++

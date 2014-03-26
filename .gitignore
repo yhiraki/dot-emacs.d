@@ -34,3 +34,4 @@ eshell/lastdir
 /org/notes.org
 /dist/*
 /.#init.el
+*.desktop

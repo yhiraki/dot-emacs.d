@@ -7,9 +7,9 @@
 ;; Created: Fr Feb  7 00:07:46 2014 (+0100)
 ;; Version:
 ;; Package-Requires: ()
-;; Last-Updated: Fr Feb  7 00:13:21 2014 (+0100)
-;;           By: Schnecki
-;;     Update #: 3
+;; Last-Updated: Mo Mär 24 12:24:15 2014 (+0100)
+;;           By: Manuel Schneckenreither
+;;     Update #: 16
 ;; URL:
 ;; Doc URL:
 ;; Keywords:
@@ -75,15 +75,54 @@
 (add-hook 'c++-mode-hook 'c++-turn-on-eldoc-mode)
 
 
+;; Create and set tags table
+(defun make-c-tags ()
+  "This function reloads the tags by using the command 'make tags'."
+  (interactive)
+  (let ((dir (nth 0 (split-string default-directory "src"))))
+    (setq esdir (replace-regexp-in-string " " "\\\\ " dir))
+    (shell-command
+     (concat "cd " esdir " && find . -name \"*.c\" -o -name \"*.h\" -o -name \"*.cpp\" -o -name \"*.hpp\" | etags - 1>/dev/null 2>/dev/null") nil)
+    (visit-tags-table (concat dir "TAGS"))))
+
+
 ;; C MODE
-(defun my-c-mode-cedet-hook ()
-  (add-to-list 'ac-sources 'ac-source-gtags)
-  (add-to-list 'ac-sources 'ac-source-semantic)
+(defun my-c-mode-hook ()
+
+
+  ;; add auto-complete mode
+  ;; (add-to-list 'ac-sources 'ac-source-abbrev)          ;; edited
+  ;; (add-to-list 'ac-sources 'ac-source-css-property)
+  ;; (add-to-list 'ac-sources 'ac-source-dictionary)
+  ;; (add-to-list 'ac-sources 'ac-source-eclim)
+  (add-to-list 'ac-sources 'ac-source-yasnippet)
+  ;; (add-to-list 'ac-sources 'ac-source-symbols)
+  ;; (add-to-list 'ac-sources 'ac-source-filename)
+  ;; (add-to-list 'ac-sources 'ac-source-files-in-current-dir)
+  ;; (add-to-list 'ac-sources 'ac-source-gtags)
+  (add-to-list 'ac-sources 'ac-source-etags)
+  (add-to-list 'ac-sources 'ac-source-imenu)
+  ;; (add-to-list 'ac-sources 'ac-source-semantic) ;; slows down auto complete)
+  (add-to-list 'ac-sources 'ac-source-semantic-raw) ;; slows down auto complete)
+  ;; (add-to-list 'ac-sources 'ac-source-words-in-all-buffer)
+  ;; (add-to-list 'ac-sources 'ac-source-words-in-buffer)
+  ;; (add-to-list 'ac-sources 'ac-source-words-in-same-mode-buffers)
+
+  ;; enable auto completion. If it doesn't work try to disable flyspell mode.
+  (auto-complete-mode)
+
+  ;; use programming flyspell mode
+  (flyspell-prog-mode)
+
   (local-set-key "." 'semantic-complete-self-insert)
-  (local-set-key ">" 'semantic-complete-self-insert))
+  (local-set-key ">" 'semantic-complete-self-insert)
+
+  (add-hook 'after-save-hook 'make-c-tags nil t)
+
+  )
 
 ;; add hook
-(add-hook 'c-mode-common-hook 'my-c-mode-cedet-hook)
+(add-hook 'c-mode-hook 'my-c-mode-hook)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; c_config.el ends here

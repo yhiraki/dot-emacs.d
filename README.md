@@ -180,7 +180,7 @@ Steps 1 + 2 + 4  (3 not included!):
     su -c "yum install ctags-etags gnuplot emacs graphviz \                # main tools
     w3m curl && \                                                          # browser for links
     texlive evince &&  \                                                   # LaTeX
-    cabal install hasktags && cabal install ghc-mod \                      # Haskell
+    cabal install hasktags &&                                              # Haskell
     perl-CPAN mariadb-devel && cpan -fi Module::Build::Compat && \         # database tools
     cpan -fi RPC::EPC::Service DBI DBD::SQLite DBD::Pg DBD::mysql" && \    # database tools
     echo "(load-file \"~/.emacs.d/gnus.el\")" > ~/.gnus.el && \            # create gnus file

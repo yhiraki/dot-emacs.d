@@ -7,9 +7,9 @@
 ;; Created: Fr Okt  4 20:33:29 2013 (+0200)
 ;; Version:
 ;; Package-Requires: ()
-;; Last-Updated: Do Mär 20 00:20:57 2014 (+0100)
+;; Last-Updated: Mi Mär 26 09:51:29 2014 (+0100)
 ;;           By: Manuel Schneckenreither
-;;     Update #: 458
+;;     Update #: 546
 ;; URL:
 ;; Doc URL:
 ;; Keywords:
@@ -35,7 +35,7 @@
 ;;
 ;; This program is distributed in the hope that it will be useful,
 ;; but WITHOUT ANY WARRANTY; without even the implied warranty of
-;; MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+;; MERCHANT ABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
 ;; General Public License for more details.
 ;;
 ;; You should have received a copy of the GNU General Public License
@@ -53,21 +53,14 @@
 
 
 ;; Edit your settings in settings.el
-;; (defvar load-directory_path (default-directory) "The directory to look for .emacs.d/ .")
-;; (setq directory_path default-directory)
 
-;; this is in the file being loaded
+;; define folder variables
 (defvar home-folder (substitute-in-file-name "$HOME/"))
 (defvar load-emacsd (concat home-folder ".emacs.d/") "The .emacs.d folder path.")
-(setq user-emacs-directory load-emacsd)        ;; set the emacs directory
 
-
+;; the settings file name to load
 (load-file (concat load-emacsd "settings.el"))
 
-
-(autoload 'cflow-mode "cflow-mode")
-(setq auto-mode-alist (append auto-mode-alist
-                              '(("\\.cflow$" . cflow-mode))))
 
 ;; ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 ;; +++++++++++++++++++++++++++ EMACS SERVER +++++++++++++++++++++++++++++
@@ -90,6 +83,12 @@
 ;; +++++++++++++++++++++++++++ LOAD PACKAGES ++++++++++++++++++++++++++++
 ;; ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
+
+;; GNU cflow comes with an emacs module providing a major mode for
+;; visiting flow charts in GNU Emacs.
+(autoload 'cflow-mode "cflow-mode")
+(setq auto-mode-alist (append auto-mode-alist
+                              '(("\\.cflow$" . cflow-mode))))
 (when (>= emacs-major-version 24)
   (require 'package)
   (package-initialize)
@@ -120,7 +119,6 @@
         flycheck-ledger
         git-commit-mode
         git-rebase-mode
-        ghc                 ;; ghc-mode
         ghci-completion
         gnuplot
         gnuplot-mode
@@ -229,9 +227,12 @@
  '(ac-quick-help-delay 0.1)
  '(ac-show-menu-immediately-on-auto-complete t)
  '(bmkp-last-as-first-bookmark-file "~/.emacs.d/.bookmarks")
+ '(bookmark-default-file "/home/schnecki/.emacs.d/.bookmarks")
  '(color-theme-legal-frame-parameters "\\(color\\|mode\\|font\\|height\\|width\\)$")
  '(column-number-mode t)
+ '(cua-delete-selection nil)
  '(custom-safe-themes (quote ("0f0e3af1ec61d04ff92f238b165dbc6d2a7b4ade7ed9812b4ce6b075e08f49fe" "f350c66dcff6db73192c4819363b7c1992931841e5ab381b1ed57ef8257a498f" default)))
+ '(delete-active-region nil)
  '(dired-kept-versions 10)
  '(display-time-mode t)
  '(ecb-auto-expand-tag-tree (quote all))

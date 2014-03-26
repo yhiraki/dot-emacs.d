@@ -7,9 +7,9 @@
 ;; Created: Sa Nov  2 16:14:09 2013 (+0100)
 ;; Version:
 ;; Package-Requires: ()
-;; Last-Updated: Mi Mär 12 13:58:20 2014 (+0100)
+;; Last-Updated: So Mär 23 17:03:34 2014 (+0100)
 ;;           By: Manuel Schneckenreither
-;;     Update #: 34
+;;     Update #: 49
 ;; URL:
 ;; Doc URL:
 ;; Keywords:
@@ -144,10 +144,13 @@
   (let ((dir (nth 0 (split-string default-directory "src"))))
     (setq esdir (replace-regexp-in-string " " "\\\\ " dir))
     (shell-command
-     (concat "cd " esdir " && find . -name \"*.tex\" -print | etags - 1>/dev/null 2>/dev/null") nil)
+     (concat "cd " esdir " && find . -name \"*.tex\" | etags - 1>/dev/null 2>/dev/null") nil)
     (visit-tags-table (concat dir "TAGS"))
     )
   )
+
+;; auto completion for auctex
+(require 'auto-complete-auctex)
 
 
 ;; MINOR MODE HOOK
@@ -162,14 +165,38 @@
   ;; auto complete mode
   (add-to-list 'ac-sources 'ac-source-etags)
 
+
+  (add-to-list 'ac-sources 'ac-source-abbrev)          ;; edited
+  ;; (add-to-list 'ac-sources 'ac-source-css-property)
+  ;; (add-to-list 'ac-sources 'ac-source-dictionary)
+  ;; (add-to-list 'ac-sources 'ac-source-eclim)
+  (add-to-list 'ac-sources 'ac-source-yasnippet)
+  ;; (add-to-list 'ac-sources 'ac-source-symbols)
+  ;; (add-to-list 'ac-sources 'ac-source-filename)
+  ;; (add-to-list 'ac-sources 'ac-source-files-in-current-dir)
+  ;; (add-to-list 'ac-sources 'ac-source-gtags)
+  (add-to-list 'ac-sources 'ac-source-etags)
+  (add-to-list 'ac-sources 'ac-source-imenu)
+  ;; (add-to-list 'ac-sources 'ac-source-semantic ;; slows down auto complete)
+  ;; (add-to-list 'ac-sources 'ac-source-semantic-raw ;; slows down auto complete)
+  ;; (add-to-list 'ac-sources 'ac-source-words-in-all-buffer)
+  (add-to-list 'ac-sources 'ac-source-words-in-buffer)
+  (add-to-list 'ac-sources 'ac-source-words-in-same-mode-buffers)
+
+  (add-to-list 'ac-modes 'gams-mode)
+
+
+  (auto-complete-mode)
+
   ;; create and set tags file
   (add-hook 'after-save-hook 'make-tex-tags nil t)
 
   ;; add to hook
   (add-hook 'LaTeX-mode-hook 'turn-on-auto-fill nil t)
 
+
   ;; set keys
-  (local-set-key (kbd "C-c SPC") 'compile-show-latex)
+  (local-set-key (kbd "C-x SPC") 'compile-show-latex)
 
   )
 

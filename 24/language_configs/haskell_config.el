@@ -8,7 +8,7 @@
 ;; Version:
 ;; Last-Updated:
 ;;           By:
-;;     Update #: 451
+;;     Update #: 485
 ;; URL:
 ;; Description:
 ;;
@@ -52,15 +52,6 @@
 
 
 ;; ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-;; ++++++++++++++++++++++++++++ GHC MODE ++++++++++++++++++++++++++++++++
-;; ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-
-
-(autoload 'ghc-init "ghc" nil t)
-(add-hook 'haskell-mode-hook (lambda () (ghc-init) (flymake-mode)))
-
-
-;; ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 ;; +++++++++++++++++++++++ USE INTERACTIVE MODE +++++++++++++++++++++++++
 ;; ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 ;; see http://haskell.github.io/haskell-mode/manual/latest/#haskell_002dinteractive_002dmode
@@ -92,7 +83,7 @@
 ;;(eval-after-load "haskell-cabal"
 ;;    '(define-key haskell-cabal-mode-map (kbd "C-x SPC") 'haskell-compile))
 
-(add-hook 'haskell-mode-hook 'turn-on-haskell-decl-scan)
+;; (add-hook 'haskell-mode-hook 'turn-on-haskell-decl-scan)
 
 ;; (setq haskell-stylish-on-save t)
 
@@ -140,12 +131,12 @@
   "Format souce coude nicely."
   (interactive)
   (save-excursion
-    (haskell-mode-stylish-buffer)
-    ;; (push-mark (point))
-    ;; (push-mark (point-max) nil t)
-    ;; (goto-char (point-min))
-    ;; (haskell-indent-align-def t 'guard)
-    ;; (haskell-indent-align-def t 'rhs)
+    ;; (haskell-mode-stylish-buffer)
+    (push-mark (point))
+    (push-mark (point-max) nil t)
+    (goto-char (point-min))
+    (haskell-indent-align-def t 'guard)
+    (haskell-indent-align-def t 'rhs)
     ))
 
 (defun haskell-insert-equals ()
@@ -160,7 +151,6 @@
     ;;     (delete-backward-char 1 nil))
     (insert "=")
     ))
-
 
 (defun haskell-insert-guard ()
   "Insert and aligns guard sign."
@@ -188,9 +178,29 @@
   "Minor mode hook for Haskell."
 
   ;; add auto-complete mode
-  (add-to-list 'ac-sources 'ac-source-ghc-mod)
+  ;; (add-to-list 'ac-sources 'ac-source-abbrev)          ;; edited
+  ;; (add-to-list 'ac-sources 'ac-source-css-property)
+  ;; (add-to-list 'ac-sources 'ac-source-dictionary)
+  ;; (add-to-list 'ac-sources 'ac-source-eclim)
+  (add-to-list 'ac-sources 'ac-source-yasnippet)
+  ;; (add-to-list 'ac-sources 'ac-source-symbols)
+  ;; (add-to-list 'ac-sources 'ac-source-filename)
+  ;; (add-to-list 'ac-sources 'ac-source-files-in-current-dir)
+  ;; (add-to-list 'ac-sources 'ac-source-gtags)
   (add-to-list 'ac-sources 'ac-source-etags)
-  (add-to-list 'ac-sources 'ac-source-symbols)
+  ;; (add-to-list 'ac-sources 'ac-source-imenu)
+  ;; (add-to-list 'ac-sources 'ac-source-semantic ;; slows down auto complete)
+  ;; (add-to-list 'ac-sources 'ac-source-semantic-raw ;; slows down auto complete)
+  ;; (add-to-list 'ac-sources 'ac-source-words-in-all-buffer)
+  ;; (add-to-list 'ac-sources 'ac-source-words-in-buffer)
+  ;; (add-to-list 'ac-sources 'ac-source-words-in-same-mode-buffers)
+
+  ;; ensure auto-completion is started. If it doesn't work try to
+  ;; disable flyspell mode.
+  (auto-complete-mode)
+
+  ;; use programming flyspell mode
+  (flyspell-prog-mode)
 
   ;; format source code in sensible way
   ;; (add-hook 'before-save-hook 'haskell-source-code-align nil t)
@@ -201,15 +211,15 @@
   (local-set-key (kbd "RET")  'newline-and-indent)
   ;; set special keys
   (local-set-key (kbd "=")  'haskell-insert-equals)
-  (local-set-key (kbd "|") 'haskell-insert-guard)
+  ;; (local-set-key (kbd "|") 'haskell-insert-guard)
 
   (local-set-key (kbd "C-c =") (defun insertEquals ()
                                  (interactive)
                                  (insert "=")))
 
-  (local-set-key (kbd "C-c |") (defun insertGuard ()
-                                 (interactive)
-                                 (insert "|")))
+  ;; (local-set-key (kbd "C-c |") (defun insertGuard ()
+  ;;                                (interactive)
+  ;;                                (insert "|")))
 
 
   ;; CREATE AND SET TAGS FILE
@@ -218,7 +228,7 @@
 
 
 (add-hook 'haskell-mode-hook 'my/haskell-minor-mode)
-;; (add-hook 'haskell-mode-hook 'highlight-keywords)
+(add-hook 'haskell-mode-hook 'highlight-keywords)
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;

@@ -5,9 +5,9 @@
 ;; Author: Manuel Schneckenreither
 ;; Created: Mon Dec 10 22:51:09 2012 (+0100)
 ;; Version:
-;; Last-Updated: Mi Mär 19 21:25:31 2014 (+0100)
+;; Last-Updated: Mo Mär 24 12:03:32 2014 (+0100)
 ;;           By: Manuel Schneckenreither
-;;     Update #: 618
+;;     Update #: 635
 ;; URL:
 ;; Description:
 ;;    Basic configuration for emacs. In here are all configs of
@@ -29,11 +29,11 @@
 (setq inhibit-startup-message t)
 
 ;; files/buffers not to be opened
-;; (setq desktop-buffers-not-to-save
-;;       (concat "\\("
-;;               "^nn\\.a[0-9]+\\|\\.log\\|(ftp)\\|^tags\\|^TAGS"
-;;               "\\|\\.emacs.*\\|\\.diary\\|\\.newsrc-dribble\\|\\.bbdb"
-;;               "\\)$"))
+(setq desktop-buffers-not-to-save
+      (concat "\\("
+              "^nn\\.a[0-9]+\\|\\.log\\|(ftp)\\|^tags\\|^TAGS"
+              "\\|\\.diary\\|\\.newsrc-dribble\\|\\.bbdb"
+              "\\)$"))
 ;; (add-to-list 'desktop-modes-not-to-save 'dired-mode)
 ;;(add-to-list 'desktop-modes-not-to-save 'Info-mode)
 ;;(add-to-list 'desktop-modes-not-to-save 'info-lookup-mode)
@@ -228,9 +228,13 @@
 ;; ++++++++++++++++++++++++++++ BACKUP INFO +++++++++++++++++++++++++++++
 ;; ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
+;; define folders
+(defvar autosaves-folder (concat load-emacsd ".tmp/autosaves/"))
+(defvar backup-folder (concat load-emacsd ".tmp/backups/"))
+
 ;; create the autosave and backup dirs if necessary, since emacs won't.
-(make-directory "~/.emacs.d/.tmp/autosaves/" t)
-(make-directory "~/.emacs.d/.tmp/backups/" t)
+(make-directory autosaves-folder t)
+(make-directory backup-folder t)
 
 
 ;; Put autosave files (ie #foo#) and backup files (ie foo~) in ~/.emacs.d/.tmp/...
@@ -239,7 +243,7 @@
       )
 
 (setq make-backup-files t               ; backup of a file the first time it is saved.
-      backup-by-copying t               ; don't clobber symlinks
+      backup-by-copying t               ; don't clobber slinks
       version-control t                 ; version numbers for backup files
       delete-old-versions 0             ; delete excess backup files silently
       delete-by-moving-to-trash t
@@ -290,6 +294,7 @@
       (my-non-fullscreen)
     (my-fullscreen)))
 
+
 ;; ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 ;; ++++++++++++ STOP ASKING EXISTING PROCESS EXISTS STUFF +++++++++++++++
 ;; ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -297,6 +302,10 @@
 (defadvice save-buffers-kill-emacs (around no-query-kill-emacs activate)
   "Prevent annoying \"Active processes exist\" query when you quit Emacs."
   (flet ((process-list ())) ad-do-it))
+
+;; don't ask me if I want to quit the shell
+(add-hook 'comint-exec-hook
+          (lambda () (process-kill-without-query (get-buffer-process (current-buffer)))))
 
 
 ;; ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -393,6 +402,9 @@
 
 ;; VISUAL LINE MODE - WRAP LONG LINES
 (global-visual-line-mode)
+
+;;DON'T ECHO PASSWORDS WHEN COMMUNICATING WITH INTERACTIVE PROGRAMS
+(add-hook 'comint-output-filter-functions 'comint-watch-for-password-prompt)
 
 ;; KILL WHOLE LINE AND NEWLINE WITH C-k IF AT BEGINNING OF LINE ¶
 (setq kill-whole-line t)
