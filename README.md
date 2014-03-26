@@ -215,7 +215,6 @@ Dependencies:
 + Haskell
   - cabal (of course)
   - hasktags ($ cabal install hasktags)
-  - ghc-mod (this extends haskell-mode)
 
 + Database Viewer: edbi
   - perl-CPAN
