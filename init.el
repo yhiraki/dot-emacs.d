@@ -7,9 +7,9 @@
 ;; Created: Fr Okt  4 20:33:29 2013 (+0200)
 ;; Version:
 ;; Package-Requires: ()
-;; Last-Updated: Mi Mär 26 09:51:29 2014 (+0100)
+;; Last-Updated: Mi Mär 26 10:55:26 2014 (+0100)
 ;;           By: Manuel Schneckenreither
-;;     Update #: 546
+;;     Update #: 549
 ;; URL:
 ;; Doc URL:
 ;; Keywords:
@@ -111,6 +111,7 @@
         bbdb
         bookmark+
         color-theme
+        dired+
         ecb
         edbi
         flycheck

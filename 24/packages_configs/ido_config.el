@@ -7,9 +7,9 @@
 ;; Created: So Okt 13 23:25:02 2013 (+0200)
 ;; Version:
 ;; Package-Requires: ()
-;; Last-Updated: So Mär  2 13:36:49 2014 (+0100)
+;; Last-Updated: Mi Mär 26 10:47:12 2014 (+0100)
 ;;           By: Manuel Schneckenreither
-;;     Update #: 39
+;;     Update #: 41
 ;; URL:
 ;; Doc URL:
 ;; Keywords:
@@ -81,12 +81,16 @@
                                    nil require-match initial-input hist def))
             ad-do-it))))
 
-(add-hook 'ediff-hook
-          '(lambda ()
-             (set (make-local-variable 'ido-enable-replace-completing-read) nil)))
-(add-hook 'dired-mode-hook
-          '(lambda ()
-             (set (make-local-variable 'ido-enable-replace-completing-read) nil)))
+
+;; DISABLE IDO IN SEVERAL MODES
+
+;; (add-hook 'ediff-hook
+;;           '(lambda ()
+;;              (set (make-local-variable 'ido-enable-replace-completing-read) nil)))
+
+;; (add-hook 'dired-mode-hook
+;;           '(lambda ()
+;;              (set (make-local-variable 'ido-enable-replace-completing-read) nil)))
 
 
 ;; SORT IDO FILELIST BY MTIME INSTEAD OF ALPHABETICALLY

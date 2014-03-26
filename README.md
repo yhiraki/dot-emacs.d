@@ -107,12 +107,12 @@ defined in the settings.el file, the default is C-x x.
 
 Have a look at ~/.emacs.d/24/basic_keys.el for the main keys.
 
-Example (with prefix beeing C-x x):
+Example (with prefix being C-x x):
 
     | Key       | Function                | Description                                 |
     |-----------+-------------------------+---------------------------------------------|
     | C-x x C-q | save-buffers-kill-emacs | close emacs                                 |
-    | C-x x c   | eshell                  | a shell inside of emacs                     |
+    | C-x x c   | shell                   | a shell inside of emacs                     |
     | C-x x r   | replace-regexp          | find and replace using a REGular EXpression |
     | ...       |                         | check out the files and get used to them    |
 

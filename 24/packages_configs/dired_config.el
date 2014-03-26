@@ -7,9 +7,9 @@
 ;; Created: Di Mär  4 06:35:38 2014 (+0100)
 ;; Version:
 ;; Package-Requires: ()
-;; Last-Updated: Di Mär  4 06:45:42 2014 (+0100)
+;; Last-Updated: Mi Mär 26 11:03:53 2014 (+0100)
 ;;           By: Manuel Schneckenreither
-;;     Update #: 10
+;;     Update #: 15
 ;; URL:
 ;; Doc URL:
 ;; Keywords:
@@ -100,6 +100,68 @@
                                         ; was dired-up-directory
             (define-key dired-mode-map (kbd "o") 'dired-open-in-external-app)
             ))
+
+
+;; dired-a provides support functions, including archiving, for dired
+(load "dired-a")
+
+;; Alist with information how to add files to an archive (from dired-a)
+;; Each element has the form (REGEXP ADD-CMD NEW-CMD). If REGEXP matches
+;; the file name of a target, that target is an archive and ADD-CMD is a command
+;; that adds to an existing archive and NEW-CMD is a command that makes a new
+;; archive (overwriting an old one if it exists). ADD-CMD and NEW-CMD are:
+;; 1. Nil (meaning we cannot do this for this type of archive) (one of
+;;    ADD-CMD and NEW-CMD must be non-nil).
+;; 2. A symbol that must be a function e.g. dired-do-archive-op.
+;; 3. A format string with two arguments, the source files concatenated into
+;;    a space separated string and the target archive.
+;; 4. A list of strings, the command and its flags, to which the target and
+;;    the source-files are concatenated."
+(setq dired-to-archive-copy-alist
+      '(("\\.sh\\(ar\\|[0-9]\\)*$" nil "shar %s > %s")
+    ("\\.jar$" ("jar" "uvf") ("jar" "cvf"))
+    ("\\.tar$" ("tar" "-uf") ("tar" "-cf"))
+    ("\\.tgz$\\|\\.tar\\.g?[zZ]$" ("tar" "-uf %s" "|" "gzip > %s") ("tar" "-czvf"))
+    ("\\.ear$" ("zip" "-qr") ("zip" "-qr"))
+;   ("\\.rar$" ("rar" "a")   ("rar" "a"))
+    ("\\.war$" ("zip" "-qr") ("zip" "-qr"))
+    ("\\.zip$" ("zip" "-qr") ("zip" "-qr"))
+    ("\\.wmz$" ("zip" "-qr") ("zip" "-qr")) ;; for media player skins
+    ("\\.arc$" ("arc" "a") nil)
+    ("\\.zoo$" ("zoo" "aP") nil)
+    ))
+
+;; use pkzip with manipulating zip files (t) from within dired (use zip
+;; and unzip otherwise)
+(setq archive-zip-use-pkzip nil)
+
+;; add these file types to archive mode to allow viewing and changing
+;; their contents
+(add-to-list 'auto-mode-alist '("\\.[ejrw]ar$\\'" . archive-mode))
+
+;; modify the dired-extract switches to use the directory
+;; ~/download/tryout as the default extract directory for zip files
+(defconst MY_TRYOUT_DIR "~/downloads/tryout"
+  "Directory for extracting files")
+
+(setq dired-extract-alist
+      `(
+    ("\\.u\\(ue\\|aa\\)$" . dired-uud)
+    ("\\.jar$" . "jar -xvf %s")
+    ("\\.tar$" . ,(concat "tar -xf %s -C " MY_TRYOUT_DIR))
+    ("\\.tgz$\\|\\.tar\\.g?[zZ]$" . ,(concat "tar -xzf %s -C " MY_TRYOUT_DIR))
+    ("\\.arc$" . "arc x %s ")
+    ("\\.bz2$" . ,(concat "bunzip2 -q %s"))
+    ("\\.rar$" . ,(concat "unrar x %s " MY_TRYOUT_DIR "\\"))
+    ("\\.zip$" . ,(concat "unzip -qq -Ux %s -d " MY_TRYOUT_DIR))
+    ("\\.ear$" . ,(concat "unzip -qq -Ux %s -d " MY_TRYOUT_DIR))
+    ("\\.war$" . ,(concat "unzip -qq -Ux %s -d " MY_TRYOUT_DIR))
+    ("\\.zoo$" . "zoo x. %s ")
+    ("\\.lzh$" . "lha x %s ")
+    ("\\.7z$"  . "7z e %s ")
+    ("\\.g?[zZ]$" . "gzip -d %s")   ; There is only one file
+    ))
+
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; dired_config.el ends here
