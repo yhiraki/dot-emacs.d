@@ -89,7 +89,7 @@ Most main keys are left as it was. So I will not list them here.
 However, changes were made of course. For example: C-w was set to
 backward-kill-word (which deletes the word before cursor). This is the
 standard Unix Terminal way. Kill region, which has originally was at
-C-w, is not at C-c C-k.
+C-w, is not at C-x C-k.
 
 Keys are set in 24/basic_keys.el and in the configuration files for
 the packages (24/package_config/*) and languages
