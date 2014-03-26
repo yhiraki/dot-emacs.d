@@ -143,25 +143,25 @@ distribution delivers or download it from http://www.gnu.org/software/emacs/.
 
 For some distribution the commands are listed below this section.
 
-0. Get the git repository
+1. Get the git repository
 
-1. install all (needed) packages listed below. Command might be found below.
+2. install all (needed) packages listed below. Command might be found below.
 
-2. you need to create a settings.el file in ./emacs.d/settings.el (see
+3. you need to create a settings.el file in ./emacs.d/settings.el (see
    settings.el.example)
 
-3. you might want to disable (comment) the Gnus package for the first
+4. you might want to disable (comment) the Gnus package for the first
    real start-up, see 24/emacs.el and search for gnus. Otherwise you
    definitely need configure it, see gnus.el.
 
-4. you need to fire up emacs - all emacs melpa packages will be
+5. you need to fire up emacs - all emacs melpa packages will be
    downloaded
 
     emacs -mm       # -mm for maximized
 
-5. it should automatically compile cedet. Check if that worked out!
+6. it should automatically compile cedet. Check if that worked out!
 
-6. you need to restart emacs (cedet doesn't like it, when new packages
+7. you need to restart emacs (cedet doesn't like it, when new packages
    get installed)
 
 
@@ -171,7 +171,7 @@ For some distribution the commands are listed below this section.
 Fedora Command:
 ---------------
 
-Steps 1 + 2 + 4  (3 not included!):
+Steps 1 + 2 + 3 + 5 (4 not included!):
 
     mv ~/.emacs.d ~/.emacs.d.bak && \                                      # backup
     git clone https://github.com/schnecki/dot-emacs-4-everyone.git && \    # download
@@ -187,7 +187,7 @@ Steps 1 + 2 + 4  (3 not included!):
     mv ~/.emacs.d/settings.el.example ~/.emacs.d/settings.el && \          # settings.el
     && emacs -mm                                                           # start emacs maximized
 
-    # check step 3, 5, 6 from How To Install menu above!
+    # check step 2, 3, 4, 6 from How To Install menu above!
 
 
 Dependencies:
