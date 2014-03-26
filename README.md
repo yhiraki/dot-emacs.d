@@ -72,7 +72,7 @@ This is a list of some of the most important packages you will get.
 Language Support
 ================
 
-+ C/C++ (not yet fully integrated; not tested; that should happen the next couple months)
++ C/C++ (not fully integrated yet; not tested; that should happen the next couple months)
 + Haskell
 + Java (Check my Makefile for flymake support, see other github projects)
 + Emacs Lisp (of course)
