@@ -7,9 +7,9 @@
 ;; Created: Mi Mär 19 11:59:38 2014 (+0100)
 ;; Version:
 ;; Package-Requires: ()
-;; Last-Updated: Mi Mär 19 12:12:58 2014 (+0100)
+;; Last-Updated: Mi Mär 26 14:41:32 2014 (+0100)
 ;;           By: Manuel Schneckenreither
-;;     Update #: 10
+;;     Update #: 11
 ;; URL:
 ;; Doc URL:
 ;; Keywords:
@@ -51,7 +51,8 @@
 (winner-mode)
 ;; (ad-Orig-winner-mode)
 
-(global-set-key (kbd (concat prefix-command-key "1")) 'ad-Orig-winner-undo)
+(global-set-key (kbd (concat prefix-command-key "1")) 'winner-undo)
+;; (global-set-key (kbd (concat prefix-command-key "1")) 'ad-Orig-winner-undo)
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;

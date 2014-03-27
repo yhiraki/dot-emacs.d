@@ -7,9 +7,9 @@
 ;; Created: Fr Okt  4 20:33:29 2013 (+0200)
 ;; Version:
 ;; Package-Requires: ()
-;; Last-Updated: Mi Mär 26 10:55:26 2014 (+0100)
+;; Last-Updated: Fr Mär 28 00:20:11 2014 (+0100)
 ;;           By: Manuel Schneckenreither
-;;     Update #: 549
+;;     Update #: 564
 ;; URL:
 ;; Doc URL:
 ;; Keywords:
@@ -93,7 +93,7 @@
   (require 'package)
   (package-initialize)
   (add-to-list 'package-archives '("melpa" . "http://melpa.milkbox.net/packages/") t)
-  (add-to-list 'package-archives '("org" . "http://orgmode.org/elpa/")))
+  (add-to-list 'package-archives '("org" . "http://orgmode.org/elpa/") t))
 
 
 ;; packages to be loaded

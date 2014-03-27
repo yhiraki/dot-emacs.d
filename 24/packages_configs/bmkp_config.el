@@ -7,9 +7,9 @@
 ;; Created: Mi Mär 19 14:51:22 2014 (+0100)
 ;; Version:
 ;; Package-Requires: ()
-;; Last-Updated: Mi Mär 26 09:38:59 2014 (+0100)
+;; Last-Updated: Mi Mär 26 16:54:06 2014 (+0100)
 ;;           By: Manuel Schneckenreither
-;;     Update #: 49
+;;     Update #: 51
 ;; URL:
 ;; Doc URL:
 ;; Keywords:
@@ -74,13 +74,14 @@ BOOKMARK is a bookmark name or a bookmark record."
   (let ((desktop-file  (bookmark-prop-get bookmark 'desktop-file)))
     (if current-desktop-file
         (my-save-desktop current-desktop-file nil nil))
-    ;; (setq current-desktop-file bookmark)
-    (setq current-desktop-file (bookmark-prop-get bookmark 'desktop-file))
+
+
     (unless (condition-case nil (require 'desktop nil t) (error nil))
       (error "You must have library `desktop.el' to use this command"))
     ;; (unless desktop-file (error "Not a desktop-bookmark: %S" bookmark)) ; Shouldn't happen.
     (bmkp-desktop-change-dir desktop-file)
-    (unless (bmkp-desktop-read desktop-file) (error "Could not load desktop file"))))
+    (unless (bmkp-desktop-read desktop-file) (error "Could not load desktop file"))
+    (setq current-desktop-file (bookmark-prop-get bookmark 'desktop-file))))
 
 
 ;; THIS FUNCTION OVERWRITES THE ORIGINAL BMKP-JUMP-DESKTOP FUNCTION

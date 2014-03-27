@@ -7,9 +7,9 @@
 ;; Created: Di Feb  4 12:54:58 2014 (+0100)
 ;; Version:
 ;; Package-Requires: ()
-;; Last-Updated: Mo Mär 24 13:15:46 2014 (+0100)
+;; Last-Updated: Mi Mär 26 23:35:52 2014 (+0100)
 ;;           By: Manuel Schneckenreither
-;;     Update #: 145
+;;     Update #: 172
 ;; URL:
 ;; Doc URL:
 ;; Keywords:
@@ -170,6 +170,19 @@
 
 (setq gnus-use-adaptive-scoring '(word line))
 
+(setq gnus-default-adaptive-score-alist
+      '((gnus-unread-mark)
+        (gnus-ticked-mark (from 4))
+        (gnus-dormant-mark (from 5))
+        (gnus-del-mark (from -4) (subject -1))
+        (gnus-read-mark (from 4) (subject 2))
+        (gnus-expirable-mark (from -1) (subject -1))
+        (gnus-killed-mark (from -1) (subject -3))
+        (gnus-kill-file-mark)
+        (gnus-ancient-mark)
+        (gnus-low-score-mark)
+        (gnus-catchup-mark (from -1) (subject -1))))
+
 
 ;; ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 ;; +++++++++++++++++++++ SENT MESSAGE FOLDERS +++++++++++++++++++++++++++
@@ -179,7 +192,9 @@
 ;; Automatically put the sent messages in the input folder. This
 ;; enables a nice history view of the topics.
 
-(setq gnus-message-archive-method '(nnml ""))
+;; remove the prefix for storing sent mail (otherwise it won't work to
+;; save the mail in the same folder)
+(setq gnus-message-archive-method "")
 
 (setq gnus-message-archive-group
       '((lambda (x)
@@ -187,9 +202,17 @@
            ;; Store personal mail messages in the same group I started
            ;; out in
            ((string-match "mail.*" group) group)
+
            ;; I receive a copy of all messages I send to a list, so
            ;; there's no need to archive
            ((string-match "list.*" group) nil)
+
+           ;; If the group information is empty, e.g. when composing a
+           ;; new mail outside of gnus, store it in the folder of the
+           ;; default email address (set in settings.el). This folder
+           ;; is INBOX for me.
+           ("" "INBOX")
+
            ;; Store everything else in misc until I can sort it out
            (t "mail.misc")))))
 
@@ -232,10 +255,10 @@
 ;; +++++++++++++++++++++++++ FORMATING LISTS ++++++++++++++++++++++++++++
 ;; ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
-
 ;; article lists
 (setq-default
- gnus-summary-line-format "%U%R%z %(%&user-date;  %-15,15f  %B%s%)\n"
+ ;; gnus-summary-line-format "%U%R%z  |  %(%&user-date;  |  %-25,25f  |  %B%s%)\n"
+ gnus-summary-line-format "%U%R%z | %5i | %(%&user-date;  %-15,15f  %B%s%)\n"
  gnus-user-date-format-alist '((t . "%d.%m.%Y %H:%M"))
  gnus-summary-thread-gathering-function 'gnus-gather-threads-by-references
  gnus-thread-sort-functions '(gnus-thread-sort-by-date)
@@ -265,7 +288,7 @@
 ;; (defun empty-common-prefix (left right)
 ;;   "Given `left' '(\"foo\" \"bar\" \"fie\") and `right' '(\"foo\"
 ;;     \"bar\" \"fum\"), return '(\"   \" \"   \" \"fum\")."
-;;   (if (and (cdr right)			; always keep the last part of right
+;;   (if (and (cdr right)     ; always keep the last part of right
 ;;            (equal (car left) (car right)))
 ;;       (cons (make-string (length (car left)) ? )
 ;;             (empty-common-prefix (cdr left) (cdr right)))
@@ -296,6 +319,59 @@
 
 ;; open gnus
 (gnus)
+
+
+;; gnus function for system wide mail editor
+(defun mailto-compose-mail (mailto-url)
+  "Parse MAILTO-URL and start composing mail."
+  (if (and (stringp mailto-url)
+           (string-match "\\`mailto:" mailto-url))
+      (progn
+        (require 'rfc2368)
+        (require 'rfc2047)
+        (require 'mailheader)
+
+        (let ((hdr-alist (rfc2368-parse-mailto-url mailto-url))
+              (body "")
+              to subject
+              ;; In addition to To, Subject and Body these headers are
+              ;; allowed:
+              (allowed-xtra-hdrs '(cc bcc in-reply-to)))
+
+          (with-temp-buffer
+            ;; Extract body if it's defined
+            (when (assoc "Body" hdr-alist)
+              (dolist (hdr hdr-alist)
+                (when (equal "Body" (car hdr))
+                  (insert (format "%s\n" (cdr hdr)))))
+              (rfc2047-decode-region (point-min) (point-max))
+              (setq body (buffer-substring-no-properties
+                          (point-min) (point-max)))
+              (erase-buffer))
+
+            ;; Extract headers
+            (dolist (hdr hdr-alist)
+              (unless (equal "Body" (car hdr))
+                (insert (format "%s: %s\n" (car hdr) (cdr hdr)))))
+            (rfc2047-decode-region (point-min) (point-max))
+            (goto-char (point-min))
+            (setq hdr-alist (mail-header-extract-no-properties)))
+
+          (setq to (or (cdr (assq 'to hdr-alist)) "")
+                subject (or (cdr (assq 'subject hdr-alist)) "")
+                hdr-alist
+                (remove nil (mapcar
+                             #'(lambda (item)
+                                 (when (memq (car item) allowed-xtra-hdrs)
+                                   (cons (capitalize (symbol-name (car item)))
+                                         (cdr item))))
+                             hdr-alist)))
+
+          (compose-mail to subject hdr-alist nil nil
+                        (list (lambda (string)
+                                (insert string))
+                              body))))
+    (compose-mail)))
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;

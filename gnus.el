@@ -7,9 +7,9 @@
 ;; Created: Di Feb  4 17:01:05 2014 (+0100)
 ;; Version:
 ;; Package-Requires: ()
-;; Last-Updated: Do Mär 20 00:15:22 2014 (+0100)
+;; Last-Updated: Mi Mär 26 15:45:25 2014 (+0100)
 ;;           By: Manuel Schneckenreither
-;;     Update #: 23
+;;     Update #: 27
 ;; URL:
 ;; Doc URL:
 ;; Keywords:
@@ -51,7 +51,7 @@
 ;; for searching imap folders (needs the call of (require 'nnir) in .emacs)
 
 ;; other newsfeeds
-(setq gnus-select-method '(nnimap "UIBK"
+(setq gnus-select-method '(nnimap "uibk"
                                   (nnimap-stream ssl)
                                   (nnimap-server-port 993)
                                   (nnimap-address "mail2.uibk.ac.at")
