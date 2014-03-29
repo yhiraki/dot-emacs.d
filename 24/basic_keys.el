@@ -7,7 +7,7 @@
 ;; Version:
 ;; Last-Updated:
 ;;           By:
-;;     Update #: 109
+;;     Update #: 110
 ;; URL:
 ;; Description:
 ;;
@@ -95,7 +95,7 @@
 ;; KEYBOARD SHORTCUTS
 (global-set-key (kbd "C-x C-SPC") 'compile-again) ;; compile
 (global-set-key (kbd "C-x SPC") 'compile-closest-Makefile) ;; compile
-(global-set-key (kbd "C-c SPC") 'compile-closest-Makefile) ;; compile
+;; (global-set-key (kbd "C-c SPC") 'compile-closest-Makefile) ;; compile
 (global-set-key [f1] 'man-follow) ;; find man page
 (global-set-key (kbd (concat prefix-command-key " c")) 'shell) ;;  start shell
 (global-set-key (kbd (concat prefix-command-key " r")) 'replace-regexp) ;; regex replace

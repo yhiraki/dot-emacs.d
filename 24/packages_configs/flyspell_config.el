@@ -7,9 +7,9 @@
 ;; Created: Fr Okt  4 20:40:17 2013 (+0200)
 ;; Version:
 ;; Package-Requires: ()
-;; Last-Updated: So Mär 23 17:07:02 2014 (+0100)
+;; Last-Updated: Fr Mär 28 14:21:57 2014 (+0100)
 ;;           By: Manuel Schneckenreither
-;;     Update #: 101
+;;     Update #: 102
 ;; URL:
 ;; Doc URL:
 ;; Keywords:
@@ -54,6 +54,9 @@
 ;; AUTOMATICALLY GESS DICTIONARY
 (require 'auto-dictionary)
 (add-hook 'flyspell-mode-hook (lambda () (auto-dictionary-mode 1)))
+
+;; number of seconds to wait before spelling the buffer
+(setq flyspell-delay 1)
 
 
 ;; message mode hook

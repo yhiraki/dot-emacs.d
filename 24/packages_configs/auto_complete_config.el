@@ -7,9 +7,9 @@
 ;; Created: So Okt 13 19:43:26 2013 (+0200)
 ;; Version:
 ;; Package-Requires: ()
-;; Last-Updated: Fr Mär 21 11:43:46 2014 (+0100)
+;; Last-Updated: Fr Mär 28 18:11:10 2014 (+0100)
 ;;           By: Manuel Schneckenreither
-;;     Update #: 117
+;;     Update #: 127
 ;; URL:
 ;; Doc URL:
 ;; Keywords:
@@ -36,9 +36,10 @@
 
 (require 'auto-complete)
 
-(define-key ac-completing-map [(tab)] 'ac-complete) ;; enable completing by tab
+(define-key ac-completing-map [(tab)] 'ac-complete)
 (define-key ac-completing-map "\r" nil) ;; disable completing by enter
 ;; (icomplete-mode +1) ;; complete mode in mini-buffer
+
 
 ;; flyspell and ac-complete don't like each other
 (ac-flyspell-workaround)
@@ -79,6 +80,9 @@
 (setq ac-quick-help-delay 0.2)
 (setq ac-ignore-case t)
 (setq ac-use-menu-map t)
+(setq ac-candidate-limit 100)  ;; maximize candidate number to prevent delays
+(setq ac-use-fuzzy t)          ;; use fuzzy matching
+
 
 ;; use C-p and C-n to navigate in menu
 (define-key ac-menu-map "\C-n" 'ac-next)

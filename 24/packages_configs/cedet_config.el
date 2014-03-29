@@ -7,9 +7,9 @@
 ;; Created: So Okt 13 11:05:43 2013 (+0200)
 ;; Version:
 ;; Package-Requires: ()
-;; Last-Updated: Di Feb  4 20:39:37 2014 (+0100)
+;; Last-Updated: Fr Mär 28 01:41:46 2014 (+0100)
 ;;           By: Manuel Schneckenreither
-;;     Update #: 64
+;;     Update #: 66
 ;; URL:
 ;; Doc URL:
 ;; Keywords:
@@ -71,8 +71,8 @@
 (add-to-list 'load-path (concat cedet-root-path "contrib"))
 
 ;; m3 menu
-(global-cedet-m3-minor-mode 1)
-(define-key cedet-m3-mode-map "\C-cm" 'cedet-m3-menu-kbd)
+; (global-cedet-m3-minor-mode 1)
+; (define-key cedet-m3-mode-map "\C-cm" 'cedet-m3-menu-kbd)
 
 ;; semantic
 (require 'semantic/canned-configs)
@@ -153,7 +153,7 @@
 
 ;; customisation of modes
 (defun my/cedet-hook ()
-  (local-set-key "\C-c " 'cedet-m3-menu-kbd)
+;;  (local-set-key "\C-c " 'cedet-m3-menu-kbd)
   (local-set-key [(control return)] 'semantic-ia-complete-symbol-menu)
   (local-set-key "\C-c?" 'semantic-ia-complete-symbol)
   (local-set-key "\C-c>" 'semantic-complete-analyze-inline)

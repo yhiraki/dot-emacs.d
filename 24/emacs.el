@@ -5,9 +5,9 @@
 ;; Author: Manuel Schneckenreither
 ;; Created: Tue Dec 11 00:43:14 2012 (+0100)
 ;; Version:
-;; Last-Updated: Mi Mär 26 10:57:43 2014 (+0100)
+;; Last-Updated: Fr Mär 28 01:47:40 2014 (+0100)
 ;;           By: Manuel Schneckenreither
-;;     Update #: 382
+;;     Update #: 383
 ;; URL:
 ;; Description:
 ;;
@@ -89,7 +89,8 @@
 (load (concat package-conf-folder "cua_config.el"))
 ;; BOOKMARKS+ - bookmark extendsion, multiple desktops
 (load (concat package-conf-folder "bmkp_config.el"))
-
+;; ACE JUMP Mode - quickly jump to the right position in the buffer
+(load (concat package-conf-folder "ace_jump_config.el"))
 
 ;; ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 ;; +++++++++++++++++ LOAD LANGUAGE SPECIFIC SETTINGS ++++++++++++++++++++

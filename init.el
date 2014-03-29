@@ -7,9 +7,9 @@
 ;; Created: Fr Okt  4 20:33:29 2013 (+0200)
 ;; Version:
 ;; Package-Requires: ()
-;; Last-Updated: Fr Mär 28 00:20:11 2014 (+0100)
+;; Last-Updated: Fr Mär 28 21:14:02 2014 (+0100)
 ;;           By: Manuel Schneckenreither
-;;     Update #: 564
+;;     Update #: 576
 ;; URL:
 ;; Doc URL:
 ;; Keywords:
@@ -92,7 +92,9 @@
 (when (>= emacs-major-version 24)
   (require 'package)
   (package-initialize)
+  (add-to-list 'package-archives '("gnu" . "http://elpa.gnu.org/packages/") t)
   (add-to-list 'package-archives '("melpa" . "http://melpa.milkbox.net/packages/") t)
+  (add-to-list 'package-archives '("marmalade" . "http://marmalade-repo.org/packages/") t)
   (add-to-list 'package-archives '("org" . "http://orgmode.org/elpa/") t))
 
 
@@ -101,6 +103,8 @@
       '(
         ac-dabbrev
         ac-math
+        ace-jump-mode
+        ace-window               ;; config in ace-jump-window config
         android-mode
         auctex
         auto-complete
@@ -135,6 +139,7 @@
         magit
         multiple-cursors
         org
+        org-gnome
         org-plus-contrib
         pager
         pager-default-keybindings
@@ -153,11 +158,6 @@
         zenburn-theme
         ))
 
-(package-initialize)
-(add-to-list 'package-archives
-             '("melpa" . "http://melpa.milkbox.net/packages/"))
-(add-to-list 'package-archives
-             '("org" . "http://orgmode.org/elpa/"))
 
 (when (not package-archive-contents)
   (package-refresh-contents))
