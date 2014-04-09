@@ -7,9 +7,9 @@
 ;; Created: Di Feb  4 17:01:05 2014 (+0100)
 ;; Version:
 ;; Package-Requires: ()
-;; Last-Updated: Mi Mär 26 15:45:25 2014 (+0100)
+;; Last-Updated: Mi Apr  9 16:14:30 2014 (+0200)
 ;;           By: Manuel Schneckenreither
-;;     Update #: 27
+;;     Update #: 31
 ;; URL:
 ;; Doc URL:
 ;; Keywords:
@@ -69,7 +69,9 @@
                                                      ;;(nnir-search-engine Imap)
                                                      (nnimap-logout-timeout 1.0)
                                                      ))
-
+;; Gwene news
+(add-to-list 'gnus-secondary-select-methods '(nntp "news.gwene.org"))
+(add-to-list 'gnus-secondary-select-methods '(nntp "news.gmane.org"))
 
 ;; Periodically check for mail/news
 (gnus-demon-init)

@@ -7,9 +7,9 @@
 ;; Created: Di Feb  4 12:54:58 2014 (+0100)
 ;; Version:
 ;; Package-Requires: ()
-;; Last-Updated: Mi Mär 26 23:35:52 2014 (+0100)
+;; Last-Updated: Mi Apr  9 19:20:14 2014 (+0200)
 ;;           By: Manuel Schneckenreither
-;;     Update #: 172
+;;     Update #: 174
 ;; URL:
 ;; Doc URL:
 ;; Keywords:
@@ -134,6 +134,10 @@
 
 ;; bbdb
 (setq bbdb/news-auto-create-p t)
+
+;; start bbdb and dired
+(add-hook 'gnus-startup-hook 'bbdb-insinuate-gnus)
+(add-hook 'dired-mode-hook 'turn-on-gnus-dired-mode)
 
 ;; search imap
 (setq nnir-imap-default-search-key "Imap")
