@@ -5,9 +5,9 @@
 ;; Author: Manuel Schneckenreither
 ;; Created: Mon Dec 10 22:51:09 2012 (+0100)
 ;; Version:
-;; Last-Updated: Mo Mär 24 12:03:32 2014 (+0100)
+;; Last-Updated: Mo Mär 31 10:39:56 2014 (+0200)
 ;;           By: Manuel Schneckenreither
-;;     Update #: 635
+;;     Update #: 636
 ;; URL:
 ;; Description:
 ;;    Basic configuration for emacs. In here are all configs of
@@ -32,7 +32,7 @@
 (setq desktop-buffers-not-to-save
       (concat "\\("
               "^nn\\.a[0-9]+\\|\\.log\\|(ftp)\\|^tags\\|^TAGS"
-              "\\|\\.diary\\|\\.newsrc-dribble\\|\\.bbdb"
+              "\\|\\.diary\\|^\\.newsrc-dribble\\|\\.bbdb"
               "\\)$"))
 ;; (add-to-list 'desktop-modes-not-to-save 'dired-mode)
 ;;(add-to-list 'desktop-modes-not-to-save 'Info-mode)

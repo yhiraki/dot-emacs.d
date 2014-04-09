@@ -7,9 +7,9 @@
 ;; Created: Fr Okt  4 20:33:29 2013 (+0200)
 ;; Version:
 ;; Package-Requires: ()
-;; Last-Updated: Fr Mär 28 21:14:02 2014 (+0100)
+;; Last-Updated: Di Apr  8 12:46:36 2014 (+0200)
 ;;           By: Manuel Schneckenreither
-;;     Update #: 576
+;;     Update #: 599
 ;; URL:
 ;; Doc URL:
 ;; Keywords:
@@ -104,7 +104,8 @@
         ac-dabbrev
         ac-math
         ace-jump-mode
-        ace-window               ;; config in ace-jump-window config
+        ace-jump-buffer          ;; config in ace-jump-mode config
+        ace-window               ;; config in ace-jump-mode config
         android-mode
         auctex
         auto-complete
@@ -139,7 +140,6 @@
         magit
         multiple-cursors
         org
-        org-gnome
         org-plus-contrib
         pager
         pager-default-keybindings

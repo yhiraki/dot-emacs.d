@@ -7,9 +7,9 @@
 ;; Created: Mo Okt 14 18:17:43 2013 (+0200)
 ;; Version:
 ;; Package-Requires: ()
-;; Last-Updated: Mo Mär 24 12:28:43 2014 (+0100)
+;; Last-Updated: Di Apr  1 21:06:08 2014 (+0200)
 ;;           By: Manuel Schneckenreither
-;;     Update #: 194
+;;     Update #: 195
 ;; URL:
 ;; Doc URL:
 ;; Keywords:
@@ -73,7 +73,7 @@
   ;; (add-to-list 'ac-sources 'ac-source-files-in-current-dir)
   ;; (add-to-list 'ac-sources 'ac-source-gtags)
   (add-to-list 'ac-sources 'ac-source-etags)
-  (add-to-list 'ac-sources 'ac-source-imenu)
+  ;; (add-to-list 'ac-sources 'ac-source-imenu)
   ;; (add-to-list 'ac-sources 'ac-source-semantic ;; slows down auto complete)
   ;; (add-to-list 'ac-sources 'ac-source-semantic-raw ;; slows down auto complete)
   ;; (add-to-list 'ac-sources 'ac-source-words-in-all-buffer)

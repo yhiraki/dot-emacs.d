@@ -7,9 +7,9 @@
 ;; Created: Sa Nov  2 16:14:09 2013 (+0100)
 ;; Version:
 ;; Package-Requires: ()
-;; Last-Updated: So Mär 23 17:03:34 2014 (+0100)
+;; Last-Updated: Di Apr  1 14:26:48 2014 (+0200)
 ;;           By: Manuel Schneckenreither
-;;     Update #: 49
+;;     Update #: 51
 ;; URL:
 ;; Doc URL:
 ;; Keywords:
@@ -162,9 +162,11 @@
   (flyspell-mode)
   (flyspell-buffer)
 
+  ;; enable org-table mode
+  (orgtbl-mode)
+
   ;; auto complete mode
   (add-to-list 'ac-sources 'ac-source-etags)
-
 
   (add-to-list 'ac-sources 'ac-source-abbrev)          ;; edited
   ;; (add-to-list 'ac-sources 'ac-source-css-property)

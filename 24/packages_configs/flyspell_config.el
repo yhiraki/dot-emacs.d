@@ -7,9 +7,9 @@
 ;; Created: Fr Okt  4 20:40:17 2013 (+0200)
 ;; Version:
 ;; Package-Requires: ()
-;; Last-Updated: Fr Mär 28 14:21:57 2014 (+0100)
+;; Last-Updated: Mo Apr  7 11:59:49 2014 (+0200)
 ;;           By: Manuel Schneckenreither
-;;     Update #: 102
+;;     Update #: 107
 ;; URL:
 ;; Doc URL:
 ;; Keywords:
@@ -51,12 +51,12 @@
 (require 'auto-dictionary)
 
 
-;; AUTOMATICALLY GESS DICTIONARY
+;; AUTOMATICALLY GUESS DICTIONARY
 (require 'auto-dictionary)
 (add-hook 'flyspell-mode-hook (lambda () (auto-dictionary-mode 1)))
 
-;; number of seconds to wait before spelling the buffer
-(setq flyspell-delay 1)
+;; call every now and then
+;; (setq flyspell-delay 1)
 
 
 ;; message mode hook
@@ -74,6 +74,9 @@
   ;; KEYS
   (local-set-key (kbd (concat prefix-command-key "s w")) 'ispell-word)
   (local-set-key (kbd (concat prefix-command-key "s b")) 'flyspell-buffer)
+  ;; (add-hook 'auto-save-hook 'flyspell-buffer)
+  (add-hook 'after-save-hook 'flyspell-buffer)
+
   )
 
 ;; global set key to enable/disable flyspell mode
@@ -92,7 +95,7 @@
 
 (global-set-key (kbd "<f8>") 'flyspell-switch-dictionary)
 
-
+;; fix key
 (eval-after-load "flyspell"
   '(define-key flyspell-mode-map (kbd "C-.") 'view-tag-other-window))
 

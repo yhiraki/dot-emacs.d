@@ -7,9 +7,9 @@
 ;; Created: Fr Mär 28 01:37:14 2014 (+0100)
 ;; Version:
 ;; Package-Requires: ()
-;; Last-Updated: Fr Mär 28 02:07:27 2014 (+0100)
+;; Last-Updated: Sa Mär 29 11:38:21 2014 (+0100)
 ;;           By: Manuel Schneckenreither
-;;     Update #: 6
+;;     Update #: 10
 ;; URL:
 ;; Doc URL:
 ;; Keywords:
@@ -58,6 +58,10 @@
 ;;(global-set-key (kbd "M-p") 'ace-window)
 (global-set-key (kbd "C-x o") 'ace-window)
 (setq aw-keys '(?a ?s ?d ?f ?g ?h ?j ?k ?l))
+
+
+;; set buffer switching to ace-jump-buffer
+(global-set-key (kbd "C-c C-b") 'ace-jump-buffer)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; ace_jump_config.el ends here
