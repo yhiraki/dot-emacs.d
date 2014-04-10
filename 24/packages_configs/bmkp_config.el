@@ -7,9 +7,9 @@
 ;; Created: Mi Mär 19 14:51:22 2014 (+0100)
 ;; Version:
 ;; Package-Requires: ()
-;; Last-Updated: Mi Apr  9 20:46:50 2014 (+0200)
+;; Last-Updated: Do Apr 10 12:48:26 2014 (+0200)
 ;;           By: Manuel Schneckenreither
-;;     Update #: 55
+;;     Update #: 71
 ;; URL:
 ;; Doc URL:
 ;; Keywords:
@@ -74,14 +74,15 @@ BOOKMARK is a bookmark name or a bookmark record."
   (let ((desktop-file  (bookmark-prop-get bookmark 'desktop-file)))
     (if current-desktop-file
         (my-save-desktop current-desktop-file nil nil))
-
+    (setq current-desktop-file (bookmark-prop-get bookmark 'desktop-file))
 
     (unless (condition-case nil (require 'desktop nil t) (error nil))
       (error "You must have library `desktop.el' to use this command"))
     ;; (unless desktop-file (error "Not a desktop-bookmark: %S" bookmark)) ; Shouldn't happen.
     (bmkp-desktop-change-dir desktop-file)
+
     (unless (bmkp-desktop-read desktop-file) (error "Could not load desktop file"))
-    (setq current-desktop-file (bookmark-prop-get bookmark 'desktop-file))))
+    (message (concat "Current-desktop-file: " (bookmark-prop-get bookmark 'desktop-file)))))
 
 
 ;; THIS FUNCTION OVERWRITES THE ORIGINAL BMKP-JUMP-DESKTOP FUNCTION
@@ -100,7 +101,6 @@ reopen it."
                           (bufferp (setq buf (get-buffer "*Group*"))))))
       (when gnusAlive
         (gnus-group-exit))
-      ;; (bmkp-set-desktop-bookmark (bookmark-prop-get bmkp-current-desktop-file 'desktop-file) t)
       (schnecki-jump-desktop bookmark)
       (when gnusAlive
         (gnus)))))
@@ -108,11 +108,11 @@ reopen it."
 
 ;; save desktop before quitting emacs (in case one was loaded)
 (add-hook 'kill-emacs-hook (lambda ()
-                              (if (not (boundp 'current-desktop-file))
-                                      (setq current-desktop-file nil))
-                              (if current-desktop-file
-                                  (my-save-desktop current-desktop-file nil nil))
-                              ))
+                             (if (not (boundp 'current-desktop-file))
+                                 (setq current-desktop-file nil))
+                             (if current-desktop-file
+                                 (my-save-desktop current-desktop-file nil nil))
+                             ))
 
 ;; this function automatically saves the bookmark file. it was copied
 ;; from the original save-desktop function and then modified.
