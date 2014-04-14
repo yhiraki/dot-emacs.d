@@ -7,9 +7,9 @@
 ;; Created: Di Feb  4 12:54:58 2014 (+0100)
 ;; Version:
 ;; Package-Requires: ()
-;; Last-Updated: Mi Apr  9 19:20:14 2014 (+0200)
+;; Last-Updated: Mo Apr 14 23:34:12 2014 (+0200)
 ;;           By: Manuel Schneckenreither
-;;     Update #: 174
+;;     Update #: 219
 ;; URL:
 ;; Doc URL:
 ;; Keywords:
@@ -59,16 +59,6 @@
 ;; ++++++++++++++++++++++++++ QUITING GNUS ++++++++++++++++++++++++++++++
 ;; ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
-;; first overwrite exit function, so gnus does not ask me if I really
-;; want to quit
-(defun gnus-group-exit ()
-  "Quit reading news after updating .newsrc."
-  (interactive)
-  (progn
-    (gnus-save-newsrc-file gnus-startup-file)
-    (gnus-clear-system)
-    (nntp-close-server)))
-
 ;; disable exiting with q
 (defun local-gnus-group-mode ()
   ;; KEYS
@@ -81,8 +71,11 @@
                                                               "Gnus")))))
   (local-set-key (kbd "C-x k") (lambda ()
                                  (interactive)
-                                 (bury-buffer)))
-  (local-set-key (kbd "Q") 'gnus-group-exit))
+                                 (schnecki-gnus)))
+  (local-set-key (kbd "Q") 'gnus-group-exit)
+
+  (local-set-key (kbd "TAB") 'gnus-topic-fold-this-topic)
+  )
 
 
 ;; set in group mode hook
@@ -115,22 +108,30 @@
                  (nnfolder-directory "~/.mail/sent-mail/")
                  ))
 
+
 (setq gnus-gcc-mark-as-read t)
 
-;; drafts
+;; set folder paths
 (setq gnus-article-save-directory "~/.mail/News/")
 
-(setq gnus-home-directory "~/.mail/")
-(setq message-directory (concat gnus-home-directory "messages/"))
-(setq nnfolder-directory (concat gnus-home-directory "archive/"))
-(setq gnus-directory (concat gnus-home-directory "news/"))
-(setq gnus-kill-files-directory (concat gnus-home-directory "score/"))
-(setq gnus-cache-directory (concat gnus-home-directory ".cache/"))
-(setq gnus-html-cache-directory (concat gnus-home-directory "htmlcache/"))
+(setq gnus-home-directory "~/.mail/"
+      message-directory (concat gnus-home-directory "messages/")
+      nnfolder-directory (concat gnus-home-directory "archive/")
+      gnus-directory (concat gnus-home-directory "news/")
+      gnus-kill-files-directory (concat gnus-home-directory "score/")
+      gnus-cache-directory (concat gnus-home-directory ".cache/")
+      gnus-html-cache-directory (concat gnus-home-directory "htmlcache/"))
+
+;; set default values
+(setq gnus-save-newsrc-file nil
+      gnus-read-newsrc-file nil
+      gnus-use-dribble-file nil
+      gnus-interactive-exit nil
+      gnus-save-killed-list nil)
+
 
 ;; for searching through imap folders (rest of config in .gnus)
 (require 'nnir)
-
 
 ;; bbdb
 (setq bbdb/news-auto-create-p t)
@@ -154,6 +155,86 @@
       (15 (message "Gnus timed out."))
     ad-do-it))
 
+;; close sent message buffers
+(setq message-kill-buffer-on-exit t)
+
+
+;; Toggle between the gnus window configuration and your normal
+;; editing window configuration.
+(defun schnecki-gnus ()
+  (interactive)
+  (let ((bufname (buffer-name)))
+    (if (or
+         (string-equal "*Group*" bufname)
+         (string-equal "*BBDB*" bufname)
+         (string-match "\*Summary" bufname)
+         (string-match "\*Article" bufname))
+        (progn
+          (schnecki-bury-gnus))
+                                        ;unbury
+      (if (get-buffer "*Group*")
+          (schnecki-unbury-gnus)
+        (gnus-unplugged)))))
+
+(defun schnecki-unbury-gnus ()
+  (interactive)
+  (setq gnus-bury-window-configuration-non-gnus nil)
+  (unless gnus-bury-window-configuration-non-gnus
+    (setq gnus-bury-window-configuration-non-gnus (current-window-configuration)))
+  (when (and (boundp 'gnus-bury-window-configuration) gnus-bury-window-configuration)
+    (set-window-configuration gnus-bury-window-configuration)))
+
+(defun schnecki-bury-gnus ()
+  (interactive)
+  (setq gnus-bury-window-configuration nil)
+  (let ((buf nil)
+        (bufname nil))
+    (dolist (buf (buffer-list))
+      (setq bufname (buffer-name buf))
+      (when (or
+             (string-equal "*Group*" bufname)
+             (string-equal "*BBDB*" bufname)
+             (string-match "\*Summary" bufname)
+             (string-match "\*Article" bufname))
+        (unless gnus-bury-window-configuration
+          (setq gnus-bury-window-configuration (current-window-configuration)))
+        (delete-other-windows)
+        (if (eq (current-buffer) buf)
+            (bury-buffer)
+          (bury-buffer buf)))))
+  (when (and (boundp 'gnus-bury-window-configuration-non-gnus) gnus-bury-window-configuration-non-gnus)
+    (set-window-configuration gnus-bury-window-configuration-non-gnus)))
+
+(global-set-key (kbd (concat prefix-command-key "m o")) 'schnecki-gnus)
+
+;; set visible headers
+(setq gnus-visible-headers "^From:\\|^Newsgroups:\\|^Subject:\\|^Date:\\|^Followup-To:\\|^Reply-To:\\|^Summary:\\|^Keywords:\\|^To:\\|^[BGF]?Cc:\\|^Posted-To:\\|^Mail-Copies-To:\\|^Mail-Followup-To:\\|^Apparently-To:\\|^Gnus-Warning:\\|^Resent-From:\\|^X-Sent:\\|^User-Agent:\\|^X-Mailer:\\|^X-Newsreader:")
+;; (setq gnus-sorted-header-list '("^From:" "^Subject:" "^Summary:" "^Keywords:" "^Newsgroups:" "^Followup-To:" "^To:" "^Cc:" "^Date:" "^User-Agent:" "^X-Mailer:" "^X-Newsreader:"))
+
+
+;; Show '-> Recipient' instead of my name as sender for replies
+(setq gnus-ignored-from-addresses "Manuel Schneckenreither")
+
+
+;; Group buffer
+(add-hook 'gnus-group-mode-hook 'gnus-topic-mode)
+
+(defun gnus-topic-fold-this-topic nil
+  "Toggle folding of current topic."
+  (interactive)
+  (gnus-topic-goto-topic (gnus-current-topic))
+  (gnus-topic-fold))
+
+
+(setq gnus-group-line-format "\t%M%S%p%P%4y: %B%*%(%-66,66g%)%6O\t%18ud [%5t]\n"
+      gnus-check-new-newsgroups nil)
+(add-hook 'gnus-select-group-hook 'gnus-group-set-timestamp)
+
+(defun gnus-user-format-function-d (headers)
+  (let ((time (gnus-group-timestamp gnus-tmp-group)))
+    (if time
+        (format-time-string "(%d.%m.%Y %H:%M)" time)
+      "")))
 
 ;; ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 ;; +++++++++++++++++++++++++++ SIGNATURE ++++++++++++++++++++++++++++++++
@@ -260,19 +341,39 @@
 ;; ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 ;; article lists
-(setq-default
- ;; gnus-summary-line-format "%U%R%z  |  %(%&user-date;  |  %-25,25f  |  %B%s%)\n"
- gnus-summary-line-format "%U%R%z | %5i | %(%&user-date;  %-15,15f  %B%s%)\n"
- gnus-user-date-format-alist '((t . "%d.%m.%Y %H:%M"))
- gnus-summary-thread-gathering-function 'gnus-gather-threads-by-references
- gnus-thread-sort-functions '(gnus-thread-sort-by-date)
- gnus-sum-thread-tree-false-root ""
- gnus-sum-thread-tree-indent " "
- gnus-sum-thread-tree-leaf-with-other "├► "
- gnus-sum-thread-tree-root ""
- gnus-sum-thread-tree-single-leaf "╰► "
- gnus-sum-thread-tree-vertical "│")
+(setq gnus-face-0 'gnus-server-offline
+      gnus-face-1 'gnus-server-agent
+      gnus-face-2 'gnus-server-opened
+      gnus-summary-line-format "%U%R%z | %6i | %(%-16,16&user-date;  %-20,20f  %2uj  %*%B%s%)\n"
+      gnus-user-date-format-alist '(((gnus-seconds-today) . "Today      %2H:%2M")
+                                    ((+ 86400 (gnus-seconds-today)) . "Yesterday  %H:%M")
+                                    ;; (604800 . "%A %2H:%2M") ;; that's one week
+                                    (t . "%d.%m.%Y %2H:%2M"))
+      gnus-summary-thread-gathering-function 'gnus-gather-threads-by-references
+      gnus-thread-sort-functions '(gnus-thread-sort-by-date)
+      gnus-sum-thread-tree-false-root ""
+      gnus-sum-thread-tree-indent " "
+      gnus-sum-thread-tree-leaf-with-other "├► "
+      gnus-sum-thread-tree-root ""
+      gnus-sum-thread-tree-single-leaf "╰► "
+      gnus-sum-thread-tree-vertical "│")
 
+
+;; show “»” if i’m the only recipient of the message, or a “~” if i’m
+;; in the To:, Cc: or BCc: headers among others:
+(defun gnus-user-format-function-j (headers)
+  (let ((to (gnus-extra-header 'To headers)))
+    (if (string-match your-mail-addresses to)
+        (if (string-match "[\"\' \<.[:alnum:]]*@[\>.[:alnum:]]*[:space]*,[\"\' \<\>.[:alnum:]]*@" to) "~" "»")
+      (if (or (string-match your-mail-addresses
+                            (gnus-extra-header 'Cc headers))
+              (string-match your-mail-addresses
+                            (gnus-extra-header 'BCc headers)))
+          "~"
+        (if (string-match your-mail-addresses (mail-header-from headers))
+            "m"
+          " ")
+        ))))
 
 ;; Coloring empty topics differently from non-empty topics is a nice idea.
 (setq gnus-topic-line-format "%i[ %u&topic-line; ] %v\n")
@@ -287,29 +388,6 @@
      'face topic-face)))
 
 
-;; Replacing common prefixes of group names with spaces
-;; (defvar gnus-user-format-function-g-prev "" "")
-;; (defun empty-common-prefix (left right)
-;;   "Given `left' '(\"foo\" \"bar\" \"fie\") and `right' '(\"foo\"
-;;     \"bar\" \"fum\"), return '(\"   \" \"   \" \"fum\")."
-;;   (if (and (cdr right)     ; always keep the last part of right
-;;            (equal (car left) (car right)))
-;;       (cons (make-string (length (car left)) ? )
-;;             (empty-common-prefix (cdr left) (cdr right)))
-;;     right))
-;; (defun gnus-user-format-function-g (arg)
-;;   "The full group name, but if it starts with a previously seen
-;;     prefix, empty that prefix."
-;;   (if (equal gnus-user-format-function-g-prev gnus-tmp-group) ; line-format is updated on exiting the summary, making prev equal this
-;;       gnus-tmp-group
-;;     (let* ((prev (split-string-and-unquote gnus-user-format-function-g-prev "\\."))
-;;            (this (split-string-and-unquote gnus-tmp-group "\\.")))
-;;       (setq gnus-user-format-function-g-prev gnus-tmp-group)
-;;       (combine-and-quote-strings
-;;        (empty-common-prefix prev this)
-;;        "."))))
-;; (setq gnus-group-line-format "%M%S%p%P%5y:%B%(%ug%)\n")
-
 ;; ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 ;; ++++++++++++++++++++++++ FINALLY OPEN GNUS +++++++++++++++++++++++++++
 ;; ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -319,11 +397,12 @@
 
 
 ;; set timeout so we don't get stuck
-(setq nntp-connection-timeout 3)
+(setq nntp-connection-timeout 3
+      nntp-command-timeout 8)
+
 
 ;; open gnus
 (gnus)
-
 
 ;; gnus function for system wide mail editor
 (defun mailto-compose-mail (mailto-url)

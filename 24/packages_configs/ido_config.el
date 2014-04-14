@@ -7,9 +7,9 @@
 ;; Created: So Okt 13 23:25:02 2013 (+0200)
 ;; Version:
 ;; Package-Requires: ()
-;; Last-Updated: Mi Mär 26 10:47:12 2014 (+0100)
+;; Last-Updated: Mo Apr 14 22:42:39 2014 (+0200)
 ;;           By: Manuel Schneckenreither
-;;     Update #: 41
+;;     Update #: 50
 ;; URL:
 ;; Doc URL:
 ;; Keywords:
@@ -29,6 +29,9 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;
 ;;; Code:
+
+
+;; NOTE: UNDO A MERGE WITH C-z
 
 
 ;; ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -56,7 +59,7 @@
 
 ;; LET IDO MODE COMPLETE ALMOST EVERYTHING
 (defvar ido-enable-replace-completing-read t
-      "If t, use ido-completing-read instead of completing-read if possible.
+  "If t, use ido-completing-read instead of completing-read if possible.
 
     Set it to nil using let in around-advice for functions where the
     original completing-read is required.  For example, if a function
@@ -66,20 +69,20 @@
     (defadvice foo (around original-completing-read-only activate)
       (let (ido-enable-replace-completing-read) ad-do-it))")
 
-    ;; Replace completing-read wherever possible, unless directed otherwise
-    (defadvice completing-read
-      (around use-ido-when-possible activate)
-      (if (or (not ido-enable-replace-completing-read) ; Manual override disable ido
-              (and (boundp 'ido-cur-list)
-                   ido-cur-list)) ; Avoid infinite loop from ido calling this
-          ad-do-it
-        (let ((allcomp (all-completions "" collection predicate)))
-          (if allcomp
-              (setq ad-return-value
-                    (ido-completing-read prompt
-                                   allcomp
-                                   nil require-match initial-input hist def))
-            ad-do-it))))
+;; Replace completing-read wherever possible, unless directed otherwise
+(defadvice completing-read
+  (around use-ido-when-possible activate)
+  (if (or (not ido-enable-replace-completing-read) ; Manual override disable ido
+          (and (boundp 'ido-cur-list)
+               ido-cur-list)) ; Avoid infinite loop from ido calling this
+      ad-do-it
+    (let ((allcomp (all-completions "" collection predicate)))
+      (if allcomp
+          (setq ad-return-value
+                (ido-completing-read prompt
+                                     allcomp
+                                     nil require-match initial-input hist def))
+        ad-do-it))))
 
 
 ;; DISABLE IDO IN SEVERAL MODES
@@ -96,13 +99,23 @@
 ;; SORT IDO FILELIST BY MTIME INSTEAD OF ALPHABETICALLY
 (add-hook 'ido-make-file-list-hook 'ido-sort-mtime)
 (add-hook 'ido-make-dir-list-hook 'ido-sort-mtime)
+
+
 (defun ido-sort-mtime ()
   (setq ido-temp-list
         (sort ido-temp-list
               (lambda (a b)
-                (time-less-p
-                 (sixth (file-attributes (concat ido-current-directory b)))
-                 (sixth (file-attributes (concat ido-current-directory a)))))))
+                (let ((a-tramp-file-p (string-match-p ":\\'" a))
+                      (b-tramp-file-p (string-match-p ":\\'" b)))
+                  (cond
+                   ((and a-tramp-file-p b-tramp-file-p)
+                    (string< a b))
+                   (a-tramp-file-p nil)
+                   (b-tramp-file-p t)
+                   (t (time-less-p
+                       (sixth (file-attributes (concat ido-current-directory b)))
+                       (sixth (file-attributes (concat ido-current-directory a))))))))))
+
   (ido-to-end  ;; move . files to end (again)
    (delq nil (mapcar
               (lambda (x) (and (char-equal (string-to-char x) ?.) x))
@@ -116,6 +129,8 @@
 ;; ido fuzzy matching
 (setq ido-enable-flex-matching t)
 
+;; remove tramp files from ido completion to disable password prompt
+(add-to-list 'ido-work-directory-list-ignore-regexps tramp-file-name-regexp)
 
 ;; IDO Everywhere
 (ido-everywhere t)

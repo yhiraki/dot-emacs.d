@@ -1,4 +1,5 @@
-# contributor: https://github.com/polypus74
-# key: prag
+# -*- mode: snippet -*-
+# name: pragma
+# key: {
 # --
-{-# $1 #-}
+{-# ${1:PRAGMA} #-}

@@ -1,12 +1,9 @@
-# contributor: Rodrigo Setti <rodrigosetti@gmail.com>
+# -*- mode: snippet -*-
 # name: figure
 # key: fig
 # --
-\\begin{figure}[${1:t!}]
-    \\centering
-    \\includegraphics[width=$0${2:0.5}\textwidth]{${3:filename}}
-    \\caption{${4:description}\\hfill
-    \\newline Source: ${5:www.wikipedia.org}
-    }
-    \\label{fig:${3:$(replace-regexp-in-string " " "_" yas/text)}}
-\\end{figure}
+\begin{figure}[ht]
+  \centering
+  \includegraphics[${1:options}]{figures/${2:path.pdf}}
+  \caption{\label{fig:${3:label}} $0}
+\end{figure}

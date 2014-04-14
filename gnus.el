@@ -7,9 +7,9 @@
 ;; Created: Di Feb  4 17:01:05 2014 (+0100)
 ;; Version:
 ;; Package-Requires: ()
-;; Last-Updated: Mi Apr  9 16:14:30 2014 (+0200)
+;; Last-Updated: Do Apr 10 16:33:37 2014 (+0200)
 ;;           By: Manuel Schneckenreither
-;;     Update #: 31
+;;     Update #: 33
 ;; URL:
 ;; Doc URL:
 ;; Keywords:
@@ -55,7 +55,7 @@
                                   (nnimap-stream ssl)
                                   (nnimap-server-port 993)
                                   (nnimap-address "mail2.uibk.ac.at")
-                                  ;(nnir-search-engine Imap)
+                                        ;(nnir-search-engine Imap)
                                   ;; if a connection to an IMAP server
                                   ;; can't be closed, force close
                                   ;; after 1s
@@ -69,7 +69,7 @@
                                                      ;;(nnir-search-engine Imap)
                                                      (nnimap-logout-timeout 1.0)
                                                      ))
-;; Gwene news
+;; Gwene news and Gmane Mailgroups
 (add-to-list 'gnus-secondary-select-methods '(nntp "news.gwene.org"))
 (add-to-list 'gnus-secondary-select-methods '(nntp "news.gmane.org"))
 

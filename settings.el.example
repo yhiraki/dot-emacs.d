@@ -2,6 +2,12 @@
 
 (setq your-full-name "Firstname Lastname")
 (setq your-mail-address "nobody@home.com")
+
+(defvar your-mail-addresses
+  (concat your-mail-address
+          "\\|mySencondMail\\.name@gmail\\.com\\|thirdmail@gmail\\.com"))
+
+
 ;; THESAURUS - choose synonym and replace
 ;; get api at http://words.bighugelabs.com/ and register (no cost).
 (setq thesaurus_api_key "somehashstring, get at address given above")

@@ -7,9 +7,9 @@
 ;; Created: Mi Mär 19 14:51:22 2014 (+0100)
 ;; Version:
 ;; Package-Requires: ()
-;; Last-Updated: Do Apr 10 12:48:26 2014 (+0200)
+;; Last-Updated: Do Apr 10 14:58:33 2014 (+0200)
 ;;           By: Manuel Schneckenreither
-;;     Update #: 71
+;;     Update #: 72
 ;; URL:
 ;; Doc URL:
 ;; Keywords:
@@ -103,7 +103,9 @@ reopen it."
         (gnus-group-exit))
       (schnecki-jump-desktop bookmark)
       (when gnusAlive
-        (gnus)))))
+        (gnus)                          ; open gnus
+        (schnecki-gnus)                 ; hide gnus
+        ))))
 
 
 ;; save desktop before quitting emacs (in case one was loaded)

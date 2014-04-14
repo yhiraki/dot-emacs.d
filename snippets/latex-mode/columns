@@ -1,12 +1,13 @@
-# contributor: Manuel Schneckenreither
+# -*- mode: snippet -*-
 # name: columns
-# key: col
+# key: cols
 # --
-\begin{columns}[${1:T}]
+\begin{columns}
+  \begin{column}{.${1:5}\textwidth}
+  $0
+  \end{column}
 
-    \column{${2:0.7}\textwidth}
-    $0
+  \begin{column}{.${2:5}\textwidth}
 
-    \column{${3:0.3}\textwidth}
-
+  \end{column}
 \end{columns}
