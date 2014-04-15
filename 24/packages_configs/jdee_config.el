@@ -7,9 +7,9 @@
 ;; Created: So Okt 13 13:22:28 2013 (+0200)
 ;; Version:
 ;; Package-Requires: ()
-;; Last-Updated: Di Feb  4 11:27:58 2014 (+0100)
+;; Last-Updated: Di Apr 15 16:38:46 2014 (+0200)
 ;;           By: Manuel Schneckenreither
-;;     Update #: 362
+;;     Update #: 363
 ;; URL:
 ;; Doc URL:
 ;; Keywords:
@@ -50,6 +50,9 @@
 ;; ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 ;; ++++++++++++++++++++++++++++ JDEE CONFIG +++++++++++++++++++++++++++++
 ;; ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+;; On Windows wget is not available.
+(setq jde-help-remote-file-exists-function '("beanshell"))
 
 (add-to-list 'load-path (concat package-folder "jdee-2.4.1/lisp"))
 (autoload 'jde-mode "jde" "JDE mode" t)

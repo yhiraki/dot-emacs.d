@@ -200,6 +200,29 @@ Steps 1 + 2 + 3 + 5 + 7 (4 not included!):
     # check step 2, 3, 4, 6 from How To Install menu above!
 
 
+Windows 8:
+----------
+
+Get Emacs: https://www.gnu.org/software/emacs/
+Get and install Git: http://git-scm.com/download/win
+Install aspell: http://aspell.net/win32/
+
+Start Git Bash and do:
+    $ cd ~/AppData/Roaming
+    $ echo "(load-file \"~/.emacs.d/init.el\")" > ~/.emacs                    # for emacs this is ~
+    $ echo "(load-file \"~/.emacs.d/gnus.el\")" > ~/.gnus.el
+    $ git clone https://github.com/schnecki/dot-emacs-4-everyone .emacs.d
+
+
+Disable following module (comment them) in ~/.emacs.d/24/emacs.el:
+  - mpc_config.el    (or install mpd and reconfigure the module)
+
+Set ispell command in
+
+  
+Then start emacs (from the bin folder of the unzipped emacs download)
+
+
 Dependencies:
 -------------
 

@@ -7,9 +7,9 @@
 ;; Created: Fr Okt  4 20:40:17 2013 (+0200)
 ;; Version:
 ;; Package-Requires: ()
-;; Last-Updated: Mo Apr  7 11:59:49 2014 (+0200)
+;; Last-Updated: Di Apr 15 16:48:38 2014 (+0200)
 ;;           By: Manuel Schneckenreither
-;;     Update #: 107
+;;     Update #: 108
 ;; URL:
 ;; Doc URL:
 ;; Keywords:
@@ -58,6 +58,8 @@
 ;; call every now and then
 ;; (setq flyspell-delay 1)
 
+(if (fboundp 'w32-send-sys-command)
+    (setq-default ispell-program-name “c:\\Program Files\\Aspell\\bin\\aspell.exe”))
 
 ;; message mode hook
 (add-hook 'message-mode-hook 'turn-on-flyspell)
