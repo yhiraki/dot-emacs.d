@@ -179,23 +179,23 @@ Fedora Command:
 
 Steps 1 + 2 + 3 + 5 + 7 (4 not included!):
 
-    mv -p ~/.emacs.d ~/.emacs.d.bak; true &&                              # backup \
-    git clone https://github.com/schnecki/dot-emacs-4-everyone.git &&     # download \
-    mv dot-emacs-4-everyone ~/.emacs.d; true &&                           # move to home \
-    mv ~/.emacs.d/settings.el.backup ~/.emacs.d/settings.el; true &&      # copy settings.el \
-    su -c "yum install ctags-etags gnuplot emacs graphviz                 # main tools \
-    w3m curl                                                              # browser for links \
-    mpd                                                                   # install mpd music server \
-    texlive evince &&                                                     # LaTeX \
-    cabal install hasktags &&                                             # Haskell \
-    perl-CPAN mariadb-devel && cpan -fi Module::Build::Compat &&          # database tools \
-    cpan -fi RPC::EPC::Service DBI DBD::SQLite DBD::Pg DBD::mysql" &&     # database tools \
-    echo "(load-file \"~/.emacs.d/gnus.el\")" > ~/.gnus.el &&             # create gnus file \
-    mv ~/.emacs.d/settings.el.example ~/.emacs.d/settings.el;true &&      # settings.el \
-    mv ~/.mpd ~/.mpd.bak; true && mv ~/.mpdconf ~/.mpdconf.bak;true &&    # backup mpd config \
-    mkdir -p ~/.mpd && mkdir -p ~/.mpd/playlists/ && touch ~/.mpd/log &&  # mpd config part 1 \
-    touch ~/.mpd/database && mv ~/.emacs.d/.mpdconf ~/.mpdconf; true  &&  # mpd config part 2 \
-    emacs -mm                                                             # start emacs maximized
+    mv ~/.emacs.d ~/.emacs.d.bak;                                        # backup \
+    git clone https://github.com/schnecki/dot-emacs-4-everyone.git;      # download \
+    mv dot-emacs-4-everyone ~/.emacs.d;                                  # move to home \
+    mv ~/.emacs.d/settings.el.backup ~/.emacs.d/settings.el;             # copy settings.el \
+    su -c "yum install ctags-etags gnuplot emacs graphviz                # main tools \
+    w3m curl                                                             # browser for links \
+    mpd                                                                  # install mpd music server \
+    texlive evince;                                                      # LaTeX \
+    cabal install hasktags;                                              # Haskell \
+    perl-CPAN mariadb-devel;  cpan -fi Module::Build::Compat;            # database tools \
+    cpan -fi RPC::EPC::Service DBI DBD::SQLite DBD::Pg DBD::mysql";      # database tools \
+    echo "(load-file \"~/.emacs.d/gnus.el\")" > ~/.gnus.el;              # create gnus file \
+    mv ~/.emacs.d/settings.el.example ~/.emacs.d/settings.el;            # settings.el \
+    mv ~/.mpd ~/.mpd.bak; mv ~/.mpdconf ~/.mpdconf.bak;                  # backup mpd config \
+    mkdir -p ~/.mpd;  mkdir -p ~/.mpd/playlists/;  touch ~/.mpd/log;     # mpd config part 1 \
+    touch ~/.mpd/database;  mv ~/.emacs.d/.mpdconf ~/.mpdconf;           # mpd config part 2 \
+    emacs -mm                                                            # start emacs maximized
 
     # check step 2, 3, 4, 6 from How To Install menu above!
 
