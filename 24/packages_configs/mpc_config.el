@@ -7,9 +7,9 @@
 ;; Created: Mo Apr 14 17:47:32 2014 (+0200)
 ;; Version:
 ;; Package-Requires: ()
-;; Last-Updated: Mo Apr 14 23:39:08 2014 (+0200)
+;; Last-Updated: Di Apr 15 11:48:05 2014 (+0200)
 ;;           By: Manuel Schneckenreither
-;;     Update #: 14
+;;     Update #: 15
 ;; URL:
 ;; Doc URL:
 ;; Keywords:
@@ -48,6 +48,10 @@
 ;; ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 ;; ++++++++++++++++++++++++ MPC Music Client ++++++++++++++++++++++++++++
 ;; ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+
+;; start mpd server (nil means hide output)
+(start-process "mpd-service" nil "mpd")
 
 (require 'mpc)
 

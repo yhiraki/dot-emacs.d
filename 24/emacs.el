@@ -5,9 +5,9 @@
 ;; Author: Manuel Schneckenreither
 ;; Created: Tue Dec 11 00:43:14 2012 (+0100)
 ;; Version:
-;; Last-Updated: Mo Apr 14 18:18:16 2014 (+0200)
+;; Last-Updated: Di Apr 15 12:41:44 2014 (+0200)
 ;;           By: Manuel Schneckenreither
-;;     Update #: 386
+;;     Update #: 389
 ;; URL:
 ;; Description:
 ;;
@@ -34,7 +34,7 @@
 (load (concat package-conf-folder "winner_mode_config.el"))
 ;; CEDET - semantic, EDE, etc. (needs to be done pretty early!)
 (load (concat package-conf-folder "cedet_config.el"))
-;; ECB - windows showing help
+;; ECB - buffers on the side showing information
 ;; (load (concat package-conf-folder "ecb_config.el"))
 ;; Eldoc config
 (load (concat package-conf-folder "eldoc_config.el"))
@@ -54,9 +54,9 @@
 (load (concat package-conf-folder "window-number_config.el"))
 ;; YASNIPPET - snippets easily handled
 (load (concat package-conf-folder "yasnippet_config.el"))
-;; JDEE Mode
+;; JDEE Mode - Java mode
 (load (concat package-conf-folder "jdee_config.el"))
-;; ORG Mode
+;; ORG Mode - organize everything
 (load (concat package-conf-folder "org_mode_config.el"))
 ;; AUTO COMPLETE - completion - You should not disable this, unless
 ;; you know what you are doing
@@ -95,6 +95,8 @@
 (load (concat package-conf-folder "printing_config.el"))
 ;; MPC - a mpd (which is a music player server) client
 (load (concat package-conf-folder "mpc_config.el"))
+;; SMART-SCAN - jump to same words by M-n and M-p in buffer
+(load (concat package-conf-folder "smart_scan_config.el"))
 
 
 ;; ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++

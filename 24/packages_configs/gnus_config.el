@@ -7,9 +7,9 @@
 ;; Created: Di Feb  4 12:54:58 2014 (+0100)
 ;; Version:
 ;; Package-Requires: ()
-;; Last-Updated: Mo Apr 14 23:34:12 2014 (+0200)
+;; Last-Updated: Di Apr 15 00:39:33 2014 (+0200)
 ;;           By: Manuel Schneckenreither
-;;     Update #: 219
+;;     Update #: 224
 ;; URL:
 ;; Doc URL:
 ;; Keywords:
@@ -72,15 +72,19 @@
   (local-set-key (kbd "C-x k") (lambda ()
                                  (interactive)
                                  (schnecki-gnus)))
-  (local-set-key (kbd "Q") 'gnus-group-exit)
-
-  (local-set-key (kbd "TAB") 'gnus-topic-fold-this-topic)
-  )
-
+  (local-set-key (kbd "Q") 'gnus-group-exit))
 
 ;; set in group mode hook
 (add-hook 'gnus-group-mode-hook 'local-gnus-group-mode)
 
+
+;; Redefine keys - disable hiding topics in group buffer
+(defun jbr-gnus-topic-mode-hook()
+  (define-key gnus-topic-mode-map [tab] 'gnus-group-next-unread-group)
+  (define-key gnus-topic-mode-map [backtab] 'gnus-group-prev-unread-group)
+  (define-key gnus-topic-mode-map [S-tab] 'gnus-group-prev-unread-group))
+
+(add-hook 'gnus-topic-mode-hook 'jbr-gnus-topic-mode-hook)
 
 ;; ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 ;; +++++++++++++++++++++++++++ GNUS CONFIG ++++++++++++++++++++++++++++++
@@ -218,13 +222,6 @@
 
 ;; Group buffer
 (add-hook 'gnus-group-mode-hook 'gnus-topic-mode)
-
-(defun gnus-topic-fold-this-topic nil
-  "Toggle folding of current topic."
-  (interactive)
-  (gnus-topic-goto-topic (gnus-current-topic))
-  (gnus-topic-fold))
-
 
 (setq gnus-group-line-format "\t%M%S%p%P%4y: %B%*%(%-66,66g%)%6O\t%18ud [%5t]\n"
       gnus-check-new-newsgroups nil)

@@ -103,7 +103,7 @@ to use the org mode (which is set default for text files), check out
 
 
 There is a prefix command for most user-defined key strokes. It can be
-defined in the settings.el file, the default is C-x x.
+defined in the ~/.emacs.d/settings.el file, the default is C-x x.
 
 Have a look at ~/.emacs.d/24/basic_keys.el for the main keys.
 
@@ -152,7 +152,8 @@ For some distribution the commands are listed below this section.
 
 4. you might want to disable (comment) the Gnus package for the first
    real start-up, see 24/emacs.el and search for gnus. Otherwise you
-   definitely need configure it, see gnus.el.
+   definitely need configure it, see ~/.emacs.d/gnus.el and/or
+   ~/.gnus!
 
 5. you need to fire up emacs - all emacs melpa packages will be
    downloaded
@@ -161,7 +162,12 @@ For some distribution the commands are listed below this section.
 
 6. it should automatically compile cedet. Check if that worked out!
 
-7. you need to restart emacs (cedet doesn't like it, when new packages
+7. if you want to use mpc/mpd music player: setup mpd (music server)
+   in ~/.mpdconf (a default setup is delivered with this setup and
+   might already be copied to ~/.mpdconf, otherwise it can be found at
+   ~/.emacs.d/.mpdconf).
+
+8. you need to restart emacs (cedet doesn't like it, when new packages
    get installed)
 
 
@@ -171,21 +177,25 @@ For some distribution the commands are listed below this section.
 Fedora Command:
 ---------------
 
-Steps 1 + 2 + 3 + 5 (4 not included!):
+Steps 1 + 2 + 3 + 5 + 7 (4 not included!):
 
-    mv ~/.emacs.d ~/.emacs.d.bak && \                                      # backup
-    git clone https://github.com/schnecki/dot-emacs-4-everyone.git && \    # download
-    mv dot-emacs-4-everyone ~/.emacs.d && \                                # move to home
-    mv ~/.emacs.d/settings.el.backup ~/.emacs.d/settings.el && \           # copy settings.el
-    su -c "yum install ctags-etags gnuplot emacs graphviz \                # main tools
-    w3m curl && \                                                          # browser for links
-    texlive evince &&  \                                                   # LaTeX
-    cabal install hasktags &&                                              # Haskell
-    perl-CPAN mariadb-devel && cpan -fi Module::Build::Compat && \         # database tools
-    cpan -fi RPC::EPC::Service DBI DBD::SQLite DBD::Pg DBD::mysql" && \    # database tools
-    echo "(load-file \"~/.emacs.d/gnus.el\")" > ~/.gnus.el && \            # create gnus file
-    mv ~/.emacs.d/settings.el.example ~/.emacs.d/settings.el && \          # settings.el
-    && emacs -mm                                                           # start emacs maximized
+    mv ~/.emacs.d ~/.emacs.d.bak &&                                       # backup \
+    git clone https://github.com/schnecki/dot-emacs-4-everyone.git &&     # download \
+    mv dot-emacs-4-everyone ~/.emacs.d &&                                 # move to home \
+    mv ~/.emacs.d/settings.el.backup ~/.emacs.d/settings.el &&            # copy settings.el \
+    su -c "yum install ctags-etags gnuplot emacs graphviz                 # main tools \
+    w3m curl                                                              # browser for links \
+    mpd                                                                   # install mpd music server \
+    texlive evince &&                                                     # LaTeX \
+    cabal install hasktags &&                                             # Haskell \
+    perl-CPAN mariadb-devel && cpan -fi Module::Build::Compat &&          # database tools \
+    cpan -fi RPC::EPC::Service DBI DBD::SQLite DBD::Pg DBD::mysql" &&     # database tools \
+    echo "(load-file \"~/.emacs.d/gnus.el\")" > ~/.gnus.el &&             # create gnus file \
+    mv ~/.emacs.d/settings.el.example ~/.emacs.d/settings.el &&           # settings.el \
+    mv ~/.mpd ~/.mpd.bak && mv ~/.mpdconf ~/.mpdconf.bak                  # backup mpd config \
+    mkdir ~/.mpd && mkdir ~/.mpd/playlists/ && touch ~/.mpd/log &&        # mpd config part 1 \
+    touch ~/.mpd/database && mv ~/.emacs.d/.mpdconf ~/.mpdconf &&         # mpd config part 2 \
+    && emacs -mm                                                          # start emacs maximized
 
     # check step 2, 3, 4, 6 from How To Install menu above!
 
@@ -232,6 +242,8 @@ Dependencies:
      mysql : dbi:mysql:mydb
   - more information: https://github.com/kiwanami/emacs-edbi
 
++ mpc (Music client for mpd)
+  - mpd of course
 
 If you got any questions, don't hesitate to contact me at "manuel.schneckiXYZgmail.com[@/XYZ]".
 

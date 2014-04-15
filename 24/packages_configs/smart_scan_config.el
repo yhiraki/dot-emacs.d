@@ -1,15 +1,15 @@
-;;; ace_jump_config.el ---
+;;; smart_scan_config.el ---
 ;;
-;; Filename: ace_jump_config.el
+;; Filename: smart_scan_config.el
 ;; Description:
 ;; Author: Manuel Schneckenreither
 ;; Maintainer:
-;; Created: Fr Mär 28 01:37:14 2014 (+0100)
+;; Created: Di Apr 15 12:29:43 2014 (+0200)
 ;; Version:
 ;; Package-Requires: ()
-;; Last-Updated: Di Apr 15 12:24:26 2014 (+0200)
+;; Last-Updated: Di Apr 15 12:41:50 2014 (+0200)
 ;;           By: Manuel Schneckenreither
-;;     Update #: 12
+;;     Update #: 2
 ;; URL:
 ;; Doc URL:
 ;; Keywords:
@@ -43,25 +43,6 @@
 ;; the Free Software Foundation, Inc., 51 Franklin Street, Fifth
 ;; Floor, Boston, MA 02110-1301, USA.
 ;;
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;
-;;; Code:
 
 
-;; set ace jump cursor config
-(global-set-key (kbd "C-c SPC") 'ace-jump-mode)
-;; (global-set-key (kbd "M-p") 'ace-jump-mode)
-(global-set-key (kbd "C-c b") 'ace-jump-mode-pop-mark)
-
-
-;; set window config
-;;(global-set-key (kbd "M-p") 'ace-window)
-(global-set-key (kbd "C-x o") 'ace-window)
-(setq aw-keys '(?a ?s ?d ?f ?g ?h ?j ?k ?l))
-
-
-;; set buffer switching to ace-jump-buffer
-(global-set-key (kbd "C-c C-b") 'ace-jump-buffer)
-
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;; ace_jump_config.el ends here
+(smartscan-mode 1)
