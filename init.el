@@ -255,7 +255,6 @@
  '(haskell-program-name "ghci -DDEBUG -fbreak-on-error" t)
  '(help-at-pt-display-when-idle (quote (flymake-overlay)) nil (help-at-pt))
  '(help-at-pt-timer-delay 0.1)
- '(ido-enable-tramp-completion nil)
  '(jde-compile-option-directory "./../classes")
  '(jde-compiler (quote ("javac")))
  '(jde-global-classpath (quote ("./../classes" "./../lib")))

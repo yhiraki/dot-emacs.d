@@ -7,9 +7,9 @@
 ;; Created: So Okt 13 23:25:02 2013 (+0200)
 ;; Version:
 ;; Package-Requires: ()
-;; Last-Updated: Mo Apr 14 22:42:39 2014 (+0200)
+;; Last-Updated: Di Apr 15 14:06:22 2014 (+0200)
 ;;           By: Manuel Schneckenreither
-;;     Update #: 50
+;;     Update #: 55
 ;; URL:
 ;; Doc URL:
 ;; Keywords:
@@ -125,12 +125,6 @@
 ;; (add-hook 'ido-setup-hook
 ;;           (lambda ()
 ;;             (define-key ido-completion-map [tab] 'ido-complete)))
-
-;; ido fuzzy matching
-(setq ido-enable-flex-matching t)
-
-;; remove tramp files from ido completion to disable password prompt
-(add-to-list 'ido-work-directory-list-ignore-regexps tramp-file-name-regexp)
 
 ;; IDO Everywhere
 (ido-everywhere t)

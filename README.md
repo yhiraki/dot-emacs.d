@@ -181,7 +181,7 @@ Steps 1 + 2 + 3 + 5 + 7 (4 not included!):
 
     mv ~/.emacs.d ~/.emacs.d.bak; true &&                                      # backup \
     git clone https://github.com/schnecki/dot-emacs-4-everyone.git .emacs.d && # download \
-    mv ~/.emacs.d/settings.el.backup ~/.emacs.d/settings.el &&                 # copy settings.el \
+    mv ~/.emacs.d/settings.el.example ~/.emacs.d/settings.el &&                # copy settings.el \
     su -c "yum install ctags-etags gnuplot emacs graphviz                      # main tools \
     w3m curl                                                                   # browser for links \
     mpd                                                                        # install mpd music server \
