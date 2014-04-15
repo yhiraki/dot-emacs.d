@@ -192,7 +192,7 @@ Steps 1 + 2 + 3 + 5 + 7 (4 not included!):
     cpan -fi RPC::EPC::Service DBI DBD::SQLite DBD::Pg DBD::mysql" &&     # database tools \
     echo "(load-file \"~/.emacs.d/gnus.el\")" > ~/.gnus.el &&             # create gnus file \
     mv ~/.emacs.d/settings.el.example ~/.emacs.d/settings.el &&           # settings.el \
-    mv ~/.mpd ~/.mpd.bak && mv ~/.mpdconf ~/.mpdconf.bak                  # backup mpd config \
+    mv ~/.mpd ~/.mpd.bak && mv ~/.mpdconf ~/.mpdconf.bak  &&              # backup mpd config \
     mkdir ~/.mpd && mkdir ~/.mpd/playlists/ && touch ~/.mpd/log &&        # mpd config part 1 \
     touch ~/.mpd/database && mv ~/.emacs.d/.mpdconf ~/.mpdconf &&         # mpd config part 2 \
     && emacs -mm                                                          # start emacs maximized
