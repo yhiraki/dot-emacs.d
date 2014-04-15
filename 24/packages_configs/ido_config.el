@@ -7,9 +7,9 @@
 ;; Created: So Okt 13 23:25:02 2013 (+0200)
 ;; Version:
 ;; Package-Requires: ()
-;; Last-Updated: Di Apr 15 14:06:22 2014 (+0200)
+;; Last-Updated: Di Apr 15 15:26:28 2014 (+0200)
 ;;           By: Manuel Schneckenreither
-;;     Update #: 55
+;;     Update #: 59
 ;; URL:
 ;; Doc URL:
 ;; Keywords:
@@ -97,8 +97,8 @@
 
 
 ;; SORT IDO FILELIST BY MTIME INSTEAD OF ALPHABETICALLY
-(add-hook 'ido-make-file-list-hook 'ido-sort-mtime)
-(add-hook 'ido-make-dir-list-hook 'ido-sort-mtime)
+;; (add-hook 'ido-make-file-list-hook 'ido-sort-mtime)
+;; (add-hook 'ido-make-dir-list-hook 'ido-sort-mtime)
 
 
 (defun ido-sort-mtime ()
@@ -121,6 +121,8 @@
               (lambda (x) (and (char-equal (string-to-char x) ?.) x))
               ido-temp-list))))
 
+;; enable flex matching
+(setq ido-enable-flex-matching t)
 
 ;; (add-hook 'ido-setup-hook
 ;;           (lambda ()
@@ -137,10 +139,17 @@
 (setq ido-create-new-buffer 'always)  ;'always, 'prompt or 'never
 
 ;; ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-;; +++++++++++++++++++++++ DISPLAY LINE NUMBERS +++++++++++++++++++++++++
+;; ++++++++++++++++++++++++ EDIT FILES AS ROOT ++++++++++++++++++++++++++
 ;; ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
+;; ask for root password if file not writable
+(defadvice ido-find-file (after find-file-sudo activate)
+  "Find file as root if necessary."
+  (unless (and buffer-file-name
+               (file-writable-p buffer-file-name))
+    (find-alternate-file (concat "/sudo:root@localhost:" buffer-file-name))))
 
+;; find as root
 (defun find-file-as-root ()
   "Like `ido-find-file, but automatically edit the file with
 root-privileges (using tramp/sudo), if the file is not writable by

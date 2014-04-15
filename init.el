@@ -251,6 +251,7 @@
  '(flymake-compilation-prevents-syntax-check nil)
  '(flymake-gui-warnings-enabled nil)
  '(frame-background-mode (quote dark))
+ '(gnus-topic-display-empty-topics nil)
  '(haskell-font-lock-haddock t)
  '(haskell-program-name "ghci -DDEBUG -fbreak-on-error" t)
  '(help-at-pt-display-when-idle (quote (flymake-overlay)) nil (help-at-pt))
