@@ -203,24 +203,35 @@ Steps 1 + 2 + 3 + 5 + 7 (4 not included!):
 Windows 8:
 ----------
 
-Get Emacs: https://www.gnu.org/software/emacs/
-Get and install Git: http://git-scm.com/download/win
-Install aspell: http://aspell.net/win32/
+1. Get Emacs: https://www.gnu.org/software/emacs/
+2. Get and install Git: http://git-scm.com/download/win
+3. Install aspell and then at least one language: http://aspell.net/win32/
 
-Start Git Bash and do:
+   Set ispell command in
+   ~/.emacs.d/24/packages_configs/flyspell_config.el (if you did not
+   change the default installation path during aspell installation,
+   you do not need to do anything!).
+
+
+3. Start Git Bash and do:
+
     $ cd ~/AppData/Roaming
     $ echo "(load-file \"~/.emacs.d/init.el\")" > ~/.emacs                    # for emacs this is ~
     $ echo "(load-file \"~/.emacs.d/gnus.el\")" > ~/.gnus.el
     $ git clone https://github.com/schnecki/dot-emacs-4-everyone .emacs.d
 
 
-Disable following module (comment them) in ~/.emacs.d/24/emacs.el:
+4. Disable following module (comment them) in ~/.emacs.d/24/emacs.el:
   - mpc_config.el    (or install mpd and reconfigure the module)
 
-Set ispell command in
 
-  
-Then start emacs (from the bin folder of the unzipped emacs download)
+5. Then start emacs (from the bin folder of the unzipped emacs download)
+
+6. Optional: You might want to change the default bash command to
+'eshell to have a more UNIX-like shell.
+
+7. If you want to use Gnus:
+   - Install cygwin: http://cygwin.com/install.html
 
 
 Dependencies:
