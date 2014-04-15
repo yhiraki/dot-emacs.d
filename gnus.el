@@ -7,9 +7,9 @@
 ;; Created: Di Feb  4 17:01:05 2014 (+0100)
 ;; Version:
 ;; Package-Requires: ()
-;; Last-Updated: Di Apr 15 17:53:58 2014 (+0200)
+;; Last-Updated: Di Apr 15 18:19:11 2014 (+0200)
 ;;           By: Manuel Schneckenreither
-;;     Update #: 35
+;;     Update #: 36
 ;; URL:
 ;; Doc URL:
 ;; Keywords:
@@ -49,6 +49,12 @@
 
 
 ;; for searching imap folders (needs the call of (require 'nnir) in .emacs)
+
+(if (fboundp 'w32-send-sys-command)
+    (eval-after-load "gnutls"
+      '(progn
+         (setq gnutls-trustfiles '("c:/cygwin/usr/ssl/certs/ca-bundle.trust.crt" "c:/cygwin/usr/ssl/certs/ca-bundle.crt"))))
+  )
 
 ;; other newsfeeds
 (setq gnus-select-method '(nnimap "uibk"
