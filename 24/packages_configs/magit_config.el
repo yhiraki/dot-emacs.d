@@ -4,6 +4,11 @@
 ;; ++++++++++++++++++++++++++++ MAGIT KEYS ++++++++++++++++++++++++++++++
 ;; ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
+;; I could not get magit running under Windows in a short test...you
+;; might need to invest a little bit of time
+(if (fboundp 'w32-send-sys-command)
+    (setq magit-git-executable "git.exe")
+  )
 
 ;; pull short
 (global-set-key (kbd (concat prefix-command-key " g p"))

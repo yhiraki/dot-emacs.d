@@ -221,17 +221,20 @@ Windows 8:
     $ git clone https://github.com/schnecki/dot-emacs-4-everyone .emacs.d
 
 
-4. Disable following module (comment them) in ~/.emacs.d/24/emacs.el:
-  - mpc_config.el    (or install mpd and reconfigure the module)
+4. Then start emacs (from the bin folder of the unzipped emacs download)
 
-
-5. Then start emacs (from the bin folder of the unzipped emacs download)
-
-6. Optional: You might want to change the default bash command to
+5. Optional: You might want to change the default bash command to
 'eshell to have a more UNIX-like shell.
 
-7. If you want to use Gnus:
-   - Install cygwin: http://cygwin.com/install.html
+6. Optional:
+ - If you want to use Gnus (I could not get nnimap running in a
+   short test, you might need to invest a little bit of time here):
+   Install cygwin: http://cygwin.com/install.html
+ - If you want to use mpc/mpd:
+   Install mpd: http://www.musicpd.org/download.html
+ - If you want to use magit, you need to get it running. I could not
+   get it running with the first try and then had no more time to
+   checkout the problem.
 
 
 Dependencies:
