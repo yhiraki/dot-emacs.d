@@ -146,7 +146,6 @@
         powerline
         rainbow-delimiters
         rainbow-mode
-        smartscan
         thesaurus
         tuareg
         undo-tree

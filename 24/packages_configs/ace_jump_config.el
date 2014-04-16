@@ -7,9 +7,9 @@
 ;; Created: Fr Mär 28 01:37:14 2014 (+0100)
 ;; Version:
 ;; Package-Requires: ()
-;; Last-Updated: Di Apr 15 12:24:26 2014 (+0200)
+;; Last-Updated: Mi Apr 16 11:55:31 2014 (+0200)
 ;;           By: Manuel Schneckenreither
-;;     Update #: 12
+;;     Update #: 13
 ;; URL:
 ;; Doc URL:
 ;; Keywords:
@@ -50,7 +50,7 @@
 
 ;; set ace jump cursor config
 (global-set-key (kbd "C-c SPC") 'ace-jump-mode)
-;; (global-set-key (kbd "M-p") 'ace-jump-mode)
+(global-set-key (kbd "M-p") 'ace-jump-mode)
 (global-set-key (kbd "C-c b") 'ace-jump-mode-pop-mark)
 
 

@@ -5,9 +5,9 @@
 ;; Author: Manuel Schneckenreither
 ;; Created: Tue Dec 11 00:43:14 2012 (+0100)
 ;; Version:
-;; Last-Updated: Di Apr 15 12:41:44 2014 (+0200)
+;; Last-Updated: Mi Apr 16 11:55:12 2014 (+0200)
 ;;           By: Manuel Schneckenreither
-;;     Update #: 389
+;;     Update #: 390
 ;; URL:
 ;; Description:
 ;;
@@ -95,8 +95,6 @@
 (load (concat package-conf-folder "printing_config.el"))
 ;; MPC - a mpd (which is a music player server) client
 (load (concat package-conf-folder "mpc_config.el"))
-;; SMART-SCAN - jump to same words by M-n and M-p in buffer
-(load (concat package-conf-folder "smart_scan_config.el"))
 
 
 ;; ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
