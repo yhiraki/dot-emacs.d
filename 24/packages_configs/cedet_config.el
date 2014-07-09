@@ -7,9 +7,9 @@
 ;; Created: So Okt 13 11:05:43 2013 (+0200)
 ;; Version:
 ;; Package-Requires: ()
-;; Last-Updated: Fr Mär 28 01:41:46 2014 (+0100)
+;; Last-Updated: Mi Jun 25 14:03:21 2014 (+0200)
 ;;           By: Manuel Schneckenreither
-;;     Update #: 66
+;;     Update #: 80
 ;; URL:
 ;; Doc URL:
 ;; Keywords:
@@ -79,11 +79,32 @@
 (semantic-load-enable-code-helpers)
 
 ;; project support
-(global-ede-mode 1)
+;; (global-ede-mode 1)
 
 
 ;; srecode
 (srecode-minor-mode 1)
+
+;; Semantic
+(global-semantic-idle-completions-mode t) ;; might need to disable this!
+(global-semantic-decoration-mode t)
+(global-semantic-highlight-func-mode t)
+;; (global-semantic-show-unmatched-syntax-mode nil)
+
+;; ;; CC-mode
+;; (add-hook 'c-mode-hook '(lambda ()
+;;         (setq ac-sources (append '(ac-source-semantic) ac-sources))
+;;         (local-set-key (kbd "RET") 'newline-and-indent)
+;;         (linum-mode t)
+;;         (semantic-mode t)))
+
+;; ;; Autocomplete
+;; (require 'auto-complete-config)
+;; (add-to-list 'ac-dictionary-directories (expand-file-name
+;;              "~/.emacs.d/elpa/auto-complete-1.4.20110207/dict"))
+;; (setq ac-comphist-file (expand-file-name
+;;              "~/.emacs.d/ac-comphist.dat"))
+;; (ac-config-default)
 
 
 ;; Java Features
@@ -190,7 +211,7 @@
 (global-srecode-minor-mode 1)
 
 ;; EDE
-(global-ede-mode 1)
+;; (global-ede-mode 1)
 (ede-enable-generic-projects)
 
 

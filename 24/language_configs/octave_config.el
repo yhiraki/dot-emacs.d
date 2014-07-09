@@ -1,15 +1,15 @@
-;;; c_config.el ---
+;;; octave_config.el ---
 ;;
-;; Filename: c_config.el
+;; Filename: octave_config.el
 ;; Description:
 ;; Author: Manuel Schneckenreither
 ;; Maintainer:
-;; Created: Fr Feb  7 00:07:46 2014 (+0100)
+;; Created: Mi Mai 28 10:11:54 2014 (+0200)
 ;; Version:
 ;; Package-Requires: ()
-;; Last-Updated: Mo Jun  2 18:09:34 2014 (+0200)
-;;           By: Schnecki
-;;     Update #: 22
+;; Last-Updated: Mi Mai 28 18:14:14 2014 (+0200)
+;;           By: Manuel Schneckenreither
+;;     Update #: 26
 ;; URL:
 ;; Doc URL:
 ;; Keywords:
@@ -48,49 +48,34 @@
 ;;; Code:
 
 
-(require 'cc-mode);
-
-;; ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-;; +++++++++++++++++ SETTINGS FOR C LIKE LANGUAGES+++++++++++++++++++++++
-;; ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-
-;; preferences
-(c-set-offset 'substatement-open 0)
-(c-set-offset 'case-label '+)
-(c-set-offset 'arglist-cont-nonempty '+)
-(c-set-offset 'arglist-intro '+)
-(c-set-offset 'topmost-intro-cont '+)
-
-
-;; CONFIGURE ELDOC INCLUDES
-(setq c-eldoc-includes   "pkg-config gtk+-2.0 --cflags` -I./ -I../ ")
-
-;; C-MODE HOOK
-;; (add-hook 'c-mode-common-hook (lambda () (flymake-mode 1)))
-(setq auto-mode-alist (cons '("\.cl$" . c-mode) auto-mode-alist)) ;; OPENCL
-(add-hook 'c-mode-hook 'c-turn-on-eldoc-mode)
-
-;; C++ HOOK
-;; (add-hook 'c++-mode-hook (lambda () (flymake-mode 1)))
-(add-hook 'c++-mode-hook 'c++-turn-on-eldoc-mode)
-
+;; associate .m files with octave
+(autoload 'octave-mode "octave-mod" nil t)
+(setq auto-mode-alist
+      (cons '("\\.m$" . octave-mode) auto-mode-alist))
 
 ;; Create and set tags table
-(defun make-c-tags ()
+(defun make-octave-tags ()
   "This function reloads the tags by using the command 'make tags'."
   (interactive)
   (let ((dir (nth 0 (split-string default-directory "src"))))
     (setq esdir (replace-regexp-in-string " " "\\\\ " dir))
     (shell-command
-     (concat "cd " esdir " && find . -name \"*.c\" -o -name \"*.h\" -o -name \"*.cpp\" -o -name \"*.hpp\" | etags - 1>/dev/null 2>/dev/null") nil)
-    (visit-tags-table (concat dir "TAGS"))))
+     (concat "cd " esdir " && find . -name '*.m' -not -name '.#*' -print | etags - 1>/dev/null 2>/dev/null") nil)
+    (visit-tags-table (concat dir "TAGS"))
+    (start-process "delete_abrt_checker" nil "rm" "-f abrt_checker_* 1>/dev/null 2>/dev/null")
+    ;; (shell-command "rm -f abrt_checker_* 1>/dev/null 2>/dev/null" nil)
+    )
+  )
 
+;; needed for octave mode hook
+(require 'ac-octave)
 
-;; C MODE
-(defun my-c-mode-hook ()
+;; MINOR MODE HOOK
+(defun my/octave-minor-mode ()
+  "Minor mode hook for Octave."
 
+  ;; auto complete mode
 
-  ;; add auto-complete mode
   ;; (add-to-list 'ac-sources 'ac-source-abbrev)          ;; edited
   ;; (add-to-list 'ac-sources 'ac-source-css-property)
   ;; (add-to-list 'ac-sources 'ac-source-dictionary)
@@ -101,35 +86,33 @@
   ;; (add-to-list 'ac-sources 'ac-source-files-in-current-dir)
   ;; (add-to-list 'ac-sources 'ac-source-gtags)
   (add-to-list 'ac-sources 'ac-source-etags)
-  (add-to-list 'ac-sources 'ac-source-imenu)
-  (add-to-list 'ac-sources 'ac-source-semantic) ;; slows down auto complete)
-  (add-to-list 'ac-sources 'ac-source-semantic-raw) ;; slows down auto complete)
+  (add-to-list 'ac-sources 'ac-source-octave)
+  ;; (add-to-list 'ac-sources 'ac-source-imenu)
+  ;; (add-to-list 'ac-sources 'ac-source-semantic ;; slows down auto complete)
+  ;; (add-to-list 'ac-sources 'ac-source-semantic-raw ;; slows down auto complete)
   ;; (add-to-list 'ac-sources 'ac-source-words-in-all-buffer)
   ;; (add-to-list 'ac-sources 'ac-source-words-in-buffer)
-  ;; (add-to-list 'ac-sources 'ac-source-words-in-same-mode-buffers)
+  (add-to-list 'ac-sources 'ac-source-words-in-same-mode-buffers)
 
-
-  ;; (setq ac-sources (append '(ac-source-semantic) ac-sources))
-
-  ;; enable semantic for auto complete mode
-  (semantic-mode t)
-
-  ;; enable auto completion. If it doesn't work try to disable flyspell mode.
+  ;; auto complete (if it doesn't work try to disable flyspell mode!)
   (auto-complete-mode)
-
+  (setq ac-delay 0.4)
+  
   ;; use programming flyspell mode
   (flyspell-prog-mode)
 
-  (local-set-key "." 'semantic-complete-self-insert)
-  (local-set-key ">" 'semantic-complete-self-insert)
 
-  (add-hook 'after-save-hook 'make-c-tags nil t)
+  (local-set-key (kbd "C-c C-l") 'octave-send-defun)
 
+  (setq c-basic-offset 2)
+
+  ;; CREATE AND SET TAGS FILE
+  (add-hook 'after-save-hook 'make-octave-tags nil t)
   )
 
-;; add hook
-(add-hook 'c-mode-hook 'my-c-mode-hook)
+
+(add-hook 'octave-mode-hook 'my/octave-minor-mode)
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;; c_config.el ends here
+;;; octave_config.el ends here

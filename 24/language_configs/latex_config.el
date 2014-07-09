@@ -7,9 +7,9 @@
 ;; Created: Sa Nov  2 16:14:09 2013 (+0100)
 ;; Version:
 ;; Package-Requires: ()
-;; Last-Updated: Di Apr  1 14:26:48 2014 (+0200)
+;; Last-Updated: Mo Jun  2 18:06:49 2014 (+0200)
 ;;           By: Manuel Schneckenreither
-;;     Update #: 51
+;;     Update #: 75
 ;; URL:
 ;; Doc URL:
 ;; Keywords:
@@ -127,8 +127,11 @@
   "Comile latex and show in evince"
   (interactive)
   (TeX-texify)
+  (shell-command "rm -rf *.blg *.toc *.out *.dvi *.backup *.exl *.exls *.ps" nil)
+  ;; (shell-command "rm -rf *.aux *.bbl *.log *.blg *.toc *.out *.dvi *.backup
+  ;; *.exl *.exls *.ps" nil) ;; need *.aux for syncing with Evince *.log needed for lookup
+  ;; *.bbl is needed for bibliography
   (TeX-command "View" 'TeX-active-master 0)
-  (shell-command "rm -rf *.aux *.bbl *.log *.blg *.toc *.out *.dvi *.backup *.exl *.exls *.ps" nil)
   )
 
 
@@ -184,17 +187,18 @@
   ;; (add-to-list 'ac-sources 'ac-source-words-in-all-buffer)
   (add-to-list 'ac-sources 'ac-source-words-in-buffer)
   (add-to-list 'ac-sources 'ac-source-words-in-same-mode-buffers)
-
+  (add-to-list 'ac-modes 'latex-mode)   ; make auto-complete aware of `latex-mode`
   (add-to-list 'ac-modes 'gams-mode)
 
-
   (auto-complete-mode)
+
+  (auto-fill-mode)
 
   ;; create and set tags file
   (add-hook 'after-save-hook 'make-tex-tags nil t)
 
   ;; add to hook
-  (add-hook 'LaTeX-mode-hook 'turn-on-auto-fill nil t)
+  ;; (add-hook 'LaTeX-mode-hook 'turn-on-auto-fill nil t)
 
 
   ;; set keys
@@ -203,7 +207,21 @@
   )
 
 (add-hook 'LaTeX-mode-hook 'my/latex-minor-mode)
+(add-hook 'LaTeX-mode-hook #'tex-smart-umlauts-decode)
 
+
+;; ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+;; +++++++++++++++++++++++++++ BIBTEX CONFIG ++++++++++++++++++++++++++++
+;; ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+(defun my/bibtex-minor-mode ()
+  "Minor mode for bibtex"
+
+  (add-hook 'before-save-hook 'bibtex-reformat)
+
+  )
+
+(add-hook 'bibtex-mode-hook 'my/bibtex-minor-mode)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; latex_config.el ends here

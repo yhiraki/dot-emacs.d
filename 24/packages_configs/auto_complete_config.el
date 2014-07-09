@@ -7,9 +7,9 @@
 ;; Created: So Okt 13 19:43:26 2013 (+0200)
 ;; Version:
 ;; Package-Requires: ()
-;; Last-Updated: Fr Mär 28 18:11:10 2014 (+0100)
+;; Last-Updated: Fr Jun  6 22:21:11 2014 (+0200)
 ;;           By: Manuel Schneckenreither
-;;     Update #: 127
+;;     Update #: 139
 ;; URL:
 ;; Doc URL:
 ;; Keywords:
@@ -30,9 +30,9 @@
 ;;
 ;;; Code:
 
-;; ;; ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-;; ;; ++++++=+++++++++++++++++++ SMART TABS MODE +++++++++++++++++++++++++++
-;; ;; ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+;; ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+;; ++++++++++++++++++++++++++ SMART TABS MODE +++++++++++++++++++++++++++
+;; ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 (require 'auto-complete)
 
@@ -45,9 +45,9 @@
 (ac-flyspell-workaround)
 
 
-;;;;##########################################################################
-;;;;  User Options, Variables
-;;;;##########################################################################
+;; ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+;; +++++++++++++++++++++++++++ ETAGS SOURCE  ++++++++++++++++++++++++++++
+;; ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 (defface ac-etags-candidate-face
   '((t (:background "gainsboro" :foreground "deep sky blue")))
@@ -66,6 +66,9 @@
     (requires . 3))
   "Source for etags.")
 
+;; ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+;; ++++++++++++++++++++++ USER OPTIONS, VARIABLES +++++++++++++++++++++++
+;; ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 (set-face-background 'ac-candidate-face "lightgray")
 (set-face-underline-p 'ac-candidate-face "darkgray")
@@ -92,7 +95,7 @@
 (define-globalized-minor-mode real-global-auto-complete-mode
   auto-complete-mode (lambda ()
                        (if (not (minibufferp (current-buffer)))
-                         (auto-complete-mode 1))
+                           (auto-complete-mode 1))
                        ))
 
 (real-global-auto-complete-mode t)
@@ -101,24 +104,38 @@
 ;; (ac-config-default)
 ;; global sources
 (setq-default ac-sources
-   '(;; ac-source-abbrev          ;; edited
-     ;; ac-source-css-property
-     ;; ac-source-dictionary
-     ;; ac-source-eclim
-     ac-source-yasnippet
-     ;; ac-source-symbols
-     ; ac-source-filename
-     ; ac-source-files-in-current-dir
-     ;; ac-source-gtags
-     ;; ac-source-etags
-     ac-source-imenu
-     ;; ac-source-semantic ;; slows down auto complete
-     ;; ac-source-semantic-raw ;; slows down auto complete
-     ;; ac-source-words-in-all-buffer
-     ;; ac-source-words-in-buffer
-     ac-source-words-in-same-mode-buffers
-     ))
+              '(;; ac-source-abbrev          ;; edited
+                ;; ac-source-css-property
+                ;; ac-source-dictionary
+                ;; ac-source-eclim
+                ac-source-yasnippet
+                ;; ac-source-symbols
+								;; ac-source-filename
+								;; ac-source-files-in-current-dir
+                ;; ac-source-gtags
+                ;; ac-source-etags
+                ac-source-imenu
+                ;; ac-source-semantic ;; slows down auto complete
+                ;; ac-source-semantic-raw ;; slows down auto complete
+                ;; ac-source-words-in-all-buffer
+                ;; ac-source-words-in-buffer
+                ac-source-words-in-same-mode-buffers
+                ))
 
+
+;; COMPLETION SOURCE FROM ISPELL
+
+(eval-after-load "auto-complete"
+  '(progn
+     (ac-ispell-setup)))
+
+(defun my/enable-ac-ispell ()
+  (add-to-list 'ac-sources 'ac-source-ispell))
+
+;; (add-hook 'git-commit-mode-hook 'my/enable-ac-ispell)
+;; (add-hook 'mail-mode-hook 'my/enable-ac-ispell)
+;; (add-hook 'message-mode-hook 'my/enable-ac-ispell)
+;; (add-hook 'TeX-mode-hook 'my/enable-ac-ispell)
 
 ;; ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; ;;; auto_complete_config.el ends here

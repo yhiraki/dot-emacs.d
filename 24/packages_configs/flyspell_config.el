@@ -7,9 +7,9 @@
 ;; Created: Fr Okt  4 20:40:17 2013 (+0200)
 ;; Version:
 ;; Package-Requires: ()
-;; Last-Updated: Di Apr 15 16:53:09 2014 (+0200)
+;; Last-Updated: Fr Mai 30 12:46:45 2014 (+0200)
 ;;           By: Manuel Schneckenreither
-;;     Update #: 111
+;;     Update #: 113
 ;; URL:
 ;; Doc URL:
 ;; Keywords:
@@ -78,7 +78,7 @@
   (local-set-key (kbd (concat prefix-command-key "s w")) 'ispell-word)
   (local-set-key (kbd (concat prefix-command-key "s b")) 'flyspell-buffer)
   ;; (add-hook 'auto-save-hook 'flyspell-buffer)
-  (add-hook 'after-save-hook 'flyspell-buffer)
+  ;; (add-hook 'after-save-hook 'flyspell-buffer)
 
   )
 

@@ -7,9 +7,9 @@
 ;; Created: Mo Apr 14 17:47:32 2014 (+0200)
 ;; Version:
 ;; Package-Requires: ()
-;; Last-Updated: Mi Apr 16 12:30:24 2014 (+0200)
+;; Last-Updated: Do Apr 17 16:48:41 2014 (+0200)
 ;;           By: Manuel Schneckenreither
-;;     Update #: 24
+;;     Update #: 26
 ;; URL:
 ;; Doc URL:
 ;; Keywords:
@@ -60,34 +60,33 @@
 (if (executable-find mpd-executeable)
 
     ;; start mpd server (nil means hide output)
-    (start-process "mpd-service" nil mpd-executeable)
+    (start-process "mpd-service" nil mpd-executeable))
 
-  (require 'mpc)
+(require 'mpc)
 
-  ;; this function is not defined by default anymore
-  (defun mpc-cmd-status ()
-    (mpc-proc-cmd-to-alist "status"))
+;; this function is not defined by default anymore
+(defun mpc-cmd-status ()
+  (mpc-proc-cmd-to-alist "status"))
 
-  ;; toggle play/pause
-  (defun mpc-toggle-pause ()
-    "This function checks the current status of mpc. If it is in
+;; toggle play/pause
+(defun mpc-toggle-pause ()
+  "This function checks the current status of mpc. If it is in
 pause state, it will start playing, and vice versa."
-    (interactive)
-    (if (member (cdr (assq 'state (mpc-cmd-status))) '("play"))
-        (mpc-pause)
-      (mpc-play)))
+  (interactive)
+  (if (member (cdr (assq 'state (mpc-cmd-status))) '("play"))
+      (mpc-pause)
+    (mpc-play)))
 
-  ;; set keys
-  (global-set-key (kbd (concat prefix-command-key "m p")) 'mpc-toggle-pause)
-  (global-set-key (kbd (concat prefix-command-key "m s")) 'mpc)
-  (global-set-key (kbd (concat prefix-command-key "m f")) 'mpc-next)
-  (global-set-key (kbd (concat prefix-command-key "m b")) 'mpc-prev)
+;; set keys
+(global-set-key (kbd (concat prefix-command-key "m p")) 'mpc-toggle-pause)
+(global-set-key (kbd (concat prefix-command-key "m s")) 'mpc)
+(global-set-key (kbd (concat prefix-command-key "m f")) 'mpc-next)
+(global-set-key (kbd (concat prefix-command-key "m b")) 'mpc-prev)
 
 
-  ;; set view of play-list
-  (setq mpc-browser-tags '(Artist Album)
-        mpc-songs-format "%3{Track} | %25{Title} | %20{Album} | %20{Artist} | %-5{Time} | %10{Date}")
+;; set view of play-list
+(setq mpc-browser-tags '(Artist Album)
+      mpc-songs-format "%3{Track} | %25{Title} | %20{Album} | %20{Artist} | %-5{Time} | %10{Date}")
 
-  )
 
 ;;; mpc_config.el ends here

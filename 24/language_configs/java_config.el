@@ -7,9 +7,9 @@
 ;; Created: Mo Okt 14 18:17:43 2013 (+0200)
 ;; Version:
 ;; Package-Requires: ()
-;; Last-Updated: Di Apr  1 21:06:08 2014 (+0200)
+;; Last-Updated: Mo Jun  2 18:07:27 2014 (+0200)
 ;;           By: Manuel Schneckenreither
-;;     Update #: 195
+;;     Update #: 197
 ;; URL:
 ;; Doc URL:
 ;; Keywords:
@@ -74,8 +74,8 @@
   ;; (add-to-list 'ac-sources 'ac-source-gtags)
   (add-to-list 'ac-sources 'ac-source-etags)
   ;; (add-to-list 'ac-sources 'ac-source-imenu)
-  ;; (add-to-list 'ac-sources 'ac-source-semantic ;; slows down auto complete)
-  ;; (add-to-list 'ac-sources 'ac-source-semantic-raw ;; slows down auto complete)
+  (add-to-list 'ac-sources 'ac-source-semantic) ;; slows down auto complete
+  ;; (add-to-list 'ac-sources 'ac-source-semantic-raw) ;; slows down auto complete
   ;; (add-to-list 'ac-sources 'ac-source-words-in-all-buffer)
   ;; (add-to-list 'ac-sources 'ac-source-words-in-buffer)
   (add-to-list 'ac-sources 'ac-source-words-in-same-mode-buffers)
@@ -85,6 +85,10 @@
 
   ;; use programming flyspell mode
   (flyspell-prog-mode)
+
+
+  ;; enable semantic for auto complete mode
+  (semantic-mode t)
 
 
   ;; glasses mode

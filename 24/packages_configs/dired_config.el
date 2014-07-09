@@ -7,9 +7,9 @@
 ;; Created: Di Mär  4 06:35:38 2014 (+0100)
 ;; Version:
 ;; Package-Requires: ()
-;; Last-Updated: Mi Mär 26 11:15:17 2014 (+0100)
+;; Last-Updated: Mo Jun  2 12:53:25 2014 (+0200)
 ;;           By: Manuel Schneckenreither
-;;     Update #: 18
+;;     Update #: 21
 ;; URL:
 ;; Doc URL:
 ;; Keywords:
@@ -52,6 +52,7 @@
 
 (put 'dired-find-alternate-file 'disabled nil)
 
+(global-set-key (kbd "C-x C-d") 'diredp-dired-files)
 
 ;; distinguishing dired mode buffers from others
 (add-hook 'dired-mode-hook 'ensure-buffer-name-ends-in-slash)
@@ -100,6 +101,10 @@
                                         ; was dired-up-directory
             (define-key dired-mode-map (kbd "o") 'dired-open-in-external-app)
             ))
+
+;; WDired settings
+
+(setq wdired-allow-to-change-permissions t)
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;

@@ -5,9 +5,9 @@
 ;; Author: Manuel Schneckenreither
 ;; Created: Tue Dec 11 00:43:14 2012 (+0100)
 ;; Version:
-;; Last-Updated: Mi Apr 16 11:55:12 2014 (+0200)
+;; Last-Updated: Fr Mai 30 11:43:13 2014 (+0200)
 ;;           By: Manuel Schneckenreither
-;;     Update #: 390
+;;     Update #: 395
 ;; URL:
 ;; Description:
 ;;
@@ -95,6 +95,10 @@
 (load (concat package-conf-folder "printing_config.el"))
 ;; MPC - a mpd (which is a music player server) client
 (load (concat package-conf-folder "mpc_config.el"))
+;; EXPAND REGION - expand the region in (semantic) units
+(load (concat package-conf-folder "expand_region_config.el"))
+;; CHANGE INNER - kill inside/outside of given element
+(load (concat package-conf-folder "change_inner_config.el"))
 
 
 ;; ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -108,6 +112,7 @@
 (load-file (concat language-conf-folder "ocaml_config.el"))
 (load-file (concat language-conf-folder "makefile_config.el"))
 (load-file (concat language-conf-folder "latex_config.el"))
+(load-file (concat language-conf-folder "octave_config.el"))
 
 ;; ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 ;; ++++++++++++++++++++++++++ LOAD KEYBINDINGS ++++++++++++++++++++++++++

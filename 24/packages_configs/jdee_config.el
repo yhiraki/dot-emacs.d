@@ -7,9 +7,9 @@
 ;; Created: So Okt 13 13:22:28 2013 (+0200)
 ;; Version:
 ;; Package-Requires: ()
-;; Last-Updated: Di Apr 15 16:38:46 2014 (+0200)
+;; Last-Updated: Fr Mai 30 15:37:49 2014 (+0200)
 ;;           By: Manuel Schneckenreither
-;;     Update #: 363
+;;     Update #: 380
 ;; URL:
 ;; Doc URL:
 ;; Keywords:
@@ -78,8 +78,8 @@
     ;; (auto-complete-mode t)
     ;; (add-to-list 'ac-sources ac-source-gtags)
     (local-set-key [f1] 'jde-help-symbol)
-    (local-set-key [f8] 'gud-next)
-    (local-set-key [f9] 'gud-cont)
+    ;; (local-set-key [f8] 'gud-next)
+    ;; (local-set-key [f9] 'gud-cont)
     ;; (local-set-key (kbd "M-/") 'hippie-expand)
     (local-set-key (kbd "M-n") 'jde-complete-minibuf)
 
@@ -96,8 +96,12 @@
                 )
               nil t)
     ;; (add-hook 'after-save-hook 'jde-compile nil t)
+
+
     ))
+
 (add-hook 'jde-mode-hook 'jde-my-minor)
+
 
 (require 'jde-help)
 ;; w3 fail to load local file, so skip this feature

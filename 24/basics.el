@@ -5,9 +5,9 @@
 ;; Author: Manuel Schneckenreither
 ;; Created: Mon Dec 10 22:51:09 2012 (+0100)
 ;; Version:
-;; Last-Updated: Mo Mär 31 10:39:56 2014 (+0200)
+;; Last-Updated: Fr Jun 13 14:14:05 2014 (+0200)
 ;;           By: Manuel Schneckenreither
-;;     Update #: 636
+;;     Update #: 650
 ;; URL:
 ;; Description:
 ;;    Basic configuration for emacs. In here are all configs of
@@ -219,6 +219,9 @@
 ;; ++++++++++++++++++ CONFIGURE IN MINIBUFFER INFO ++++++++++++++++++++++
 ;; ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 (display-time-mode t)
+(setq display-time-day-and-date t
+      display-time-24hr-format t)
+(display-time)
 (column-number-mode t)
 (line-number-mode t)
 (size-indication-mode t)
@@ -325,12 +328,6 @@
     (insert to_insert))
   )
 
-;; ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-;; ++++++++++++++++++ AUTOMATICALLY WRAP LONG LINES +++++++++++++++++++++
-;; ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-
-;; set the wrapping length to column x
-(setq fill-column 80)
 
 ;; ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 ;; +++++++++++ JUMP TO BEGINNING AFTER MATCH IN SEARCHING +++++++++++++++
@@ -357,6 +354,27 @@
  bookmark-default-file (concat load-emacsd ".bookmarks") ;; keep my ~/ clean
  bookmark-save-flag 1)                        ;; autosave each change
 
+;; ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+;; ++++++++++++++++++++++++++ KILL PROCESSES ++++++++++++++++++++++++++++
+;; ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+(defun delete-process-interactive ()
+  (interactive)
+  (let ((pname (ido-completing-read "Process Name: "
+                    (mapcar 'process-name (process-list)))))
+
+    (delete-process (get-process pname))))
+
+(global-set-key (kbd (concat prefix-command-key "k")) 'delete-process-interactive)
+
+;; ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+;; ++++++++++++++++++++++++ SEARCH IMPROVEMENT ++++++++++++++++++++++++++
+;; ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+(defadvice isearch-yank-word-or-char (before move-to-beginning-of-word)
+  (unless (eq last-command this-command)
+    (goto-char (car (bounds-of-thing-at-point 'word)))))
+(ad-activate 'isearch-yank-word-or-char)
 
 ;; ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 ;; ++++++++++++++++++++++++++++ OTHER STUFF +++++++++++++++++++++++++++++
@@ -432,6 +450,21 @@
 ;; OPEN MARKDOWN FILES WITH THE MARKDOWN MODE
 (add-to-list 'auto-mode-alist '("\\.md$" . markdown-mode))
 
+;; ADD NEW LINES WHEN AT END OF BUFFER
+(setq next-line-add-newlines t)
 
+
+;; USE IMENU
+(global-set-key (kbd "C-c l") 'imenu)
+
+
+;; REPLACE S EXPRESSION
+(defun replace-last-sexp ()
+    (interactive)
+    (let ((value (eval (preceding-sexp))))
+      (kill-sexp -1)
+      (insert (format "%S" value))))
+
+(global-set-key (kbd (concat prefix-command-key " C-e")) 'replace-last-sexp)
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; basics.el ends here

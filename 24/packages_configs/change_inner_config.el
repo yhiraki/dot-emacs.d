@@ -1,15 +1,15 @@
-;;; ace_jump_config.el ---
+;;; change_inner_config.el ---
 ;;
-;; Filename: ace_jump_config.el
+;; Filename: change_inner_config.el
 ;; Description:
 ;; Author: Manuel Schneckenreither
 ;; Maintainer:
-;; Created: Fr Mär 28 01:37:14 2014 (+0100)
+;; Created: Fr Mai 30 11:41:33 2014 (+0200)
 ;; Version:
 ;; Package-Requires: ()
-;; Last-Updated: So Mai  4 11:04:07 2014 (+0200)
-;;           By: Manuel Schneckenreither
-;;     Update #: 14
+;; Last-Updated:
+;;           By:
+;;     Update #: 2
 ;; URL:
 ;; Doc URL:
 ;; Keywords:
@@ -47,21 +47,10 @@
 ;;
 ;;; Code:
 
+(require 'change-inner)
+(global-set-key (kbd "M-i") 'change-inner)
+(global-set-key (kbd "M-o") 'change-outer)
 
-;; set ace jump cursor config
-;; (global-set-key (kbd "C-c SPC") 'ace-jump-mode)
-(global-set-key (kbd "M-p") 'ace-jump-mode)
-(global-set-key (kbd "C-c b") 'ace-jump-mode-pop-mark)
-
-
-;; set window config
-;;(global-set-key (kbd "M-p") 'ace-window)
-(global-set-key (kbd "C-x o") 'ace-window)
-(setq aw-keys '(?a ?s ?d ?f ?g ?h ?j ?k ?l))
-
-
-;; set buffer switching to ace-jump-buffer
-(global-set-key (kbd "C-c C-b") 'ace-jump-buffer)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;; ace_jump_config.el ends here
+;;; change_inner_config.el ends here

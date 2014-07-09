@@ -1,15 +1,15 @@
-;;; ace_jump_config.el ---
+;;; expand_region_config.el ---
 ;;
-;; Filename: ace_jump_config.el
+;; Filename: expand_region_config.el
 ;; Description:
 ;; Author: Manuel Schneckenreither
 ;; Maintainer:
-;; Created: Fr Mär 28 01:37:14 2014 (+0100)
+;; Created: Fr Mai 30 11:29:34 2014 (+0200)
 ;; Version:
 ;; Package-Requires: ()
-;; Last-Updated: So Mai  4 11:04:07 2014 (+0200)
+;; Last-Updated: Fr Mai 30 11:32:44 2014 (+0200)
 ;;           By: Manuel Schneckenreither
-;;     Update #: 14
+;;     Update #: 3
 ;; URL:
 ;; Doc URL:
 ;; Keywords:
@@ -48,20 +48,8 @@
 ;;; Code:
 
 
-;; set ace jump cursor config
-;; (global-set-key (kbd "C-c SPC") 'ace-jump-mode)
-(global-set-key (kbd "M-p") 'ace-jump-mode)
-(global-set-key (kbd "C-c b") 'ace-jump-mode-pop-mark)
+(global-set-key (kbd (concat prefix-command-key "e e")) 'er/expand-region)
 
-
-;; set window config
-;;(global-set-key (kbd "M-p") 'ace-window)
-(global-set-key (kbd "C-x o") 'ace-window)
-(setq aw-keys '(?a ?s ?d ?f ?g ?h ?j ?k ?l))
-
-
-;; set buffer switching to ace-jump-buffer
-(global-set-key (kbd "C-c C-b") 'ace-jump-buffer)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;; ace_jump_config.el ends here
+;;; expand_region_config.el ends here

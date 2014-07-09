@@ -1,50 +1,3 @@
-;;; init.el ---
-;;
-;; Filename: init.el
-;; Description:
-;; Author: Manuel Schneckenreither
-;; Maintainer:
-;; Created: Fr Okt  4 20:33:29 2013 (+0200)
-;; Version:
-;; Package-Requires: ()
-;;           By: Manuel Schneckenreither
-;; URL:
-;; Doc URL:
-;; Keywords:
-;; Compatibility:
-;;
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;
-;;; Commentary:
-;;
-;;
-;;
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;
-;;; Change Log:
-;;
-;;
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;
-;; This program is free software; you can redistribute it and/or
-;; modify it under the terms of the GNU General Public License as
-;; published by the Free Software Foundation; either version 3, or
-;; (at your option) any later version.
-;;
-;; This program is distributed in the hope that it will be useful,
-;; but WITHOUT ANY WARRANTY; without even the implied warranty of
-;; MERCHANT ABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
-;; General Public License for more details.
-;;
-;; You should have received a copy of the GNU General Public License
-;; along with this program; see the file COPYING.  If not, write to
-;; the Free Software Foundation, Inc., 51 Franklin Street, Fifth
-;; Floor, Boston, MA 02110-1301, USA.
-;;
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;
-;;; Code:
-
 ;; ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 ;; +++++++++++++++++++++++++ PERSONAL SETTINGS ++++++++++++++++++++++++++
 ;; ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -70,12 +23,12 @@
 
 ;; and handle C-x k command just normally
 (add-hook 'server-switch-hook
-  (lambda ()
-    (local-set-key (kbd "C-x k") '(lambda ()
-                                    (interactive)
-                                    (if server-buffer-clients
-                                        (server-edit)
-                                      (ido-kill-buffer))))))
+          (lambda ()
+            (local-set-key (kbd "C-x k") '(lambda ()
+                                            (interactive)
+                                            (if server-buffer-clients
+                                                (server-edit)
+                                              (ido-kill-buffer))))))
 
 ;; ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 ;; +++++++++++++++++++++++++++ LOAD PACKAGES ++++++++++++++++++++++++++++
@@ -100,10 +53,12 @@
 (setq jpk-packages
       '(
         ac-dabbrev
+        ac-ispell                       ; config in auto_complete_config.el
         ac-math
+        ac-octave
         ace-jump-mode
-        ace-jump-buffer          ;; config in ace-jump-mode config
-        ace-window               ;; config in ace-jump-mode config
+        ace-jump-buffer                 ; config in ace-jump-mode config
+        ace-window                      ; config in ace-jump-mode config
         android-mode
         auctex
         auto-complete
@@ -113,11 +68,13 @@
         backup-walker
         bbdb
         bookmark+
+				change-inner
         color-theme
         color-theme-solarized
         dired+
         ecb
         edbi
+        expand-region
         flycheck
         flycheck-haskell
         flycheck-color-mode-line
@@ -146,6 +103,7 @@
         powerline
         rainbow-delimiters
         rainbow-mode
+        tex-smart-umlauts
         thesaurus
         tuareg
         undo-tree
@@ -172,8 +130,8 @@
   (interactive)
   (package-show-package-list
    (remove-if-not (lambda (x) (and (not (memq x jpk-packages))
-                            (not (package-built-in-p x))
-                            (package-installed-p x)))
+                                   (not (package-built-in-p x))
+                                   (package-installed-p x)))
                   (mapcar 'car package-archive-contents))))
 
 ;; ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -201,12 +159,12 @@
 
 (require 'color-theme)
 (color-theme-initialize)
-(color-theme-dark-laptop)
+;;(color-theme-dark-laptop)
 ;; eval following to use standard theme:
 ;; (color-theme-standard)
 
 ;; Color theme solarized
-;; (color-theme-solarized-dark)
+(color-theme-solarized-dark)
 
 ;; (defun color-my-emacs-default ()
 ;;   "Revert to default emacs theme."
@@ -226,7 +184,6 @@
  '(ac-quick-help-delay 0.1)
  '(ac-show-menu-immediately-on-auto-complete t)
  '(bmkp-last-as-first-bookmark-file "~/.emacs.d/.bookmarks")
- '(bookmark-default-file "/home/schnecki/.emacs.d/.bookmarks")
  '(color-theme-legal-frame-parameters "\\(color\\|mode\\|font\\|height\\|width\\)$")
  '(column-number-mode t)
  '(cua-delete-selection nil)
@@ -248,6 +205,7 @@
  '(ecb-type-tag-expansion (quote ((default) (c-mode "struct"))))
  '(ecb-use-speedbar-instead-native-tree-buffer nil)
  '(ede-project-directories (quote ("/home/schnecki/Documents/UIBK/5.Semester/NP/PS/06/01-ThreadPoolExecutor/src" "/home/schnecki/Documents/UIBK/5.Semester/NP/PS/06/01-ThreadPoolExecutor" "/home/schnecki/Programmierung/Java/BetPredictionTest/src" "/home/schnecki/Programmierung/Java/BetPredictionTest" "/tmp/myproject/include" "/tmp/myproject/src" "/tmp/myproject")))
+ '(fill-column 80)
  '(flymake-compilation-prevents-syntax-check nil)
  '(flymake-gui-warnings-enabled nil)
  '(frame-background-mode (quote dark))
@@ -264,7 +222,7 @@
  '(jde-sourcepath (quote ("./src/main" "./src/test")))
  '(kept-new-versions 5000)
  '(mpc-data-directory "~/.emacs.d/.tmp/mpc")
- '(org-agenda-files (quote ("~/Documents/Planning/planning_time.org" "~/Documents/Planning/university.org" "~/Documents/Planning/bachelorarbeit.org" "~/Documents/Planning/ProjectIdeas.org" "~/Documents/Planning/freetime.org" "~/Documents/Planning/lists.org" "~/Documents/Planning/anniverseries.org" "~/Documents/Planning/Emacs.org" "~/Programmierung/App/Documentation/app-brainstorming.txt" "~/.emacs.d/org/notes.org")))
+ '(org-agenda-files (quote ("~/Documents/Planning/planning_time.org" "~/Documents/Planning/university.org" "~/Documents/Planning/ProjectIdeas.org" "~/Documents/Planning/freetime.org" "~/Documents/Planning/lists.org" "~/Documents/Planning/anniverseries.org" "~/Documents/Planning/Emacs.org" "~/Programmierung/App/Documentation/app-brainstorming.txt" "~/.emacs.d/org/notes.org")))
  '(send-mail-function (quote smtpmail-send-it))
  '(size-indication-mode t)
  '(smtpmail-smtp-server "smtp.uibk.ac.at")
@@ -299,7 +257,4 @@
 (put 'upcase-region 'disabled nil)
 (put 'downcase-region 'disabled nil)
 (put 'dired-find-alternate-file 'disabled nil)
-
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;; init.el ends here
 (put 'narrow-to-region 'disabled nil)

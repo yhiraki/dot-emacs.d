@@ -7,9 +7,9 @@
 ;; Created: So Okt 13 22:47:58 2013 (+0200)
 ;; Version:
 ;; Package-Requires: ()
-;; Last-Updated: Mo Mär 24 11:27:34 2014 (+0100)
+;; Last-Updated: Mo Jun  2 18:06:25 2014 (+0200)
 ;;           By: Manuel Schneckenreither
-;;     Update #: 143
+;;     Update #: 146
 ;; URL:
 ;; Doc URL:
 ;; Keywords:
@@ -81,7 +81,7 @@
   ;; (add-to-list 'ac-sources 'ac-source-gtags)
   ;; (add-to-list 'ac-sources 'ac-source-etags)
   ;; (add-to-list 'ac-sources 'ac-source-imenu)
-  ;; (add-to-list 'ac-sources 'ac-source-semantic ;; slows down auto complete)
+  (add-to-list 'ac-sources 'ac-source-semantic) ;; slows down auto complete)
   ;; (add-to-list 'ac-sources 'ac-source-semantic-raw ;; slows down auto complete)
   ;; (add-to-list 'ac-sources 'ac-source-words-in-all-buffer)
   ;; (add-to-list 'ac-sources 'ac-source-words-in-buffer)
@@ -90,6 +90,10 @@
   ;; ensure auto-completion is started. If it doesn't work try to
   ;; disable flyspell mode.
   (auto-complete-mode)
+
+  ;; enable semantic for auto complete mode
+  (semantic-mode t)
+
 
   ;; use programming flyspell mode
   (flyspell-prog-mode)
