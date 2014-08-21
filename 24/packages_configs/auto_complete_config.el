@@ -7,9 +7,9 @@
 ;; Created: So Okt 13 19:43:26 2013 (+0200)
 ;; Version:
 ;; Package-Requires: ()
-;; Last-Updated: Thu Aug 21 16:39:29 2014 (+0200)
+;; Last-Updated: Thu Aug 21 16:41:59 2014 (+0200)
 ;;           By: Manuel Schneckenreither
-;;     Update #: 262
+;;     Update #: 265
 ;; URL:
 ;; Doc URL:
 ;; Keywords:
@@ -37,11 +37,10 @@
 (require 'auto-complete)
 
 
-;; (define-key ac-completing-map [(tab)] 'ac-complete)
-;; (define-key ac-completing-map "\r" nil) ;; disable completing by enter
-;; (define-key ac-completing-map [return] nil) ;; disable completing by enter
+(define-key ac-completing-map [(tab)] 'ac-complete)
+(define-key ac-completing-map "\r" nil) ;; disable completing by enter
+(define-key ac-completing-map [return] nil) ;; disable completing by enter
 ;; ;; (icomplete-mode +1) ;; complete mode in mini-buffer
-
 
 ;; flyspell and ac-complete don't like each other
 (ac-flyspell-workaround)
@@ -49,7 +48,6 @@
 ;; ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 ;; +++++++++++++++++++++++++++ ETAGS SOURCE  ++++++++++++++++++++++++++++
 ;; ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-
 (defface ac-etags-candidate-face
   '((t (:background "light sky blue" :foreground "black")))
   "Face for etags candidate")
