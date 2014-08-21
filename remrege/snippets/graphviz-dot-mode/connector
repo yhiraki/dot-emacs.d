@@ -1,0 +1,6 @@
+# contributor: Manuel Schneckenreither
+# name: connector simple
+# key: con
+# --
+n_$1 -> n_$2
+$0

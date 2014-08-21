@@ -1,0 +1,11 @@
+elpa/**
+**TAGS
+session.*
+./ac-comphist.dat
+./thumbs
+./tramp
+.tmp/**
+eshell/**
+auto-save-list/**
+./abbrev_defs
+*settings.el*

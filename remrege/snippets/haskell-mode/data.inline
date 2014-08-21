@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# key: datai
+# name: inline data
+# condition: (= (length "datai") (current-column))
+# contributor: Luke Hoersten <luke@hoersten.org>
+# --
+data ${1:Type} $2 = $1 $0 ${3:deriving (${4:Show, Eq})}
