@@ -1,0 +1,15 @@
+# -*- mode: snippet -*-
+# name: orgtbl
+# key: orgtbl
+# --
+% BEGIN RECEIVE ORGTBL ${1:name}
+% END RECEIVE ORGTBL $1
+\begin{comment}
+
+  :splice nil/t  ...return only table body lines. Default is nil.
+  :fmt fmt       ...format to use, e.g. "$%s$" or (2 "$%s$" 4 "%s\\%%") for specific columns.
+  :skip n        ...skip n rows
+  #+ORGTBL: SEND $1 orgtbl-to-latex :splice nil :skip 0
+  | $0
+\end{comment}
+
