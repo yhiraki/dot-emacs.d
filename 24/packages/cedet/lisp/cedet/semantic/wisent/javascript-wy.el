@@ -2,8 +2,8 @@
 
 ;; Copyright (C) 2005-2012 Free Software Foundation, Inc.
 
-;; Author: Schnecki <schnecki@schnecki.laptop>
-;; Created: 2013-10-13 11:12:00+0200
+;; Author:  <schnecki@schnecki-laptop>
+;; Created: 2014-08-28 18:59:47+0200
 ;; Keywords: syntax
 ;; X-RCS: $Id$
 

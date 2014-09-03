@@ -7,9 +7,9 @@
 ;; Created: So Okt 13 13:22:28 2013 (+0200)
 ;; Version:
 ;; Package-Requires: ()
-;; Last-Updated: Fr Mai 30 15:37:49 2014 (+0200)
+;; Last-Updated: Fri Aug 29 16:52:26 2014 (+0200)
 ;;           By: Manuel Schneckenreither
-;;     Update #: 380
+;;     Update #: 391
 ;; URL:
 ;; Doc URL:
 ;; Keywords:
@@ -55,13 +55,16 @@
 (setq jde-help-remote-file-exists-function '("beanshell"))
 
 (add-to-list 'load-path (concat package-folder "jdee-2.4.1/lisp"))
+
+;; ENABLE JDE FOR JAVA FILES
 (autoload 'jde-mode "jde" "JDE mode" t)
 (setq auto-mode-alist
       (append '(("\\.java\\'" . jde-mode)) auto-mode-alist))
+(load "jde-autoload")
+
 
 ;; (push 'jde-mode ac-modes)
 
-(load "jde-autoload")
 (setq jde-check-version-flag nil)
 ;; (setq jde-compile-option-directory
 ;;    (concat user-emacs-directory "/tmp"))
@@ -69,6 +72,7 @@
 (defalias 'dired-rename-file 'rename-file)
 
 (require 'gud)
+
 (defun jde-my-minor ()
   (progn
 
@@ -88,13 +92,13 @@
     ;; locally overwrite build command
     ;; (local-set-key (kbd "C-c C-v C-b") 'compile-closest-Makefile)
 
-    (add-hook 'before-save-hook
-              (lambda ()
-                ;; (jde-import-all)
-                ;; (jde-import-organize)
-                ;; (jde-import-kill-extra-imports)
-                )
-              nil t)
+    ;; (add-hook 'before-save-hook
+    ;;           (lambda ()
+    ;;             ;; (jde-import-all)
+    ;;             ;; (jde-import-organize)
+    ;;             ;; (jde-import-kill-extra-imports)
+    ;;             )
+    ;;           nil t)
     ;; (add-hook 'after-save-hook 'jde-compile nil t)
 
 

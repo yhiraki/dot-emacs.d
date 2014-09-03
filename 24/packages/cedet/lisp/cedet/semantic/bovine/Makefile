@@ -15,7 +15,8 @@ top=../../../
 ede_FILES=Project.ede Makefile
 
 by_SEMANTIC_GRAMMAR=c.by make.by scm.by erlang.by f90.by
-LOADPATH= ../../ ../../ ../../../../  ../../../eieio/\
+LOADPATH= /home/schnecki/.emacs.d/24/packages/cedet/lisp/cedet/ /home/schnecki/.emacs.d/24/packages/cedet/lisp/cedet/ /home/schnecki/.emacs.d/24/packages/cedet/\
+    /home/schnecki/.emacs.d/24/packages/cedet/lisp/eieio/\
    
 by_SEMANTIC_GRAMMAR_EL=c-by.el make-by.el scm-by.el erlang-by.el f90-by.el
 bovinator_LISP=grammar.el debug.el grammar-macros.el

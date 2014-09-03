@@ -7,7 +7,7 @@
 ;; Version:
 ;; Last-Updated:
 ;;           By:
-;;     Update #: 116
+;;     Update #: 121
 ;; URL:
 ;; Description:
 ;;
@@ -117,7 +117,8 @@
 (global-set-key (kbd "C-c y") 'kill-ring-insert)
 
 ;; TAGS
-(global-set-key (kbd "C-.") 'find-tag-other-window)
+(global-set-key (kbd "C-c C-.") 'find-tag-other-window) ; pointer moves
+(global-set-key (kbd "C-.") 'view-tag-other-window)     ; pointer stays
 
 ;; align with regex
 (global-set-key (kbd "C-x a r") 'align-regexp)

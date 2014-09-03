@@ -1,4 +1,4 @@
-This is semantic-appdev.info, produced by makeinfo version 5.1 from
+This is semantic-appdev.info, produced by makeinfo version 5.2 from
 app-dev-guide.texi.
 
 This manual documents Application Development with Semantic.
@@ -4497,6 +4497,6 @@ Ref: semantic-adebug-mode149925
 Ref: semantic-adebug-new-buffer150506
 Ref: data-debug-insert-thing150903
 Node: GNU Free Documentation License151155
-Node: Index170803
+Node: Index170804
 
 End Tag Table

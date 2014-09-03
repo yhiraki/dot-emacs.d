@@ -1,0 +1,15 @@
+# -*- mode: snippet -*-
+# name: property with getter only
+# key: propg
+# --
+private ${1:String} ${2:name};$0
+
+/**
+* Gets the value of $2.
+*
+* @return the value of $2.
+*/
+public $1 get${2:$(upcase-initials yas/text)}() {
+    return $2;
+}
+

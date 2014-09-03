@@ -6,7 +6,8 @@
 # EDE is the Emacs Development Environment.
 # http://cedet.sourceforge.net/ede.shtml
 #
-LOADPATH= ../../eieio/ ../ ../ 
+LOADPATH= /home/schnecki/.emacs.d/24/packages/cedet/lisp/eieio/ /home/schnecki/.emacs.d/24/packages/cedet/lisp/cedet/ /home/schnecki/.emacs.d/24/packages/cedet/lisp/cedet/\
+   
 require=$(foreach r,$(1),(require (quote $(r))))
 EMACSFLAGS=-batch --no-site-file --eval '(setq debug-on-error t)' -l "../../../cedet-remove-builtin.el"
 EMACS=@echo "    > $@";emacs
@@ -17,7 +18,7 @@ ede_FILES=Project.ede Makefile
 
 LOADDEFS=loaddefs.el
 LOADDIRS=.
-ede_LISP=auto.el base.el custom.el dired.el source.el util.el system.el speedbar.el srecode.el files.el locate.el make.el shell.el android.el m3.el arduino.el
+ede_LISP=auto.el detect.el base.el custom.el dired.el source.el util.el system.el speedbar.el srecode.el files.el locate.el make.el shell.el android.el m3.el arduino.el
 proj-project_LISP=proj.el pmake.el pconf.el proj-elisp.el proj-misc.el proj-obj.el proj-prog.el proj-archive.el proj-shared.el proj-info.el proj-scheme.el proj-aux.el proj-comp.el
 projects_LISP=project-am.el cpp-root.el emacs.el linux.el generic.el java-root.el jvm-base.el maven2.el lein2.el ant.el
 aux-lisp_LISP=autoconf-edit.el makefile-edit.el

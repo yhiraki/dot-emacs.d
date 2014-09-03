@@ -5,9 +5,9 @@
 ;; Author: Manuel Schneckenreither
 ;; Created: Tue Dec 11 00:43:14 2012 (+0100)
 ;; Version:
-;; Last-Updated: Fr Mai 30 11:43:13 2014 (+0200)
+;; Last-Updated: Mon Sep  1 09:26:23 2014 (+0200)
 ;;           By: Manuel Schneckenreither
-;;     Update #: 395
+;;     Update #: 408
 ;; URL:
 ;; Description:
 ;;
@@ -16,6 +16,7 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;
 ;;; Code:
+
 
 ;; ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 ;; ++++++++++++++++++++++++++++++ BASICS ++++++++++++++++++++++++++++++++
@@ -33,9 +34,9 @@
 ;; WINNER MODE - undo window configurations (needs to be done before ECB)
 (load (concat package-conf-folder "winner_mode_config.el"))
 ;; CEDET - semantic, EDE, etc. (needs to be done pretty early!)
-(load (concat package-conf-folder "cedet_config.el"))
+;; (load (concat package-conf-folder "cedet_config.el"))
 ;; ECB - buffers on the side showing information
-;; (load (concat package-conf-folder "ecb_config.el"))
+(load (concat package-conf-folder "ecb_config.el"))
 ;; Eldoc config
 (load (concat package-conf-folder "eldoc_config.el"))
 ;; FLYCHECK -- automatic syntax checking on-the-fly
@@ -113,6 +114,7 @@
 (load-file (concat language-conf-folder "makefile_config.el"))
 (load-file (concat language-conf-folder "latex_config.el"))
 (load-file (concat language-conf-folder "octave_config.el"))
+(load-file (concat language-conf-folder "bash_config.el"))
 
 ;; ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 ;; ++++++++++++++++++++++++++ LOAD KEYBINDINGS ++++++++++++++++++++++++++

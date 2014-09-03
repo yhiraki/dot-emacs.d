@@ -15,7 +15,7 @@ top=../../../
 ede_FILES=Project.ede Makefile
 
 symref_LISP=global.el grep.el list.el idutils.el cscope.el filter.el
-LOADPATH= ../../../eieio/ ../../ ../../
+LOADPATH= /home/schnecki/.emacs.d/24/packages/cedet/lisp/eieio/ /home/schnecki/.emacs.d/24/packages/cedet/lisp/cedet/ /home/schnecki/.emacs.d/24/packages/cedet/lisp/cedet/
 VERSION=1.1beta
 DISTDIR=$(top)cedet-topdir-$(VERSION)/cedet/semantic/symref
 

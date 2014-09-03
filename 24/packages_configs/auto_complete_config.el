@@ -7,9 +7,9 @@
 ;; Created: So Okt 13 19:43:26 2013 (+0200)
 ;; Version:
 ;; Package-Requires: ()
-;; Last-Updated: Thu Aug 21 16:41:59 2014 (+0200)
+;; Last-Updated: Fri Aug 29 16:42:24 2014 (+0200)
 ;;           By: Manuel Schneckenreither
-;;     Update #: 265
+;;     Update #: 271
 ;; URL:
 ;; Doc URL:
 ;; Keywords:
@@ -80,8 +80,8 @@
 (setq ac-auto-start t)
 (setq ac-delay 0.01)
 (setq ac-dictionary-directories (quote ("~/.emacs.d/auto-complete/dict/")))
-(setq ac-quick-help-delay 0.2)
-(setq ac-ignore-case t)
+(setq ac-quick-help-delay 0.1)
+(setq ac-ignore-case 0)                 ; be case-sensitive!
 (setq ac-use-menu-map t)
 (setq ac-candidate-limit 100)  ;; maximize candidate number to prevent delays
 (setq ac-use-fuzzy t)          ;; use fuzzy matching

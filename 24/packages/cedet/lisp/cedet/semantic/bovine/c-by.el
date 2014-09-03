@@ -1,9 +1,9 @@
 ;;; c-by.el --- Generated parser support file
 
-;; Copyright (C) 1999-2012 Free Software Foundation, Inc.
+;; Copyright (C) 1999-2012, 2014 Free Software Foundation, Inc.
 
-;; Author: Schnecki <schnecki@schnecki.laptop>
-;; Created: 2014-02-04 19:30:06+0100
+;; Author:  <schnecki@schnecki-laptop>
+;; Created: 2014-08-28 18:59:55+0200
 ;; Keywords: syntax
 ;; X-RCS: $Id$
 
@@ -182,6 +182,7 @@
       (GREATER . "\\`[>]\\'")
       (LESS . "\\`[<]\\'")
       (EQUAL . "\\`[=]\\'")
+      (QUESTION . "\\`[?]\\'")
       (BANG . "\\`[!]\\'")
       (MINUS . "\\`[-]\\'")
       (PLUS . "\\`[+]\\'")
@@ -2213,6 +2214,18 @@
 
     (expression
      (unaryexpression
+      punctuation
+      "\\`[?]\\'"
+      unaryexpression
+      punctuation
+      "\\`[:]\\'"
+      unaryexpression
+      ,(semantic-lambda
+	(list
+	 (identity start)
+	 (identity end)))
+      )
+     (unaryexpression
       expr-binop
       unaryexpression
       ,(semantic-lambda
@@ -2252,8 +2265,9 @@
 (defun semantic-c-by--install-parser ()
   "Setup the Semantic Parser."
   (setq semantic--parse-table semantic-c-by--parse-table
-	semantic-debug-parser-source "c.by"
+	semantic-debug-parser-source "semantic/bovine/c.by"
 	semantic-debug-parser-class 'semantic-bovine-debug-parser
+	semantic-debug-parser-debugger-source 'semantic/bovine/debug
 	semantic-flex-keywords-obarray semantic-c-by--keyword-table
 	semantic-equivalent-major-modes '(c-mode c++-mode arduino-mode)
 	))

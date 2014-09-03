@@ -1,4 +1,4 @@
-This is semantic.info, produced by makeinfo version 5.1 from
+This is semantic.info, produced by makeinfo version 5.2 from
 semantic.texi.
 
 This manual documents Semantic, a new intrastructure for parser based
@@ -1303,6 +1303,6 @@ Ref: token32723
 Ref: token stream32848
 Ref: wisent parser32928
 Node: GNU Free Documentation License33080
-Node: Index52716
+Node: Index52717
 
 End Tag Table

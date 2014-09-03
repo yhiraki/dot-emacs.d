@@ -7,9 +7,9 @@
 ;; Created: So Okt 13 16:30:34 2013 (+0200)
 ;; Version:
 ;; Package-Requires: ()
-;; Last-Updated: Fr Mär  7 14:00:09 2014 (+0100)
+;; Last-Updated: Fri Aug 29 16:26:38 2014 (+0200)
 ;;           By: Manuel Schneckenreither
-;;     Update #: 10
+;;     Update #: 11
 ;; URL:
 ;; Doc URL:
 ;; Keywords:
@@ -35,7 +35,7 @@
 (require 'ecb)
 (ecb-byte-compile)
 (setq ecb-tip-of-the-day nil)
-(ecb-activate)
+;; (ecb-activate)
 
 
 ;; rest of ecb config can be found in init.el

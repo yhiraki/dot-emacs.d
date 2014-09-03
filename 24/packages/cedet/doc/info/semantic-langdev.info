@@ -1,4 +1,4 @@
-This is semantic-langdev.info, produced by makeinfo version 5.1 from
+This is semantic-langdev.info, produced by makeinfo version 5.2 from
 lang-support-guide.texi.
 
 This manual documents Application Development with Semantic.
@@ -271,6 +271,7 @@ File: semantic-langdev.info,  Node: Semantic Parser Structure,  Next: Applicatio
 =============================
 
 NOTE: describe the functions that do parsing, and how to overload each.
+
 
 
 
@@ -1853,49 +1854,49 @@ Node: Tag Structure2357
 Node: Language Support Overview4323
 Node: Semantic Overload Mechanism5592
 Node: Semantic Parser Structure11467
-Node: Application API Structure11771
-Node: Semantic Analyzer Support13308
-Node: Writing Lexers13470
-Ref: semantic-lex14305
-Node: Lexer Overview15517
-Node: Lexer Output16752
-Node: Lexer Construction20609
-Ref: define-lex21014
-Node: Lexer Built In Analyzers21864
-Node: Lexer Analyzer Construction25361
-Node: Keywords29537
-Node: Keyword Properties31112
-Node: Writing Parsers31989
-Node: External Parsers33473
-Node: Grammar Programming Environment34084
-Node: Parser Backend Support34677
-Node: Parsing a language file35427
-Ref: semantic-fetch-tags35801
-Ref: semantic-fetch-available-tags36571
-Ref: semantic-clear-toplevel-cache37021
-Node: Example Backend File37232
-Node: Tag Expansion39509
-Ref: semantic-tag-expand-function39835
-Node: Debugging41486
-Node: Lexical Debugging42045
-Ref: semantic-lex-debug42461
-Node: Parser Output tools42934
-Ref: semantic-show-unmatched-syntax-mode43433
-Ref: semantic-show-tag-boundaries-mode44369
-Ref: semantic-highlight-by-attribute-mode45002
-Ref: bovinate45712
-Node: Bovine Parser Debugging45943
-Ref: semantic-debug46417
-Node: Wisent Parser Debugging47917
-Node: Overlay Debugging48307
-Ref: semantic-tag-components-with-overlays49028
-Node: Incremental Parser Debugging49771
-Ref: semantic-highlight-edits-mode50540
-Ref: semantic-show-parser-state-mode51275
-Ref: semantic-edits-verbose-flag52293
-Node: Semantic 1.4 Doc52428
-Node: Parser Error Handling54199
-Node: GNU Free Documentation License54392
-Node: Index74049
+Node: Application API Structure11772
+Node: Semantic Analyzer Support13309
+Node: Writing Lexers13471
+Ref: semantic-lex14306
+Node: Lexer Overview15518
+Node: Lexer Output16753
+Node: Lexer Construction20610
+Ref: define-lex21015
+Node: Lexer Built In Analyzers21865
+Node: Lexer Analyzer Construction25362
+Node: Keywords29538
+Node: Keyword Properties31113
+Node: Writing Parsers31990
+Node: External Parsers33474
+Node: Grammar Programming Environment34085
+Node: Parser Backend Support34678
+Node: Parsing a language file35428
+Ref: semantic-fetch-tags35802
+Ref: semantic-fetch-available-tags36572
+Ref: semantic-clear-toplevel-cache37022
+Node: Example Backend File37233
+Node: Tag Expansion39510
+Ref: semantic-tag-expand-function39836
+Node: Debugging41487
+Node: Lexical Debugging42046
+Ref: semantic-lex-debug42462
+Node: Parser Output tools42935
+Ref: semantic-show-unmatched-syntax-mode43434
+Ref: semantic-show-tag-boundaries-mode44370
+Ref: semantic-highlight-by-attribute-mode45003
+Ref: bovinate45713
+Node: Bovine Parser Debugging45944
+Ref: semantic-debug46418
+Node: Wisent Parser Debugging47918
+Node: Overlay Debugging48308
+Ref: semantic-tag-components-with-overlays49029
+Node: Incremental Parser Debugging49772
+Ref: semantic-highlight-edits-mode50541
+Ref: semantic-show-parser-state-mode51276
+Ref: semantic-edits-verbose-flag52294
+Node: Semantic 1.4 Doc52429
+Node: Parser Error Handling54200
+Node: GNU Free Documentation License54393
+Node: Index74051
 
 End Tag Table

@@ -7,9 +7,9 @@
 ;; Created: So Okt 13 22:47:58 2013 (+0200)
 ;; Version:
 ;; Package-Requires: ()
-;; Last-Updated: Mo Jun  2 18:06:25 2014 (+0200)
+;; Last-Updated: Thu Aug 28 10:00:19 2014 (+0200)
 ;;           By: Manuel Schneckenreither
-;;     Update #: 146
+;;     Update #: 147
 ;; URL:
 ;; Doc URL:
 ;; Keywords:
@@ -60,6 +60,7 @@
   ;; KEYS
   (local-set-key (kbd (concat prefix-command-key " e r")) 'eval-region)
   (local-set-key (kbd (concat prefix-command-key " e b")) 'eval-buffer)
+  (local-set-key (kbd (concat prefix-command-key " e d")) 'eval-defun)
 
   ;; AUTO COMPLETE MODE SOURCES
   (add-to-list 'ac-sources 'ac-source-features)

@@ -6,7 +6,8 @@
 # EDE is the Emacs Development Environment.
 # http://cedet.sourceforge.net/ede.shtml
 #
-LOADPATH= ../ ../ ../../../  ../../eieio/\
+LOADPATH= /home/schnecki/.emacs.d/24/packages/cedet/lisp/cedet/ /home/schnecki/.emacs.d/24/packages/cedet/lisp/cedet/ /home/schnecki/.emacs.d/24/packages/cedet/\
+    /home/schnecki/.emacs.d/24/packages/cedet/lisp/eieio/\
    
 require=$(foreach r,$(1),(require (quote $(r))))
 EMACSFLAGS=-batch --no-site-file --eval '(setq debug-on-error t)' -l "../../../cedet-remove-builtin.el"

@@ -1,9 +1,9 @@
 ;;; scm-by.el --- Generated parser support file
 
-;; Copyright (C) 2001-2012 Free Software Foundation, Inc.
+;; Copyright (C) 2001-2012, 2014 Free Software Foundation, Inc.
 
-;; Author: Schnecki <schnecki@schnecki.laptop>
-;; Created: 2013-10-13 11:12:08+0200
+;; Author:  <schnecki@schnecki-laptop>
+;; Created: 2014-08-28 18:59:57+0200
 ;; Keywords: syntax
 ;; X-RCS: $Id$
 
@@ -44,6 +44,7 @@
   (semantic-lex-make-keyword-table
    '(("define" . DEFINE)
      ("define-module" . DEFINE-MODULE)
+     ("module" . MODULE)
      ("load" . LOAD))
    '(("load" summary "Function: (load \"filename\")")
      ("define-module" summary "Function: (define-module (name arg1 ...)) ")
@@ -67,13 +68,31 @@
 
     (scheme
      (semantic-list
-      ,(lambda (vals start end)
-	 (semantic-bovinate-from-nonterminal
-	  (car
-	   (nth 0 vals))
-	  (cdr
-	   (nth 0 vals))
-	  'scheme-list))
+      ,(semantic-lambda
+	(let
+	    (
+	     (expand
+	      (semantic-bovinate-from-nonterminal
+	       (car
+		(nth 0 vals))
+	       (cdr
+		(nth 0 vals))
+	       'scheme-list)))
+	  (cond
+	   (
+	    (semantic-tag-of-class-p expand
+				     'module)
+	    (semantic-tag-new-type
+	     (semantic-tag-name expand)
+	     "module"
+	     (semantic-parse-region
+	      (car
+	       (nth 0 vals))
+	      (cdr
+	       (nth 0 vals))
+	      'scheme
+	      1) nil))
+	   (t expand))))
       )
      ) ;; end scheme
 
@@ -81,8 +100,6 @@
      (open-paren
       "("
       scheme-in-list
-      close-paren
-      ")"
       ,(semantic-lambda
 	(nth 1 vals))
       )
@@ -100,7 +117,6 @@
      (DEFINE
        name-args
        opt-doc
-       sequence
        ,(semantic-lambda
 	 (semantic-tag-new-function
 	  (car
@@ -117,6 +133,13 @@
 	    (nth 1 vals))
 	   (nth 1 vals)) nil))
        )
+     (MODULE
+      symbol
+      ,(semantic-lambda
+	(semantic-tag
+	 (nth 0 vals)
+	 'module :members nil))
+      )
      (LOAD
       string
       ,(semantic-lambda
@@ -128,6 +151,7 @@
 	  (nth 1 vals))))
       )
      (symbol
+      sequence
       ,(semantic-lambda
 	(semantic-tag-new-code
 	 (nth 0 vals) nil))
@@ -142,16 +166,20 @@
 	   (nth 0 vals))
 	  (cdr
 	   (nth 0 vals))
-	  'name-arg-expand))
+	  'name-arg-list))
       )
      ) ;; end name-args
 
-    (name-arg-expand
+    (name-arg-list
      (open-paren
+      "("
       name-arg-expand
       ,(semantic-lambda
 	(nth 1 vals))
       )
+     ) ;; end name-arg-list
+
+    (name-arg-expand
      (symbol
       name-arg-expand
       ,(semantic-lambda
@@ -188,8 +216,9 @@
 (defun semantic-scm-by--install-parser ()
   "Setup the Semantic Parser."
   (setq semantic--parse-table semantic-scm-by--parse-table
-	semantic-debug-parser-source "scm.by"
+	semantic-debug-parser-source "semantic/bovine/scm.by"
 	semantic-debug-parser-class 'semantic-bovine-debug-parser
+	semantic-debug-parser-debugger-source 'semantic/bovine/debug
 	semantic-flex-keywords-obarray semantic-scm-by--keyword-table
 	))
 

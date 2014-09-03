@@ -5,9 +5,9 @@
 ;; Author: Manuel Schneckenreither
 ;; Created: Mon Dec 10 22:51:09 2012 (+0100)
 ;; Version:
-;; Last-Updated: Thu Aug 21 12:33:42 2014 (+0200)
+;; Last-Updated: Mon Sep  1 14:05:21 2014 (+0200)
 ;;           By: Manuel Schneckenreither
-;;     Update #: 653
+;;     Update #: 786
 ;; URL:
 ;; Description:
 ;;    Basic configuration for emacs. In here are all configs of
@@ -52,7 +52,7 @@
               "\\)$"))
 ;; (add-to-list 'desktop-modes-not-to-save 'dired-mode)
 ;;(add-to-list 'desktop-modes-not-to-save 'Info-mode)
-;;(add-to-list 'desktop-modes-not-to-save 'info-lookup-mode)
+;;(add-to-list 'desktop-modes-not-to-save 'info-look-up-mode)
 ;;(add-to-list 'desktop-modes-not-to-save 'fundamental-mode)
 
 ;; ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -72,29 +72,37 @@
 
 ;; CLOSE/BURY THE COMPILATION WINDOW IF THERE WAS NO ERROR AT ALL.
 (defun compilation-exit-autoclose (status code msg)
-  ;; If M-x compile exists with a 0
-  (when (and (eq status 'exit) (zerop code))
-    ;; then bury the *compilation* buffer, so that C-x b doesn't go there
-    (bury-buffer)
-    ;; and delete/burry the *compilation* window
-    (replace-buffer-in-windows "*compilation*")
-    ;; (bury-buffer "*compilation*")
-    (other-window 1)
-    (shell)
-    (return)) ;; open compilation window
-  ;; Always return the anticipated result of compilation-exit-message-function
-  (cons msg code))
+  "Automatically close the *compilation* buffer, if the major
+mode of the invoking window is in
+`compilation-modes-to-close-window listed."
+  (let ((this-buffer (current-buffer)))
+    (let ((cmm (buffer-local-value 'major-mode (other-buffer this-buffer t nil))))
+      (progn
+        (message "CMM: %s" cmm)
+        (message "Bool: %s" (not (equal nil (find cmm compilation-modes-to-close-window))))
+
+        (if (not (equal nil (find cmm compilation-modes-to-close-window)))
+
+
+            (when (and (eq status 'exit) (zerop code))
+              ;; then bury the *compilation* buffer, so that C-x b doesn't go there
+              (bury-buffer)
+              ;; and delete/bury the *compilation* buffer
+              (replace-buffer-in-windows "*compilation*")
+              ;; (bury-buffer "*compilation*")
+              (other-window 1)
+              (shell)
+              (return))
+          ;; Otherwise open compilation window. Always return the anticipated result
+          ;; of compilation-exit-message-function
+          (cons msg code))))))
 
 ;; SPECIFY FUNCTION
+;; specified for each language
+(setq compilation-modes-to-close-window '(jde-mode
+                                          java-mode
+                                          ))
 (setq compilation-exit-message-function 'compilation-exit-autoclose)
-
-
-;; get the closest makefile
-;; (defun get-above-makefile ()
-;;   (loop as d = default-directory then (expand-file-name
-;;                                        ".." d) if (file-exists-p (expand-file-name "Makefile" d)) return
-;;                                        d))
-
 
 ;; COMPILE CLOSES MAKEFILE
 (defun compile-closest-Makefile ()
@@ -111,6 +119,7 @@
 ;; ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 ;; ++++++++++++++++++++++++ YES AND NO PROMPTS ++++++++++++++++++++++++++
 ;; ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
 
 ;; MAKE YES NO PROMTS TO Y N PROMTS
 (defalias 'yes-or-no-p 'y-or-n-p)
@@ -221,16 +230,14 @@
 ;; ;; ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 ;; ;; ++++++++++++++++++++++++ TAGS INFORMATION ++++++++++++++++++++++++++++
 ;; ;; ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-;; DEPRECATED
-;; Changed to find-tag-other-window
 ;; ;; View tags other window - Bound to C-. in basic_keys.el
-;; (defun view-tag-other-window (tagname &optional next-p regexp-p)
-;;   "Same as `find-tag-other-window' but doesn't move the point"
-;;   (interactive (find-tag-interactive "View tag other window: "))
-;;   (let ((window (get-buffer-window)))
-;;     (find-tag-other-window tagname next-p regexp-p)
-;;     (recenter 10)
-;;     (select-window window)))
+(defun view-tag-other-window (tagname &optional next-p regexp-p)
+  "Same as `find-tag-other-window' but doesn't move the point"
+  (interactive (find-tag-interactive "View tag other window: "))
+  (let ((window (get-buffer-window)))
+    (find-tag-other-window tagname next-p regexp-p)
+    (recenter 10)
+    (select-window window)))
 
 ;; ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 ;; ++++++++++++++++++ CONFIGURE IN MINIBUFFER INFO ++++++++++++++++++++++
@@ -378,7 +385,7 @@
 (defun delete-process-interactive ()
   (interactive)
   (let ((pname (ido-completing-read "Process Name: "
-                    (mapcar 'process-name (process-list)))))
+                                    (mapcar 'process-name (process-list)))))
 
     (delete-process (get-process pname))))
 
@@ -444,9 +451,6 @@
 ;; KILL WHOLE LINE AND NEWLINE WITH C-k IF AT BEGINNING OF LINE ¶
 (setq kill-whole-line t)
 
-;; ENABLE REGION SELECTING, USE C-ENTER
-;; (cua-mode 1)
-
 ;; ALWAYS USE THE ABSOUTE PATH WHEN VISTITING FILES (GETS RID OF SOME
 ;; WEIRED BEHAVIOUR)
 (setq find-file-visit-truename t)
@@ -470,7 +474,6 @@
 ;; ADD NEW LINES WHEN AT END OF BUFFER
 (setq next-line-add-newlines t)
 
-
 ;; USE IMENU
 (global-set-key (kbd "C-c l") 'imenu)
 
@@ -478,15 +481,14 @@
 (setq visible-bell t)
 
 ;; SHOW PARENTHESIS
-(show-paren-mode 1)
-
+(show-paren-mode t)
 
 ;; REPLACE S EXPRESSION
 (defun replace-last-sexp ()
-    (interactive)
-    (let ((value (eval (preceding-sexp))))
-      (kill-sexp -1)
-      (insert (format "%S" value))))
+  (interactive)
+  (let ((value (eval (preceding-sexp))))
+    (kill-sexp -1)
+    (insert (format "%S" value))))
 
 (global-set-key (kbd (concat prefix-command-key " C-e")) 'replace-last-sexp)
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;

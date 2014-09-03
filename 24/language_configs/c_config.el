@@ -7,9 +7,9 @@
 ;; Created: Fr Feb  7 00:07:46 2014 (+0100)
 ;; Version:
 ;; Package-Requires: ()
-;; Last-Updated: Thu Aug 21 14:27:12 2014 (+0200)
+;; Last-Updated: Fri Aug 29 16:38:31 2014 (+0200)
 ;;           By: Manuel Schneckenreither
-;;     Update #: 35
+;;     Update #: 58
 ;; URL:
 ;; Doc URL:
 ;; Keywords:
@@ -63,17 +63,12 @@
 
 
 ;; CONFIGURE ELDOC INCLUDES
-(setq c-eldoc-includes   "pkg-config gtk+-2.0 --cflags` -I./ -I../ ")
+;; (setq c-eldoc-includes   "pkg-config gtk+-2.0 --cflags` -I./ -I../ ")
 
 ;; C-MODE HOOK
-;; (add-hook 'c-mode-common-hook (lambda () (flymake-mode 1)))
 (setq auto-mode-alist (cons '("\.cl$" . c-mode) auto-mode-alist)) ;; OPENCL
-(add-hook 'c-mode-hook 'turn-on-eldoc-mode)
 
-;; C++ HOOK
-;; (add-hook 'c++-mode-hook (lambda () (flymake-mode 1)))
-(add-hook 'c++-mode-hook 'turn-on-eldoc-mode)
-
+;; (add-hook 'c-mode-hook 'turn-on-eldoc-mode)
 
 ;; Create and set tags table
 (defun make-c-tags ()
@@ -92,6 +87,7 @@
 
 
   ;; add auto-complete mode
+  (add-to-list 'ac-sources 'ac-source-semantic) ;; slows down auto complete)
   (add-to-list 'ac-sources 'ac-source-abbrev)
   ;; (add-to-list 'ac-sources 'ac-source-css-property)
   (add-to-list 'ac-sources 'ac-source-dictionary)
@@ -104,8 +100,8 @@
   ;; (add-to-list 'ac-sources 'ac-source-gtags)
   (add-to-list 'ac-sources 'ac-source-etags)
   (add-to-list 'ac-sources 'ac-source-imenu)
-  (add-to-list 'ac-sources 'ac-source-semantic) ;; slows down auto complete)
-  (add-to-list 'ac-sources 'ac-source-semantic-raw) ;; slows down auto complete)
+
+  ;; (add-to-list 'ac-sources 'ac-source-semantic-raw) ;; slows down auto complete)
   ;; (add-to-list 'ac-sources 'ac-source-words-in-all-buffer)
   ;; (add-to-list 'ac-sources 'ac-source-words-in-buffer)
   ;; (add-to-list 'ac-sources 'ac-source-words-in-same-mode-buffers)
@@ -122,8 +118,27 @@
   ;; use programming flyspell mode
   (flyspell-prog-mode)
 
-  (local-set-key "." 'semantic-complete-self-insert)
-  (local-set-key ">" 'semantic-complete-self-insert)
+  ;; start auto completion after entering a dot: .
+  (local-set-key (kbd ".") (lambda ()
+                             (interactive)
+                             (progn
+                               (insert ".")
+                               ;; (if (not (auto-complete-mode))
+                               ;;     (auto-complete-mode t))
+                               (auto-complete)
+                               ;; (semantic-ia-complete-tip (point))
+                               )))
+
+  ;; start auto completion after entering >
+  (local-set-key (kbd ">") (lambda ()
+                             (interactive)
+                             (progn
+                               (insert ">")
+                               ;; (if (not (auto-complete-mode))
+                               ;;     (auto-complete-mode t))
+                               (auto-complete)
+                               ;; (semantic-ia-complete-tip (point))
+                               )))
 
   (add-hook 'after-save-hook 'make-c-tags nil t)
 
@@ -131,6 +146,7 @@
 
 ;; add hook
 (add-hook 'c-mode-hook 'my-c-mode-hook)
+(add-hook 'c++-mode-hook 'my-c-mode-hook)
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;

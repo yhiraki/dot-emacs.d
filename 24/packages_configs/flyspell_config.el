@@ -7,9 +7,9 @@
 ;; Created: Fr Okt  4 20:40:17 2013 (+0200)
 ;; Version:
 ;; Package-Requires: ()
-;; Last-Updated: Thu Aug 21 15:11:53 2014 (+0200)
+;; Last-Updated: Mon Sep  1 11:16:21 2014 (+0200)
 ;;           By: Manuel Schneckenreither
-;;     Update #: 125
+;;     Update #: 130
 ;; URL:
 ;; Doc URL:
 ;; Keywords:
@@ -89,18 +89,23 @@
 (add-hook 'flyspell-mode-hook 'my/flyspell-minor-mode)
 
 (defun flyspell-switch-dictionary()
-    (interactive)
-    (let* ((dic ispell-current-dictionary)
-           (change (if (string= dic "german") "english" "german")))
-      (ispell-change-dictionary change)
-      (message "Dictionary switched from %s to %s" dic change)
-      ))
+  (interactive)
+  (let* ((dic ispell-current-dictionary)
+         (change (if (string= dic "german") "english" "german")))
+    (ispell-change-dictionary change)
+    (message "Dictionary switched from %s to %s" dic change)
+    ))
 
 (global-set-key (kbd "<f8>") 'flyspell-switch-dictionary)
 
 ;; fix key
 (eval-after-load "flyspell"
-  '(define-key flyspell-mode-map (kbd "C-.") 'find-tag-other-window))
+  '(define-key flyspell-mode-map (kbd "C-.") 'view-tag-other-window)
+  )
+
+(eval-after-load "flyspell"
+  '(define-key flyspell-mode-map (kbd "C-c C-.") 'find-tag-other-window)
+  )
 
 
 (setq flyspell-issue-message-flag nil)

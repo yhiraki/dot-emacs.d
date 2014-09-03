@@ -16,7 +16,8 @@ top=../../../
 ede_FILES=Project.ede Makefile
 
 wy_SEMANTIC_GRAMMAR=java-tags.wy calc.wy java.wy python.wy javascript.wy
-LOADPATH= ../../ ../../ ../../../../  ../../../eieio/\
+LOADPATH= /home/schnecki/.emacs.d/24/packages/cedet/lisp/cedet/ /home/schnecki/.emacs.d/24/packages/cedet/lisp/cedet/ /home/schnecki/.emacs.d/24/packages/cedet/\
+    /home/schnecki/.emacs.d/24/packages/cedet/lisp/eieio/\
    
 wy_SEMANTIC_GRAMMAR_EL=java-tags-wy.el calc-wy.el java-wy.el python-wy.el javascript-wy.el
 tools_LISP=bison-wisent.el

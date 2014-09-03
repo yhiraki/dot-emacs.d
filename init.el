@@ -7,9 +7,9 @@
 ;; Created: Tue Jul 29 00:11:38 2014 (+0200)
 ;; Version:
 ;; Package-Requires: ()
-;; Last-Updated: Thu Aug 21 16:15:10 2014 (+0200)
+;; Last-Updated: Wed Sep  3 09:00:07 2014 (+0200)
 ;;           By: Manuel Schneckenreither
-;;     Update #: 69
+;;     Update #: 172
 ;; URL:
 ;; Doc URL:
 ;; Keywords:
@@ -121,7 +121,7 @@
         backup-walker
         bbdb
         bookmark+
-				change-inner
+        change-inner
         color-theme
         color-theme-solarized
         dired+
@@ -152,6 +152,7 @@
         org
         org-ac
         org-plus-contrib
+        ov
         pager
         pager-default-keybindings
         popup
@@ -257,7 +258,7 @@
  '(ecb-source-path (quote (("/" "/"))))
  '(ecb-type-tag-expansion (quote ((default) (c-mode "struct"))))
  '(ecb-use-speedbar-instead-native-tree-buffer nil)
- '(ede-project-directories (quote ("/home/schnecki/Documents/UIBK/5.Semester/NP/PS/06/01-ThreadPoolExecutor/src" "/home/schnecki/Documents/UIBK/5.Semester/NP/PS/06/01-ThreadPoolExecutor" "/home/schnecki/Programmierung/Java/BetPredictionTest/src" "/home/schnecki/Programmierung/Java/BetPredictionTest" "/tmp/myproject/include" "/tmp/myproject/src" "/tmp/myproject")))
+ '(ede-project-directories (quote ("/home/schnecki/Programmierung/C++/Test/src" "/home/schnecki/Programmierung/C++/Test" "/ssdspace/.emacs.d" "/home/schnecki/Programmierung/Java/Papa" "/home/schnecki/Documents/UIBK/5.Semester/NP/PS/06/01-ThreadPoolExecutor/src" "/home/schnecki/Documents/UIBK/5.Semester/NP/PS/06/01-ThreadPoolExecutor" "/home/schnecki/Programmierung/Java/BetPredictionTest/src" "/home/schnecki/Programmierung/Java/BetPredictionTest" "/tmp/myproject/include" "/tmp/myproject/src" "/tmp/myproject")))
  '(fill-column 80)
  '(flymake-compilation-prevents-syntax-check nil)
  '(flymake-gui-warnings-enabled nil)
@@ -269,11 +270,11 @@
  '(jde-compiler (quote ("javac")))
  '(jde-global-classpath (quote ("./../classes" "./../lib")))
  '(jde-jdk (quote ("1.6")))
- '(jde-jdk-registry (quote (("1.6" . "/usr/lib/jvm/java-1.7.0") ("1.6OpenJDK" . "/usr/lib/jvm/java-1.7.0-openjdk"))))
+ '(jde-jdk-registry (quote (("1.6" . "/usr/lib/jvm/java-default-runtime"))))
  '(jde-sourcepath (quote ("./src/main" "./src/test")))
  '(kept-new-versions 5000)
  '(mpc-data-directory "~/.emacs.d/.tmp/mpc")
- '(org-agenda-files (quote ("~/Documents/Planning/planning_time.org" "~/Documents/Planning/university.org" "~/Documents/Planning/ProjectIdeas.org" "~/Documents/Planning/freetime.org" "~/Documents/Planning/lists.org" "~/Documents/Planning/anniverseries.org" "~/Documents/Planning/Emacs.org" "~/Programmierung/App/Documentation/app-brainstorming.txt" "~/.emacs.d/org/notes.org")))
+ '(org-agenda-files (quote ("~/Documents/Planning/planning_time.org" "~/Documents/Planning/university.org" "~/Documents/Planning/ProjectIdeas.org" "~/Documents/Planning/freetime.org" "~/Documents/Planning/lists.org" "~/Documents/Planning/anniverseries.org" "~/Documents/Planning/Emacs.org" "~/Documents/Planning/jobcl.org" "~/Programmierung/App/Documentation/app-brainstorming.txt" "~/.emacs.d/org/notes.org")))
  '(send-mail-function (quote smtpmail-send-it))
  '(size-indication-mode t)
  '(smtpmail-smtp-server "smtp.uibk.ac.at")

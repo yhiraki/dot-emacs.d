@@ -1,156 +1,294 @@
 BZR merge-modified list format 1
-file_id: semanticscope.el-20100824174052-438azmcl2y47lvam-785
-hash: b57ac6a9b7d3de2b1ad219361f13b711ce2164c9
+file_id: edefiles.el-20100824174052-438azmcl2y47lvam-859
+hash: de08f8898c253c279b7115219b861fcc5eb51ccd
 
-file_id: eieiotestpersist.el-20120116195741-611dmlbsq3s9jpzt-1
-hash: aeab0b145405386e8d82be9286f4dc5bfb03e4e5
+file_id: ede_stop_scan-20140531215314-inzhar14k1vqgn8w-1
+hash: 1973db0958807a99f319f135164249800bfcf8ac
 
-file_id: edelinux.el-20100824174052-438azmcl2y47lvam-862
-hash: 343571623628dbadc6adaffa69f74236dc3cf2b2
+file_id: projlein2.el-20121201123656-7dywv37458vw2mfx-3
+hash: 52bcd11058d4663658461d1c871ff9ea6d7e0ccb
 
-file_id: util.cc-20140102012918-gzlxxbhtnutea6uv-10
-hash: c961a6ac2e222b2aa70b9e5ae3ab98938e85a54a
-
-file_id: project.ede-20100824174052-438azmcl2y47lvam-142
-hash: 4cac68ae516e9f051d12bb48baac987350a6f551
-
-file_id: managertest.cc-20140102012918-gzlxxbhtnutea6uv-11
-hash: 8169e91c7f9833942de2aad850990cc2271f1713
-
-file_id: edegeneric.el-20100824174052-438azmcl2y47lvam-987
-hash: 3c79d5f76683624be688fdf448d6ece0c75e8a55
-
-file_id: readme-20140102012918-gzlxxbhtnutea6uv-2
-hash: af7066e9781397fb671c0bb864eca8e0c3b38388
-
-file_id: manager.cc-20140102012918-gzlxxbhtnutea6uv-9
-hash: 1a573cea80bf20b6d32ff50875adfec2a2b433dd
-
-file_id: semanticanalyzerefs.-20100824174052-438azmcl2y47lvam-840
-hash: 19f37985a648ba11d3377c968b8b1ede4890aeeb
-
-file_id: semanticformat.el-20100824174052-438azmcl2y47lvam-273
-hash: 62db21f9277b514c3285c40d24926e98409c686a
-
-file_id: citexternaldb.el-20100824174052-438azmcl2y47lvam-988
-hash: d68363daf749d5acd11471e5edcb7698ef705859
-
-file_id: srecodetest.el-20100824174052-438azmcl2y47lvam-799
-hash: 325d6220f5f0f29d435aff41b73dfece4511cae2
-
-file_id: testusing.cpp-20100824174052-438azmcl2y47lvam-851
-hash: 886515244a3b8f95781ce1f8bd3cfdca443a2645
-
-file_id: semanticanalyze.el-20100824174052-438azmcl2y47lvam-159
-hash: 7f955d6258cd6a0b17df64a7e71aac327cb67130
-
-file_id: semanticdecoratemode-20100824174052-438azmcl2y47lvam-375
-hash: 3871d7189368d378d16dabb9739fed87f6da1c9e
-
-file_id: fields.el-20110517001737-ag9jcvbztpqtbdbf-1
-hash: 561a263370df4f00cc340efda6a80fe3b9200024
-
-file_id: citglobalref.el-20140102013519-jpfys4enxpeupg0a-1
-hash: db20c2246d22bfcdcbfe82025ad90b4570fa5b97
-
-file_id: srecodetestgetset.el-20100824174052-438azmcl2y47lvam-821
-hash: 59039522b2aa484dfa862ee8e9edb01c16e477d9
-
-file_id: stltest.el-20121027212131-1c2xuclosk122g7n-1
-hash: 33390fe23e75323a83f230ef6de8f841db0b462a
-
-file_id: langsupportguide.tex-20100824174052-438azmcl2y47lvam-259
-hash: a3b63044bb32055eada501119e5297c75833c53a
-
-file_id: cittest.sh-20100824174052-438azmcl2y47lvam-813
-hash: f4482d783bd00018e9ba98c16aec7cb965774efd
-
-file_id: project.ede-20100824174052-438azmcl2y47lvam-802
-hash: 2f5a6351d144ddadc6205c767e87b1968a2c77a9
-
-file_id: semanticsymref.el-20100824174052-438azmcl2y47lvam-850
-hash: de13a286eff82451db4a0c14e442067570eb8511
-
-file_id: semanticutest.el-20100824174052-438azmcl2y47lvam-734
-hash: 4a99c526ca2a5340a5397838d374281b063f9109
-
-file_id: semanticdecorateincl-20100824174052-438azmcl2y47lvam-814
-hash: c60fa46d8ff7ed6b320c5e069a215819671a10d0
-
-file_id: semanticdbglobal.el-20100824174052-438azmcl2y47lvam-860
-hash: 1303d1500e6405fc2d66c7be69c654de67a665cb
-
-file_id: testusing.hh-20100824174052-438azmcl2y47lvam-852
-hash: 09fe8cc754f22eef638f8ceb092e72ed7b6d431d
-
-file_id: makefile-20100824174052-438azmcl2y47lvam-241
-hash: 9f4d1c73f34721dc9ed6275033cdd650d3b020dd
-
-file_id: semanticlexspp.el-20100824174052-438azmcl2y47lvam-731
-hash: a7444a76a293f1dab117b0524baab522a2c03fa4
-
-file_id: testsppreplace.c-20100824174052-438azmcl2y47lvam-811
-hash: 47f641e3329d4a90ba2b8048cdf3f0be42bae602
-
-file_id: semanticdb.sh-20100824174052-438azmcl2y47lvam-211
-hash: aebc0c13758b73dcdafceee70684bff1b4b87ee1
-
-file_id: semanticcomplete.el-20100824174052-438azmcl2y47lvam-275
-hash: 47e4c99d726ce2a7fc397b0c59ea6a913f62bbbc
-
-file_id: semantic.el-20100824174052-438azmcl2y47lvam-47
-hash: eee184ea2bbf12670fa27eb6613e14c0a4a1eed1
-
-file_id: c.by-20100824174052-438azmcl2y47lvam-234
-hash: 7f6f9fb2665bd97492548e347eb05b7c27358633
-
-file_id: semanticiautest.el-20100824174052-438azmcl2y47lvam-788
-hash: c925253920257990d0a6be8bd8e5c92c71e58dc3
-
-file_id: testvarnames.c-20100824174052-438azmcl2y47lvam-969
-hash: 50bb316a94f93f868772d8ef9a67858717872771
-
-file_id: semanticgcc.el-20100824174052-438azmcl2y47lvam-832
-hash: 4591d7e34ea19eda7ceb75d72db4c3dc651bcabb
-
-file_id: semanticdbmode.el-20100824174052-438azmcl2y47lvam-839
-hash: 06be2c6a0eb5d2e4de8d1af43ef5dd6c9436f701
-
-file_id: semanticdb.el-20100824174052-438azmcl2y47lvam-94
-hash: e8fc3731e601d3ddb4bbd4c7ef4f3ff3cf0068d7
-
-file_id: util.hh-20140102012918-gzlxxbhtnutea6uv-8
-hash: a26e2d57cc370fbc829df75b4f602a84e6853d56
-
-file_id: managertest.hh-20140102012918-gzlxxbhtnutea6uv-12
-hash: 9f7d2d33848749cc6d025005f53cddd618ce15cc
-
-file_id: semanticia.el-20100824174052-438azmcl2y47lvam-179
-hash: 21d461bc591208dfbe0d77606530cda594548967
-
-file_id: manager.hh-20140102012918-gzlxxbhtnutea6uv-7
-hash: 858dc7f0c6d1460fbcc446a6dc8f7b5255b18803
-
-file_id: testsppreplaced.c-20100824174052-438azmcl2y47lvam-815
-hash: 58d841b0cb805cad20c5bc48166d1ffb7960b86d
-
-file_id: makefile-20111115191636-ae3tfko9800bhiit-1
-hash: 544cc2d244da43aab5c354c5809b5b4c9da64f6d
-
-file_id: edearduino.el-20120223010504-fnxfre4c72ywc96n-1
-hash: 043b8543dc2409122af64fe77ecca6c14ddd5f69
-
-file_id: semanticectagutil.el-20100824174052-438azmcl2y47lvam-843
-hash: 84f709b7ae0a553174d19d327e134748944fb9bf
-
-file_id: semanticc.el-20100824174052-438azmcl2y47lvam-221
-hash: a2f9bf10ee8c427c680949744e06accb5c3f207c
-
-file_id: testlocalvars.cpp-20140202192827-i56rg120955knoab-1
-hash: e353aac4d20d8991de6dfcca6df49e67bb86720d
+file_id: ede.el-20100824174052-438azmcl2y47lvam-39
+hash: 6b288d3e2fee28aea819ed4bcf7878ee88dc99a9
 
 file_id: cedetintegtest.el-20100824174052-438azmcl2y47lvam-801
-hash: 1ca277c3834daf71e4751624ca41401fdfae1bad
+hash: 8408e46e9746f7c4fb210268a61f57367e5c1680
 
-file_id: citcpp.el-20100824174052-438azmcl2y47lvam-804
-hash: cf18685e9fac470565c7b48bc46a32cafa37b4af
+file_id: dmlib.cpp-20140524005725-bdd6nheouo2zjw56-2
+hash: e3d06a5ad67a5fa35a1ead8f260e73941068d75f
+
+file_id: srecodejava.el-20100824174052-438azmcl2y47lvam-874
+hash: f1de5f709770977b7ead8c379e407dc1ccfd45c6
+
+file_id: configure.in-20140420180447-qpqgg1lzaurok0go-2
+hash: 3ed00cdd245ae1f066f20535db87f8ad1c1ad975
+
+file_id: citglobalref.el-20140102013519-jpfys4enxpeupg0a-1
+hash: 436468436becbf5537b617b2b0c6b3914b36f205
+
+file_id: project.ede-20140420180642-6g3ceud4pvwafofp-2
+hash: 3b13a3fab910f7739566d565936e5252520c300c
+
+file_id: test.java-20140420180407-4ms8y04strzf7zsk-2
+hash: 64122b8fdac02520d45a60d02cee7015d214800b
+
+file_id: cedetuutil.el-20110820170311-f7livkp9z1nlvypj-1
+hash: bf8085ffa920abaf703efa444327f33384e00a46
+
+file_id: semanticsymref.el-20100824174052-438azmcl2y47lvam-850
+hash: 7149062487a954ad1d57f75add1827cd18d6cbfb
+
+file_id: detectutest.el-20140420180026-ntiuldyhgls2jjmv-1
+hash: 1593d2a15d378a367a99d32e03c171be6380dfbe
+
+file_id: detectdirtest.el-20140523102239-mdsv5it3ryl9zchg-1
+hash: 395f344b111910777290e7874fa1186d046d43c6
+
+file_id: edeprojmaven2.el-20100824174052-438azmcl2y47lvam-885
+hash: c5d00ea8a14dc46904f9c5c10435c08d3ac5b70b
+
+file_id: semanticdebug.el-20100824174052-438azmcl2y47lvam-249
+hash: 3e57fa23679762f4e1a3164eea8fe935df77ee08
+
+file_id: edeconfig.el-20140530231916-0tydwjxa3tt7lazo-1
+hash: b80e7fe819e8721e9aa58db844f1b620cfff471f
+
+file_id: lib.cpp-20140524005739-cfr1t0rf2qtzo5ob-4
+hash: 42149a48be64abddfc1b36773f25aec03aa7efca
+
+file_id: edeconfig.el-20140530231933-pek1wugy4uxn61p3-1
+hash: b80e7fe819e8721e9aa58db844f1b620cfff471f
+
+file_id: readme-20140518225357-hkbk8ip5orhejmed-2
+hash: b3a566863a3d9238e60608dfb6627441da681906
+
+file_id: project.clj-20140531215330-9y5hzmcppc13e130-2
+hash: 2a63d5abaf0246d3240e4e39c2395ee697cb0066
+
+file_id: test-20140420180659-33igd2c09trr691x-1
+hash: 984816fd329622876e14907634264e6f332e9fb3
+
+file_id: edebase.el-20100824174052-438azmcl2y47lvam-979
+hash: 20a408ab3492fbe881cfe3eb9660fec23ea598de
+
+file_id: test.cpp-20140530231925-unnj3aturxg36e2n-3
+hash: 953d0233cb2b2f1bedb23a4a21eb4aeef0f927c7
+
+file_id: makefile.am-20140420180428-bhow8zp0bd670ihm-2
+hash: 08919ce362855be180c40248a97e6e555b4dc0bb
+
+file_id: scheme.by-20100824174052-438azmcl2y47lvam-247
+hash: ce5d90627221c7f309710dbab1065ed89c8bdbc9
+
+file_id: sconstruct-20140530231841-qxy7s6nwgli41201-1
+hash: d65fcc6cdf46ff06f969b566a639d04d9ac313e2
+
+file_id: edeconfig.el-20140601020144-st771oqnn6bqeny6-1
+hash: b80e7fe819e8721e9aa58db844f1b620cfff471f
+
+file_id: semanticscm.el-20100824174052-438azmcl2y47lvam-223
+hash: 5f4a06385c9eaee44c3f2eb3851274740d41b235
+
+file_id: emacs.c-20140420180532-00gi2o2z4rq0xbow-1
+hash: bde1cb672154fad230442a8b9bd85fd94ff81da8
+
+file_id: semanticutest.el-20100824174052-438azmcl2y47lvam-734
+hash: 7c2bb3c62ff29bb0d1a9b03950e7dbdc40482d33
+
+file_id: edepconf.el-20100824174052-438azmcl2y47lvam-54
+hash: 1871f382f2dcdd92105672e26b54289ea3126d65
+
+file_id: makefile-20140420180612-n8iyevf404yojyhv-2
+hash: 76ede3b657cded00be5c8da592d0ce7839b6f7bc
+
+file_id: wisentphp.el-20100824174052-438azmcl2y47lvam-828
+hash: 4a337c0bfbc2eaebc0e821b0256468b7deac34b7
+
+file_id: readme-20121003203823-f3p07e8y8cg5s99d-2
+hash: 4ed611af2eef9d91da68b70fd61bc2f9f3937f2d
+
+file_id: makefile-20140622003353-907wdi9a1m9bja7i-1
+hash: 53db947175ea5d44bb0788e78adce87a4e3b73a3
+
+file_id: projectam.el-20100824174052-438azmcl2y47lvam-35
+hash: d8a7a773994cbe7b161446964d9780a6a6f703e3
+
+file_id: project.ede-20100824174052-438azmcl2y47lvam-102
+hash: 9c5c20398fe6c298193bc0baa3a13386c85195a5
+
+file_id: semantic.el-20100824174052-438azmcl2y47lvam-47
+hash: 91a19eb26d5a645a270253dad2957a88181c9af1
+
+file_id: ver_linux-20140420180624-ogl3h9hzr9itg9cq-2
+hash: f9d95d8109172789ce6924cf354bfc0ddbe9e257
+
+file_id: readme-20140518225429-vp31jpsuz0jlp4p0-2
+hash: 35854fe156568a374bda1204db33d889320e0460
+
+file_id: projant.el-20121201123656-7dywv37458vw2mfx-2
+hash: 0fead3be8cb41c42ea9be39e191fe2a915976d54
+
+file_id: boards.txt-20140824140100-xx7p6u31jzmsf5fi-5
+hash: 37afbd5cac4edc48652651f38119037b1e6e6912
+
+file_id: config.h-20140420180520-h8jhe6j3rlnw21vs-2
+hash: 492d2fa78d866d39651972e8543b74cfc2d48fd4
+
+file_id: ede_stop_scan-20140518225335-bamo202cj454mat9-1
+hash: 1973db0958807a99f319f135164249800bfcf8ac
+
+file_id: testvarnames.java-20140217141319-k5t0uemxnc9rp433-1
+hash: ccf94d9e51fd8d32509e4bd8cee86bca2d7697c1
+
+file_id: mydirmatch.cpp-20140523014455-2915e3d2lhmc7qa7-3
+hash: 4b55f4278a10cdf4e99dd2e197748f1c123ec14a
+
+file_id: main.cpp-20140518225412-otpqaox1oo1v34a6-2
+hash: 07eae2a09a19b48b1c9edf6eb9983323f64de480
+
+file_id: semanticectagutil.el-20100824174052-438azmcl2y47lvam-843
+hash: 0550959252691cee4b0325b04cafe877012c2125
+
+file_id: semanticc.el-20100824174052-438azmcl2y47lvam-221
+hash: b30a39d5fb332daf69da9b4bde0ce2e179fabc4d
+
+file_id: testlocalvars.cpp-20140202192827-i56rg120955knoab-1
+hash: 73cea1fc18c81c62f0da85b6fb2abe7b1dd21ed0
+
+file_id: bovinegrammar.el-20100824174052-438azmcl2y47lvam-235
+hash: 7e63584ac18b17469053607338f8c59ed086c530
+
+file_id: autoconfedit.el-20100824174052-438azmcl2y47lvam-29
+hash: 5f792cd835a08733bca205f03a480039a0b311ab
+
+file_id: build.xml-20140531215255-rd4ca3yl4pvft31s-3
+hash: 5e322d5e447bcacb37daf14f0e649309fe372e19
+
+file_id: edelinux.el-20100824174052-438azmcl2y47lvam-862
+hash: 6354d5693e3a6c10bf6d9f1f5b29902623b2169e
+
+file_id: javaroot.el-20120716230309-w24kz3hz3l2cmvib-1
+hash: 6c83e67488c8d191649c9ab43a97441892341d7d
+
+file_id: semanticdbjavap.el-20110228031011-gu109mewpih102bj-1
+hash: 524614dce5cd8aa5d4a35ed98c6ec2ec0a4db981
+
+file_id: ede_stop_scan-20140530231956-zye7jn8l7h0hn4nx-1
+hash: 1973db0958807a99f319f135164249800bfcf8ac
+
+file_id: edegeneric.el-20100824174052-438azmcl2y47lvam-987
+hash: 73c21115c5bf077475f73ee6e0c75f4648654820
+
+file_id: pom.xml-20140531215344-1xdv8rigf3ouiwxw-2
+hash: 8c5b45c6e63e9e4be0f949f0a6de427e67a1edb2
+
+file_id: project.ede-20140518225538-wl04q0g18y2dkdwr-2
+hash: 2d04997070d917143d3c8650eebbf86e4d0c1f3a
+
+file_id: androidmanifest.xml-20140420180344-ysnafx1apjqmckgb-3
+hash: bb8a90c6b29474f9bda912ca4c6f37f075962a48
+
+file_id: makefile-20140622003306-i02a317y95msv6o4-1
+hash: c7936fba990e37376679f306a751076975f8e04a
+
+file_id: test-20140518225553-z0ab3xqv71ekzbew-1
+hash: 191faf51d5a9fb1cfde66f362f34f658b4f419d3
+
+file_id: edeprojelisp.el-20100824174052-438azmcl2y47lvam-60
+hash: 3699b3845c7ee6d900d4e60130529cb54b469815
+
+file_id: test.cpp-20140530231858-ra36cumc5aj1cvh6-3
+hash: ab7e4488bce91036275a8bd9f6584da02a69ce9f
+
+file_id: edeproj.el-20100824174052-438azmcl2y47lvam-43
+hash: 46e28a4d10f662660d5a1b210fc38fb0c9a3546e
+
+file_id: makefile-20100824174052-438azmcl2y47lvam-241
+hash: e5c136d3f5af79c060d7e8d263d009b1fd17f163
+
+file_id: cmakelists-20140530231940-2qgvajqhur8us2e3-1
+hash: 93cb445a1a8f387413bb3a1597133e944a8cd564
+
+file_id: edearduino.el-20120223010504-fnxfre4c72ywc96n-1
+hash: 9207ad11d9b16b7f3cf7c5bc1c1c4875932997f2
+
+file_id: c.by-20100824174052-438azmcl2y47lvam-234
+hash: 5fcf03f1c069dfb8855724f4ff24acc039352117
+
+file_id: semanticiautest.el-20100824174052-438azmcl2y47lvam-788
+hash: 23469d7a42007bc01813dc6889c0e1023678b2f4
+
+file_id: cedetutests.el-20100824174052-438azmcl2y47lvam-841
+hash: 3f8fc2c23ad3e9720e0763e53161d3237defe96a
+
+file_id: semanticdb.el-20100824174052-438azmcl2y47lvam-94
+hash: debaae9ef097de7257167b09e81f1dc51fa6706e
+
+file_id: edeauto.el-20100824174052-438azmcl2y47lvam-978
+hash: 6bf7a290bc5e0a93f7a4c206bbce23632f9feb90
+
+file_id: foo.java-20140518225441-ke1u0i1mbodalr7n-3
+hash: f869f32d3e40aa41dc061f618fce5b03259e1ca6
+
+file_id: cogresrecode.el-20100824174052-438azmcl2y47lvam-956
+hash: f70f318c771460b189dc0543e866db8170702c1d
+
+file_id: edeemacs.el-20100824174052-438azmcl2y47lvam-838
+hash: edec188f58b00a1ad016e14d8a08d1b8aface18a
+
+file_id: detect.el-20140423022847-ls8fa485jxs4qgtz-1
+hash: b2755bf62705a6df849b298504bf351b18c38116
+
+file_id: makefile-20100824174052-438azmcl2y47lvam-335
+hash: 2b6f6b14b4239c50b43b5786ffc073b31ecfd84a
+
+file_id: lisp.h-20140420180544-jar1luj10z2doo42-1
+hash: 4e497014cabf776ae2a97f45feff7c3407c5ba7e
+
+file_id: test.cpp-20140530231830-ii3r1jg0wkf7gh8c-4
+hash: b4857e740ca29b153030d8269b0e3beb007c4934
+
+file_id: ub.c-20140622003253-40np72euql3ni2ji-3
+hash: 8dd807978f696e0f8c4aa763891a00b89a404ac8
+
+file_id: test.cpp-20140601020128-z4suopcchbynjn65-3
+hash: 83b673042f92f3cd8d44b1f5ae4d58e75b68b752
+
+file_id: dominate.el-20140531211142-1ajxifaucgkyvwwf-1
+hash: dc4971115a2779b5a0934e87ccd993ace30d4796
+
+file_id: blink.ino-20140524005753-fsi1fxzmnu7d2ivb-1
+hash: 662be05fecea37252d087dc42f5cdb35f7765e27
+
+file_id: semanticanalyze.el-20100824174052-438azmcl2y47lvam-159
+hash: 160456afcad6d2d31224fbdedd69c8f2d85e02af
+
+file_id: makefile-20140420180505-jv65n6p4bymhv627-1
+hash: 6d1c0299b2c090af6c7c47b953c6607a66cbb5d5
+
+file_id: makefile-20140530231908-8cs6qqpi7nw0wzk5-1
+hash: 578632d6a02eb6048441cc510bd581959a3255b2
+
+file_id: edecpproot.el-20100824174052-438azmcl2y47lvam-779
+hash: 354811d68dbbb4a4b8492a8dc22c9a35cdd91336
+
+file_id: project.ede-20100824174052-438azmcl2y47lvam-142
+hash: ab818cfcfe41d5dc9332e2714b552eefe1ffe67a
+
+file_id: edeandroid.el-20110228030959-g70hrza1h0lop1t4-1
+hash: faa2638745243198362d591eee537a9146b7d219
+
+file_id: edeconfig.el-20140530231849-o3u03r3ncdo0vfea-1
+hash: b80e7fe819e8721e9aa58db844f1b620cfff471f
+
+file_id: makefile-20111115191636-ae3tfko9800bhiit-1
+hash: 34f1c00b54ab81be5c25b96a248865976eb721b2
+
+file_id: makefile.am-20140518225457-30ji53xqpy285uc0-2
+hash: 1396f7a0e13a006fc28bba036358f76c51cbbf9c
+
+file_id: semanticel.el-20100824174052-438azmcl2y47lvam-220
+hash: 24c5a0c6037ccfb560fa54928cfa8887a1016d93
+
+file_id: vc-20140601020157-xxaiohppe1hs6tq6-1
+hash: 49d7e622f6d1e9d5bb5ea1b33044d0c00abd0908
