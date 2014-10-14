@@ -167,8 +167,8 @@ If ARG is nil, then toggle.
 ;;;***
 
 ;;;### (autoloads (cogre cogre-arrow cogre-link cogre-node cogre-base-graph
-;;;;;;  cogre-graph-element) "cogre" "cogre.el" (21437 53512 663727
-;;;;;;  147000))
+;;;;;;  cogre-graph-element) "cogre" "cogre.el" (21560 19393 843458
+;;;;;;  0))
 ;;; Generated autoloads from cogre.el
 
 (eieio-defclass-autoload 'cogre-graph-element '(eieio-named) "cogre" "A Graph Element.\nGraph elements are anything that is drawn into a `cogre-base-graph'.\nGraph elements have a method for marking themselves dirty.")
@@ -300,7 +300,7 @@ See a pretty-printed representation of FUNCTION-NAME.
 ;;;***
 
 ;;;### (autoloads (semantic-mode semantic-default-submodes) "semantic"
-;;;;;;  "semantic.el" (21503 24125 838145 0))
+;;;;;;  "semantic.el" (21560 19393 843458 0))
 ;;; Generated autoloads from semantic.el
 
 (defvar semantic-default-submodes '(global-semantic-idle-scheduler-mode global-semanticdb-minor-mode) "\
@@ -358,7 +358,7 @@ Semantic mode.
 
 ;;;### (autoloads nil nil ("cedet-compat.el" "cedet-cscope.el" "cedet-files.el"
 ;;;;;;  "cedet-idutils.el" "cedet.el" "pulse.el" "srecode.el" "working.el")
-;;;;;;  (21503 25258 293993 848000))
+;;;;;;  (21560 19416 508359 631000))
 
 ;;;***
 

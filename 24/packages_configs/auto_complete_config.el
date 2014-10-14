@@ -7,9 +7,9 @@
 ;; Created: So Okt 13 19:43:26 2013 (+0200)
 ;; Version:
 ;; Package-Requires: ()
-;; Last-Updated: Fri Aug 29 16:42:24 2014 (+0200)
+;; Last-Updated: Sat Oct  4 22:43:40 2014 (+0200)
 ;;           By: Manuel Schneckenreither
-;;     Update #: 271
+;;     Update #: 272
 ;; URL:
 ;; Doc URL:
 ;; Keywords:
@@ -118,7 +118,7 @@
                 ;; ac-source-files-in-current-dir ;; A source for completing files in a current directory. It may be useful with eshell.
                 ;; ac-source-functions ;; A source for completing Emacs Lisp functions. It is available only after (.
                 ;; ac-source-gtags ;; A source for completing tags of Global.
-                ac-source-etags ;; locally defined tags completion source
+                ;; ac-source-etags ;; locally defined tags completion source
                 ac-source-imenu ;; A source for completing imenu nodes. See info emacs imenu for details.
                 ;; ac-source-semantic ;; A source for Semantic. It can be used for completing member name for C/C++.
                 ;; ac-source-semantic-raw ;; Unlike ac-source-semantic, this source is for completing symbols in a raw namespace.

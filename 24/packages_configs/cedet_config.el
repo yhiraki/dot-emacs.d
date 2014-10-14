@@ -7,9 +7,9 @@
 ;; Created: So Okt 13 11:05:43 2013 (+0200)
 ;; Version:
 ;; Package-Requires: ()
-;; Last-Updated: Fri Aug 29 16:53:50 2014 (+0200)
+;; Last-Updated: Fri Oct 10 23:19:54 2014 (+0200)
 ;;           By: Manuel Schneckenreither
-;;     Update #: 235
+;;     Update #: 238
 ;; URL:
 ;; Doc URL:
 ;; Keywords:
@@ -71,8 +71,6 @@
 ;;                        :classpath nil
 ;;                        )
 
-;; Enable EDE (Project Management) features
-(global-ede-mode 1)
 
 ;; CEDET Context Menu
 ;; (global-cedet-m3-minor-mode 1)
@@ -249,9 +247,6 @@
 ;; ;; SRecode
 ;; (global-srecode-minor-mode 1)
 
-;; ;; EDE
-;; (global-ede-mode 1)
-;; (ede-enable-generic-projects)
 
 ;; ;; Setup JAVA....
 ;; (require 'cedet-java)
@@ -307,6 +302,7 @@
 ;;         (candidates . (lambda ()
 ;;                         (if ac-source-semantic-analysis
 ;;                             (all-completions ac-target (mapcar 'car ac-source-semantic-analysis)))))))
+
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; cedet_config.el ends here

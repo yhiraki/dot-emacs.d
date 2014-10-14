@@ -174,20 +174,21 @@ For some distribution the commands are listed below this section.
     C-x C-c         # to close emacs when an error occured
 
 
-Fedora Command:
+Pacman Command:
 ---------------
 
 You need to have *RPM-Fusion enabled* (see: http://rpmfusion.org).
 Steps 1 + 2 + 3 + 5 + 7 (4 not included!):
 
     mv ~/.emacs.d ~/.emacs.d.bak; true &&                                      # backup \
-    git clone https://github.com/schnecki/dot-emacs-4-everyone.git .emacs.d && # download \
+    git clone https://github.com/schnecki/dot-emacs.d ~/.emacs.d &&            # download \
     mv ~/.emacs.d/settings.el.example ~/.emacs.d/settings.el &&                # copy settings.el \
-    su -c "yum install emacs ctags-etags gnuplot emacs graphviz wget           # main tools \
+    su -c "pacman -S emacs ctags-etags gnuplot emacs graphviz wget             # main tools \
     w3m curl                                                                   # browser for links \
     mpd                                                                        # install mpd music server \
+    python-jedi python-virtualenv                                              # Python completion \
     texlive evince &&                                                          # LaTeX \
-    cabal install hasktags &&                                                  # Haskell \
+    cabal install hasktags structured-haskell-mode &&                          # Haskell \
     perl-CPAN mariadb-devel && cpan -fi Module::Build::Compat &&               # database tools \
     cpan -fi RPC::EPC::Service DBI DBD::SQLite DBD::Pg DBD::mysql" &&          # database tools \
     echo "(load-file \"~/.emacs.d/gnus.el\")" > ~/.gnus.el &&                  # create gnus file \
@@ -245,6 +246,18 @@ Dependencies:
   - wget
   - ctags-etags
 
++ C/C++
+  - cppcheck (for flycheck support)
+
++ Python
+  - python-pip (for pylint)
+  - pylint (for flycheck support)
+  - python-jedi (for auto completion support)
+  - python-virtualenv (for auto completion support)
+
++ Flycheck support for other languages
+  - see http://flycheck.readthedocs.org/en/latest/guide/languages.html
+
 + Java
   - w3m (Javadoc Lookup inside of Emacs)
 
@@ -263,6 +276,7 @@ Dependencies:
 + Haskell
   - cabal (of course)
   - hasktags ($ cabal install hasktags)
+  - structured-haskell-mode ($ cabal install structured-haskell-mode)
 
 + Database Viewer: edbi
   - perl-CPAN

@@ -7,9 +7,9 @@
 ;; Created: Mi Mai 28 10:11:54 2014 (+0200)
 ;; Version:
 ;; Package-Requires: ()
-;; Last-Updated: Mi Mai 28 18:14:14 2014 (+0200)
+;; Last-Updated: Tue Sep 16 09:48:44 2014 (+0200)
 ;;           By: Manuel Schneckenreither
-;;     Update #: 26
+;;     Update #: 28
 ;; URL:
 ;; Doc URL:
 ;; Keywords:
@@ -68,7 +68,7 @@
   )
 
 ;; needed for octave mode hook
-(require 'ac-octave)
+;; (require 'ac-octave)
 
 ;; MINOR MODE HOOK
 (defun my/octave-minor-mode ()
@@ -86,7 +86,7 @@
   ;; (add-to-list 'ac-sources 'ac-source-files-in-current-dir)
   ;; (add-to-list 'ac-sources 'ac-source-gtags)
   (add-to-list 'ac-sources 'ac-source-etags)
-  (add-to-list 'ac-sources 'ac-source-octave)
+  ;; (add-to-list 'ac-sources 'ac-source-octave)
   ;; (add-to-list 'ac-sources 'ac-source-imenu)
   ;; (add-to-list 'ac-sources 'ac-source-semantic ;; slows down auto complete)
   ;; (add-to-list 'ac-sources 'ac-source-semantic-raw ;; slows down auto complete)
@@ -97,7 +97,7 @@
   ;; auto complete (if it doesn't work try to disable flyspell mode!)
   (auto-complete-mode)
   (setq ac-delay 0.4)
-  
+
   ;; use programming flyspell mode
   (flyspell-prog-mode)
 

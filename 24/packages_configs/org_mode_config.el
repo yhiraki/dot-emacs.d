@@ -1,14 +1,17 @@
 
 
-;; (load-file "org_gnome_calendar.el")			
+;; (load-file "org_gnome_calendar.el")
 
 ;; ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 ;; ++++++++++++++++++++++++++++ ORG CONFIG ++++++++++++++++++++++++++++++
 ;; ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
+;; active Babel languages
 (org-babel-do-load-languages
  'org-babel-load-languages
  '((gnuplot . t)))
+;; add additional languages with '((language . t)))
+
 
 ;; persistent clocking
 (setq org-clock-persisnt 'history)
@@ -18,21 +21,6 @@
 (global-set-key (kbd "C-c C-x C-j") 'org-clock-goto)
 (global-set-key (kbd "C-c C-x C-o") 'org-clock-out)
 
-
-;; personal agendas
-(setq org-agenda-custom-commands
-      '(
-        ("y" agenda*)
-        ("w" todo "WAITING")
-        ("W" todo-tree "WAITING")
-        ("d" "Daily Action List"
-         ((agenda "")
-          (org-agenda-ndays 1)
-          (org-agenda-sorting-strategy
-           (quote ((agenda time-up priority-down tag-up) )))
-          (org-deadline-warning-days 0)))
-        ("v" tags-todo "+BAC")
-        ))
 
 ;; do not show prewarnings when also scheduled, but x days before the deadline
 (setq org-agenda-skip-deadline-prewarning-if-scheduled 3)
@@ -163,6 +151,14 @@
                                         ; Use fundamental mode when editing plantuml blocks with C-c '
 (add-to-list 'org-src-lang-modes (quote ("plantuml" . fundamental)))
 
+;; ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+;; +++++++++++++++++++++++++++ Autocompletion +++++++++++++++++++++++++++
+;; ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+(require 'org-ac)
+(setq org-ac/ac-trigger-command-keys '("\\" "SPC" ":" "[" "+"))
+(org-ac/config-default)
+
 
 ;; ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 ;; +++++++++++++++++++++++++++++ MINOR MODE +++++++++++++++++++++++++++++
@@ -175,10 +171,32 @@
 
   (local-set-key (kbd "C-c C-x s") 'org-insert-src-block)
 
+  (local-set-key (kbd "C-x SPC") 'org-latex-export-to-pdf)
+
+
+  ;; add auto-complete mode
+  ;; (add-to-list 'ac-sources 'ac-source-abbrev)          ;; edited
+  ;; ;; (add-to-list 'ac-sources 'ac-source-css-property)
+  ;; (add-to-list 'ac-sources 'ac-source-dictionary)
+  ;; ;; (add-to-list 'ac-sources 'ac-source-eclim)
+  ;; (add-to-list 'ac-sources 'ac-source-yasnippet)
+  ;; ;; (add-to-list 'ac-sources 'ac-source-symbols)
+  ;; ;; (add-to-list 'ac-sources 'ac-source-filename)
+  ;; ;; (add-to-list 'ac-sources 'ac-source-files-in-current-dir)
+  ;; ;; (add-to-list 'ac-sources 'ac-source-gtags)
+  ;; ;; (add-to-list 'ac-sources 'ac-source-etags)
+  ;; ;; (add-to-list 'ac-sources 'ac-source-imenu) ;; broken !!!
+  ;; ;; (add-to-list 'ac-sources 'ac-source-semantic) ;; slows down auto complete)
+  ;; ;; (add-to-list 'ac-sources 'ac-source-semantic-raw ;; slows down auto complete)
+  ;; ;; (add-to-list 'ac-sources 'ac-source-words-in-all-buffer)
+  ;; (add-to-list 'ac-sources 'ac-source-words-in-buffer)
+  ;; ;; (add-to-list 'ac-sources 'ac-source-words-in-same-mode-buffers)
+
+  ;; (auto-complete-mode)
+
   )
 
 (add-hook 'org-mode-hook 'my/org-minor-mode)
-
 
 (setq org-startup-indented t)
 
@@ -212,3 +230,56 @@
 
 (global-set-key "\C-ca" 'org-agenda)
 ;; (global-set-key "\C-cb" 'org-iswitchb)
+
+
+;; ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+;; +++++++++++++++++++++++++ Open files in ... ++++++++++++++++++++++++++
+;; ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+
+(eval-after-load "org"
+  '(progn
+     ;; .txt files aren't in the list initially, but in case that changes
+     ;; in a future version of org, use if to avoid errors
+     (if (assoc "\\.txt\\'" org-file-apps)
+         (setcdr (assoc "\\.txt\\'" org-file-apps) "notepad.exe %s")
+       (add-to-list 'org-file-apps '("\\.txt\\'" . "notepad.exe %s") t))
+     ;; Change .pdf association directly within the alist
+     (setcdr (assoc "\\.pdf\\'" org-file-apps) "evince %s")))
+
+;; ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+;; ++++++++++++++++++++++++++ Org Mobile Setup ++++++++++++++++++++++++++
+;; ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+
+(setq org-mobile-directory "~/.grive/Planning")
+(setq org-mobile-inbox-for-pull "~/.grive/index.org")
+
+
+;; ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+;; ++++++++++++++++++++++++++++ LATEX EXPORT ++++++++++++++++++++++++++++
+;; ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+
+(setq org-latex-pdf-process
+      '("pdflatex -interaction nonstopmode -output-directory %o %f"
+        "bibtex %b"
+        "pdflatex -interaction nonstopmode -output-directory %o %f"
+        "pdflatex -interaction nonstopmode -output-directory %o %f"))
+
+;; ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+;; +++++++++++++++++++++++++++++++ eldoc ++++++++++++++++++++++++++++++++
+;; ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+
+(org-eldoc-hook-setup) ;; have org-eldoc add itself to `org-mode-hook'
+
+
+;; ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+;; +++++++++++++++++++++++ org mode and cua mode ++++++++++++++++++++++++
+;; ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+
+(require 'org-cua-dwim)
+(org-cua-dwim-activate)
+

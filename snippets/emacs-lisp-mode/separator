@@ -1,0 +1,13 @@
+# contributor: https://github.com/polypus74
+# key: sep
+# --
+;; ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+;; ${1:$(let* ((text-len (length yas/text))
+	    (cmnt-len (- 34 (/ (+ text-len (if (oddp text-len) 1 0)) 2))))
+       (make-string cmnt-len 43))} $1 ${1:$(let* ((text-len (length yas/text))
+						  (cmnt-len (- 34 (/
+						    (+ text-len (if (oddp text-len) 0 1)) 2))))
+					     (make-string cmnt-len 43))}
+;; ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+

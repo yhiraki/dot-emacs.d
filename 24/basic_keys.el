@@ -7,7 +7,7 @@
 ;; Version:
 ;; Last-Updated:
 ;;           By:
-;;     Update #: 121
+;;     Update #: 127
 ;; URL:
 ;; Description:
 ;;
@@ -42,6 +42,7 @@
 (global-set-key (kbd "S-C-<down>") 'shrink-window)
 (global-set-key (kbd "S-C-<up>") 'enlarge-window)
 
+
 ;; M-x withouth using the ALT key
 (global-set-key "\C-x\C-m" 'execute-extended-command)
 ;; (global-set-key "\C-c\C-m" 'execute-extended-command)
@@ -49,7 +50,6 @@
 ;; Kill words with C-w: the standard unix way
 (global-set-key "\C-w" 'backward-kill-word)
 (global-set-key "\C-x\C-k" 'kill-region)
-;; (global-set-key "\C-c\C-k" 'kill-region)
 
 
 ;; ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -100,6 +100,17 @@
 (global-set-key (kbd (concat prefix-command-key " c")) 'shell) ;;  start shell
 (global-set-key (kbd (concat prefix-command-key " r")) 'replace-regexp) ;; regex replace
 (global-set-key (kbd (concat prefix-command-key " s l")) 'list-matching-lines) ;; Regex search and show in other buffer
+
+;;; easily insert the current date
+(global-set-key (kbd "C-c d") 'insert-date)
+
+;; Change delete backward char to bash default
+(global-set-key (kbd (concat prefix-command-key " h")) 'help) ;;  start shell
+(global-set-key (kbd "C-h") 'delete-backward-char)
+
+;; buffer/frame switching
+(global-set-key (kbd (concat prefix-command-key " b t")) 'transpose-buffers)
+(global-set-key (kbd (concat prefix-command-key " b s")) 'switch-buffers-between-frames)
 
 ;; TAGS
 (global-set-key (kbd (concat prefix-command-key " t r")) 'tags-reset-tags-tables);; Reset tags table

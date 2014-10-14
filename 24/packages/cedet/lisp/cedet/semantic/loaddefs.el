@@ -96,8 +96,8 @@ if a cached copy of the return object is found.
 ;;;***
 
 ;;;### (autoloads (semantic-analyze-possible-completions semantic-analyze-type-constants)
-;;;;;;  "semantic/analyze/complete" "analyze/complete.el" (21437
-;;;;;;  53514 383727 181000))
+;;;;;;  "semantic/analyze/complete" "analyze/complete.el" (21560
+;;;;;;  19393 843458 0))
 ;;; Generated autoloads from analyze/complete.el
 
 (autoload 'semantic-analyze-type-constants "semantic/analyze/complete" "\
@@ -935,7 +935,7 @@ macro `defcustom-mode-local-semantic-dependency-system-include-path'.
 ;;;***
 
 ;;;### (autoloads (semantic-documentation-for-tag) "semantic/doc"
-;;;;;;  "doc.el" (21437 53513 20393 821000))
+;;;;;;  "doc.el" (21560 19393 843458 0))
 ;;; Generated autoloads from doc.el
 
 (autoload 'semantic-documentation-for-tag "semantic/doc" "\
@@ -1379,8 +1379,8 @@ The VALUE is a spp lexical table.
 ;;;***
 
 ;;;### (autoloads (semantic-m3-ref-items semantic-m3-context-items
-;;;;;;  semantic-m3-add-whatisit semantic-m3-install) "semantic/m3"
-;;;;;;  "m3.el" (21437 53512 807060 483000))
+;;;;;;  semantic-m3-add-doc semantic-m3-add-whatisit semantic-m3-install)
+;;;;;;  "semantic/m3" "m3.el" (21560 19393 843458 0))
 ;;; Generated autoloads from m3.el
 
 (autoload 'semantic-m3-install "semantic/m3" "\
@@ -1390,6 +1390,12 @@ Install ourselves into the `cedet-m3' system.
 
 (autoload 'semantic-m3-add-whatisit "semantic/m3" "\
 Return a menu item for the 'whatisit' function.
+
+\(fn)" nil nil)
+
+(autoload 'semantic-m3-add-doc "semantic/m3" "\
+Return a menu item to query the doc for the symbol under point.
+Only return that menu item if there is some doc to display.
 
 \(fn)" nil nil)
 
@@ -2114,7 +2120,7 @@ Setup buffer for parse.
 ;;;;;;  "wisent/comp.el" "wisent/expr.el" "wisent/grammar-macros.el"
 ;;;;;;  "wisent/java-tags-wy.el" "wisent/java-wy.el" "wisent/java.el"
 ;;;;;;  "wisent/javascript-wy.el" "wisent/python-wy.el" "wisent/wisent.el")
-;;;;;;  (21503 25259 457044 880000))
+;;;;;;  (21560 19417 624962 954000))
 
 ;;;***
 

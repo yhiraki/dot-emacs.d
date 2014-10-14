@@ -5,9 +5,9 @@
 ;; Author: Manuel Schneckenreither
 ;; Created: Tue Dec 11 00:43:14 2012 (+0100)
 ;; Version:
-;; Last-Updated: Mon Sep  1 09:26:23 2014 (+0200)
+;; Last-Updated: Mon Oct 13 14:40:56 2014 (+0200)
 ;;           By: Manuel Schneckenreither
-;;     Update #: 408
+;;     Update #: 420
 ;; URL:
 ;; Description:
 ;;
@@ -16,7 +16,6 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;
 ;;; Code:
-
 
 ;; ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 ;; ++++++++++++++++++++++++++++++ BASICS ++++++++++++++++++++++++++++++++
@@ -28,7 +27,7 @@
 (load (concat load-folder "custom_themes.el"))
 
 ;; ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-;; +++++++++++++++++++++++++ SPECIAL PACKAGES ++++++++++++++++++++++++++
+;; ++++++++++++++++++++++++++ Special Packages ++++++++++++++++++++++++++
 ;; ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 ;; WINNER MODE - undo window configurations (needs to be done before ECB)
@@ -46,7 +45,7 @@
 ;; HEADER 2 - Enter a header in the files
 (load (concat package-conf-folder "header2_config.el"))
 ;; IDO - minibuffer helper
-(load (concat package-conf-folder "ido_config.el"))
+;; (load (concat package-conf-folder "ido_config.el"))
 ;; MULTIPLE CURSORS - use multiple cursors to edit the buffers
 (load (concat package-conf-folder "multiple_cursors_config.el"))
 ;; THESAURUS - choose synonym and replace
@@ -85,7 +84,7 @@
 ;; BBDB - Address-Book Management (load before GNUS)
 (load (concat package-conf-folder "bbdb_config.el"))
 ;; GNUS - Newsreader and Email Client
-(load (concat package-conf-folder "gnus_config.el"))
+;; (load (concat package-conf-folder "gnus_config.el"))
 ;; CUA - use rectangle selections
 (load (concat package-conf-folder "cua_config.el"))
 ;; BOOKMARKS+ - bookmark extendsion, multiple desktops
@@ -100,11 +99,22 @@
 (load (concat package-conf-folder "expand_region_config.el"))
 ;; CHANGE INNER - kill inside/outside of given element
 (load (concat package-conf-folder "change_inner_config.el"))
+;; SHM - structured haskell code editing
+(load (concat package-conf-folder "shm_config.el"))
+;; Paredit - emacs lisp structured code editing
+(load (concat package-conf-folder "paredit_config.el"))
+;; Paredit - emacs lisp structured code editing
+(load (concat package-conf-folder "ede_config.el"))
+;; Function args - show function arguments for C/C++ code
+(load (concat package-conf-folder "function_args_config.el"))
+;; Helm - narrowing framework
+(load (concat package-conf-folder "helm_config.el"))
 
 
 ;; ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-;; +++++++++++++++++ LOAD LANGUAGE SPECIFIC SETTINGS ++++++++++++++++++++
+;; ++++++++++++++++++ Load Language Specific Settings +++++++++++++++++++
 ;; ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
 
 (load-file (concat language-conf-folder "c_config.el"))
 (load-file (concat language-conf-folder "haskell_config.el"))
@@ -115,6 +125,7 @@
 (load-file (concat language-conf-folder "latex_config.el"))
 (load-file (concat language-conf-folder "octave_config.el"))
 (load-file (concat language-conf-folder "bash_config.el"))
+(load-file (concat language-conf-folder "python_config.el"))
 
 ;; ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 ;; ++++++++++++++++++++++++++ LOAD KEYBINDINGS ++++++++++++++++++++++++++

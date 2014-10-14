@@ -30,7 +30,7 @@
 ;; set in customize-set-variables in init.el
 
 ;; LEDGER
-(eval-after-load 'flycheck '(require 'flycheck-ledger))
+;; (eval-after-load 'flycheck '(require 'flycheck-ledger))
 
 ;; FLYCHECK MODE LINE COLOR
 (add-hook 'flycheck-mode-hook 'flycheck-color-mode-line-mode)

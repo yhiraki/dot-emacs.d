@@ -7,9 +7,9 @@
 ;; Created: Fr Feb  7 00:07:46 2014 (+0100)
 ;; Version:
 ;; Package-Requires: ()
-;; Last-Updated: Fri Aug 29 16:38:31 2014 (+0200)
+;; Last-Updated: Sat Oct 11 00:20:39 2014 (+0200)
 ;;           By: Manuel Schneckenreither
-;;     Update #: 58
+;;     Update #: 76
 ;; URL:
 ;; Doc URL:
 ;; Keywords:
@@ -80,7 +80,13 @@
      (concat "cd " esdir " && find . -name \"*.c\" -o -name \"*.h\" -o -name \"*.cpp\" -o -name \"*.hpp\" | etags - 1>/dev/null 2>/dev/null") nil)
     (visit-tags-table (concat dir "TAGS"))))
 
+(require 'auto-complete-config)
 (require 'auto-complete-c-headers)
+(require 'auto-complete)
+
+
+;; (setq ac-clang-flags (split-string "-I/usr/include/c++/4.9.1"))
+
 
 ;; C MODE
 (defun my-c-mode-hook ()
@@ -100,6 +106,7 @@
   ;; (add-to-list 'ac-sources 'ac-source-gtags)
   (add-to-list 'ac-sources 'ac-source-etags)
   (add-to-list 'ac-sources 'ac-source-imenu)
+
 
   ;; (add-to-list 'ac-sources 'ac-source-semantic-raw) ;; slows down auto complete)
   ;; (add-to-list 'ac-sources 'ac-source-words-in-all-buffer)
@@ -147,6 +154,18 @@
 ;; add hook
 (add-hook 'c-mode-hook 'my-c-mode-hook)
 (add-hook 'c++-mode-hook 'my-c-mode-hook)
+(define-key c-mode-map (kbd "M-o")  'fa-show)
+(define-key c++-mode-map (kbd "M-o")  'fa-show)
+
+
+;;; cpp flycheck google code guidelines
+(eval-after-load 'flycheck
+  '(progn
+     (require 'flycheck-google-cpplint)
+     ;; Add Google C++ Style checker.
+     ;; In default, syntax checked by Clang and Cppcheck.
+     (flycheck-add-next-checker 'c/c++-clang
+                                'c/c++-googlelint 'append)))
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;

@@ -7,9 +7,9 @@
 ;; Created: Di Feb  4 12:54:58 2014 (+0100)
 ;; Version:
 ;; Package-Requires: ()
-;; Last-Updated: Thu Aug 21 12:08:07 2014 (+0200)
+;; Last-Updated: Mon Oct 13 15:33:57 2014 (+0200)
 ;;           By: Manuel Schneckenreither
-;;     Update #: 227
+;;     Update #: 274
 ;; URL:
 ;; Doc URL:
 ;; Keywords:
@@ -53,11 +53,11 @@
 ;; (setq gnus-home-directory "~/.mail/")
 
 
-(load-file (concat package-folder "gnus/gnus-desktop-notify.el"))
+;; (load-file (concat package-folder "gnus/gnus-desktop-notify.el"))
 
-;; ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-;; ++++++++++++++++++++++++++ QUITING GNUS ++++++++++++++++++++++++++++++
-;; ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+;; ;; ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+;; ;; ++++++++++++++++++++++++++ QUITING GNUS ++++++++++++++++++++++++++++++
+;; ;; ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 ;; disable exiting with q
 (defun local-gnus-group-mode ()
@@ -93,8 +93,8 @@
 ;; show old messages also
 ;; (setq gnus-fetch-old-headers t)
 
-(setq gnus-asynchronous t)
-(setq gnus-use-cache t)
+;; (setq gnus-asynchronous t)
+;; (setq gnus-use-cache t)
 
 ;; show all images, but the ones having "ads" in them.
 ;; (setq gnus-blocked-images "ads")
@@ -104,60 +104,63 @@
 ;; CHANGE GNUS DIRECTORY TO NOT CLUTTER THE HOME DIRECTORY
 
 ;; archive
-(setq gnus-message-archive-method
-      '(nnfolder "archive"
-                 (nnfolder-inhibit-expiry t)
-                 (nnfolder-get-new-mail nil)
-                 (nnfolder-active-file "~/.mail/sent-mail/active")
-                 (nnfolder-directory "~/.mail/sent-mail/")
-                 ))
+;; (setq gnus-message-archive-method
+;;       '(nnfolder "archive"
+;;                  (nnfolder-inhibit-expiry t)
+;;                  (nnfolder-get-new-mail nil)
+;;                  (nnfolder-active-file "~/.mail/sent-mail/active")
+;;                  (nnfolder-directory "~/.mail/sent-mail/")
+;;                  ))
 
 
 (setq gnus-gcc-mark-as-read t)
 
-;; set folder paths
-(setq gnus-article-save-directory "~/.mail/News/")
 
-(setq gnus-home-directory "~/.mail/"
-      message-directory (concat gnus-home-directory "messages/")
-      nnfolder-directory (concat gnus-home-directory "archive/")
-      gnus-directory (concat gnus-home-directory "news/")
-      gnus-kill-files-directory (concat gnus-home-directory "score/")
-      gnus-cache-directory (concat gnus-home-directory ".cache/")
-      gnus-html-cache-directory (concat gnus-home-directory "htmlcache/"))
+;; ;; set folder paths
+;; (setq gnus-article-save-directory "~/.mail/News/")
 
-;; set default values
-(setq gnus-save-newsrc-file nil
-      gnus-read-newsrc-file nil
-      gnus-use-dribble-file nil
-      gnus-interactive-exit nil
-      gnus-save-killed-list nil)
+;; (setq gnus-home-directory "~/.mail/"
+;;       message-directory (concat gnus-home-directory "messages/")
+;;       nnfolder-directory (concat gnus-home-directory "archive/")
+;;       gnus-directory (concat gnus-home-directory "news/")
+;;       gnus-kill-files-directory (concat gnus-home-directory "score/")
+;;       gnus-cache-directory (concat gnus-home-directory ".cache/")
+;;       gnus-html-cache-directory (concat gnus-home-directory "htmlcache/"))
+
+;; ;; set default values
+(setq
+ ;; gnus-save-newsrc-file nil
+ ;; gnus-read-newsrc-file nil
+ ;; gnus-use-dribble-file nil
+ gnus-interactive-exit nil
+ ;; gnus-save-killed-list nil
+ )
 
 
-;; for searching through imap folders (rest of config in .gnus)
-(require 'nnir)
+;; ;; for searching through imap folders (rest of config in .gnus)
+;; (require 'nnir)
 
-;; bbdb
+;; ;; bbdb
 (setq bbdb/news-auto-create-p t)
 
-;; start bbdb and dired
+;; ;; start bbdb and dired
 (add-hook 'gnus-startup-hook 'bbdb-insinuate-gnus)
 (add-hook 'dired-mode-hook 'turn-on-gnus-dired-mode)
 
-;; search imap
-(setq nnir-imap-default-search-key "Imap")
+;; ;; search imap
+;; (setq nnir-imap-default-search-key "Imap")
 
-(setq nnir-method-default-engines '((nnimap . imap)
-                                    (nntp . gmane)
-                                    ))
+;; (setq nnir-method-default-engines '((nnimap . imap)
+;;                                     (nntp . gmane)
+;;                                     ))
 
 
-;; set custom timeout
-(defadvice gnus-demon-scan-news (around gnus-demon-timeout activate)
-  "Timeout for Gnus."
-  (with-timeout
-      (15 (message "Gnus timed out."))
-    ad-do-it))
+;; ;; set custom timeout
+;; (defadvice gnus-demon-scan-news (around gnus-demon-timeout activate)
+;;   "Timeout for Gnus."
+;;   (with-timeout
+;;       (15 (message "Gnus timed out."))
+;;     ad-do-it))
 
 ;; close sent message buffers
 (setq message-kill-buffer-on-exit t)
@@ -242,7 +245,7 @@
 (setq message-cite-reply-position (quote traditional))
 (setq gnus-posting-styles '(
                             (".*"
-                             (signature-file "~/.mail/signature")
+                             (signature-file "~/News/signature")
                              (name "Manuel Schneckenreither"))
                             ))
 
@@ -276,30 +279,30 @@
 
 ;; remove the prefix for storing sent mail (otherwise it won't work to
 ;; save the mail in the same folder)
-(setq gnus-message-archive-method "")
-
-(setq gnus-message-archive-group
-      '((lambda (x)
-          (cond
-           ;; Store personal mail messages in the same group I started
-           ;; out in
-           ((string-match "mail.*" group) group)
-
-           ;; I receive a copy of all messages I send to a list, so
-           ;; there's no need to archive
-           ((string-match "list.*" group) nil)
-
-           ;; If the group information is empty, e.g. when composing a
-           ;; new mail outside of gnus, store it in the folder of the
-           ;; default email address (set in settings.el). This folder
-           ;; is INBOX for me.
-           ("" "INBOX")
-
-           ;; Store everything else in misc until I can sort it out
-           (t "mail.misc")))))
-
-;; edit score for replying
-(add-hook 'message-sent-hook 'gnus-score-followup-thread)
+;; (setq gnus-message-archive-method "")
+;;
+;; (setq gnus-message-archive-group
+;;       '((lambda (x)
+;;           (cond
+;;            ;; Store personal mail messages in the same group I started
+;;            ;; out in
+;;            ((string-match "mail.*" group) group)
+;;
+;;            ;; I receive a copy of all messages I send to a list, so
+;;            ;; there's no need to archive
+;;            ((string-match "list.*" group) nil)
+;;
+;;            ;; If the group information is empty, e.g. when composing a
+;;            ;; new mail outside of gnus, store it in the folder of the
+;;            ;; default email address (set in settings.el). This folder
+;;            ;; is INBOX for me.
+;;            ("" "INBOX")
+;;
+;;            ;; Store everything else in misc until I can sort it out
+;;            (t "mail.misc")))))
+;;
+;; ;; edit score for replying
+;; (add-hook 'message-sent-hook 'gnus-score-followup-thread)
 
 
 ;; ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -312,147 +315,163 @@
 ;; This prevents GNUS from inserting its default attribution header.
 ;; Otherwise, both GNUS and Supercite will insert an attribution
 ;; header:
-(setq news-reply-header-hook nil)
+;; (setq news-reply-header-hook nil)
 
-(setq mail-user-agent 'gnus-user-agent)
+;; ;; ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+;; ;; ++++++++++++++++++++ SET DEFAULT MAIL USER AGENT +++++++++++++++++++++
+;; ;; ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+
+;; (setq mail-user-agent 'gnus-user-agent)
 
 ;; ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 ;; ++++++++++++++++++++++++ SIGNING MESSAGES ++++++++++++++++++++++++++++
 ;; ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
-;; Always sign encrypted messages
-(setq mc-pgp-always-sign t)
-;; How long should mailcrypt remember your passphrase
-(setq mc-passwd-timeout 600)
+;; ;; Always sign encrypted messages
+;; (setq mc-pgp-always-sign t)
+;; ;; How long should mailcrypt remember your passphrase
+;; (setq mc-passwd-timeout 600)
 
-;; Automagically sign all messages
-(add-hook 'message-send-hook 'will-you-sign)
-(defun will-you-sign ()
-  (interactive)
-  (if (y-or-n-p "Do you want to sign this message? ")
-      (mml-secure-sign-pgp)))
+;; ;; Automagically sign all messages
+;; ;; (add-hook 'message-send-hook 'will-you-sign)
+;; (defun will-you-sign ()
+;;   (interactive)
+;;   (if (y-or-n-p "Do you want to sign this message? ")
+;;       (mml-secure-sign-pgp)))
 
 
 ;; ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 ;; +++++++++++++++++++++++++ FORMATING LISTS ++++++++++++++++++++++++++++
 ;; ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
-;; article lists
-(setq gnus-face-0 'gnus-server-offline
-      gnus-face-1 'gnus-server-agent
-      gnus-face-2 'gnus-server-opened
-      gnus-summary-line-format "%U%R%z | %6i | %(%-16,16&user-date;  %-20,20f  %2uj  %*%B%s%)\n"
-      gnus-user-date-format-alist '(((gnus-seconds-today) . "Today      %2H:%2M")
-                                    ((+ 86400 (gnus-seconds-today)) . "Yesterday  %H:%M")
-                                    ;; (604800 . "%A %2H:%2M") ;; that's one week
-                                    (t . "%d.%m.%Y %2H:%2M"))
-      gnus-summary-thread-gathering-function 'gnus-gather-threads-by-references
-      gnus-thread-sort-functions '(gnus-thread-sort-by-date)
-      gnus-sum-thread-tree-false-root ""
-      gnus-sum-thread-tree-indent " "
-      gnus-sum-thread-tree-leaf-with-other "├► "
-      gnus-sum-thread-tree-root ""
-      gnus-sum-thread-tree-single-leaf "╰► "
-      gnus-sum-thread-tree-vertical "│")
+;; ;; article lists
+;; (setq gnus-face-0 'gnus-server-offline
+;;       gnus-face-1 'gnus-server-agent
+;;       gnus-face-2 'gnus-server-opened
+;;       gnus-summary-line-format "%U%R%z | %6i | %(%-16,16&user-date;  %-20,20f  %2uj  %*%B%s%)\n"
+;;       gnus-user-date-format-alist '(((gnus-seconds-today) . "Today      %2H:%2M")
+;;                                     ((+ 86400 (gnus-seconds-today)) . "Yesterday  %H:%M")
+;;                                     ;; (604800 . "%A %2H:%2M") ;; that's one week
+;;                                     (t . "%d.%m.%Y %2H:%2M"))
+;;       gnus-summary-thread-gathering-function 'gnus-gather-threads-by-references
+;;       gnus-thread-sort-functions '(gnus-thread-sort-by-date)
+;;       gnus-sum-thread-tree-false-root ""
+;;       gnus-sum-thread-tree-indent " "
+;;       gnus-sum-thread-tree-leaf-with-other "├► "
+;;       gnus-sum-thread-tree-root ""
+;;       gnus-sum-thread-tree-single-leaf "╰► "
+;;       gnus-sum-thread-tree-vertical "│")
+;;
+;;
+;; ;; show “»” if i’m the only recipient of the message, or a “~” if i’m
+;; ;; in the To:, Cc: or BCc: headers among others:
+;; (defun gnus-user-format-function-j (headers)
+;;   (let ((to (gnus-extra-header 'To headers)))
+;;     (if (string-match your-mail-addresses to)
+;;         (if (string-match "[\"\' \<.[:alnum:]]*@[\>.[:alnum:]]*[:space]*,[\"\' \<\>.[:alnum:]]*@" to) "~" "»")
+;;       (if (or (string-match your-mail-addresses
+;;                             (gnus-extra-header 'Cc headers))
+;;               (string-match your-mail-addresses
+;;                             (gnus-extra-header 'BCc headers)))
+;;           "~"
+;;         (if (string-match your-mail-addresses (mail-header-from headers))
+;;             "m"
+;;           " ")
+;;         ))))
+;;
+;; ;; Coloring empty topics differently from non-empty topics is a nice idea.
+;; (setq gnus-topic-line-format "%i[ %u&topic-line; ] %v\n")
+;;
+;; ;; this corresponds to a topic line format of "%n %A"
+;; (defun gnus-user-format-function-topic-line (dummy)
+;;   (let ((topic-face (if (zerop total-number-of-articles)
+;;                         'my-gnus-topic-empty-face
+;;                       'my-gnus-topic-face)))
+;;     (propertize
+;;      (format "%s %d" name total-number-of-articles)
+;;      'face topic-face)))
+;;
+;;
+;; ;;; turn on debug info
+;; (setq smtpmail-debug-info t)
+;;
+;;; add cc and bcc when composing emails
+(setq message-default-mail-headers "Cc: \nBcc: manuel.schnecki@gmail.com\n")
+;;
+;; ;;; If nil, attach files as normal parts in Fcc copies; if it is non-nil, attach
+;; ;;; local files as external parts.
+;; (setq message-interactive t)
+;;
+;;
+;; ;; ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+;; ;; ++++++++++++++++++++++++ FINALLY OPEN GNUS +++++++++++++++++++++++++++
+;; ;; ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+;;
+;; ;; do not download everyting when gnus starts
+;; (setq gnus-read-active-file 'some)
+;;
+;;
+;; ;; set timeout so we don't get stuck
+;; ;; (setq nntp-connection-timeout 3
+;; ;;       nntp-command-timeout 8)
+;;
+;;
+;; ;; open gnus
+;; ;; (gnus) ;; is done in init.el if gnus is loaded and user does not decline
+;;
+;; ;; gnus function for system wide mail editor
+;; (defun mailto-compose-mail (mailto-url)
+;;   "Parse MAILTO-URL and start composing mail."
+;;   (if (and (stringp mailto-url)
+;;            (string-match "\\`mailto:" mailto-url))
+;;       (progn
+;;         (require 'rfc2368)
+;;         (require 'rfc2047)
+;;         (require 'mailheader)
+;;
+;;         (let ((hdr-alist (rfc2368-parse-mailto-url mailto-url))
+;;               (body "")
+;;               to subject
+;;               ;; In addition to To, Subject and Body these headers are
+;;               ;; allowed:
+;;               (allowed-xtra-hdrs '(cc bcc in-reply-to)))
+;;
+;;           (with-temp-buffer
+;;             ;; Extract body if it's defined
+;;             (when (assoc "Body" hdr-alist)
+;;               (dolist (hdr hdr-alist)
+;;                 (when (equal "Body" (car hdr))
+;;                   (insert (format "%s\n" (cdr hdr)))))
+;;               (rfc2047-decode-region (point-min) (point-max))
+;;               (setq body (buffer-substring-no-properties
+;;                           (point-min) (point-max)))
+;;               (erase-buffer))
+;;
+;;             ;; Extract headers
+;;             (dolist (hdr hdr-alist)
+;;               (unless (equal "Body" (car hdr))
+;;                 (insert (format "%s: %s\n" (car hdr) (cdr hdr)))))
+;;             (rfc2047-decode-region (point-min) (point-max))
+;;             (goto-char (point-min))
+;;             (setq hdr-alist (mail-header-extract-no-properties)))
+;;
+;;           (setq to (or (cdr (assq 'to hdr-alist)) "")
+;;                 subject (or (cdr (assq 'subject hdr-alist)) "")
+;;                 hdr-alist
+;;                 (remove nil (mapcar
+;;                              #'(lambda (item)
+;;                                  (when (memq (car item) allowed-xtra-hdrs)
+;;                                    (cons (capitalize (symbol-name (car item)))
+;;                                          (cdr item))))
+;;                              hdr-alist)))
+;;
+;;           (compose-mail to subject hdr-alist nil nil
+;;                         (list (lambda (string)
+;;                                 (insert string))
+;;                               body))))
+;;     (compose-mail)))
 
 
-;; show “»” if i’m the only recipient of the message, or a “~” if i’m
-;; in the To:, Cc: or BCc: headers among others:
-(defun gnus-user-format-function-j (headers)
-  (let ((to (gnus-extra-header 'To headers)))
-    (if (string-match your-mail-addresses to)
-        (if (string-match "[\"\' \<.[:alnum:]]*@[\>.[:alnum:]]*[:space]*,[\"\' \<\>.[:alnum:]]*@" to) "~" "»")
-      (if (or (string-match your-mail-addresses
-                            (gnus-extra-header 'Cc headers))
-              (string-match your-mail-addresses
-                            (gnus-extra-header 'BCc headers)))
-          "~"
-        (if (string-match your-mail-addresses (mail-header-from headers))
-            "m"
-          " ")
-        ))))
-
-;; Coloring empty topics differently from non-empty topics is a nice idea.
-(setq gnus-topic-line-format "%i[ %u&topic-line; ] %v\n")
-
-;; this corresponds to a topic line format of "%n %A"
-(defun gnus-user-format-function-topic-line (dummy)
-  (let ((topic-face (if (zerop total-number-of-articles)
-                        'my-gnus-topic-empty-face
-                      'my-gnus-topic-face)))
-    (propertize
-     (format "%s %d" name total-number-of-articles)
-     'face topic-face)))
-
-
-;; ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-;; ++++++++++++++++++++++++ FINALLY OPEN GNUS +++++++++++++++++++++++++++
-;; ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-
-;; do not download everyting when gnus starts
-(setq gnus-read-active-file 'some)
-
-
-;; set timeout so we don't get stuck
-(setq nntp-connection-timeout 3
-      nntp-command-timeout 8)
-
-
-;; open gnus
-;; (gnus) ;; is done in init.el if gnus is loaded and user does not decline
-
-;; gnus function for system wide mail editor
-(defun mailto-compose-mail (mailto-url)
-  "Parse MAILTO-URL and start composing mail."
-  (if (and (stringp mailto-url)
-           (string-match "\\`mailto:" mailto-url))
-      (progn
-        (require 'rfc2368)
-        (require 'rfc2047)
-        (require 'mailheader)
-
-        (let ((hdr-alist (rfc2368-parse-mailto-url mailto-url))
-              (body "")
-              to subject
-              ;; In addition to To, Subject and Body these headers are
-              ;; allowed:
-              (allowed-xtra-hdrs '(cc bcc in-reply-to)))
-
-          (with-temp-buffer
-            ;; Extract body if it's defined
-            (when (assoc "Body" hdr-alist)
-              (dolist (hdr hdr-alist)
-                (when (equal "Body" (car hdr))
-                  (insert (format "%s\n" (cdr hdr)))))
-              (rfc2047-decode-region (point-min) (point-max))
-              (setq body (buffer-substring-no-properties
-                          (point-min) (point-max)))
-              (erase-buffer))
-
-            ;; Extract headers
-            (dolist (hdr hdr-alist)
-              (unless (equal "Body" (car hdr))
-                (insert (format "%s: %s\n" (car hdr) (cdr hdr)))))
-            (rfc2047-decode-region (point-min) (point-max))
-            (goto-char (point-min))
-            (setq hdr-alist (mail-header-extract-no-properties)))
-
-          (setq to (or (cdr (assq 'to hdr-alist)) "")
-                subject (or (cdr (assq 'subject hdr-alist)) "")
-                hdr-alist
-                (remove nil (mapcar
-                             #'(lambda (item)
-                                 (when (memq (car item) allowed-xtra-hdrs)
-                                   (cons (capitalize (symbol-name (car item)))
-                                         (cdr item))))
-                             hdr-alist)))
-
-          (compose-mail to subject hdr-alist nil nil
-                        (list (lambda (string)
-                                (insert string))
-                              body))))
-    (compose-mail)))
-
-
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;; gnus_config.el ends here
+;; ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; ;;; gnus_config.el ends here

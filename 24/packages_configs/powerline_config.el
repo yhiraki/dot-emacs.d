@@ -1,1 +1,2 @@
-(powerline-default-theme)
+;; (powerline-default-theme)
+(powerline-center-theme)

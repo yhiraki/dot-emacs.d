@@ -7,9 +7,9 @@
 ;; Created: So Okt 13 13:22:28 2013 (+0200)
 ;; Version:
 ;; Package-Requires: ()
-;; Last-Updated: Fri Aug 29 16:52:26 2014 (+0200)
-;;           By: Manuel Schneckenreither
-;;     Update #: 391
+;; Last-Updated: Sun Oct  5 17:25:18 2014 (+0200)
+;;           By: schnecki
+;;     Update #: 392
 ;; URL:
 ;; Doc URL:
 ;; Keywords:
@@ -107,14 +107,14 @@
 (add-hook 'jde-mode-hook 'jde-my-minor)
 
 
-(require 'jde-help)
-;; w3 fail to load local file, so skip this feature
-(defmethod jde-jdhelper-show-url ((this jde-jdhelper) url)
-  (let ((doc-url (jde-url-name url)))
-    (message "Displaying %s from %s"
-             (oref url :class)
-             (oref (oref url :docset) :description))
-    (jde-jdhelper-show-document this doc-url)))
+;; (require 'jde-help)
+;; ;; w3 fail to load local file, so skip this feature
+;; (defmethod jde-jdhelper-show-url ((this jde-jdhelper) url)
+;;   (let ((doc-url (jde-url-name url)))
+;;     (message "Displaying %s from %s"
+;;              (oref url :class)
+;;              (oref (oref url :docset) :description))
+;;     (jde-jdhelper-show-document this doc-url)))
 
 
 ;; JUNIT

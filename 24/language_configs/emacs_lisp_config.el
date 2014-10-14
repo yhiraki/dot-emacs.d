@@ -7,9 +7,9 @@
 ;; Created: So Okt 13 22:47:58 2013 (+0200)
 ;; Version:
 ;; Package-Requires: ()
-;; Last-Updated: Thu Aug 28 10:00:19 2014 (+0200)
+;; Last-Updated: Sat Oct  4 23:23:44 2014 (+0200)
 ;;           By: Manuel Schneckenreither
-;;     Update #: 147
+;;     Update #: 164
 ;; URL:
 ;; Doc URL:
 ;; Keywords:
@@ -39,17 +39,18 @@
   "This function reloads the tags by using the command 'make tags'."
   (interactive)
 
-  ;; only create tags if we are not in the home folder (otherwise it
-  ;; does a find on all files in the home folder...and this takes
-  ;; forever)
-  (if (= 2 (length (split-string (expand-file-name default-directory)
-                                 (concat load-emacsd))))
-      (let ((dir (nth 0 (split-string default-directory load-emacsversion))))
-        (setq esdir (replace-regexp-in-string " " "\\\\ " dir))
-        (shell-command
-         (concat "cd " esdir
-                 " && find . -name '*.el' | etags - 1>/dev/null 2>/dev/null") nil)
-        (visit-tags-table (concat dir "TAGS")))
+  ;; only create tags when editing a .el file and if we are not in the home
+  ;; folder (otherwise it does a find on all files in the home folder...and this
+  ;; takes forever)
+  (when (and (string-match "\\.el\\'" buffer-file-name)
+             (not (integerp (string-match (concat home-folder "$")
+                                          (expand-file-name default-directory)))))
+    (let ((dir (nth 0 (split-string default-directory load-emacsversion))))
+      (setq esdir (replace-regexp-in-string " " "\\\\ " dir))
+      (shell-command
+       (concat "cd " esdir
+               " && find . -name '*.el' | etags - 1>/dev/null 2>/dev/null") nil)
+      (visit-tags-table (concat dir "TAGS")))
     ))
 
 
@@ -95,15 +96,13 @@
   ;; enable semantic for auto complete mode
   (semantic-mode t)
 
-
   ;; use programming flyspell mode
   (flyspell-prog-mode)
 
   ;; CREATE AND SET TAGS FILE
   (add-hook 'after-save-hook 'make-emacs-lisp-tags)
 
-)
-
+  )
 
 (add-hook 'emacs-lisp-mode-hook 'my/emacs-lisp-minor-mode)
 

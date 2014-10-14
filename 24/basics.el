@@ -5,9 +5,9 @@
 ;; Author: Manuel Schneckenreither
 ;; Created: Mon Dec 10 22:51:09 2012 (+0100)
 ;; Version:
-;; Last-Updated: Mon Sep  1 14:05:21 2014 (+0200)
+;; Last-Updated: Fri Oct  3 22:22:05 2014 (+0200)
 ;;           By: Manuel Schneckenreither
-;;     Update #: 786
+;;     Update #: 788
 ;; URL:
 ;; Description:
 ;;    Basic configuration for emacs. In here are all configs of
@@ -399,6 +399,53 @@ mode of the invoking window is in
   (unless (eq last-command this-command)
     (goto-char (car (bounds-of-thing-at-point 'word)))))
 (ad-activate 'isearch-yank-word-or-char)
+
+;; ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+;; ++++++++++++++++++++++++++ Buffer switching ++++++++++++++++++++++++++
+;; ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+
+(defun switch-buffers-between-frames ()
+  "switch-buffers-between-frames switches the buffers between the two last frames"
+  (interactive)
+  (let ((this-frame-buffer nil)
+	(other-frame-buffer nil))
+    (setq this-frame-buffer (car (frame-parameter nil 'buffer-list)))
+    (other-frame 1)
+    (setq other-frame-buffer (car (frame-parameter nil 'buffer-list)))
+    (switch-to-buffer this-frame-buffer)
+    (other-frame 1)
+    (switch-to-buffer other-frame-buffer)))
+
+(defun transpose-buffers (arg)
+  "Transpose the buffers shown in two windows."
+  (interactive "p")
+  (let ((selector (if (>= arg 0) 'next-window 'previous-window)))
+    (while (/= arg 0)
+      (let ((this-win (window-buffer))
+            (next-win (window-buffer (funcall selector))))
+        (set-window-buffer (selected-window) next-win)
+        (set-window-buffer (funcall selector) this-win)
+        (select-window (funcall selector)))
+      (setq arg (if (plusp arg) (1- arg) (1+ arg))))))
+
+
+;; ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+;; ++++++++++++++++++++++++++++ Insert date +++++++++++++++++++++++++++++
+;; ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+
+(defun insert-date (prefix)
+    "Insert the current date. With prefix-argument, use ISO format. With
+   two prefix arguments, write out the day and month name."
+    (interactive "P")
+    (let ((format (cond
+                   ((not prefix) "%d.%m.%Y")
+                   ((equal prefix '(4)) "%Y-%m-%d")
+                   ((equal prefix '(16)) "%A, %d. %B %Y")))
+          (system-time-locale "de_DE"))
+      (insert (format-time-string format))))
+
 
 ;; ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 ;; ++++++++++++++++++++++++++++ OTHER STUFF +++++++++++++++++++++++++++++

@@ -199,8 +199,8 @@ Setup buffer for parse.
 
 ;;;***
 
-;;;### (autoloads nil nil ("wisent-dot-wy.el") (21503 25259 160984
-;;;;;;  260000))
+;;;### (autoloads nil nil ("wisent-dot-wy.el") (21560 19417 338644
+;;;;;;  40000))
 
 ;;;***
 

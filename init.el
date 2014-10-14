@@ -7,9 +7,9 @@
 ;; Created: Tue Jul 29 00:11:38 2014 (+0200)
 ;; Version:
 ;; Package-Requires: ()
-;; Last-Updated: Wed Sep  3 09:00:07 2014 (+0200)
+;; Last-Updated: Tue Oct 14 04:10:00 2014 (+0200)
 ;;           By: Manuel Schneckenreither
-;;     Update #: 172
+;;     Update #: 325
 ;; URL:
 ;; Doc URL:
 ;; Keywords:
@@ -47,11 +47,43 @@
 ;;
 ;;; Code:
 
+;; (toggle-debug-on-quit)
+;; (setq debug-on-error t)
+
+;; DEBUG WITH
+
+;; I assume only emacs is stuck, so you can open an xterm: what does ``ps
+;; awlx | grep emacs'' say?  In particular, the state and the wchan are of
+;; interest: normally, it should be in S state and waiting on select: idle
+;; and waiting for input. If it's persistently in D state, it's stuck
+;; somewhere in the kernel - the wchan gives an idea where. Do it a few times
+;; to make sure that things are not changing.
+
+;; The next step is to do ``strace -p<emacs_pid>'' to see whether it's going
+;; in and out of the kernel (perhaps in an infinite loop).
+
+;; If it is *not* going into the kernel, but accumulates CPU runtime (check
+;; the ps awlx output a few times), then it's stuck in a loop in user
+;; space. Attaching to it with ``gdb -p<emacs_pid>'' and getting a
+;; backtrace should give an idea of where it's stuck. But if the loop is in
+;; lisp code, the backtrace is not going to tell you where: it'll just be
+;; in eval. If that's the case, then bisecting through your .emacs setup is
+;; probably the best idea (maybe start by commenting out the org/wanderlust
+;; stuff, particularly if you started getting these problems recently,
+;; after making changes to their configuration.)
+
+;; It's always a good idea to do these things with a working emacs first, so
+;; that you learn what "normal" looks like. Then you have a better idea
+;; of what's wrong when you try them on the stuck emacs.
+
+;; This only scratches the surface but...
+
+;; HTH,
+;; Nick
 
 ;; ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 ;; +++++++++++++++++++++++++ PERSONAL SETTINGS ++++++++++++++++++++++++++
 ;; ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-
 
 ;; Edit your settings in settings.el
 
@@ -69,7 +101,9 @@
 
 
 ;; start emacs as a server. You can then connect to it by invoking emacsclient.
-(server-start)
+(require 'server)
+(unless (server-running-p)
+  (server-start))
 
 ;; and handle C-x k command just normally
 (add-hook 'server-switch-hook
@@ -113,8 +147,9 @@
         android-mode
         auctex
         auto-complete
-        auto-complete-c-headers
         auto-complete-auctex
+        auto-complete-c-headers
+        auto-complete-clang
         auto-dictionary
         arduino-mode
         ;; backup-each-save ;;; solved differently, see backup_each_save_config.el
@@ -132,6 +167,7 @@
         flycheck-haskell
         flycheck-color-mode-line
         flycheck-ledger
+        function-args
         fuzzy
         git-commit-mode
         git-rebase-mode
@@ -140,25 +176,41 @@
         gnuplot-mode
         haskell-mode
         header2
+        helm
+        helm-bibtex
+        helm-c-yasnippet
+        helm-dired-recent-dirs
+        helm-flycheck
+        helm-git
+        helm-git-files
+        helm-google
+        helm-hoogle
+        helm-mode-manager
         ido-gnus
         ido-hacks
         ido-ubiquitous
         javadoc-lookup
         javap-mode
+        jedi
         latex-pretty-symbols
         latex-extra
         magit
         multiple-cursors
         org
         org-ac
+        org-cua-dwim
+        org-eldoc
         org-plus-contrib
+        orgtbl-ascii-plot
         ov
         pager
         pager-default-keybindings
+        paredit
         popup
         powerline
         rainbow-delimiters
         rainbow-mode
+        shm
         tex-smart-umlauts
         thesaurus
         tuareg
@@ -207,6 +259,7 @@
 ;; ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 ;; init everything else
+(modify-frame-parameters nil '((wait-for-wm . nil)))
 (load (concat load-folder "emacs.el"))
 
 ;; ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -221,6 +274,7 @@
 
 ;; Color theme solarized
 (color-theme-solarized-dark)
+;; (color-theme-solarized-light)
 
 ;; (defun color-my-emacs-default ()
 ;;   "Revert to default emacs theme."
@@ -258,7 +312,7 @@
  '(ecb-source-path (quote (("/" "/"))))
  '(ecb-type-tag-expansion (quote ((default) (c-mode "struct"))))
  '(ecb-use-speedbar-instead-native-tree-buffer nil)
- '(ede-project-directories (quote ("/home/schnecki/Programmierung/C++/Test/src" "/home/schnecki/Programmierung/C++/Test" "/ssdspace/.emacs.d" "/home/schnecki/Programmierung/Java/Papa" "/home/schnecki/Documents/UIBK/5.Semester/NP/PS/06/01-ThreadPoolExecutor/src" "/home/schnecki/Documents/UIBK/5.Semester/NP/PS/06/01-ThreadPoolExecutor" "/home/schnecki/Programmierung/Java/BetPredictionTest/src" "/home/schnecki/Programmierung/Java/BetPredictionTest" "/tmp/myproject/include" "/tmp/myproject/src" "/tmp/myproject")))
+ '(ede-project-directories (quote ("/home/schnecki/Documents/UIBK/7.Semester/C++/project/01/src" "/home/schnecki/Documents/UIBK/7.Semester/C++/project/01" "/home/schnecki/Programmierung/C++/Test/src" "/home/schnecki/Programmierung/C++/Test" "/ssdspace/.emacs.d" "/home/schnecki/Programmierung/Java/Papa" "/home/schnecki/Documents/UIBK/5.Semester/NP/PS/06/01-ThreadPoolExecutor/src" "/home/schnecki/Documents/UIBK/5.Semester/NP/PS/06/01-ThreadPoolExecutor" "/home/schnecki/Programmierung/Java/BetPredictionTest/src" "/home/schnecki/Programmierung/Java/BetPredictionTest" "/tmp/myproject/include" "/tmp/myproject/src" "/tmp/myproject")))
  '(fill-column 80)
  '(flymake-compilation-prevents-syntax-check nil)
  '(flymake-gui-warnings-enabled nil)
