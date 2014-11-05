@@ -200,7 +200,6 @@
 
 (setq org-startup-indented t)
 
-
 (add-to-list 'org-latex-classes
              '("ds"
                "[NO-DEFAULT-PACKAGES]

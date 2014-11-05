@@ -7,9 +7,9 @@
 ;; Created: So Okt 13 11:05:43 2013 (+0200)
 ;; Version:
 ;; Package-Requires: ()
-;; Last-Updated: Fri Oct 10 23:19:54 2014 (+0200)
+;; Last-Updated: Wed Nov  5 13:35:48 2014 (+0100)
 ;;           By: Manuel Schneckenreither
-;;     Update #: 238
+;;     Update #: 250
 ;; URL:
 ;; Doc URL:
 ;; Keywords:
@@ -72,13 +72,14 @@
 ;;                        )
 
 
-;; CEDET Context Menu
-;; (global-cedet-m3-minor-mode 1)
-;; (define-key cedet-m3-mode-map "\C-c " 'cedet-m3-menu-kbd)
+(require 'cedet)
+(require 'cedet-files)
+(require 'cedet-cscope)
+(require 'cedet-global)
+(require 'cedet-idutils)
+(require 'semantic)
+;; (require 'eieio)
 
-
-;; JDEE Target, EDE Project Management and ECB Target
-(require 'semantic/canned-configs)
 
 ;; SRecode for code generation
 (srecode-minor-mode 1)
@@ -98,6 +99,7 @@
 
 ;; enable generic projects
 (ede-enable-generic-projects)
+(add-hook 'find-file-hook 'ede-turn-on-hook)
 
 ;; JAVA config
 (setq cedet-java-command "java")
@@ -182,8 +184,6 @@
 ;; Enable Semantic
 (semantic-mode 1)
 
-;; increase max-specpdl-size
-(setq max-specpdl-size 1500)
 
 ;; Disable some semantic tools
 (global-semantic-decoration-mode 0) ;; if enabled it throws warnings as hell!
@@ -249,8 +249,7 @@
 
 
 ;; ;; Setup JAVA....
-;; (require 'cedet-java)
-;; (require 'semantic/db-javap)
+
 
 ;; ;; ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 ;; ;; +++++++++++++++++++++++++++ GLOBAL KEYS ++++++++++++++++++++++++++++++

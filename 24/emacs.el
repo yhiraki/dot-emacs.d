@@ -5,9 +5,9 @@
 ;; Author: Manuel Schneckenreither
 ;; Created: Tue Dec 11 00:43:14 2012 (+0100)
 ;; Version:
-;; Last-Updated: Mon Oct 13 14:40:56 2014 (+0200)
+;; Last-Updated: Mon Nov  3 16:00:25 2014 (+0100)
 ;;           By: Manuel Schneckenreither
-;;     Update #: 420
+;;     Update #: 421
 ;; URL:
 ;; Description:
 ;;
@@ -100,7 +100,7 @@
 ;; CHANGE INNER - kill inside/outside of given element
 (load (concat package-conf-folder "change_inner_config.el"))
 ;; SHM - structured haskell code editing
-(load (concat package-conf-folder "shm_config.el"))
+;; (load (concat package-conf-folder "shm_config.el"))
 ;; Paredit - emacs lisp structured code editing
 (load (concat package-conf-folder "paredit_config.el"))
 ;; Paredit - emacs lisp structured code editing

@@ -7,9 +7,9 @@
 ;; Created: Mi Mär 19 11:59:38 2014 (+0100)
 ;; Version:
 ;; Package-Requires: ()
-;; Last-Updated: Mi Mär 26 14:41:32 2014 (+0100)
+;; Last-Updated: Wed Oct 22 21:16:00 2014 (+0200)
 ;;           By: Manuel Schneckenreither
-;;     Update #: 11
+;;     Update #: 12
 ;; URL:
 ;; Doc URL:
 ;; Keywords:
@@ -47,7 +47,7 @@
 ;;
 ;;; Code:
 
-; (require 'winner-mode)
+;; (require 'winner-mode)
 (winner-mode)
 ;; (ad-Orig-winner-mode)
 

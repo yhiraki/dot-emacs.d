@@ -7,9 +7,9 @@
 ;; Created: Fr Okt  4 21:14:20 2013 (+0200)
 ;; Version: 
 ;; Package-Requires: ()
-;; Last-Updated: Mo Okt 14 17:01:23 2013 (+0200)
+;; Last-Updated: Wed Oct 22 21:53:16 2014 (+0200)
 ;;           By: Manuel Schneckenreither
-;;     Update #: 7
+;;     Update #: 8
 ;; URL: 
 ;; Doc URL: 
 ;; Keywords: 
@@ -47,6 +47,7 @@
 ;; 
 ;;; Code:
 
+(require 'eldoc)
 
 (defun turn-on-eldoc ()
   "Force 'eldoc-mode' on using a positive arg.  For use in hooks."
@@ -105,7 +106,6 @@
 ;; ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 (eldoc-mode t)
-
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;

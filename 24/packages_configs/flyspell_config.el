@@ -7,9 +7,9 @@
 ;; Created: Fr Okt  4 20:40:17 2013 (+0200)
 ;; Version:
 ;; Package-Requires: ()
-;; Last-Updated: Mon Sep  1 11:16:21 2014 (+0200)
+;; Last-Updated: Wed Oct 22 21:20:50 2014 (+0200)
 ;;           By: Manuel Schneckenreither
-;;     Update #: 130
+;;     Update #: 131
 ;; URL:
 ;; Doc URL:
 ;; Keywords:
@@ -50,7 +50,7 @@
 
 (require 'auto-dictionary)
 (require 'ispell)
-
+(require 'flyspell)
 
 ;; AUTOMATICALLY GUESS DICTIONARY
 (add-hook 'flyspell-mode-hook (lambda () (auto-dictionary-mode 1)))

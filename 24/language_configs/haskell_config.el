@@ -8,7 +8,7 @@
 ;; Version:
 ;; Last-Updated:
 ;;           By:
-;;     Update #: 667
+;;     Update #: 671
 ;; URL:
 ;; Description:
 ;;
@@ -264,7 +264,7 @@ attention to case differences."
   (auto-complete-mode)
 
   ;; use programming flyspell mode
-  (flyspell-prog-mode)
+  ;; (flyspell-prog-mode)
 
   ;; format source code in sensible way
   ;; (add-hook 'before-save-hook 'haskell-source-code-align nil t)
@@ -350,9 +350,9 @@ attention to case differences."
   (add-to-list 'ac-sources 'ac-source-words-in-same-mode-buffers)
 
   (auto-complete-mode)
+  (cua-selection-mode nil)
 
   )
-
 
 (add-hook 'haskell-mode-hook 'my/haskell-minor-mode)
 (add-hook 'haskell-interactive-mode-hook 'my/haskell-interactive-minor-mode)
@@ -361,7 +361,7 @@ attention to case differences."
 
 ;; IDENTATION MODE
 ;;; DISABLED DUE TO ENABLED SHM (STRUCTURED HASKELL MODE).
-;; (add-hook 'haskell-mode-hook 'turn-on-haskell-indentation)
+(add-hook 'haskell-mode-hook 'turn-on-haskell-indentation)
 ;; (add-hook 'haskell-mode-hook 'turn-on-haskell-simple-indent)
 ;; (add-hook 'haskell-mode-hook 'turn-on-haskell-indent)
 

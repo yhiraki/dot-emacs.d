@@ -43,7 +43,7 @@ ROOTPROJ is nil, since there is only one project.
 ;;;***
 
 ;;;### (autoloads (ede-arduino-load ede-arduino-file ede-arduino-root)
-;;;;;;  "ede/arduino" "arduino.el" (21503 24125 838145 0))
+;;;;;;  "ede/arduino" "arduino.el" (21594 4956 645948 0))
 ;;; Generated autoloads from arduino.el
 
 (autoload 'ede-arduino-root "ede/arduino" "\
@@ -71,7 +71,7 @@ ROOTPROJ is nil, sinc there is only one project for a directory tree.
 
 \(fn DIR &optional ROOTPROJ)" nil nil)
 
-(ede-add-project-autoload (ede-project-autoload "arduino" :name "ARDUINO SKETCH" :file 'ede/arduino :root-only nil :proj-root-dirmatch (ede-project-autoload-dirmatch "arduino" :fromconfig (if (boundp 'ede-arduino-preferences-file) ede-arduino-preferences-file "~/.arduino/preferences.txt") :configregex "^sketchbook.path=\\([^\n]+\\)$" :configregexidx 1) :proj-file 'ede-arduino-file :load-type 'ede-arduino-load :class-sym 'ede-arduino-project :safe-p t :new-p t) 'unique)
+(ede-add-project-autoload (ede-project-autoload "arduino" :name "ARDUINO SKETCHBOOK" :file 'ede/arduino :root-only nil :proj-root-dirmatch (ede-project-autoload-dirmatch "arduino" :fromconfig (if (boundp 'ede-arduino-preferences-file) ede-arduino-preferences-file "~/.arduino/preferences.txt") :configregex "^sketchbook.path=\\([^\n]+\\)$" :configregexidx 1) :proj-file 'ede-arduino-file :load-type 'ede-arduino-load :class-sym 'ede-arduino-project :safe-p t :new-p t) 'unique)
 
 ;;;***
 
@@ -131,7 +131,7 @@ the current EDE project.
 ;;;***
 
 ;;;### (autoloads (ede-enable-generic-projects) "ede/generic" "generic.el"
-;;;;;;  (21503 24125 838145 0))
+;;;;;;  (21594 4956 645948 0))
 ;;; Generated autoloads from generic.el
 
 (autoload 'ede-enable-generic-projects "ede/generic" "\
@@ -311,12 +311,12 @@ Argument NEWVERSION is the version number to use in the current project.
 ;;;***
 
 ;;;### (autoloads nil nil ("auto.el" "autoconf-edit.el" "base.el"
-;;;;;;  "detect.el" "dired.el" "makefile-edit.el" "pconf.el" "pmake.el"
-;;;;;;  "proj-archive.el" "proj-aux.el" "proj-comp.el" "proj-elisp.el"
-;;;;;;  "proj-info.el" "proj-misc.el" "proj-obj.el" "proj-prog.el"
-;;;;;;  "proj-scheme.el" "proj-shared.el" "proj.el" "project-am.el"
-;;;;;;  "shell.el" "source.el" "srecode.el") (21560 19418 154325
-;;;;;;  735000))
+;;;;;;  "config.el" "detect.el" "dired.el" "makefile-edit.el" "pconf.el"
+;;;;;;  "pmake.el" "proj-archive.el" "proj-aux.el" "proj-comp.el"
+;;;;;;  "proj-elisp.el" "proj-info.el" "proj-misc.el" "proj-obj.el"
+;;;;;;  "proj-prog.el" "proj-scheme.el" "proj-shared.el" "proj.el"
+;;;;;;  "project-am.el" "shell.el" "source.el" "srecode.el") (21594
+;;;;;;  6087 211644 247000))
 
 ;;;***
 

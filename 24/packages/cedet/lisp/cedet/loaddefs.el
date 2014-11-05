@@ -7,7 +7,7 @@
 ;;;;;;  cedet-android-adb-version-check cedet-android-adb-devices
 ;;;;;;  cedet-android-adb-help cedet-android-start-ddms cedet-android-layoutopt
 ;;;;;;  cedet-android-target-list cedet-android-create-project) "cedet-android"
-;;;;;;  "cedet-android.el" (21437 53516 203727 219000))
+;;;;;;  "cedet-android.el" (21594 4956 645948 0))
 ;;; Generated autoloads from cedet-android.el
 
 (autoload 'cedet-android-create-project "cedet-android" "\
@@ -77,7 +77,7 @@ Update the classpath for `cedet-java' to include the android compile-time librar
 ;;;***
 
 ;;;### (autoloads (cedet-gnu-global-version-check) "cedet-global"
-;;;;;;  "cedet-global.el" (21437 53512 73727 136000))
+;;;;;;  "cedet-global.el" (21594 4956 645948 0))
 ;;; Generated autoloads from cedet-global.el
 
 (autoload 'cedet-gnu-global-version-check "cedet-global" "\
@@ -201,7 +201,7 @@ Create a new data-debug buffer with NAME.
 
 ;;;***
 
-;;;### (autoloads (global-ede-mode) "ede" "ede.el" (21503 24125 838145
+;;;### (autoloads (global-ede-mode) "ede" "ede.el" (21594 4956 645948
 ;;;;;;  0))
 ;;; Generated autoloads from ede.el
 
@@ -358,7 +358,7 @@ Semantic mode.
 
 ;;;### (autoloads nil nil ("cedet-compat.el" "cedet-cscope.el" "cedet-files.el"
 ;;;;;;  "cedet-idutils.el" "cedet.el" "pulse.el" "srecode.el" "working.el")
-;;;;;;  (21560 19416 508359 631000))
+;;;;;;  (21594 6085 596031 460000))
 
 ;;;***
 

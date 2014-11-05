@@ -7,9 +7,9 @@
 ;; Created: Di Mär  4 06:35:38 2014 (+0100)
 ;; Version:
 ;; Package-Requires: ()
-;; Last-Updated: Mo Jun  2 12:53:25 2014 (+0200)
+;; Last-Updated: Wed Oct 22 21:05:07 2014 (+0200)
 ;;           By: Manuel Schneckenreither
-;;     Update #: 21
+;;     Update #: 23
 ;; URL:
 ;; Doc URL:
 ;; Keywords:
@@ -106,6 +106,7 @@
 
 (setq wdired-allow-to-change-permissions t)
 
+(setq dired-hide-details nil)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; dired_config.el ends here

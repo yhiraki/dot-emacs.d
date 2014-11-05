@@ -7,9 +7,9 @@
 ;; Created: Di Feb  4 17:01:05 2014 (+0100)
 ;; Version:
 ;; Package-Requires: ()
-;; Last-Updated: Mon Oct 13 15:33:54 2014 (+0200)
+;; Last-Updated: Fri Oct 31 12:29:12 2014 (+0100)
 ;;           By: Manuel Schneckenreither
-;;     Update #: 44
+;;     Update #: 55
 ;; URL:
 ;; Doc URL:
 ;; Keywords:
@@ -47,8 +47,8 @@
 ;;
 ;;; Code:
 
+(global-set-key (kbd "C-x m") 'gnus-msg-mail)
 
-;; for searching imap folders (needs the call of (require 'nnir) in .emacs)
 
 ;; (if (fboundp 'w32-send-sys-command)
 ;;     (eval-after-load "gnutls"
@@ -62,10 +62,6 @@
                                   (nnimap-server-port 993)
                                   (nnimap-address "mail2.uibk.ac.at")
                                   ;;(nnir-search-engine Imap)
-                                  ;; if a connection to an IMAP server
-                                  ;; can't be closed, force close
-                                  ;; after 1s
-                                  ;; (nnimap-logout-timeout 1.0)
                                   ))
 
 (add-to-list 'gnus-secondary-select-methods '(nnimap "gmail"
@@ -73,15 +69,14 @@
                                                      (nnimap-address "imap.gmail.com")
                                                      (nnimap-server-port 993)
                                                      ;;(nnir-search-engine Imap)
-                                                     ;; (nnimap-logout-timeout 1.0)
                                                      ))
 ;; Gwene news and Gmane Mailgroups
 ;; (add-to-list 'gnus-secondary-select-methods '(nntp "news.gwene.org"))
 ;; (add-to-list 'gnus-secondary-select-methods '(nntp "news.gmane.org"))
 
 ;; Periodically check for mail/news
-(gnus-demon-init)
-(gnus-demon-add-handler 'gnus-demon-scan-news 5 t)
+;; (gnus-demon-init)
+;; (gnus-demon-add-handler 'gnus-demon-scan-news 5 t)
 
 
 ;; ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -90,7 +85,7 @@
 
 (setq bbdb/news-auto-create-p t)
 (add-hook 'gnus-startup-hook 'bbdb-insinuate-gnus)
-(add-hook 'dired-mode-hook 'turn-on-gnus-dired-mode)
+;; (add-hook 'dired-mode-hook 'turn-on-gnus-dired-mode)
 
 ;; ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 ;; +++++++++++++++++++++++ Do not ask me for exit +++++++++++++++++++++++
@@ -239,6 +234,7 @@
 
 ;; use the built in supercite for citing.
 (add-hook 'mail-citation-hook 'sc-cite-original)
+
 
 ;; This prevents GNUS from inserting its default attribution header.
 ;; Otherwise, both GNUS and Supercite will insert an attribution

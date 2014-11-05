@@ -2,9 +2,7 @@
 # name: img
 # key: img
 # --
-<img src="$1"
- alt="$2" align="${3:left}"
- title="${4:image title}"
- class="img"
-</img>
-$0
+#+CAPTION:    Example caption.
+#+LABEL:      fig:example
+#+ATTR_LaTeX: :width 1.0\textwidth
+[[file:./$0]]

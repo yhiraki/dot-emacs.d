@@ -7,9 +7,9 @@
 ;; Created: Thu Sep  4 21:24:24 2014 (+0200)
 ;; Version:
 ;; Package-Requires: ()
-;; Last-Updated: Mon Sep 15 16:10:22 2014 (+0200)
+;; Last-Updated: Mon Nov  3 20:26:15 2014 (+0100)
 ;;           By: Manuel Schneckenreither
-;;     Update #: 10
+;;     Update #: 11
 ;; URL:
 ;; Doc URL:
 ;; Keywords:
@@ -58,7 +58,7 @@
 (add-hook 'haskell-mode-hook 'structured-haskell-mode)
 
 ;;; customize keymap
-(define-key shm-map (kbd "M-;") nil)
+(define-key shm-map (kbd "M-;") 'paredit-comment-dwim)
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;

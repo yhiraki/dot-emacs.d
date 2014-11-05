@@ -7,9 +7,9 @@
 ;; Created: Fr Mär 28 01:37:14 2014 (+0100)
 ;; Version:
 ;; Package-Requires: ()
-;; Last-Updated: So Mai  4 11:04:07 2014 (+0200)
+;; Last-Updated: Wed Oct 22 21:15:08 2014 (+0200)
 ;;           By: Manuel Schneckenreither
-;;     Update #: 14
+;;     Update #: 15
 ;; URL:
 ;; Doc URL:
 ;; Keywords:
@@ -47,6 +47,8 @@
 ;;
 ;;; Code:
 
+
+(require 'ace-window)
 
 ;; set ace jump cursor config
 ;; (global-set-key (kbd "C-c SPC") 'ace-jump-mode)

@@ -20,7 +20,7 @@ It creates an autoload function for CNAME's constructor.
 ;;;***
 
 ;;;### (autoloads (customize-object) "eieio-custom" "eieio-custom.el"
-;;;;;;  (21437 53511 243727 119000))
+;;;;;;  (21594 4956 645948 0))
 ;;; Generated autoloads from eieio-custom.el
 
 (autoload 'customize-object "eieio-custom" "\
@@ -67,7 +67,7 @@ Also extracts information about all methods specific to this generic.
 ;;;***
 
 ;;;### (autoloads nil nil ("chart.el" "eieio-base.el" "eieio-datadebug.el"
-;;;;;;  "eieio-speedbar.el" "eieio.el") (21560 19416 808816 161000))
+;;;;;;  "eieio-speedbar.el" "eieio.el") (21594 6085 891004 885000))
 
 ;;;***
 

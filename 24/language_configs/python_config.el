@@ -7,9 +7,9 @@
 ;; Created: Sun Oct 12 21:01:25 2014 (+0200)
 ;; Version:
 ;; Package-Requires: ()
-;; Last-Updated: Sun Oct 12 21:36:07 2014 (+0200)
+;; Last-Updated: Wed Oct 22 13:53:20 2014 (+0200)
 ;;           By: Manuel Schneckenreither
-;;     Update #: 4
+;;     Update #: 8
 ;; URL:
 ;; Doc URL:
 ;; Keywords:
@@ -84,6 +84,7 @@
 
   (add-hook 'after-save-hook 'make-python-tags nil t)
 
+  (local-set-key (kbd "C-c C-l") 'python-shell-send-buffer)
   )
 
 ;; add hook
