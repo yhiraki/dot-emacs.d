@@ -8,9 +8,27 @@
 (require 'cedet)
 (require 'eieio)
 (require 'eieio-speedbar)
+(require 'eieio-opt)
+(require 'eieio-base)
 (require 'ede/source)
 (require 'ede/base)
 (require 'ede/auto)
+(require 'ede/proj)
+(require 'ede/proj-archive)
+(require 'ede/proj-aux)
+(require 'ede/proj-comp)
+(require 'ede/proj-elisp)
+(require 'ede/proj-info)
+(require 'ede/proj-misc)
+(require 'ede/proj-obj)
+(require 'ede/proj-prog)
+(require 'ede/proj-scheme)
+(require 'ede/proj-shared)
+
+
+;; (require 'ede/detect)
+(require 'ede/dired)
+(require 'ede/make)
 
 (load "ede/loaddefs" nil 'nomessage)
 
@@ -26,8 +44,9 @@
 (declare-function ede-up-directory "ede/files")
 (declare-function semantic-lex-make-spp-table "semantic/lex-spp")
 
-(defconst ede-version "1.2"
+(defconst ede-version "2.0"
   "Current version of the Emacs EDE.")
 
 
-;; (ede-enable-generic-projects)
+(add-hook 'find-file-hook 'ede-turn-on-hook)
+

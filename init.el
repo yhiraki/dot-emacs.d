@@ -7,9 +7,9 @@
 ;; Created: Tue Jul 29 00:11:38 2014 (+0200)
 ;; Version:
 ;; Package-Requires: ()
-;; Last-Updated: Wed Nov  5 13:50:39 2014 (+0100)
+;; Last-Updated: Wed Nov  5 14:48:19 2014 (+0100)
 ;;           By: Manuel Schneckenreither
-;;     Update #: 413
+;;     Update #: 422
 ;; URL:
 ;; Doc URL:
 ;; Keywords:
@@ -312,7 +312,7 @@
  '(ecb-source-path (quote (("/" "/"))))
  '(ecb-type-tag-expansion (quote ((default) (c-mode "struct"))))
  '(ecb-use-speedbar-instead-native-tree-buffer nil)
- '(ede-project-directories (quote ("/home/schnecki/Documents/UIBK/7.Semester/InfoSec_SecArch/PS/05/04/src" "/home/schnecki/Documents/UIBK/7.Semester/InfoSec_SecArch/PS/05/04" "/home/schnecki/Documents/UIBK/7.Semester/C++/project/03/autom4te.cache" "/home/schnecki/Documents/UIBK/7.Semester/C++/project/03/src/.deps" "/home/schnecki/Documents/UIBK/7.Semester/C++/project/03/src" "/home/schnecki/Documents/UIBK/7.Semester/C++/project/03" "/home/schnecki/Documents/UIBK/7.Semester/C++/project/02/src" "/home/schnecki/Documents/UIBK/7.Semester/C++/project/02" "/home/schnecki/Documents/UIBK/7.Semester/C++/project/01/src" "/home/schnecki/Documents/UIBK/7.Semester/C++/project/01" "/home/schnecki/Programmierung/C++/Test/src" "/home/schnecki/Programmierung/C++/Test" "/ssdspace/.emacs.d" "/home/schnecki/Programmierung/Java/Papa" "/home/schnecki/Documents/UIBK/5.Semester/NP/PS/06/01-ThreadPoolExecutor/src" "/home/schnecki/Documents/UIBK/5.Semester/NP/PS/06/01-ThreadPoolExecutor" "/home/schnecki/Programmierung/Java/BetPredictionTest/src" "/home/schnecki/Programmierung/Java/BetPredictionTest" "/tmp/myproject/include" "/tmp/myproject/src" "/tmp/myproject")))
+ '(ede-project-directories (quote ("/home/schnecki/Documents/UIBK/7.Semester/InfoSec_SecArch/PS/05/04/src" "/home/schnecki/Documents/UIBK/7.Semester/InfoSec_SecArch/PS/05/04")))
  '(fill-column 80)
  '(flycheck-clang-definitions (quote ("-std=c++11")))
  '(flycheck-clang-language-standard "c++11")

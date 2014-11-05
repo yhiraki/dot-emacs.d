@@ -5,9 +5,9 @@
 ;; Author: Manuel Schneckenreither
 ;; Created: Tue Dec 11 00:43:14 2012 (+0100)
 ;; Version:
-;; Last-Updated: Mon Nov  3 16:00:25 2014 (+0100)
+;; Last-Updated: Wed Nov  5 14:33:53 2014 (+0100)
 ;;           By: Manuel Schneckenreither
-;;     Update #: 421
+;;     Update #: 425
 ;; URL:
 ;; Description:
 ;;
@@ -33,7 +33,9 @@
 ;; WINNER MODE - undo window configurations (needs to be done before ECB)
 (load (concat package-conf-folder "winner_mode_config.el"))
 ;; CEDET - semantic, EDE, etc. (needs to be done pretty early!)
-;; (load (concat package-conf-folder "cedet_config.el"))
+(load (concat package-conf-folder "cedet_config.el"))
+;; EDE - project management in emacs
+(load (concat package-conf-folder "ede_config.el"))
 ;; ECB - buffers on the side showing information
 (load (concat package-conf-folder "ecb_config.el"))
 ;; Eldoc config
@@ -103,8 +105,6 @@
 ;; (load (concat package-conf-folder "shm_config.el"))
 ;; Paredit - emacs lisp structured code editing
 (load (concat package-conf-folder "paredit_config.el"))
-;; Paredit - emacs lisp structured code editing
-(load (concat package-conf-folder "ede_config.el"))
 ;; Function args - show function arguments for C/C++ code
 (load (concat package-conf-folder "function_args_config.el"))
 ;; Helm - narrowing framework

@@ -7,9 +7,9 @@
 ;; Created: So Okt 13 11:05:43 2013 (+0200)
 ;; Version:
 ;; Package-Requires: ()
-;; Last-Updated: Wed Nov  5 13:35:48 2014 (+0100)
+;; Last-Updated: Wed Nov  5 14:09:00 2014 (+0100)
 ;;           By: Manuel Schneckenreither
-;;     Update #: 250
+;;     Update #: 251
 ;; URL:
 ;; Doc URL:
 ;; Keywords:
@@ -98,8 +98,8 @@
 ;; (semantic-add-system-include "/usr/src/linux-2.4/include" 'c-mode)
 
 ;; enable generic projects
-(ede-enable-generic-projects)
-(add-hook 'find-file-hook 'ede-turn-on-hook)
+;; (ede-enable-generic-projects)
+
 
 ;; JAVA config
 (setq cedet-java-command "java")
@@ -152,9 +152,10 @@
   (semanticdb-enable-gnu-global-databases 'java-mode t)
   (semanticdb-enable-gnu-global-databases 'jde-mode t)
 
-  (setq ede-locate-setup-options
-        '(ede-locate-global
-          ede-locate-base)))
+  ;; (setq ede-locate-setup-options
+  ;;       '(ede-locate-global
+  ;;         ede-locate-base))
+  )
 
 
 ;; MANUALLY
