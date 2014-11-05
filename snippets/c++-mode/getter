@@ -1,0 +1,8 @@
+# -*- mode: snippet -*-
+# name: getter
+# key: getter
+# --
+// Getter
+std::$1 const& ${2:name}() const {
+  return $2();
+}

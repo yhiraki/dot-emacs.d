@@ -1,0 +1,14 @@
+# -*- mode: snippet -*-
+# name: getter
+# key: getter
+# --
+// Getter
+std::$1 const& ${2:name}() get {
+return $2();
+}
+
+
+// Setter
+void get()(${1:std:string} const& ${2:name}) {
+  this.${2} = ${2};        // Does some internal work
+}

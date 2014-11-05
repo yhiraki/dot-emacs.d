@@ -1,0 +1,59 @@
+# -*- mode: snippet -*-
+# name: dot with example
+# key: dot
+# --
+#+name: example-node-table
+| *node* | *label* | *shape* | *fillcolor* |
+|--------+---------+---------+-------------|
+| A      |       A |         |             |
+| S_a    |     100 |         |             |
+| S_b    |     200 |         |             |
+| S_c    |     300 |         |             |
+| S_d    |     400 |         |             |
+| B      |       B |         |             |
+| S_e    |     300 |         |             |
+| S_f    |     500 |         |             |
+| S_g    |     100 |         |             |
+| S_h    |     600 |         |             |
+| S_i    |     300 |         |             |
+| S_j    |     400 |         |             |
+
+#+name: example-graph
+| from | to  | label |
+|------+-----+-------|
+| A    | S_a |       |
+| A    | S_b |       |
+| S_a  | S_c |       |
+| S_a  | S_d |       |
+| B    | S_e |       |
+| B    | S_f |       |
+| S_f  | S_g |       |
+| S_f  | S_h |       |
+| S_g  | S_i |       |
+| S_g  | S_j |       |
+
+#+name: graph-from-tables
+#+HEADER: :var nodes=example-node-table graph=example-graph
+#+BEGIN_SRC emacs-lisp :file ~/example-diagram.png :colnames yes :exports results
+    (org-babel-execute:dot
+     (concat
+          "digraph {\\n"
+          "//rankdir=LR;\\n" ;; remove comment characters '//' for horizontal layout; add for vertical layout
+          (mapconcat
+           (lambda (x)
+             (format "%s [label=\\"%s\\" shape=%s style=\\"filled\\" fillcolor=\\"%s\\"]"
+                             (car x)
+                             (nth 1 x)
+                             (if (string= "" (nth 2 x)) "box" (nth 2 x))
+                             (if (string= "" (nth 3 x)) "none" (nth 3 x))
+                             )) nodes "\\n")
+          "\\n"
+          (mapconcat
+           (lambda (x)
+             (format "%s -> %s [taillabel=\\"%s\\"]"
+                             (car x) (nth 1 x) (nth 2 x))) graph "\\n")
+          "}\\n") params)
+#+END_SRC
+
+#+results: graph-from-tables
+[[file:~/example-diagram.png]]
