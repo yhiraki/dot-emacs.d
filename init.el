@@ -7,9 +7,9 @@
 ;; Created: Tue Jul 29 00:11:38 2014 (+0200)
 ;; Version:
 ;; Package-Requires: ()
-;; Last-Updated: Wed Nov  5 14:48:19 2014 (+0100)
+;; Last-Updated: Tue Nov 18 15:34:22 2014 (+0100)
 ;;           By: Manuel Schneckenreither
-;;     Update #: 422
+;;     Update #: 477
 ;; URL:
 ;; Doc URL:
 ;; Keywords:
@@ -156,6 +156,7 @@
         backup-walker
         bbdb
         bookmark+
+        cdlatex
         change-inner
         color-theme
         color-theme-solarized
@@ -295,7 +296,9 @@
  '(color-theme-legal-frame-parameters "\\(color\\|mode\\|font\\|height\\|width\\)$")
  '(column-number-mode t)
  '(cua-delete-selection nil)
- '(custom-safe-themes (quote ("0f0e3af1ec61d04ff92f238b165dbc6d2a7b4ade7ed9812b4ce6b075e08f49fe" "f350c66dcff6db73192c4819363b7c1992931841e5ab381b1ed57ef8257a498f" default)))
+ '(custom-safe-themes
+   (quote
+    ("0f0e3af1ec61d04ff92f238b165dbc6d2a7b4ade7ed9812b4ce6b075e08f49fe" "f350c66dcff6db73192c4819363b7c1992931841e5ab381b1ed57ef8257a498f" default)))
  '(delete-active-region nil)
  '(dired-kept-versions 10)
  '(display-time-mode t)
@@ -305,17 +308,27 @@
  '(ecb-expand-methods-switch-off-auto-expand nil)
  '(ecb-jde-set-directories-buffer-to-jde-sourcepath (quote replace))
  '(ecb-layout-name "left-methods-sources")
- '(ecb-layout-window-sizes (quote (("left-methods-sources" (ecb-methods-buffer-name 0.15546218487394958 . 0.6911764705882353) (ecb-sources-buffer-name 0.15546218487394958 . 0.29411764705882354)) ("left8" (ecb-directories-buffer-name 0.15126050420168066 . 0.29411764705882354) (ecb-sources-buffer-name 0.15126050420168066 . 0.23529411764705882) (ecb-methods-buffer-name 0.15126050420168066 . 0.29411764705882354) (ecb-history-buffer-name 0.15126050420168066 . 0.16176470588235295)))))
+ '(ecb-layout-window-sizes
+   (quote
+    (("left-methods-sources"
+      (ecb-methods-buffer-name 0.15546218487394958 . 0.6911764705882353)
+      (ecb-sources-buffer-name 0.15546218487394958 . 0.29411764705882354))
+     ("left8"
+      (ecb-directories-buffer-name 0.15126050420168066 . 0.29411764705882354)
+      (ecb-sources-buffer-name 0.15126050420168066 . 0.23529411764705882)
+      (ecb-methods-buffer-name 0.15126050420168066 . 0.29411764705882354)
+      (ecb-history-buffer-name 0.15126050420168066 . 0.16176470588235295)))))
  '(ecb-method-face (quote ecb-default-highlight-face))
  '(ecb-methods-general-face (quote ecb-default-general-face))
  '(ecb-options-version "2.40")
  '(ecb-source-path (quote (("/" "/"))))
  '(ecb-type-tag-expansion (quote ((default) (c-mode "struct"))))
  '(ecb-use-speedbar-instead-native-tree-buffer nil)
- '(ede-project-directories (quote ("/home/schnecki/Documents/UIBK/7.Semester/InfoSec_SecArch/PS/05/04/src" "/home/schnecki/Documents/UIBK/7.Semester/InfoSec_SecArch/PS/05/04")))
+ '(ede-project-directories
+   (quote
+    ("/home/schnecki/Documents/UIBK/7.Semester/InfoSec_SecArch/PS/06/04/src" "/home/schnecki/Documents/UIBK/7.Semester/InfoSec_SecArch/PS/06/04" "/home/schnecki/Documents/UIBK/7.Semester/C++/project/textyTex/src/model/framework" "/home/schnecki/Documents/UIBK/7.Semester/C++/project/textyTex/src/model/exceptions" "/home/schnecki/Documents/UIBK/7.Semester/C++/project/textyTex/src/model" "/home/schnecki/Documents/UIBK/7.Semester/C++/project/textyTex/src" "/home/schnecki/Documents/UIBK/7.Semester/C++/project/textyTex" "/home/schnecki/Documents/UIBK/7.Semester/InfoSec_SecArch/PS/05/04/src" "/home/schnecki/Documents/UIBK/7.Semester/InfoSec_SecArch/PS/05/04")))
  '(fill-column 80)
- '(flycheck-clang-definitions (quote ("-std=c++11")))
- '(flycheck-clang-language-standard "c++11")
+ '(flycheck-clang-includes (quote ("/usr/include/netdb.h")))
  '(flymake-compilation-prevents-syntax-check nil)
  '(flymake-gui-warnings-enabled nil)
  '(frame-background-mode (quote dark))
@@ -330,7 +343,9 @@
  '(jde-sourcepath (quote ("./src/main" "./src/test")))
  '(kept-new-versions 5000)
  '(mpc-data-directory "~/.emacs.d/.tmp/mpc")
- '(org-agenda-files (quote ("~/Documents/Planning/planning_time.org" "~/Documents/Planning/university.org" "~/Documents/Planning/ProjectIdeas.org" "~/Documents/Planning/freetime.org" "~/Documents/Planning/lists.org" "~/Documents/Planning/anniverseries.org" "~/Documents/Planning/Emacs.org" "~/Documents/Planning/jobcl.org" "~/Programmierung/App/Documentation/app-brainstorming.txt" "~/.emacs.d/org/notes.org")))
+ '(org-agenda-files
+   (quote
+    ("~/Documents/Planning/planning_time.org" "~/Documents/Planning/university.org" "~/Documents/Planning/ProjectIdeas.org" "~/Documents/Planning/freetime.org" "~/Documents/Planning/lists.org" "~/Documents/Planning/anniverseries.org" "~/Documents/Planning/Emacs.org" "~/Documents/Planning/jobcl.org" "~/Programmierung/App/Documentation/app-brainstorming.txt" "~/.emacs.d/org/notes.org")))
  '(send-mail-function (quote smtpmail-send-it))
  '(setq max-specpdl-size t)
  '(size-indication-mode t)
@@ -341,7 +356,9 @@
  '(tramp-default-method "ssh")
  '(user-full-name your-full-name)
  '(user-mail-address your-mail-address)
- '(yas-prompt-functions (quote (yas-ido-prompt yas-dropdown-prompt yas-completing-prompt yas-x-prompt yas-no-prompt))))
+ '(yas-prompt-functions
+   (quote
+    (yas-ido-prompt yas-dropdown-prompt yas-completing-prompt yas-x-prompt yas-no-prompt))))
 
 (custom-set-faces
  ;; custom-set-faces was added by Custom.

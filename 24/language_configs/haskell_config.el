@@ -8,7 +8,7 @@
 ;; Version:
 ;; Last-Updated:
 ;;           By:
-;;     Update #: 671
+;;     Update #: 672
 ;; URL:
 ;; Description:
 ;;
@@ -294,6 +294,10 @@ attention to case differences."
   (local-set-key (kbd "C-c ]") (defun insertClosingBra ()
                                  (interactive)
                                  (insert "]")))
+
+  (local-set-key (kbd "C-c C-u") (defun insertUndefined ()
+                                 (interactive)
+                                 (insert "undefined")))
 
   ;; (local-set-key (kbd "C-c |") (defun insertGuard ()
   ;;                                (interactive)

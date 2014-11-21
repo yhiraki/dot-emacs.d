@@ -1,6 +1,0 @@
-# contributor: Manuel Schneckenreither
-# name: box
-# key: gr_b
-# --
-b_${1:name} [${2:shape=box, fillcolor=${3:lightblue}, style=${4:filled},} label="${5:Text}"]
-$0

@@ -5,9 +5,9 @@
 ;; Author: Manuel Schneckenreither
 ;; Created: Mon Dec 10 22:51:09 2012 (+0100)
 ;; Version:
-;; Last-Updated: Fri Oct  3 22:22:05 2014 (+0200)
+;; Last-Updated: Tue Nov 18 15:21:13 2014 (+0100)
 ;;           By: Manuel Schneckenreither
-;;     Update #: 788
+;;     Update #: 789
 ;; URL:
 ;; Description:
 ;;    Basic configuration for emacs. In here are all configs of
@@ -529,6 +529,9 @@ mode of the invoking window is in
 
 ;; SHOW PARENTHESIS
 (show-paren-mode t)
+
+;; Octave Mode
+(require 'octave)
 
 ;; REPLACE S EXPRESSION
 (defun replace-last-sexp ()
