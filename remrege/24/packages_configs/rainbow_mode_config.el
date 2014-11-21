@@ -7,9 +7,9 @@
 ;; Created: Mo Nov 11 22:27:29 2013 (+0100)
 ;; Version:
 ;; Package-Requires: ()
-;; Last-Updated: Mo Nov 11 22:32:15 2013 (+0100)
-;;           By: Manuel Schneckenreither
-;;     Update #: 3
+;; Last-Updated: Fri Nov 21 08:43:33 2014 (+0100)
+;;           By: schnecki
+;;     Update #: 4
 ;; URL:
 ;; Doc URL:
 ;; Keywords:
@@ -47,6 +47,7 @@
 ;;
 ;;; Code:
 
+(require 'rainbow-mode)
 
 (define-globalized-minor-mode my-global-rainbow-mode rainbow-mode
   (lambda () (rainbow-mode 1)))

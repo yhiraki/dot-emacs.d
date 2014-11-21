@@ -271,7 +271,7 @@
 ;; ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 
-(org-eldoc-hook-setup) ;; have org-eldoc add itself to `org-mode-hook'
+;; (org-eldoc-hook-setup) ;; have org-eldoc add itself to `org-mode-hook'
 
 
 ;; ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
