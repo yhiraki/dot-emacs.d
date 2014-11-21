@@ -7,9 +7,9 @@
 ;; Created: Tue Jul 29 00:11:38 2014 (+0200)
 ;; Version:
 ;; Package-Requires: ()
-;; Last-Updated: Tue Nov 18 15:34:22 2014 (+0100)
+;; Last-Updated: Fri Nov 21 14:20:28 2014 (+0100)
 ;;           By: Manuel Schneckenreither
-;;     Update #: 477
+;;     Update #: 478
 ;; URL:
 ;; Doc URL:
 ;; Keywords:
@@ -160,14 +160,15 @@
         change-inner
         color-theme
         color-theme-solarized
-        dired+
+				dired+
         ecb
         edbi
         expand-region
         flycheck
         flycheck-haskell
         flycheck-color-mode-line
-        flycheck-ledger
+				flycheck-google-cpplint
+				flycheck-ledger
         function-args
         fuzzy
         git-commit-mode
