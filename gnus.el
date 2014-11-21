@@ -7,9 +7,9 @@
 ;; Created: Di Feb  4 17:01:05 2014 (+0100)
 ;; Version:
 ;; Package-Requires: ()
-;; Last-Updated: Fri Oct 31 12:29:12 2014 (+0100)
+;; Last-Updated: Mon Nov 17 19:24:56 2014 (+0100)
 ;;           By: Manuel Schneckenreither
-;;     Update #: 55
+;;     Update #: 56
 ;; URL:
 ;; Doc URL:
 ;; Keywords:
@@ -241,6 +241,8 @@
 ;; header:
 ;; (setq news-reply-header-hook nil)
 
+
+(setq mail-self-blind t)
 
 ;; ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 ;; +++++++++++++++++++++++++++ GNUS NOTIFY ++++++++++++++++++++++++++++++

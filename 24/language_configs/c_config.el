@@ -7,9 +7,9 @@
 ;; Created: Fr Feb  7 00:07:46 2014 (+0100)
 ;; Version:
 ;; Package-Requires: ()
-;; Last-Updated: Fri Nov 21 08:48:58 2014 (+0100)
-;;           By: schnecki
-;;     Update #: 77
+;; Last-Updated: Fri Nov 21 14:19:51 2014 (+0100)
+;;           By: Manuel Schneckenreither
+;;     Update #: 82
 ;; URL:
 ;; Doc URL:
 ;; Keywords:
@@ -96,7 +96,7 @@
   (add-to-list 'ac-sources 'ac-source-semantic) ;; slows down auto complete)
   (add-to-list 'ac-sources 'ac-source-abbrev)
   ;; (add-to-list 'ac-sources 'ac-source-css-property)
-  (add-to-list 'ac-sources 'ac-source-dictionary)
+  ;; (add-to-list 'ac-sources 'ac-source-dictionary)
   ;; (add-to-list 'ac-sources 'ac-source-eclim)
   (add-to-list 'ac-sources 'ac-source-yasnippet)
   (add-to-list 'ac-sources 'ac-source-c-headers)
@@ -158,14 +158,18 @@
 (define-key c++-mode-map (kbd "M-o")  'fa-show)
 
 
+;;; flycheck
+(add-hook 'c++-mode-hook (lambda () (setq flycheck-clang-language-standard "c++11")))
+(add-hook 'c-mode-hook (lambda () (setq flycheck-clang-language-standard "c99")))
+
 ;;; cpp flycheck google code guidelines
-(eval-after-load 'flycheck
-  '(progn
-     (require 'flycheck-google-cpplint)
-     ;; Add Google C++ Style checker.
-     ;; In default, syntax checked by Clang and Cppcheck.
-     (flycheck-add-next-checker 'c/c++-clang
-                                'c/c++-googlelint 'append)))
+;; (eval-after-load 'flycheck
+;;   '(progn
+;;      (require 'flycheck-google-cpplint)
+;;      ;; Add Google C++ Style checker.
+;;      ;; In default, syntax checked by Clang and Cppcheck.
+;;      (flycheck-add-next-checker 'c/c++-clang
+;;                                 'c/c++-googlelint 'append)))
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;

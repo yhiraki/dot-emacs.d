@@ -5,9 +5,9 @@
 ;; Author: Manuel Schneckenreither
 ;; Created: Tue Dec 11 00:43:14 2012 (+0100)
 ;; Version:
-;; Last-Updated: Fri Nov 21 09:12:54 2014 (+0100)
+;; Last-Updated: Fri Nov 21 14:23:29 2014 (+0100)
 ;;           By: Firstname Lastname
-;;     Update #: 426
+;;     Update #: 427
 ;; URL:
 ;; Description:
 ;;
@@ -109,6 +109,8 @@
 (load (concat package-conf-folder "function_args_config.el"))
 ;; Helm - narrowing framework
 (load (concat package-conf-folder "helm_config.el"))
+;; Cdlatex - fast input methods for LaTeX environments
+(load (concat package-conf-folder "cdlatex_config.el"))
 
 
 ;; ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++

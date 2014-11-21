@@ -1,0 +1,17 @@
+# -*- mode: snippet; require-final-newline: nil -*-
+# name: readCommandline
+# key: read
+# binding: direct-keybinding
+# --
+/**
+ * @brief Read something from command line
+ * @param pattern Pattern to look for and save in pointer
+ * @param ptr input gets saved in this pointer
+ *
+ *
+ */
+void scanf_flush(char* pattern, void *ptr) {
+  int ch;
+  scanf(pattern, ptr);
+  while ((ch = getchar()) != '\n' && ch != EOF);
+}

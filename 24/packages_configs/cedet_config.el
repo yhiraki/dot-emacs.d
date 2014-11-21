@@ -7,9 +7,9 @@
 ;; Created: So Okt 13 11:05:43 2013 (+0200)
 ;; Version:
 ;; Package-Requires: ()
-;; Last-Updated: Wed Nov  5 14:09:00 2014 (+0100)
+;; Last-Updated: Wed Nov 12 15:59:51 2014 (+0100)
 ;;           By: Manuel Schneckenreither
-;;     Update #: 251
+;;     Update #: 255
 ;; URL:
 ;; Doc URL:
 ;; Keywords:
@@ -164,7 +164,7 @@
 ;; you can use here.
 (add-to-list 'semantic-default-submodes 'global-semanticdb-minor-mode) ;; Maintain tag database.
 (add-to-list 'semantic-default-submodes 'global-semantic-idle-scheduler-mode) ;; Reparse buffer when idle.
-(add-to-list 'semantic-default-submodes 'global-semantic-idle-summary-mode) ;; Show summary of tag at point.
+;; (add-to-list 'semantic-default-submodes 'global-semantic-idle-summary-mode) ;; Show summary of tag at point.
 ;; (add-to-list 'semantic-default-submodes 'global-semantic-idle-completions-mode) ;; Show completions when idle.
 (remove 'global-semantic-idle-completions-mode 'semantic-default-submodes)
 ;; (add-to-list 'semantic-default-submodes 'global-semantic-decoration-mode) ;; Additional tag decorations.
@@ -182,7 +182,9 @@
 ;;(semantic-load-enable-gaudy-code-helper) ;; or this
 ;; (semantic-load-enable-excessive-code-helpers) ;; or that
 
-;; Enable Semantic
+
+       ;; Enable Semantic
+
 (semantic-mode 1)
 
 
@@ -190,6 +192,7 @@
 (global-semantic-decoration-mode 0) ;; if enabled it throws warnings as hell!
 (global-semantic-idle-completions-mode 0)
 (global-semantic-highlight-func-mode t)
+(setq global-semantic-idle-summary-mode nil)
 
 ;; customisation of modes
 (defun cedet-minor-mode-hook ()
