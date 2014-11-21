@@ -5,9 +5,9 @@
 ;; Author: Manuel Schneckenreither
 ;; Created: Tue Dec 11 00:43:14 2012 (+0100)
 ;; Version:
-;; Last-Updated: Wed Nov  5 14:33:53 2014 (+0100)
-;;           By: Manuel Schneckenreither
-;;     Update #: 425
+;; Last-Updated: Fri Nov 21 09:12:54 2014 (+0100)
+;;           By: Firstname Lastname
+;;     Update #: 426
 ;; URL:
 ;; Description:
 ;;
@@ -72,7 +72,7 @@
 ;; DIRED - file mangement for emacs
 (load (concat package-conf-folder "dired_config.el"))
 ;; DIRED PLUS - extension function for dired
-(load (concat package-conf-folder "diredp_config.el"))
+;; (load (concat package-conf-folder "diredp_config.el")) -- not available no more
 ;; PAGER -- better scrolling
 (load (concat package-conf-folder "pager_config.el"))
 ;; RAINBOW DELIMITERS - show parenthesis in different colors
