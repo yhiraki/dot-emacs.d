@@ -7,9 +7,9 @@
 ;; Created: Tue Jul 29 00:11:38 2014 (+0200)
 ;; Version:
 ;; Package-Requires: ()
-;; Last-Updated: Fri Nov 21 14:20:28 2014 (+0100)
+;; Last-Updated: Fri Nov 21 14:30:52 2014 (+0100)
 ;;           By: Manuel Schneckenreither
-;;     Update #: 478
+;;     Update #: 479
 ;; URL:
 ;; Doc URL:
 ;; Keywords:
