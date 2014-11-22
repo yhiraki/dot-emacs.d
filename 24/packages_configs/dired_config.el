@@ -7,9 +7,9 @@
 ;; Created: Di Mär  4 06:35:38 2014 (+0100)
 ;; Version:
 ;; Package-Requires: ()
-;; Last-Updated: Wed Oct 22 21:05:07 2014 (+0200)
-;;           By: Manuel Schneckenreither
-;;     Update #: 23
+;; Last-Updated: Fri Nov 21 09:13:03 2014 (+0100)
+;;           By: Firstname Lastname
+;;     Update #: 24
 ;; URL:
 ;; Doc URL:
 ;; Keywords:
@@ -47,6 +47,8 @@
 ;;
 ;;; Code:
 
+
+(require 'dired)
 
 ;; reuse the same buffer
 

@@ -7,9 +7,9 @@
 ;; Created: Mi Mär 26 10:56:13 2014 (+0100)
 ;; Version:
 ;; Package-Requires: ()
-;; Last-Updated: Mi Mär 26 11:18:22 2014 (+0100)
-;;           By: Manuel Schneckenreither
-;;     Update #: 4
+;; Last-Updated: Fri Nov 21 09:12:34 2014 (+0100)
+;;           By: Firstname Lastname
+;;     Update #: 5
 ;; URL:
 ;; Doc URL:
 ;; Keywords:
@@ -47,11 +47,12 @@
 ;;
 ;;; Code:
 
+;; (require 'dired)
 
 ;; dired plus configuration
 
-(define-key ctl-x-map   "d" 'diredp-dired-files)
-(define-key ctl-x-4-map "d" 'diredp-dired-files-other-window)
+;; (define-key ctl-x-map   "d" 'diredp-dired-files)
+;; (define-key ctl-x-4-map "d" 'diredp-dired-files-other-window)
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
