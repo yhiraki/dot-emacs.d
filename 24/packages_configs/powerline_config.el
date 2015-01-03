@@ -1,3 +1,3 @@
 ;; (powerline-default-theme)
-(require 'powerline)
-(powerline-center-theme)
+;; (require 'powerline)
+;; (powerline-center-theme)

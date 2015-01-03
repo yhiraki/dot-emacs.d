@@ -284,3 +284,46 @@
 (require 'org-cua-dwim)
 (org-cua-dwim-activate)
 
+;; ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+;; ++++++++++++++++++++++ DIARY SUNSET AND SUNRISE ++++++++++++++++++++++
+;; ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+
+(setq calendar-latitude 47.6667)
+(setq calendar-longitude 11.2)
+(setq calendar-location-name "Innsbruck, Austria")
+
+
+(defun cus/org-agenda-only-today (fn)
+  "Show the result of calling FN in the agenda for today."
+  (if (equal date (calendar-current-date))
+      (funcall fn)))
+
+
+(autoload 'solar-sunrise-sunset "solar.el")
+(autoload 'solar-time-string "solar.el")
+(defun diary-sunrise ()
+  "Local time of sunrise as a diary entry.
+The diary entry can contain `%s' which will be replaced with
+`calendar-location-name'."
+  (let ((l (solar-sunrise-sunset date)))
+    (when (car l)
+      (concat
+       (if (string= entry "")
+           "Sunrise"
+         (format entry (eval calendar-location-name))) " "
+         (solar-time-string (caar l) nil)))))
+
+(defun diary-sunset ()
+  "Local time of sunset as a diary entry.
+The diary entry can contain `%s' which will be replaced with
+`calendar-location-name'."
+  (let ((l (solar-sunrise-sunset date)))
+    (when (cadr l)
+      (concat
+       (if (string= entry "")
+           "Sunset"
+         (format entry (eval calendar-location-name))) " "
+         (solar-time-string (caadr l) nil)))))
+
+

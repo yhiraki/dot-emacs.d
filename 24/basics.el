@@ -5,9 +5,9 @@
 ;; Author: Manuel Schneckenreither
 ;; Created: Mon Dec 10 22:51:09 2012 (+0100)
 ;; Version:
-;; Last-Updated: Tue Nov 18 15:21:13 2014 (+0100)
+;; Last-Updated: Tue Dec 16 20:00:57 2014 (+0100)
 ;;           By: Manuel Schneckenreither
-;;     Update #: 789
+;;     Update #: 798
 ;; URL:
 ;; Description:
 ;;    Basic configuration for emacs. In here are all configs of
@@ -533,6 +533,17 @@ mode of the invoking window is in
 ;; Octave Mode
 (require 'octave)
 
+;; Send mail to myself in bcc
+(defun add-sender-mail-bcc ()
+  (interactive)
+  (mail-bcc)
+  (if (char-equal (char-before (- (point) 1)) ?:)
+      (insert (message-fetch-field "From"))
+    (progn
+      (insert ", ")
+      (insert (message-fetch-field "From")))))
+
+
 ;; REPLACE S EXPRESSION
 (defun replace-last-sexp ()
   (interactive)
@@ -541,5 +552,12 @@ mode of the invoking window is in
     (insert (format "%S" value))))
 
 (global-set-key (kbd (concat prefix-command-key " C-e")) 'replace-last-sexp)
+
+;; MAIL
+(setq mail-user-agent 'sendmail-user-agent)
+;; (setq mail-self-blind nil) ;; does not work for me, solved by bcc'ing to myself
+(add-hook 'message-send-hook 'add-sender-mail-bcc)
+
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; basics.el ends here
