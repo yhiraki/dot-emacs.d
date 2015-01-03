@@ -8,7 +8,7 @@
 ;; Version:
 ;; Last-Updated:
 ;;           By:
-;;     Update #: 672
+;;     Update #: 680
 ;; URL:
 ;; Description:
 ;;
@@ -43,6 +43,7 @@
 (setq haskell-program-name "ghci")
 (setq haskell-process-args-ghci
       '("-ferror-spans"
+        "-cpp"                          ; enable cpp processing
         "-DDEBUG"
         "-pgmF loch"
         "-fbreak-on-error"
@@ -87,7 +88,7 @@
 
 
 ;; (define-key haskell-mode-map (kbd "C-x C-s") 'haskell-mode-save-buffer)
-(setq haskell-stylish-on-save t)
+;; (setq haskell-stylish-on-save nil)
 
 
 ;; (speedbar-add-supported-extension ".hs")
@@ -160,6 +161,10 @@
 
 ;; enable flycheck
 ;; (eval-after-load 'flycheck '(require 'flycheck-hdevtools))
+(setq flycheck-ghc-args '("-DDEBUG"
+                          "-DFLYCHECK"
+                          ))
+
 
 ;; ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 ;; +++++++++++++++++++++++++++++ MINOR MODE +++++++++++++++++++++++++++++
@@ -386,6 +391,7 @@ attention to case differences."
 
 ;; disable pop-ups
 (setq haskell-interactive-popup-errors nil)
+
 
 ;; modules to add
 (add-hook 'haskell-mode-hook 'turn-on-haskell-doc-mode)

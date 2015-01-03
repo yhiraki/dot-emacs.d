@@ -7,9 +7,9 @@
 ;; Created: Di Feb  4 17:01:05 2014 (+0100)
 ;; Version:
 ;; Package-Requires: ()
-;; Last-Updated: Mon Nov 17 19:24:56 2014 (+0100)
+;; Last-Updated: Tue Dec 16 19:44:22 2014 (+0100)
 ;;           By: Manuel Schneckenreither
-;;     Update #: 56
+;;     Update #: 58
 ;; URL:
 ;; Doc URL:
 ;; Keywords:
@@ -240,9 +240,6 @@
 ;; Otherwise, both GNUS and Supercite will insert an attribution
 ;; header:
 ;; (setq news-reply-header-hook nil)
-
-
-(setq mail-self-blind t)
 
 ;; ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 ;; +++++++++++++++++++++++++++ GNUS NOTIFY ++++++++++++++++++++++++++++++
