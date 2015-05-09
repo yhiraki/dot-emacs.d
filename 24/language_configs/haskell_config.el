@@ -8,7 +8,7 @@
 ;; Version:
 ;; Last-Updated:
 ;;           By:
-;;     Update #: 680
+;;     Update #: 696
 ;; URL:
 ;; Description:
 ;;
@@ -194,7 +194,9 @@
     (goto-char (point-min))
     (haskell-indent-align-def t 'guard)
     (haskell-indent-align-def t 'rhs)
-    ))
+    )
+   ;; (haskell-mode-format-imports)
+  )
 
 
 ;; need to declare these two function
@@ -269,7 +271,7 @@ attention to case differences."
   (auto-complete-mode)
 
   ;; use programming flyspell mode
-  ;; (flyspell-prog-mode)
+  (flyspell-prog-mode)
 
   ;; format source code in sensible way
   ;; (add-hook 'before-save-hook 'haskell-source-code-align nil t)
@@ -280,7 +282,7 @@ attention to case differences."
   ;; (define-key interactive-haskell-mode-map (kbd "C-c c") nil)
 
   ;; (Local-set-key (kbd "C-j")  'haskell-newline)
-  ;; (local-set-key (kbd "RET")  'newline-and-indent)
+  (local-set-key (kbd "RET")  'newline-and-indent)
 
   ;; Disabled set special keys
   ;; (local-set-key (kbd "=")  'haskell-insert-equals)
@@ -326,6 +328,8 @@ attention to case differences."
   ;; (define-set-key (kbd "C-c c") 'comment-or-uncomment-region)
   ;; (define-key 'haskell-mode-map (kbd "C-.") 'find-tag)
 
+
+  (define-key haskell-mode-map "\C-c h h" 'haskell-hoogle)
 
   ;; CREATE AND SET TAGS FILE
   (add-hook 'after-save-hook 'make-haskell-tags nil t)

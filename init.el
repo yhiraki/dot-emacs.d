@@ -7,9 +7,9 @@
 ;; Created: Tue Jul 29 00:11:38 2014 (+0200)
 ;; Version:
 ;; Package-Requires: ()
-;; Last-Updated: Fri Jan 16 10:14:52 2015 (+0100)
+;; Last-Updated: Fri May  8 16:33:52 2015 (+0200)
 ;;           By: Manuel Schneckenreither
-;;     Update #: 558
+;;     Update #: 668
 ;; URL:
 ;; Doc URL:
 ;; Keywords:
@@ -353,7 +353,7 @@
  '(mpc-data-directory "~/.emacs.d/.tmp/mpc")
  '(org-agenda-files
    (quote
-    ("~/Documents/Planning/planning_time.org" "~/Documents/Planning/university.org" "~/Documents/Planning/ProjectIdeas.org" "~/Documents/Planning/freetime.org" "~/Documents/Planning/lists.org" "~/Documents/Planning/anniverseries.org" "~/Documents/Planning/Emacs.org" "~/Documents/Planning/jobcl.org" "~/Programmierung/App/Documentation/app-brainstorming.txt" "~/.emacs.d/org/notes.org")))
+    ("~/Documents/Planning/planning_time.org" "~/Documents/Planning/university.org" "~/Documents/Planning/ProjectIdeas.org" "~/Documents/Planning/freetime.org" "~/Documents/Planning/lists.org" "~/Documents/Planning/anniverseries.org" "~/Documents/Planning/Emacs.org" "~/Documents/Planning/jobcl.org" "~/Documents/Planning/jobanna.org" "~/Programmierung/App/Documentation/app-brainstorming.txt" "~/.emacs.d/org/notes.org")))
  '(send-mail-function (quote smtpmail-send-it))
  '(setq max-specpdl-size t)
  '(size-indication-mode t)

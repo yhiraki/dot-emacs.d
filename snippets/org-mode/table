@@ -3,6 +3,7 @@
 # key: tbl
 # binding: direct-keybinding
 # --
+# Info: edit fields with C-c `
 #+attr_latex: :placement [h!]
 #+NAME: global
 #+CAPTION: This table contains the external factors for \textit{hoop u fit}.

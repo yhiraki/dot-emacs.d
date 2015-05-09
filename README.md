@@ -188,7 +188,7 @@ Steps 1 + 2 + 3 + 5 + 7 (4 not included!):
     mpd                                                                        # install mpd music server \
     python-jedi python-virtualenv                                              # Python completion \
     texlive evince &&                                                          # LaTeX \
-    cabal install hasktags structured-haskell-mode &&                          # Haskell \
+    cabal install hasktags structured-haskell-mode stylish-haskell &&                          # Haskell \
     perl-CPAN mariadb-devel && cpan -fi Module::Build::Compat &&               # database tools \
     cpan -fi RPC::EPC::Service DBI DBD::SQLite DBD::Pg DBD::mysql" &&          # database tools \
     echo "(load-file \"~/.emacs.d/gnus.el\")" > ~/.gnus.el &&                  # create gnus file \
@@ -276,6 +276,7 @@ Dependencies:
 + Haskell
   - cabal (of course)
   - hasktags ($ cabal install hasktags)
+  - stylish-haskell (format souce code nicely)
   - structured-haskell-mode ($ cabal install structured-haskell-mode)
 
 + Database Viewer: edbi
