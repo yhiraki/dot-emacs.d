@@ -7,9 +7,9 @@
 ;; Created: Di Feb  4 12:54:58 2014 (+0100)
 ;; Version:
 ;; Package-Requires: ()
-;; Last-Updated: Mon Oct 13 15:33:57 2014 (+0200)
+;; Last-Updated: Wed Sep 16 10:28:33 2015 (+0200)
 ;;           By: Manuel Schneckenreither
-;;     Update #: 274
+;;     Update #: 279
 ;; URL:
 ;; Doc URL:
 ;; Keywords:
@@ -49,8 +49,8 @@
 
 
 ;; Don't create that ugly Mail folder in my home directory
-;; (setq gnus-directory (expand-file-name "~/.mail/"))
-;; (setq gnus-home-directory "~/.mail/")
+;; (setq gnus-directory (expand-file-name "~/Mail/"))
+;; (setq gnus-home-directory "~/Mail/")
 
 
 ;; (load-file (concat package-folder "gnus/gnus-desktop-notify.el"))
@@ -108,8 +108,8 @@
 ;;       '(nnfolder "archive"
 ;;                  (nnfolder-inhibit-expiry t)
 ;;                  (nnfolder-get-new-mail nil)
-;;                  (nnfolder-active-file "~/.mail/sent-mail/active")
-;;                  (nnfolder-directory "~/.mail/sent-mail/")
+;;                  (nnfolder-active-file "~/Mail/sent-mail/active")
+;;                  (nnfolder-directory "~/Mail/sent-mail/")
 ;;                  ))
 
 
@@ -117,9 +117,9 @@
 
 
 ;; ;; set folder paths
-;; (setq gnus-article-save-directory "~/.mail/News/")
+;; (setq gnus-article-save-directory "~/Mail/News/")
 
-;; (setq gnus-home-directory "~/.mail/"
+;; (setq gnus-home-directory "~/Mail/"
 ;;       message-directory (concat gnus-home-directory "messages/")
 ;;       nnfolder-directory (concat gnus-home-directory "archive/")
 ;;       gnus-directory (concat gnus-home-directory "news/")
@@ -223,7 +223,7 @@
 (setq gnus-ignored-from-addresses "Manuel Schneckenreither")
 
 
-;; Group buffer
+;; ;; Group buffer
 (add-hook 'gnus-group-mode-hook 'gnus-topic-mode)
 
 (setq gnus-group-line-format "\t%M%S%p%P%4y: %B%*%(%-66,66g%)%6O\t%18ud [%5t]\n"
@@ -241,7 +241,7 @@
 ;; ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 (setq mail-signature t)
-(setq mail-signature-file "~/.mail/signature")
+(setq mail-signature-file "~/Mail/signature")
 (setq message-cite-reply-position (quote traditional))
 (setq gnus-posting-styles '(
                             (".*"
@@ -345,59 +345,59 @@
 ;; +++++++++++++++++++++++++ FORMATING LISTS ++++++++++++++++++++++++++++
 ;; ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
-;; ;; article lists
-;; (setq gnus-face-0 'gnus-server-offline
-;;       gnus-face-1 'gnus-server-agent
-;;       gnus-face-2 'gnus-server-opened
-;;       gnus-summary-line-format "%U%R%z | %6i | %(%-16,16&user-date;  %-20,20f  %2uj  %*%B%s%)\n"
-;;       gnus-user-date-format-alist '(((gnus-seconds-today) . "Today      %2H:%2M")
-;;                                     ((+ 86400 (gnus-seconds-today)) . "Yesterday  %H:%M")
-;;                                     ;; (604800 . "%A %2H:%2M") ;; that's one week
-;;                                     (t . "%d.%m.%Y %2H:%2M"))
-;;       gnus-summary-thread-gathering-function 'gnus-gather-threads-by-references
-;;       gnus-thread-sort-functions '(gnus-thread-sort-by-date)
-;;       gnus-sum-thread-tree-false-root ""
-;;       gnus-sum-thread-tree-indent " "
-;;       gnus-sum-thread-tree-leaf-with-other "├► "
-;;       gnus-sum-thread-tree-root ""
-;;       gnus-sum-thread-tree-single-leaf "╰► "
-;;       gnus-sum-thread-tree-vertical "│")
-;;
-;;
-;; ;; show “»” if i’m the only recipient of the message, or a “~” if i’m
-;; ;; in the To:, Cc: or BCc: headers among others:
-;; (defun gnus-user-format-function-j (headers)
-;;   (let ((to (gnus-extra-header 'To headers)))
-;;     (if (string-match your-mail-addresses to)
-;;         (if (string-match "[\"\' \<.[:alnum:]]*@[\>.[:alnum:]]*[:space]*,[\"\' \<\>.[:alnum:]]*@" to) "~" "»")
-;;       (if (or (string-match your-mail-addresses
-;;                             (gnus-extra-header 'Cc headers))
-;;               (string-match your-mail-addresses
-;;                             (gnus-extra-header 'BCc headers)))
-;;           "~"
-;;         (if (string-match your-mail-addresses (mail-header-from headers))
-;;             "m"
-;;           " ")
-;;         ))))
-;;
-;; ;; Coloring empty topics differently from non-empty topics is a nice idea.
-;; (setq gnus-topic-line-format "%i[ %u&topic-line; ] %v\n")
-;;
-;; ;; this corresponds to a topic line format of "%n %A"
-;; (defun gnus-user-format-function-topic-line (dummy)
-;;   (let ((topic-face (if (zerop total-number-of-articles)
-;;                         'my-gnus-topic-empty-face
-;;                       'my-gnus-topic-face)))
-;;     (propertize
-;;      (format "%s %d" name total-number-of-articles)
-;;      'face topic-face)))
+;; article lists
+(setq gnus-face-0 'gnus-server-offline
+      gnus-face-1 'gnus-server-agent
+      gnus-face-2 'gnus-server-opened
+      gnus-summary-line-format "%U%R%z | %6i | %(%-16,16&user-date;  %-20,20f  %2uj  %*%B%s%)\n"
+      gnus-user-date-format-alist '(((gnus-seconds-today) . "Today      %2H:%2M")
+                                    ((+ 86400 (gnus-seconds-today)) . "Yesterday  %H:%M")
+                                    ;; (604800 . "%A %2H:%2M") ;; that's one week
+                                    (t . "%d.%m.%Y %2H:%2M"))
+      gnus-summary-thread-gathering-function 'gnus-gather-threads-by-references
+      gnus-thread-sort-functions '(gnus-thread-sort-by-date)
+      gnus-sum-thread-tree-false-root ""
+      gnus-sum-thread-tree-indent " "
+      gnus-sum-thread-tree-leaf-with-other "├► "
+      gnus-sum-thread-tree-root ""
+      gnus-sum-thread-tree-single-leaf "╰► "
+      gnus-sum-thread-tree-vertical "│")
+
+
+;; show “»” if i’m the only recipient of the message, or a “~” if i’m
+;; in the To:, Cc: or BCc: headers among others:
+(defun gnus-user-format-function-j (headers)
+  (let ((to (gnus-extra-header 'To headers)))
+    (if (string-match your-mail-addresses to)
+        (if (string-match "[\"\' \<.[:alnum:]]*@[\>.[:alnum:]]*[:space]*,[\"\' \<\>.[:alnum:]]*@" to) "~" "»")
+      (if (or (string-match your-mail-addresses
+                            (gnus-extra-header 'Cc headers))
+              (string-match your-mail-addresses
+                            (gnus-extra-header 'BCc headers)))
+          "~"
+        (if (string-match your-mail-addresses (mail-header-from headers))
+            "m"
+          " ")
+        ))))
+
+;; Coloring empty topics differently from non-empty topics is a nice idea.
+(setq gnus-topic-line-format "%i[ %u&topic-line; ] %v\n")
+
+;; this corresponds to a topic line format of "%n %A"
+(defun gnus-user-format-function-topic-line (dummy)
+  (let ((topic-face (if (zerop total-number-of-articles)
+                        'my-gnus-topic-empty-face
+                      'my-gnus-topic-face)))
+    (propertize
+     (format "%s %d" name total-number-of-articles)
+     'face topic-face)))
 ;;
 ;;
 ;; ;;; turn on debug info
 ;; (setq smtpmail-debug-info t)
 ;;
 ;;; add cc and bcc when composing emails
-(setq message-default-mail-headers "Cc: \nBcc: manuel.schnecki@gmail.com\n")
+;; (setq message-default-mail-headers "Cc: \nBcc: manuel.schnecki@gmail.com\n")
 ;;
 ;; ;;; If nil, attach files as normal parts in Fcc copies; if it is non-nil, attach
 ;; ;;; local files as external parts.

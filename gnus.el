@@ -7,9 +7,9 @@
 ;; Created: Di Feb  4 17:01:05 2014 (+0100)
 ;; Version:
 ;; Package-Requires: ()
-;; Last-Updated: Tue Dec 16 19:44:22 2014 (+0100)
+;; Last-Updated: Tue Sep 22 15:57:06 2015 (+0200)
 ;;           By: Manuel Schneckenreither
-;;     Update #: 58
+;;     Update #: 62
 ;; URL:
 ;; Doc URL:
 ;; Keywords:
@@ -219,7 +219,7 @@
 ;; ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 (setq mail-signature t)
-(setq mail-signature-file "~/.mail/signature")
+(setq mail-signature-file "~/Mail/signature")
 (setq message-cite-reply-position (quote traditional))
 (setq gnus-posting-styles '(
                             (".*"
@@ -227,6 +227,9 @@
                              (name "Manuel Schneckenreither"))
                             ))
 
+
+;; Sign messages by default.
+;; (add-hook 'message-setup-hook 'mml-secure-message-sign-pgpmime)
 
 ;; ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 ;; +++++++++++++++++++++++++++++ CITING +++++++++++++++++++++++++++++++++

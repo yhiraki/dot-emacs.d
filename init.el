@@ -7,9 +7,9 @@
 ;; Created: Tue Jul 29 00:11:38 2014 (+0200)
 ;; Version:
 ;; Package-Requires: ()
-;; Last-Updated: Fri May  8 16:33:52 2015 (+0200)
+;; Last-Updated: Mon Oct 12 16:09:52 2015 (+0200)
 ;;           By: Manuel Schneckenreither
-;;     Update #: 668
+;;     Update #: 811
 ;; URL:
 ;; Doc URL:
 ;; Keywords:
@@ -197,6 +197,9 @@
         latex-pretty-symbols
         latex-extra
         magit
+        markdown-mode
+        markdown-mode+
+        markdown-toc
         multiple-cursors
         org
         org-ac
@@ -208,6 +211,7 @@
         pager
         pager-default-keybindings
         paredit
+        php-mode
         popup
         powerline
         rainbow-delimiters
@@ -218,6 +222,7 @@
         thesaurus
         tuareg
         undo-tree
+        vc-darcs
         w3m
         wide-n
         window-number
@@ -350,10 +355,12 @@
  '(jde-jdk-registry (quote (("1.6" . "/usr/lib/jvm/java-default-runtime"))))
  '(jde-sourcepath (quote ("./src/main" "./src/test")))
  '(kept-new-versions 5000)
- '(mpc-data-directory "~/.emacs.d/.tmp/mpc")
+ '(mpc-host "192.168.178.62")
  '(org-agenda-files
    (quote
-    ("~/Documents/Planning/planning_time.org" "~/Documents/Planning/university.org" "~/Documents/Planning/ProjectIdeas.org" "~/Documents/Planning/freetime.org" "~/Documents/Planning/lists.org" "~/Documents/Planning/anniverseries.org" "~/Documents/Planning/Emacs.org" "~/Documents/Planning/jobcl.org" "~/Documents/Planning/jobanna.org" "~/Programmierung/App/Documentation/app-brainstorming.txt" "~/.emacs.d/org/notes.org")))
+    ("~/Documents/UIBK/9.Semester/Thesis: Production planning using dynamic planned lead times/tasks.org" "~/Documents/Planning/planning_time.org" "~/Documents/Planning/university.org" "~/Documents/Planning/ProjectIdeas.org" "~/Documents/Planning/freetime.org" "~/Documents/Planning/lists.org" "~/Documents/Planning/anniverseries.org" "~/Documents/Planning/Emacs.org" "~/Documents/Planning/jobcl.org" "~/Documents/Planning/jobanna.org" "~/Programmierung/App/Documentation/app-brainstorming.txt" "~/.emacs.d/org/notes.org" "~/Documents/Jobs/UIBK/PLM/z-Tree/tasks.org")))
+ '(org-latex-table-caption-above nil)
+ '(org-use-sub-superscripts (quote {}))
  '(send-mail-function (quote smtpmail-send-it))
  '(setq max-specpdl-size t)
  '(size-indication-mode t)

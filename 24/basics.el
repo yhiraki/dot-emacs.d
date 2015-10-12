@@ -5,9 +5,9 @@
 ;; Author: Manuel Schneckenreither
 ;; Created: Mon Dec 10 22:51:09 2012 (+0100)
 ;; Version:
-;; Last-Updated: Sat Jan 24 11:56:28 2015 (+0100)
+;; Last-Updated: Sun Oct  4 15:27:15 2015 (+0200)
 ;;           By: Manuel Schneckenreither
-;;     Update #: 799
+;;     Update #: 800
 ;; URL:
 ;; Description:
 ;;    Basic configuration for emacs. In here are all configs of
@@ -560,6 +560,13 @@ mode of the invoking window is in
 
 ;; Octave Mode
 (require 'octave)
+
+
+;; version control darcs repositories
+(add-to-list 'vc-handled-backends 'DARCS)
+(autoload 'vc-darcs-find-file-hook "vc-darcs")
+(add-hook 'find-file-hooks 'vc-darcs-find-file-hook)
+
 
 ;; Send mail to myself in bcc
 (defun add-sender-mail-bcc ()

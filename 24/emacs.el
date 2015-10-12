@@ -5,9 +5,9 @@
 ;; Author: Manuel Schneckenreither
 ;; Created: Tue Dec 11 00:43:14 2012 (+0100)
 ;; Version:
-;; Last-Updated: Fri Nov 21 14:23:29 2014 (+0100)
-;;           By: Firstname Lastname
-;;     Update #: 427
+;; Last-Updated: Mon Oct 12 15:45:18 2015 (+0200)
+;;           By: Manuel Schneckenreither
+;;     Update #: 429
 ;; URL:
 ;; Description:
 ;;
@@ -86,7 +86,7 @@
 ;; BBDB - Address-Book Management (load before GNUS)
 (load (concat package-conf-folder "bbdb_config.el"))
 ;; GNUS - Newsreader and Email Client
-;; (load (concat package-conf-folder "gnus_config.el"))
+(load (concat package-conf-folder "gnus_config.el"))
 ;; CUA - use rectangle selections
 (load (concat package-conf-folder "cua_config.el"))
 ;; BOOKMARKS+ - bookmark extendsion, multiple desktops
@@ -128,6 +128,7 @@
 (load-file (concat language-conf-folder "octave_config.el"))
 (load-file (concat language-conf-folder "bash_config.el"))
 (load-file (concat language-conf-folder "python_config.el"))
+(load-file (concat language-conf-folder "php_config.el"))
 
 ;; ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 ;; ++++++++++++++++++++++++++ LOAD KEYBINDINGS ++++++++++++++++++++++++++

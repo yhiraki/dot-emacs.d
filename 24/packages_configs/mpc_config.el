@@ -7,9 +7,9 @@
 ;; Created: Mo Apr 14 17:47:32 2014 (+0200)
 ;; Version:
 ;; Package-Requires: ()
-;; Last-Updated: Do Apr 17 16:48:41 2014 (+0200)
+;; Last-Updated: Thu Sep 17 16:56:15 2015 (+0200)
 ;;           By: Manuel Schneckenreither
-;;     Update #: 26
+;;     Update #: 30
 ;; URL:
 ;; Doc URL:
 ;; Keywords:
@@ -57,10 +57,11 @@
   (setq mpd-executeable "mpd"))
 
 
-(if (executable-find mpd-executeable)
+;; DISABLED as being run on raspberry server
+;; (if (executable-find mpd-executeable)
 
-    ;; start mpd server (nil means hide output)
-    (start-process "mpd-service" nil mpd-executeable))
+;;     ;; start mpd server (nil means hide output)
+;;     (start-process "mpd-service" nil mpd-executeable))
 
 (require 'mpc)
 

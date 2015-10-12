@@ -7,9 +7,9 @@
 ;; Created: Fr Feb  7 00:07:46 2014 (+0100)
 ;; Version:
 ;; Package-Requires: ()
-;; Last-Updated: Fri Dec 12 09:21:20 2014 (+0100)
+;; Last-Updated: Mon Oct 12 16:07:55 2015 (+0200)
 ;;           By: Manuel Schneckenreither
-;;     Update #: 91
+;;     Update #: 93
 ;; URL:
 ;; Doc URL:
 ;; Keywords:
@@ -78,6 +78,7 @@
     (setq esdir (replace-regexp-in-string " " "\\\\ " dir))
     (shell-command
      (concat "cd " esdir " && find . -name \"*.c\" -o -name \"*.h\" -o -name \"*.cpp\" -o -name \"*.hpp\" | etags - 1>/dev/null 2>/dev/null") nil)
+    (message (concat "cd " esdir " && find . -name \"*.c\" -o -name \"*.h\" -o -name \"*.cpp\" -o -name \"*.hpp\" | etags - 1>/dev/null 2>/dev/null") nil)
     (visit-tags-table (concat dir "TAGS"))))
 
 (require 'auto-complete-config)

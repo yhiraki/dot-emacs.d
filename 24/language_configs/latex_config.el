@@ -7,9 +7,9 @@
 ;; Created: Sa Nov  2 16:14:09 2013 (+0100)
 ;; Version:
 ;; Package-Requires: ()
-;; Last-Updated: Fri Oct  3 21:37:05 2014 (+0200)
+;; Last-Updated: Sun May 10 12:57:23 2015 (+0200)
 ;;           By: Manuel Schneckenreither
-;;     Update #: 77
+;;     Update #: 81
 ;; URL:
 ;; Doc URL:
 ;; Keywords:
@@ -134,6 +134,8 @@
   (TeX-command "View" 'TeX-active-master 0)
   )
 
+
+;; (add-hook 'doc-view-mode-hook 'auto-revert-mode)
 
 (setq TeX-view-program-selection
       '((output-html "xdg-open")
