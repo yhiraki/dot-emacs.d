@@ -7,9 +7,9 @@
 ;; Created: Di Feb  4 17:01:05 2014 (+0100)
 ;; Version:
 ;; Package-Requires: ()
-;; Last-Updated: Tue Sep 22 15:57:06 2015 (+0200)
+;; Last-Updated: Thu Dec  3 15:53:04 2015 (+0100)
 ;;           By: Manuel Schneckenreither
-;;     Update #: 62
+;;     Update #: 64
 ;; URL:
 ;; Doc URL:
 ;; Keywords:
@@ -221,11 +221,19 @@
 (setq mail-signature t)
 (setq mail-signature-file "~/Mail/signature")
 (setq message-cite-reply-position (quote traditional))
-(setq gnus-posting-styles '(
-                            (".*"
-                             (signature-file "~/News/signature")
-                             (name "Manuel Schneckenreither"))
-                            ))
+(setq gnus-posting-styles
+      '(((header "to" "manuel.schnecki@gmail.com")
+         (address "manuel.schnecki@gmail.com"))
+        ((header "to" "manuel.schneckenreither@student.uibk.ac.at")
+         (address "manuel.schneckenreither@student.uibk.ac.at"))
+        ((header "cc" "manuel.schneckenreither@student.uibk.ac.at")
+         (address "manuel.schneckenreither@student.uibk.ac.at"))
+        ((header "cc" "manuel.schnecki@gmail.com")
+         (address "manuel.schnecki@gmail.com"))
+        ;; (".*"
+        ;;  (signature-file "~/News/signature")
+        ;;  (name "Manuel Schneckenreither")))
+      ))
 
 
 ;; Sign messages by default.

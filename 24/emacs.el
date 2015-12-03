@@ -5,9 +5,9 @@
 ;; Author: Manuel Schneckenreither
 ;; Created: Tue Dec 11 00:43:14 2012 (+0100)
 ;; Version:
-;; Last-Updated: Mon Oct 12 15:45:18 2015 (+0200)
+;; Last-Updated: Sun Nov 29 14:11:36 2015 (+0100)
 ;;           By: Manuel Schneckenreither
-;;     Update #: 429
+;;     Update #: 434
 ;; URL:
 ;; Description:
 ;;
@@ -31,13 +31,13 @@
 ;; ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 ;; WINNER MODE - undo window configurations (needs to be done before ECB)
-(load (concat package-conf-folder "winner_mode_config.el"))
+;; (load (concat package-conf-folder "winner_mode_config.el"))
 ;; CEDET - semantic, EDE, etc. (needs to be done pretty early!)
 (load (concat package-conf-folder "cedet_config.el"))
 ;; EDE - project management in emacs
 (load (concat package-conf-folder "ede_config.el"))
 ;; ECB - buffers on the side showing information
-(load (concat package-conf-folder "ecb_config.el"))
+;; (load (concat package-conf-folder "ecb_config.el"))
 ;; Eldoc config
 (load (concat package-conf-folder "eldoc_config.el"))
 ;; FLYCHECK -- automatic syntax checking on-the-fly
@@ -58,6 +58,10 @@
 (load (concat package-conf-folder "yasnippet_config.el"))
 ;; JDEE Mode - Java mode
 (load (concat package-conf-folder "jdee_config.el"))
+;; RAINBOW DELIMITERS - show parenthesis in different colors
+(load (concat package-conf-folder "rainbow_del_config.el"))
+;; ;; RAINBOW MODE - background of color names in specified color (kills org-mode agenda colors)
+;; (load (concat package-conf-folder "rainbow_mode_config.el"))
 ;; ORG Mode - organize everything
 (load (concat package-conf-folder "org_mode_config.el"))
 ;; AUTO COMPLETE - completion - You should not disable this, unless
@@ -75,10 +79,6 @@
 ;; (load (concat package-conf-folder "diredp_config.el")) -- not available no more
 ;; PAGER -- better scrolling
 (load (concat package-conf-folder "pager_config.el"))
-;; RAINBOW DELIMITERS - show parenthesis in different colors
-(load (concat package-conf-folder "rainbow_del_config.el"))
-;; RAINBOW MODE - background of color names in specified color
-(load (concat package-conf-folder "rainbow_mode_config.el"))
 ;; POWERLINE - better modline
 (load (concat package-conf-folder "powerline_config.el"))
 ;; ANDROID MODE

@@ -7,9 +7,9 @@
 ;; Created: Tue Jul 29 00:11:38 2014 (+0200)
 ;; Version:
 ;; Package-Requires: ()
-;; Last-Updated: Mon Oct 12 16:09:52 2015 (+0200)
+;; Last-Updated: Sun Nov 29 14:16:56 2015 (+0100)
 ;;           By: Manuel Schneckenreither
-;;     Update #: 811
+;;     Update #: 819
 ;; URL:
 ;; Doc URL:
 ;; Keywords:
@@ -88,7 +88,7 @@
 ;; Edit your settings in settings.el
 
 ;; define folder variables
-(defvar home-folder (substitute-in-file-name "$HOME/"))
+(defvar home-folder (substitute-in-file-name "$HOME"))
 (defvar load-emacsd (concat home-folder ".emacs.d/") "The .emacs.d folder path.")
 
 ;; the settings file name to load
@@ -137,8 +137,10 @@
 (setq jpk-packages
       '(
         ac-c-headers
+        ac-capf
         ac-dabbrev
         ac-ispell                       ; config in auto_complete_config.el
+        ac-etags
         ac-math
         ac-octave
         ace-jump-mode
@@ -300,7 +302,8 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(Flymake-compilation-prevents-syntax-check nil)
- '(bmkp-last-as-first-bookmark-file "~/.emacs.d/.bookmarks")
+ '(ac-etags-requires 1)
+ '(bmkp-last-as-first-bookmark-file "/home/schnecki/.emacs.d/.bookmarks")
  '(color-theme-legal-frame-parameters "\\(color\\|mode\\|font\\|height\\|width\\)$")
  '(column-number-mode t)
  '(cua-delete-selection nil)
@@ -346,6 +349,7 @@
  '(frame-background-mode (quote dark))
  '(global-flycheck-mode t nil (flycheck))
  '(gnus-topic-display-empty-topics nil)
+ '(helm-case-fold-search t)
  '(help-at-pt-display-when-idle (quote (flymake-overlay)) nil (help-at-pt))
  '(help-at-pt-timer-delay 0.1)
  '(jde-compile-option-directory "./../classes")
@@ -358,7 +362,7 @@
  '(mpc-host "192.168.178.62")
  '(org-agenda-files
    (quote
-    ("~/Documents/UIBK/9.Semester/Thesis: Production planning using dynamic planned lead times/tasks.org" "~/Documents/Planning/planning_time.org" "~/Documents/Planning/university.org" "~/Documents/Planning/ProjectIdeas.org" "~/Documents/Planning/freetime.org" "~/Documents/Planning/lists.org" "~/Documents/Planning/anniverseries.org" "~/Documents/Planning/Emacs.org" "~/Documents/Planning/jobcl.org" "~/Documents/Planning/jobanna.org" "~/Programmierung/App/Documentation/app-brainstorming.txt" "~/.emacs.d/org/notes.org" "~/Documents/Jobs/UIBK/PLM/z-Tree/tasks.org")))
+    ("~/Documents/UIBK/9.Semester/Thesis: Production planning using dynamic planned lead times/tasks.org" "~/Documents/Planning/planning_time.org" "~/Documents/Planning/university.org" "~/Documents/Planning/ProjectIdeas.org" "~/Documents/Planning/freetime.org" "~/Documents/Planning/lists.org" "~/Documents/Planning/anniverseries.org" "~/Documents/Planning/Emacs.org" "~/Documents/Planning/jobcl.org" "~/Programmierung/App/Documentation/app-brainstorming.txt" "~/Documents/Jobs/UIBK/PLM/z-Tree/tasks.org")))
  '(org-latex-table-caption-above nil)
  '(org-use-sub-superscripts (quote {}))
  '(send-mail-function (quote smtpmail-send-it))

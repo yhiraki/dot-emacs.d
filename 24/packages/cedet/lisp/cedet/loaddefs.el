@@ -3,8 +3,8 @@
 ;;; Code:
 
 
-;;;### (autoloads nil "cedet-android" "cedet-android.el" (21614 60114
-;;;;;;  175436 66000))
+;;;### (autoloads nil "cedet-android" "cedet-android.el" (22103 28577
+;;;;;;  414368 64000))
 ;;; Generated autoloads from cedet-android.el
 
 (autoload 'cedet-android-create-project "cedet-android" "\
@@ -63,8 +63,8 @@ Update the classpath for `cedet-java' to include the android compile-time librar
 
 ;;;***
 
-;;;### (autoloads nil "cedet-edebug" "cedet-edebug.el" (21614 60114
-;;;;;;  175436 66000))
+;;;### (autoloads nil "cedet-edebug" "cedet-edebug.el" (22103 28577
+;;;;;;  414368 64000))
 ;;; Generated autoloads from cedet-edebug.el
 
 (add-hook 'edebug-setup-hook (lambda nil (require 'cedet-edebug) (defalias 'edebug-prin1-to-string 'cedet-edebug-prin1-to-string) (define-key edebug-mode-map "A" 'data-debug-edebug-expr)))
@@ -73,8 +73,8 @@ Update the classpath for `cedet-java' to include the android compile-time librar
 
 ;;;***
 
-;;;### (autoloads nil "cedet-global" "cedet-global.el" (21614 60114
-;;;;;;  175436 66000))
+;;;### (autoloads nil "cedet-global" "cedet-global.el" (22103 28577
+;;;;;;  414368 64000))
 ;;; Generated autoloads from cedet-global.el
 
 (autoload 'cedet-gnu-global-version-check "cedet-global" "\
@@ -87,8 +87,8 @@ return nil.
 
 ;;;***
 
-;;;### (autoloads nil "cedet-graphviz" "cedet-graphviz.el" (21614
-;;;;;;  60114 175436 66000))
+;;;### (autoloads nil "cedet-graphviz" "cedet-graphviz.el" (22103
+;;;;;;  28577 414368 64000))
 ;;; Generated autoloads from cedet-graphviz.el
 
 (defvar cedet-graphviz-dot-command "dot" "\
@@ -111,8 +111,8 @@ return nil.
 
 ;;;***
 
-;;;### (autoloads nil "cedet-java" "cedet-java.el" (21614 60114 175436
-;;;;;;  66000))
+;;;### (autoloads nil "cedet-java" "cedet-java.el" (22103 28577 414368
+;;;;;;  64000))
 ;;; Generated autoloads from cedet-java.el
 
 (autoload 'cedet-java-version-check "cedet-java" "\
@@ -131,8 +131,8 @@ Display in a javap output buffer.
 
 ;;;***
 
-;;;### (autoloads nil "cedet-m3" "cedet-m3.el" (21614 60114 175436
-;;;;;;  66000))
+;;;### (autoloads nil "cedet-m3" "cedet-m3.el" (22103 28577 414368
+;;;;;;  64000))
 ;;; Generated autoloads from cedet-m3.el
 
 (autoload 'cedet-m3-minor-mode "cedet-m3" "\
@@ -162,7 +162,7 @@ If ARG is nil, then toggle.
 
 ;;;***
 
-;;;### (autoloads nil "cogre" "cogre.el" (21614 60114 175436 66000))
+;;;### (autoloads nil "cogre" "cogre.el" (22103 28577 414368 64000))
 ;;; Generated autoloads from cogre.el
 
 (eieio-defclass-autoload 'cogre-graph-element '(eieio-named) "cogre" "A Graph Element.\nGraph elements are anything that is drawn into a `cogre-base-graph'.\nGraph elements have a method for marking themselves dirty.")
@@ -184,8 +184,8 @@ Optional argument GRAPH-CLASS indicates the type of graph to create.
 
 ;;;***
 
-;;;### (autoloads nil "data-debug" "data-debug.el" (21614 60114 178769
-;;;;;;  436000))
+;;;### (autoloads nil "data-debug" "data-debug.el" (22103 28578 107701
+;;;;;;  419000))
 ;;; Generated autoloads from data-debug.el
 
 (autoload 'data-debug-new-buffer "data-debug" "\
@@ -195,7 +195,7 @@ Create a new data-debug buffer with NAME.
 
 ;;;***
 
-;;;### (autoloads nil "ede" "ede.el" (21614 60114 178769 436000))
+;;;### (autoloads nil "ede" "ede.el" (22103 28578 107701 419000))
 ;;; Generated autoloads from ede.el
 
 (defvar global-ede-mode nil "\
@@ -220,7 +220,7 @@ an EDE controlled project.
 
 ;;;***
 
-;;;### (autoloads nil "fame" "fame.el" (21614 60114 185436 176000))
+;;;### (autoloads nil "fame" "fame.el" (22103 28578 964368 112000))
 ;;; Generated autoloads from fame.el
 
 (autoload 'define-fame-channel "fame" "\
@@ -241,8 +241,8 @@ messages to CHANNEL.
 
 ;;;***
 
-;;;### (autoloads nil "inversion" "inversion.el" (21614 60114 185436
-;;;;;;  176000))
+;;;### (autoloads nil "inversion" "inversion.el" (22103 28578 964368
+;;;;;;  112000))
 ;;; Generated autoloads from inversion.el
 
 (autoload 'inversion-require-emacs "inversion" "\
@@ -253,15 +253,15 @@ Only checks one based on which kind of Emacs is being run.
 
 ;;;***
 
-;;;### (autoloads nil "mode-local" "mode-local.el" (21614 60114 185436
-;;;;;;  176000))
+;;;### (autoloads nil "mode-local" "mode-local.el" (22103 28578 964368
+;;;;;;  112000))
 ;;; Generated autoloads from mode-local.el
 
 (put 'define-overloadable-function 'doc-string-elt 3)
 
 ;;;***
 
-;;;### (autoloads nil "pprint" "pprint.el" (21614 60114 185436 176000))
+;;;### (autoloads nil "pprint" "pprint.el" (22103 28578 964368 112000))
 ;;; Generated autoloads from pprint.el
 
 (autoload 'pprint-to-string "pprint" "\
@@ -290,8 +290,8 @@ See a pretty-printed representation of FUNCTION-NAME.
 
 ;;;***
 
-;;;### (autoloads nil "semantic" "semantic.el" (21614 60114 185436
-;;;;;;  176000))
+;;;### (autoloads nil "semantic" "semantic.el" (22103 28578 967701
+;;;;;;  445000))
 ;;; Generated autoloads from semantic.el
 
 (defvar semantic-default-submodes '(global-semantic-idle-scheduler-mode global-semanticdb-minor-mode) "\
@@ -349,7 +349,7 @@ Semantic mode.
 
 ;;;### (autoloads nil nil ("cedet-compat.el" "cedet-cscope.el" "cedet-files.el"
 ;;;;;;  "cedet-idutils.el" "cedet.el" "pulse.el" "srecode.el" "working.el")
-;;;;;;  (21614 60405 641396 621000))
+;;;;;;  (22104 54433 456711 812000))
 
 ;;;***
 

@@ -7,9 +7,9 @@
 ;; Created: So Okt 13 19:43:26 2013 (+0200)
 ;; Version:
 ;; Package-Requires: ()
-;; Last-Updated: Sat Oct  4 22:43:40 2014 (+0200)
+;; Last-Updated: Wed Dec  2 15:54:10 2015 (+0100)
 ;;           By: Manuel Schneckenreither
-;;     Update #: 272
+;;     Update #: 276
 ;; URL:
 ;; Doc URL:
 ;; Keywords:
@@ -40,7 +40,7 @@
 (define-key ac-completing-map [(tab)] 'ac-complete)
 (define-key ac-completing-map "\r" nil) ;; disable completing by enter
 (define-key ac-completing-map [return] nil) ;; disable completing by enter
-;; ;; (icomplete-mode +1) ;; complete mode in mini-buffer
+;; (icomplete-mode +1) ;; complete mode in mini-buffer
 
 ;; flyspell and ac-complete don't like each other
 (ac-flyspell-workaround)
@@ -48,23 +48,23 @@
 ;; ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 ;; +++++++++++++++++++++++++++ ETAGS SOURCE  ++++++++++++++++++++++++++++
 ;; ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-(defface ac-etags-candidate-face
-  '((t (:background "light sky blue" :foreground "black")))
-  "Face for etags candidate")
+;; (defface ac-etags-candidate-face
+;;   '((t (:background "light sky blue" :foreground "black")))
+;;   "Face for etags candidate")
 
-(defface ac-etags-selection-face
-  '((t (:background "blue" :foreground "white")))
-  "Face for the etags selected candidate.")
+;; (defface ac-etags-selection-face
+;;   '((t (:background "blue" :foreground "white")))
+;;   "Face for the etags selected candidate.")
 
 
-;; define a new source for auto complete (source from tags)
-(defvar ac-source-etags
-  '((candidates . (lambda ()
-                    (all-completions ac-target (tags-completion-table))))
-    (candidate-face . ac-etags-candidate-face)
-    (selection-face . ac-etags-selection-face)
-    (requires . 3))
-  "Source for etags.")
+;; ;; define a new source for auto complete (source from tags)
+;; (defvar ac-source-etags
+;;   '((candidates . (lambda ()
+;;                     (all-completions ac-target (tags-completion-table))))
+;;     (candidate-face . ac-etags-candidate-face)
+;;     (selection-face . ac-etags-selection-face)
+;;     (requires . 3))
+;;   "Source for etags.")
 
 
 ;; ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -106,6 +106,12 @@
 ;; configure sources
 (ac-config-default)
 
+(custom-set-variables
+  '(ac-etags-requires 1))
+
+(eval-after-load "etags"
+  '(progn
+      (ac-etags-setup)))
 
 ;; global sources
 (setq-default ac-sources

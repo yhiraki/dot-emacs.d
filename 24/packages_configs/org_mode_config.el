@@ -9,9 +9,9 @@
 (require 'org)
 
 ;; active Babel languages
-(org-babel-do-load-languages
- 'org-babel-load-languages
- '((gnuplot . t)))
+;; (org-babel-do-load-languages
+;;  'org-babel-load-languages
+;;  '((gnuplot . t)))
 ;; add additional languages with '((language . t)))
 
 
@@ -48,7 +48,6 @@
 
 ;; open unknown files in org mode
 (setq-default major-mode 'org-mode)
-
 
 ;; Insert source code
 (defun org-insert-src-block (src-code-type)
@@ -129,21 +128,21 @@
       (org-display-inline-images)
     (error nil)))
 
-(org-babel-do-load-languages
- (quote org-babel-load-languages)
- (quote ((emacs-lisp . t)
-         (dot . t)
-         (ditaa . t)
-         (R . t)
-         (python . t)
-         (ruby . t)
-         (gnuplot . t)
-         (clojure . t)
-         (sh . t)
-         (ledger . t)
-         (org . t)
-         (plantuml . t)
-         (latex . t))))
+;; (org-babel-do-load-languages
+;;  (quote org-babel-load-languages)
+;;  (quote ((emacs-lisp . t)
+;;          (dot . t)
+;;          (ditaa . t)
+;;          (R . t)
+;;          (python . t)
+;;          (ruby . t)
+;;          (gnuplot . t)
+;;          (clojure . t)
+;;          (sh . t)
+;;          (ledger . t)
+;;          (org . t)
+;;          (plantuml . t)
+;;          (latex . t))))
 
                                         ; Do not prompt to confirm evaluation
                                         ; This may be dangerous - make sure you understand the consequences
