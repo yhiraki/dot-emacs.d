@@ -201,6 +201,7 @@
 
 (setq org-startup-indented t)
 
+
 (add-to-list 'org-latex-classes
              '("ds"
                "[NO-DEFAULT-PACKAGES]
@@ -383,3 +384,33 @@ The diary entry can contain `%s' which will be replaced with
     (replace-match "" nil nil contents)))
 
 (add-to-list 'org-export-filter-headline-functions 'sa-ignore-headline)
+
+
+;; ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+;; ++++++++++++++++++++++++++++ Latex Export ++++++++++++++++++++++++++++
+;; ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+
+(setq org-latex-listings-options
+      '(("basicstyle" "\\small")
+        ;; ("keywordstyle" "\\color{black}\\bfseries\\underbar")
+        ("basicstyle" "\\footnotesize")
+        ("breakatwhitespace" "false")
+        ("breaklines" "true")
+        ("captionpos" "b")
+        ("deletekeywords" "{...}")
+        ("escapeinside" "{\\%*}{*)}")
+        ("extendedchars" "true")
+        ("frame" "single")
+        ("keepspaces" "true")
+        ;; ("keywordstyle" "\\color{blue}")
+        ("otherkeywords" "{*,...}")
+        ("numbers" "left")
+        ("numbersep" "5pt")
+        ("numberstyle" "\\tiny\\color{black}")
+        ("rulecolor" "\\color{black}")
+        ("showspaces" "false")
+        ("showstringspaces" "false")
+        ("showtabs" "false")
+        ("stepnumber" "1")
+        ("tabsize" "2")))

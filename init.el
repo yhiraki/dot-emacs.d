@@ -7,9 +7,9 @@
 ;; Created: Tue Jul 29 00:11:38 2014 (+0200)
 ;; Version:
 ;; Package-Requires: ()
-;; Last-Updated: Sun Nov 29 14:16:56 2015 (+0100)
+;; Last-Updated: Mon Dec  7 12:56:44 2015 (+0100)
 ;;           By: Manuel Schneckenreither
-;;     Update #: 819
+;;     Update #: 821
 ;; URL:
 ;; Doc URL:
 ;; Keywords:
@@ -363,6 +363,7 @@
  '(org-agenda-files
    (quote
     ("~/Documents/UIBK/9.Semester/Thesis: Production planning using dynamic planned lead times/tasks.org" "~/Documents/Planning/planning_time.org" "~/Documents/Planning/university.org" "~/Documents/Planning/ProjectIdeas.org" "~/Documents/Planning/freetime.org" "~/Documents/Planning/lists.org" "~/Documents/Planning/anniverseries.org" "~/Documents/Planning/Emacs.org" "~/Documents/Planning/jobcl.org" "~/Programmierung/App/Documentation/app-brainstorming.txt" "~/Documents/Jobs/UIBK/PLM/z-Tree/tasks.org")))
+ '(org-latex-listings t)
  '(org-latex-table-caption-above nil)
  '(org-use-sub-superscripts (quote {}))
  '(send-mail-function (quote smtpmail-send-it))
