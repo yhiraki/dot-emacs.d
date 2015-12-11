@@ -7,9 +7,9 @@
 ;; Created: Tue Jul 29 00:11:38 2014 (+0200)
 ;; Version:
 ;; Package-Requires: ()
-;; Last-Updated: Wed Dec  9 14:11:03 2015 (+0100)
+;; Last-Updated: Fri Dec 11 20:00:07 2015 (+0100)
 ;;           By: Manuel Schneckenreither
-;;     Update #: 830
+;;     Update #: 832
 ;; URL:
 ;; Doc URL:
 ;; Keywords:
@@ -349,6 +349,10 @@
  '(frame-background-mode (quote dark))
  '(global-flycheck-mode t nil (flycheck))
  '(gnus-topic-display-empty-topics nil)
+ '(haskell-process-args-cabal-repl
+   (quote
+    ("--ghc-option=-ferror-spans" "--ghc-option=-fbreak-on-error")))
+ '(haskell-process-type (quote cabal-repl))
  '(helm-case-fold-search t)
  '(help-at-pt-display-when-idle (quote (flymake-overlay)) nil (help-at-pt))
  '(help-at-pt-timer-delay 0.1)
