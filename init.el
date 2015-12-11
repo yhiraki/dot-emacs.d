@@ -7,9 +7,9 @@
 ;; Created: Tue Jul 29 00:11:38 2014 (+0200)
 ;; Version:
 ;; Package-Requires: ()
-;; Last-Updated: Mon Dec  7 12:56:44 2015 (+0100)
+;; Last-Updated: Wed Dec  9 14:11:03 2015 (+0100)
 ;;           By: Manuel Schneckenreither
-;;     Update #: 821
+;;     Update #: 830
 ;; URL:
 ;; Doc URL:
 ;; Keywords:
@@ -303,7 +303,7 @@
  ;; If there is more than one, they won't work right.
  '(Flymake-compilation-prevents-syntax-check nil)
  '(ac-etags-requires 1)
- '(bmkp-last-as-first-bookmark-file "/home/schnecki/.emacs.d/.bookmarks")
+ '(bmkp-last-as-first-bookmark-file "~/.emacs.d/.bookmarks")
  '(color-theme-legal-frame-parameters "\\(color\\|mode\\|font\\|height\\|width\\)$")
  '(column-number-mode t)
  '(cua-delete-selection nil)
@@ -363,6 +363,9 @@
  '(org-agenda-files
    (quote
     ("~/Documents/UIBK/9.Semester/Thesis: Production planning using dynamic planned lead times/tasks.org" "~/Documents/Planning/planning_time.org" "~/Documents/Planning/university.org" "~/Documents/Planning/ProjectIdeas.org" "~/Documents/Planning/freetime.org" "~/Documents/Planning/lists.org" "~/Documents/Planning/anniverseries.org" "~/Documents/Planning/Emacs.org" "~/Documents/Planning/jobcl.org" "~/Programmierung/App/Documentation/app-brainstorming.txt" "~/Documents/Jobs/UIBK/PLM/z-Tree/tasks.org")))
+ '(org-export-creator-string "")
+ '(org-export-with-creator nil)
+ '(org-html-creator-string "")
  '(org-latex-listings t)
  '(org-latex-table-caption-above nil)
  '(org-use-sub-superscripts (quote {}))
