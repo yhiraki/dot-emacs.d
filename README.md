@@ -180,23 +180,23 @@ Pacman Command:
 You need to have *RPM-Fusion enabled* (see: http://rpmfusion.org).
 Steps 1 + 2 + 3 + 5 + 7 (4 not included!):
 
-    mv ~/.emacs.d ~/.emacs.d.bak; true &&                                      # backup \
-    git clone https://github.com/schnecki/dot-emacs.d ~/.emacs.d &&            # download \
-    mv ~/.emacs.d/settings.el.example ~/.emacs.d/settings.el &&                # copy settings.el \
-    su -c "pacman -S emacs ctags-etags gnuplot emacs graphviz wget             # main tools \
-    w3m curl                                                                   # browser for links \
-    mpd                                                                        # install mpd music server \
-    python-jedi python-virtualenv                                              # Python completion \
-    texlive evince &&                                                          # LaTeX \
-    cabal install hasktags structured-haskell-mode stylish-haskell &&                          # Haskell \
-    perl-CPAN mariadb-devel && cpan -fi Module::Build::Compat &&               # database tools \
-    cpan -fi RPC::EPC::Service DBI DBD::SQLite DBD::Pg DBD::mysql" &&          # database tools \
-    echo "(load-file \"~/.emacs.d/gnus.el\")" > ~/.gnus.el &&                  # create gnus file \
-    mv ~/.emacs.d/settings.el.example ~/.emacs.d/settings.el;true &&           # settings.el \
-    mv ~/.mpd ~/.mpd.bak; true && mv ~/.mpdconf ~/.mpdconf.bak;true &&         # backup mpd config \
-    mkdir -p ~/.mpd && mkdir -p ~/.mpd/playlists/ && touch ~/.mpd/log &&       # mpd config part 1 \
-    touch ~/.mpd/database && mv ~/.emacs.d/.mpdconf ~/.mpdconf; true  &&       # mpd config part 2 \
-    emacs -mm                                                                  # start emacs maximized
+    mv ~/.emacs.d ~/.emacs.d.bak; true &&                                             # backup \
+    git clone https://github.com/schnecki/dot-emacs.d ~/.emacs.d &&                   # download \
+    mv ~/.emacs.d/settings.el.example ~/.emacs.d/settings.el &&                       # copy settings.el \
+    su -c "pacman -S emacs ctags-etags gnuplot emacs graphviz wget                    # main tools \
+    w3m curl                                                                          # browser for links \
+    mpd                                                                               # install mpd music server \
+    python-jedi python-virtualenv                                                     # Python completion \
+    texlive evince &&                                                                 # LaTeX \
+    cabal install hasktags hdevtools structured-haskell-mode stylish-haskell stack && # Haskell \
+    perl-CPAN mariadb-devel && cpan -fi Module::Build::Compat &&                      # database tools \
+    cpan -fi RPC::EPC::Service DBI DBD::SQLite DBD::Pg DBD::mysql" &&                 # database tools \
+    echo "(load-file \"~/.emacs.d/gnus.el\")" > ~/.gnus.el &&                         # create gnus file \
+    mv ~/.emacs.d/settings.el.example ~/.emacs.d/settings.el;true &&                  # settings.el \
+    mv ~/.mpd ~/.mpd.bak; true && mv ~/.mpdconf ~/.mpdconf.bak;true &&                # backup mpd config \
+    mkdir -p ~/.mpd && mkdir -p ~/.mpd/playlists/ && touch ~/.mpd/log &&              # mpd config part 1 \
+    touch ~/.mpd/database && mv ~/.emacs.d/.mpdconf ~/.mpdconf; true  &&              # mpd config part 2 \
+    emacs -mm                                                                         # start emacs maximized
 
     # check step 2, 3, 4, 6 from How To Install menu above!
 
@@ -275,6 +275,10 @@ Dependencies:
 
 + Haskell
   - cabal (of course)
+  - hdevtools
+  - stack (needs libtinfo for Arch Linux from AUR)
+    We highly encourage you to use stack, as it plays well together with
+    flycheck and keeps your systems clean.
   - hasktags ($ cabal install hasktags)
   - stylish-haskell (format souce code nicely)
   - structured-haskell-mode ($ cabal install structured-haskell-mode)

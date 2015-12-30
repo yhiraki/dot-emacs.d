@@ -203,6 +203,48 @@
 
 
 (add-to-list 'org-latex-classes
+             '("letter"
+               "\\documentclass{letter}
+               [DEFAULT-PACKAGES]
+               [PACKAGES]
+               [EXTRA]"
+               ("\\section{%s}" . "\\section*{%s}")
+               ("\\subsection{%s}" . "\\subsection*{%s}")
+               ("\\subsubsection{%s}" . "\\subsubsection*{%s}")
+               ("\\paragraph{%s}" . "\\paragraph*{%s}")
+               ("\\subparagraph{%s}" . "\\subparagraph*{%s}")))
+
+
+(add-to-list 'org-latex-classes
+             '("scrlttr2"
+               "\\documentclass{scrlttr2}
+                \\usepackage{ngerman}
+                \\usepackage[utf8]{inputenc}
+                \\usepackage[T1]{fontenc}
+                \\usepackage{textcomp}
+                \\RequirePackage{graphicx}
+
+                % if you have a word with just uppercase letter you should use the package soul
+                % for better readability
+                \\usepackage{soul}
+                \\sodef\\so{}{.14em}{.4em plus.1em minus .1em}{.4em plus.1em minus .1em}
+
+
+                % do not indent the signature
+                \\renewcommand*{\\raggedsignature}{\\raggedright}
+
+
+               [DEFAULT-PACKAGES]
+               [PACKAGES]
+               [EXTRA]"
+               ("\\section{%s}" . "\\section*{%s}")
+               ("\\subsection{%s}" . "\\subsection*{%s}")
+               ("\\subsubsection{%s}" . "\\subsubsection*{%s}")
+               ("\\paragraph{%s}" . "\\paragraph*{%s}")
+               ("\\subparagraph{%s}" . "\\subparagraph*{%s}")))
+
+
+(add-to-list 'org-latex-classes
              '("ds"
                "[NO-DEFAULT-PACKAGES]
                [NO-PACKAGES]
