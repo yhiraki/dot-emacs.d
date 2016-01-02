@@ -8,7 +8,7 @@
 ;; Version:
 ;; Last-Updated:
 ;;           By:
-;;     Update #: 698
+;;     Update #: 701
 ;; URL:
 ;; Description:
 ;;
@@ -272,7 +272,7 @@ attention to case differences."
   (auto-complete-mode)
 
   ;; use programming flyspell mode
-  (flyspell-prog-mode)
+  ;; (flyspell-prog-mode)
 
   ;; format source code in sensible way
   ;; (add-hook 'before-save-hook 'haskell-source-code-align nil t)
@@ -322,6 +322,7 @@ attention to case differences."
   (define-key interactive-haskell-mode-map (kbd "C-c c") nil)
   (define-key interactive-haskell-mode-map (kbd "C-.") nil)
   (define-key interactive-haskell-mode-map (kbd "M-.") nil)
+  (define-key interactive-haskell-mode-map (kbd "M-p") nil)
   (define-key haskell-mode-map (kbd "M-.") nil)
 
   ;; (define-set-key (kbd "C-.") 'view-tag-other-window)
