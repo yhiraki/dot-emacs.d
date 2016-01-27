@@ -8,7 +8,7 @@
 ;; Version:
 ;; Last-Updated:
 ;;           By:
-;;     Update #: 701
+;;     Update #: 719
 ;; URL:
 ;; Description:
 ;;
@@ -42,7 +42,7 @@
 ;; (setq haskell-program-name "ghci -DDEBUG ")
 ;; (haskell-process-type (quote cabal-repl))
 ;; (setq haskell-program-name "ghci")
-;; (setq haskell-process-args-ghci
+;; (setq haskell-process-args-cabal-repl
 ;;       '("-ferror-spans"
 ;;         "-cpp"                          ; enable cpp processing
 ;;         "-DDEBUG"
@@ -89,10 +89,9 @@
 
 
 ;; (define-key haskell-mode-map (kbd "C-x C-s") 'haskell-mode-save-buffer)
-;; (setq haskell-stylish-on-save nil)
 
-
-;; (speedbar-add-supported-extension ".hs")
+(require 'speedbar)
+(speedbar-add-supported-extension ".hs")
 
 ;; ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 ;; ++++++++++++++++++++++++++ HADDOCK ++++++++++++++++++++++++++++
@@ -137,13 +136,34 @@
 
 ;; (add-hook 'haskell-mode-hook 'turn-on-haskell-decl-scan)
 
-;; (setq haskell-stylish-on-save t)
+(setq haskell-stylish-on-save t)
 
 ;; (eval-after-load "haskell-mode"
 ;;   '(progn
 ;;      (define-key haskell-mode-map (kbd "C-,") 'haskell-move-nested-left)
 ;;      (define-key haskell-mode-map (kbd "C-.") 'haskell-move-nested-right)))
 
+;; let align know about haskell prefs
+(eval-after-load "align"                
+  '(add-to-list 'align-rules-list
+                '(haskell-types
+                   (regexp . "\\(\\s-+\\)\\(::\\|∷\\)\\s-+")
+                   (modes quote (haskell-mode literate-haskell-mode)))))
+(eval-after-load "align"
+  '(add-to-list 'align-rules-list
+                '(haskell-assignment
+                  (regexp . "\\(\\s-+\\)=\\s-+")
+                  (modes quote (haskell-mode literate-haskell-mode)))))
+(eval-after-load "align"
+  '(add-to-list 'align-rules-list
+                '(haskell-arrows
+                  (regexp . "\\(\\s-+\\)\\(->\\|→\\)\\s-+")
+                  (modes quote (haskell-mode literate-haskell-mode)))))
+(eval-after-load "align"
+  '(add-to-list 'align-rules-list
+                '(haskell-left-arrows
+                  (regexp . "\\(\\s-+\\)\\(<-\\|←\\)\\s-+")
+                  (modes quote (haskell-mode literate-haskell-mode)))))
 
 ;; ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 ;; +++++++++++++++++++++++++++ FLYCHECK MODE ++++++++++++++++++++++++++++
@@ -176,7 +196,9 @@
 (defun make-haskell-tags ()
   "This function reloads the tags by using the command 'make tags'."
   (interactive)
-  (let ((dir (nth 0 (split-string default-directory "src"))))
+  (let ((dir (nth 0 (if (string-match "app/" default-directory)
+                        (split-string default-directory "app")
+                      (split-string default-directory "src")))))
     (setq esdir (replace-regexp-in-string " " "\\\\ " dir))
     (shell-command
      (concat "cd " esdir
@@ -189,14 +211,13 @@
   "Format souce coude nicely."
   (interactive)
   (save-excursion
-    ;; (haskell-mode-stylish-buffer)
     (push-mark (point))
     (push-mark (point-max) nil t)
     (goto-char (point-min))
     (haskell-indent-align-def t 'guard)
     (haskell-indent-align-def t 'rhs)
     )
-   ;; (haskell-mode-format-imports)
+   (haskell-mode-format-imports)
   )
 
 
@@ -275,7 +296,7 @@ attention to case differences."
   ;; (flyspell-prog-mode)
 
   ;; format source code in sensible way
-  ;; (add-hook 'before-save-hook 'haskell-source-code-align nil t)
+  (add-hook 'before-save-hook 'haskell-source-code-align nil t)
 
   ;; KEYS
   ;; fix return behavior

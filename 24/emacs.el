@@ -5,9 +5,9 @@
 ;; Author: Manuel Schneckenreither
 ;; Created: Tue Dec 11 00:43:14 2012 (+0100)
 ;; Version:
-;; Last-Updated: Sun Nov 29 14:11:36 2015 (+0100)
+;; Last-Updated: Wed Jan 27 14:06:44 2016 (+0100)
 ;;           By: Manuel Schneckenreither
-;;     Update #: 434
+;;     Update #: 436
 ;; URL:
 ;; Description:
 ;;
@@ -138,5 +138,3 @@
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; emacs.el ends here
-
-
