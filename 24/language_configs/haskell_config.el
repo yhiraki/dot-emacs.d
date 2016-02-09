@@ -8,7 +8,7 @@
 ;; Version:
 ;; Last-Updated:
 ;;           By:
-;;     Update #: 719
+;;     Update #: 736
 ;; URL:
 ;; Description:
 ;;
@@ -41,7 +41,18 @@
 ;; set DEBUG constant in haskell interpreter
 ;; (setq haskell-program-name "ghci -DDEBUG ")
 ;; (haskell-process-type (quote cabal-repl))
-;; (setq haskell-program-name "ghci")
+
+;; (add-hook 'haskell-mode-hook 'haskell-doc-mode)
+;; (add-hook 'haskell-mode-hook 'haskell-indentation-mode)
+;; (add-hook 'haskell-mode-hook 'interactive-haskell-mode)
+;; (add-hook 'haskell-mode-hook 'haskell-decl-scan-mode)
+
+(setq haskell-process-type 'stack-ghci)
+(setq haskell-process-path-ghci "stack")
+(setq haskell-process-args-ghci "ghci")
+
+
+;; (setq haskell-program-name "stack ghci -DDEBUG")
 ;; (setq haskell-process-args-cabal-repl
 ;;       '("-ferror-spans"
 ;;         "-cpp"                          ; enable cpp processing
@@ -124,6 +135,10 @@
 ;; ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 
+(add-to-list 'load-path "~/.emacs.d/24/packages/hare")
+(require 'hare)
+(autoload 'hare-init "hare" nil t)
+
 ;;(eval-after-load "haskell-mode"
 ;;  (define-key haskell-mode-map (kbd "C-c v c") 'haskell-cabal-visit-file))
 
@@ -144,7 +159,7 @@
 ;;      (define-key haskell-mode-map (kbd "C-.") 'haskell-move-nested-right)))
 
 ;; let align know about haskell prefs
-(eval-after-load "align"                
+(eval-after-load "align"
   '(add-to-list 'align-rules-list
                 '(haskell-types
                    (regexp . "\\(\\s-+\\)\\(::\\|∷\\)\\s-+")
@@ -388,6 +403,7 @@ attention to case differences."
   (auto-complete-mode)
   (cua-selection-mode nil)
 
+  (hare-init)
   )
 
 (add-hook 'haskell-mode-hook 'my/haskell-minor-mode)
@@ -397,7 +413,10 @@ attention to case differences."
 
 ;; IDENTATION MODE
 ;;; DISABLED DUE TO ENABLED SHM (STRUCTURED HASKELL MODE).
-(add-hook 'haskell-mode-hook 'turn-on-haskell-indentation)
+;; (add-hook 'haskell-mode-hook 'turn-on-haskell-indentation)
+(add-hook 'haskell-mode-hook 'structured-haskell-mode) ; Note that this needs a simple:
+                                                       ; cabal install
+                                                       ; stuctured-haskell-mode
 ;; (add-hook 'haskell-mode-hook 'turn-on-haskell-simple-indent)
 ;; (add-hook 'haskell-mode-hook 'turn-on-haskell-indent)
 
@@ -425,6 +444,15 @@ attention to case differences."
 ;; (add-hook 'haskell-mode-hook 'turn-on-haskell-decl-scan-mode)
 ;; (add-hook 'haskell-mode-hook 'turn-on-haskell-unicode-input-method)
 (setq haskell-font-lock-symbols t)
+
+
+;; subword mode ; M-f/r moves camel case wise
+(add-hook 'haskell-mode-hook 'subword-mode)
+
+;; load ghc mod - you need ghc-mod for this: cabal install ghc-mod
+;; (autoload 'ghc-init "ghc" nil t)
+;; (autoload 'ghc-debug "ghc" nil t)
+;; (add-hook 'haskell-mode-hook (lambda () (ghc-init)))
 
 
 ;; OVERWRITE FUNCTIONS TO CHANGE BEHAVIOR

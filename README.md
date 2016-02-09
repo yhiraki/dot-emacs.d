@@ -189,6 +189,7 @@ Steps 1 + 2 + 3 + 5 + 7 (4 not included!):
     python-jedi python-virtualenv                                                     # Python completion \
     texlive evince &&                                                                 # LaTeX \
     cabal install hasktags hdevtools structured-haskell-mode stylish-haskell stack && # Haskell \
+    cabal install ghc-mod hoogle hlint HaRe                                        && # Haskell cont'd \
     perl-CPAN mariadb-devel && cpan -fi Module::Build::Compat &&                      # database tools \
     cpan -fi RPC::EPC::Service DBI DBD::SQLite DBD::Pg DBD::mysql" &&                 # database tools \
     echo "(load-file \"~/.emacs.d/gnus.el\")" > ~/.gnus.el &&                         # create gnus file \
@@ -280,8 +281,12 @@ Dependencies:
     We highly encourage you to use stack, as it plays well together with
     flycheck and keeps your systems clean.
   - hasktags ($ cabal install hasktags)
-  - stylish-haskell (format souce code nicely)
+  - stylish-haskell (format source code nicely)
   - structured-haskell-mode ($ cabal install structured-haskell-mode)
+  - ghc-mod ($ cabal install ghc-mod)
+  - hoogle ($ cabal install hoogle)
+  - hlint ($ cabal install hlint)
+  - HaRe ($ cabal install HaRe)
 
 + Database Viewer: edbi
   - perl-CPAN

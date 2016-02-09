@@ -7,7 +7,7 @@
 ;; Version:
 ;; Last-Updated:
 ;;           By:
-;;     Update #: 127
+;;     Update #: 129
 ;; URL:
 ;; Description:
 ;;
@@ -44,7 +44,8 @@
 
 
 ;; M-x withouth using the ALT key
-(global-set-key "\C-x\C-m" 'execute-extended-command)
+;; defined in helm_config.el
+;; (global-set-key "\C-x\C-m" 'execute-extended-command)
 ;; (global-set-key "\C-c\C-m" 'execute-extended-command)
 
 ;; Kill words with C-w: the standard unix way

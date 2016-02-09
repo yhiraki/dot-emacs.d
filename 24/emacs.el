@@ -5,9 +5,9 @@
 ;; Author: Manuel Schneckenreither
 ;; Created: Tue Dec 11 00:43:14 2012 (+0100)
 ;; Version:
-;; Last-Updated: Wed Jan 27 14:06:44 2016 (+0100)
+;; Last-Updated: Tue Feb  9 14:38:37 2016 (+0100)
 ;;           By: Manuel Schneckenreither
-;;     Update #: 436
+;;     Update #: 437
 ;; URL:
 ;; Description:
 ;;
@@ -100,7 +100,7 @@
 ;; EXPAND REGION - expand the region in (semantic) units
 (load (concat package-conf-folder "expand_region_config.el"))
 ;; CHANGE INNER - kill inside/outside of given element
-(load (concat package-conf-folder "change_inner_config.el"))
+;; (load (concat package-conf-folder "change_inner_config.el"))
 ;; SHM - structured haskell code editing
 ;; (load (concat package-conf-folder "shm_config.el"))
 ;; Paredit - emacs lisp structured code editing

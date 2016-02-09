@@ -7,9 +7,9 @@
 ;; Created: So Okt 13 22:47:58 2013 (+0200)
 ;; Version:
 ;; Package-Requires: ()
-;; Last-Updated: Sat Oct  4 23:23:44 2014 (+0200)
+;; Last-Updated: Mon Feb  8 17:02:13 2016 (+0100)
 ;;           By: Manuel Schneckenreither
-;;     Update #: 164
+;;     Update #: 166
 ;; URL:
 ;; Doc URL:
 ;; Keywords:
@@ -34,24 +34,27 @@
 ;; ++++++++++++++++++++++++++++ EMACS LISP  +++++++++++++++++++++++++++++
 ;; ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
+(setq make-emacs-lisp-tags-flag nil)
+
 ;; Create and set tags table
 (defun make-emacs-lisp-tags ()
   "This function reloads the tags by using the command 'make tags'."
   (interactive)
 
-  ;; only create tags when editing a .el file and if we are not in the home
-  ;; folder (otherwise it does a find on all files in the home folder...and this
-  ;; takes forever)
-  (when (and (string-match "\\.el\\'" buffer-file-name)
-             (not (integerp (string-match (concat home-folder "$")
-                                          (expand-file-name default-directory)))))
-    (let ((dir (nth 0 (split-string default-directory load-emacsversion))))
-      (setq esdir (replace-regexp-in-string " " "\\\\ " dir))
-      (shell-command
-       (concat "cd " esdir
-               " && find . -name '*.el' | etags - 1>/dev/null 2>/dev/null") nil)
-      (visit-tags-table (concat dir "TAGS")))
-    ))
+  (when make-emacs-lisp-tags-flag
+    ;; only create tags when editing a .el file and if we are not in the home
+    ;; folder (otherwise it does a find on all files in the home folder...and this
+    ;; takes forever)
+    (when (and (string-match "\\.el\\'" buffer-file-name)
+               (not (integerp (string-match (concat home-folder "$")
+                                            (expand-file-name default-directory)))))
+      (let ((dir (nth 0 (split-string default-directory load-emacsversion))))
+        (setq esdir (replace-regexp-in-string " " "\\\\ " dir))
+        (shell-command
+         (concat "cd " esdir
+                 " && find . -name '*.el' | etags - 1>/dev/null 2>/dev/null") nil)
+        (visit-tags-table (concat dir "TAGS")))
+      )))
 
 
 ;; MINOR MODE HOOK

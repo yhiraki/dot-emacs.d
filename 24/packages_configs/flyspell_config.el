@@ -7,9 +7,9 @@
 ;; Created: Fr Okt  4 20:40:17 2013 (+0200)
 ;; Version:
 ;; Package-Requires: ()
-;; Last-Updated: Wed Oct 22 21:20:50 2014 (+0200)
+;; Last-Updated: Tue Feb  9 14:48:21 2016 (+0100)
 ;;           By: Manuel Schneckenreither
-;;     Update #: 131
+;;     Update #: 132
 ;; URL:
 ;; Doc URL:
 ;; Keywords:
@@ -110,6 +110,8 @@
 
 (setq flyspell-issue-message-flag nil)
 
+(eval-after-load "flyspell"
+  '(define-key flyspell-mode-map (kbd "C-M-i") nil))
 
 ;; (setq ispell-program-name "hunspell")          ; Use hunspell to correct mistakes
 
