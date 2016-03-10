@@ -8,7 +8,7 @@
 ;; Version:
 ;; Last-Updated:
 ;;           By:
-;;     Update #: 736
+;;     Update #: 784
 ;; URL:
 ;; Description:
 ;;
@@ -42,10 +42,8 @@
 ;; (setq haskell-program-name "ghci -DDEBUG ")
 ;; (haskell-process-type (quote cabal-repl))
 
-;; (add-hook 'haskell-mode-hook 'haskell-doc-mode)
 ;; (add-hook 'haskell-mode-hook 'haskell-indentation-mode)
-;; (add-hook 'haskell-mode-hook 'interactive-haskell-mode)
-;; (add-hook 'haskell-mode-hook 'haskell-decl-scan-mode)
+(add-hook 'haskell-mode-hook 'interactive-haskell-mode)
 
 (setq haskell-process-type 'stack-ghci)
 (setq haskell-process-path-ghci "stack")
@@ -99,8 +97,6 @@
 ;;         ))
 
 
-;; (define-key haskell-mode-map (kbd "C-x C-s") 'haskell-mode-save-buffer)
-
 (require 'speedbar)
 (speedbar-add-supported-extension ".hs")
 
@@ -151,6 +147,9 @@
 
 ;; (add-hook 'haskell-mode-hook 'turn-on-haskell-decl-scan)
 
+(defadvice haskell-mode-stylish-buffer (around skip-if-flycheck-errors activate)
+  (unless (flycheck-has-current-errors-p 'error)
+    ad-do-it))
 (setq haskell-stylish-on-save t)
 
 ;; (eval-after-load "haskell-mode"
@@ -223,7 +222,7 @@
 
 
 (defun haskell-source-code-align()
-  "Format souce coude nicely."
+  "Format souce code nicely."
   (interactive)
   (save-excursion
     (push-mark (point))
@@ -307,9 +306,6 @@ attention to case differences."
 
   (auto-complete-mode)
 
-  ;; use programming flyspell mode
-  ;; (flyspell-prog-mode)
-
   ;; format source code in sensible way
   (add-hook 'before-save-hook 'haskell-source-code-align nil t)
 
@@ -322,8 +318,8 @@ attention to case differences."
   (local-set-key (kbd "RET")  'newline-and-indent)
 
   ;; Disabled set special keys
-  ;; (local-set-key (kbd "=")  'haskell-insert-equals)
-  ;; (local-set-key (kbd "|") 'haskell-insert-guard)
+  (local-set-key (kbd "=")  'haskell-insert-equals)
+  (local-set-key (kbd "|") 'haskell-insert-guard)
 
   (local-set-key (kbd "C-c =") (defun insertEquals ()
                                  (interactive)
@@ -367,7 +363,8 @@ attention to case differences."
   ;; (define-key 'haskell-mode-map (kbd "C-.") 'find-tag)
 
 
-  (define-key haskell-mode-map "\C-c h h" 'haskell-hoogle)
+  (define-key haskell-mode-map (kbd "C-c h h") 'haskell-hoogle)
+  ;; (define-key shm-repl-map (kbd "M-;") nil)
 
   ;; CREATE AND SET TAGS FILE
   (add-hook 'after-save-hook 'make-haskell-tags nil t)
@@ -410,23 +407,30 @@ attention to case differences."
 (add-hook 'haskell-interactive-mode-hook 'my/haskell-interactive-minor-mode)
 ;;(add-hook 'haskell-mode-hook 'highlight-keywords)
 
+;; setup shm mode
+;; (require 'shm)
+;; (set-face-background 'shm-current-face "#392929")
+;; (set-face-background 'shm-quarantine-face "#443333")
+;; (define-key shm-repl-map (kbd "M-;") nil)
 
 ;; IDENTATION MODE
 ;;; DISABLED DUE TO ENABLED SHM (STRUCTURED HASKELL MODE).
-;; (add-hook 'haskell-mode-hook 'turn-on-haskell-indentation)
-(add-hook 'haskell-mode-hook 'structured-haskell-mode) ; Note that this needs a simple:
-                                                       ; cabal install
-                                                       ; stuctured-haskell-mode
+(add-hook 'haskell-mode-hook 'turn-on-haskell-indentation)
+
+;; (add-hook 'haskell-mode-hook 'structured-haskell-mode) ; Note that this needs a simple:
+;;                                                        ; cabal install
+;;                                                        ; stuctured-haskell-mode
 ;; (add-hook 'haskell-mode-hook 'turn-on-haskell-simple-indent)
 ;; (add-hook 'haskell-mode-hook 'turn-on-haskell-indent)
 
 
-;; INTERACTION MODES
-;; (add-hook 'haskell-mode-hook 'inf-haskell-mode) ; deprecated !!!
-(add-hook 'haskell-mode-hook 'interactive-haskell-mode)
+;; ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+;; ++++++++++++++++++++++++++++ Other Modes +++++++++++++++++++++++++++++
+;; ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
+;; use programming flyspell mode
+(add-hook 'haskell-mode-hook 'flyspell-prog-mode)
 
-;; OTHER MODES
 (add-hook 'haskell-mode-hook 'haskell-decl-scan-mode) ; Scans top-level
                                         ; declarations, and places
                                         ; them in a menu.
@@ -440,10 +444,11 @@ attention to case differences."
 
 
 ;; modules to add
-(add-hook 'haskell-mode-hook 'turn-on-haskell-doc-mode)
-;; (add-hook 'haskell-mode-hook 'turn-on-haskell-decl-scan-mode)
 ;; (add-hook 'haskell-mode-hook 'turn-on-haskell-unicode-input-method)
 (setq haskell-font-lock-symbols t)
+
+;; Ignore compiled Haskell files in filename completions
+(add-to-list 'completion-ignored-extensions ".hi")
 
 
 ;; subword mode ; M-f/r moves camel case wise
@@ -455,7 +460,9 @@ attention to case differences."
 ;; (add-hook 'haskell-mode-hook (lambda () (ghc-init)))
 
 
-;; OVERWRITE FUNCTIONS TO CHANGE BEHAVIOR
+;; ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+;; +++++++++++++++ OVERWRITE FUNCTIONS TO CHANGE BEHAVIOR +++++++++++++++
+;; ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 (defun haskell-mode-buffer-apply-command (cmd)
   "Execute shell command CMD with current buffer as input and

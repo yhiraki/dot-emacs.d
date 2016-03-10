@@ -7,9 +7,9 @@
 ;; Created: Di Feb  4 17:01:05 2014 (+0100)
 ;; Version:
 ;; Package-Requires: ()
-;; Last-Updated: Thu Dec  3 15:53:04 2015 (+0100)
+;; Last-Updated: Sun Mar  6 14:22:52 2016 (+0100)
 ;;           By: Manuel Schneckenreither
-;;     Update #: 64
+;;     Update #: 87
 ;; URL:
 ;; Doc URL:
 ;; Keywords:
@@ -57,19 +57,36 @@
 ;;   )
 
 ;; other newsfeeds
-(setq gnus-select-method '(nnimap "uibk"
+;; (setq gnus-select-method '(nnimap "uibk"
+;;                                   (nnimap-stream ssl)
+;;                                   (nnimap-server-port 993)
+;;                                   (nnimap-address "mail2.uibk.ac.at")
+;;                                   ))
+
+(setq gnus-select-method '(nnimap "uibk_exchange"
                                   (nnimap-stream ssl)
-                                  (nnimap-server-port 993)
-                                  (nnimap-address "mail2.uibk.ac.at")
-                                  ;;(nnir-search-engine Imap)
+                                  (nnimap-address "exchange.uibk.ac.at")
+                                  (nnimap-server-port "imaps")
                                   ))
+
+(add-to-list 'gnus-secondary-select-methods '(nnimap "uibk"
+                                                     (nnimap-stream ssl)
+                                                     (nnimap-server-port 993)
+                                                     (nnimap-address "mail2.uibk.ac.at")
+                                                     ))
 
 (add-to-list 'gnus-secondary-select-methods '(nnimap "gmail"
                                                      (nnimap-stream ssl)
                                                      (nnimap-address "imap.gmail.com")
                                                      (nnimap-server-port 993)
-                                                     ;;(nnir-search-engine Imap)
                                                      ))
+
+;; (add-to-list 'gnus-secondary-select-methods '(nnimap "uibk_exchange"
+;;                                                      (nnimap-stream tls)
+;;                                                      (nnimap-address "exchange.uibk.ac.at")
+;;                                                      (nnimap-server-port "imaps")
+;;                                                      ))
+
 ;; Gwene news and Gmane Mailgroups
 ;; (add-to-list 'gnus-secondary-select-methods '(nntp "news.gwene.org"))
 ;; (add-to-list 'gnus-secondary-select-methods '(nntp "news.gmane.org"))

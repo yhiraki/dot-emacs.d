@@ -7,9 +7,9 @@
 ;; Created: Tue Jul 29 00:11:38 2014 (+0200)
 ;; Version:
 ;; Package-Requires: ()
-;; Last-Updated: Tue Feb  9 17:26:23 2016 (+0100)
+;; Last-Updated: Thu Mar 10 10:47:11 2016 (+0100)
 ;;           By: Manuel Schneckenreither
-;;     Update #: 899
+;;     Update #: 943
 ;; URL:
 ;; Doc URL:
 ;; Keywords:
@@ -200,6 +200,7 @@
         jedi
         latex-pretty-symbols
         latex-extra
+        lenlen-theme
         magit
         markdown-mode
         markdown-mode+
@@ -282,11 +283,18 @@
 (color-theme-initialize)
 ;;(color-theme-dark-laptop)
 ;; eval following to use standard theme:
+
 ;; (color-theme-standard)
 
-;; Color theme solarized
-(color-theme-solarized-dark)
-;; (color-theme-solarized-light)
+;;(color-theme-aalto-light)
+
+
+;; Color theme solarized dark
+;; (require 'color-theme-solarized)
+
+
+;; solarized light
+;;(require 'lenlen-theme)
 
 ;; (defun color-my-emacs-default ()
 ;;   "Revert to default emacs theme."
@@ -309,9 +317,10 @@
  '(color-theme-legal-frame-parameters "\\(color\\|mode\\|font\\|height\\|width\\)$")
  '(column-number-mode t)
  '(cua-delete-selection nil)
+ '(custom-enabled-themes (quote (leuven)))
  '(custom-safe-themes
    (quote
-    ("0f0e3af1ec61d04ff92f238b165dbc6d2a7b4ade7ed9812b4ce6b075e08f49fe" "f350c66dcff6db73192c4819363b7c1992931841e5ab381b1ed57ef8257a498f" default)))
+    ("8db4b03b9ae654d4a57804286eb3e332725c84d7cdab38463cb6b97d5762ad26" "0f0e3af1ec61d04ff92f238b165dbc6d2a7b4ade7ed9812b4ce6b075e08f49fe" "f350c66dcff6db73192c4819363b7c1992931841e5ab381b1ed57ef8257a498f" default)))
  '(delete-active-region nil)
  '(dired-kept-versions 10)
  '(display-time-mode t)
@@ -351,12 +360,16 @@
  '(gnus-topic-display-empty-topics nil)
  '(haskell-align-imports-pad-after-name t)
  '(haskell-ask-also-kill-buffers nil)
+ '(haskell-doc-prettify-types t)
+ '(haskell-font-lock-symbols t)
  '(haskell-interactive-mode-collapse t)
+ '(haskell-interactive-popup-errors nil)
  '(haskell-process-args-cabal-repl
    (quote
     ("--ghc-option=-ferror-spans" "--ghc-option=-fbreak-on-error")))
  '(haskell-process-path-ghci "stack")
  '(haskell-process-type (quote stack-ghci))
+ '(haskell-stylish-on-save t)
  '(helm-case-fold-search t)
  '(help-at-pt-display-when-idle (quote (flymake-overlay)) nil (help-at-pt))
  '(help-at-pt-timer-delay 0.1)
@@ -398,10 +411,9 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(column-marker-1 ((t nil)))
- '(ecb-default-highlight-face ((t (:background "gray30"))))
  '(flymake-errline ((((class color)) (:underline (:style wave :color "Red1")))))
- '(flymake-warnline ((((class color)) (:underline (:style wave :color "DarkOrange")))))
- '(highlight-current-line-face ((t (:background "gray5"))) t)
+ '(flymake-warnline ((((class color)) (:underline (:style wave :color "Orange")))))
+ '(magit-section-highlight ((t nil)))
  '(rainbow-delimiters-depth-1-face ((t (:foreground "red"))))
  '(rainbow-delimiters-depth-2-face ((t (:foreground "magenta"))))
  '(rainbow-delimiters-depth-3-face ((t (:foreground "cyan"))))
@@ -411,14 +423,13 @@
  '(rainbow-delimiters-depth-7-face ((t (:foreground "yellow"))))
  '(rainbow-delimiters-depth-9-face ((t (:foreground "orange")))))
 
-
 (put 'upcase-region 'disabled nil)
 (put 'downcase-region 'disabled nil)
 (put 'dired-find-alternate-file 'disabled nil)
 (put 'narrow-to-region 'disabled nil)
 
 
-;; Open gnus if it is loaded and used does not decline
+;; Open gnus if it is loaded and user does not decline
 (if (fboundp 'gnus)
     (if (y-or-n-p-with-timeout "Open Gnus (You got 5 seconds do decline)? " 5 t)
         (gnus)))

@@ -33,3 +33,4 @@
 ;; git status
 (global-set-key (kbd (concat prefix-command-key " g s"))
                 'magit-status)
+
