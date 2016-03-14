@@ -7,9 +7,9 @@
 ;; Created: Tue Jul 29 00:11:38 2014 (+0200)
 ;; Version:
 ;; Package-Requires: ()
-;; Last-Updated: Thu Mar 10 10:47:11 2016 (+0100)
+;; Last-Updated: Sun Mar 13 22:08:23 2016 (+0100)
 ;;           By: Manuel Schneckenreither
-;;     Update #: 943
+;;     Update #: 960
 ;; URL:
 ;; Doc URL:
 ;; Keywords:
@@ -421,7 +421,8 @@
  '(rainbow-delimiters-depth-5-face ((t (:foreground "violet"))))
  '(rainbow-delimiters-depth-6-face ((t (:foreground "green"))))
  '(rainbow-delimiters-depth-7-face ((t (:foreground "yellow"))))
- '(rainbow-delimiters-depth-9-face ((t (:foreground "orange")))))
+ '(rainbow-delimiters-depth-9-face ((t (:foreground "orange"))))
+ '(semantic-highlight-func-current-tag-face ((t (:box (:line-width 1 :color "grey75"))))))
 
 (put 'upcase-region 'disabled nil)
 (put 'downcase-region 'disabled nil)
