@@ -7,9 +7,9 @@
 ;; Created: Tue Jul 29 00:11:38 2014 (+0200)
 ;; Version:
 ;; Package-Requires: ()
-;; Last-Updated: Sun Mar 13 22:08:23 2016 (+0100)
+;; Last-Updated: Wed Apr 27 17:37:33 2016 (+0200)
 ;;           By: Manuel Schneckenreither
-;;     Update #: 960
+;;     Update #: 972
 ;; URL:
 ;; Doc URL:
 ;; Keywords:
@@ -157,6 +157,7 @@
         ;; backup-each-save ;;; solved differently, see backup_each_save_config.el
         backup-walker
         bbdb
+        bison-mode
         bookmark+
         cdlatex
         change-inner
@@ -223,6 +224,7 @@
         rainbow-mode
         shakespeare-mode
         shm
+        smart-mode-line
         tex-smart-umlauts
         thesaurus
         tuareg
@@ -313,7 +315,7 @@
  ;; If there is more than one, they won't work right.
  '(Flymake-compilation-prevents-syntax-check nil)
  '(ac-etags-requires 1)
- '(bmkp-last-as-first-bookmark-file "~/.emacs.d/.bookmarks")
+ '(bmkp-last-as-first-bookmark-file "/home/schnecki/.emacs.d/.bookmarks")
  '(color-theme-legal-frame-parameters "\\(color\\|mode\\|font\\|height\\|width\\)$")
  '(column-number-mode t)
  '(cua-delete-selection nil)
@@ -349,7 +351,6 @@
  '(ede-project-directories
    (quote
     ("/home/schnecki/Documents/UIBK/7.Semester/InfoSec_SecArch/PS/08/03/src" "/home/schnecki/Documents/UIBK/7.Semester/InfoSec_SecArch/PS/08/03" "/home/schnecki/Documents/UIBK/7.Semester/InfoSec_SecArch/PS/06/04/src" "/home/schnecki/Documents/UIBK/7.Semester/InfoSec_SecArch/PS/06/04" "/home/schnecki/Documents/UIBK/7.Semester/C++/project/textyTex/src/model/framework" "/home/schnecki/Documents/UIBK/7.Semester/C++/project/textyTex/src/model/exceptions" "/home/schnecki/Documents/UIBK/7.Semester/C++/project/textyTex/src/model" "/home/schnecki/Documents/UIBK/7.Semester/C++/project/textyTex/src" "/home/schnecki/Documents/UIBK/7.Semester/C++/project/textyTex" "/home/schnecki/Documents/UIBK/7.Semester/InfoSec_SecArch/PS/05/04/src" "/home/schnecki/Documents/UIBK/7.Semester/InfoSec_SecArch/PS/05/04")))
- '(fill-column 90)
  '(flycheck-clang-include-path
    (quote
     ("/usr/include/gtkmm-3.0" "/usr/include/gdkmm-3.0" "/usr/include/glibmm-2.4" "/usr/include/gtkmm-3.0" "/usr/lib/gtkmm-3.0/include" "/usr/include/atkmm-1.6" "/usr/include/gtk-3.0/unix-print" "/usr/include/gdkmm-3.0" "/usr/lib/gdkmm-3.0/include" "/usr/include/giomm-2.4" "/usr/lib/giomm-2.4/include" "/usr/include/pangomm-1.4" "/usr/lib/pangomm-1.4/include" "/usr/include/glibmm-2.4" "/usr/lib/glibmm-2.4/include" "/usr/include/gtk-3.0" "/usr/include/at-spi2-atk/2.0" "/usr/include/at-spi-2.0" "/usr/include/dbus-1.0" "/usr/lib/dbus-1.0/include" "/usr/include/gtk-3.0" "/usr/include/gio-unix-2.0/" "/usr/include/cairo" "/usr/include/pango-1.0" "/usr/include/atk-1.0" "/usr/include/cairo" "/usr/include/cairomm-1.0" "/usr/lib/cairomm-1.0/include" "/usr/include/cairo" "/usr/include/pixman-1" "/usr/include/freetype2" "/usr/include/libpng16" "/usr/include/harfbuzz" "/usr/include/freetype2" "/usr/include/harfbuzz" "/usr/include/libdrm" "/usr/include/libpng16" "/usr/include/sigc++-2.0" "/usr/lib/sigc++-2.0/include" "/usr/include/gdk-pixbuf-2.0" "/usr/include/libpng16" "/usr/include/glib-2.0" "/usr/lib/glib-2.0/include")))
@@ -367,6 +368,9 @@
  '(haskell-process-args-cabal-repl
    (quote
     ("--ghc-option=-ferror-spans" "--ghc-option=-fbreak-on-error")))
+ '(haskell-process-args-stack-ghci
+   (quote
+    ("--ghc-options=-ferror-spans -fbreak-on-error -fghci-history-size=1000")))
  '(haskell-process-path-ghci "stack")
  '(haskell-process-type (quote stack-ghci))
  '(haskell-stylish-on-save t)
@@ -376,8 +380,8 @@
  '(jde-compile-option-directory "./../classes")
  '(jde-compiler (quote ("javac")))
  '(jde-global-classpath (quote ("./../classes" "./../lib")))
- '(jde-jdk (quote ("1.6")))
- '(jde-jdk-registry (quote (("1.6" . "/usr/lib/jvm/java-default-runtime"))))
+ '(jde-jdk (quote ("1.8")))
+ '(jde-jdk-registry (quote (("1.8" . "/usr/lib/jvm/default/"))))
  '(jde-sourcepath (quote ("./src/main" "./src/test")))
  '(kept-new-versions 5000)
  '(mpc-host "192.168.178.62")
@@ -397,6 +401,7 @@
  '(smtpmail-smtp-server "smtp.uibk.ac.at")
  '(smtpmail-smtp-service 587)
  '(solarized-contrast (quote high))
+ '(tex-smart-umlauts-german-shortcuts nil)
  '(tool-bar-mode nil)
  '(tramp-default-method "ssh")
  '(user-full-name your-full-name)

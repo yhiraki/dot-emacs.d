@@ -8,7 +8,7 @@
 ;; Version:
 ;; Last-Updated:
 ;;           By:
-;;     Update #: 784
+;;     Update #: 789
 ;; URL:
 ;; Description:
 ;;
@@ -162,22 +162,22 @@
   '(add-to-list 'align-rules-list
                 '(haskell-types
                    (regexp . "\\(\\s-+\\)\\(::\\|∷\\)\\s-+")
-                   (modes quote (haskell-mode literate-haskell-mode)))))
+                   (modes quote (haskell-mode literate-haskell-mode interactive-haskell-mode)))))
 (eval-after-load "align"
   '(add-to-list 'align-rules-list
                 '(haskell-assignment
                   (regexp . "\\(\\s-+\\)=\\s-+")
-                  (modes quote (haskell-mode literate-haskell-mode)))))
+                  (modes quote (haskell-mode literate-haskell-mode interactive-haskell-mode)))))
 (eval-after-load "align"
   '(add-to-list 'align-rules-list
                 '(haskell-arrows
                   (regexp . "\\(\\s-+\\)\\(->\\|→\\)\\s-+")
-                  (modes quote (haskell-mode literate-haskell-mode)))))
+                  (modes quote (haskell-mode literate-haskell-mode interactive-haskell-mode)))))
 (eval-after-load "align"
   '(add-to-list 'align-rules-list
                 '(haskell-left-arrows
                   (regexp . "\\(\\s-+\\)\\(<-\\|←\\)\\s-+")
-                  (modes quote (haskell-mode literate-haskell-mode)))))
+                  (modes quote (haskell-mode literate-haskell-mode interactive-haskell-mode)))))
 
 ;; ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 ;; +++++++++++++++++++++++++++ FLYCHECK MODE ++++++++++++++++++++++++++++
@@ -318,8 +318,8 @@ attention to case differences."
   (local-set-key (kbd "RET")  'newline-and-indent)
 
   ;; Disabled set special keys
-  (local-set-key (kbd "=")  'haskell-insert-equals)
-  (local-set-key (kbd "|") 'haskell-insert-guard)
+  ;; (local-set-key (kbd "=")  'haskell-insert-equals)
+  ;; (local-set-key (kbd "|") 'haskell-insert-guard)
 
   (local-set-key (kbd "C-c =") (defun insertEquals ()
                                  (interactive)

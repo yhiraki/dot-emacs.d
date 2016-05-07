@@ -5,9 +5,9 @@
 ;; Author: Manuel Schneckenreither
 ;; Created: Tue Dec 11 00:43:14 2012 (+0100)
 ;; Version:
-;; Last-Updated: Tue Feb  9 14:38:37 2016 (+0100)
+;; Last-Updated: Mon Mar 28 15:54:07 2016 (+0200)
 ;;           By: Manuel Schneckenreither
-;;     Update #: 437
+;;     Update #: 440
 ;; URL:
 ;; Description:
 ;;
@@ -129,6 +129,7 @@
 (load-file (concat language-conf-folder "bash_config.el"))
 (load-file (concat language-conf-folder "python_config.el"))
 (load-file (concat language-conf-folder "php_config.el"))
+;; (load-file (concat language-conf-folder "flex_config.el"))
 
 ;; ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 ;; ++++++++++++++++++++++++++ LOAD KEYBINDINGS ++++++++++++++++++++++++++

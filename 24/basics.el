@@ -5,9 +5,9 @@
 ;; Author: Manuel Schneckenreither
 ;; Created: Mon Dec 10 22:51:09 2012 (+0100)
 ;; Version:
-;; Last-Updated: Sun Oct  4 15:27:15 2015 (+0200)
+;; Last-Updated: Tue Apr  5 10:48:51 2016 (+0200)
 ;;           By: Manuel Schneckenreither
-;;     Update #: 800
+;;     Update #: 803
 ;; URL:
 ;; Description:
 ;;    Basic configuration for emacs. In here are all configs of
@@ -236,6 +236,7 @@ mode of the invoking window is in
   (interactive (find-tag-interactive "View tag other window: "))
   (let ((window (get-buffer-window)))
     (find-tag-other-window tagname next-p regexp-p)
+    ;; (find-tag-other-frame tagname next-p)
     (recenter 10)
     (select-window window)))
 

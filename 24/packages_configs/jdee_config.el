@@ -7,9 +7,9 @@
 ;; Created: So Okt 13 13:22:28 2013 (+0200)
 ;; Version:
 ;; Package-Requires: ()
-;; Last-Updated: Sun Oct  5 17:25:18 2014 (+0200)
-;;           By: schnecki
-;;     Update #: 392
+;; Last-Updated: Tue Mar 29 11:13:48 2016 (+0200)
+;;           By: Manuel Schneckenreither
+;;     Update #: 396
 ;; URL:
 ;; Doc URL:
 ;; Keywords:
@@ -55,6 +55,24 @@
 (setq jde-help-remote-file-exists-function '("beanshell"))
 
 (add-to-list 'load-path (concat package-folder "jdee-2.4.1/lisp"))
+
+;; ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+;; +++++++++++++++++++++ Java Version (JDK Version) +++++++++++++++++++++
+;; ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+;; See customize section in init.el for following variables:
+;; '(jde-compile-option-directory "./../classes")
+;; '(jde-compiler (quote ("javac")))
+;; '(jde-global-classpath (quote ("./../classes" "./../lib")))
+;; '(jde-jdk (quote ("1.8")))
+;; '(jde-jdk-registry (quote (("1.8" . "/usr/lib/jvm/java-default-runtime"))))
+;; '(jde-sourcepath (quote ("./src/main" "./src/test")))
+
+
+;; ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+;; ++++++++++++++++++++++++++++++ General +++++++++++++++++++++++++++++++
+;; ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
 
 ;; ENABLE JDE FOR JAVA FILES
 (autoload 'jde-mode "jde" "JDE mode" t)
