@@ -1,6 +1,6 @@
 ;;; semantic/bovine/c.el --- Semantic details for C
 
-;; Copyright (C) 1999-2014 Free Software Foundation, Inc.
+;; Copyright (C) 1999-2015 Free Software Foundation, Inc.
 
 ;; Author: Eric M. Ludlam <zappo@gnu.org>
 
@@ -512,7 +512,7 @@ code to parse."
 			nil))))
       (if (or (not eval-form)
               (and (numberp eval-form)
-                   (equal eval-form 0)));; ifdefline resulted in false
+                   (equal eval-form 0)));; ifdef line resulted in false
 
 	;; The if indicates to skip this preprocessor section
 	(let ((pt nil))
@@ -1024,6 +1024,15 @@ now.
       (setq return-list (car tag))
       (setq tag (cdr tag)))
 
+    ;; Check if we have a typed enum, and if so, apply its type to all
+    ;; members.
+    (when (and (semantic-tag-of-type-p tag "enum")
+	       (semantic-tag-get-attribute tag :enum-type))
+      (let ((enumtype (semantic-tag-get-attribute tag :enum-type))
+	    (members (semantic-tag-get-attribute tag :members)))
+	(dolist (cur members)
+	  (semantic-tag-put-attribute cur :type enumtype))))
+
     ;; Name of the tag is a list, so expand it.  Tag lists occur
     ;; for variables like this: int var1, var2, var3;
     ;;
@@ -1180,13 +1189,16 @@ is its own toplevel tag.  This function will return (cons A B)."
 	   (while names
 
 	     (setq vl (cons (semantic-tag-new-type
-			     (nth 1 (car names)) ; name
+			     (nth 2 (car names)) ; name
 			     "typedef"
 			     (semantic-tag-type-members tag)
 			     nil
 			     :pointer
 			     (let ((stars (car (car (car names)))))
 			       (if (= stars 0) nil stars))
+			     :reference
+			     (let ((refs (car (nth 1 (car names)))))
+			       (when (> refs 0) refs))
 			     ;; This specifies what the typedef
 			     ;; is expanded out as.  Just the
 			     ;; name shows up as a parent of this
@@ -1303,14 +1315,15 @@ Optional argument STAR and REF indicate the number of * and & in the typedef."
 			  (nth 10 tokenpart) ; initializers
 			  )
 		      (not (car (nth 3 tokenpart)))))
-		(fcnpointer (and (> (length (car tokenpart)) 0)
+		(operator (if (string-match "[a-zA-Z]" (car tokenpart))
+			      nil
+			    t))
+		(fcnpointer (and (not operator)
+				 (> (length (car tokenpart)) 1)
 				 (= (aref (car tokenpart) 0) ?*)))
 		(fnname (if fcnpointer
 			    (substring (car tokenpart) 1)
 			  (car tokenpart)))
-		(operator (if (string-match "[a-zA-Z]" fnname)
-			      nil
-			    t))
 		)
 	   ;; The function
 	   (semantic-tag-new-function
@@ -1350,8 +1363,10 @@ Optional argument STAR and REF indicate the number of * and & in the typedef."
 	    ;; `throws' as a common name for things that toss
 	    ;; exceptions about.
 	    :throws (nth 5 tokenpart)
-	    ;; Reentrant is a C++ thingy.  Add it here
+	    ;; Reentrant, override, final are a C++ things.  Add it here.
 	    :reentrant-flag (if (member "reentrant" (nth 6 tokenpart)) t)
+	    :override-flag (if (member "override" (nth 6 tokenpart)) t)
+	    :final-flag (if (member "final" (nth 6 tokenpart)) t)
 	    ;; A function post-const is funky.  Try stuff
 	    :methodconst-flag (if (member "const" (nth 6 tokenpart)) t)
 	    ;; prototypes are functions w/ no body
@@ -1408,8 +1423,18 @@ PARENT specifies a parent class.
 COLOR indicates that the text should be type colorized.
 Enhances the base class to search for the entire parent
 tree to make the name accurate."
-  (semantic-format-tag-canonical-name-default tag parent color)
-  )
+  (cond 
+   ((and (semantic-tag-of-class-p tag 'type)
+	 (semantic-tag-get-attribute tag :parent))
+    ;; We nee to combine the :parent into the tag name and continue on.
+    (let* ((par (semantic-tag-get-attribute tag :parent))
+	   (parstr (if (stringp par) par
+		     (mapconcat 'identity par "::")))
+	   (clone (semantic-tag-clone 
+		   tag (concat parstr "::" (semantic-tag-name tag)))))
+      (semantic-format-tag-canonical-name-default clone parent color)))
+   (t (semantic-format-tag-canonical-name-default tag parent color))
+  ))
 
 (define-mode-local-override semantic-format-tag-type c-mode (tag color)
   "Convert the data type of TAG to a string usable in tag formatting.
@@ -1614,7 +1639,7 @@ Optional PARENT and COLOR as specified with
   "Return non-nil if TAG is considered abstract.
 PARENT is tag's parent.
 In C, a method is abstract if it is `virtual', which is already
-handled.  A class is abstract iff its destructor is virtual."
+handled.  A class is abstract only if its destructor is virtual."
   (cond
    ((eq (semantic-tag-class tag) 'type)
     (require 'semantic/find)
@@ -1651,6 +1676,8 @@ SCOPE is not used, and TYPE-DECLARATION is used only if TYPE is not a typedef."
 	       (let* ((fname (semantic-tag-file-name type))
 		      (def (semantic-tag-copy dt nil fname)))
 		 (list def def)))
+	      ((semantic-tag-p dt)
+	       (list (semantic-format-tag-canonical-name dt) dt))
               ((stringp dt) (list dt (semantic-tag dt 'type)))
               ((consp dt) (list (car dt) dt))))
 
@@ -1872,6 +1899,23 @@ These are constants which are of type TYPE."
   "Assemble the list of names NAMELIST into a namespace name."
   (mapconcat 'identity namelist "::"))
 
+(define-mode-local-override semantic-analyze-tag-type-members c-mode (tag)
+  "Return a list of :members of TAG.
+Merges in all members of anonymous unions that are :members of TAG."
+  (let ((raw (semantic-tag-type-members tag))
+	(ans nil))
+    (dolist (T raw)
+      (cond ((and (semantic-tag-of-class-p T 'type)
+	    	  (semantic-tag-of-type-p T "union")
+	    	  (string= (semantic-tag-name T) ""))
+	     ;; Merge in all the union members.
+	     (dolist (Ts (semantic-analyze-tag-type-members T))
+	       (setq ans (cons Ts ans))))
+	    ;; Be default, just push the tag.
+	    (t
+	     (setq ans (cons T ans)))))
+    (nreverse ans)))
+
 (define-mode-local-override semantic-ctxt-scoped-types c++-mode (&optional point)
   "Return a list of tags of CLASS type based on POINT.
 DO NOT return the list of tags encompassing point."
@@ -2042,10 +2086,12 @@ have to be wrapped in that namespace."
 	    (setq sv (cdr sv)))
 
 	  ;; This is optional, and potentially fraught w/ errors.
-	  (condition-case nil
-	      (dolist (lt sv)
-		(setq txt (concat txt " " (semantic-lex-token-text lt))))
-	    (error (setq txt (concat txt "  #error in summary fcn"))))
+	  (if (stringp sv)
+	      (setq txt (concat txt " " sv))
+	    (condition-case nil
+		(dolist (lt sv)
+		  (setq txt (concat txt " " (semantic-lex-token-text lt))))
+	      (error (setq txt (concat txt "  #error in summary fcn")))))
 
 	  txt)
       (semantic-idle-summary-current-symbol-info-default))))

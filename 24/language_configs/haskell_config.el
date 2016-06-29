@@ -8,7 +8,7 @@
 ;; Version:
 ;; Last-Updated:
 ;;           By:
-;;     Update #: 789
+;;     Update #: 794
 ;; URL:
 ;; Description:
 ;;
@@ -152,6 +152,10 @@
     ad-do-it))
 (setq haskell-stylish-on-save t)
 
+;; hindent
+;; (require 'hindent)
+;; (add-hook 'haskell-mode-hook #'hindent-mode)
+
 ;; (eval-after-load "haskell-mode"
 ;;   '(progn
 ;;      (define-key haskell-mode-map (kbd "C-,") 'haskell-move-nested-left)
@@ -193,6 +197,9 @@
 ;;   )
 
 ;; (add-hook 'open-file 'delete-hdevtools-socket-file)
+
+;; (eval-after-load 'flycheck
+;;   '(add-hook 'flycheck-mode-hook #'flycheck-haskell-setup))
 
 ;; enable flycheck
 ;; (eval-after-load 'flycheck '(require 'flycheck-hdevtools))
@@ -464,53 +471,53 @@ attention to case differences."
 ;; +++++++++++++++ OVERWRITE FUNCTIONS TO CHANGE BEHAVIOR +++++++++++++++
 ;; ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
-(defun haskell-mode-buffer-apply-command (cmd)
-  "Execute shell command CMD with current buffer as input and
-replace the whole buffer with the output. If CMD fails the buffer
-remains unchanged."
-  (set-buffer-modified-p t)
-  (let* ((chomp (lambda (str)
-                  (while (string-match "\\`\n+\\|^\\s-+\\|\\s-+$\\|\n+\\'" str)
-                    (setq str (replace-match "" t t str)))
-                  str))
-         (errout (lambda (fmt &rest args)
-                   (let* ((warning-fill-prefix " "))
-                     (display-warning cmd (apply 'format fmt args) :warning))))
-         (filename (buffer-file-name (current-buffer)))
-         (cmd-prefix (replace-regexp-in-string " .*" "" cmd))
-         (tmp-file (make-temp-file cmd-prefix))
-         (err-file (make-temp-file cmd-prefix))
-         (default-directory (if (and (boundp 'haskell-session)
-                                     haskell-session)
-                                (haskell-session-cabal-dir haskell-session)
-                              default-directory))
-         (errcode (with-temp-file tmp-file
-                    (call-process cmd filename
-                                  (list (current-buffer) err-file) nil)))
-         (stderr-output ""
-                        ;; (with-temp-buffer
-                        ;;   (insert-file-contents err-file)
-                        ;;   (funcall chomp (buffer-substring-no-properties (point-min) (point-max))))
-                        )
-         (stdout-output
-          (with-temp-buffer
-            (insert-file-contents tmp-file)
-            (buffer-substring-no-properties (point-min) (point-max)))))
-    (if (string= "" stderr-output)
-        (if (string= "" stdout-output)
-            (funcall errout
-                     "Error: %s produced no output, leaving buffer alone" cmd)
-          (save-restriction
-            (widen)
-            ;; command successful, insert file with replacement to preserve
-            ;; markers.
-            (insert-file-contents tmp-file nil nil nil t)))
-      ;; non-null stderr, command must have failed
-      (funcall errout "%s failed: %s" cmd stderr-output)
-      )
-    (delete-file tmp-file)
-    (delete-file err-file)
-    ))
+;; (defun haskell-mode-buffer-apply-command (cmd)
+;;   "Execute shell command CMD with current buffer as input and
+;; replace the whole buffer with the output. If CMD fails the buffer
+;; remains unchanged."
+;;   (set-buffer-modified-p t)
+;;   (let* ((chomp (lambda (str)
+;;                   (while (string-match "\\`\n+\\|^\\s-+\\|\\s-+$\\|\n+\\'" str)
+;;                     (setq str (replace-match "" t t str)))
+;;                   str))
+;;          (errout (lambda (fmt &rest args)
+;;                    (let* ((warning-fill-prefix " "))
+;;                      (display-warning cmd (apply 'format fmt args) :warning))))
+;;          (filename (buffer-file-name (current-buffer)))
+;;          (cmd-prefix (replace-regexp-in-string " .*" "" cmd))
+;;          (tmp-file (make-temp-file cmd-prefix))
+;;          (err-file (make-temp-file cmd-prefix))
+;;          (default-directory (if (and (boundp 'haskell-session)
+;;                                      haskell-session)
+;;                                 (haskell-session-cabal-dir haskell-session)
+;;                               default-directory))
+;;          (errcode (with-temp-file tmp-file
+;;                     (call-process cmd filename
+;;                                   (list (current-buffer) err-file) nil)))
+;;          (stderr-output ""
+;;                         ;; (with-temp-buffer
+;;                         ;;   (insert-file-contents err-file)
+;;                         ;;   (funcall chomp (buffer-substring-no-properties (point-min) (point-max))))
+;;                         )
+;;          (stdout-output
+;;           (with-temp-buffer
+;;             (insert-file-contents tmp-file)
+;;             (buffer-substring-no-properties (point-min) (point-max)))))
+;;     (if (string= "" stderr-output)
+;;         (if (string= "" stdout-output)
+;;             (funcall errout
+;;                      "Error: %s produced no output, leaving buffer alone" cmd)
+;;           (save-restriction
+;;             (widen)
+;;             ;; command successful, insert file with replacement to preserve
+;;             ;; markers.
+;;             (insert-file-contents tmp-file nil nil nil t)))
+;;       ;; non-null stderr, command must have failed
+;;       (funcall errout "%s failed: %s" cmd stderr-output)
+;;       )
+;;     (delete-file tmp-file)
+;;     (delete-file err-file)
+;;     ))
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;

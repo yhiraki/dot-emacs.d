@@ -7,9 +7,9 @@
 ;; Created: So Okt 13 11:05:43 2013 (+0200)
 ;; Version:
 ;; Package-Requires: ()
-;; Last-Updated: Wed Nov 12 15:59:51 2014 (+0100)
+;; Last-Updated: Sat May 28 16:02:09 2016 (+0200)
 ;;           By: Manuel Schneckenreither
-;;     Update #: 255
+;;     Update #: 258
 ;; URL:
 ;; Doc URL:
 ;; Keywords:
@@ -46,7 +46,9 @@
 
 (defun byte-compile-cedet ()
   (interactive)
-  (shell-command (concat "cd " cedet-root-path " && make && make install-info")))
+  (shell-command (concat "cd " cedet-root-path " && make && make install-info"))
+	(shell-command (concat "cd " cedet-root-path "/contrib && make"))
+	)
 
 
 ;; DO ONLY IF NOT BUILT YET
@@ -79,6 +81,9 @@
 (require 'cedet-idutils)
 (require 'semantic)
 ;; (require 'eieio)
+
+;; Load CEDET CONTRIB.
+(load-file (concat package-folder "cedet/contrib/cedet-contrib-load.el"))
 
 
 ;; SRecode for code generation
@@ -126,7 +131,7 @@
 ;;     'semantic/db-javap' when searching for classes.  This classpath is
 ;;     NOT passed to java when invoking java commands.
 (setq semanticdb-javap-classpath
-      '("/usr/lib/jvm/java-default-runtime/src/"
+      '("/usr/lib/jvm/default-runtime/src/"
         (concat (nth 0 (split-string default-directory "src")) "./lib/")
         (concat (nth 0 (split-string default-directory "src")) "./src/")
         (concat (nth 0 (split-string default-directory "src")) "../Common/src/")

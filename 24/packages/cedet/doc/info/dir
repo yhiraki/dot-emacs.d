@@ -27,6 +27,5 @@ Emacs
 Emacs misc features
 * Bovine: (bovine).             Semantic bovine parser development.
 * EDE: (ede).                   The Emacs Development Environment.
-* EIEIO: (eieio).               An objects system for Emacs Lisp.
 * SRecode: (srecode).           Template code generator.
 * Wisent: (wisent).             Semantic Wisent parser development.

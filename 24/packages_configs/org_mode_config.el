@@ -8,7 +8,29 @@
 
 (require 'org)
 
+
 ;; active Babel languages
+
+;; see http://orgmode.org/worg/org-contrib/babel/languages.html
+;; see http://orgmode.org/manual/Languages.html#Languages
+;; and see: http://orgmode.org/manual/Evaluating-code-blocks.html
+
+(org-babel-do-load-languages
+ (quote org-babel-load-languages)
+ (quote ((emacs-lisp . t)
+         (dot . t)
+         (ditaa . t)
+         (R . t)
+         (python . t)
+         (ruby . t)
+         (gnuplot . t)
+         (clojure . t)
+         (sh . t)
+         (ledger . t)
+         (org . t)
+         (plantuml . t)
+         (latex . t))))
+
 ;; (org-babel-do-load-languages
 ;;  'org-babel-load-languages
 ;;  '((gnuplot . t)))
@@ -128,21 +150,6 @@
       (org-display-inline-images)
     (error nil)))
 
-;; (org-babel-do-load-languages
-;;  (quote org-babel-load-languages)
-;;  (quote ((emacs-lisp . t)
-;;          (dot . t)
-;;          (ditaa . t)
-;;          (R . t)
-;;          (python . t)
-;;          (ruby . t)
-;;          (gnuplot . t)
-;;          (clojure . t)
-;;          (sh . t)
-;;          (ledger . t)
-;;          (org . t)
-;;          (plantuml . t)
-;;          (latex . t))))
 
                                         ; Do not prompt to confirm evaluation
                                         ; This may be dangerous - make sure you understand the consequences
@@ -432,27 +439,27 @@ The diary entry can contain `%s' which will be replaced with
 ;; ++++++++++++++++++++++++++++ Latex Export ++++++++++++++++++++++++++++
 ;; ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
-
-(setq org-latex-listings-options
-      '(("basicstyle" "\\small")
-        ;; ("keywordstyle" "\\color{black}\\bfseries\\underbar")
-        ("basicstyle" "\\footnotesize")
-        ("breakatwhitespace" "false")
-        ("breaklines" "true")
-        ("captionpos" "b")
-        ("deletekeywords" "{...}")
-        ("escapeinside" "{\\%*}{*)}")
-        ("extendedchars" "true")
-        ("frame" "single")
-        ("keepspaces" "true")
-        ;; ("keywordstyle" "\\color{blue}")
-        ("otherkeywords" "{*,...}")
-        ("numbers" "left")
-        ("numbersep" "5pt")
-        ("numberstyle" "\\tiny\\color{black}")
-        ("rulecolor" "\\color{black}")
-        ("showspaces" "false")
-        ("showstringspaces" "false")
-        ("showtabs" "false")
-        ("stepnumber" "1")
-        ("tabsize" "2")))
+;; rather do that for each file separately in header!!!
+;; (setq org-latex-listings-options
+      ;; '(("basicstyle" "\\small")
+      ;;   ;; ("keywordstyle" "\\color{black}\\bfseries\\underbar")
+      ;;   ("basicstyle" "\\footnotesize")
+      ;;   ("breakatwhitespace" "false")
+      ;;   ("breaklines" "true")
+      ;;   ("captionpos" "b")
+      ;;   ("deletekeywords" "{...}")
+      ;;   ("escapeinside" "{\\%*}{*)}")
+      ;;   ("extendedchars" "true")
+      ;;   ("frame" "single")
+      ;;   ("keepspaces" "true")
+      ;;   ;; ("keywordstyle" "\\color{blue}")
+      ;;   ("otherkeywords" "{*,...}")
+      ;;   ("numbers" "left")
+      ;;   ("numbersep" "5pt")
+      ;;   ("numberstyle" "\\tiny\\color{black}")
+      ;;   ("rulecolor" "\\color{black}")
+      ;;   ("showspaces" "false")
+      ;;   ("showstringspaces" "false")
+      ;;   ("showtabs" "false")
+      ;;   ("stepnumber" "1")
+      ;;   ("tabsize" "2")))

@@ -38,8 +38,8 @@
 (add-hook 'flycheck-mode-hook 'flycheck-color-mode-line-mode)
 
 ;; Haskell setup
-(eval-after-load 'flycheck
-  '(add-hook 'flycheck-mode-hook #'flycheck-haskell-setup))
+;; (eval-after-load 'flycheck
+;;  '(add-hook 'flycheck-mode-hook #'flycheck-haskell-setup))
 
 ;; (eval-after-load 'flycheck '(require 'flycheck-hdevtools))
 

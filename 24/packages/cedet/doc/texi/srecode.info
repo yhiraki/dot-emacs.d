@@ -1,4 +1,4 @@
-This is srecode.info, produced by makeinfo version 5.1 from
+This is srecode.info, produced by makeinfo version 6.1 from
 srecode.texi.
 
 Copyright (C) 2007-2013 Free Software Foundation, Inc.
@@ -2223,7 +2223,7 @@ Node: Parts of SRecode6104
 Node: SRecode Minor Mode9993
 Ref: srecode-insert-ask-variable-method11382
 Node: Template Writing12570
-Ref: 'SRecode-template-mode'12714
+Ref: SRecode-template-mode12714
 Node: Variables13828
 Node: String Values14854
 Node: Multi-string Values15283
@@ -2268,6 +2268,6 @@ Ref: srecode-semantic-insert-tag55551
 Node: Application Writing57230
 Ref: srecode-load-tables-for-mode58184
 Node: GNU Free Documentation License58508
-Node: Index83668
+Node: Index83669
 
 End Tag Table

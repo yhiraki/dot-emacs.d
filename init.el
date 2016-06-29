@@ -7,9 +7,9 @@
 ;; Created: Tue Jul 29 00:11:38 2014 (+0200)
 ;; Version:
 ;; Package-Requires: ()
-;; Last-Updated: Wed Apr 27 17:37:33 2016 (+0200)
+;; Last-Updated: Sat May 28 15:55:05 2016 (+0200)
 ;;           By: Manuel Schneckenreither
-;;     Update #: 972
+;;     Update #: 977
 ;; URL:
 ;; Doc URL:
 ;; Keywords:
@@ -316,6 +316,24 @@
  '(Flymake-compilation-prevents-syntax-check nil)
  '(ac-etags-requires 1)
  '(bmkp-last-as-first-bookmark-file "/home/schnecki/.emacs.d/.bookmarks")
+ '(cedet-java-classpath-extension
+   (quote
+    ((concat
+      (nth 0
+           (split-string default-directory "src"))
+      "./lib/")
+     (concat
+      (nth 0
+           (split-string default-directory "src"))
+      "./src/")
+     (concat
+      (nth 0
+           (split-string default-directory "src"))
+      "../Common/src/")
+     (concat
+      (nth 0
+           (split-string default-directory "src"))
+      "../Common/lib/"))))
  '(color-theme-legal-frame-parameters "\\(color\\|mode\\|font\\|height\\|width\\)$")
  '(column-number-mode t)
  '(cua-delete-selection nil)
@@ -395,6 +413,25 @@
  '(org-latex-prefer-user-labels t)
  '(org-latex-table-caption-above nil)
  '(org-use-sub-superscripts (quote {}))
+ '(semanticdb-javap-classpath
+   (quote
+    ("/usr/lib/jvm/default-runtime/src/"
+     (concat
+      (nth 0
+           (split-string default-directory "src"))
+      "./lib/")
+     (concat
+      (nth 0
+           (split-string default-directory "src"))
+      "./src/")
+     (concat
+      (nth 0
+           (split-string default-directory "src"))
+      "../Common/src/")
+     (concat
+      (nth 0
+           (split-string default-directory "src"))
+      "../Common/lib/"))))
  '(send-mail-function (quote smtpmail-send-it))
  '(setq max-specpdl-size t)
  '(size-indication-mode t)

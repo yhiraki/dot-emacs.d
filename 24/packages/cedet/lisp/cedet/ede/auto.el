@@ -1,6 +1,6 @@
 ;;; ede/auto.el --- Autoload features for EDE
 
-;; Copyright (C) 2010-2014 Free Software Foundation, Inc.
+;; Copyright (C) 2010-2016 Free Software Foundation, Inc.
 
 ;; Author: Eric M. Ludlam <zappo@gnu.org>
 
@@ -62,74 +62,62 @@ location is varied dependent on other complex criteria, this class
 can be used to define that match without loading the specific project
 into memory.")
 
+(defmethod ede-calc-fromconfig ((dirmatch ede-project-autoload-dirmatch))
+  "Calculate the value of :fromconfig from DIRMATCH."
+  (let* ((fc (oref dirmatch fromconfig))
+	 (found (cond ((stringp fc) fc)
+		      ((functionp fc) (funcall fc))
+		      (t (error "Unknown dirmatch object match style.")))))
+    (expand-file-name found)
+    ))
+
+
 (defmethod ede-dirmatch-installed ((dirmatch ede-project-autoload-dirmatch))
   "Return non-nil if the tool DIRMATCH might match is installed on the system."
-  (let ((fc (oref dirmatch fromconfig)))
-
-    (cond
-     ;; If the thing to match is stored in a config file.
-     ((stringp fc)
-      (file-exists-p fc))
-
-     ;; Add new types of dirmatches here.
-
-     ;; Error for weird stuff
-     (t (error "Unknown dirmatch type.")))))
-
+  (file-exists-p (ede-calc-fromconfig dirmatch)))
 
 (defmethod ede-do-dirmatch ((dirmatch ede-project-autoload-dirmatch) file)
   "Does DIRMATCH match the filename FILE."
-  (let ((fc (oref dirmatch fromconfig)))
+  (let ((fc (ede-calc-fromconfig dirmatch)))
 
-    (cond
-     ;; If the thing to match is stored in a config file.
-     ((stringp fc)
-      (when (file-exists-p fc)
-	(let ((matchstring 
-	       (if (slot-boundp dirmatch 'configdatastash)
-		   (oref dirmatch configdatastash)
-		 nil)))
-	  (when (and (not matchstring) (not (slot-boundp dirmatch 'configdatastash)))
-	    (save-current-buffer
-	      (let* ((buff (get-file-buffer fc))
-		     (readbuff
-		      (let ((find-file-hook nil)) ;; Disable ede from recursing
-			(find-file-noselect fc))))
-		(set-buffer readbuff)
-		(save-excursion
-		  (goto-char (point-min))
-		  (when (re-search-forward (oref dirmatch configregex) nil t)
-		    (setq matchstring
-			  (match-string (or (oref dirmatch configregexidx) 0)))))
-		(if (not buff) (kill-buffer readbuff))))
-	    (when matchstring
-	      ;; If this dirmatch only finds subdirs of matchstring, then
-	      ;; force matchstring to be a directory.
-	      (when (oref dirmatch subdir-only)
-		(setq matchstring (file-name-as-directory matchstring)))
-	      ;; Convert matchstring to a regexp
-	      (setq matchstring (concat "^" (regexp-quote matchstring)))
-	      ;; Stash it for later.
-	      (oset dirmatch configdatastash matchstring))
-	    ;; Debug
-	    ;;(message "Stashing config data for dirmatch %S as %S" (eieio-object-name dirmatch) matchstring)
-	    )
-	  ;;(message "dirmatch %s against %s" matchstring (expand-file-name file))
-	  ;; Match against our discovered string
-	  (setq file (file-name-as-directory (expand-file-name file)))
-	  (and matchstring (string-match matchstring (expand-file-name file))
-	       (or (not (oref dirmatch subdir-only))
-		   (not (= (match-end 0) (length file))))
-	       )
-	  )))
-     
-     ;; Add new matches here
-     ;; ((stringp somenewslot ...)
-     ;;   )
-
-     ;; Error if none others known
-     (t
-      (error "Unknown dirmatch object match style.")))
+    (when (file-exists-p fc)
+      (let ((matchstring 
+	     (if (slot-boundp dirmatch 'configdatastash)
+		 (oref dirmatch configdatastash)
+	       nil)))
+	(when (and (not matchstring) (not (slot-boundp dirmatch 'configdatastash)))
+	  (save-current-buffer
+	    (let* ((buff (get-file-buffer fc))
+		   (readbuff
+		    (let ((find-file-hook nil)) ;; Disable ede from recursing
+		      (find-file-noselect fc))))
+	      (set-buffer readbuff)
+	      (save-excursion
+		(goto-char (point-min))
+		(when (re-search-forward (oref dirmatch configregex) nil t)
+		  (setq matchstring
+			(match-string (or (oref dirmatch configregexidx) 0)))))
+	      (if (not buff) (kill-buffer readbuff))))
+	  (when matchstring
+	    ;; If this dirmatch only finds subdirs of matchstring, then
+	    ;; force matchstring to be a directory.
+	    (when (oref dirmatch subdir-only)
+	      (setq matchstring (file-name-as-directory matchstring)))
+	    ;; Convert matchstring to a regexp
+	    (setq matchstring (concat "^" (regexp-quote matchstring)))
+	    ;; Stash it for later.
+	    (oset dirmatch configdatastash matchstring))
+	  ;; Debug
+	  ;;(message "Stashing config data for dirmatch %S as %S" (eieio-object-name dirmatch) matchstring)
+	  )
+	;;(message "dirmatch %s against %s" matchstring (expand-file-name file))
+	;; Match against our discovered string
+	(setq file (file-name-as-directory (expand-file-name file)))
+	(and matchstring (string-match matchstring (expand-file-name file))
+	     (or (not (oref dirmatch subdir-only))
+		 (not (= (match-end 0) (length file))))
+	     )
+	))
     ))
 
 (declare-function ede-directory-safe-p "ede")
@@ -224,6 +212,12 @@ type is required and the load function used.")
 
 (put 'ede-project-class-files 'risky-local-variable t)
 
+(defun ede-show-supported-projects ()
+  "Display all the project types registered with EDE."
+  (interactive)
+  (data-debug-new-buffer (concat "*EDE Autodetect*"))
+  (data-debug-insert-stuff-list ede-project-class-files "* "))
+
 (defun ede-add-project-autoload (projauto &optional flag)
   "Add PROJAUTO, an EDE autoload definition to `ede-project-class-files'.
 Optional argument FLAG indicates how this autoload should be
@@ -233,8 +227,8 @@ added.  Possible values are:
             front of the list so more generic projects don't get priority."
   ;; First, can we identify PROJAUTO as already in the list?  If so, replace.
   (let ((projlist ede-project-class-files)
-	(projname (eieio-object-name-string projauto)))
-    (while (and projlist (not (string= (eieio-object-name-string (car projlist)) projname)))
+	(projname (oref projauto :name)))
+    (while (and projlist (not (string= (oref (car projlist) :name) projname)))
       (setq projlist (cdr projlist)))
 
     (if projlist
@@ -277,7 +271,7 @@ added.  Possible values are:
 	 (pf (oref this proj-file))
 	 (f (when (stringp pf) (expand-file-name pf d))))
     (if f
-	(and f (file-exists-p f))
+	(file-exists-p f)
       (let ((dirmatch (oref this proj-root-dirmatch)))
 	(cond 
 	 ((stringp dirmatch)

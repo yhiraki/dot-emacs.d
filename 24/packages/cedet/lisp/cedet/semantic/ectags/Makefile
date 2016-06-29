@@ -15,7 +15,7 @@ top=../../../
 ede_FILES=Project.ede Makefile
 
 ectags_LISP=db.el util.el lang.el lang2.el parse.el
-LOADPATH= /home/schnecki/.emacs.d/24/packages/cedet/lisp/eieio/ /home/schnecki/.emacs.d/24/packages/cedet/lisp/cedet/ /home/schnecki/.emacs.d/24/packages/cedet/lisp/cedet/
+LOADPATH= ../../ ../../
 VERSION=1.1beta
 DISTDIR=$(top)cedet-topdir-$(VERSION)/cedet/semantic/ectags
 

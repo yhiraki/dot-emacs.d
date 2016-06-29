@@ -118,6 +118,7 @@
 (eval-when-compile
   ;; For the semantic-find-tags-for-completion macro.
   (require 'semantic/find))
+(require 'semantic/db-find)          ;For type semanticdb-find-result-with-nil.
 
 (declare-function semanticdb-find-tags-by-name-method "semantic/db-find.el")
 
@@ -208,7 +209,8 @@ HISTORY is a symbol representing a variable to story the history in."
 	 (semantic-completion-display-engine displayor)
 	 (semantic-complete-active-default nil)
 	 (semantic-complete-current-matched-tag nil)
-	 (default-as-tag (semantic-complete-default-to-tag default-tag))
+	 (default-as-tag (save-current-buffer
+			   (semantic-complete-default-to-tag default-tag)))
 	 (default-as-string (when (semantic-tag-p default-as-tag)
 			      (semantic-tag-name default-as-tag)))
 	 )
@@ -1081,14 +1083,19 @@ Output must be in semanticdb Find result format."
 		      (eq (compare-strings
 			   prefix 0 nil
 			   last-prefix 0 (length prefix)) t))
-		   ;; The new prefix is a substring of the old
-		   ;; prefix, and it's longer than one character.
-		   ;; Perform a full search to pull in additional
-		   ;; matches.
-		 (let ((context (semantic-analyze-current-context (point))))
-		   ;; Set new context and make first-pass-completions
-		   ;; unbound so that they are newly calculated.
-		   (oset obj context context)
+		 ;; The new prefix is a substring of the old
+		 ;; prefix, and it's longer than one character.
+		 ;; Perform a full search to pull in additional
+		 ;; matches.
+		 (when (slot-exists-p obj 'context)
+		   ;; If this collector wants an analyzed context,
+		   ;; then restart here.
+		   (save-current-buffer
+		     (set-buffer (oref obj buffer))
+		     (let ((context (semantic-analyze-current-context (point))))
+		       ;; Set new context and make first-pass-completions
+		       ;; unbound so that they are newly calculated.
+		       (oset obj context context)))
 		   (when (slot-boundp obj 'first-pass-completions)
 		     (slot-makeunbound obj 'first-pass-completions)))
 		 nil)))
@@ -1695,6 +1702,8 @@ Display mechanism using tooltip for a list of possible completions.")
     (error nil))
   )
 
+(defvar tooltip-mode)
+
 (defmethod semantic-displayor-show-request ((obj semantic-displayor-tooltip))
   "A request to show the current tags table."
   (if (or (not (featurep 'tooltip)) (not tooltip-mode))
@@ -1791,6 +1800,9 @@ Return a cons cell (X . Y)"
     (cons (+ (car point-pix-pos) (car edges) left)
           (+ (cdr point-pix-pos) (cadr edges) top))))
 
+
+(defvar tooltip-frame-parameters)
+(declare-function tooltip-show "tooltip" (text &optional use-echo-area))
 
 (defun semantic-displayor-tooltip-show (text)
   "Display a tooltip with TEXT near cursor."
@@ -2029,7 +2041,7 @@ completion works."
 	 (complst nil))
     (when (and thissym (or (not (string= thissym ""))
 			   nextsym))
-      ;; Do a quick calcuation of completions.
+      ;; Do a quick calculation of completions.
       (semantic-collector-calculate-completions
        collector thissym nil)
       ;; Get the master list
@@ -2109,7 +2121,7 @@ completion works."
 	 (complst nil))
     (when (and thissym (or (not (string= thissym ""))
 			   nextsym))
-      ;; Do a quick calcuation of completions.
+      ;; Do a quick calculation of completions.
       (semantic-collector-calculate-completions
        collector thissym nil)
       ;; Get the master list

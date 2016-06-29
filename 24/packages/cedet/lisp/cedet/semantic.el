@@ -1,6 +1,6 @@
 ;;; semantic.el --- Semantic buffer evaluator.
 
-;; Copyright (C) 1999-2014 Free Software Foundation, Inc.
+;; Copyright (C) 1999-2015 Free Software Foundation, Inc.
 
 ;; Author: Eric M. Ludlam <zappo@gnu.org>
 ;; Keywords: syntax tools
@@ -313,14 +313,6 @@ a parse of the buffer.")
 			    'semantic-init-mode-hook "23.2")
 (semantic-varalias-obsolete 'semantic-init-db-hooks
 			    'semantic-init-db-hook "23.2")
-
-(defvar semantic-new-buffer-fcn-was-run nil
-  "Non-nil after `semantic-new-buffer-fcn' has been executed.")
-(make-variable-buffer-local 'semantic-new-buffer-fcn-was-run)
-
-(defsubst semantic-active-p ()
-  "Return non-nil if the current buffer was set up for parsing."
-  semantic-new-buffer-fcn-was-run)
 
 (defsubst semantic-error-if-unparsed ()
   "Raise an error if current buffer was not parsed by Semantic."
@@ -1185,17 +1177,18 @@ Semantic mode.
   "Return possible analasis completions at point.
 The completions provided are via `semantic-analyze-possible-completions'.
 This function can be used by `completion-at-point-functions'."
-  (let* ((ctxt (semantic-analyze-current-context))
-	 (possible (semantic-analyze-possible-completions ctxt)))
 
-    ;; The return from this is either:
-    ;; nil - not applicable here.
-    ;; A list: (START END COLLECTION . PROPS)
-    (when possible
-      (list (car (oref ctxt bounds))
-	    (cdr (oref ctxt bounds))
-	    possible))
-    ))
+  (when (semantic-active-p)
+    (let* ((ctxt (semantic-analyze-current-context))
+           (possible (semantic-analyze-possible-completions ctxt)))
+      
+      ;; The return from this is either:
+      ;; nil - not applicable here.
+      ;; A list: (START END COLLECTION . PROPS)
+      (when possible
+        (list (car (oref ctxt bounds))
+              (cdr (oref ctxt bounds))
+              possible)))))
 
 (defun semantic-analyze-notc-completion-at-point-function ()
   "Return possible analasis completions at point.
@@ -1203,14 +1196,15 @@ The completions provided are via `semantic-analyze-possible-completions',
 but with the 'no-tc option passed in, which means constraints based
 on what is being assigned to are ignored.
 This function can be used by `completion-at-point-functions'."
-  (let* ((ctxt (semantic-analyze-current-context))
-	 (possible (semantic-analyze-possible-completions ctxt 'no-tc)))
 
-    (when possible
-      (list (car (oref ctxt bounds))
-	    (cdr (oref ctxt bounds))
-	    possible))
-    ))
+  (when (semantic-active-p)
+    (let* ((ctxt (semantic-analyze-current-context))
+           (possible (semantic-analyze-possible-completions ctxt 'no-tc)))
+      
+      (when possible
+        (list (car (oref ctxt bounds))
+              (cdr (oref ctxt bounds))
+              possible)))))
 
 (defun semantic-analyze-nolongprefix-completion-at-point-function ()
   "Return possible analasis completions at point.
@@ -1218,15 +1212,15 @@ The completions provided are via `semantic-analyze-possible-completions',
 but with the 'no-tc and 'no-longprefix option passed in, which means
 constraints resulting in a long multi-symbol dereference are ignored.
 This function can be used by `completion-at-point-functions'."
-  (let* ((ctxt (semantic-analyze-current-context))
-	 (possible (semantic-analyze-possible-completions
-		    ctxt 'no-tc 'no-longprefix)))
+  (when (semantic-active-p)
+    (let* ((ctxt (semantic-analyze-current-context))
+           (possible (semantic-analyze-possible-completions
+                      ctxt 'no-tc 'no-longprefix)))
 
-    (when possible
-      (list (car (oref ctxt bounds))
-	    (cdr (oref ctxt bounds))
-	    possible))
-    ))
+      (when possible
+        (list (car (oref ctxt bounds))
+              (cdr (oref ctxt bounds))
+              possible)))))
 
 ;;; Autoload some functions that are not in semantic/loaddefs
 

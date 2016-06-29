@@ -1,6 +1,6 @@
 ;;; ede/arduino.el --- EDE support for arduino projects / sketches
 ;;
-;; Copyright (C) 2012, 2013, 2014 Eric M. Ludlam
+;; Copyright (C) 2012, 2013, 2014, 2015, 2016 Eric M. Ludlam
 ;;
 ;; Author: Eric M. Ludlam <eric@siege-engine.com>
 ;;
@@ -203,9 +203,10 @@ ROOTPROJ is nil, sinc there is only one project for a directory tree."
    ;; NOTE: In loaddefs, the pref file isn't there, so we need a fallback.
    ;;       when this files loads, we need to use the actual pref in case
    ;;       the user set it.
-   :fromconfig (if (boundp 'ede-arduino-preferences-file)
-		   ede-arduino-preferences-file 
-		 "~/.arduino/preferences.txt")
+   :fromconfig (lambda ()
+		 (if (boundp 'ede-arduino-preferences-file)
+		     ede-arduino-preferences-file 
+		   "~/.arduino/preferences.txt"))
    :configregex "^sketchbook.path=\\([^\n]+\\)$"
    :configregexidx 1)
   :proj-file 'ede-arduino-file
@@ -302,6 +303,7 @@ Argument COMMAND is the command to use for compiling the target."
   "Get the system include path used by project THIS."
   (let* ((fromconfig (call-next-method))
 	 (prefs (ede-arduino-sync))
+	 ;; Pull libs from installed libraries
 	 (iphardware (expand-file-name "hardware/arduino/cores/arduino"
 				       (ede-arduino-find-install)))
 	 (libs (ede-arduino-guess-libs))
@@ -309,8 +311,17 @@ Argument COMMAND is the command to use for compiling the target."
 		  (lambda (lib)
 		    (expand-file-name (concat "libraries/" lib)
 				      (ede-arduino-find-install)))
-		  libs)))
-    (append (cons iphardware iplibs) fromconfig)))
+		  libs))
+	 ;; Also pull libs from sketchbook
+	 (sketchroot (and prefs (oref prefs sketchbook)))
+	 (sblibs (mapcar
+		  (lambda (lib)
+		    (expand-file-name (concat "libraries/" lib)
+				      sketchroot))
+		  libs))
+	 )
+
+    (append (cons iphardware iplibs) sblibs fromconfig)))
 
 ;;; Config File support
 ;;
@@ -426,7 +437,7 @@ Argument COMMAND is the command to use for compiling the target."
       (set-buffer buff)
       (save-excursion
 	(goto-char (point-min))
-	(while (re-search-forward "#include <\\(\\w+\\).h>" nil t)
+	(while (re-search-forward "^#include <\\(\\w+\\).h>" nil t)
 	  (setq tmp (match-string 1))
 	  (unless (file-exists-p (concat tmp ".h"))
 	    (let* ((lib (match-string 1))

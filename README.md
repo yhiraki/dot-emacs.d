@@ -189,7 +189,7 @@ Steps 1 + 2 + 3 + 5 + 7 (4 not included!):
     python-jedi python-virtualenv                                                     # Python completion \
     texlive evince &&                                                                 # LaTeX \
     cabal install hasktags hdevtools structured-haskell-mode stylish-haskell stack && # Haskell \
-    cabal install ghc-mod hoogle hlint HaRe                                        && # Haskell cont'd \
+    cabal install hindent ghc-mod hoogle hlint HaRe                                && # Haskell cont'd \
     perl-CPAN mariadb-devel && cpan -fi Module::Build::Compat &&                      # database tools \
     cpan -fi RPC::EPC::Service DBI DBD::SQLite DBD::Pg DBD::mysql" &&                 # database tools \
     echo "(load-file \"~/.emacs.d/gnus.el\")" > ~/.gnus.el &&                         # create gnus file \

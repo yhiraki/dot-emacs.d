@@ -5,9 +5,9 @@
 ;; Author: Manuel Schneckenreither
 ;; Created: Tue Dec 11 00:43:14 2012 (+0100)
 ;; Version:
-;; Last-Updated: Mon Mar 28 15:54:07 2016 (+0200)
+;; Last-Updated: Sat May 28 15:52:33 2016 (+0200)
 ;;           By: Manuel Schneckenreither
-;;     Update #: 440
+;;     Update #: 441
 ;; URL:
 ;; Description:
 ;;
@@ -57,7 +57,7 @@
 ;; YASNIPPET - snippets easily handled
 (load (concat package-conf-folder "yasnippet_config.el"))
 ;; JDEE Mode - Java mode
-(load (concat package-conf-folder "jdee_config.el"))
+;; (load (concat package-conf-folder "jdee_config.el"))
 ;; RAINBOW DELIMITERS - show parenthesis in different colors
 (load (concat package-conf-folder "rainbow_del_config.el"))
 ;; ;; RAINBOW MODE - background of color names in specified color (kills org-mode agenda colors)

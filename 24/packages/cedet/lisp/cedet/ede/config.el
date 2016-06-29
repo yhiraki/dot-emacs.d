@@ -1,6 +1,6 @@
 ;;; config.el --- Configuration Handler baseclass
 ;;
-;; Copyright (C) 2014 Eric Ludlam
+;; Copyright (C) 2014, 2015 Eric Ludlam
 ;;
 ;; Author: Eric Ludlam <zappo@ballista>
 ;;
@@ -53,6 +53,11 @@
 
 ;;; Code:
 (require 'ede)
+(require 'ede/shell)
+
+(declare-function semanticdb-file-table-object "semantic/db")
+(declare-function semanticdb-needs-refresh-p "semantic/db")
+(declare-function semanticdb-refresh-table "semantic/db")
 
 ;;; CONFIG
 ;;
@@ -391,7 +396,14 @@ the preprocessor map, and include paths.")
   "Class to mix into a configuration for compilation.")
 
 (defclass ede-project-with-config-java ()
-  ()
+  ((classpath :initarg :classpath
+	      :initform nil
+	      :type list
+	      :group java
+	      :custom (repeat (string :tag "Classpath"))
+	      :documentation
+	      "The default classpath used within a project.
+ All files listed in the local path are full paths to files."))
   "Class to mix into a project to support java.
 This brings in methods to support Semantic querying the
 java class path.")

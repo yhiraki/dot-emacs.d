@@ -47,7 +47,8 @@
 (require 'ede/auto)
 (require 'ede/detect)
 
-(load "ede/loaddefs" nil 'nomessage)
+(eval-and-compile
+  (load "ede/loaddefs" nil 'nomessage))
 
 (declare-function ede-commit-project "ede/custom")
 (declare-function ede-convert-path "ede/files")
@@ -60,6 +61,7 @@
 (declare-function ede-toplevel-project "ede/files")
 (declare-function ede-up-directory "ede/files")
 (declare-function semantic-lex-make-spp-table "semantic/lex-spp")
+(declare-function ede-directory-project-cons  "ede/files")
 
 (defconst ede-version "2.0"
   "Current version of the Emacs EDE.")
@@ -100,7 +102,7 @@ target willing to take the file.  'never means never perform the check."
 If the value is t, EDE may search in any directory.
 
 If the value is a function, EDE calls that function with one
-argument, the directory name; the function should return t iff
+argument, the directory name; the function should return t if
 EDE should look for project files in the directory.
 
 Otherwise, the value should be a list of fully-expanded directory
@@ -451,8 +453,6 @@ If optional argument CURRENT is non-nil, return sub-menu code."
 
 ;;; Mode Declarations
 ;;
-(eval-and-compile
-  (autoload 'ede-dired-minor-mode "ede/dired" "EDE commands for dired" t))
 
 (defun ede-apply-target-options ()
   "Apply options to the current buffer for the active project/target."
@@ -722,7 +722,7 @@ This is abstracted out so that tests can answer this question.")
   "Check if DIR should be in `ede-project-directories'.
 If it is not, try asking the user if it should be added; if so,
 add it and save `ede-project-directories' via Customize.
-Return nil iff DIR should not be in `ede-project-directories'."
+Return nil if DIR should not be in `ede-project-directories'."
   (setq dir (directory-file-name (expand-file-name dir))) ; strip trailing /
   (or (eq ede-project-directories t)
       (and (functionp ede-project-directories)
@@ -1102,22 +1102,6 @@ Flush the dead projects from the project cache."
     (dolist (D dead)
       (ede-delete-project-from-global-list D))
     ))
-
-(defun ede-global-list-sanity-check ()
-  "Perform a sanity check to make sure there are no duplicate projects."
-  (interactive)
-  (let ((scanned nil))
-    (dolist (P ede-projects)
-      (if (member (oref P :directory) scanned)
-	  (error "Duplicate project (by dir) found in %s!" (oref P :directory))
-	(push (oref P :directory) scanned)))
-    (unless ede--disable-inode
-      (setq scanned nil)
-      (dolist (P ede-projects)
-	(if (member (ede--project-inode P) scanned)
-	  (error "Duplicate project (by inode) found in %s!" (ede--project-inode P))
-	  (push (ede--project-inode P) scanned))))
-    (message "EDE by directory %sis still sane." (if ede--disable-inode "" "& inode "))))
 
 (defun ede-load-project-file (dir &optional detectin rootreturn)
   "Project file independent way to read a project in from DIR.

@@ -1,9 +1,9 @@
 ;;; c-by.el --- Generated parser support file
 
-;; Copyright (C) 1999-2012, 2014 Free Software Foundation, Inc.
+;; Copyright (C) 1999-2012, 2014, 2015, 2016 Free Software Foundation, Inc.
 
 ;; Author:  <schnecki@schnecki-laptop>
-;; Created: 2014-10-10 23:13:00+0200
+;; Created: 2016-05-28 16:00:07+0200
 ;; Keywords: syntax
 ;; X-RCS: $Id$
 
@@ -48,6 +48,7 @@
    '(("extern" . EXTERN)
      ("static" . STATIC)
      ("const" . CONST)
+     ("constexpr" . CONSTEXPR)
      ("volatile" . VOLATILE)
      ("register" . REGISTER)
      ("signed" . SIGNED)
@@ -69,8 +70,11 @@
      ("template" . TEMPLATE)
      ("throw" . THROW)
      ("reentrant" . REENTRANT)
+     ("override" . OVERRIDE)
+     ("final" . FINAL)
      ("try" . TRY)
      ("catch" . CATCH)
+     ("noexcept" . NOEXCEPT)
      ("operator" . OPERATOR)
      ("public" . PUBLIC)
      ("private" . PRIVATE)
@@ -125,6 +129,8 @@
      ("friend" summary "friend class <CLASSNAME>")
      ("catch" summary "try { <body> } catch { <catch code> }")
      ("try" summary "try { <body> } catch { <catch code> }")
+     ("final" summary "<type> <methoddef> (<method args>) final ...")
+     ("override" summary "<type> <methoddef> (<method args>) override ...")
      ("reentrant" summary "<type> <methoddef> (<method args>) reentrant ...")
      ("throw" summary "<type> <methoddef> (<method args>) throw (<exception>) ...")
      ("template" summary "template <class TYPE ...> TYPE_OR_FUNCTION")
@@ -135,7 +141,7 @@
      ("typename" summary "typename is used to handle a qualified name as a typename;")
      ("class" summary "Class Declaration: class <name>[:parents] { ... };")
      ("typedef" summary "Arbitrary Type Declaration: typedef <typedeclaration> <name>;")
-     ("enum" summary "Enumeration Type Declaration: enum [name] { ... };")
+     ("enum" summary "Enumeration Type Declaration: enum [name] [: type] { ... };")
      ("union" summary "Union Type Declaration: union [name] { ... };")
      ("struct" summary "Structure Type Declaration: struct [name] { ... };")
      ("explicit" summary "Forbids implicit type conversion: explicit <constructor>")
@@ -237,50 +243,39 @@
 
     (extern-c
      (EXTERN
-      string
-      "\"C\""
-      semantic-list
+      c-or-cpp
+      opt-extern-c-contents
       ,(semantic-lambda
 	(semantic-tag
-	 "C"
+	 (car
+	  (nth 1 vals))
 	 'extern :members
-	 (semantic-parse-region
-	  (car
-	   (nth 2 vals))
-	  (cdr
-	   (nth 2 vals))
-	  'extern-c-contents
-	  1)))
-      )
-     (EXTERN
-      string
-      "\"C\\+\\+\""
-      semantic-list
-      ,(semantic-lambda
-	(semantic-tag
-	 "C"
-	 'extern :members
-	 (semantic-parse-region
-	  (car
-	   (nth 2 vals))
-	  (cdr
-	   (nth 2 vals))
-	  'extern-c-contents
-	  1)))
-      )
-     (EXTERN
-      string
-      "\"C\""
-      ,(semantic-lambda
-	(list nil))
-      )
-     (EXTERN
-      string
-      "\"C\\+\\+\""
-      ,(semantic-lambda
-	(list nil))
+	 (nth 2 vals)))
       )
      ) ;; end extern-c
+
+    (c-or-cpp
+     (string
+      "\"C\"")
+     (string
+      "\"C\\+\\+\"")
+     ) ;; end c-or-cpp
+
+    (opt-extern-c-contents
+     (semantic-list
+      ,(semantic-lambda
+	(semantic-parse-region
+	 (car
+	  (nth 0 vals))
+	 (cdr
+	  (nth 0 vals))
+	 'extern-c-contents
+	 1))
+      )
+     ( ;;EMPTY
+      ,(semantic-lambda)
+      )
+     ) ;; end opt-extern-c-contents
 
     (macro
      (spp-macro-def
@@ -352,9 +347,20 @@
 	  (nth 0 vals))
 	 'label))
       )
+     (FRIEND
+      symbol
+      punctuation
+      "\\`[;]\\'"
+      ,(semantic-lambda
+	(semantic-tag
+	 (nth 1 vals)
+	 'friend))
+      )
      (var-or-fun)
      (FRIEND
       func-decl
+      punctuation
+      "\\`[;]\\'"
       ,(semantic-lambda
 	(semantic-tag
 	 (car
@@ -364,6 +370,8 @@
      (FRIEND
       CLASS
       symbol
+      punctuation
+      "\\`[;]\\'"
       ,(semantic-lambda
 	(semantic-tag
 	 (nth 2 vals)
@@ -561,13 +569,24 @@
       )
      ) ;; end opt-name
 
+    (opt-enum-type
+     (punctuation
+      "\\`[:]\\'"
+      typeformbase
+      ,(semantic-lambda
+	(nth 1 vals))
+      )
+     ( ;;EMPTY
+      )
+     ) ;; end opt-enum-type
+
     (typesimple
      (struct-or-class
       opt-class
       opt-name
       opt-template-specifier
       opt-class-parents
-      semantic-list
+      typesimple-opt-subparts
       ,(semantic-lambda
 	(semantic-tag-new-type
 	 (car
@@ -582,31 +601,22 @@
 		 (nth 2 vals))
 		(car
 		 (nth 0 vals)))))
-	   (semantic-parse-region
-	    (car
-	     (nth 5 vals))
-	    (cdr
-	     (nth 5 vals))
-	    'classsubparts
-	    1))
+	   (when
+	       (nth 5 vals)
+	     (semantic-parse-region
+	      (car
+	       (car
+		(nth 5 vals)))
+	      (cdr
+	       (car
+		(nth 5 vals)))
+	      'classsubparts
+	      1)))
 	 (nth 4 vals) :template-specifier
-	 (nth 3 vals) :parent
-	 (car
-	  (nth 1 vals))))
-      )
-     (struct-or-class
-      opt-class
-      opt-name
-      opt-template-specifier
-      opt-class-parents
-      ,(semantic-lambda
-	(semantic-tag-new-type
-	 (car
-	  (nth 2 vals))
-	 (car
-	  (nth 0 vals)) nil
-	 (nth 4 vals) :template-specifier
-	 (nth 3 vals) :prototype t :parent
+	 (nth 3 vals) :prototype
+	 (not
+	  (car
+	   (nth 5 vals))) :parent
 	 (car
 	  (nth 1 vals))))
       )
@@ -626,15 +636,18 @@
      (ENUM
       opt-class
       opt-name
+      opt-enum-type
       enumparts
       ,(semantic-lambda
 	(semantic-tag-new-type
 	 (car
 	  (nth 2 vals))
 	 (nth 0 vals)
-	 (nth 3 vals) nil :parent
+	 (nth 4 vals) nil :parent
 	 (car
-	  (nth 1 vals))))
+	  (nth 1 vals)) :enum-type
+	 (car
+	  (nth 3 vals))))
       )
      (TYPEDEF
       declmods
@@ -650,32 +663,49 @@
       )
      ) ;; end typesimple
 
-    (typedef-symbol-list
-     (typedefname
-      punctuation
-      "\\`[,]\\'"
-      typedef-symbol-list
-      ,(semantic-lambda
-	(cons
-	 (nth 0 vals)
-	 (nth 2 vals)))
-      )
-     (typedefname
+    (typesimple-opt-subparts
+     (semantic-list
       ,(semantic-lambda
 	(list
 	 (nth 0 vals)))
       )
+     ( ;;EMPTY
+      ,(semantic-lambda)
+      )
+     ) ;; end typesimple-opt-subparts
+
+    (typedef-symbol-list
+     (typedefname
+      typedef-symbol-list-opt-comma
+      ,(semantic-lambda
+	(cons
+	 (nth 0 vals)
+	 (nth 1 vals)))
+      )
      ) ;; end typedef-symbol-list
+
+    (typedef-symbol-list-opt-comma
+     (punctuation
+      "\\`[,]\\'"
+      typedef-symbol-list
+      ,(semantic-lambda
+	(nth 1 vals))
+      )
+     ( ;;EMPTY
+      )
+     ) ;; end typedef-symbol-list-opt-comma
 
     (typedefname
      (opt-stars
+      opt-ref
       symbol
       opt-bits
       opt-array
       ,(semantic-lambda
 	(list
 	 (nth 0 vals)
-	 (nth 1 vals)))
+	 (nth 1 vals)
+	 (nth 2 vals)))
       )
      ) ;; end typedefname
 
@@ -692,24 +722,29 @@
 	(nth 0 vals))
       )
      (NAMESPACE
-      symbol
+      type-namespace
+      ,(semantic-lambda
+	(nth 1 vals))
+      )
+     ) ;; end type
+
+    (type-namespace
+     (symbol
       namespaceparts
       ,(semantic-lambda
 	(semantic-tag-new-type
-	 (nth 1 vals)
 	 (nth 0 vals)
-	 (nth 2 vals) nil))
+	 "namespace"
+	 (nth 1 vals) nil))
       )
-     (NAMESPACE
-      namespaceparts
+     (namespaceparts
       ,(semantic-lambda
 	(semantic-tag-new-type
 	 "unnamed"
-	 (nth 0 vals)
-	 (nth 1 vals) nil))
+	 "namespace"
+	 (nth 0 vals) nil))
       )
-     (NAMESPACE
-      symbol
+     (symbol
       punctuation
       "\\`[=]\\'"
       typeformbase
@@ -717,16 +752,16 @@
       "\\`[;]\\'"
       ,(semantic-lambda
 	(semantic-tag-new-type
-	 (nth 1 vals)
 	 (nth 0 vals)
+	 "namespace"
 	 (list
 	  (semantic-tag-new-type
 	   (car
-	    (nth 3 vals))
-	   (nth 0 vals) nil nil)) nil :kind
+	    (nth 2 vals))
+	   "namespace" nil nil)) nil :kind
 	 'alias))
       )
-     ) ;; end type
+     ) ;; end type-namespace
 
     (using
      (USING
@@ -999,10 +1034,6 @@
 	  (nth 0 vals))
 	 (nth 1 vals)))
       )
-     (DECLMOD
-      ,(semantic-lambda
-	(nth 0 vals))
-      )
      ( ;;EMPTY
       ,(semantic-lambda)
       )
@@ -1031,6 +1062,7 @@
 
     (CVDECLMOD
      (CONST)
+     (CONSTEXPR)
      (VOLATILE)
      ) ;; end CVDECLMOD
 
@@ -1055,6 +1087,7 @@
     (METADECLMOD
      (VIRTUAL)
      (MUTABLE)
+     (EXPLICIT)
      ) ;; end METADECLMOD
 
     (opt-ref
@@ -1101,15 +1134,7 @@
       ,(semantic-lambda
 	(nth 0 vals))
       )
-     (symbol
-      template-specifier
-      ,(semantic-lambda
-	(semantic-tag-new-type
-	 (nth 0 vals)
-	 "class" nil nil :template-specifier
-	 (nth 1 vals)))
-      )
-     (namespace-symbol-for-typeformbase
+     (namespace-symbol
       opt-template-specifier
       ,(semantic-lambda
 	(semantic-tag-new-type
@@ -1353,6 +1378,9 @@
     (post-fcn-modifiers
      (REENTRANT)
      (CONST)
+     (OVERRIDE)
+     (FINAL)
+     (NOEXCEPT)
      ) ;; end post-fcn-modifiers
 
     (opt-throw
@@ -1540,31 +1568,50 @@
      (opt-ref
       varname
       varname-opt-initializer
-      punctuation
-      "\\`[,]\\'"
-      varnamelist
+      opt-varnamelist-more
       ,(semantic-lambda
 	(cons
 	 (append
 	  (nth 1 vals)
 	  (nth 2 vals))
-	 (nth 4 vals)))
-      )
-     (opt-ref
-      varname
-      varname-opt-initializer
-      ,(semantic-lambda
-	(list
-	 (append
-	  (nth 1 vals)
-	  (nth 2 vals))))
+	 (car
+	  (nth 3 vals))))
       )
      ) ;; end varnamelist
+
+    (opt-varnamelist-more
+     (punctuation
+      "\\`[,]\\'"
+      varnamelist
+      ,(semantic-lambda
+	(list
+	 (nth 1 vals)))
+      )
+     ( ;;EMPTY
+      ,(semantic-lambda)
+      )
+     ) ;; end opt-varnamelist-more
 
     (namespace-symbol
      (symbol
       opt-template-specifier
-      punctuation
+      opt-namespace-symbol-more
+      ,(semantic-lambda
+	(list
+	 (concat
+	  (nth 0 vals)
+	  (car
+	   (nth 2 vals)))))
+      )
+     (symbol
+      ,(semantic-lambda
+	(list
+	 (nth 0 vals)))
+      )
+     ) ;; end namespace-symbol
+
+    (opt-namespace-symbol-more
+     (punctuation
       "\\`[:]\\'"
       punctuation
       "\\`[:]\\'"
@@ -1572,41 +1619,11 @@
       ,(semantic-lambda
 	(list
 	 (concat
-	  (nth 0 vals)
 	  "::"
 	  (car
-	   (nth 4 vals)))))
+	   (nth 2 vals)))))
       )
-     (symbol
-      opt-template-specifier
-      ,(semantic-lambda
-	(list
-	 (nth 0 vals)))
-      )
-     ) ;; end namespace-symbol
-
-    (namespace-symbol-for-typeformbase
-     (symbol
-      opt-template-specifier
-      punctuation
-      "\\`[:]\\'"
-      punctuation
-      "\\`[:]\\'"
-      namespace-symbol-for-typeformbase
-      ,(semantic-lambda
-	(list
-	 (concat
-	  (nth 0 vals)
-	  "::"
-	  (car
-	   (nth 4 vals)))))
-      )
-     (symbol
-      ,(semantic-lambda
-	(list
-	 (nth 0 vals)))
-      )
-     ) ;; end namespace-symbol-for-typeformbase
+     ) ;; end opt-namespace-symbol-more
 
     (namespace-opt-class
      (symbol
@@ -2192,6 +2209,8 @@
       "\\`[*]\\'")
      (punctuation
       "\\`[&]\\'")
+     ( ;;EMPTY
+      )
      ) ;; end expr-start
 
     (expr-binop
@@ -2220,33 +2239,29 @@
      ) ;; end expr-binop
 
     (expression
-     (unaryexpression
-      punctuation
+     (expr-start
+      unaryexpression
+      opt-more-expression
+      ,(semantic-lambda
+	(list
+	 (identity start)
+	 (- end
+	    1)))
+      )
+     ) ;; end expression
+
+    (opt-more-expression
+     (punctuation
       "\\`[?]\\'"
       unaryexpression
       punctuation
       "\\`[:]\\'"
-      unaryexpression
-      ,(semantic-lambda
-	(list
-	 (identity start)
-	 (identity end)))
+      unaryexpression)
+     (expr-binop
+      unaryexpression)
+     ( ;;EMPTY
       )
-     (unaryexpression
-      expr-binop
-      unaryexpression
-      ,(semantic-lambda
-	(list
-	 (identity start)
-	 (identity end)))
-      )
-     (unaryexpression
-      ,(semantic-lambda
-	(list
-	 (identity start)
-	 (identity end)))
-      )
-     ) ;; end expression
+     ) ;; end opt-more-expression
 
     (unaryexpression
      (number)
@@ -2261,10 +2276,8 @@
      (type-cast
       expression)
      (semantic-list
-      expression)
+      unaryexpression)
      (semantic-list)
-     (expr-start
-      expression)
      ) ;; end unaryexpression
     )
   "Parser table.")

@@ -2,8 +2,8 @@
 
 ;; Copyright (C) 2005, 2007, 2008, 2009, 2010, 2013 Eric M. Ludlam
 
-;; Author: Schnecki <schnecki@schnecki.laptop>
-;; Created: 2013-10-13 11:11:24+0200
+;; Author:  <schnecki@schnecki-laptop>
+;; Created: 2016-05-28 15:59:21+0200
 ;; Keywords: syntax
 ;; X-RCS: $Id$
 

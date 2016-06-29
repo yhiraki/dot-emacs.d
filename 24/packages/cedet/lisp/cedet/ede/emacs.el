@@ -1,6 +1,6 @@
 ;;; ede/emacs.el --- Special project for Emacs
 
-;; Copyright (C) 2008-2014 Free Software Foundation, Inc.
+;; Copyright (C) 2008-2015 Free Software Foundation, Inc.
 
 ;; Author: Eric M. Ludlam <eric@siege-engine.com>
 
@@ -55,12 +55,6 @@ Return a tuple of ( EMACSNAME . VERSION )."
     (with-current-buffer buff
       (erase-buffer)
       (setq default-directory (file-name-as-directory dir))
-      (or (file-exists-p configure_ac)
-	  (setq configure_ac "configure.in"))
-      ;(call-process "egrep" nil buff nil "-n" "-e" "^version=" "Makefile")
-      (call-process "egrep" nil buff nil "-n" "-e" "AC_INIT" configure_ac)
-      (goto-char (point-min))
-      ;(re-search-forward "version=\\([0-9.]+\\)")
       (cond
        ;; Maybe XEmacs?
        ((file-exists-p "version.sh")
@@ -88,10 +82,11 @@ m4_define(\\[SXEM4CS_BETA_VERSION\\], \\[\\([0-9]+\\)\\])")
        ;; Insert other Emacs here...
 
        ;; Vaguely recent version of GNU Emacs?
-       (t
+       ((or (file-exists-p configure_ac)
+	    (file-exists-p (setq configure_ac "configure.in")))
 	(insert-file-contents configure_ac)
 	(goto-char (point-min))
-	(re-search-forward "AC_INIT(\\(?:GNU \\)?[Ee]macs,\\s-*\\([0-9.]+\\),?\\s-*.*)")
+	(re-search-forward "AC_INIT(\\(?:GNU \\)?[eE]macs,\\s-*\\([0-9.]+\\)\\s-*[,)]")
 	(setq ver (match-string 1))
 	)
        )
@@ -137,6 +132,11 @@ ROOTPROJ is nil, since there is only one project."
 All directories need at least one target.")
 
 (defclass ede-emacs-target-el (ede-target)
+  ()
+  "EDE Emacs Project target for Emacs Lisp code.
+All directories need at least one target.")
+
+(defclass ede-emacs-target-texi (ede-target)
   ()
   "EDE Emacs Project target for Emacs Lisp code.
 All directories need at least one target.")
@@ -191,6 +191,8 @@ If one doesn't exist, create a new one for this directory."
 		     'ede-emacs-target-c)
 		    ((string-match "elc?" ext)
 		     'ede-emacs-target-el)
+		    ((string-match "texi" ext)
+		     'ede-emacs-target-texi)
 		    (t 'ede-emacs-target-misc)))
 	 (targets (oref proj targets))
 	 (dir default-directory)
@@ -286,6 +288,40 @@ Knows about how the Emacs source tree is organized."
     (oset this name (car ver))
     (oset this version (cdr ver))
     ))
+
+;;; Compile Support
+;;
+(defmethod project-compile-project ((proj ede-emacs-project) &optional command)
+  "Compile the Emacs project.
+Argument COMMAND is the command to use when compiling."
+  (let ((default-directory (ede-project-root-directory proj)))
+    (require 'compile)
+    (compile "make all")))
+
+(defmethod project-compile-target ((proj ede-emacs-target-texi) &optional command)
+  "Compile the doc target for Emacs.
+Argument COMMAND is the command to use for compiling the target."
+  (let* ((default-directory (ede-project-root-directory (ede-current-project)))
+	 (command "make docs"))
+    (require 'compile)
+    (compile command)))
+
+(defmethod project-compile-target ((proj ede-emacs-target-el) &optional command)
+  "Compile the doc target for Emacs.
+Argument COMMAND is the command to use for compiling the target."
+  (let* ((default-directory (ede-project-root-directory (ede-current-project)))
+	 (command "make lisp"))
+    (require 'compile)
+    (compile command)))
+
+(defmethod project-compile-target ((proj ede-emacs-target-c) &optional command)
+  "Compile the doc target for Emacs.
+Argument COMMAND is the command to use for compiling the target."
+  (let* ((default-directory (ede-project-root-directory (ede-current-project)))
+	 (command "make src"))
+    (require 'compile)
+    (compile command)))
+
 
 (provide 'ede/emacs)
 

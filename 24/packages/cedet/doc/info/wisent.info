@@ -1,4 +1,4 @@
-This is wisent.info, produced by makeinfo version 5.2 from wisent.texi.
+This is wisent.info, produced by makeinfo version 6.1 from wisent.texi.
 
 Copyright (C) 1988-1993, 1995, 1998-2004, 2007, 2012-2013 Free Software
 Foundation, Inc.
@@ -170,8 +170,8 @@ TERMINALS
 
 ASSOCS
      Specify the associativity of TERMINALS.  It is 'nil' when there is
-     no associativity defined, or an alist of '(ASSOC-TYPE . ASSOC-VALUE)'
-     elements.
+     no associativity defined, or an alist of
+     '(ASSOC-TYPE . ASSOC-VALUE)' elements.
 
      ASSOC-TYPE must be one of the 'default-prec', 'nonassoc', 'left' or
      'right' symbols.  When ASSOC-TYPE is 'default-prec', ASSOC-VALUE
@@ -1035,8 +1035,9 @@ File: wisent.info,  Node: Actions goodies,  Next: Report errors,  Prev: Writing 
  -- Function: wisent-region &rest positions
      Return the start/end positions of the region including POSITIONS.
      Each element of POSITIONS is a pair '(START-POS .  END-POS)' or
-     'nil'.  The returned value is the pair '(MIN-START-POS . MAX-END-POS)'
-     or 'nil' if no POSITIONS are available.
+     'nil'.  The returned value is the pair
+     '(MIN-START-POS . MAX-END-POS)' or 'nil' if no POSITIONS are
+     available.
 
 
 File: wisent.info,  Node: Report errors,  Next: Error recovery,  Prev: Actions goodies,  Up: Wisent Parsing
@@ -2226,7 +2227,7 @@ Index
 * reduce:                                Wisent Parsing.      (line  13)
 * reduce/reduce conflicts:               Conflicts.           (line  28)
 * reparse-symbol:                        Start nonterminals.  (line  45)
-* 'reparse-symbol' property:             Start nonterminals.  (line   6)
+* reparse-symbol property:               Start nonterminals.  (line   6)
 * rule:                                  Wisent Grammar.      (line   6)
 * scanner:                               Writing a lexer.     (line  10)
 * semantic action symbols:               Debugging actions.   (line   6)
@@ -2322,19 +2323,19 @@ Node: Understanding the automaton20889
 Node: Wisent Parsing30554
 Node: Writing a lexer33066
 Node: Actions goodies34685
-Node: Report errors35399
-Node: Error recovery37002
-Ref: wisent-skip-token41332
-Node: Debugging actions42506
-Node: Wisent Semantic44343
-Node: Grammar styles45189
-Node: Iterative style45723
-Node: Bison style48099
-Node: Mixed style49782
-Node: Start nonterminals52396
-Node: Useful functions55243
-Node: Wisent Lex55796
-Node: GNU Free Documentation License57225
-Node: Index82381
+Node: Report errors35404
+Node: Error recovery37007
+Ref: wisent-skip-token41337
+Node: Debugging actions42511
+Node: Wisent Semantic44348
+Node: Grammar styles45194
+Node: Iterative style45728
+Node: Bison style48104
+Node: Mixed style49787
+Node: Start nonterminals52401
+Node: Useful functions55248
+Node: Wisent Lex55801
+Node: GNU Free Documentation License57230
+Node: Index82386
 
 End Tag Table
