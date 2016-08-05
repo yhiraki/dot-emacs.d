@@ -5,9 +5,9 @@
 ;; Author: Manuel Schneckenreither
 ;; Created: Tue Dec 11 00:43:14 2012 (+0100)
 ;; Version:
-;; Last-Updated: Sat May 28 15:52:33 2016 (+0200)
+;; Last-Updated: Fri Aug  5 12:32:54 2016 (+0200)
 ;;           By: Manuel Schneckenreither
-;;     Update #: 441
+;;     Update #: 445
 ;; URL:
 ;; Description:
 ;;
@@ -111,6 +111,8 @@
 (load (concat package-conf-folder "helm_config.el"))
 ;; Cdlatex - fast input methods for LaTeX environments
 (load (concat package-conf-folder "cdlatex_config.el"))
+;; undo tree
+(load (concat package-conf-folder "undotree_config.el"))
 
 
 ;; ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++

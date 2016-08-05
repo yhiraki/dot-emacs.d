@@ -7,9 +7,9 @@
 ;; Created: Tue Jul 29 00:11:38 2014 (+0200)
 ;; Version:
 ;; Package-Requires: ()
-;; Last-Updated: Sat May 28 15:55:05 2016 (+0200)
+;; Last-Updated: Fri Aug  5 12:35:09 2016 (+0200)
 ;;           By: Manuel Schneckenreither
-;;     Update #: 977
+;;     Update #: 989
 ;; URL:
 ;; Doc URL:
 ;; Keywords:
@@ -376,6 +376,7 @@
  '(flymake-gui-warnings-enabled nil)
  '(frame-background-mode (quote dark))
  '(global-flycheck-mode t nil (flycheck))
+ '(global-undo-tree-mode t)
  '(gnus-topic-display-empty-topics nil)
  '(haskell-align-imports-pad-after-name t)
  '(haskell-ask-also-kill-buffers nil)
@@ -386,9 +387,7 @@
  '(haskell-process-args-cabal-repl
    (quote
     ("--ghc-option=-ferror-spans" "--ghc-option=-fbreak-on-error")))
- '(haskell-process-args-stack-ghci
-   (quote
-    ("--ghc-options=-ferror-spans -fbreak-on-error -fghci-history-size=1000")))
+ '(haskell-process-args-stack-ghci (quote ("--ghc-options=-ferror-spans -fbreak-on-error ")))
  '(haskell-process-path-ghci "stack")
  '(haskell-process-type (quote stack-ghci))
  '(haskell-stylish-on-save t)
@@ -441,6 +440,10 @@
  '(tex-smart-umlauts-german-shortcuts nil)
  '(tool-bar-mode nil)
  '(tramp-default-method "ssh")
+ '(undo-tree-auto-save-history t)
+ '(undo-tree-visualizer-diff nil)
+ '(undo-tree-visualizer-timestamps t)
+ ;; '(undo-tree-history-directory-alist (cf . "~/.emacs.d/undotree/"))
  '(user-full-name your-full-name)
  '(user-mail-address your-mail-address)
  '(yas-prompt-functions
@@ -464,7 +467,8 @@
  '(rainbow-delimiters-depth-6-face ((t (:foreground "green"))))
  '(rainbow-delimiters-depth-7-face ((t (:foreground "yellow"))))
  '(rainbow-delimiters-depth-9-face ((t (:foreground "orange"))))
- '(semantic-highlight-func-current-tag-face ((t (:box (:line-width 1 :color "grey75"))))))
+ '(semantic-highlight-func-current-tag-face ((t (:box (:line-width 1 :color "grey75")))))
+ '(undo-tree-visualizer-active-branch-face ((t (:foreground "black" :weight bold)))))
 
 (put 'upcase-region 'disabled nil)
 (put 'downcase-region 'disabled nil)
