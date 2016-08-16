@@ -8,7 +8,7 @@
 ;; Version:
 ;; Last-Updated:
 ;;           By:
-;;     Update #: 26
+;;     Update #: 30
 ;; URL:
 ;; Description:
 ;;
@@ -42,6 +42,7 @@
 ;;  '(add-hook 'flycheck-mode-hook #'flycheck-haskell-setup))
 
 ;; (eval-after-load 'flycheck '(require 'flycheck-hdevtools))
+
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; flycheck_config.el ends here
