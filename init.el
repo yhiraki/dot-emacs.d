@@ -7,9 +7,9 @@
 ;; Created: Tue Jul 29 00:11:38 2014 (+0200)
 ;; Version:
 ;; Package-Requires: ()
-;; Last-Updated: Fri Jul  1 17:49:35 2016 (+0200)
+;; Last-Updated: Tue Aug 16 18:52:37 2016 (+0200)
 ;;           By: Manuel Schneckenreither
-;;     Update #: 980
+;;     Update #: 982
 ;; URL:
 ;; Doc URL:
 ;; Keywords:
@@ -162,12 +162,20 @@
         change-inner
         color-theme
         color-theme-solarized
-				dired+
+        company-auctex
+        company-c-headers
+        company-cabal
+        company-ghc
+        company-ghci
+        company-math
+				company-shell
+        company-try-hard
+        dired+
         ecb
         edbi
         expand-region
         flycheck
-        ;; flycheck-hdevtools
+        flycheck-hdevtools
         flycheck-haskell
         flycheck-color-mode-line
 				flycheck-google-cpplint
@@ -181,6 +189,7 @@
         gnuplot-mode
         haskell-mode
         header2
+        hlint-refactor
         helm
         helm-bibtex
         helm-c-yasnippet
@@ -195,6 +204,7 @@
         ido-gnus
         ido-hacks
         ido-ubiquitous
+        intero
         javadoc-lookup
         javap-mode
         jedi
@@ -335,6 +345,7 @@
       "../Common/lib/"))))
  '(color-theme-legal-frame-parameters "\\(color\\|mode\\|font\\|height\\|width\\)$")
  '(column-number-mode t)
+ '(company-idle-delay 0.01)
  '(cua-delete-selection nil)
  '(custom-enabled-themes (quote (leuven)))
  '(custom-safe-themes
@@ -375,6 +386,7 @@
  '(flymake-gui-warnings-enabled nil)
  '(frame-background-mode (quote dark))
  '(global-flycheck-mode t nil (flycheck))
+ '(global-undo-tree-mode t)
  '(gnus-topic-display-empty-topics nil)
  '(haskell-align-imports-pad-after-name t)
  '(haskell-ask-also-kill-buffers nil)
@@ -385,9 +397,7 @@
  '(haskell-process-args-cabal-repl
    (quote
     ("--ghc-option=-ferror-spans" "--ghc-option=-fbreak-on-error")))
- '(haskell-process-args-stack-ghci
-   (quote
-    ("--ghc-options=-ferror-spans -fbreak-on-error -fghci-history-size=1000")))
+ '(haskell-process-args-stack-ghci (quote ("--ghc-options=-ferror-spans -fbreak-on-error ")))
  '(haskell-process-path-ghci "stack")
  '(haskell-process-type (quote stack-ghci))
  '(haskell-stylish-on-save t)
@@ -440,6 +450,9 @@
  '(tex-smart-umlauts-german-shortcuts nil)
  '(tool-bar-mode nil)
  '(tramp-default-method "ssh")
+ '(undo-tree-auto-save-history t)
+ '(undo-tree-visualizer-diff nil)
+ '(undo-tree-visualizer-timestamps t)
  '(user-full-name your-full-name)
  '(user-mail-address your-mail-address)
  '(yas-prompt-functions
@@ -463,7 +476,8 @@
  '(rainbow-delimiters-depth-6-face ((t (:foreground "green"))))
  '(rainbow-delimiters-depth-7-face ((t (:foreground "yellow"))))
  '(rainbow-delimiters-depth-9-face ((t (:foreground "orange"))))
- '(semantic-highlight-func-current-tag-face ((t (:box (:line-width 1 :color "grey75"))))))
+ '(semantic-highlight-func-current-tag-face ((t (:box (:line-width 1 :color "grey75")))))
+ '(undo-tree-visualizer-active-branch-face ((t (:foreground "black" :weight bold)))))
 
 (put 'upcase-region 'disabled nil)
 (put 'downcase-region 'disabled nil)

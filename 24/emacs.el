@@ -5,9 +5,9 @@
 ;; Author: Manuel Schneckenreither
 ;; Created: Tue Dec 11 00:43:14 2012 (+0100)
 ;; Version:
-;; Last-Updated: Sat May 28 15:52:33 2016 (+0200)
+;; Last-Updated: Tue Aug  9 15:37:12 2016 (+0200)
 ;;           By: Manuel Schneckenreither
-;;     Update #: 441
+;;     Update #: 459
 ;; URL:
 ;; Description:
 ;;
@@ -66,7 +66,7 @@
 (load (concat package-conf-folder "org_mode_config.el"))
 ;; AUTO COMPLETE - completion - You should not disable this, unless
 ;; you know what you are doing
-(load (concat package-conf-folder "auto_complete_config.el"))
+;; (load (concat package-conf-folder "auto_complete_config.el"))
 ;; WHITESPACE MODE -- mark 80'th+ columns
 (load (concat package-conf-folder "whitespace_config.el"))
 ;; MAKE BACKUPS
@@ -111,7 +111,10 @@
 (load (concat package-conf-folder "helm_config.el"))
 ;; Cdlatex - fast input methods for LaTeX environments
 (load (concat package-conf-folder "cdlatex_config.el"))
-
+;; undo tree
+(load (concat package-conf-folder "undotree_config.el"))
+;; company mode
+(load (concat package-conf-folder "company_config.el"))
 
 ;; ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 ;; ++++++++++++++++++ Load Language Specific Settings +++++++++++++++++++
