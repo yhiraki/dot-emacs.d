@@ -7,9 +7,9 @@
 ;; Created: Tue Jul 29 00:11:38 2014 (+0200)
 ;; Version:
 ;; Package-Requires: ()
-;; Last-Updated: Sat May 28 15:55:05 2016 (+0200)
+;; Last-Updated: Fri Jul  1 17:49:35 2016 (+0200)
 ;;           By: Manuel Schneckenreither
-;;     Update #: 977
+;;     Update #: 980
 ;; URL:
 ;; Doc URL:
 ;; Keywords:
@@ -32,7 +32,6 @@
 ;; modify it under the terms of the GNU General Public License as
 ;; published by the Free Software Foundation; either version 3, or
 ;; (at your option) any later version.
-;;
 ;; This program is distributed in the hope that it will be useful,
 ;; but WITHOUT ANY WARRANTY; without even the implied warranty of
 ;; MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU

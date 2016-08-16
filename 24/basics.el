@@ -5,9 +5,9 @@
 ;; Author: Manuel Schneckenreither
 ;; Created: Mon Dec 10 22:51:09 2012 (+0100)
 ;; Version:
-;; Last-Updated: Tue Apr  5 10:48:51 2016 (+0200)
+;; Last-Updated: Thu Aug 11 14:15:04 2016 (+0200)
 ;;           By: Manuel Schneckenreither
-;;     Update #: 803
+;;     Update #: 804
 ;; URL:
 ;; Description:
 ;;    Basic configuration for emacs. In here are all configs of
@@ -594,6 +594,10 @@ mode of the invoking window is in
 ;; (setq mail-self-blind nil) ;; does not work for me, solved by bcc'ing to myself
 (add-hook 'message-send-hook 'add-sender-mail-bcc)
 
+
+;; Regex
+(require 're-builder)
+(setq reb-re-syntax 'string)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; basics.el ends here
