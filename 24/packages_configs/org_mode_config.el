@@ -285,6 +285,18 @@
                ("\\paragraph{%s}" . "\\paragraph*{%s}")
                ("\\subparagraph{%s}" . "\\subparagraph*{%s}")))
 
+(add-to-list 'org-latex-classes
+             '("plmmthesis"
+               "\\documentclass{plmmthesis}
+               [DEFAULT-PACKAGES]
+               [PACKAGES]
+               [EXTRA]"
+               ("\\chapter{%s}" . "\\chapter*{%s}")
+               ("\\section{%s}" . "\\section*{%s}")
+               ("\\subsection{%s}" . "\\subsection*{%s}")
+               ("\\paragraph{%s}" . "\\paragraph*{%s}")
+               ("\\subparagraph{%s}" . "\\subparagraph*{%s}")))
+
 
 (add-to-list 'org-latex-classes
              '("clbthesis"
@@ -305,9 +317,9 @@
                [DEFAULT-PACKAGES]
                [PACKAGES]
                [EXTRA]"
+               ("\\chapter{%s}" . "\\chapter*{%s}")
                ("\\section{%s}" . "\\section*{%s}")
                ("\\subsection{%s}" . "\\subsection*{%s}")
-               ("\\subsubsection{%s}" . "\\subsubsection*{%s}")
                ("\\paragraph{%s}" . "\\paragraph*{%s}")
                ("\\subparagraph{%s}" . "\\subparagraph*{%s}")))
 

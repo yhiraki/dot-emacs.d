@@ -285,7 +285,7 @@ Dependencies:
   - structured-haskell-mode ($ cabal install structured-haskell-mode)
   - ghc-mod ($ cabal install ghc-mod)
   - hoogle ($ cabal install hoogle)
-  - hlint ($ cabal install hlint)
+  - hlint ($ cabal install hlint): code suggestions
   - HaRe ($ cabal install HaRe)
 
 + Database Viewer: edbi
