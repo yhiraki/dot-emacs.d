@@ -2,8 +2,8 @@
 
 ;; Copyright (C) 2002, 2003, 2004 David Ponce
 
-;; Author:  <schnecki@schnecki-laptop>
-;; Created: 2016-05-28 15:59:49+0200
+;; Author:  <schnecki@schnecki_x2_210>
+;; Created: 2016-06-29 16:35:15+0200
 ;; Keywords: syntax
 ;; X-RCS: $Id$
 
