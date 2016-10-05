@@ -1,0 +1,60 @@
+BZR merge-modified list format 1
+file_id: secureutest.el-20141019030542-m62u1aqnd9soho2b-1
+hash: 1c640e152a3d87bfc5d4f64f9fd09f41f2b8dae5
+
+file_id: makefile-20100824174052-438azmcl2y47lvam-335
+hash: 35740b8d6ad72098707e7e855995be3bcfe535eb
+
+file_id: citexternaldb.el-20100824174052-438azmcl2y47lvam-988
+hash: 59a87cd47dea237d28b53b59f44f79f26d3dd944
+
+file_id: edeauto.el-20100824174052-438azmcl2y47lvam-978
+hash: 45f4f9fb29fd652915c1c8f5f2bfc5b6c4151891
+
+file_id: config.el-20141016030338-vjxflbn2k2p8jpwc-1
+hash: 6db8cbe9cf8290668a119bb1760ec14393d2116f
+
+file_id: config.ede-20141023020655-lpdy26o7lzf211jz-1
+hash: 082c3d293ee45af3c9945901cfe2e80b997d6cff
+
+file_id: cedetglobal.el-20100824174052-438azmcl2y47lvam-858
+hash: 63a2a8870d670c521dc768836a50aeebd68ba752
+
+file_id: citarduino.el-20120225015814-ex553a0jsx4tr8mk-1
+hash: e3dbcec85769dc4cebab17335fd767dd9a7d47b4
+
+file_id: project.ede-20100824174052-438azmcl2y47lvam-102
+hash: b470ab927322a8e163a154201b9670a48423c297
+
+file_id: makefile-20111115191636-ae3tfko9800bhiit-1
+hash: 4bd5eeb14aa7d5294bc63e166562d052c91b9480
+
+file_id: citcheckenv.el-20141024192806-07v68avz4g5yu3q5-1
+hash: 0e8be0024acd3fba2283b7698620c880516a819e
+
+file_id: ede.el-20100824174052-438azmcl2y47lvam-39
+hash: 1070736819c9634d684b43f9557abe845bbe4dc2
+
+file_id: cedetandroid.el-20110228030631-cnoznfj30rqkb622-1
+hash: a155bd11fdc1b93904ff956de5578b814f8b6913
+
+file_id: eieiocustom.el-20100824174052-438azmcl2y47lvam-44
+hash: 426a4aacbf208eaa8bc0a9d2ba24d0a89f28d6f7
+
+file_id: cedetintegtest.el-20100824174052-438azmcl2y47lvam-801
+hash: e69383ceebee19c2e50a5ae884c62f19e33a4252
+
+file_id: edegeneric.el-20100824174052-438azmcl2y47lvam-987
+hash: 291978cabaff3c7a6cb7846d5b8a49ef9445db85
+
+file_id: edearduino.el-20120223010504-fnxfre4c72ywc96n-1
+hash: 74e69ef6f54751af7fb627f94aeddf819a2750e0
+
+file_id: citglobalref.el-20140102013519-jpfys4enxpeupg0a-1
+hash: 308f8775524685d6555886e363a9dd7ba21373bc
+
+file_id: cedetutests.el-20100824174052-438azmcl2y47lvam-841
+hash: 5fcae188ac012b4ee06bbab752d782a0ab3dbce2
+
+file_id: detectutest.el-20140420180026-ntiuldyhgls2jjmv-1
+hash: 29a951641897d5ddb022943f7025b985ad5a4cb7
