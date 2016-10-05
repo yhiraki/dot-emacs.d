@@ -7,9 +7,9 @@
 ;; Created: Tue Jul 29 00:11:38 2014 (+0200)
 ;; Version:
 ;; Package-Requires: ()
-;; Last-Updated: Tue Aug 16 18:52:37 2016 (+0200)
+;; Last-Updated: Sun Sep 18 14:07:14 2016 (+0200)
 ;;           By: Manuel Schneckenreither
-;;     Update #: 982
+;;     Update #: 983
 ;; URL:
 ;; Doc URL:
 ;; Keywords:
@@ -201,6 +201,7 @@
         helm-google
         helm-hoogle
         helm-mode-manager
+        htmlize
         ido-gnus
         ido-hacks
         ido-ubiquitous

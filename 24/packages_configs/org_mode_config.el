@@ -15,21 +15,21 @@
 ;; see http://orgmode.org/manual/Languages.html#Languages
 ;; and see: http://orgmode.org/manual/Evaluating-code-blocks.html
 
-;; (org-babel-do-load-languages
-;;  (quote org-babel-load-languages)
-;;  (quote ((emacs-lisp . t)
-;;          (dot . t)
-;;          (ditaa . t)
-;;          (R . t)
-;;          (python . t)
-;;          (ruby . t)
-;;          (gnuplot . t)
-;;          (clojure . t)
-;;          (sh . t)
-;;          (ledger . t)
-;;          (org . t)
-;;          (plantuml . t)
-;;          (latex . t))))
+(org-babel-do-load-languages
+ (quote org-babel-load-languages)
+ (quote ((emacs-lisp . t)
+         (dot . t)
+         (ditaa . t)
+         (R . t)
+         (python . t)
+         (ruby . t)
+         (gnuplot . t)
+         (clojure . t)
+         (sh . t)
+         (ledger . t)
+         (org . t)
+         (plantuml . t)
+         (latex . t))))
 
 ;; (org-babel-do-load-languages
 ;;  'org-babel-load-languages
