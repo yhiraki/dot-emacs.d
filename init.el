@@ -7,9 +7,9 @@
 ;; Created: Tue Jul 29 00:11:38 2014 (+0200)
 ;; Version:
 ;; Package-Requires: ()
-;; Last-Updated: Sun Sep 18 14:07:14 2016 (+0200)
+;; Last-Updated: Sun Oct  9 19:59:52 2016 (+0200)
 ;;           By: Manuel Schneckenreither
-;;     Update #: 983
+;;     Update #: 989
 ;; URL:
 ;; Doc URL:
 ;; Keywords:
@@ -386,7 +386,7 @@
  '(flycheck-clang-includes (quote ("/usr/include/netdb.h")))
  '(flymake-gui-warnings-enabled nil)
  '(frame-background-mode (quote dark))
- '(global-flycheck-mode t nil (flycheck))
+ '(global-flycheck-mode t)
  '(global-undo-tree-mode t)
  '(gnus-topic-display-empty-topics nil)
  '(haskell-align-imports-pad-after-name t)
@@ -410,7 +410,7 @@
  '(jde-global-classpath (quote ("./../classes" "./../lib")))
  '(jde-jdk (quote ("1.8")))
  '(jde-jdk-registry (quote (("1.8" . "/usr/lib/jvm/default/"))))
- '(jde-sourcepath (quote ("./src/main" "./src/test")))
+ '(jde-sourcepath (quote ("./src/main" "./src/test")) t)
  '(kept-new-versions 5000)
  '(mpc-host "192.168.178.62")
  '(org-agenda-files
@@ -418,11 +418,20 @@
     ("~/Documents/UIBK/9.Semester/Thesis_dynamic_planned_lead_times/tasks.org" "~/Documents/Planning/planning_time.org" "~/Documents/Planning/university.org" "~/Documents/Planning/projects.org" "~/Documents/Planning/freetime.org" "~/Documents/Planning/lists.org" "~/Documents/Planning/anniverseries.org" "~/Documents/Planning/Emacs.org" "~/Documents/Planning/jobcl.org" "~/Programmierung/App/Documentation/app-brainstorming.txt" "~/Documents/Jobs/UIBK/PLM/z-Tree/tasks.org")))
  '(org-export-creator-string "")
  '(org-export-with-creator nil)
+ '(org-file-apps
+   (quote
+    ((auto-mode . emacs)
+     ("\\.mm\\'" . default)
+     ("\\.x?html?\\'" . default)
+     ("\\.pdf\\'" . "evince %s"))))
  '(org-html-creator-string "")
  '(org-latex-listings t)
  '(org-latex-prefer-user-labels t)
  '(org-latex-table-caption-above nil)
  '(org-use-sub-superscripts (quote {}))
+ '(package-selected-packages
+   (quote
+    (zenburn-theme window-number w3m vc-darcs thesaurus tex-smart-umlauts smart-mode-line shm shakespeare-mode request rainbow-mode rainbow-delimiters php-mode pager-default-keybindings ov orgtbl-ascii-plot org-plus-contrib org-cua-dwim org-ac multiple-cursors markdown-toc markdown-mode+ magit lenlen-theme latex-pretty-symbols latex-extra jedi javap-mode javadoc-lookup intero ido-ubiquitous ido-hacks ido-gnus htmlize hlint-refactor hindent helm-mode-manager helm-hoogle helm-hayoo helm-google helm-git-files helm-git helm-flycheck helm-dired-recent-dirs helm-c-yasnippet helm-bibtex header2 gnuplot-mode gnuplot ghci-completion fuzzy function-args flycheck-stack flycheck-ledger flycheck-haskell flycheck-google-cpplint flycheck-color-mode-line edbi ecb dired+ company-try-hard company-shell company-math company-ghci company-ghc company-cabal company-c-headers company-auctex change-inner cdlatex bookmark+ bison-mode bbdb backup-walker auto-dictionary auto-complete-clang auto-complete-c-headers auto-complete-auctex arduino-mode android-mode ace-window ace-jump-mode ace-jump-buffer ac-octave ac-math ac-ispell ac-etags ac-dabbrev ac-capf ac-c-headers)))
  '(semanticdb-javap-classpath
    (quote
     ("/usr/lib/jvm/default-runtime/src/"
