@@ -486,9 +486,13 @@ mode of the invoking window is in
 ;; ++++++++++++++++++++++++++++ OTHER STUFF +++++++++++++++++++++++++++++
 ;; ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
-(menu-bar-mode 1) ;; MENUBAR
-(tool-bar-mode -1) ;; REMOVE TOOLBAR
-(scroll-bar-mode -1) ;; REMOVE SCROLLBARS
+(if (display-graphic-p)
+		(progn
+			(menu-bar-mode 1)		 ;; MENUBAR
+			(tool-bar-mode -1)	 ;; REMOVE TOOLBAR
+			(scroll-bar-mode -1) ;; REMOVE SCROLLBARS
+			))
+
 
 ;; ENABLE UTF8
 (setq locale-coding-system 'utf-8)
