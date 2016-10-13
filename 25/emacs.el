@@ -33,7 +33,7 @@
 ;; WINNER MODE - undo window configurations (needs to be done before ECB)
 ;; (load (concat package-conf-folder "winner_mode_config.el"))
 ;; CEDET - semantic, EDE, etc. (needs to be done pretty early!)
-(load (concat package-conf-folder "cedet_config.el"))
+;; (load (concat package-conf-folder "cedet_config.el"))
 ;; EDE - project management in emacs
 (load (concat package-conf-folder "ede_config.el"))
 ;; ECB - buffers on the side showing information
