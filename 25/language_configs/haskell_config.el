@@ -8,7 +8,7 @@
 ;; Version:
 ;; Last-Updated:
 ;;           By:
-;;     Update #: 880
+;;     Update #: 889
 ;; URL:
 ;; Description:
 ;;
@@ -224,9 +224,21 @@
                         (split-string default-directory "app")
                       (split-string default-directory "src")))))
     (setq esdir (replace-regexp-in-string " " "\\\\ " dir))
+    (message esdir)
+    (setq tagslst (if (and (file-exists-p (concat esdir "src"))
+                           (file-exists-p (concat esdir "app")))
+                      "*.hs app src"
+                    (if (file-exists-p (concat esdir "src"))
+                        "*.hs src"
+                      (if (file-exists-p (concat esdir "app"))
+                          "*.hs app"
+                        "*.hs"))))
     (shell-command
      (concat "cd " esdir
-             " && hasktags --ignore-close-implementation -e . 2>/dev/null 1>/dev/null") nil)
+             ;; " && hasktags --ignore-close-implementation -e --cache . 2>/dev/null 1>/dev/null") nil)
+             " && hasktags --ignore-close-implementation -e --cache "
+             tagslst
+             " 2>/dev/null 1>/dev/null") nil)
     (visit-tags-table (concat dir "TAGS")))
   )
 

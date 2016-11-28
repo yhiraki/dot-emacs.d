@@ -7,7 +7,7 @@
 ;; Version:
 ;; Last-Updated:
 ;;           By:
-;;     Update #: 129
+;;     Update #: 130
 ;; URL:
 ;; Description:
 ;;
@@ -116,7 +116,7 @@
 ;; TAGS
 (global-set-key (kbd (concat prefix-command-key " t r")) 'tags-reset-tags-tables);; Reset tags table
 (global-set-key (kbd (concat prefix-command-key " t v")) 'visit-tags-table) ;; Visit tags table
-
+(global-set-key (kbd "M-*") 'pop-tag-mark)
 
 ;; UNDO TREE
 (global-undo-tree-mode) ;; set undo tree mode

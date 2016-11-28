@@ -7,9 +7,9 @@
 ;; Created: Tue Jul 29 00:11:38 2014 (+0200)
 ;; Version:
 ;; Package-Requires: ()
-;; Last-Updated: Sun Oct  9 19:59:52 2016 (+0200)
+;; Last-Updated: Wed Oct 19 12:13:51 2016 (+0200)
 ;;           By: Manuel Schneckenreither
-;;     Update #: 989
+;;     Update #: 990
 ;; URL:
 ;; Doc URL:
 ;; Keywords:
@@ -425,6 +425,7 @@
      ("\\.x?html?\\'" . default)
      ("\\.pdf\\'" . "evince %s"))))
  '(org-html-creator-string "")
+ '(org-latex-caption-above nil)
  '(org-latex-listings t)
  '(org-latex-prefer-user-labels t)
  '(org-latex-table-caption-above nil)
