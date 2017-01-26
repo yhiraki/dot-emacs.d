@@ -29,3 +29,8 @@
 /.#2
 /settings.el.example
 /24/*
+/ede-projects.el
+/helm-doc.org
+/network-security.data
+/org-gcal/.org-gcal-token
+org-gcal/*
