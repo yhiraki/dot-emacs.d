@@ -5,9 +5,9 @@
 ;; Author: Manuel Schneckenreither
 ;; Created: Mon Dec 10 22:51:09 2012 (+0100)
 ;; Version:
-;; Last-Updated: Sat Sep 10 11:08:05 2016 (+0200)
-;;           By: schnecki
-;;     Update #: 805
+;; Last-Updated: Sat Dec 10 23:19:22 2016 (+0100)
+;;           By: Manuel Schneckenreither
+;;     Update #: 808
 ;; URL:
 ;; Description:
 ;;    Basic configuration for emacs. In here are all configs of
@@ -600,6 +600,8 @@ mode of the invoking window is in
 ;; (setq mail-self-blind nil) ;; does not work for me, solved by bcc'ing to myself
 (add-hook 'message-send-hook 'add-sender-mail-bcc)
 
+;; Calendar
+(require 'org-gcal)
 
 ;; Regex
 (require 're-builder)

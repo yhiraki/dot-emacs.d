@@ -7,7 +7,7 @@
 ;; Version:
 ;; Last-Updated:
 ;;           By:
-;;     Update #: 130
+;;     Update #: 134
 ;; URL:
 ;; Description:
 ;;
@@ -169,6 +169,7 @@ buffer read-only, so I suggest setting kill-read-only-ok to t."
 
 ;; quit gnus properly instead of leaving auto-save files around
 (defadvice save-buffers-kill-emacs (before quit-gnus (&rest args) activate)
+  (if org-gcal-client-id (org-gcal-sync))
   (let (buf)
     (when (and (fboundp 'gnus-alive-p)
                (gnus-alive-p)
@@ -187,6 +188,13 @@ buffer read-only, so I suggest setting kill-read-only-ok to t."
 
 (setq-default truncate-lines 0)
 (global-set-key [f12] 'toggle-truncate-lines)
+
+;; ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+;; ++++++++++++++++++++++++++++++ FLYSPELL ++++++++++++++++++++++++++++++
+;; ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+(require 'flyspell-correct-helm)
+(define-key flyspell-mode-map (kbd "C-;") 'flyspell-correct-previous-word-generic)
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;

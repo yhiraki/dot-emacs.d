@@ -15,3 +15,9 @@
 ;; THE PREFIX KEY STROKE TO USE FOR CUSTOM COMMANDS
 (setq prefix-command-key "C-x x")
 
+;; Google calendar sync with org mode -- see https://github.com/myuhe/org-gcal.el
+;; to disable set org-gcal-client-id to nil!
+(setq org-gcal-client-id "your-id-foo.apps.googleusercontent.com"
+      org-gcal-client-secret "your-secret"
+      org-gcal-file-alist '(("manuel.schnecki@gmail.com" .  "~/Documents/Planning/default.org")
+                            ("asdf...calendar.google.com" .  "~/Documents/Planning/university.org")))

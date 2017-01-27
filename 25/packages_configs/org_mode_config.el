@@ -7,13 +7,14 @@
 ;; ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 (require 'org)
-
+(require 'org-agenda)
 
 ;; active Babel languages
 
 ;; see http://orgmode.org/worg/org-contrib/babel/languages.html
 ;; see http://orgmode.org/manual/Languages.html#Languages
 ;; and see: http://orgmode.org/manual/Evaluating-code-blocks.html
+
 
 (org-babel-do-load-languages
  (quote org-babel-load-languages)
@@ -96,10 +97,7 @@
 ;; ++++++++++++++++++++++++ CAPTURE/REMEMBER ++++++++++++++++++++++++++++
 ;; ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
-(setq org-directory (concat load-emacsd "org/"))
-(setq org-mode-capture-directory (concat org-directory "notes.org"))
-
-(make-directory org-directory t) ;; create directory
+(setq org-mode-capture-directory "~/Documents/Planning/default.org")
 
 (setq org-default-notes-file org-mode-capture-directory)
 ;; (define-key global-map "\C-c\C-c" 'org-capture) ;; define keystroke
@@ -111,13 +109,12 @@
          "* TODO %^{Name of Task} %^g     \nAdded: %U  %i\n  %?\n"
          :clock-in t :clock-resume t))))
 
-(setq org-default-notes-file (concat org-directory "/notes.org"))
+(setq org-default-notes-file "~/Documents/Planning/default.org")
 (define-key global-map "\C-cr" 'org-capture)
-
 
 (setq org-capture-templates
       (append '(("l" "Ledger entries")
-                ("ld" "Debit Card" plain
+                ("ld" "Debit/Credit Card" plain
                  (file "~/Documents/Planning/accounting.ledger")
                  "%(org-read-date) %^{Payee}
   Liabilities:Debit Card
@@ -128,8 +125,23 @@
 	        "%(org-read-date) * %^{Payee}
   Expenses:Cash
   Expenses:%^{Account}  %^{Amount}
-"))
+")
+                ("g" "Google Calendar")
+                ("gd" "Event in default calendar" plain
+                  (file "~/Documents/Planning/default.org")
+                  "* %^{Subject}
+%^T
+
+%^{Description}")
+                ("gu" "Event in university calendar" plain
+                  (file "~/Documents/Planning/university.org")
+                  "* %^{Subject}
+%^T
+
+%^{Description}"))
        org-capture-templates))
+
+;; (setq org-capture-templates nil)
 
 
 ;; ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -339,7 +351,25 @@
 ;; +++++++++++++++++++++++++++ DEFAULT KEYS +++++++++++++++++++++++++++++
 ;; ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
-(global-set-key "\C-ca" 'org-agenda)
+;; (if org-gcal-client-id
+;;     (add-to-list 'emacs-startup-hook 'org-gcal-sync))
+
+(defun org-save-all-org-buffers ()
+  "Save all Org buffers without user confirmation."
+  (interactive)
+  (message "Saving all Org buffers...")
+  (save-some-buffers t (lambda () (derived-mode-p 'org-mode)))
+  (when (featurep 'org-id) (org-id-locations-save))
+  (message "Saving all Org buffers... done")
+  (when org-gcal-client-id (org-gcal-sync)))
+
+(defun org-gcal-sync-and-open-agenda ()
+  "Calls org-gcal-sync and then org-agenda"
+  (interactive)
+  (org-gcal-sync)
+  (org-agenda))
+
+(global-set-key "\C-ca" 'org-gcal-sync-and-open-agenda)
 ;; (global-set-key "\C-cb" 'org-iswitchb)
 
 

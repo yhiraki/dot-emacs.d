@@ -7,9 +7,9 @@
 ;; Created: Tue Jul 29 00:11:38 2014 (+0200)
 ;; Version:
 ;; Package-Requires: ()
-;; Last-Updated: Wed Oct 19 12:13:51 2016 (+0200)
+;; Last-Updated: Mon Jan 23 10:29:00 2017 (+0100)
 ;;           By: Manuel Schneckenreither
-;;     Update #: 990
+;;     Update #: 1031
 ;; URL:
 ;; Doc URL:
 ;; Keywords:
@@ -180,6 +180,8 @@
         flycheck-color-mode-line
 				flycheck-google-cpplint
 				flycheck-ledger
+        flyspell-correct
+        flyspell-correct-helm
         function-args
         fuzzy
         git-commit-mode
@@ -221,6 +223,7 @@
         org-ac
         org-cua-dwim
         org-eldoc
+        org-gcal
         org-plus-contrib
         orgtbl-ascii-plot
         ov
@@ -296,7 +299,7 @@
 ;;(color-theme-dark-laptop)
 ;; eval following to use standard theme:
 
-;; (color-theme-standard)
+(color-theme-standard)
 
 ;;(color-theme-aalto-light)
 
@@ -325,7 +328,7 @@
  ;; If there is more than one, they won't work right.
  '(Flymake-compilation-prevents-syntax-check nil)
  '(ac-etags-requires 1)
- '(bmkp-last-as-first-bookmark-file "/home/schnecki/.emacs.d/.bookmarks")
+ '(bmkp-last-as-first-bookmark-file "~/.emacs.d/.bookmarks")
  '(cedet-java-classpath-extension
    (quote
     ((concat
@@ -392,7 +395,7 @@
  '(haskell-align-imports-pad-after-name t)
  '(haskell-ask-also-kill-buffers nil)
  '(haskell-doc-prettify-types t)
- '(haskell-font-lock-symbols t)
+ '(haskell-font-lock-symbols nil)
  '(haskell-interactive-mode-collapse t)
  '(haskell-interactive-popup-errors nil)
  '(haskell-process-args-cabal-repl
@@ -415,7 +418,7 @@
  '(mpc-host "192.168.178.62")
  '(org-agenda-files
    (quote
-    ("~/Documents/UIBK/9.Semester/Thesis_dynamic_planned_lead_times/tasks.org" "~/Documents/Planning/planning_time.org" "~/Documents/Planning/university.org" "~/Documents/Planning/projects.org" "~/Documents/Planning/freetime.org" "~/Documents/Planning/lists.org" "~/Documents/Planning/anniverseries.org" "~/Documents/Planning/Emacs.org" "~/Documents/Planning/jobcl.org" "~/Programmierung/App/Documentation/app-brainstorming.txt" "~/Documents/Jobs/UIBK/PLM/z-Tree/tasks.org")))
+    ("~/Documents/Planning/university.org" "~/Documents/Planning/projects.org" "~/Documents/Planning/freetime.org" "~/Documents/Planning/lists.org" "~/Documents/Planning/default.org" "~/Documents/Planning/anniverseries.org" "~/Documents/Planning/Emacs.org" "~/Documents/Planning/jobcl.org" "~/Documents/Planning/work.org")))
  '(org-export-creator-string "")
  '(org-export-with-creator nil)
  '(org-file-apps
@@ -432,7 +435,7 @@
  '(org-use-sub-superscripts (quote {}))
  '(package-selected-packages
    (quote
-    (zenburn-theme window-number w3m vc-darcs thesaurus tex-smart-umlauts smart-mode-line shm shakespeare-mode request rainbow-mode rainbow-delimiters php-mode pager-default-keybindings ov orgtbl-ascii-plot org-plus-contrib org-cua-dwim org-ac multiple-cursors markdown-toc markdown-mode+ magit lenlen-theme latex-pretty-symbols latex-extra jedi javap-mode javadoc-lookup intero ido-ubiquitous ido-hacks ido-gnus htmlize hlint-refactor hindent helm-mode-manager helm-hoogle helm-hayoo helm-google helm-git-files helm-git helm-flycheck helm-dired-recent-dirs helm-c-yasnippet helm-bibtex header2 gnuplot-mode gnuplot ghci-completion fuzzy function-args flycheck-stack flycheck-ledger flycheck-haskell flycheck-google-cpplint flycheck-color-mode-line edbi ecb dired+ company-try-hard company-shell company-math company-ghci company-ghc company-cabal company-c-headers company-auctex change-inner cdlatex bookmark+ bison-mode bbdb backup-walker auto-dictionary auto-complete-clang auto-complete-c-headers auto-complete-auctex arduino-mode android-mode ace-window ace-jump-mode ace-jump-buffer ac-octave ac-math ac-ispell ac-etags ac-dabbrev ac-capf ac-c-headers)))
+    (django-mode org org-gcal flyspell-correct flyspell-correct-helm zenburn-theme window-number w3m vc-darcs thesaurus tex-smart-umlauts smart-mode-line shm shakespeare-mode request rainbow-mode rainbow-delimiters php-mode pager-default-keybindings ov orgtbl-ascii-plot org-plus-contrib org-cua-dwim org-ac multiple-cursors markdown-toc markdown-mode+ magit lenlen-theme latex-pretty-symbols latex-extra jedi javap-mode javadoc-lookup intero ido-ubiquitous ido-hacks ido-gnus htmlize hlint-refactor hindent helm-mode-manager helm-hoogle helm-hayoo helm-google helm-git-files helm-git helm-flycheck helm-dired-recent-dirs helm-c-yasnippet helm-bibtex header2 gnuplot-mode gnuplot ghci-completion fuzzy function-args flycheck-stack flycheck-ledger flycheck-haskell flycheck-google-cpplint flycheck-color-mode-line edbi ecb dired+ company-try-hard company-shell company-math company-ghci company-ghc company-cabal company-c-headers company-auctex change-inner cdlatex bookmark+ bison-mode bbdb backup-walker auto-dictionary auto-complete-clang auto-complete-c-headers auto-complete-auctex arduino-mode android-mode ace-window ace-jump-mode ace-jump-buffer ac-octave ac-math ac-ispell ac-etags ac-dabbrev ac-capf ac-c-headers)))
  '(semanticdb-javap-classpath
    (quote
     ("/usr/lib/jvm/default-runtime/src/"
@@ -466,6 +469,7 @@
  '(undo-tree-visualizer-timestamps t)
  '(user-full-name your-full-name)
  '(user-mail-address your-mail-address)
+ '(xref-prompt-for-identifier t)
  '(yas-prompt-functions
    (quote
     (yas-ido-prompt yas-dropdown-prompt yas-completing-prompt yas-x-prompt yas-no-prompt))))

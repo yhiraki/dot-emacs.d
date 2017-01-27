@@ -13,11 +13,9 @@
   ;;             (lambda (return-val) (concat return-val ".gz")))
 
   ;; Persistent undo-tree history across emacs sessions
-  (setq modi/undo-tree-history-dir (let ((dir (concat user-emacs-directory
-                                                      "undo-tree-history/")))
-                                     (make-directory dir :parents)
-                                     dir))
-  (setq undo-tree-history-directory-alist `(("." . ,modi/undo-tree-history-dir)))
+  ; (setq undo-tree-history-directory-alist '("." . (concat user-emacs-directory "undo-tree-history/")))
+  (setq undo-tree-history-directory-alist '(("." . "~/.emacs.d/undo-tree-history")))
+
 
   (add-hook 'write-file-functions #'undo-tree-save-history-hook)
   (add-hook 'find-file-hook #'undo-tree-load-history-hook))
