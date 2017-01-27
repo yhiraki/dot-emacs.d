@@ -1,13 +1,11 @@
 /.#session*
 /.bookmarks
-/.emacs.d
 /.mc-lists.el
 *TAGS
 /abbrev_defs
 /ac-comphist.dat
 /auto-save-list/
 /elconfig.desktop
-/elpa.bak/
 /elpa/
 /eshell/
 /image-dired/
@@ -24,8 +22,11 @@
 *~
 *.elc
 /Project.ede
-
 /.python-environments
 /.#2
-/settings.el.example
 /24/*
+/ede-projects.el
+/helm-doc.org
+/network-security.data
+/org-gcal/.org-gcal-token
+org-gcal/*

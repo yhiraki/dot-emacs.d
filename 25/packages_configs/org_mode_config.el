@@ -133,12 +133,13 @@
 %^T
 
 %^{Description}")
-                ("gu" "Event in university calendar" plain
-                  (file "~/Documents/Planning/university.org")
-                  "* %^{Subject}
-%^T
+;;                 ("gu" "Event in university calendar" plain
+;;                   (file "~/Documents/Planning/university.org")
+;;                   "* %^{Subject}
+;; %^T
 
-%^{Description}"))
+;; %^{Description}")
+                )
        org-capture-templates))
 
 ;; (setq org-capture-templates nil)
