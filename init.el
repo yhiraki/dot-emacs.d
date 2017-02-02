@@ -7,9 +7,9 @@
 ;; Created: Tue Jul 29 00:11:38 2014 (+0200)
 ;; Version:
 ;; Package-Requires: ()
-;; Last-Updated: Fri Jan 27 13:06:40 2017 (+0100)
+;; Last-Updated: Thu Feb  2 09:54:13 2017 (+0100)
 ;;           By: Manuel Schneckenreither
-;;     Update #: 1032
+;;     Update #: 1034
 ;; URL:
 ;; Doc URL:
 ;; Keywords:
@@ -418,7 +418,7 @@
  '(mpc-host "192.168.178.62")
  '(org-agenda-files
    (quote
-    ("~/Documents/Planning/university.org" "~/Documents/Planning/projects.org" "~/Documents/Planning/freetime.org" "~/Documents/Planning/lists.org" "~/Documents/Planning/default.org" "~/Documents/Planning/anniverseries.org" "~/Documents/Planning/Emacs.org" "~/Documents/Planning/jobcl.org" "~/Documents/Planning/work.org")))
+    ("~/Documents/Planning/university.org" "~/Documents/Planning/projects.org" "~/Documents/Planning/freetime.org" "~/Documents/Planning/lists.org" "~/Documents/Planning/default.org" "~/Documents/Planning/anniverseries.org" "~/Documents/Planning/Emacs.org" "~/Documents/Planning/jobcl.org" "~/Documents/Planning/work.org" "~/Documents/Planning/work.org" "~/Documents/Planning/c437.org")))
  '(org-export-creator-string "")
  '(org-export-with-creator nil)
  '(org-file-apps
@@ -465,7 +465,7 @@
  '(tool-bar-mode nil)
  '(tramp-default-method "ssh")
  '(undo-tree-auto-save-history t)
- '(undo-tree-visualizer-diff nil)
+ '(undo-tree-visualizer-diff t)
  '(undo-tree-visualizer-timestamps t)
  '(user-full-name your-full-name)
  '(user-mail-address your-mail-address)
