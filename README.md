@@ -177,8 +177,7 @@ For some distribution the commands are listed below this section.
 Pacman Command:
 ---------------
 
-You need to have *RPM-Fusion enabled* (see: http://rpmfusion.org).
-Steps 1 + 2 + 3 + 5 + 7 (4 not included!):
+Steps 1 + 2 + 3 + 5 + 7 (4 not included!). You must have Aura (see AUR) installed:
 
     mv ~/.emacs.d ~/.emacs.d.bak; true &&                                             # backup \
     git clone https://github.com/schnecki/dot-emacs.d ~/.emacs.d &&                   # download \
@@ -187,7 +186,8 @@ Steps 1 + 2 + 3 + 5 + 7 (4 not included!):
     w3m curl                                                                          # browser for links \
     mpd                                                                               # install mpd music server \
     python-jedi python-virtualenv                                                     # Python completion \
-    texlive evince &&                                                                 # LaTeX \
+    texlive evince" &&                                                                # LaTeX \
+    su -c "aura -A eclim" &&                                                          # for Java using aura \
     cabal install hasktags hdevtools structured-haskell-mode stylish-haskell stack && # Haskell \
     cabal install hindent ghc-mod hoogle hlint HaRe                                && # Haskell cont'd \
     perl-CPAN mariadb-devel && cpan -fi Module::Build::Compat &&                      # database tools \
