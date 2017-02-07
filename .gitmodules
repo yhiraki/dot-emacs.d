@@ -1,3 +1,7 @@
 [submodule "25/packages/jdee"]
 	path = 25/packages/jdee
 	url = https://github.com/jdee-emacs/jdee.git
+
+[submodule "25/packages/cedet"]
+	path = 25/packages/cedet
+	url = http://git.code.sf.net/p/cedet/git
