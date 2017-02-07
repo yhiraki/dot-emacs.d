@@ -5,9 +5,9 @@
 ;; Author: Manuel Schneckenreither
 ;; Created: Tue Dec 11 00:43:14 2012 (+0100)
 ;; Version:
-;; Last-Updated: Tue Aug  9 15:37:12 2016 (+0200)
+;; Last-Updated: Tue Feb  7 17:17:26 2017 (+0100)
 ;;           By: Manuel Schneckenreither
-;;     Update #: 459
+;;     Update #: 462
 ;; URL:
 ;; Description:
 ;;
@@ -115,6 +115,8 @@
 (load (concat package-conf-folder "undotree_config.el"))
 ;; company mode
 (load (concat package-conf-folder "company_config.el"))
+;; load django
+(load (concat package-conf-folder "python_django_config.el"))
 
 ;; ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 ;; ++++++++++++++++++ Load Language Specific Settings +++++++++++++++++++

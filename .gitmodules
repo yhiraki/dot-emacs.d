@@ -1,0 +1,3 @@
+[submodule "25/packages/jdee"]
+	path = 25/packages/jdee
+	url = https://github.com/jdee-emacs/jdee.git
