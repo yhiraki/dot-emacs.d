@@ -7,9 +7,9 @@
 ;; Created: Fr Okt  4 20:40:17 2013 (+0200)
 ;; Version:
 ;; Package-Requires: ()
-;; Last-Updated: Tue Feb  9 14:48:21 2016 (+0100)
+;; Last-Updated: Thu Feb  9 15:02:34 2017 (+0100)
 ;;           By: Manuel Schneckenreither
-;;     Update #: 132
+;;     Update #: 135
 ;; URL:
 ;; Doc URL:
 ;; Keywords:
@@ -100,12 +100,19 @@
 
 ;; fix key
 (eval-after-load "flyspell"
-  '(define-key flyspell-mode-map (kbd "C-.") 'view-tag-other-window)
-  )
+  '(define-key flyspell-mode-map (kbd "C-.") nil))
+
+;; (eval-after-load "flyspell"
+;;   '(define-key flyspell-mode-map (kbd "C-.") 'view-tag-other-window)
+;;   )
 
 (eval-after-load "flyspell"
-  '(define-key flyspell-mode-map (kbd "C-c C-.") 'find-tag-other-window)
-  )
+  '(define-key flyspell-mode-map (kbd "C-c C-.") nil))
+
+
+;; (eval-after-load "flyspell"
+;;   '(define-key flyspell-mode-map (kbd "C-c C-.") 'find-tag-other-window)
+;;   )
 
 
 (setq flyspell-issue-message-flag nil)

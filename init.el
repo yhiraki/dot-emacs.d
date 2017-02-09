@@ -7,9 +7,9 @@
 ;; Created: Tue Jul 29 00:11:38 2014 (+0200)
 ;; Version:
 ;; Package-Requires: ()
-;; Last-Updated: Thu Feb  9 07:28:12 2017 (+0100)
+;; Last-Updated: Thu Feb  9 14:12:47 2017 (+0100)
 ;;           By: Manuel Schneckenreither
-;;     Update #: 1039
+;;     Update #: 1043
 ;; URL:
 ;; Doc URL:
 ;; Keywords:
@@ -381,6 +381,7 @@
  '(ecb-source-path (quote (("/" "/"))))
  '(ecb-type-tag-expansion (quote ((default) (c-mode "struct"))))
  '(ecb-use-speedbar-instead-native-tree-buffer nil)
+ '(eclimd-autostart nil)
  '(ede-project-directories
    (quote
     ("/home/schnecki/Documents/UIBK/7.Semester/InfoSec_SecArch/PS/08/03/src" "/home/schnecki/Documents/UIBK/7.Semester/InfoSec_SecArch/PS/08/03" "/home/schnecki/Documents/UIBK/7.Semester/InfoSec_SecArch/PS/06/04/src" "/home/schnecki/Documents/UIBK/7.Semester/InfoSec_SecArch/PS/06/04" "/home/schnecki/Documents/UIBK/7.Semester/C++/project/textyTex/src/model/framework" "/home/schnecki/Documents/UIBK/7.Semester/C++/project/textyTex/src/model/exceptions" "/home/schnecki/Documents/UIBK/7.Semester/C++/project/textyTex/src/model" "/home/schnecki/Documents/UIBK/7.Semester/C++/project/textyTex/src" "/home/schnecki/Documents/UIBK/7.Semester/C++/project/textyTex" "/home/schnecki/Documents/UIBK/7.Semester/InfoSec_SecArch/PS/05/04/src" "/home/schnecki/Documents/UIBK/7.Semester/InfoSec_SecArch/PS/05/04")))
@@ -390,6 +391,7 @@
  '(flycheck-clang-includes (quote ("/usr/include/netdb.h")))
  '(flymake-gui-warnings-enabled nil)
  '(frame-background-mode (quote dark))
+ '(global-eclim-mode t)
  '(global-flycheck-mode t)
  '(global-undo-tree-mode t)
  '(gnus-topic-display-empty-topics nil)

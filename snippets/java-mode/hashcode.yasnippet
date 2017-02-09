@@ -1,0 +1,11 @@
+# -*- mode: snippet -*-
+# name: hashcode
+# key: hash
+# --
+@Override
+public int hashCode() {
+  int hash = 1;
+  hash = hash * 31 + ${1:name}.hashCode();
+  ${2:hash = hash * 13 + (${3:value} == null ? 0 : ${3:$(yas/text)}.hashCode());}
+  $0return hash;
+}

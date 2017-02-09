@@ -7,9 +7,9 @@
 ;; Created: Mo Okt 14 18:17:43 2013 (+0200)
 ;; Version:
 ;; Package-Requires: ()
-;; Last-Updated: Sat Aug 30 19:15:18 2014 (+0200)
+;; Last-Updated: Thu Feb  9 15:07:32 2017 (+0100)
 ;;           By: Manuel Schneckenreither
-;;     Update #: 306
+;;     Update #: 331
 ;; URL:
 ;; Doc URL:
 ;; Keywords:
@@ -51,10 +51,12 @@
     (shell-command
      (concat "cd " esdir " && find . -name '*.java' -not -name '.#*' -print | etags - 1>/dev/null 2>/dev/null") nil)
     (visit-tags-table (concat dir "TAGS"))
-    (start-process "delete_abrt_checker" nil "rm" "-f abrt_checker_* 1>/dev/null 2>/dev/null")
+    ;; (start-process "delete_abrt_checker" nil "rm" "-f abrt_checker_* 1>/dev/null 2>/dev/null")
     ;; (shell-command "rm -f abrt_checker_* 1>/dev/null 2>/dev/null" nil)
     )
   )
+
+
 
 
 ;; MINOR MODE HOOK
@@ -64,27 +66,27 @@
   ;; auto complete mode
 
   ;; enable semantic for auto complete mode
-  (semantic-mode t)
+  (semantic-mode nil)
 
-  ;; (add-to-list 'ac-sources 'ac-source-abbrev)          ;; edited
-  ;; (add-to-list 'ac-sources 'ac-source-css-property)
-  ;; (add-to-list 'ac-sources 'ac-source-dictionary)
-  ;; (add-to-list 'ac-sources 'ac-source-eclim)
-  (add-to-list 'ac-sources 'ac-source-yasnippet)
-  ;; (add-to-list 'ac-sources 'ac-source-symbols)
-  ;; (add-to-list 'ac-sources 'ac-source-filename)
-  ;; (add-to-list 'ac-sources 'ac-source-files-in-current-dir)
-  ;; (add-to-list 'ac-sources 'ac-source-gtags)
-  (add-to-list 'ac-sources 'ac-source-etags)
-  (add-to-list 'ac-sources 'ac-source-imenu)
-  (add-to-list 'ac-sources 'ac-source-semantic) ;; slows down auto complete
-  ;; (add-to-list 'ac-sources 'ac-source-semantic-raw) ;; slows down auto complete
-  ;; (add-to-list 'ac-sources 'ac-source-words-in-all-buffer)
-  ;; (add-to-list 'ac-sources 'ac-source-words-in-buffer)
-  (add-to-list 'ac-sources 'ac-source-words-in-same-mode-buffers)
+  ;; ;; (add-to-list 'ac-sources 'ac-source-abbrev)          ;; edited
+  ;; ;; (add-to-list 'ac-sources 'ac-source-css-property)
+  ;; ;; (add-to-list 'ac-sources 'ac-source-dictionary)
+  ;; ;; (add-to-list 'ac-sources 'ac-source-eclim)
+  ;; (add-to-list 'ac-sources 'ac-source-yasnippet)
+  ;; ;; (add-to-list 'ac-sources 'ac-source-symbols)
+  ;; ;; (add-to-list 'ac-sources 'ac-source-filename)
+  ;; ;; (add-to-list 'ac-sources 'ac-source-files-in-current-dir)
+  ;; ;; (add-to-list 'ac-sources 'ac-source-gtags)
+  ;; (add-to-list 'ac-sources 'ac-source-etags)
+  ;; (add-to-list 'ac-sources 'ac-source-imenu)
+  ;; (add-to-list 'ac-sources 'ac-source-semantic) ;; slows down auto complete
+  ;; ;; (add-to-list 'ac-sources 'ac-source-semantic-raw) ;; slows down auto complete
+  ;; ;; (add-to-list 'ac-sources 'ac-source-words-in-all-buffer)
+  ;; ;; (add-to-list 'ac-sources 'ac-source-words-in-buffer)
+  ;; (add-to-list 'ac-sources 'ac-source-words-in-same-mode-buffers)
 
-  ;; auto complete (if it doesn't work try to disable flyspell mode!)
-  (auto-complete-mode)
+  ;; ;; auto complete (if it doesn't work try to disable flyspell mode!)
+  ;; (auto-complete-mode)
 
   ;; use programming flyspell mode
   (flyspell-prog-mode)
@@ -96,24 +98,24 @@
   ;; (my-java-flymake-init)
 
   ;;FLYMAKE (ENHANCEMENTS)
-  (local-set-key (kbd  "C-c ! n") 'my-flymake-show-next-error)
-  (local-set-key (kbd "C-c ! p") 'my-flymake-show-prev-error)
-  ;;ASOCIATE KEY FOR CURRENT ERROR POPUP/MINIBUFFER
-  (local-set-key (kbd "C-c ! e") 'flymake:display-err-popup-for-current-line)
+  ;; (local-set-key (kbd  "C-c ! n") 'my-flymake-show-next-error)
+  ;; (local-set-key (kbd "C-c ! p") 'my-flymake-show-prev-error)
+  ;; ;;ASOCIATE KEY FOR CURRENT ERROR POPUP/MINIBUFFER
+  ;; (local-set-key (kbd "C-c ! e") 'flymake:display-err-popup-for-current-line)
 
-  (local-set-key (kbd ".") (lambda ()
-                             (interactive)
-                             (progn
-                               (insert ".")
-                               (if (not (auto-complete-mode))
-                                   (auto-complete-mode t))
-                               (auto-complete)
-                               ;; (semantic-ia-complete-tip (point))
-                               )))
+  ;; (local-set-key (kbd ".") (lambda ()
+  ;;                            (interactive)
+  ;;                            (progn
+  ;;                              (insert ".")
+  ;;                              (if (not (auto-complete-mode))
+  ;;                                  (auto-complete-mode t))
+  ;;                              (auto-complete)
+  ;;                              ;; (semantic-ia-complete-tip (point))
+  ;;                              )))
 
   ;; (local-set-key (kbd (concat prefix-command-key " e")) 'flymake:display-err-minibuf-for-current-line)
   (defvar-mode-local java-mode browse-url-browser-function #'w3m-browse-url)
-  (defvar-mode-local jde-mode browse-url-browser-function #'w3m-browse-url)
+  ;; (defvar-mode-local jde-mode browse-url-browser-function #'w3m-browse-url)
   ;;
   ;; (set-variable browse-url-browser-function #'w3m-browse-url)
 
@@ -122,7 +124,20 @@
   (setq c-basic-offset 2)
 
   ;; CREATE AND SET TAGS FILE
-  (add-hook 'after-save-hook 'make-java-tags nil t)
+  ;; (add-hook 'after-save-hook 'make-java-tags nil t)
+
+  ;; enable keys
+  (local-set-key (kbd "C-.") (defun make-tags-view-other (tagname &optional next-p regexp-p)
+                               (interactive (find-tag-interactive "View tag other window: "))
+                               (make-java-tags)
+                               (view-tag-other-window tagname next-p regexp-p)))
+  (local-set-key (kbd "M-.") (defun make-tags-view (tagname &optional next-p regexp-p)
+                               (interactive (find-tag-interactive "View tag: "))
+                               (make-java-tags)
+                               (xref-find-definitions tagname next-p regexp-p)))
+
+
+  (remove-hook 'before-save-hook 'collapse-blank-lines)
 
   )
 

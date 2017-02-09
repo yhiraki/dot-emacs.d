@@ -2,6 +2,18 @@
 # name: equals
 # key: eq
 # --
-public boolean equals(${1:Class} other) {
-       $0
+@Override
+public boolean equals(Object o) {
+  // self check
+  if (this == o)
+    return true;
+  // null check
+  if (o == null)
+    return false;
+  // type check and cast
+  if (getClass() != o.getClass())
+    return false;
+  ${1:`(file-name-sans-extension (buffer-name))`} other = (${1:$(yas/text)}) o;
+  // field comparison
+  return this.${2:name}.equals(other.${2:$(yas/text)})$0;
 }

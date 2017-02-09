@@ -5,9 +5,9 @@
 ;; Author: Manuel Schneckenreither
 ;; Created: Mon Dec 10 22:51:09 2012 (+0100)
 ;; Version:
-;; Last-Updated: Sat Dec 10 23:19:22 2016 (+0100)
+;; Last-Updated: Thu Feb  9 14:09:39 2017 (+0100)
 ;;           By: Manuel Schneckenreither
-;;     Update #: 808
+;;     Update #: 810
 ;; URL:
 ;; Description:
 ;;    Basic configuration for emacs. In here are all configs of
@@ -108,7 +108,7 @@ mode of the invoking window is in
 (setq compilation-modes-to-close-window '(jde-mode
                                           java-mode
                                           ))
-(setq compilation-exit-message-function 'compilation-exit-autoclose)
+;; (setq compilation-exit-message-function 'compilation-exit-autoclose)
 
 ;; COMPILE CLOSES MAKEFILE
 (defun compile-closest-Makefile ()
