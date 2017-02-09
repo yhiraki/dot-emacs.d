@@ -7,9 +7,9 @@
 ;; Created: Mo Okt 14 18:17:43 2013 (+0200)
 ;; Version:
 ;; Package-Requires: ()
-;; Last-Updated: Thu Feb  9 15:07:32 2017 (+0100)
+;; Last-Updated: Thu Feb  9 18:21:10 2017 (+0100)
 ;;           By: Manuel Schneckenreither
-;;     Update #: 331
+;;     Update #: 338
 ;; URL:
 ;; Doc URL:
 ;; Keywords:
@@ -57,8 +57,6 @@
   )
 
 
-
-
 ;; MINOR MODE HOOK
 (defun my/java-minor-mode ()
   "Minor mode hook for Java."
@@ -98,10 +96,11 @@
   ;; (my-java-flymake-init)
 
   ;;FLYMAKE (ENHANCEMENTS)
-  ;; (local-set-key (kbd  "C-c ! n") 'my-flymake-show-next-error)
-  ;; (local-set-key (kbd "C-c ! p") 'my-flymake-show-prev-error)
-  ;; ;;ASOCIATE KEY FOR CURRENT ERROR POPUP/MINIBUFFER
-  ;; (local-set-key (kbd "C-c ! e") 'flymake:display-err-popup-for-current-line)
+  ;; (local-unset-key (kbd "C-c ! n"))
+  (local-set-key (kbd  "C-c ! n") 'my-flymake-show-next-error)
+  (local-set-key (kbd "C-c ! p") 'my-flymake-show-prev-error)
+  ;;ASOCIATE KEY FOR CURRENT ERROR POPUP/MINIBUFFER
+  (local-set-key (kbd "C-c ! e") 'flymake:display-err-popup-for-current-line)
 
   ;; (local-set-key (kbd ".") (lambda ()
   ;;                            (interactive)
@@ -126,6 +125,7 @@
   ;; CREATE AND SET TAGS FILE
   ;; (add-hook 'after-save-hook 'make-java-tags nil t)
 
+
   ;; enable keys
   (local-set-key (kbd "C-.") (defun make-tags-view-other (tagname &optional next-p regexp-p)
                                (interactive (find-tag-interactive "View tag other window: "))
@@ -141,84 +141,85 @@
 
   )
 
-
-(setq gud-jdb-use-classpath t)
-(setq gud-jdb-classpath "/home/schnecki/Programmierung/Java/Papa/src:/home/schnecki/Programmierung/Java/Papa/classes")
-(setq gud-jdb-sourcepath "/home/schnecki/Programmierung/Java/Papa/src")
-(setq  gud-pdb-command-name "~/bin/pdb.py")
-
-(defun gud-java-set-breakpoint ()
-  (interactive)
-  (setq msgSet (format "%s %s%s:%s" "stop in"
-                       (format "%s" (getJavaPackage)) (file-name-base) (line-number-at-pos)))
-  (setq msgClear (format "%s %s%s:%s" "clear "
-                         (format "%s" (getJavaPackage)) (file-name-base) (line-number-at-pos)))
-  (let ((output
-         (gud-gdb-run-command-fetch-lines
-          msgSet
-          gud-comint-buffer)))
-    (progn
-      (message "Sent: %s" msgSet)
-      ;; (message output)
-      (if (string-match "Unable to set" (car output))
-          (progn
-            (gud-gdb-run-command-fetch-lines
-             msgClear
-             gud-comint-buffer)
-            nil)
-        output))))
-
-
-(defun getJavaPackage ()
-  "Returns java package."
-  (interactive)
-  (save-excursion
-    (goto-char (point-min))
-    (let ((pos(search-forward-regexp "^package [a-zA-Z.]+;" nil t)))
-      (if (equal nil pos)
-          (format "%s" "")
-        (progn
-          (goto-char pos)
-          (let ((myStr (thing-at-point 'line)))
-            (format "%s" (concat
-                          (replace-regexp-in-string
-                           "package " ""
-                           (replace-regexp-in-string ";[\n ]*" "" myStr)) "."))))))))
-
-
-;; (setq jdb-mode-hook nil)
-;; (setq my-gud-break nil)
-(add-hook 'jdb-mode-hook (lambda ()
-                           (global-set-key (kbd "C-x C-a C-b") 'gud-java-set-breakpoint)))
-
-;; (setq debug-on-error t)
-;; (setq gud-jdb-directories '("./classes/"))
-
-;; (setq
-;;  gud-jdb-directories (list "../../../source/java/caltool"
-;;                            "../../source/java/caltool/admin"
-;;                            "../../source/java/caltool/admin_ui"
-;;                            "../../source/java/caltool/caldb"
-;;                            "../../source/java/caltool/caltool_ui"
-;;                            "../../source/java/caltool/edit"
-;;                            "../../source/java/caltool/edit_ui"
-;;                            "../../source/java/caltool/file"
-;;                            "../../source/java/caltool/file_ui"
-;;                            "../../source/java/caltool/help"
-;;                            "../../source/java/caltool/help_ui"
-;;                            "../../source/java/caltool/options"
-;;                            "../../source/java/caltool/options_ui"
-;;                            "../../source/java/caltool/schedule"
-;;                            "../../source/java/caltool/schedule_ui"
-;;                            "../../source/java/caltool/view"
-;;                            "../../source/java/caltool/view_ui"))
 (add-hook 'java-mode-hook 'my/java-minor-mode)
 (add-hook 'jde-mode-hook 'my/java-minor-mode)
 
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; Java Compilation output - Make Emacs understand links
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; (setq gud-jdb-use-classpath t)
+;; (setq gud-jdb-classpath "/home/schnecki/Programmierung/Java/Papa/src:/home/schnecki/Programmierung/Java/Papa/classes")
+;; (setq gud-jdb-sourcepath "/home/schnecki/Programmierung/Java/Papa/src")
+;; (setq  gud-pdb-command-name "~/bin/pdb.py")
+
+;; (defun gud-java-set-breakpoint ()
+;;   (interactive)
+;;   (setq msgSet (format "%s %s%s:%s" "stop in"
+;;                        (format "%s" (getJavaPackage)) (file-name-base) (line-number-at-pos)))
+;;   (setq msgClear (format "%s %s%s:%s" "clear "
+;;                          (format "%s" (getJavaPackage)) (file-name-base) (line-number-at-pos)))
+;;   (let ((output
+;;          (gud-gdb-run-command-fetch-lines
+;;           msgSet
+;;           gud-comint-buffer)))
+;;     (progn
+;;       (message "Sent: %s" msgSet)
+;;       ;; (message output)
+;;       (if (string-match "Unable to set" (car output))
+;;           (progn
+;;             (gud-gdb-run-command-fetch-lines
+;;              msgClear
+;;              gud-comint-buffer)
+;;             nil)
+;;         output))))
+
+
+;; (defun getJavaPackage ()
+;;   "Returns java package."
+;;   (interactive)
+;;   (save-excursion
+;;     (goto-char (point-min))
+;;     (let ((pos(search-forward-regexp "^package [a-zA-Z.]+;" nil t)))
+;;       (if (equal nil pos)
+;;           (format "%s" "")
+;;         (progn
+;;           (goto-char pos)
+;;           (let ((myStr (thing-at-point 'line)))
+;;             (format "%s" (concat
+;;                           (replace-regexp-in-string
+;;                            "package " ""
+;;                            (replace-regexp-in-string ";[\n ]*" "" myStr)) "."))))))))
+
+
+;; ;; (setq jdb-mode-hook nil)
+;; ;; (setq my-gud-break nil)
+;; (add-hook 'jdb-mode-hook (lambda ()
+;;                            (global-set-key (kbd "C-x C-a C-b") 'gud-java-set-breakpoint)))
+
+;; ;; (setq debug-on-error t)
+;; ;; (setq gud-jdb-directories '("./classes/"))
+
+;; ;; (setq
+;; ;;  gud-jdb-directories (list "../../../source/java/caltool"
+;; ;;                            "../../source/java/caltool/admin"
+;; ;;                            "../../source/java/caltool/admin_ui"
+;; ;;                            "../../source/java/caltool/caldb"
+;; ;;                            "../../source/java/caltool/caltool_ui"
+;; ;;                            "../../source/java/caltool/edit"
+;; ;;                            "../../source/java/caltool/edit_ui"
+;; ;;                            "../../source/java/caltool/file"
+;; ;;                            "../../source/java/caltool/file_ui"
+;; ;;                            "../../source/java/caltool/help"
+;; ;;                            "../../source/java/caltool/help_ui"
+;; ;;                            "../../source/java/caltool/options"
+;; ;;                            "../../source/java/caltool/options_ui"
+;; ;;                            "../../source/java/caltool/schedule"
+;; ;;                            "../../source/java/caltool/schedule_ui"
+;; ;;                            "../../source/java/caltool/view"
+;; ;;                            "../../source/java/caltool/view_ui"))
+
+
+;; ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; ;; Java Compilation output - Make Emacs understand links
+;; ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 
 (require 'compile)
@@ -308,5 +309,5 @@
   )
 
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;; java_config.el ends here
+;; ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; ;;; java_config.el ends here

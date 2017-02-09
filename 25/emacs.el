@@ -5,9 +5,9 @@
 ;; Author: Manuel Schneckenreither
 ;; Created: Tue Dec 11 00:43:14 2012 (+0100)
 ;; Version:
-;; Last-Updated: Tue Feb  7 17:24:44 2017 (+0100)
+;; Last-Updated: Thu Feb  9 18:39:21 2017 (+0100)
 ;;           By: Manuel Schneckenreither
-;;     Update #: 466
+;;     Update #: 472
 ;; URL:
 ;; Description:
 ;;
@@ -59,7 +59,7 @@
 ;; JDEE Mode - Java mode - NOT TESTED, RATHER USE ECLIM!
 ;; (load (concat package-conf-folder "jdee_config.el"))
 ;; eclim for Java
-(load (concat package-conf-folder "eclim_config.el"))
+;; (load (concat package-conf-folder "eclim_config.el"))
 ;; RAINBOW DELIMITERS - show parenthesis in different colors
 (load (concat package-conf-folder "rainbow_del_config.el"))
 ;; ;; RAINBOW MODE - background of color names in specified color (kills org-mode agenda colors)
@@ -114,7 +114,7 @@
 ;; Cdlatex - fast input methods for LaTeX environments
 (load (concat package-conf-folder "cdlatex_config.el"))
 ;; undo tree
-(load (concat package-conf-folder "undotree_config.el"))
+;; (load (concat package-conf-folder "undotree_config.el"))
 ;; company mode
 (load (concat package-conf-folder "company_config.el"))
 ;; load django

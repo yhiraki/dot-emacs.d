@@ -7,9 +7,9 @@
 ;; Created: So Okt 13 11:05:43 2013 (+0200)
 ;; Version:
 ;; Package-Requires: ()
-;; Last-Updated: Sat May 28 16:02:09 2016 (+0200)
+;; Last-Updated: Thu Feb  9 15:27:34 2017 (+0100)
 ;;           By: Manuel Schneckenreither
-;;     Update #: 258
+;;     Update #: 259
 ;; URL:
 ;; Doc URL:
 ;; Keywords:
@@ -107,42 +107,42 @@
 
 
 ;; JAVA config
-(setq cedet-java-command "java")
-(setq cedet-javap-command "javap")
+;; (setq cedet-java-command "java")
+;; (setq cedet-javap-command "javap")
 
 
-;; Using JAR files for semantic
-(require 'semantic/db-javap)
+;; ;; Using JAR files for semantic
+;; (require 'semantic/db-javap)
 
-;; -- Variable: cedet-java-classpath-extension
-;;     List of extended classpath directories and Jar files to pass to
-;;     java commands.  This will affect ALL calls to java and javap that
-;;     CEDET makes so that java programs will use those libraries.  This
-;;     path is ignored when semantic looks up files.
-(setq cedet-java-classpath-extension
-      '(;; "/usr/lib/jvm/java-default-runtime/src/"
-        (concat (nth 0 (split-string default-directory "src")) "./lib/")
-        (concat (nth 0 (split-string default-directory "src")) "./src/")
-        (concat (nth 0 (split-string default-directory "src")) "../Common/src/")
-        (concat (nth 0 (split-string default-directory "src")) "../Common/lib/")))
+;; ;; -- Variable: cedet-java-classpath-extension
+;; ;;     List of extended classpath directories and Jar files to pass to
+;; ;;     java commands.  This will affect ALL calls to java and javap that
+;; ;;     CEDET makes so that java programs will use those libraries.  This
+;; ;;     path is ignored when semantic looks up files.
+;; (setq cedet-java-classpath-extension
+;;       '(;; "/usr/lib/jvm/java-default-runtime/src/"
+;;         (concat (nth 0 (split-string default-directory "src")) "./lib/")
+;;         (concat (nth 0 (split-string default-directory "src")) "./src/")
+;;         (concat (nth 0 (split-string default-directory "src")) "../Common/src/")
+;;         (concat (nth 0 (split-string default-directory "src")) "../Common/lib/")))
 
-;; -- Variable: semanticdb-javap-classpath
-;;     List of extended classpath directories and Jar files used by
-;;     'semantic/db-javap' when searching for classes.  This classpath is
-;;     NOT passed to java when invoking java commands.
-(setq semanticdb-javap-classpath
-      '("/usr/lib/jvm/default-runtime/src/"
-        (concat (nth 0 (split-string default-directory "src")) "./lib/")
-        (concat (nth 0 (split-string default-directory "src")) "./src/")
-        (concat (nth 0 (split-string default-directory "src")) "../Common/src/")
-        (concat (nth 0 (split-string default-directory "src")) "../Common/lib/")))
+;; ;; -- Variable: semanticdb-javap-classpath
+;; ;;     List of extended classpath directories and Jar files used by
+;; ;;     'semantic/db-javap' when searching for classes.  This classpath is
+;; ;;     NOT passed to java when invoking java commands.
+;; (setq semanticdb-javap-classpath
+;;       '("/usr/lib/jvm/default-runtime/src/"
+;;         (concat (nth 0 (split-string default-directory "src")) "./lib/")
+;;         (concat (nth 0 (split-string default-directory "src")) "./src/")
+;;         (concat (nth 0 (split-string default-directory "src")) "../Common/src/")
+;;         (concat (nth 0 (split-string default-directory "src")) "../Common/lib/")))
 
-;; (eval (concat (nth 0 (split-string default-directory "src")) "src/"))
-;;         (shell-command (concat "find " (concat (nth 0 (split-string default-directory "src")) "./src/") " -name \"*.java\" ;"))
-;;         (shell-command (concat "find " (concat (nth 0 (split-string default-directory "src")) "./Common/src/") " -name \"*.java\" ;"))
-;;         (shell-command (concat "find " (concat (nth 0 (split-string default-directory "src")) "./lib/") " -name \"*.jar\" ;"))
-;;         (shell-command (concat "find " (concat (nth 0 (split-string default-directory "src")) "../Common/lib/") " -name \"*.jar\" ;"))
-;;         ))
+;; ;; (eval (concat (nth 0 (split-string default-directory "src")) "src/"))
+;; ;;         (shell-command (concat "find " (concat (nth 0 (split-string default-directory "src")) "./src/") " -name \"*.java\" ;"))
+;; ;;         (shell-command (concat "find " (concat (nth 0 (split-string default-directory "src")) "./Common/src/") " -name \"*.java\" ;"))
+;; ;;         (shell-command (concat "find " (concat (nth 0 (split-string default-directory "src")) "./lib/") " -name \"*.jar\" ;"))
+;; ;;         (shell-command (concat "find " (concat (nth 0 (split-string default-directory "src")) "../Common/lib/") " -name \"*.jar\" ;"))
+;; ;;         ))
 
 
 ;;GNU Global - enhance and speed up CEDET
@@ -154,8 +154,8 @@
   (semanticdb-enable-gnu-global-databases 'c++-mode t)
   (semanticdb-enable-gnu-global-databases 'c-mode t)
   (semanticdb-enable-gnu-global-databases 'haskell-mode t)
-  (semanticdb-enable-gnu-global-databases 'java-mode t)
-  (semanticdb-enable-gnu-global-databases 'jde-mode t)
+  ;; (semanticdb-enable-gnu-global-databases 'java-mode t)
+  ;; (semanticdb-enable-gnu-global-databases 'jde-mode t)
 
   ;; (setq ede-locate-setup-options
   ;;       '(ede-locate-global
