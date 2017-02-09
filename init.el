@@ -7,9 +7,9 @@
 ;; Created: Tue Jul 29 00:11:38 2014 (+0200)
 ;; Version:
 ;; Package-Requires: ()
-;; Last-Updated: Thu Feb  2 09:54:13 2017 (+0100)
+;; Last-Updated: Wed Feb  8 17:16:26 2017 (+0100)
 ;;           By: Manuel Schneckenreither
-;;     Update #: 1034
+;;     Update #: 1038
 ;; URL:
 ;; Doc URL:
 ;; Keywords:
@@ -328,7 +328,7 @@
  ;; If there is more than one, they won't work right.
  '(Flymake-compilation-prevents-syntax-check nil)
  '(ac-etags-requires 1)
- '(bmkp-last-as-first-bookmark-file "~/.emacs.d/.bookmarks")
+ '(bmkp-last-as-first-bookmark-file "/home/schnecki/.emacs.d/.bookmarks")
  '(cedet-java-classpath-extension
    (quote
     ((concat
