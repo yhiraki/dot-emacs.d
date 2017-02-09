@@ -7,9 +7,9 @@
 ;; Created: So Okt 13 13:22:28 2013 (+0200)
 ;; Version:
 ;; Package-Requires: ()
-;; Last-Updated: Tue Mar 29 11:13:48 2016 (+0200)
+;; Last-Updated: Tue Feb  7 17:17:33 2017 (+0100)
 ;;           By: Manuel Schneckenreither
-;;     Update #: 396
+;;     Update #: 401
 ;; URL:
 ;; Doc URL:
 ;; Keywords:
@@ -54,7 +54,9 @@
 ;; On Windows wget is not available.
 (setq jde-help-remote-file-exists-function '("beanshell"))
 
-(add-to-list 'load-path (concat package-folder "jdee-2.4.1/lisp"))
+(add-to-list 'load-path (concat package-folder "jdee/"))
+(require 'jdee)
+
 
 ;; ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 ;; +++++++++++++++++++++ Java Version (JDK Version) +++++++++++++++++++++
@@ -137,10 +139,9 @@
 
 ;; JUNIT
 ;; (setq jde-junit-testrunner-type "org.junit.runner.JUnitCore")
-(setq jde-junit-testrunner-type "org.junit.runner.JUnitCore")
 
 ;; FIX PROJECT SETUP
-(load-file (concat package-folder "jdee-2.4.1/lisp/jde-project-file.el"))
+;; (load-file (concat package-folder "jdee/lisp/jde-project-file.el"))
 
 (setq jde-project-text
       "(jde-project-file-version \\\"1.0\\\")

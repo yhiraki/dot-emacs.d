@@ -30,3 +30,5 @@
 /network-security.data
 /org-gcal/.org-gcal-token
 org-gcal/*
+/.cask/25.1/bootstrap/archives/gnu/archive-contents
+.cask

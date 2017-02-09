@@ -5,9 +5,9 @@
 ;; Author: Manuel Schneckenreither
 ;; Created: Tue Dec 11 00:43:14 2012 (+0100)
 ;; Version:
-;; Last-Updated: Tue Aug  9 15:37:12 2016 (+0200)
+;; Last-Updated: Tue Feb  7 17:24:44 2017 (+0100)
 ;;           By: Manuel Schneckenreither
-;;     Update #: 459
+;;     Update #: 466
 ;; URL:
 ;; Description:
 ;;
@@ -56,8 +56,10 @@
 (load (concat package-conf-folder "window-number_config.el"))
 ;; YASNIPPET - snippets easily handled
 (load (concat package-conf-folder "yasnippet_config.el"))
-;; JDEE Mode - Java mode
+;; JDEE Mode - Java mode - NOT TESTED, RATHER USE ECLIM!
 ;; (load (concat package-conf-folder "jdee_config.el"))
+;; eclim for Java
+(load (concat package-conf-folder "eclim_config.el"))
 ;; RAINBOW DELIMITERS - show parenthesis in different colors
 (load (concat package-conf-folder "rainbow_del_config.el"))
 ;; ;; RAINBOW MODE - background of color names in specified color (kills org-mode agenda colors)
@@ -115,6 +117,8 @@
 (load (concat package-conf-folder "undotree_config.el"))
 ;; company mode
 (load (concat package-conf-folder "company_config.el"))
+;; load django
+(load (concat package-conf-folder "python_django_config.el"))
 
 ;; ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 ;; ++++++++++++++++++ Load Language Specific Settings +++++++++++++++++++
