@@ -7,9 +7,9 @@
 ;; Created: So Okt 13 11:05:43 2013 (+0200)
 ;; Version:
 ;; Package-Requires: ()
-;; Last-Updated: Sat May 28 16:02:09 2016 (+0200)
+;; Last-Updated: Tue Feb  7 18:11:15 2017 (+0100)
 ;;           By: Manuel Schneckenreither
-;;     Update #: 258
+;;     Update #: 259
 ;; URL:
 ;; Doc URL:
 ;; Keywords:
@@ -131,7 +131,7 @@
 ;;     'semantic/db-javap' when searching for classes.  This classpath is
 ;;     NOT passed to java when invoking java commands.
 (setq semanticdb-javap-classpath
-      '("/usr/lib/jvm/default-runtime/src/"
+      '(;; "/usr/lib/jvm/default-runtime/src/"
         (concat (nth 0 (split-string default-directory "src")) "./lib/")
         (concat (nth 0 (split-string default-directory "src")) "./src/")
         (concat (nth 0 (split-string default-directory "src")) "../Common/src/")
