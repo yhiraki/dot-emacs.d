@@ -7,9 +7,9 @@
 ;; Created: Tue Jul 29 00:11:38 2014 (+0200)
 ;; Version:
 ;; Package-Requires: ()
-;; Last-Updated: Fri Feb 10 11:21:00 2017 (+0100)
+;; Last-Updated: Fri Feb 10 11:29:25 2017 (+0100)
 ;;           By: Manuel Schneckenreither
-;;     Update #: 1050
+;;     Update #: 1051
 ;; URL:
 ;; Doc URL:
 ;; Keywords:
@@ -467,7 +467,6 @@
  '(tex-smart-umlauts-german-shortcuts nil)
  '(tool-bar-mode nil)
  '(tramp-default-method "ssh")
- '(undo-tree-auto-save-history t)
  '(undo-tree-visualizer-diff nil)
  '(undo-tree-visualizer-timestamps t)
  '(user-full-name your-full-name)
