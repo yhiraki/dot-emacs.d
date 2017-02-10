@@ -7,9 +7,9 @@
 ;; Created: Tue Jul 29 00:11:38 2014 (+0200)
 ;; Version:
 ;; Package-Requires: ()
-;; Last-Updated: Tue Feb  7 19:48:05 2017 (+0100)
+;; Last-Updated: Fri Feb 10 11:21:00 2017 (+0100)
 ;;           By: Manuel Schneckenreither
-;;     Update #: 1047
+;;     Update #: 1050
 ;; URL:
 ;; Doc URL:
 ;; Keywords:
@@ -165,7 +165,7 @@
         company-auctex
         company-c-headers
         company-cabal
-        company-emacs-eclim
+        ;; company-emacs-eclim
         company-ghc
         company-ghci
         company-math
@@ -173,7 +173,7 @@
         company-try-hard
         dired+
         ecb
-        eclim
+        ;; eclim
         edbi
         expand-region
         flycheck
@@ -330,7 +330,7 @@
  ;; If there is more than one, they won't work right.
  '(Flymake-compilation-prevents-syntax-check nil)
  '(ac-etags-requires 1)
- '(bmkp-last-as-first-bookmark-file "/home/schnecki/.emacs.d/.bookmarks")
+ '(bmkp-last-as-first-bookmark-file "~/.emacs.d/.bookmarks")
  '(cedet-java-classpath-extension
    (quote
     ((concat

@@ -7,9 +7,9 @@
 ;; Created: Mo Okt 14 18:17:43 2013 (+0200)
 ;; Version:
 ;; Package-Requires: ()
-;; Last-Updated: Tue Feb  7 17:42:45 2017 (+0100)
+;; Last-Updated: Fri Feb 10 10:18:59 2017 (+0100)
 ;;           By: Manuel Schneckenreither
-;;     Update #: 307
+;;     Update #: 312
 ;; URL:
 ;; Doc URL:
 ;; Keywords:
@@ -48,7 +48,7 @@
   (interactive)
   (let ((dir (nth 0 (split-string default-directory "src"))))
     (setq esdir (replace-regexp-in-string " " "\\\\ " dir))
-    (shell-command
+    (call-process
      (concat "cd " esdir " && find . -name '*.java' -not -name '.#*' -print | etags - 1>/dev/null 2>/dev/null") nil)
     (visit-tags-table (concat dir "TAGS"))
     ;; (start-process "delete_abrt_checker" nil "rm" "-f abrt_checker_* 1>/dev/null 2>/dev/null")
