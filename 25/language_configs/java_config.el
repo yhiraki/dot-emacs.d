@@ -7,9 +7,9 @@
 ;; Created: Mo Okt 14 18:17:43 2013 (+0200)
 ;; Version:
 ;; Package-Requires: ()
-;; Last-Updated: Fri Feb 10 12:31:10 2017 (+0100)
+;; Last-Updated: Fri Feb 10 16:03:23 2017 (+0100)
 ;;           By: Manuel Schneckenreither
-;;     Update #: 315
+;;     Update #: 321
 ;; URL:
 ;; Doc URL:
 ;; Keywords:
@@ -92,9 +92,6 @@
   ;; glasses mode
   ;; (glasses-mode t)
 
-  ;; flymake init
-  ;; (my-java-flymake-init)
-
   ;;FLYMAKE (ENHANCEMENTS)
   ;; (local-unset-key (kbd "C-c ! n"))
   (local-set-key (kbd  "C-c ! n") 'my-flymake-show-next-error)
@@ -137,7 +134,10 @@
                                (make-java-tags)
                                (xref-find-definitions tagname next-p regexp-p)))
 
-  (remove-hook 'before-save-hook 'collapse-blank-lines)
+  ;; (remove-hook 'before-save-hook 'collapse-blank-lines)
+
+  ;; Enable flymake mode
+  (flymake-mode-on)
 
   )
 
