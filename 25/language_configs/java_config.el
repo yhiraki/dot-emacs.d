@@ -51,7 +51,7 @@
     (shell-command
      (concat "cd " esdir " && find . -name '*.java' -not -name '.#*' -print | etags - 1>/dev/null 2>/dev/null") nil)
     (visit-tags-table (concat dir "TAGS"))
-    (start-process "delete_abrt_checker" nil "rm" "-f abrt_checker_* 1>/dev/null 2>/dev/null")
+    ;; (start-process "delete_abrt_checker" nil "rm" "-f abrt_checker_* 1>/dev/null 2>/dev/null")
     ;; (shell-command "rm -f abrt_checker_* 1>/dev/null 2>/dev/null" nil)
     )
   )
@@ -83,7 +83,7 @@
   ;; ;; (add-to-list 'ac-sources 'ac-source-words-in-buffer)
   ;; (add-to-list 'ac-sources 'ac-source-words-in-same-mode-buffers)
 
-  ;; auto complete (if it doesn't work try to disable flyspell mode!)
+  ;; ;; auto complete (if it doesn't work try to disable flyspell mode!)
   ;; (auto-complete-mode)
 
   ;; use programming flyspell mode
@@ -96,10 +96,12 @@
   ;; (my-java-flymake-init)
 
   ;;FLYMAKE (ENHANCEMENTS)
-  ;; (local-set-key (kbd  "C-c ! n") 'my-flymake-show-next-error)
-  ;; (local-set-key (kbd "C-c ! p") 'my-flymake-show-prev-error)
-  ;; ;;ASOCIATE KEY FOR CURRENT ERROR POPUP/MINIBUFFER
-  ;; (local-set-key (kbd "C-c ! e") 'flymake:display-err-popup-for-current-line)
+  ;; (local-unset-key (kbd "C-c ! n"))
+  (local-set-key (kbd  "C-c ! n") 'my-flymake-show-next-error)
+  (local-set-key (kbd "C-c ! p") 'my-flymake-show-prev-error)
+  ;;ASOCIATE KEY FOR CURRENT ERROR POPUP/MINIBUFFER
+  (local-set-key (kbd "C-c ! e") 'flymake:display-err-popup-for-current-line)
+
 
   ;; (local-set-key (kbd ".") (lambda ()
   ;;                            (interactive)
@@ -113,7 +115,7 @@
 
   ;; (local-set-key (kbd (concat prefix-command-key " e")) 'flymake:display-err-minibuf-for-current-line)
   (defvar-mode-local java-mode browse-url-browser-function #'w3m-browse-url)
-  (defvar-mode-local jde-mode browse-url-browser-function #'w3m-browse-url)
+  ;; (defvar-mode-local jde-mode browse-url-browser-function #'w3m-browse-url)
   ;;
   ;; (set-variable browse-url-browser-function #'w3m-browse-url)
 
@@ -122,9 +124,26 @@
   (setq c-basic-offset 2)
 
   ;; CREATE AND SET TAGS FILE
-  (add-hook 'after-save-hook 'make-java-tags nil t)
+  ;; (add-hook 'after-save-hook 'make-java-tags nil t)
+
+
+  ;; enable keys
+  (local-set-key (kbd "C-.") (defun make-tags-view-other (tagname &optional next-p regexp-p)
+                               (interactive (find-tag-interactive "View tag other window: "))
+                               (make-java-tags)
+                               (view-tag-other-window tagname next-p regexp-p)))
+  (local-set-key (kbd "M-.") (defun make-tags-view (tagname &optional next-p regexp-p)
+                               (interactive (find-tag-interactive "View tag: "))
+                               (make-java-tags)
+                               (xref-find-definitions tagname next-p regexp-p)))
+
+  (remove-hook 'before-save-hook 'collapse-blank-lines)
 
   )
+
+(add-hook 'java-mode-hook 'my/java-minor-mode)
+(add-hook 'jde-mode-hook 'my/java-minor-mode)
+
 
 
 ;; (setq gud-jdb-use-classpath t)
@@ -197,6 +216,7 @@
 ;; ;;                            "../../source/java/caltool/schedule_ui"
 ;; ;;                            "../../source/java/caltool/view"
 ;; ;;                            "../../source/java/caltool/view_ui"))
+
 ;; (add-hook 'java-mode-hook 'my/java-minor-mode)
 ;; (add-hook 'jde-mode-hook 'my/java-minor-mode)
 
@@ -204,6 +224,7 @@
 ;; ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; ;; Java Compilation output - Make Emacs understand links
 ;; ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
 
 
 ;; (require 'compile)
@@ -293,5 +314,6 @@
 ;;   )
 
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;; java_config.el ends here
+
+;; ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; ;;; java_config.el ends here

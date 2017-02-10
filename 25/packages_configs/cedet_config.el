@@ -154,8 +154,8 @@
   (semanticdb-enable-gnu-global-databases 'c++-mode t)
   (semanticdb-enable-gnu-global-databases 'c-mode t)
   (semanticdb-enable-gnu-global-databases 'haskell-mode t)
-  (semanticdb-enable-gnu-global-databases 'java-mode t)
-  (semanticdb-enable-gnu-global-databases 'jde-mode t)
+  ;; (semanticdb-enable-gnu-global-databases 'java-mode t)
+  ;; (semanticdb-enable-gnu-global-databases 'jde-mode t)
 
   ;; (setq ede-locate-setup-options
   ;;       '(ede-locate-global

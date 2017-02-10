@@ -7,7 +7,7 @@
 ;; Version:
 ;; Last-Updated:
 ;;           By:
-;;     Update #: 134
+;;     Update #: 138
 ;; URL:
 ;; Description:
 ;;
@@ -114,6 +114,8 @@
 (global-set-key (kbd (concat prefix-command-key " b s")) 'switch-buffers-between-frames)
 
 ;; TAGS
+(global-set-key (kbd "C-c C-.") 'find-tag-other-window) ; pointer moves
+(global-set-key (kbd "C-.") 'view-tag-other-window)     ; pointer stays
 (global-set-key (kbd (concat prefix-command-key " t r")) 'tags-reset-tags-tables);; Reset tags table
 (global-set-key (kbd (concat prefix-command-key " t v")) 'visit-tags-table) ;; Visit tags table
 (global-set-key (kbd "M-*") 'pop-tag-mark)
@@ -127,10 +129,6 @@
 
 ;; browse kill ring
 (global-set-key (kbd "C-c y") 'kill-ring-insert)
-
-;; TAGS
-(global-set-key (kbd "C-c C-.") 'find-tag-other-window) ; pointer moves
-(global-set-key (kbd "C-.") 'view-tag-other-window)     ; pointer stays
 
 ;; align with regex
 (global-set-key (kbd "C-x a r") 'align-regexp)

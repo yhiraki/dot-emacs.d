@@ -8,7 +8,7 @@
 ;; Version:
 ;; Last-Updated:
 ;;           By:
-;;     Update #: 890
+;;     Update #: 891
 ;; URL:
 ;; Description:
 ;;
@@ -336,7 +336,7 @@ attention to case differences."
   ;; (define-key 'haskell-mode-map (kbd "C .") 'find-tag)
   ;; (define-key interactive-haskell-mode-map (kbd "C-c c") nil)
 
-  ;; (Local-set-key (kbd "C-j")  'haskell-newline)
+  ;; (local-set-key (kbd "C-j")  'haskell-newline)
   (local-set-key (kbd "RET")  'newline-and-indent)
 
   ;; Disabled set special keys
