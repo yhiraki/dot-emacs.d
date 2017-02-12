@@ -7,9 +7,9 @@
 ;; Created: Mo Okt 14 18:17:43 2013 (+0200)
 ;; Version:
 ;; Package-Requires: ()
-;; Last-Updated: Fri Feb 10 16:03:23 2017 (+0100)
+;; Last-Updated: Sun Feb 12 18:41:39 2017 (+0100)
 ;;           By: Manuel Schneckenreither
-;;     Update #: 321
+;;     Update #: 322
 ;; URL:
 ;; Doc URL:
 ;; Keywords:
@@ -145,7 +145,6 @@
 (add-hook 'jde-mode-hook 'my/java-minor-mode)
 
 
-
 ;; (setq gud-jdb-use-classpath t)
 ;; (setq gud-jdb-classpath "/home/schnecki/Programmierung/Java/Papa/src:/home/schnecki/Programmierung/Java/Papa/classes")
 ;; (setq gud-jdb-sourcepath "/home/schnecki/Programmierung/Java/Papa/src")
@@ -226,7 +225,6 @@
 ;; ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 
-
 ;; (require 'compile)
 ;; (setq compilation-error-regexp-alist
 ;;       (append (list
@@ -242,77 +240,76 @@
 ;; ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 
-;; (when (require 'flymake)
-;;   (set-variable 'flymake-log-level 0)
-;;   (setq flymake-start-syntax-check-on-newline nil)
-;;   (setq flymake-no-changes-timeout 1)
-;;   (add-hook 'java-mode-hook 'flymake-mode-on)
-;;   )
+(when (require 'flymake)
+  (set-variable 'flymake-log-level 0)
+  (setq flymake-start-syntax-check-on-newline nil)
+  (setq flymake-no-changes-timeout 1)
+  (add-hook 'java-mode-hook 'flymake-mode-on)
+  )
 
 
-;; ;; FLYMAKE TEMP FOLDER
-;; (make-directory "~/.emacs.d/.tmp/flymake/" t)
-;; (setq temporary-file-directory "~/.emacs.d/.tmp/flymake/")
+;; FLYMAKE TEMP FOLDER
+(make-directory "~/.emacs.d/.tmp/flymake/" t)
+(setq temporary-file-directory "~/.emacs.d/.tmp/flymake/")
 
-;; (defun flymake-simple-java-cleanup ()
-;;   (start-process "delete_flymake" nil "rm" "-rf ~/.emacs.d/.tmp/flymake/*")
-;;   ;; (shell-command "rm " nil)
-;;   )
+(defun flymake-simple-java-cleanup ()
+  (start-process "delete_flymake" nil "rm" "-rf ~/.emacs.d/.tmp/flymake/*")
+  ;; (shell-command "rm " nil)
+  )
 
-;; ;; ;; ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-;; ;; ;; ++++++++++++++ ENHANCEMENTS FOR DISPLAYING FLYMAKE ERRORS ++++++++++++
-;; ;; ;; ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+;; ;; ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+;; ;; ++++++++++++++ ENHANCEMENTS FOR DISPLAYING FLYMAKE ERRORS ++++++++++++
+;; ;; ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
-;; (defun flymake:display-err-minibuf-for-current-line ()
-;;   "Displays the error/warning for the current line in the minibuffer"
-;;   (interactive)
-;;   (let* ((line-no            (flymake-current-line-no))
-;;          (line-err-info-list (nth 0 (flymake-find-err-info flymake-err-info line-no)))
-;;          (count              (length line-err-info-list)))
-;;     (while (> count 0)
-;;       (when line-err-info-list
-;;         (let* ((text       (flymake-ler-text (nth (1- count) line-err-info-list)))
-;;                (line       (flymake-ler-line (nth (1- count) line-err-info-list))))
-;;           (message "[%s] %s" line text)))
-;;       (setq count (1- count))))
-;;   )
+(defun flymake:display-err-minibuf-for-current-line ()
+  "Displays the error/warning for the current line in the minibuffer"
+  (interactive)
+  (let* ((line-no            (flymake-current-line-no))
+         (line-err-info-list (nth 0 (flymake-find-err-info flymake-err-info line-no)))
+         (count              (length line-err-info-list)))
+    (while (> count 0)
+      (when line-err-info-list
+        (let* ((text       (flymake-ler-text (nth (1- count) line-err-info-list)))
+               (line       (flymake-ler-line (nth (1- count) line-err-info-list))))
+          (message "[%s] %s" line text)))
+      (setq count (1- count))))
+  )
 
-;; (custom-set-variables
-;;  '(help-at-pt-timer-delay 0.1)
-;;  '(help-at-pt-display-when-idle '(flymake-overlay)))
+(custom-set-variables
+ '(help-at-pt-timer-delay 0.1)
+ '(help-at-pt-display-when-idle '(flymake-overlay)))
 
-;; (defun flymake:display-err-popup-for-current-line ()
-;;   "Display a menu with errors/warnings for current line if it has errors and/or warnings."
-;;   (interactive)
-;;   (let* ((line-no            (flymake-current-line-no))
-;;          (line-err-info-list (nth 0 (flymake-find-err-info flymake-err-info line-no)))
-;;          (menu-data          (flymake-make-err-menu-data line-no line-err-info-list)))
-;;     (if menu-data
-;;         (popup-tip (mapconcat (lambda (e) (nth 0 e))
-;;                               (nth 1 menu-data)
-;;                               "\n")))
-;;     )
-;;   )
+(defun flymake:display-err-popup-for-current-line ()
+  "Display a menu with errors/warnings for current line if it has errors and/or warnings."
+  (interactive)
+  (let* ((line-no            (flymake-current-line-no))
+         (line-err-info-list (nth 0 (flymake-find-err-info flymake-err-info line-no)))
+         (menu-data          (flymake-make-err-menu-data line-no line-err-info-list)))
+    (if menu-data
+        (popup-tip (mapconcat (lambda (e) (nth 0 e))
+                              (nth 1 menu-data)
+                              "\n")))
+    )
+  )
 
 
-;; ;; ------------------------------------------------------------------
+;; ------------------------------------------------------------------
 
-;; ;; SHOW NEXT ERROR FUNCTION
-;; (defun my-flymake-show-next-error()
-;;   (interactive)
-;;   (flymake-goto-next-error)
-;;   ;; (flymake:display-err-popup-for-current-line)
-;;   (flymake-display-err-menu-for-current-line)
-;;   )
+;; SHOW NEXT ERROR FUNCTION
+(defun my-flymake-show-next-error()
+  (interactive)
+  (flymake-goto-next-error)
+  ;; (flymake:display-err-popup-for-current-line)
+  (flymake-display-err-menu-for-current-line)
+  )
 
-;; ;; SHOW PREV ERROR FUNCTION
-;; (defun my-flymake-show-prev-error()
-;;   (interactive)
-;;   (flymake-goto-prev-error)
-;;   (flymake:display-err-popup-for-current-line)
-;;   ;;(flymake-display-err-menu-for-current-line)
-;;   )
-
+;; SHOW PREV ERROR FUNCTION
+(defun my-flymake-show-prev-error()
+  (interactive)
+  (flymake-goto-prev-error)
+  (flymake:display-err-popup-for-current-line)
+  ;;(flymake-display-err-menu-for-current-line)
+  )
 
 
 ;; ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
