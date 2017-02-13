@@ -5,9 +5,9 @@
 ;; Author: Manuel Schneckenreither
 ;; Created: Tue Dec 11 00:43:14 2012 (+0100)
 ;; Version:
-;; Last-Updated: Thu Feb  9 18:39:21 2017 (+0100)
+;; Last-Updated: Thu Feb  9 18:58:14 2017 (+0100)
 ;;           By: Manuel Schneckenreither
-;;     Update #: 472
+;;     Update #: 473
 ;; URL:
 ;; Description:
 ;;
@@ -114,7 +114,7 @@
 ;; Cdlatex - fast input methods for LaTeX environments
 (load (concat package-conf-folder "cdlatex_config.el"))
 ;; undo tree
-;; (load (concat package-conf-folder "undotree_config.el"))
+(load (concat package-conf-folder "undotree_config.el"))
 ;; company mode
 (load (concat package-conf-folder "company_config.el"))
 ;; load django
