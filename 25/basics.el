@@ -5,9 +5,9 @@
 ;; Author: Manuel Schneckenreither
 ;; Created: Mon Dec 10 22:51:09 2012 (+0100)
 ;; Version:
-;; Last-Updated: Thu Feb  9 14:09:39 2017 (+0100)
+;; Last-Updated: Fri Feb 10 13:35:49 2017 (+0100)
 ;;           By: Manuel Schneckenreither
-;;     Update #: 810
+;;     Update #: 857
 ;; URL:
 ;; Description:
 ;;    Basic configuration for emacs. In here are all configs of
@@ -81,34 +81,35 @@
   "Automatically close the *compilation* buffer, if the major
 mode of the invoking window is in
 `compilation-modes-to-close-window listed."
+  (interactive)
   (let ((this-buffer (current-buffer)))
     (let ((cmm (buffer-local-value 'major-mode (other-buffer this-buffer t nil))))
-      (progn
-        (message "CMM: %s" cmm)
-        (message "Bool: %s" (not (equal nil (find cmm compilation-modes-to-close-window))))
 
         (if (not (equal nil (find cmm compilation-modes-to-close-window)))
-
-
             (when (and (eq status 'exit) (zerop code))
               ;; then bury the *compilation* buffer, so that C-x b doesn't go there
-              (bury-buffer)
+              ;; (bury-buffer)
               ;; and delete/bury the *compilation* buffer
-              (replace-buffer-in-windows "*compilation*")
-              ;; (bury-buffer "*compilation*")
-              (other-window 1)
+              ;; (replace-buffer-in-windows "*compilation*")
+              (bury-buffer "*compilation*")
+              ;; (other-window 1)
+              ;; (switch-to-buffer "*shell*")
+              (command-execute 'shell)
               (shell)
-              (return))
+              (message "compilation successful")
+              ;; (cons msg code)
+              )
           ;; Otherwise open compilation window. Always return the anticipated result
           ;; of compilation-exit-message-function
-          (cons msg code))))))
+          (cons msg code)))));; )
 
 ;; SPECIFY FUNCTION
 ;; specified for each language
 (setq compilation-modes-to-close-window '(jde-mode
                                           java-mode
                                           ))
-;; (setq compilation-exit-message-function 'compilation-exit-autoclose)
+(setq compilation-exit-message-function 'compilation-exit-autoclose)
+;; (setq compilation-exit-message-function nil)
 
 ;; COMPILE CLOSES MAKEFILE
 (defun compile-closest-Makefile ()

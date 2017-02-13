@@ -7,9 +7,9 @@
 ;; Created: Tue Jul 29 00:11:38 2014 (+0200)
 ;; Version:
 ;; Package-Requires: ()
-;; Last-Updated: Mon Feb 13 09:40:49 2017 (+0100)
+;; Last-Updated: Mon Feb 13 16:30:36 2017 (+0100)
 ;;           By: Manuel Schneckenreither
-;;     Update #: 1048
+;;     Update #: 1049
 ;; URL:
 ;; Doc URL:
 ;; Keywords:
@@ -165,6 +165,7 @@
         company-auctex
         company-c-headers
         company-cabal
+        ;; company-emacs-eclim
         company-ghc
         company-ghci
         company-math
@@ -172,7 +173,7 @@
         company-try-hard
         dired+
         ecb
-        eclim
+        ;; eclim
         edbi
         expand-region
         flycheck
@@ -329,7 +330,7 @@
  ;; If there is more than one, they won't work right.
  '(Flymake-compilation-prevents-syntax-check nil)
  '(ac-etags-requires 1)
- '(bmkp-last-as-first-bookmark-file "/home/schnecki/.emacs.d/.bookmarks")
+ '(bmkp-last-as-first-bookmark-file "~/.emacs.d/.bookmarks")
  '(cedet-java-classpath-extension
    (quote
     ((concat
@@ -441,8 +442,7 @@
     (org org-gcal flyspell-correct flyspell-correct-helm zenburn-theme window-number w3m vc-darcs thesaurus tex-smart-umlauts smart-mode-line shm shakespeare-mode request rainbow-mode rainbow-delimiters php-mode pager-default-keybindings ov orgtbl-ascii-plot org-plus-contrib org-cua-dwim org-ac multiple-cursors markdown-toc markdown-mode+ magit lenlen-theme latex-pretty-symbols latex-extra jedi javap-mode javadoc-lookup intero ido-ubiquitous ido-hacks ido-gnus htmlize hlint-refactor hindent helm-mode-manager helm-hoogle helm-hayoo helm-google helm-git-files helm-git helm-flycheck helm-dired-recent-dirs helm-c-yasnippet helm-bibtex header2 gnuplot-mode gnuplot ghci-completion fuzzy function-args flycheck-stack flycheck-ledger flycheck-haskell flycheck-google-cpplint flycheck-color-mode-line edbi ecb dired+ company-try-hard company-shell company-math company-ghci company-ghc company-cabal company-c-headers company-auctex change-inner cdlatex bookmark+ bison-mode bbdb backup-walker auto-dictionary auto-complete-clang auto-complete-c-headers auto-complete-auctex arduino-mode android-mode ace-window ace-jump-mode ace-jump-buffer ac-octave ac-math ac-ispell ac-etags ac-dabbrev ac-capf ac-c-headers)))
  '(semanticdb-javap-classpath
    (quote
-    ("/usr/lib/jvm/default-runtime/src/"
-     (concat
+    ((concat
       (nth 0
            (split-string default-directory "src"))
       "./lib/")
@@ -467,7 +467,6 @@
  '(tex-smart-umlauts-german-shortcuts nil)
  '(tool-bar-mode nil)
  '(tramp-default-method "ssh")
- '(undo-tree-auto-save-history t)
  '(undo-tree-visualizer-diff nil)
  '(undo-tree-visualizer-timestamps t)
  '(user-full-name your-full-name)

@@ -7,9 +7,9 @@
 ;; Created: So Okt 13 11:05:43 2013 (+0200)
 ;; Version:
 ;; Package-Requires: ()
-;; Last-Updated: Thu Feb  9 15:27:34 2017 (+0100)
+;; Last-Updated: Fri Feb 10 11:40:31 2017 (+0100)
 ;;           By: Manuel Schneckenreither
-;;     Update #: 259
+;;     Update #: 260
 ;; URL:
 ;; Doc URL:
 ;; Keywords:
@@ -131,18 +131,18 @@
 ;; ;;     'semantic/db-javap' when searching for classes.  This classpath is
 ;; ;;     NOT passed to java when invoking java commands.
 ;; (setq semanticdb-javap-classpath
-;;       '("/usr/lib/jvm/default-runtime/src/"
+;;       '(;; "/usr/lib/jvm/default-runtime/src/"
 ;;         (concat (nth 0 (split-string default-directory "src")) "./lib/")
 ;;         (concat (nth 0 (split-string default-directory "src")) "./src/")
 ;;         (concat (nth 0 (split-string default-directory "src")) "../Common/src/")
 ;;         (concat (nth 0 (split-string default-directory "src")) "../Common/lib/")))
 
-;; ;; (eval (concat (nth 0 (split-string default-directory "src")) "src/"))
-;; ;;         (shell-command (concat "find " (concat (nth 0 (split-string default-directory "src")) "./src/") " -name \"*.java\" ;"))
-;; ;;         (shell-command (concat "find " (concat (nth 0 (split-string default-directory "src")) "./Common/src/") " -name \"*.java\" ;"))
-;; ;;         (shell-command (concat "find " (concat (nth 0 (split-string default-directory "src")) "./lib/") " -name \"*.jar\" ;"))
-;; ;;         (shell-command (concat "find " (concat (nth 0 (split-string default-directory "src")) "../Common/lib/") " -name \"*.jar\" ;"))
-;; ;;         ))
+;; (eval (concat (nth 0 (split-string default-directory "src")) "src/"))
+;;         (shell-command (concat "find " (concat (nth 0 (split-string default-directory "src")) "./src/") " -name \"*.java\" ;"))
+;;         (shell-command (concat "find " (concat (nth 0 (split-string default-directory "src")) "./Common/src/") " -name \"*.java\" ;"))
+;;         (shell-command (concat "find " (concat (nth 0 (split-string default-directory "src")) "./lib/") " -name \"*.jar\" ;"))
+;;         (shell-command (concat "find " (concat (nth 0 (split-string default-directory "src")) "../Common/lib/") " -name \"*.jar\" ;"))
+;;         ))
 
 
 ;;GNU Global - enhance and speed up CEDET

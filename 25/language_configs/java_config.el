@@ -7,9 +7,9 @@
 ;; Created: Mo Okt 14 18:17:43 2013 (+0200)
 ;; Version:
 ;; Package-Requires: ()
-;; Last-Updated: Thu Feb  9 18:21:10 2017 (+0100)
+;; Last-Updated: Sun Feb 12 18:41:39 2017 (+0100)
 ;;           By: Manuel Schneckenreither
-;;     Update #: 338
+;;     Update #: 322
 ;; URL:
 ;; Doc URL:
 ;; Keywords:
@@ -48,7 +48,7 @@
   (interactive)
   (let ((dir (nth 0 (split-string default-directory "src"))))
     (setq esdir (replace-regexp-in-string " " "\\\\ " dir))
-    (shell-command
+    (call-process-shell-command
      (concat "cd " esdir " && find . -name '*.java' -not -name '.#*' -print | etags - 1>/dev/null 2>/dev/null") nil)
     (visit-tags-table (concat dir "TAGS"))
     ;; (start-process "delete_abrt_checker" nil "rm" "-f abrt_checker_* 1>/dev/null 2>/dev/null")
@@ -64,7 +64,7 @@
   ;; auto complete mode
 
   ;; enable semantic for auto complete mode
-  (semantic-mode nil)
+  ;; (semantic-mode t)
 
   ;; ;; (add-to-list 'ac-sources 'ac-source-abbrev)          ;; edited
   ;; ;; (add-to-list 'ac-sources 'ac-source-css-property)
@@ -92,15 +92,13 @@
   ;; glasses mode
   ;; (glasses-mode t)
 
-  ;; flymake init
-  ;; (my-java-flymake-init)
-
   ;;FLYMAKE (ENHANCEMENTS)
   ;; (local-unset-key (kbd "C-c ! n"))
   (local-set-key (kbd  "C-c ! n") 'my-flymake-show-next-error)
   (local-set-key (kbd "C-c ! p") 'my-flymake-show-prev-error)
   ;;ASOCIATE KEY FOR CURRENT ERROR POPUP/MINIBUFFER
   (local-set-key (kbd "C-c ! e") 'flymake:display-err-popup-for-current-line)
+
 
   ;; (local-set-key (kbd ".") (lambda ()
   ;;                            (interactive)
@@ -136,8 +134,10 @@
                                (make-java-tags)
                                (xref-find-definitions tagname next-p regexp-p)))
 
+  ;; (remove-hook 'before-save-hook 'collapse-blank-lines)
 
-  (remove-hook 'before-save-hook 'collapse-blank-lines)
+  ;; Enable flymake mode
+  (flymake-mode-on)
 
   )
 
@@ -216,25 +216,28 @@
 ;; ;;                            "../../source/java/caltool/view"
 ;; ;;                            "../../source/java/caltool/view_ui"))
 
+;; (add-hook 'java-mode-hook 'my/java-minor-mode)
+;; (add-hook 'jde-mode-hook 'my/java-minor-mode)
+
 
 ;; ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; ;; Java Compilation output - Make Emacs understand links
 ;; ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 
-(require 'compile)
-(setq compilation-error-regexp-alist
-      (append (list
-               ;; works for jikes
-               ;; '("^\\s-*\\[[^]]*\\]\\s-*\\(.+\\):\\([0-9]+\\):\\([0-9]+\\):[0-9]+:[0-9]+:" 1 2 3)
-               ;; works for javac
-               '("^\\s-*\\[[^]]*\\]\\s-*\\(.+\\):\\([0-9]+\\):" 1 2))
-              compilation-error-regexp-alist))
+;; (require 'compile)
+;; (setq compilation-error-regexp-alist
+;;       (append (list
+;;                ;; works for jikes
+;;                ;; '("^\\s-*\\[[^]]*\\]\\s-*\\(.+\\):\\([0-9]+\\):\\([0-9]+\\):[0-9]+:[0-9]+:" 1 2 3)
+;;                ;; works for javac
+;;                '("^\\s-*\\[[^]]*\\]\\s-*\\(.+\\):\\([0-9]+\\):" 1 2))
+;;               compilation-error-regexp-alist))
 
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; Java flymake
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; ;; Java flymake
+;; ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 
 (when (require 'flymake)
