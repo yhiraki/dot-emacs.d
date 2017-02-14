@@ -7,9 +7,9 @@
 ;; Created: Mo Okt 14 18:17:43 2013 (+0200)
 ;; Version:
 ;; Package-Requires: ()
-;; Last-Updated: Sun Feb 12 18:41:39 2017 (+0100)
+;; Last-Updated: Tue Feb 14 11:16:06 2017 (+0100)
 ;;           By: Manuel Schneckenreither
-;;     Update #: 322
+;;     Update #: 332
 ;; URL:
 ;; Doc URL:
 ;; Keywords:
@@ -129,15 +129,15 @@
                                (interactive (find-tag-interactive "View tag other window: "))
                                (make-java-tags)
                                (view-tag-other-window tagname next-p regexp-p)))
-  (local-set-key (kbd "M-.") (defun make-tags-view (tagname &optional next-p regexp-p)
+  (local-set-key (kbd "M-.") (defun make-tags-view  (tagname)
                                (interactive (find-tag-interactive "View tag: "))
                                (make-java-tags)
-                               (xref-find-definitions tagname next-p regexp-p)))
+                               (xref-find-definitions tagname)))
 
   ;; (remove-hook 'before-save-hook 'collapse-blank-lines)
 
   ;; Enable flymake mode
-  (flymake-mode-on)
+  ;; (flymake-mode)
 
   )
 

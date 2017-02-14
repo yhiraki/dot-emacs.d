@@ -18,7 +18,8 @@
 
 
   (add-hook 'write-file-functions #'undo-tree-save-history-hook)
-  (add-hook 'find-file-hook #'undo-tree-load-history-hook))
+  (add-hook 'find-file-hook #'undo-tree-load-history-hook)
+  )
 
 (defun modi/undo-tree-disable-save-history ()
   "Disable auto saving of the undo history."
@@ -29,7 +30,8 @@
   (remove-hook 'write-file-functions #'undo-tree-save-history-hook)
   (remove-hook 'find-file-hook #'undo-tree-load-history-hook))
 
-(modi/undo-tree-enable-save-history)
+;; (modi/undo-tree-enable-save-history)
+(modi/undo-tree-disable-save-history)
 
 (global-undo-tree-mode 1)
 
