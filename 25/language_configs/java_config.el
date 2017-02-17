@@ -7,9 +7,9 @@
 ;; Created: Mo Okt 14 18:17:43 2013 (+0200)
 ;; Version:
 ;; Package-Requires: ()
-;; Last-Updated: Tue Feb 14 11:16:06 2017 (+0100)
+;; Last-Updated: Fri Feb 17 12:27:42 2017 (+0100)
 ;;           By: Manuel Schneckenreither
-;;     Update #: 332
+;;     Update #: 335
 ;; URL:
 ;; Doc URL:
 ;; Keywords:
@@ -46,7 +46,7 @@
 (defun make-java-tags ()
   "This function reloads the tags by using the command 'make tags'."
   (interactive)
-  (let ((dir (nth 0 (split-string default-directory "src"))))
+  (let ((dir (nth 0 (split-string default-directory "\\(src\\|test\\|tests\\)"))))
     (setq esdir (replace-regexp-in-string " " "\\\\ " dir))
     (call-process-shell-command
      (concat "cd " esdir " && find . -name '*.java' -not -name '.#*' -print | etags - 1>/dev/null 2>/dev/null") nil)
@@ -87,7 +87,7 @@
   ;; (auto-complete-mode)
 
   ;; use programming flyspell mode
-  (flyspell-prog-mode)
+  ;; (flyspell-prog-mode)
 
   ;; glasses mode
   ;; (glasses-mode t)
