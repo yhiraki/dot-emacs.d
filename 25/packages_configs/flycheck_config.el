@@ -8,7 +8,7 @@
 ;; Version:
 ;; Last-Updated:
 ;;           By:
-;;     Update #: 30
+;;     Update #: 33
 ;; URL:
 ;; Description:
 ;;
@@ -42,6 +42,17 @@
 ;;  '(add-hook 'flycheck-mode-hook #'flycheck-haskell-setup))
 
 ;; (eval-after-load 'flycheck '(require 'flycheck-hdevtools))
+
+
+;; ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+;; +++++++++++++++++++++++++++ Flycheck Java ++++++++++++++++++++++++++++
+;; ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+
+;; (load-file (concat package-folder "java_files/flycheck_java.el"))
+
+;; (add-hook 'java-mode-hook
+;;           (lambda () (setq flycheck-java-ecj-jar-path (concat package-folder "java_files/ecj-4.5.1.jar"))))
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;

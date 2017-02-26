@@ -7,9 +7,9 @@
 ;; Created: Mo Okt 14 18:17:43 2013 (+0200)
 ;; Version:
 ;; Package-Requires: ()
-;; Last-Updated: Fri Feb 17 12:27:42 2017 (+0100)
+;; Last-Updated: Sun Feb 26 10:45:22 2017 (+0100)
 ;;           By: Manuel Schneckenreither
-;;     Update #: 335
+;;     Update #: 336
 ;; URL:
 ;; Doc URL:
 ;; Keywords:
@@ -137,7 +137,7 @@
   ;; (remove-hook 'before-save-hook 'collapse-blank-lines)
 
   ;; Enable flymake mode
-  ;; (flymake-mode)
+  (flymake-mode)
 
   )
 
