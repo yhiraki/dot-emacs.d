@@ -7,9 +7,9 @@
 ;; Created: Mo Okt 14 18:17:43 2013 (+0200)
 ;; Version:
 ;; Package-Requires: ()
-;; Last-Updated: Sun Feb 26 10:45:22 2017 (+0100)
+;; Last-Updated: Sun Feb 26 10:52:07 2017 (+0100)
 ;;           By: Manuel Schneckenreither
-;;     Update #: 336
+;;     Update #: 342
 ;; URL:
 ;; Doc URL:
 ;; Keywords:
@@ -137,7 +137,7 @@
   ;; (remove-hook 'before-save-hook 'collapse-blank-lines)
 
   ;; Enable flymake mode
-  (flymake-mode)
+  ;; (flymake-mode)
 
   )
 
@@ -239,13 +239,12 @@
 ;; ;; Java flymake
 ;; ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
+(require 'flymake)
 
-(when (require 'flymake)
-  (set-variable 'flymake-log-level 0)
-  (setq flymake-start-syntax-check-on-newline nil)
-  (setq flymake-no-changes-timeout 1)
-  (add-hook 'java-mode-hook 'flymake-mode-on)
-  )
+;; (set-variable 'flymake-log-level 0)
+;; (setq flymake-start-syntax-check-on-newline t)
+;; (setq flymake-no-changes-timeout 1)
+(add-hook 'java-mode-hook 'flymake-mode-on)
 
 
 ;; FLYMAKE TEMP FOLDER
