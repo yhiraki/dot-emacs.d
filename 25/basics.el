@@ -5,9 +5,9 @@
 ;; Author: Manuel Schneckenreither
 ;; Created: Mon Dec 10 22:51:09 2012 (+0100)
 ;; Version:
-;; Last-Updated: Fri Feb 10 13:35:49 2017 (+0100)
+;; Last-Updated: Tue Mar  7 15:07:42 2017 (+0100)
 ;;           By: Manuel Schneckenreither
-;;     Update #: 857
+;;     Update #: 858
 ;; URL:
 ;; Description:
 ;;    Basic configuration for emacs. In here are all configs of
@@ -278,7 +278,7 @@ mode of the invoking window is in
       )
 
 (setq make-backup-files t               ; backup of a file the first time it is saved.
-      backup-by-copying t               ; don't clobber slinks
+      backup-by-copying nil               ; don't clobber slinks
       version-control t                 ; version numbers for backup files
       delete-old-versions 0             ; delete excess backup files silently
       delete-by-moving-to-trash t
@@ -288,8 +288,8 @@ mode of the invoking window is in
 
 
       auto-save-default t               ; auto-save every buffer that visits a file
-      auto-save-timeout 20              ; number of seconds idle time before auto-save (default: 30)
-      auto-save-interval 200            ; number of keystrokes between auto-saves (default: 300)
+      auto-save-timeout 60              ; number of seconds idle time before auto-save (default: 30)
+      auto-save-interval 400            ; number of keystrokes between auto-saves (default: 300)
       )
 
 

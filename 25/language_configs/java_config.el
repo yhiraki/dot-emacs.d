@@ -7,9 +7,9 @@
 ;; Created: Mo Okt 14 18:17:43 2013 (+0200)
 ;; Version:
 ;; Package-Requires: ()
-;; Last-Updated: Sun Feb 26 10:52:07 2017 (+0100)
+;; Last-Updated: Tue Mar  7 15:16:14 2017 (+0100)
 ;;           By: Manuel Schneckenreither
-;;     Update #: 342
+;;     Update #: 345
 ;; URL:
 ;; Doc URL:
 ;; Keywords:
@@ -111,7 +111,7 @@
   ;;                              )))
 
   ;; (local-set-key (kbd (concat prefix-command-key " e")) 'flymake:display-err-minibuf-for-current-line)
-  (defvar-mode-local java-mode browse-url-browser-function #'w3m-browse-url)
+  ;; (defvar-mode-local java-mode browse-url-browser-function #'w3m-browse-url)
   ;; (defvar-mode-local jde-mode browse-url-browser-function #'w3m-browse-url)
   ;;
   ;; (set-variable browse-url-browser-function #'w3m-browse-url)
@@ -138,6 +138,8 @@
 
   ;; Enable flymake mode
   ;; (flymake-mode)
+
+  (remove-hook 'before-save-hook 'collapse-blank-lines)
 
   )
 
@@ -243,7 +245,7 @@
 
 ;; (set-variable 'flymake-log-level 0)
 ;; (setq flymake-start-syntax-check-on-newline t)
-;; (setq flymake-no-changes-timeout 1)
+(setq flymake-no-changes-timeout 3)
 (add-hook 'java-mode-hook 'flymake-mode-on)
 
 
