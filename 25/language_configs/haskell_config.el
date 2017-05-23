@@ -8,7 +8,7 @@
 ;; Version:
 ;; Last-Updated:
 ;;           By:
-;;     Update #: 891
+;;     Update #: 892
 ;; URL:
 ;; Description:
 ;;
@@ -227,7 +227,8 @@
     (message esdir)
     (setq tagslst (if (and (file-exists-p (concat esdir "src"))
                            (file-exists-p (concat esdir "app")))
-                      "*.hs app src"
+                      ;; "*.hs app src"
+                      "*app src"
                     (if (file-exists-p (concat esdir "src"))
                         "*.hs src"
                       (if (file-exists-p (concat esdir "app"))
