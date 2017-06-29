@@ -7,9 +7,9 @@
 ;; Created: Tue Jul 29 00:11:38 2014 (+0200)
 ;; Version:
 ;; Package-Requires: ()
-;; Last-Updated: Sat Jun 17 18:19:14 2017 (+0200)
+;; Last-Updated: Thu Jun 29 19:01:09 2017 (+0200)
 ;;           By: Manuel Schneckenreither
-;;     Update #: 1080
+;;     Update #: 1083
 ;; URL:
 ;; Doc URL:
 ;; Keywords:
@@ -331,6 +331,7 @@
  ;; If there is more than one, they won't work right.
  '(Flymake-compilation-prevents-syntax-check nil)
  '(ac-etags-requires 1)
+ '(auto-save-default nil)
  '(bmkp-last-as-first-bookmark-file "/home/schnecki/.emacs.d/.bookmarks")
  '(cedet-java-classpath-extension
    (quote

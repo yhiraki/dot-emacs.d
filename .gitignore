@@ -6,7 +6,6 @@
 /ac-comphist.dat
 /auto-save-list/
 /elconfig.desktop
-/elpa/
 /eshell/
 /image-dired/
 /org-clock-save.el
@@ -32,3 +31,4 @@
 org-gcal/*
 /.cask/25.1/bootstrap/archives/gnu/archive-contents
 .cask
+.org-id-locations

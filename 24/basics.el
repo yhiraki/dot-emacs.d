@@ -333,13 +333,13 @@ mode of the invoking window is in
 ;; ++++++++++++ STOP ASKING EXISTING PROCESS EXISTS STUFF +++++++++++++++
 ;; ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
-(defadvice save-buffers-kill-emacs (around no-query-kill-emacs activate)
-  "Prevent annoying \"Active processes exist\" query when you quit Emacs."
-  (flet ((process-list ())) ad-do-it))
+;; (defadvice save-buffers-kill-emacs (around no-query-kill-emacs activate)
+;;   "Prevent annoying \"Active processes exist\" query when you quit Emacs."
+;;   (flet ((process-list ())) ad-do-it))
 
-;; don't ask me if I want to quit the shell
-(add-hook 'comint-exec-hook
-          (lambda () (process-kill-without-query (get-buffer-process (current-buffer)))))
+;; ;; don't ask me if I want to quit the shell
+;; (add-hook 'comint-exec-hook
+;;           (lambda () (process-kill-without-query (get-buffer-process (current-buffer)))))
 
 
 ;; ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
