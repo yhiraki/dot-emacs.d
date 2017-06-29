@@ -7,9 +7,9 @@
 ;; Created: Tue Jul 29 00:11:38 2014 (+0200)
 ;; Version:
 ;; Package-Requires: ()
-;; Last-Updated: Mon Mar  6 10:35:21 2017 (+0100)
+;; Last-Updated: Sat Jun 17 18:19:14 2017 (+0200)
 ;;           By: Manuel Schneckenreither
-;;     Update #: 1053
+;;     Update #: 1080
 ;; URL:
 ;; Doc URL:
 ;; Keywords:
@@ -191,6 +191,7 @@
         ghci-completion
         gnuplot
         gnuplot-mode
+        hamlet-mode
         haskell-mode
         header2
         hlint-refactor
@@ -439,7 +440,7 @@
  '(org-use-sub-superscripts (quote {}))
  '(package-selected-packages
    (quote
-    (org org-gcal flyspell-correct flyspell-correct-helm zenburn-theme window-number w3m vc-darcs thesaurus tex-smart-umlauts smart-mode-line shm shakespeare-mode request rainbow-mode rainbow-delimiters php-mode pager-default-keybindings ov orgtbl-ascii-plot org-plus-contrib org-cua-dwim org-ac multiple-cursors markdown-toc markdown-mode+ magit lenlen-theme latex-pretty-symbols latex-extra jedi javap-mode javadoc-lookup intero ido-ubiquitous ido-hacks ido-gnus htmlize hlint-refactor hindent helm-mode-manager helm-hoogle helm-hayoo helm-google helm-git-files helm-git helm-flycheck helm-dired-recent-dirs helm-c-yasnippet helm-bibtex header2 gnuplot-mode gnuplot ghci-completion fuzzy function-args flycheck-stack flycheck-ledger flycheck-haskell flycheck-google-cpplint flycheck-color-mode-line edbi ecb dired+ company-try-hard company-shell company-math company-ghci company-ghc company-cabal company-c-headers company-auctex change-inner cdlatex bookmark+ bison-mode bbdb backup-walker auto-dictionary auto-complete-clang auto-complete-c-headers auto-complete-auctex arduino-mode android-mode ace-window ace-jump-mode ace-jump-buffer ac-octave ac-math ac-ispell ac-etags ac-dabbrev ac-capf ac-c-headers)))
+    (hamlet-mode thesaurus tuareg org org-gcal flyspell-correct flyspell-correct-helm zenburn-theme window-number w3m vc-darcs tex-smart-umlauts smart-mode-line shm shakespeare-mode request rainbow-mode rainbow-delimiters php-mode pager-default-keybindings ov orgtbl-ascii-plot org-plus-contrib org-cua-dwim org-ac multiple-cursors markdown-toc markdown-mode+ magit lenlen-theme latex-pretty-symbols latex-extra jedi javap-mode javadoc-lookup intero ido-ubiquitous ido-hacks ido-gnus htmlize hlint-refactor hindent helm-mode-manager helm-hoogle helm-hayoo helm-google helm-git-files helm-git helm-flycheck helm-dired-recent-dirs helm-c-yasnippet helm-bibtex header2 gnuplot-mode gnuplot ghci-completion fuzzy function-args flycheck-stack flycheck-ledger flycheck-haskell flycheck-google-cpplint flycheck-color-mode-line edbi ecb dired+ company-try-hard company-shell company-math company-ghci company-ghc company-cabal company-c-headers company-auctex change-inner cdlatex bookmark+ bison-mode bbdb backup-walker auto-dictionary auto-complete-clang auto-complete-c-headers auto-complete-auctex arduino-mode android-mode ace-window ace-jump-mode ace-jump-buffer ac-octave ac-math ac-ispell ac-etags ac-dabbrev ac-capf ac-c-headers)))
  '(semanticdb-javap-classpath
    (quote
     ((concat
