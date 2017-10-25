@@ -8,7 +8,7 @@
 ;; Version:
 ;; Last-Updated:
 ;;           By:
-;;     Update #: 892
+;;     Update #: 894
 ;; URL:
 ;; Description:
 ;;
@@ -224,22 +224,21 @@
                         (split-string default-directory "app")
                       (split-string default-directory "src")))))
     (setq esdir (replace-regexp-in-string " " "\\\\ " dir))
-    (message esdir)
-    (setq tagslst (if (and (file-exists-p (concat esdir "src"))
-                           (file-exists-p (concat esdir "app")))
-                      ;; "*.hs app src"
-                      "*app src"
-                    (if (file-exists-p (concat esdir "src"))
-                        "*.hs src"
-                      (if (file-exists-p (concat esdir "app"))
-                          "*.hs app"
-                        "*.hs"))))
+    ;; (message esdir)
+    (setq tagslst '("."))
+    (if (file-exists-p (concat esdir "src")) (add-to-list 'tagslst "src"))
+    (if (file-exists-p (concat esdir "app")) (add-to-list 'tagslst "app"))
+    (if (file-exists-p (concat esdir "fay")) (add-to-list 'tagslst "fay"))
+    (if (file-exists-p (concat esdir "fay_shared")) (add-to-list 'tagslst "fay_shared"))
+    (setq dirs (mapconcat 'identity tagslst " "))
+    ;; (message dirs)
     (shell-command
      (concat "cd " esdir
              ;; " && hasktags --ignore-close-implementation -e --cache . 2>/dev/null 1>/dev/null") nil)
              " && hasktags --ignore-close-implementation -e "
-             tagslst
-             " 2>/dev/null 1>/dev/null") nil)
+             dirs
+             ;; " 2>/dev/null 1>/dev/null"
+             ) nil)
     (visit-tags-table (concat dir "TAGS")))
   )
 
