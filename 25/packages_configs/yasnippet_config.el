@@ -7,9 +7,9 @@
 ;; Created: So Okt 13 20:37:05 2013 (+0200)
 ;; Version:
 ;; Package-Requires: ()
-;; Last-Updated: Sat Jan  9 21:16:10 2016 (+0100)
+;; Last-Updated: Thu Jul 13 10:24:40 2017 (+0200)
 ;;           By: Manuel Schneckenreither
-;;     Update #: 27
+;;     Update #: 28
 ;; URL:
 ;; Doc URL:
 ;; Keywords:
@@ -39,8 +39,8 @@
 (require 'yasnippet)
 
 
-(setq yas/snippet-dirs
-      '("~/.emacs.d/snippets/"))            ;; personal snippets
+;; (setq yas/snippet-dirs
+;;       '("~/.emacs.d/snippets/"))            ;; personal snippets
 (setq yas-snippet-dirs
       '("~/.emacs.d/snippets/"))            ;; personal snippets
 

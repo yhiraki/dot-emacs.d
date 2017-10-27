@@ -7,9 +7,6 @@
 ;; Created: Tue Jul 29 00:11:38 2014 (+0200)
 ;; Version:
 ;; Package-Requires: ()
-;; Last-Updated: Fri Oct  6 12:52:03 2017 (+0200)
-;;           By: Manuel Schneckenreither
-;;     Update #: 1093
 ;; URL:
 ;; Doc URL:
 ;; Keywords:
@@ -241,6 +238,7 @@
         shakespeare-mode
         shm
         smart-mode-line
+        sml-mode
         tex-smart-umlauts
         thesaurus
         tuareg

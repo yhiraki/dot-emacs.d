@@ -7,9 +7,8 @@
 ;; Created: Di Feb  4 17:01:05 2014 (+0100)
 ;; Version:
 ;; Package-Requires: ()
-;; Last-Updated: Sun Aug 27 15:30:05 2017 (+0200)
 ;;           By: Manuel Schneckenreither
-;;     Update #: 90
+;;     Update #: 91
 ;; URL:
 ;; Doc URL:
 ;; Keywords:
@@ -81,6 +80,11 @@
 ;;                                                      (nnimap-server-port "imaps")
 ;;                                                      ))
 
+(add-to-list 'gnus-secondary-select-methods '(nnimap "uppcoin"
+                                                     (nnimap-stream ssl)
+                                                     (nnimap-address "imap.gmail.com")
+                                                     (nnimap-server-port 993)
+                                                     ))
 
 (add-to-list 'gnus-secondary-select-methods '(nnimap "gmail"
                                                      (nnimap-stream ssl)
