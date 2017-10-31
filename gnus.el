@@ -7,9 +7,8 @@
 ;; Created: Di Feb  4 17:01:05 2014 (+0100)
 ;; Version:
 ;; Package-Requires: ()
-;; Last-Updated: Tue Oct 31 14:25:46 2017 (+0100)
 ;;           By: Manuel Schneckenreither
-;;     Update #: 91
+;;     Update #: 93
 ;; URL:
 ;; Doc URL:
 ;; Keywords:
@@ -75,11 +74,11 @@
                                                      (nnimap-address "mail.uibk.ac.at")
                                                      ))
 
-(add-to-list 'gnus-secondary-select-methods '(nnimap "uibk-c703"
-                                                     (nnimap-stream ssl)
-                                                     (nnimap-address "exchange.uibk.ac.at")
-                                                     (nnimap-server-port "imaps")
-                                                     ))
+;; (add-to-list 'gnus-secondary-select-methods '(nnimap "uibk-c703"
+;;                                                      (nnimap-stream ssl)
+;;                                                      (nnimap-address "exchange.uibk.ac.at")
+;;                                                      (nnimap-server-port "imaps")
+;;                                                      ))
 
 
 (add-to-list 'gnus-secondary-select-methods '(nnimap "gmail"

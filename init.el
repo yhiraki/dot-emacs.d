@@ -7,9 +7,6 @@
 ;; Created: Tue Jul 29 00:11:38 2014 (+0200)
 ;; Version:
 ;; Package-Requires: ()
-;; Last-Updated: Tue Oct 31 14:24:18 2017 (+0100)
-;;           By: Manuel Schneckenreither
-;;     Update #: 1104
 ;; URL:
 ;; Doc URL:
 ;; Keywords:

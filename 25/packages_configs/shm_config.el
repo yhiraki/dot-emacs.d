@@ -7,9 +7,9 @@
 ;; Created: Thu Sep  4 21:24:24 2014 (+0200)
 ;; Version:
 ;; Package-Requires: ()
-;; Last-Updated: Mon Nov  3 20:26:15 2014 (+0100)
+;; Last-Updated: Wed Aug 23 11:18:22 2017 (+0200)
 ;;           By: Manuel Schneckenreither
-;;     Update #: 11
+;;     Update #: 12
 ;; URL:
 ;; Doc URL:
 ;; Keywords:
@@ -60,6 +60,8 @@
 ;;; customize keymap
 (define-key shm-map (kbd "M-;") 'paredit-comment-dwim)
 
+(set-face-background 'shm-current-face "#eee8d5")
+(set-face-background 'shm-quarantine-face "lemonchiffon")
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; shm_config.el ends here
