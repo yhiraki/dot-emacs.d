@@ -3,8 +3,8 @@
 ;;; Code:
 (add-to-list 'load-path (directory-file-name (or (file-name-directory #$) (car load-path))))
 
-;;;### (autoloads nil "sml-mode" "sml-mode.el" (23028 15108 830694
-;;;;;;  32000))
+;;;### (autoloads nil "sml-mode" "sml-mode.el" (22829 7564 552839
+;;;;;;  907000))
 ;;; Generated autoloads from sml-mode.el
 
 (defalias 'run-sml 'sml-run)
