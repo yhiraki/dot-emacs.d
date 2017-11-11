@@ -331,7 +331,7 @@
  '(Flymake-compilation-prevents-syntax-check nil)
  '(ac-etags-requires 1)
  '(auto-save-default nil)
- '(bmkp-last-as-first-bookmark-file "~/.emacs.d/.bookmarks")
+ '(bmkp-last-as-first-bookmark-file "/home/schnecki/.emacs.d/.bookmarks")
  '(cedet-java-classpath-extension
    (quote
     ((concat
