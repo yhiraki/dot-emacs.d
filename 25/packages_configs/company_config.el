@@ -18,7 +18,11 @@
     (indent-according-to-mode)))
 
 
-(define-key company-active-map (kbd "TAB") 'complete-or-indent)
+(define-key company-active-map (kbd "TAB") 'company-complete-selection)
+;; (define-key company-active-map (kbd "TAB") 'complete-or-indent)
+
+;; Add Yasnippet
+(add-to-list 'company-backends 'company-yasnippet)
 
 ;; immediate completion
 (setq company-idle-delay 0.01)

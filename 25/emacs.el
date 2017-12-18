@@ -5,9 +5,9 @@
 ;; Author: Manuel Schneckenreither
 ;; Created: Tue Dec 11 00:43:14 2012 (+0100)
 ;; Version:
-;; Last-Updated: Wed Aug 23 18:28:44 2017 (+0200)
+;; Last-Updated: Sun Dec  3 12:43:46 2017 (+0100)
 ;;           By: Manuel Schneckenreither
-;;     Update #: 479
+;;     Update #: 482
 ;; URL:
 ;; Description:
 ;;
@@ -66,8 +66,8 @@
 ;; (load (concat package-conf-folder "rainbow_mode_config.el"))
 ;; ORG Mode - organize everything
 (load (concat package-conf-folder "org_mode_config.el"))
-;; AUTO COMPLETE - completion - You should not disable this, unless
-;; you know what you are doing
+;; AUTO COMPLETE - completion - You should not enable this, unless
+;; you know what you are doing -- SEE COMPANY MODE
 ;; (load (concat package-conf-folder "auto_complete_config.el"))
 ;; WHITESPACE MODE -- mark 80'th+ columns
 (load (concat package-conf-folder "whitespace_config.el"))
@@ -115,7 +115,7 @@
 (load (concat package-conf-folder "cdlatex_config.el"))
 ;; undo tree
 (load (concat package-conf-folder "undotree_config.el"))
-;; company mode
+;; company mode -- auto completion -- set auto-completion-mode
 (load (concat package-conf-folder "company_config.el"))
 ;; load django
 (load (concat package-conf-folder "python_django_config.el"))
