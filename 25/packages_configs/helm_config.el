@@ -9,6 +9,7 @@
 (loop for ext in '("\\.swf$" "\\.elc$" "\\.pyc$")
       do (add-to-list 'helm-boring-file-regexp-list ext))
 
+(setq helm-exit-idle-delay 0)
 
 (require 'helm-config)
 
