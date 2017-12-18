@@ -5,9 +5,9 @@
 ;; Author: Manuel Schneckenreither
 ;; Created: Mon Dec 10 22:51:09 2012 (+0100)
 ;; Version:
-;; Last-Updated: Tue Mar  7 15:07:42 2017 (+0100)
+;; Last-Updated: Sat Nov 11 09:41:32 2017 (+0100)
 ;;           By: Manuel Schneckenreither
-;;     Update #: 858
+;;     Update #: 859
 ;; URL:
 ;; Description:
 ;;    Basic configuration for emacs. In here are all configs of
@@ -23,7 +23,7 @@
 ;; trump hang workaround
 (setq tramp-ssh-controlmaster-options
       "-o ControlMaster=auto -o ControlPath='tramp.%%C' -o ControlPersist=no")
-
+(setq projectile-mode-line "Projectile")
 
 ;; ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 ;; ++++++++++++++++++++++++ ENSURE PATH IS SET ++++++++++++++++++++++++++
