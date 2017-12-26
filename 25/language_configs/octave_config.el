@@ -7,9 +7,9 @@
 ;; Created: Mi Mai 28 10:11:54 2014 (+0200)
 ;; Version:
 ;; Package-Requires: ()
-;; Last-Updated: Tue Sep 16 09:48:44 2014 (+0200)
+;; Last-Updated: Wed Nov 15 13:36:52 2017 (+0100)
 ;;           By: Manuel Schneckenreither
-;;     Update #: 28
+;;     Update #: 29
 ;; URL:
 ;; Doc URL:
 ;; Keywords:
@@ -50,8 +50,6 @@
 
 ;; associate .m files with octave
 (autoload 'octave-mode "octave-mod" nil t)
-(setq auto-mode-alist
-      (cons '("\\.m$" . octave-mode) auto-mode-alist))
 
 ;; Create and set tags table
 (defun make-octave-tags ()

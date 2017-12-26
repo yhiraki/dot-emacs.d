@@ -5,9 +5,9 @@
 ;; Author: Manuel Schneckenreither
 ;; Created: Tue Dec 11 00:43:14 2012 (+0100)
 ;; Version:
-;; Last-Updated: Sun Dec  3 12:43:46 2017 (+0100)
+;; Last-Updated: Mon Dec 18 10:15:05 2017 (+0100)
 ;;           By: Manuel Schneckenreither
-;;     Update #: 482
+;;     Update #: 483
 ;; URL:
 ;; Description:
 ;;
@@ -136,6 +136,7 @@
 (load-file (concat language-conf-folder "bash_config.el"))
 (load-file (concat language-conf-folder "python_config.el"))
 (load-file (concat language-conf-folder "php_config.el"))
+(load-file (concat language-conf-folder "matlab_config.el"))
 ;; (load-file (concat language-conf-folder "flex_config.el"))
 
 ;; ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
