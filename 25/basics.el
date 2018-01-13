@@ -5,9 +5,9 @@
 ;; Author: Manuel Schneckenreither
 ;; Created: Mon Dec 10 22:51:09 2012 (+0100)
 ;; Version:
-;; Last-Updated: Sat Nov 11 10:31:41 2017 (+0100)
+;; Last-Updated: Sat Jan 13 20:28:35 2018 (+0100)
 ;;           By: Manuel Schneckenreither
-;;     Update #: 860
+;;     Update #: 861
 ;; URL:
 ;; Description:
 ;;    Basic configuration for emacs. In here are all configs of
@@ -351,8 +351,7 @@ mode of the invoking window is in
 
 (defun kill-ring-insert ()
   (interactive)
-  (let (
-        (to_insert (completing-read "Yank : "
+  (let ((to_insert (completing-read "Yank : "
                                     (delete-duplicates kill-ring :test #'equal)
                                     )))
     (when (and to_insert

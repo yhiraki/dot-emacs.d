@@ -7,7 +7,7 @@
 ;; Version:
 ;; Last-Updated:
 ;;           By:
-;;     Update #: 138
+;;     Update #: 139
 ;; URL:
 ;; Description:
 ;;
@@ -128,7 +128,7 @@
 (global-set-key (kbd (concat prefix-command-key " a"))  'auto-fill-mode)
 
 ;; browse kill ring
-(global-set-key (kbd "C-c y") 'kill-ring-insert)
+(global-set-key (kbd "C-c y") 'browse-kill-ring)
 
 ;; align with regex
 (global-set-key (kbd "C-x a r") 'align-regexp)
