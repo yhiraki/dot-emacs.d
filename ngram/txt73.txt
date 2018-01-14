@@ -1,0 +1,246 @@
+c 1998 Kluwer Academic Publishers. Manufactured in The Netherlands.
+IDSIA, Corso Elvezia 36, 6900 Lugano, Switzerland
+Abstract. Q(λ)-learning uses TD(λ)-methods to accelerate Q-learning. The update complexity of previous online
+Q(λ) implementations based on lookup tables is bounded by the size of the state/action space. Our faster algorithm’s
+update complexity is bounded by the number of actions. The method is based on the observation that Q-value
+updates may be postponed until they are needed.
+Keywords: reinforcement learning, Q-learning, TD(λ), online Q(λ), lazy learning
+Q(λ)-learning (Watkins, 1989; Peng & Williams, 1996) is an important reinforcement learning (RL) method. It combines Q-learning (Watkins, 1989; Watkins & Dayan, 1992) and
+TD(λ) (Sutton, 1988; Tesauro, 1992). Q(λ) is widely used—it is generally believed to outperform simple one-step Q-learning, since it uses single experiences to update evaluations
+of multiple state/action pairs (SAPs) that have occurred in the past.
+Online vs. offline. We distinguish online RL and offline RL. Online RL updates modifiable
+parameters after each visit of a state. Offline RL delays updates until after a trial is finished,
+that is, until a goal has been found or a time limit has been reached. Without explicit trial
+boundaries, offline RL does not make sense at all. But even where applicable, offline RL
+tends to get outperformed by online RL, which uses experience earlier and therefore more
+efficiently (Rummery & Niranjan, 1994). Online RL’s advantage can be huge. For instance,
+online methods that punish actions (to prevent repetitive selection of identical actions) can
+discover certain environments’ goal states in polynomial time (Koenig & Simmons, 1996),
+while offline RL requires exponential search time (Whitehead, 1992).
+Previous Q(λ) implementations. To speed up Q-learning, Watkins (1989) suggested combining it with TD(λ) learning. His approach resets eligibility traces once exploratory actions
+are executed, while Peng and Williams’ variant (1996) does not require this. Typical online
+Q(λ) implementations based on lookup tables or other local approximators such as CMACs
+(Albus, 1975; Sutton, 1996) or self-organizing maps (Kohonen, 1988), however, are unnecessarily time-consuming. Their update complexity depends on the values of λ and discount
+factor γ , and is proportional to the number of SAPs (state/action pairs) which have occurred.
+The latter is bounded by the size of state/action space (and by the trial length which may
+Lin’s offline Q(λ) (1993) creates an action-replay set of experiences after each trial.
+Cichosz’ semi-online method (1995) combines Lin’s offline method and online learning.
+It needs fewer updates than Peng and Williams’ online Q(λ), but postpones Q-updates
+until several subsequent experiences are available. Hence, actions executed before the next
+Q-update are less informed than they could be. This may result in performance loss. For
+instance, suppose that the same state is visited twice in a row. If some hazardous action’s
+Q-value does not reflect negative experience collected after the first visit then it may get
+selected again with higher probability than wanted.
+The novel method. Previous methods either are not truly online and thus most likely require
+more experiences than necessary, or their updates are less efficient than they could be and
+thus require more computation time. Our Q(λ) variant is truly online and more efficient
+than others because its update complexity does not depend on the number of states. The
+method can also be used for speeding up tabular TD(λ). It uses “lazy learning” (introduced
+in memory-based learning, e.g., Atkeson, Moore, & Schaal, 1997) to postpone updates until
+Outline. Section 2 reviews Q(λ) and describes Peng and William’s Q(λ)-algorithm (PW).
+Section 3 presents our more efficient algorithm. Section 4 concludes.
+We consider finite Markov decision processes, using discrete time steps t = 1, 2, 3, . . . , a
+finite set of states S = {S1 , S2 , S3 , . . . , Sn } and a finite set of actions A. The state at time
+t is denoted by st , and at = 5(st ) the selected action, where 5 represents the learner’s
+policy mapping states to actions. The transition probability to the next state st+1 , given st
+and at , is determined by Piaj = P(st+1 = j | st = i, at = a) for i, j ∈ S and a ∈ A. A
+reward function R maps SAP (i, a) ∈ S × A to scalar reinforcement signals R(i, a) ∈ R.
+The reward at time t is denoted by rt . A discount factor γ ∈ [0, 1] discounts later against
+immediate rewards. The controller’s goal is to select actions which maximize the expected
+long-term cumulative discounted reinforcement, given an initial state selected according to
+a probability distribution over possible initial states.
+Reinforcement learning. To achieve this goal, most reinforcement learning methods learn
+an action evaluation function or Q-function. The optimal Q-value of SAP (i, a) satisfies
+where V ∗ ( j) = maxa Q ∗ ( j, a). To learn this Q-function, RL algorithms repeatedly do: (1)
+Select action at given state st ; (2) collect reward rt and observe successor state st+1 ; and
+(3) update the Q-function using the latest experience (st , at , rt , st+1 ).
+Q-learning. Given (st , at , rt , st+1 ), standard one-step Q-learning updates just a single
+Q-value Q(st , at ) as follows (Watkins, 1989):
+Q(st , at ) ← Q(st , at ) + αk (st , at )et0 .
+Here the temporal difference or TD(0)-error et0 is given by:
+where the value function V (s) is defined as V (s) = maxa Q(s, a), and αk (st , at ) is the
+learning rate for the kth update of SAP (st , at ).
+Learning rate adaptation. The learning rate αk (s, a) for the kth update of SAP (s, a)
+should decrease over time to satisfy two conditions for stochastic iterative algorithms
+(Watkins & Dayan, 1992; Bertsekas & Tsitsiklis, 1996):
+They hold for αk (s, a) = 1/k β , where 1/2 < β ≤ 1.
+Q(λ)-learning. Q(λ) uses TD(λ)-methods (Sutton, 1988) to accelerate Q-learning. First
+note that Q-learning’s update at time t + 1 may change V (st+1 ) in the definition of et0 .
+Following Peng & Williams (1996) we define the TD(0)-error of V (st+1 ) as
+Q(λ) uses a factor λ ∈ [0, 1] to discount TD-errors of future time steps:
+Q(st , at ) ← Q(st , at ) + αk (st , at )etλ ,
+Eligibility traces. The updates above cannot be made as long as TD-errors of future time
+steps are not known. We can compute them incrementally, however, by using eligibility
+traces (Barto, Sutton, & Anderson, 1983; Sutton, 1988). In what follows, ηt (s, a) will
+denote the indicator function which returns 1 if (s, a) occurred at time t, and 0 otherwise.
+Omitting the learning rate for simplicity, the increment of Q(s, a) for the complete trial is:
+To simplify this we use an eligibility trace lt (s, a) for each SAP (s, a):
+Then the online update at time t becomes:
+∀(s, a) ∈ S × A do : Q(s, a) ← Q(s, a) + αk (st , at )[et0 ηt (s, a) + et lt (s, a)].
+Online Q(λ). We will focus on Peng and Williams’ algorithm (PW) (1996), although there
+are other possible variants (e.g., Rummery and Niranjan, 1994). PW uses a list H of SAPs
+that have occurred at least once. SAPs with eligibility traces below ² ≥ 0 are removed
+from H . Boolean variables visited (s, a) are used to make sure no two SAPs in H are
+(1) et0 ← (rt + γ V (st+1 ) − Q(st , at ))
+(3b) Q(s, a) ← Q(s, a) + αk (st , at )et l(s, a)
+(4) Q(st , at ) ← Q(st , at ) + αk (st , at )et0
+1. The SARSA algorithm (Rummery & Niranjan, 1994) replaces the right-hand side in lines
+(1) and (2) by (rt + γ Q(st+1 , at+1 ) − Q(st , at )).
+2. For replacing eligibility traces (Singh & Sutton, 1996), step (5) should be: ∀a : l(st , a)
+3. Representing H by a doubly linked list and using direct pointers from each SAP to its
+position in H , the functions operating on H (deleting and adding elements—see lines
+Complexity. Deleting SAPs from H (step (3c-1)) once their traces fall below a certain
+threshold may significantly speed up the algorithm. If γ λ is sufficiently small, then this
+will keep the number of updates per time step manageable. For large γ λ, PW does not work
+that well: it needs a sweep (sequence of SAP updates) after each time step, and the update
+cost for such sweeps grows with γ λ. Let us consider worst-case behavior, which means
+that each SAP occurs just once (if SAPs reoccur then the history list will grow at a slower
+rate). In the beginning of the trial the number of updates increases linearly until at some
+time step t some SAPs get deleted from H . This will happen as soon as t ≥ log ²/ log(γ λ).
+Since the number of updates is bounded from above by the number of SAPs, the total update
+complexity increases towards O(|S||A|) per update for γ λ → 1.
+The space complexity of the algorithm is O(|S||A|). We need to store for all SAPs:
+Q-values, eligibility traces, the “visited” bit variable and three pointers for managing the
+history list (one from the SAP to its place in the history list, and two for the doubly linked
+The main contribution of this paper is an efficient, fully online algorithm with time complexity O(|A|) per update. The algorithm is designed for λγ > 0—otherwise we can use
+Main principle. The algorithm is based on the observation that the only Q-values needed
+at any given time are those for the possible actions given the current state. Hence, using
+“lazy learning”, we can postpone updating Q-values until they are needed. Suppose some
+SAP (s, a) occurs at steps t1 , t2 , t3 , . . .. Let us abbreviate ηt = ηt (s, a), φ = γ λ. First, we
+Since ηt is 1 only for t = t1 , t2 , t3 , . . . and 0 otherwise, we can rewrite this as
+constructing an efficient online Q(λ) algorithm. We define a local trace
+, and use (3) to write down the total update of Q(s, a) during a trial:
+To exploit this we introduce a global variable 1 keeping track of the cumulative TD(λ)error since the start of the trial. As long as SAP (s, a) does not occur we postpone updating
+Q(s, a). In the update below we need to subtract that part of 1 which has already been used
+(see Eqs. (3) and (4)). We use for each SAP (s, a) a local variable δ(s, a) which records the
+value of 1 at the moment of the last update, and a local trace variable l 0 (s, a). Then, once
+Q(s, a) needs to be known, we update Q(s, a) by adding l 0 (s, a)(1 − δ(s, a)). Figure 1
+illustrates that the algorithm substitutes the varying eligibility trace l(s, a) by multiplying
+a global trace φ t by the local trace l 0 (s, a). The value of φ t changes all the time, but l 0 (s, a)
+does not in intervals during which (s, a) does not occur.
+Algorithm overview. The algorithm relies on two procedures: the Local update procedure
+calculates exact Q-values once they are required; the Global update procedure updates the
+global variables and the current Q-value. Initially, we set the global variables φ 0 ← 1.0
+and 1 ← 0. We also initialize the local variables δ(s, a) ← 0 and l 0 (s, a) ← 0 for all
+Local updates. Q-values for all actions possible in a given state are updated before an
+action is selected and before a particular V -value is calculated. For each SAP (s, a) a
+variable δ(s, a) tracks changes since the last update:
+Figure 1. SAP (s, a) occurs at times t1 , t2 , t3 , . . . . The standard eligibility trace l(s, a) equals the product of φ t
+(1) Q(st , at ) ← Q(st , at ) + αk (st , at )(1 − δ(st , at ))l 0 (st , at )
+The global update procedure. After each executed action we invoke the procedure Global
+update, which consists of three basic steps: (1) To calculate V (st+1 ) (which may have
+changed due to the most recent experience), it calls Local update for the possible next
+SAPs; (2) it updates the global variables φ t and 1; and (3) it updates (st , at )’s Q-value and
+trace variable and stores the current 1 value (in Local update).
+(2) et0 ← (rt + γ V (st+1 ) − Q(st , at ))
+(7) Q(st , at ) ← Q(st , at ) + αk (st , at )et0
+(8) l 0 (st , at ) ← l 0 (st , at ) + 1/φ t
+For replacing eligibility traces (Singh & Sutton, 1996), step (8) should be changed as
+follows: ∀a : l 0 (st , a) ← 0; l 0 (st , at ) ← 1/φ t .
+Machine precision problem and solution. Adding et φ t to 1 in line (5) may create a
+problem due to limited machine precision: for large absolute values of 1 and small φ t
+there may be significant rounding errors. More importantly, line (8) will quickly overflow
+any machine for γ λ < 1. The following addendum to the procedure Global update detects
+when φ t falls below machine precision ²m , updates all SAPs which have occurred (again
+we make use of a list H ), and removes SAPs with l 0 (s, a) < ²m from H . Finally, 1 and φ t
+Comments. Recall that Local update sets δ(s, a) ← 1, and update steps depend on
+1 − δ(s, a). Thus, after having updated all SAPs in H , we can set 1 ← 0 and δ(s, a) ← 0.
+Furthermore, we can simply set l 0 (s, a) ← l 0 (s, a)φ t and φ t ← 1.0 without affecting the
+expression l 0 (s, a)φ t used in future updates—this just rescales the variables. Note that if
+γ λ = 1, then no sweeps through the history list will be necessary.
+Complexity. The algorithm’s most expensive part are the calls of Local update, whose
+total cost is O(|A|). This is not bad: even simple Q-learning’s action selection procedure
+costs O(|A|) if, say, the Boltzmann rule (Thrun, 1992; Caironi & Dorigo, 1994) is used.
+Concerning the occasional complete sweep through SAPs still in history list H : during each
+sweep the traces of SAPs in H are multiplied by l < em . SAPs are deleted from H once
+their trace falls below em . In the worst case one sweep per n time steps updates 2n SAPs
+and costs O(1) on average. This means that there is an additional computational burden
+at certain time steps, but since this happens infrequently our method’s total average update
+The space complexity of the algorithm remains O(|S||A|). We need to store the following
+variables for all SAPs: Q-values, eligibility traces, previous delta values, the “visited” bit,
+and three pointers to manage the history list (one from each SAP to its place in the history
+list, and two for the doubly linked list). Finally, we need to store the two global variables.
+Comparison to PW. Figure 2 illustrates differences between both methods for |A| = 5,
+|S| = 1000, and γ = 1. We plot the number of updates against time for λ ∈ {0.7, 0.9, 0.99}.
+The plots refer to worst-case behavior: we assume that at each time step a new SAP is added
+Figure 2. Number of updates plotted against time: a worst case analysis comparing our method (right) and Peng
+and Williams’ (left) for different values of λ. The occasional spikes (right) hardly affect our method’s average
+performance, which is very close to the horizontal line.
+to the history list. The accuracy parameter ² (used in PW) is set to 10−6 (in practice, less
+precise values may be used, but this will not change matters much). The machine precision
+parameter ²m is set to 10−16 . Plot 2(A) shows that PW’s update costs increase until the history
+lists have reached their maximum size, although for λ = 0.99 this does not happen before
+time step 1375. The spikes in the fast Q(λ) plot reflect occasional full sweeps through the
+history list due to limited machine precision (the corresponding average number of updates,
+however, is very close to the value indicated by the horizontal solid line—as explained
+above, the spikes hardly affect the average). No sweep is necessary in fast Q(0.99)’s plot
+during the shown interval. Fast Q needs on average a total of 13 update steps: 5 in chooseaction, 5 for calculating V (st+1 ), 1 for updating the chosen action, and 2 for taking into
+account the full sweeps. See Wiering & Schmidhuber (1998) for illustrative experiments
+Extension to function approximators. Tabular representations do not allow for generalizing from previous experiences, which is necessary in case of large state spaces. Fast Q(λ),
+however, can also improve matters in case of “local” function approximators (FAs) consisting of separate building blocks, such as Kohonen networks (Kohonen, 1988), CMACs
+(Albus, 1975; Sutton, 1996), locally weighted learning (Atkeson, Moore, & Schaal, 1996),
+and neural gas (Fritzke, 1994). Such FAs work as follows: there are |S| possible state
+space “features”. There are Q-values for all possible feature/action pairs, just like there are
+Q-values of state/action pairs in the case of tabular representation. Q-values of I ≤ |S|
+features are combined to evaluate an input (query). Here the update complexity of fast Q(λ)
+equals O(I |A|). This results in a speed-up of |S|/I in comparison to PW’s method.
+Our method can also be used in conjunction with arbitrary gradient-based FAs. In case of
+global FAs, such as monolithic neural networks, it will be useless due to I = |S|. Consider,
+however, a combination of CMACs and neural network FAs. Only few neural networks
+are used at any given time, hence our method will be useful: in Global update we simply
+add to each weight trace the gradient of the combined Q-values (the weighted sum of all
+used network outputs) with respect to the used weight. More formally: in the lookup-table
+case we used l 0 (s, a) := l 0 (s, a) + 1/φ t (in line (8) of Global update). Now we replace
+, where l 0 (wi ) is the fast-eligibility trace of weight wi .
+this by l 0 (wi ) := l 0 (wi ) + ∂ Q(s,a)/∂w
+The speed-up equals the average fraction of weights used per time step, a measure of the
+Multiple trials. We have described a single-trial version of our algorithm. One might be
+tempted to think that in case of multiple trials all SAPs in the history list need to be updated
+and all eligibility traces reset after each trial. This is not necessary—we may use cross-trial
+We introduce 1 M variables, where index M stands for the Mth trial. Let N denote the
+current trial number, and let variable visited(s, a) represent the trial number of the most
+recent occurrence of SAP (s, a). Now we slightly change Local update:
+(2) Q(st , at ) ← Q(st , at ) + αk (st , at )(1 M − δ(st , at ))l 0 (st , at )
+Thus we update Q(s, a) using the value 1 M of the most recent trial M during which SAP
+(s, a) occurred and the corresponding values of δ(st , at ) and l 0 (st , at ) (computed during
+the same trial). In case SAP (s, a) has not occurred during the current trial we reset the
+eligibility trace and set visited (s, a) to the current trial number. In Global update we need
+to change lines (5) and (10b) by adding trial subscripts to 1, and we need to change line
+(9b) in which we have to set visited (st , at ) ← N . At trial end we reset φ t to φ 0 = 1.0,
+increment the trial counter N , and set 1 N ← 0. This allows for postponing certain updates
+While other Q(λ) approaches are either offline, inexact, or may suffer from average update complexity depending on the size of the state/action space, ours is fully online Q(λ)
+with average update complexity linear in the number of actions. Efficiently dealing with
+eligibility traces makes fast Q(λ) applicable to larger scale RL problems.
+Thanks to Nic Schraudolph for helpful comments. This work was supported in part by SNF
+grant 2100-49’144.96 “Long Short-Term Memory”.
+Albus, J.S. (1975). A new approach to manipulator control: The cerebellar model articulation controller (CMAC).
+Dynamic Systems, Measurement and Control, 97, 220–227.
+Atkeson, C.G., Schaal, S., & Moore, A.W. (1997). Locally weighted learning. Artificial Intelligence Review, 11,
+Barto, A.G., Sutton, R.S., & Anderson, C.W. (1983). Neuronlike adaptive elements that can solve difficult learning
+control problems. IEEE Transactions on Systems, Man, and Cybernetics, SMC-13, 834–846.
+Bertsekas, D.P., & Tsitsiklis, J.N. (1996). Neuro-dynamic programming. Belmont, MA: Athena Scientific.
+Caironi, P.V.C., & Dorigo, M. (1994). Training Q-agents (Technical Report IRIDIA-94-14). Université Libre de
+Cichosz, P. (1995). Truncating temporal differences: On the efficient implementation of TD(λ) for reinforcement
+learning. Journal of Artificial Intelligence Research, 2, 287–318.
+Fritzke, B. (1994). Supervised learning with growing cell structures. In J. Cowan, G. Tesauro, & J. Alspector
+(Eds.), Advances in neural information processing systems (Vol.6, pp. 255–262). San Mateo, CA: Morgan
+Koenig, S., & Simmons, R.G. (1996). The effect of representation and knowledge on goal-directed exploration
+with reinforcement learning algorithms. Machine Learning, 22, 228–250.
+Kohonen, T. (1988). Self-organization and associative memory (2nd ed.). Springer.
+Lin, L.-J. (1993). Reinforcement learning for robots using neural networks. Ph.D. thesis, Carnegie Mellon University, Pittsburgh.
+Peng, J., & Williams, R. (1996). Incremental multi-step Q-learning. Machine Learning, 22, 283–290.
+Rummery, G., & Niranjan, M. (1994). On-line Q-learning using connectionist sytems (Technical Report CUED/
+F-INFENG-TR 166). UK: Cambridge University.
+Singh, S., & Sutton, R. (1996). Reinforcement learning with replacing eligibility traces. Machine Learning, 22,
+Sutton, R.S. (1988). Learning to predict by the methods of temporal differences. Machine Learning, 3, 9–44.
+Sutton, R.S. (1996). Generalization in reinforcement learning: Successful examples using sparse coarse coding.
+In D.S. Touretzky, M.C. Mozer, & M.E. Hasselmo (Eds.), Advances in neural information processing systems,
+(Vol. 8, pp. 1033–1045). Cambridge, MA: MIT Press.
+Tesauro, G. (1992). Practical issues in temporal difference learning. In D.S., Lippman, J.E. Moody, & D.S
+Touretzky (Eds.), Advances in neural information processing systems (Vol. 4, pp. 259–266). San Mateo, CA:
+Thrun, S. (1992). Efficient exploration in reinforcement learning (Technical Report CMU-CS-92-102). CarnegieMellon University.
+Watkins, C.J.C.H. (1989). Learning from delayed rewards. Ph.D. thesis, King’s College, Cambridge, England.
+Watkins, C.J.C.H., & Dayan, P. (1992). Technical note: Q-learning. Machine Learning, 8, 279–292.
+Whitehead, S. (1992). Reinforcement learning for the adaptive control of perception and action. Ph.D. thesis,
+Wiering, M.A., & Schmidhuber, J. (1998). Speeding up Q(λ)-learning. In C. Nedellec, & C. Rouveirol (Eds.),
+Machine Learning: Proceedings of the Tenth European Conference. Berlin: Springer Verlag.

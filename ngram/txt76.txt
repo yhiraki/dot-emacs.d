@@ -1,0 +1,1105 @@
+ISSN: 0953-7287 (Print) 1366-5871 (Online) Journal homepage: http://www.tandfonline.com/loi/tppc20
+Neural networks in production planning and
+To cite this article: Marco Garetti & Marco Taisch (1999) Neural networks in production planning
+and control, Production Planning & Control, 10:4, 324-339, DOI: 10.1080/095372899233082
+To link to this article: http://dx.doi.org/10.1080/095372899233082
+Full Terms & Conditions of access and use can be found at
+http://www.tandfonline.com/action/journalInformation?journalCode=tppc20
+Download by: [Universitaetsbibliothek Innsbruck]
+P R O D U C T I O N P L A N N I N G & C O N T R O L , 1 99 9, V O L . 10 , N O . 4, 3 24 – 3 39
+N eu ra l n etw ork s in p rod u ct ion p la n n in g a n d
+Downloaded by [Universitaetsbibliothek Innsbruck] at 10:17 31 October 2017
+M A R C O G A R E T T I a n d M A R C O T A I SC H
+K ey w or d s p r od u ction p la n n ing a n d c on tr ol, ar ti cia l neu r al
+n etw ork s, a d v a nc ed co m p u ting t ec hn iq u es in P P C
+A bs tr act . T he p u rp ose of t his p a p er is to p re sen t a se lec tion of
+th e m ost sig ni ca n t A N N ( a r ti cia l n eu r a l n et w or k ) ap p lica tion s u se d t o sol v e P P C ( p r od u ction p la n nin g an d co nt ro l)
+p ro b le m s. T h erefor e, th e p ap er itself is a r ea so n ed cla ssi c at ion
+ra t her th a n a sim p le su r v ey . T h e P P C d om a in is d iv id ed int o
+v ar iou s ar ea s, a n d fo r ea ch a r ea on e or m ore ex am p les of A N N s
+a re d isc u ssed , tog eth er w it h t he b en e ts a n d d ra w b a ck s of t h eir
+a p p lica t ion to th at p a rticu l ar a re a. F in ally , tw o ca se stu d ies
+d ev elop ed b y th e a u t h or s a re rep orted a n d d iscu ssed to an a ly se
+th e m a in im p le m ent at ion p ro b lem s t o b e co nsid ered w h en u sin g
+A m on g th e la rg e v a riet y of n ew c om pu tin g tech n iq u es
+( i.e. genetic algorith m s, ta b u sea rc h, sim u la ted a n n ea lin g , ch a os th eory a n d fu zzy logic) th a t h av e b een d ev elop ed ov er th e p a st few y ea rs, arti cia l n eu ra l n et w ork s
+( A N N s) certa in ly p lay a c ruc ia l role in th e a rea of in d u stria l en g in eer in g, as th e la rge am ou n t of p a pers a n d
+resea rch w orks p u b lished in th e last d eca d e sh ow s.
+N ot on ly is th e n u m b er of th ese p a p ers rem a rk ab le, b u t
+th eir a p p lication sc op e is a lso b roa d er tha n th a t of th e
+a b ov e-m en tion ed com p u tin g tech n iq ues. N eu ra l netw ork
+A uthors: M . G ar et ti, an d M . T a isch , D ep a rtm en t of E co nom ics a nd P ro d u c tion, P oly tech nic of
+M ila n, P iaz za L . d a V in ci, 32, I -20133, M ila n o, I t a ly .
+Marco Ga retti is P r ofessor of I n d u stri al T ec hn olog y at t h e D ip a rtim ent o d i E c on om ia e
+P ro d u zion e of t he P olit ecn ic o d i M ila no, I ta ly . A fter g ra d u a ting in m ec ha n ica l en g in eer ing in
+1971 a t P ol itec nic o, h e b eg an his ca reer at A l fa R om eo, w here h e w or k ed on m at h em at ica l
+m od ell ing of ca r p a ssen ger an d on v ehicle-b od y co m p u ter -a id ed d esign . I n 1974 h e join ed
+P olit ec hn ico d i M ila no a s a re sea rc her, w ork ing in t he  eld of in d u stria l p ro d u ct ion, a u t om a ted
+p ro d u ct ion sy st em s an d C I M . P ro f. G a ret ti is a m em b er of I F I P W .G . 5.7 on co m p u ter- aid ed
+p ro d u ct ion m a na g em ent sy stem s, a m em b er of th e ed it or ia l b oa rd of P I X E L ( an I t ali an r ev iew on
+C A D -C A M ) a n d a m em b er of th e ed it or ia l b oa r d of P roduction Planning and Control . H e is a ct iv e in
+org an iz ing sem ina rs, p ost-g ra d u a te ed u c at ion c ou rses an d co nferenc es on p ro d u c iton sy stem s
+d esign a nd m a na g em en t. H is ac tu al  eld s of int erest a re d esig n of p ro d u c tion sy st em s, p ro d u ct ion
+m an a gem ent , exp er t sy stem s in m a nu fa ct u r ing , sim u la t ion a n d co m p u ter -in tegr a ted m a nu fa ct u r in g. H is p resen t re se ar ch in cl u d es a p ro ject sp on so red b y th e E C a nd ind u str y on d ev elop in g a
+soft w ar e w ork b en ch t o su p p ort t he m a nu fa ct u r ing sy st em en gin eerin g p ro cess. H e ha s p u b lished
+fo u r b ook s an d v a riou s p ap er s in in ter na tion a l jou rn als a n d co nfe ren ce p ro ce ed ing s.
+Marco Taisch is sen ior re se ar ch er a t t he D ip ar tim en to d i E co n om ia e P ro d u zion e, P olit ecn ico
+d i M ila n o, I ta ly . H e ob ta ined a M aster ’s d eg ree in ind u st ria l en gin eerin g in 1992 fr om th e sa m e
+u niv er sit y . H is c u r ren t t ea ch ing a n d r esea rch in terests a re in t he a rea of th e au tom at ed p ro d u ct ion
+sy stem s, co m p u ter- aid ed p ro d u c tion m a n ag em en t , si m u la tion, ex p ert sy stem s a nd soft c om p u t ing
+t ech niq u es. I n p a r ticu la r, ov er th e la st y ea rs, h is r esea rch h as fo cu se d on th e a p p lic at ion of n eu ra l
+n etw ork s an d g en et ic alg orit hm s fo r th e d esig n an d m an a gem ent of int ellig en t p ro d u ct ion sy st em s.
+I n th is re ga rd , he is co or d in a tor of t he I F I P W .G . 5.7 Sp ecial I n t erest G ro u p in A dvanced T echniques
+in Production Planning & Control an d join t m em b er of th e E U -I M S W ork in g G r ou p . H e ha s join ed
+in tern at ion a l a nd n at iona l p ro ject s; cu rrent ly he is in v ol v ed in C O SP I , a n at iona l fu nd ed p ro jec t
+w ith in d u stries for th e d ev elop m ent of a n au ton om ou s a gent -b a sed sy stem for p r od u ct ion p la nn in g
+P roduction P lanning & Control I S S N 09 5 3– 72 8 7 p rin t /I S S N 1 36 6– 5 87 1 on lin e
+h t t p ://w w w .ta n d f.co .u k /J N L S /p p c .h t m
+h t t p ://w w w .t a y lor a n d fr a n c is.co m /J N L S /p p c.h t m
+Downloaded by [Universitaetsbibliothek Innsbruck] at 10:17 31 October 2017
+a p p lic ation s cov er a g rea t n u m b er of in d u stria l en g in eering d om a in s w ith d i å eren t d egrees of in n ov a tion .
+E x a m p le s ran g e from p rod u ction sch ed u ling to p rocess
+con trol ( C u rrie an d L eCla ir 1993, R og ers a n d D a g li
+1996) , from im a g e rec og n ition ( H u a n g et al . 1992) to
+sig n a l p rocessin g ( W id row et al . 1994) , from sy stem id en ti ca tion ( P olla rd et al . 1992) to m et al cu ttin g ( N ag a sa ka
+et al . 1995, Y a n et al . 1995) , from in sp ec tion ( H ou et al .
+1993) to forec asting , from p rod u ct d esig n ( V en u g op a l
+a n d N aren d ran 1992, W u 1993) to p la nt desig n an d
+loca tion ( Sh tu b a n d Z im erm a n 1993, V a ith y a n ath a n et
+al . 1996) , from rob ot con trol to sy stem d ia gn osis ( H ua n g
+L a st b u t n ot lea st, an im p orta n t p oin t to b e stressed in
+th is in trod u ction is h y b rid ity, i.e. th e com b in ed u se of
+d i å eren t com pu t in g tech n iq u es ( Ca v a lieri an d T a isch
+1996) . A s w e w ill see la ter in th is p a p er, the b est resu lt s
+A N N s c an yield w h en a p p lied to P P C p rob le m s a re
+som et im es a ch ieved b y com b in in g th em w ith oth er com p u tin g tech n iq u es.
+H ere follow s a g en era l ou tlin e of th is p a p er. I n section
+2 a referen ce m od el of p rod u ction p la n n in g a n d c on trol
+a ctiv ities is p resen ted . T h is fra m ew ork is referred to in
+section 3, w h er e a critica l su rv ey of A N N s a p p lica tion to
+th e P P C d om a in is d escrib ed . I n section 4, tw o ca se
+stu d ies a re d iscu ssed as exa m p le s of A N N s a p p lic ation
+p oten tia l. F in a lly , c om m en ts on tren d s a n d p ersp ectiv es
+rela tin g to th e u se of A N N s in P P C a re g iv en in sect ion 5.
+T h e A N N s p resen ted h erein sh ou ld n ot b e reg ard ed as
+ex h a u st ive ex a m p le s of th e w id e ra n ge of A N N a p p lic ation s th a t ca n b e a p p lied to th e P P C d om a in ; ra th er, th ey
+a re ju st m ea n t to be rep resen ta tiv e sam ples of a speci c
+2. R ef er en c e f ra m ew or k of th e P P C d om ain
+A s is k n ow n , P P C p rob lem s en com p ass a v ery w id e
+ra n ge of  eld s a n d in d u stries; th erefore, th eir solu tion
+stron g ly d ep en d s on m a n y a sp ects, e.g . p rodu ction en v iron m en t ( i.e. a m a n u fa ctu rin g p la n t v ersu s a p rocess
+p la n t) , p rod u ction stra teg y ( a p u sh versu s a p u ll p olicy ) ,
+m a rk et en v iron m en t, d eg ree of a u tom a tion, et c. F rom a
+g en era l p oin t of v iew , P P C a ctiv ities d ea l w ith th e plan n in g a n d con trol of m an u fa ctu ring p roc esses, a n d th erefore in c lu d e m a teria ls, m a ch in es, p rod uc ts, op era tors,
+A s a referenc e fra m ew ork to b e u sed to d e n e th e
+d i å eren t kind s of A N N s w h ich ca n b e a p p lied to P P C
+p rob lem s, th e m od el su g g ested b y V ollm a n n et al.
+( 1991) for th e P P C d om a in w ill b e con sid ered . T h is
+m od el , w h ich is ou tlin ed in  g u re 1, h as b een sligh tly
+ch a n g ed to a d a p t it to th e p u rpo se of th is p a p er.
+T h e top p a rt of  g ure 1 correspon d s to th e lon g -term
+P P C sy st em ( a lso ca lled front en d ) a n d d ea ls w ith overall
+d irection settin g ; th e m id d le p art sh ow s th e m ediu m -term
+P P C sy stem ( or en g in e) for d et a iled m a teria l a n d
+ca p a city p la n nin g ; w h erea s th e b ottom p art ou tlin es th e
+sh ort -term P P C sy stem ( or b a ck en d ) th a t in clu d es th e
+ex ecu tion sy stem . A s in d ica ted in  g u re 1, eac h pa rt
+con ta in s d i å eren t m od u le s, a n d ea ch m od u le p erform s
+v ariou s an d w el l-k n ow n plan n in g an d control fu n ction s.
+Ba sed on th is d escrip tion of th e P P C d om a in , ta b le 1 lists
+th e p ossib le ap plica tion s of A N N s to P P C a n alysed in th is
+p a p er. ( A s in som e ca ses A N N s d eal w ith th e settin g of
+p la n n in g fu n ction pa ra m et ers, th is colu m n h a s b een
+3. T h e r ole of A N N s in th e P P C dom ain
+Sta rtin g from th e cla ssi ca tion of P P C p r ob lem s ou tlin ed in  g u re 1, th is section rev iew s d i å eren t p ossib le
+a p p lica tion s of A N N s to P P C . F irst th e d i æ cu lties norm a lly fou n d w h en tryin g to solv e ea ch p a rticu la r P P C
+p rob lem w ith con v en tion a l ap p roa ch es a re ou tlin ed , th en
+A sp ecia l c om m en t reg a rd s t h e g rou p t ech n olo g y fu n ct io n , t h a t , b ein g
+p a rt icu la rly rela t ed w it h t h e d esig n o f t h e m a n u fa c t u rin g sy stem , co u ld
+b e c o n sid ered a s a p rob lem o n t h e ed g e of t h e P P C d om a in . F or t h is
+rea son , in sp it e of t h e fa c t t h a t A N N a p p lica t io n s t o t h is t op ic h a v e b een
+w id ely in v estig a t ed b y m a n y a u t h o rs, t h is su b ject is n ot a d d ressed in t h e
+p a p er. R eferen ce t o t h is t o p ic ca n b e fo u n d in S u resh a n d K a p a rt h i
+( 19 94 ) , a n d K a m a l a n d Bu rk e ( 19 96 ) .
+T a b l e 1. R efer en ce t ab le fo r A N N a p p lic at ion s.
+M a ster p r od u ction sch ed u lin g ( M P S )
+Downloaded by [Universitaetsbibliothek Innsbruck] at 10:17 31 October 2017
+R esou rce p la nn in g ( see sec tion 3.1.1)
+D em an d fo rec astin g ( se e sec tion 3.1.2)
+Select ion of co n tro l st ra teg y [ see
+sect ion s 3.1.3 an d 4.1 ( c ase stu d y ) ]
+Bu å er sizin g [se e se ct ion s 3.2.1 an d 4.2
+O å -line sch ed u lin g ( see sect ion 3.3.1)
+O n-line sch ed u lin g ( se e sect ion 3.3.2)
+Q u a lity co nt ro l a n d in sp ect ion ( se e
+th e b en e ts o å ered b y a solu tion th a t in v olv es th e u se of
+a n A N N a re sh ow n. D raw b a ck s of A N N a p p lica tion s a re
+p oin ted ou t a s w ell. T h e p u rp ose of th is critica l rev iew is
+to d escrib e the sta te of the a rt of the a p p lica tion of A N N s
+to P P C , a nd to m a ke com m ents as w ell as to ad v ise b oth
+a ca d em ic s a n d p ra ctition ers on A N N a p p lic a bility .
+I n th is p a rt of th e P P C d om a in , A N N s ca n  n d g ood
+a p p lic ation op p ortu n ities in th e resou rce p la n n in g an d
+d em a n d m a n ag em en t fu n ction s.
+R esou rce p la n n in g is a ty p ic al lon g -term a c tivity
+w h ich p rovid es th e ca pa city req u ir ed to m a n u fa ctu re
+p rod u cts a n d m eet d em an d . U sin g a p rod u ction p la n as
+a n in p u t, resou rce p la nn ing ca rries ou t a n ev a lu a tion of
+a g greg a te resou rc es ( g ross lab ou r-h ou rs, c ap ita l ex pa n sion , m ac h in es, w ar eh ouse sp a ce, et c.) in p rep a ration
+for fu tu re p rod u ction . Stric tl y rela te d to resou rce plan n in g is rou gh -c ap a cit y p la n n in g w h ich , ev en th ou g h on a
+sh orter term , p rovid es inform at ion on h ow resou rce lev els
+sh ould b e ch a n ged to en su re th e ex ecu tion of th e m a ster
+p rod u ction sch ed u le ( V oll m an n et al . 1991) .
+I n a m u lti-p la n t com p a n y , th e com p lex ity of th is pr oblem in crea ses, req u irin g – on a d ecision -m a k in g lev el –
+th e a llo cation of p rod u ction q u a n tities to th e v ariou s
+p rod u ction p la n ts in v olv ed for ea ch p rod u ct fa m ily, in
+a n a ttem p t to m in im ize overall p rod u c tion a n d d istrib u tion c osts. Con sid erin g th e la rg e a m ou n t of con stra in ts
+a n d p ossib le solu tion s a va ila b le, th is p rob lem ca n b e
+reg a rd ed a s a c om b ina toria l op tim iz at ion p rob le m .
+O p era tion a l resea rch tech n iq u es, e.g . lin ea r p rog ra m m in g , ca n b e ap p lied to solv e it, b u t th ese tech n iq u es
+ca n n ot d ea l w ith th e n on -lin earity of p rob lem s oft en
+resu lt in g from it, a sim p le ex am ple of w h ic h b ein g th e
+sca le econ om ies oc cu rrin g in p rod u ction .
+A n interest in g a p p lica tion [ 1] of A N N s to suc h situ a tion s h a s b een d evel op ed b y V iola n te et al. ( 1996) in a
+p relim in a ry stu d y w h ic h ex ploits th e a bility of th e
+H op  eld n eu ra l n et w ork ( H op  eld a n d T a n k 1985) to
+tac kle th is k in d of n on -lin ea r optim iza tion p roblem . T h e
+a lloca tion of q u a n tities in a p rod u ction m ix w a s stu d ied
+in a m u lti-site en v iron m en t, w ith tw o p rod u ction stag es
+b ein g con sid ered ; th e sa m e tech n olog ica l ca p ab ilities a n d
+p rod u ction ca p ac ity w ere a v aila b le to ea ch p rod u ction
+stag e in the d i å eren t p lan ts, th ou gh a t d i å eren t prod u ction costs. T ra n sp orta tion costs from a n y plan t to an y
+oth er p la n t w ere a lso con sid ered . T h e p urp ose of th e
+stud y w as to m in im ize th e resultin g ov era ll costs u n d er
+D esp ite the fact th a t th is a p p lic ation ca n b e con sid ered
+q u ite sim p le if c om p a red to rea l- life situ a tion s, A N N s
+h a ve p rov ed su ita b le to ap p roa ch th is kin d of p rob lem .
+O n th e oth er h a n d, m ore com p lica ted situa tion s w ith a
+la rg er n u m b er of p la n ts or m ore p rod u ction sta g es ca n b e
+ea sily im plem en te d in th e A N N stru ctu re ju st b y a d d in g
+m ore n eu ron s to it. T h is fea tu re a p p ea rs q u ite in terestin g
+if com p a red to oth er a p p roach es, becau se it b ecom es
+p ossib le to sk ip th e b rea k in g d ow n of th e p rob lem in to
+su b p roblem s a n d a void s th e a ssocia ted risk of a su b op tim a l solu tion ( i.e. a solu tion w h ich is op tim a l for th e
+su b p roblem , bu t n ot for th e p rob lem a s a w h ole) .
+F in a ll y, oth er costs b esid es th e p rod u ction a n d tran sportation costs tak en in to acc ou n t in th is a p p lica tion c an b e
+a d d ed to th e m od el, m ak in g it m ore rea list ic.
+I n ou r op inion , op tim iza tion A N N s ha v e p r ov ed c ap a b le of cop in g w ith la rg e-sca le non -lin ea r p rob le m s ( see
+N u m b ers in b ra c k et s ( e.g . [ 1] h ere) m a k e referen ce t o t h e p o sit ion of
+t h e c on sid ered A N N a p p lic a t ion in t h e referen ce t a b le rep o rt ed in t a b le
+a lso section 3.3.3) , b ut th ey ra ise som e d i æ cu lt ies in th e
+m a th em a tica l m od el iza tion of th e p rob lem ( w h ich , e.g .
+a p p ea rs to b e a d i æ cu lt operation in th e K oh on en n et ) .
+O th er a d v an ced c om p utin g tech n iq ues, e.g . g en et ic
+a lg orith m s, sim ulat ed a n n ea lin g , ta b u sea rch , et c. ca n
+p rob ab ly prov id e pra ctitioners w ith m ore su it ab le tools
+Downloaded by [Universitaetsbibliothek Innsbruck] at 10:17 31 October 2017
+M ark et g lob a liza tion , in crea se of q u ality stan d a rd s,
+stron g er com p et ition on serv ice a n d price are d riv in g
+com p a n ies to rev ise th eir d em a n d foreca stin g p rocess. A
+g ood sales forec a stin g system le ad s to a red u ction in p rod u ction p la n n in g d istu rb a n ces ( less sa fety stock a n d less
+stoc k-ou ts) a n d to an in crea se in serv ice lev els.
+T ra d ition al qu a n tita tiv e foreca st in g m et h od s in clu d e
+b oth tim e series a n d c au sa l m od els. T im es series aim at
+forec astin g the fu tu r e v a lu es of a p h en om en on b a sed on
+th e h istorica l d a ta of th e va ria b le b ein g p red icted ( exa m p le s of tim e series m et h od s in clud e m ov in g a v era g e,
+ex p on en tia l sm ooth in g an d th e Box–J en kins m et h od ) .
+C a u sa l m od el s ( a lso ca lled stru ctu ra l m od els) u se d a ta
+from v aria b les oth er th an th a t b ein g p red icted b u t
+w h ose va lu es are lin k ed to th at v a ria b le b y a ca u se–e å ect
+E con om et ric m od el s a s w el l as sin g le an d m u lt ip le
+reg ression m et h od s a re ex am p les of ca u sa l m odels.
+A lt h oug h th ese q u a n titativ e m et h od s p erfor m w ell, th ey
+su å er from som e lim ita tion s. F irst, a la ck of ex p ertise
+m ig h t ca u se a m issp eci c ation of th e fu n ction a l form
+lin k in g th e in d ep en dent an d d ep en d en t v a ria b les
+togeth er, resu lt in g in a p oor regression ( H ill et al.
+1996) . Secon d ly , a larg e a m ou nt of d a ta is oft en req u ired
+to gu a ra n tee a n acc ura te p red iction . T h ird ly , n on -lin ear
+p a tte rn s are d i æ cu lt to ca p tu re ( m an y m eth od s a re b a sed
+on th e lin ea rit y a ssu m p tion of th e p h en om en on ) . F in ally ,
+ou tliers ca n b ia s th e estim a tion of th e m od el p a ra m et ers
+Som e of th ese lim ita tion s c an b e ov ercom e b y th e u se of
+n eu ra l n et w ork s, w h ich h a v e b een m a them atica lly
+d em on stra te d to be u niversa l a p p rox im ators of fu n ctions
+( C y b en k o 1989, H orn ik et al. 1989) . T h e p ossib ility n ot to
+sp ecify a m ath em atic al form u la for th e m od el a priori , as
+w ou ld norm a lly b e req u ired b y reg ression ap p roa ch es, in
+con ju n ction w ith th e in trin sic ca p a b ility of A N N s to
+b u ild fu n ctio na l m od els, lea d s to a m ore a ccu ra te
+a p p rox im a tion of th e tim e series. M oreover, b et ter p erform a n ces ca n b e ach iev ed b y rep la cin g sta tistica l
+m et h od s th a t n eed to b e reestim a ted p eriod ic ally w ith a
+con tin u ou s lea rnin g p r oc ed u re ( H ill et al. 1996) . A s
+reg a rd s the lin ea rity lim itatio n s of som e regression m od els, th ey ca n b e ea sily ov ercom e b y th e intr in sic n on -lin ea r p a tte rn recog n ition fea tu re of n eu ral n etw ork s.
+N eura l n et w orks ca n b e u sed in d em a n d m a n a g em en t
+system s a s ord er forec astin g sy stem s ( tim e series p red ictors) or a s d a ta p rep roc essors for sm ooth in g an d cla ssify in g n oisy d a ta. L u x høj et al . ( 1996) prop ose a h y b rid
+econ om et ric-n eu ral n et w ork m od el for forecastin g tota l
+m on th ly sales [ 2] . T h e p rob lem h ere is c h ara cterized
+b y n on -sta tiona ry v a ria n ce, season a lity a n d a lin ea r p ositiv e tren d in th e m ean of tota l m on th ly sa le s. T h e sy stem
+u n d er stu d y is m a d e up of th ree sta ges, w ith th e ou tp u t of
+a sta ge b ecom in g th e in p u t of th e sta g e th a t follow s it. I n
+stag e on e, a sea son a lly a d ju sted tim e series m od el
+( W in ter’s m et hod ) forec asts th e ov era ll m on th ly sa les
+for th e com p a n y. T h is foreca st is in clu d ed am on g th e
+in p u ts fed to th e sec on d sta g e, w h ere a reg ression m od el
+foreca sts ov era ll m on th ly sa les on ce m ore. O ther v a ria b les are a d d ed to th e m od el, e.g. ov era ll corp ora te
+sales for th e p rev iou s year a n d ov erall sa le s for the p rev ious m on th a n d yea r in som e E u rop ea n c ou n tries. T h e
+foreca st g en era ted b y th e regression m od el an d th e tim e
+series foreca st a re fed to th e th ird -sta g e foreca stin g
+m et h od , w here a gen era l regression n eu ra l netw ork
+( G R N N ) m od el is u sed . T he n et w ork is a lso in p u t w ith
+th e sam e va ria b les u sed for th e reg ression m od el p lu s
+som e m ore v aria b les th a t cou ld n ot b e p roc essed w ith
+su æ cien t a ccu ra cy b y th e reg ression m od el d ue to th eir
+n on -lin ea r p a tt ern ( in th is ex a m p le, th ey a re the tota l
+sales for th e p rev iou s m on th an d th e total sa le s in
+D en m a rk d u rin g th e sa m e period of th e p rev iou s y ea r) .
+E v en tu a lly , th e th ree estim at es g en erated b y th e th ree
+su b m od els ( ex p on en tia l sm ooth in g , reg ression a n d n eu ra l
+n et w ork) a re a v era ged to p rod u ce th e ‘a v era g e foreca st’.
+T h is a p p lic a tion , w h ich u ses a neu ral n et w ork ju st to
+p red ic t w h at th e tw o tra d ition a l m et h od s ca n n ot foreca st
+w ith a ccu ra cy , c lea rly sh ow s h ow som e lim ita tion s of
+trad ition al foreca stin g m et ho ds ca n th en b e overc om e.
+T h e u se of a sim ila r a p p lic ation is su g g ested b y
+H ru sch k a ( 1993) to p red ict the m on th ly sa les of a n
+A u strian consu m er b ra n d b a sed on som e m a rk et in g
+in stru m en ts ( i.e. p rice, a d v ertisin g ) , an d on ex og en ou s
+en v iron m en ta l v aria b les ( i.e. tem p era tu re) .
+A d i å eren t a p p lic ation ca n b e fou n d in M oon a n d
+J a n ow sk i ( 1995) , w h ere a n eu ra l n et w ork in terp ret s
+p rod u ct ord er d a ta a s a p relim in a ry step to foreca stin g
+fu tu re ord ers [ 3] . T h is ca se refers to th e com p u ter in d u stry, w h er e prod u ct life cy cles a re q u ite sh ort a n d tra d ition a l foreca stin g m et h od s fa il d u e to th e la ck of h istorica l
+d a ta . Ba sed on the assu m p tion th at th e life cy cle pa ttern
+of a n ew p rod u ct is sim ila r to th e pa ttern of a t lea st on e
+ex istin g p rod u ct, a tw o-step n eu ra l a pp roa ch is d ev elop ed . A m u lt ilay er n eu ra l netw ork tra in ed w ith a rob u st
+b a ck -p rop a g a tion lea rn in g algorithm ex tra cts th e sh a p e
+of a n u n d erly in g p rod u ct ord er p a tte rn , w h ich is th en fed
+to th e secon d n et w ork ( a self-orga n izin g fea tu re m a p )
+a n d cla ssi ed in to a k n ow n pa ttern . T h e life cy cle pa ttern
+Downloaded by [Universitaetsbibliothek Innsbruck] at 10:17 31 October 2017
+of the n ew p rod u ct is th en p red icted a ssu m in g its b eh a viou r is th e sam e as th a t of th e ex istin g p a tte rn .
+D ue to in crea sin g m a rket com p lex ity ( g lob aliza tion ,
+red u ction of p rod u ct life cy cle, et c.) , d em a n d forec astin g
+h a s b een a d d ressed b y m a n y a u th ors a s one of th e m ost
+strateg ic fu n ction s w ith in th e P P C fra m ew ork .
+F u rth erm ore, th is com p lex ity seriou sly lim its th e p erform a n ce of tra d ition a l foreca stin g system s ( b oth tim e
+series a n d reg ression m od els) . A N N s h a v e p rov id ed satisfa ctory resu lt s in th is con tex t an d th erefore th ey ca n b e
+u sed e å ec tivel y to im p rov e th e a ccu ra cy of corpora te
+H ard req u irem en ts in the P P C d om ain a re fa ced b y
+m a n y m a nu fa ctu rin g c om p a n ies w h ose m a rket situ ation
+is ch a ra cterized a s foll ow s ( H igg in s a n d Brow n e 1992) :
+g rea tly red u ced p rod u ct life cy cles;
+u n p red ic ta ble d em a n d p a tt ern s;
+larg e n u m b ers of com p on en ts w ith high lea d tim es,
+T h ese ch a ra cteristic s h a v e a stron g im p ac t on th e P P C
+a rch itec tu re as a w h ole a n d on th e m aster p rod u ction
+sch ed u le in p a rticu la r, as the u se of ‘pu re’ p rod u ction
+con trol stra teg ies, e.g . m a k e to stock ( M T S) , a ssem b ly
+to ord er ( A T O ) or m a k e to ord er ( M T O ) , very oft en
+g iv es p oor resu lts in th is con tex t. A b et ter p erform a n ce
+ca n b e ach iev ed th rou g h th e a d op tion of h y b rid p rod u ction con trol stra te gies w h ich focu s on m a k in g th e posi3
+tion in g of th e cu stom er order d ecou p lin g p oin t ( C O D P )
+m ore  exib le. D i å eren t kin ds of h y b rid ities ca n b e d istin g u ish ed : a cla ssi ca tion is g iv en in G iesb erts an d V a n
+T h e a d op tion of su ch h yb rid p rod u ction situ ations
+req u ir es a n ev a lu a tion of th e correc t p osition in g of th e
+C O D P w ith in th e g ood s  ow b a sed on a n u m b er of fa ctors, e.g . cu stom er d em a n d , size of c u stom er ord ers, tech n ica l p a ra m et ers of th e item s b ein g p rod u ced , et c.
+T h is situ a tion is ex a m in ed in th e case stu d y rep ort ed in
+section 4.1, w h ere th e u se of a n eura l-b ased m et h od ology
+to  n d th e best c on trol stra tegy for eac h item is d escrib ed .
+T h e resu lt of th e ca se stu d y p rov es th e e å ectiv en ess of
+T h e cu stom er o rd er d eco u p lin g p o in t ca n b e d e n ed a s t h e p oin t in t h e
+g oo d s  ow w h ere t h e fo reca st -d riv e p ro d u c t io n a n d cu sto m er o rd erd riv e p rod u cit on a re sep a ra t ed ( G iesb erts a n d V a n D er T a n g 1 99 2 ) .
+A lt h ou g h b u å er sizin g ca n b e reg a rded a s rela tin g to
+th e d esig n of a m a n u fa ctu rin g system , n ev erth el ess, w h en
+it is p erform ed reg u larly to p rovide m ore  ex ib ility to a
+p rod u ction system it ca n b e con sid ered as a p art of th e
+P P C fra m ew ork ( ca p ac ity plan n in g ) .
+T h e p rob lem h ere lies in th e d et erm in at ion of th e b u ffer size th a t m a kes it p ossib le for the p rod u ction sy stem to
+a ch iev e a b ett er p erform a n ce. A s is w ell k n ow n , p erform a n ce – an d this is esp ecia ll y tru e in a u tom a ted p r od u ction system s – stron gly dep en d s on th e con  gu ra tion of
+system d ev ices ( n u m b er of resou rces, con trol ru les, etc .)
+a n d is a lso stron g ly a å ected b y ch a n g es in ex tern a l c on d ition s, e.g . p rod u ction m ix , d em an d , etc . T h erefore, a
+p eriod ic al recon  g u ra tion of th e p rod u ction sy stem is
+req u ired to g u a ra n tee op tim u m perform a n ce follow in g
+B u å er siz in g p rob lem s fa ll in to th is ca teg ory a n d a re
+d iscu ssed in th e ca se stu d y in section 4.2, w h ere a n A N N
+is tra in ed to p erform as a p la n t em u la tor. T h e in p u ts fed
+to th e A N N a re exter n al con d ition s ( rep resen ted h ere by
+th e pro du c tion m ix) a n d p ro d uc tion sy stem con  g ura tion ( rep resen ted h ere b y th e p la n t b u å er size) , w h erea s
+th e ou tp u t is th e p rod uc tion sy stem p erform a n ce ( rep resen ted b y its th rou g h p u t) . I n th is w a y it is p ossib le to test
+d i å eren t p lan t con gu ra tion s u n d er sp eci c ex tern a l c on d ition s in ord er to select th e best b u å er size.
+T h e grow in g a u tom a tion lev els fou n d in m od ern
+m a n u fa ctu rin g sy stem s req u ire th a t in crea sin g atten tion
+b e d ev oted to the d esig n of suita b le sh op  oor con trol
+system s ( SF C S) . F le xibility , reliab ility , h ig h -q ua lity solu tions a n d rea l-tim e b eh av iou r a re ju st a few of th e
+req u irem en ts th a t a m od ern SF C S sh ou ld m eet. A s is
+k n ow n , SF C Ss a re u sed to p la n , sch ed u le a n d ex ecu te
+th e task s req u ired to process a n ord er. P a rt selection ,
+loa din g , seq u en cin g a n d d isp a tch in g are ju st som e of
+th ese ta sk s; oth er m in or b u t n ev erth el ess im porta n t activ ities d eal w ith tool a lloca tion , m a ch in e b reak d ow n s,
+m a in ten a n ce a n d in sp ection of in -p rocess an d /or  n ish ed
+g ood s ( G u na seka ra n et al. 1993) . A ll th ese fu n ction s h a v e
+to b e p erform ed in an en v iron m en t ch a ra cterized b y m u ltip le p erfor m a nc e targ et s.
+A N N s ha ve fou n d th eir w ay in to som e of th e SF C S
+a reas listed a b ov e: o å -lin e sch ed u lin g , on -lin e sch ed u lin g ,
+q u a lity con trol a n d q u a lity in sp ec tion . T h e m ost sig n i ca n t ap p lica tion s a re rep orted a n d discu ssed below .
+Downloaded by [Universitaetsbibliothek Innsbruck] at 10:17 31 October 2017
+A s is k n ow n , sch ed u lin g is a con strain ed com b ina toria l
+op tim iza tion p rob lem d ea lin g w ith resour ce a lloc ation
+a n d in v olv in g th e generat ion of a seq u en ce of operation s
+( ta sk s) for ea ch m a ch in e fou n d on th e sh op  oor in a n
+a tte m p t to optim ize a so-ca ll ed ob jectiv e fu n ction .
+R esea rch ers h a ve lon g b een searc h in g for e æ cien t solu tion s to th is p rob le m . Sc h ed u lin g ap p roa ch es in clu d e
+m a th em a tica l a n aly sis, d isp a tch in g ru les, kn ow led geb a sed sy stem s a n d d y n a m ic task a ssig n m en t th rou g h con tra ct n et s ( Sim et al. 1994) . N on et heless, ex c ep t for sm a llsized p rob lem s, h ig h com p ut ation a l tim es still rem a in th e
+m a jor d isa d v an ta g e of som e of th ese a p p roa ch es.
+I n th is section w e w ill refer to o å -lin e sc hedu lin g , also
+ca lled sta tic sc hedu lin g , w h ic h in volves th e plan n in g of a
+ x ed set of job s ( V oll m an et al. 1991) .
+D ep en d in g on th e role p la yed b y A N N s, o å -lin e sch ed u lin g a p p lic a tion p rob lem s ca n b e cla ssi ed in to th e follow in g c ateg ories: ( i) th e A N N gen erat es a sch ed u lin g
+solu tion ( op tim iz ation n eu ra l arch itectu res a re u sed
+h ere) ; ( ii) th e A N N b eh av es as a m ulti-criteria ev alu at or
+for solu tion s g en era ted b y oth er optim iza tion te ch n iq u es;
+a n d ( iii) th e A N N sup p orts th e tun ing of p a ra m et ers u sed
+M ost a p p lica tion s fa ll in to th e  rst ca te gory . T h ese
+a p p lic ation s in v olv e th e u se of A N N op tim iza tion a rch itectu res, e.g . th e H op  eld n etw ork , th e I n tera ctiv e an d
+C om p et itiv e n et w ork , th e G a ussia n m a ch in e an d th e
+F oo a n d T a k efu ji ( 1988a ,b ,c) h a ve u sed the H op  eld
+n et w ork to solv e th e n/m job sh op sch ed u lin g p rob le m ,
+con sid erin g h a rd con strain ts ( i.e. p reced enc e an d
+resou rce c on stra in ts) a n d th e ov era ll cost of com p letion
+tim e for a ll jobs. Z h ou et al. ( 1990) ex ten d ed th is a p p lica tion to a 20-job 20-m a ch in e p rob le m . V a n H ulle
+( 1991) d esig n ed a g oa l- prog ra m m ing n et w ork ca p a b le
+of g u a ran teein g con st rain t-sa tisfy in g solu tions. T o av oid
+loca l m in im u m solution s ( a ty p ic al p rob lem to b e solv ed
+w ith th e H op  eld n etw ork ) , A rizon o et al. ( 1992) u sed a
+G a u ssia n m a ch ine m od el ( i.e. a stoch a st ic n eu ral n et w ork) ca p a b le of ov ercom ing th e H op  eld n et w ork d isa d va n ta g es th a n k s to its con v erg en ce d y n a m ics. K im et
+al. ( 1992) d em on strat ed th a t a Boltz m an n m a ch in e ca n
+solv e a sch ed u lin g p rob le m w ith tim e con stra in ts. F u rth er
+a p p lic ation s an d d iscu ssion s can b e fou n d in Z h an g et al.
+( 1991) , T h aw on m a s et al. ( 1992) a n d V a ith y a n at ha n an d
+A d i å eren t u se of A N N s in sch ed u lin g p rob lem s
+in v olv es th eir im p lem en ta tion a s m u lt i-crite ria ev a lu at ors
+of solu tion s d evel op ed b y a con ven tiona l sc hedu ler.
+T h e e æ c ien cy of a sch ed u le can b e m ea su red th rou g h
+m a n y d i å eren t p erfor m an ce crit eria , w ith lea d tim e,
+m ea n la te n ess, m ean tard iness a n d m ea n  ow tim e
+b ein g ju st som e of th em . I n a rea l-life in d u st ria l situ a tion ,
+it is d esir ab le for the ob jectiv e fu nc tion to resu lt in a n on lin ea r com b in ation of som e of th ese criteria , w h ic h m ea n s
+th at a m u lt i- criteria n on -lin ea r ev a lu a tion fu n ction h a s to
+b e d ev elop ed . D a gli a n d Sittisa th a nc h ai ( 1993) h a v e
+d ev elop ed a gen et ic n eu rosch ed u le r c ap a b le of a p p ly in g
+a n A N N to th e ev alu a tion m od u le of a g en et ic a lg or ith m .
+A pop u lation of sch ed u les is g en era ted a t each ite ration of
+th e a lg orith m ; a g en e in te rp ret a tion m od u le th en d ev elop s a G an t t ch a rt of th e sch ed u le an d ca lcu la tes th e
+v alues of th e p erform a n ce criteria . Su ch v a lu es a re pa ssed
+on to th e neu ra l ev a lu at or as inp u ts, w ith th e ou tp u t
+b ein g a score of th e p rop osed sch ed u le. T h e tra in in g
+d a ta set is d ev elop ed b ased on th e ev alua tion of a series
+of sim u la te d sch ed u les b y an ex p ert h u m a n sch ed u ler [ 5] .
+A s reg a rd s th e th ird typ e of a pp lica tion s ( i.e. su pp ort
+to th e tun ing of p ara m eters u sed b y h eu ristic
+a p p roa ch es) , th e con tribu tion p rovid ed b y A N N s seem s
+to b e sign i ca n t [ 6] . A p ra ctica l ap p lica tion in v olv es
+sin g le-m a ch in e job seq u en cin g p rob lem s w h ich a re norm a lly solv ed b y m ean s of h eu ristic ap p roa ch es. W h en th e
+tota l w eig h ted tard iness of th e job s is u sed a s a n ob jectiv e
+fu n ction , th e A T C ( a p p a ren t ta rd in ess c ost) ru le prop osed b y V ep sa la in en a n d M orton ( 1987) p rov es to b e
+th e b est for th e n o-setu p ca se. A n ex ten sion of th is ru le to
+th e setu p ca se ha s b een d ev elop ed by L ee et al. ( 1992) .
+T h e job p riority in d ex ca lcu lated b y th ese ru le s d ep en d s
+on som e look -a h ea d pa ra m eters, th e v a lu es of w h ich a re
+a å ected b y th e p rob lem ch a ra cteristic s ( i.e. n u m b er of
+job s in the qu eue, d u e d a te tigh tn ess a n d d u e d a te
+ra n ge) . K im et al . ( 1995) h a v e solv ed th is p rob lem b y
+in p u ttin g a n A N N ( a m u lt ila yer feed -forw ard netw ork
+train ed w ith a b ack -p rop a ga tion a lg orith m ) w ith th e
+a b ov e-m en tion ed p rob lem ch a ra cteristics, w ith th e pa ra m et er va lu e itself b ein g th e ou tp u t. T h e tra in in g set is
+g en era ted b y a sim u la tion ca m p a ig n th a t selects th e
+v alue of th e p a ram et er w ith th e b est sch ed u lin g p erform a n ce for each d i å eren t sc en ar io ( scen a rios b ein g
+d escrib ed b y th e v alues of th e p rob lem ch ara cteristics) .
+I n th e ea rly 1990s th e u se of A N N s for the solu tion of
+job sh op sch ed u lin g p rob lem s focu sed on N N op tim iza tion a rch itectu res ( th e H op  el d a n d T a n k m od els in pa rticu la r) . T h ese a pp lica tion s p rov ed esp ecia lly e æ cien t in
+solv in g la rg e-sc a le op tim izat ion p rob lem s tha n k s to th e
+in trin sic pa ra ll elism of th eir n eu ra l m od el , a nd perform ed
+b et ter th a n con ven tion a l op era tion a l research tools or
+T h er e a re, h ow ev er, som e d isa dv an ta g es to b e m en tion ed . F irst, th e op tim a l solu tion is n ot alw a y s fou n d
+u sin g th e N N . Secon d ly , th e a p p lica tion of A N N op tim iza tion m od els req u ires a p rop er d escrip tion of th e p rob lem ob jectiv es a n d con stra in ts b y m ea n s of eq u a tion s,
+a n d m a n y a u th ors a gree on th e fa ct th a t th is op era tion
+Downloaded by [Universitaetsbibliothek Innsbruck] at 10:17 31 October 2017
+req u ir es a rel at ively b ig e å ort. M oreov er, d evel op ing a
+su ita ble eq u a tion ca n b e d i æ cu lt ( D a gli an d
+Sittisa th an c ha i 1993) . O n th e oth er h a nd , m ore ‘u serfriend ly ’ a n d, in ou r op in ion , m ore p rom isin g op tim iza tion te ch n iq u es ( i.e. sim u la ted an n ea lin g , gen etic algorith m s, ta b u sea rc h, et c.) ha v e g ra d u a lly ca p tu red th e
+a tte n tion o f th e resea rch com m un ity . F in a lly , on e of th e
+m a jor d raw b a ck s of A N N s v is-a`-v is k n ow led g e-ba sed
+sy stem s is th eir in a b ility to ex p la in h ow solu tion s a re
+Bet te r resu lt s h a ve b een a ch iev ed in th e tw o rem a in ing
+a p p lic ation categ ories [ see th e sc hedu le ev a lu a tor in
+D a g li an d Sittisa th an c ha i ( 1993) a n d th e p a ra m et er
+tu n er in K im et al. ( 1995) ] , w h ere A N N s a re u sed as
+su p p ort in g com pon en ts for a hy b rid tool. T h is a pp roa ch
+to th e sch ed u ling p rob lem ex p loits th e ca p a b ilities of
+oth er recen t te ch n iq u es, e.g. g en et ic a lg or ith m s, th e p erform a n ce of w h ich can be im p rov ed b y integ ra tin g A N N s
+in to th e solu tion fra m ew ork . T h is w ay th e sch ed u lin g
+p rob lem is b rok en d ow n in to a set of su b p rob lem s th at
+ca n b e solved in d iv id u ally th rou g h th e u se of sp ec i c
+O n -lin e sch ed u lin g , a lso ca lled d y n a m ic or real-tim e
+sch ed u lin g, deals w ith situ a tion s in w h ich n ew job s a re
+con sta ntly a d d ed ov er tim e ( V ollm a n n et al . 1991) . O n e
+a p p roa ch to on -lin e sc h ed ulin g is th e u se of d isp a tch ing
+ru les. T h is is w id ely recog n ized a s on e of th e m ost e æ cient w a y s to solv e sh ort-term sch ed u lin g p rob le m s, a s in
+a rea l-tim e en viron m en t an a ly tic al ap p roa ch es ( i.e. in teg er lin ea r p rog ra m m in g or d y n a m ic p rogra m m in g ) ca n
+on ly solv e sm a ll -siz e p rob le m s. O n the oth er h a n d, m an y
+sim u la tion stu d ies h a ve sh ow n th a t th e p erform a n ce of
+d isp a tc h in g stra teg ies g rea tl y d ep en ds on th e sta tu s of th e
+m a n u fa ctu rin g system . System p a ra m et ers, e.g. sh op
+loa d , rou tin g, b u å er size a n d fa cility la y ou t, w id el y a å ect
+th e p erform a nc e of d isp a tch in g stra teg ies; m ea n ing th at
+n o d isp atch in g str ateg y sh ou ld b e reg a rd ed a s th e op tim a l on e, a s its perform a n ce strictly d ep en d s on th e sy stem
+statu s. T h erefore, in a n on -lin e SF C S b a sed on disp a tc hin g ru les, som e sy stem sta tus d ia g nostic s is req u ired to
+e æ cien tly ad d ress th e selection of th e b est d isp a tch in g
+strateg y . A s con ven tion al a p p roach es b a sed on sim u lation a re n ot w el l su ited for rea l-tim e ap p lica tion s du e to
+th eir h ig h c om p u tation a l e å ort, the u se of n eu ra l n et w orks as d isp a tch in g stra tegy selector s h a s b een su gg ested
+A sig n i ca n t ex am ple is rep orte d b y Su n an d Y ih
+( 1996) . I n th eir stu d y [ 7] a rob ot is u sed a s the m a teria l
+h a n d lin g eq u ip m en t for  v e m a ch in es loca te d in a m a n ufa ctu rin g cell. E a ch m a ch in e is eq u ip p ed w ith an in p ut
+a n d ou tp u t b u å er, w herea s th e rob ot itself is eq u ip p ed
+w ith a n eu ra l con troller tha t ca n select an y of seven d isp a tch in g ru les to m ove p a rts from b oth the in p u t a n d
+ou tp u t b u å er of an y m a ch in e. M oreov er, each m a ch in e
+is eq u ip p ed w ith a n eu ra l con troller th a t can selec t a n y of
+eig h t d isp a tch in g ru les a n d u se it to ch oose th e p a rt to b e
+tak en from th e in p u t b u å er. F ifteen p arts are p rocessed
+b y th e sy stem a n d fou r p erform an c e p a ra m et ers ( c yc le
+tim e, a v era ge w a itin g tim e, a v erag e ta rd in ess a n d tard y
+job ra tio) a re ev a lu ated w h en com p leted pa rts ex it th e
+system . T h e n eu ra l con trollers ( m u lt i-la y er p ercep tron )
+a re fed w ith th e sta tu s of th e system ( i.e. q ueu e len g th ,
+d ev ice u tiliza tion in d ex ) a n d w ith a score of th e fou r
+p erform a n ce p ara m ete rs set b y th e p rod u ction m an a g er
+ex tern a lly . T h e ou tp u t of th e n eu ra l con trollers is a score
+for each d isp a tch in g ru le, an d th e ru le w ith th e h ig h est
+v alue is u sed to select the n ex t p a rt to b e p rocessed . T h ese
+n et w orks a re tra in ed to lea rn th e in v erse fun c tion s ta k en
+from a sim u la tion m od el of the sy stem ; d i å erent scen a rios
+( i.e. d i å eren t d isp a tch in g ru les a n d in term ed ia te sy stem
+statu s con dition s) a re sim u la ted for ea ch p iece of eq u ip m en t to m ea su re th e p erform a n ce of th e sy stem a n d to
+crea te a train in g set for th e m u lt i-la y er p ercep tron .
+Sim ila r ap p lica tion s ca n b e fou n d in C ho a n d W ysk
+( 1993) , J on es a n d R ab el o ( 1993) , T ou re et al. ( 1993) ,
+A d i å eren t w ay to tak e ad v a n tag e of neu ra l netw ork
+a p p lica tion s is to entru st th em w ith th e ch oice of th e n ex t
+job to b e processed [ 8] . I n w ork b y L ee et al. ( 1996) , a
+m u lt i-lay er neu ra l n et w ork sch ed u ler is a p p lied to a key b oard a ssem b ly cel l. T h e A N N of th e a p p lica tion is in p u t
+w ith th e sta tu s of th e a ssem b ly cell a n d d et erm in es th e
+n ex t ty p e of k ey b oard to b e p rocessed .
+T h ese exa m p les h ig hlig h t som e im p ortan t rea son s th a t
+ju stify th e u se of A N N s for th e rea l-tim e con trol of m an u fa ctu rin g sy stem s. F irst, th e n eed for sh ort resp on se tim es
+is so stron g tha t oth er a p p roa ch es, e.g . th e trial-a n d -error
+a p p roa ch b a sed on th e u se of sim u la tion for th e itera tiv e
+ev a lu at ion of di å eren t con trol solu tion s, h a v e p rov en
+u n su ita ble. Se con d ly , inc rea ses in p rob lem sc op e a å ect
+th e size of th e n eu ra l n et w ork a n d its c om p u ta tion a l
+tim e in a le ss th a n lin ea r w a y . T h is im p lies th at a
+m u ch la rg er a m ou n t of in p u t d a ta ca n b e p roc essed ,
+th u s im p rov in g solu tion q u a lity a n d m a kin g th e a p p lica tion of m u lt ip le -criteria ev a lu a tion m et h od s ea sier ( Su n
+a n d Y ih 1996) . O th er b en e ts in clud e th e a b ility to  n d
+p oten t ia l a n sw ers ev en to n oisy a n d in com p lete d ata
+( C h o a n d W y sk 1993) . H ow ev er, som e d ra w b a cks n eed
+to b e high lig hted as w el l. U n p red ic te d ev en ts, e.g .
+m a ch in e b rea kd ow n s or a lt ern a tiv e p rocess p lan s, ca n not
+b e ea sily m a n ag ed b y A N N s; in a d dition , an y ch a n ges to
+th e sy st em ( e.g. th e a d d ition of a n ew m a ch in e or th e
+m a n u fa ctu rin g of a n ew p art) ca ll for th e ret ra in in g of
+th e n eu ra l n et w ork , a n d th e d ev el op m en t of th e n ew d ata
+set req u ired for ret ra in in g p u rp oses in clu d es a m od i ed
+sim u la tion m od el a s w ell a s n ew sim u la tion ru n s.
+Downloaded by [Universitaetsbibliothek Innsbruck] at 10:17 31 October 2017
+A la rge n u m b er of m a n u fa ctu rin g processes ca n b en e t
+from con trol c ha rts. A s is k now n , con trol c h arts are com m on ly used in sta tistica l p rocess c on trol ( SP C ) to d et erm in e w h et h er a p rocess is in -con trol or ou t-of-con trol.
+T h e ou t-of-con trol sta tu s m a y b e g en era ted eith er b y a
+p oin t fa lling outsid e th e con trol lim its or b y a series of
+p oin ts ex h ib itin g a so-c alled un n a tu ra l pa ttern or n onra n d om v ariation . D i å eren t k in d s of u n n a tu ral p attern s
+h a ve b een id en ti ed : up w a rd a n d d ow n w ard tren d s, system a tic v a ria tion s, cy cle s, u p w ard an d d ow n w ard sud d en sh ifts of th e m ea n a n d d i å eren t m ix tu res of th e
+T h e in terp ret a tion of u n n a tu ra l p a tt ern s req u ires
+sk illed op era tors. I n th e p a st, ru le s, e.g . the zon e test or
+ru n test ( e.g. fou r ou t of  v e su ccessiv e ob serv a tions fa llin g ou tsid e of a speci ed ran g e) , w ere a d op ted to h elp
+h u m a n op era tors p erfor m th is ta sk ; h ow ev er, a correct
+recog n ition still rem ain s a d i æ c ult p roc ess, an d on e
+th a t stron g ly dep en d s on h u m a n sk ills. M oreov er, th e
+a u tom ation of p rod u ction p rocesses m ore a n d m ore
+oft en req u ir es a rea l-tim e a na ly sis of con trol ch a rts to
+m a k e p rom p t correction s to th e p roc ess u n d er stu dy p ossib le .
+A con trol ch a rts a n a ly ser [ 9] , b ased on n eu ra l n et w orks, h as b een p rop osed b y C hen g ( 1997) in a stud y
+th a t d em on stra tes th e p ossib ility to e æ cien tl y p erform a n
+a n alysis of con trol c h arts w h ile ov ercom ing the p rob lem s
+m en tion ed a b ov e. A m od u la r n eu ra l netw ork is in p ut
+w ith a seq u en ce of th e la st m ob serv a tion s from a c on trol
+ch a rt ( on e ob serva tion for eac h n euron in th e in p u t
+la y er) ; th e ou tp u t la y er con sists of  v e n eu ron s, ea ch
+corresp on d in g to one of th e u n n a tu ral p atterns ad d ressed
+b y th e n et w ork : tren d , system a tic va ria tion , cy cle , m ix tu re a n d m ea n sh ift . W h en ev er a n u n n a tura l pa ttern is
+recog n ized , th e corresp on d ing neuron ret u rn s a v alue of
+1, oth erw ise it retu rn s a v alu e of 0. T h e tra in ing d ata set
+is generat ed u sin g a M on te C a rlo m et h od , c h an g in g p ara m et ers, e.g . m a gn itu d e of c h a ng e, d a ta cy clin g p eriod ,
+a n d p rob a b ility of sh ifting b etw een p attern s. T he d a ta
+from an a u tom ated m a n u fa ctu rin g sy stem a re a u tom a tica lly c ollected b y sen sors an d ca n b e exa m in ed b y a n
+u n m a n n ed n eu ra l-b a sed m od u le w ith a view to d iscov erin g u n n a tu ra l p a ttern s. O p era tors are a le rt ed on ly w h en
+ou t-of-c on trol situ a tion s a re d et ec te d .
+Sim ila r a p p lica tion s ca n b e fou n d in P h a m an d
+O ztem el ( 1992, 1994) , H w a rn g a n d H u bele ( 1992,
+1993a ,b ) an d Sm ith ( 1994) . M ore recen tly , H w arn g
+( 1995) h a s d ev elop ed a sy stem w h ich focu ses on th e
+d et ection of cy clic d a ta a n d b eh a ves bett er th a n g en era l
+p u rp ose p a ttern recog n izers in h ig h -n oise con d ition s a n d
+in th e p resen ce of la rg e-a m p lit ud e cyc les.
+D esp ite th e im p rov em en ts A N N s h a ve b rou g h t to th e
+con tro l ch art p a tte rn recog n ition p rob lem , som e a sp ects
+still req u ire fu rther stu d y in g a n d resea rch in g . T h e rec og n ition of m u ltip le u n n a tu ra l p a ttern s occu rrin g a t th e
+sam e tim e h a s n ot b een in v estig a ted yet. M oreov er, a
+d ia gn ostic system ca p a b le of d et ectin g th e ca u ses of u n n a tu ra l p attern s w ou ld b e a h elp fu l tool for op era tors.
+C h en g ( 1997) su g g ests th a t a h y b rid tool m ad e u p of
+A N N s a n d a k n ow le d ge- b ased sy stem m ig h t b e a p rom isin g tool for p erform ing su ch a task , w h ich req u ires b oth
+ex p erienc e a nd a g ood p rocess k n ow le dg e.
+A s a n ex am p le of th e poten tia l of A N N a p p lica tion s in
+th e P P C d om a in , tw o ca se stu d ies a re reported b elow .
+T h e  rst on e com es from th e m a ster p rod u ction sch ed u lin g a rea a n d u ses A N N s a s a d ecision -su p p ort tool for
+th e selection of th e b est p rod u ction con trol stra teg y to b e
+a p p lied to a w ell-d e n ed p rod u ction con text, a n d to b e
+ch osen a m on g m a ke to ord er, a ssem b le to ord er a n d
+m a ke to stock op tions. T h e secon d on e com es from th e
+ca p a city p la n n in g a rea a n d sh ow s th e u se of a n A N N to
+m a n ag e th e p la n t c on  g u ra tion p rob le m ( n u m b er of b u ffers an d W I P ) , b a sed on th e p rod u ction m ix to b e m a n u fa ctu red .
+4.1. Production control strateg y selection
+T h e case stu d y [ 10] d escrib ed b el ow d ea ls w ith a n
+a p p lica tion d ev elop ed b y a m an u fa cturer of va lv es u sed
+to regu la te w a ter a n d stea m  ow s in resid en tia l h ea tin g
+a n d coolin g eq u ip m en ts [ a m ore d et a iled rep ort on th is
+ca se stud y ca n b e fou n d in C orra d i et al. ( 1996) ] .
+T h e com p an y m an u fa ctures m ost of th e v a lv e c om p on en ts itself a n d a ssem b les th e en d p rod u cts. P u re p r od u ction control stra teg ies ( i.e. m a k e to stock , a ssem b le to
+ord er an d m a k e to ord er) im p lem en ted in th e p a st h a d
+g iv en poor resu lt s d ue to severa l p rob lem s w h ich w ill b e
+d iscu ssed in m ore d et a il la ter, w h erea s a hy b rid ap p roa ch
+b a sed on d i å eren t k in d s of strateg ies an d in v olv in g th e
+u se of a n A N N p roved d e n itely m ore su ita b le. T h e
+p rod u ction en v iron m en t th a t m ad e th e a d op tion of a
+p u re p rod u ction con trol strateg y d i æ cu lt w ill b e ou tl in ed
+in th e n ex t sect ions; follow in g it w ill b e a d escrip tion of
+th e hy b rid p rod u ction c on trol ev en tua lly a d op ted a n d
+th e A N N im p lem en ted for th e selection of th e b est
+Downloaded by [Universitaetsbibliothek Innsbruck] at 10:17 31 October 2017
+F ig u r e 2. P ro cess p la n  ow c ha rt .
+T h e com p an y in v olv ed in th is ca se stu d y m a n u fa ctu res
+a w id e ran ge of en d p rod u cts ( 3200 ite m s) ou t of 900
+com p on en ts an d 100 d i å eren t m a teria ls. T h eir m a n u fa ctu rin g p la n t is m a d e u p of n in d ep en d en t m a ch in in g
+w orksta tion s p lu s a b u å er for sem i- n ish ed p rod u cts an d
+a n assem b ly line (  g ure 2) . I n d epen den ce b et w een w or kstation s is g u a ra n teed , a s ea ch item b ein g p rod u ced is
+fu ll y p roc essed b y on e sin g le m a ch in e. T he  n ish ed
+g ood s a re ob ta in ed b y assem blin g com p on en ts b a sica lly
+m a n u fa ctu red b y th e m a ch in ing w ork station s ( som e
+m in or stan d a rd com p on ent s a re p u rch ased from ex tern a l
+I n su ch a n en v iron m ent, c om p lia n ce w ith ord er d u e
+d a tes req u ir ed b y th e cu stom ers ( on w hich th e prov ision
+of a sa tisfa ctory serv ice lev el is b a sed ) is n ot p ossib le if th e
+M T O stra te gy is ad op ted , b eca u se of con stra in ts du e to
+th e lim ite d ca p a city of a v ailab le m a ch in es. T h e a ssem b ly
+stag e, on th e oth er h a n d , d oes n ot su å er from an y
+ca p a city sh ort ag es; rath er, it h a s qu ite a short lea d tim e
+a n d th erefore it ca n a lw a y s b e ca rried ou t a ft er receiving
+th e ord ers ( A T O ) . F in a ll y , a bottlen eck is id en ti ed in
+T h e m a in ch a rac teristics of th is p rob lem , sh ared b y a
+w id e n u m b er of com p a n ies, c an b e su m m a rized as follow s.
+( 1) A V -sh a p ed b ill of m a teria l ( i.e. a w id e ra n g e of
+sem i- n ish ed p rod u cts a n d a n ev en w id er ran g e of
+en d p r od u cts) : th is is d u e to a n in crea sin g d em a n d
+for cu stom iza tion , w h ich ca u ses th e n u m b er of
+op tion s a n d v a ria n ts in ea ch p rod u ct fa m ily to
+( 2) A strong va ria b ility of cu stom er d em a n d in term s
+of b oth ord er plac em en t freq u en cy a nd ord er siz e:
+th e sim u lt a n eou s p resen ce of th ese tw o e å ects
+m a k es it d i æ cu lt to d et erm in e w h et her a n ord er
+w ill b e p laced a n d , in th is ca se, w h a t its size w ill
+( 3) V a ry in g d em a n d p attern s from on e item to th e
+n ex t, a s th e com p an y su p p lies b oth item s c ha ra cterized b y a h ig h ly v aria b le d em a n d a n d item s
+( 4) L on g setu p tim es v is-a`-v is p rocessin g tim es:
+rem a rk a b le im p rov em en ts h a v e b een a ch iev ed in
+th is  eld , b u t som e m a ch in es still req u ire a v ery
+( 5) P ressu re from c ustom ers d em an d in g sh orter d eliv ery tim es.
+A s stated in section 1, th e a d op tion of p ure p rod u ction
+con tro l strateg ies in su ch a n en viron m en t resu lt ed in p oor
+p erform a n ce. A s a m a tte r of fa ct, M T S stra te gies p rov ed
+ex trem el y exp en sive d u e to th e h igh stock lev el s req u ired
+to m a n u fac tu re a v ery la rge ran g e of en d p rod u cts w hile
+a t th e sam e tim e h a v in g to m eet a h ig h ly v aria ble cu stom er d em an d . O n th e oth er h an d , a n M T O str a teg y
+en tailed a v ery la rge n u m b er of setu ps b ecau se th e ch a ra cteristics of th e dem a n d [ see ( 2) a n d ( 3) ] a n d th e la rg e
+n u m b er of en d prod u cts w ou ld m a ke it d i æ cu lt to grou p
+d i å eren t ord ers tog et her [ see ( 1) ] ; as a con seq uenc e, su ch
+a strateg y ca u sed h igh setu p costs, a h ig h c ap a city c on su m p tion a n d a low n et m a ch ine u tiliza tion, th u s m a k ing
+it im p ossib le to m eet d em a n d un d er n orm a l con d ition s
+w ith ou t resortin g to overtim e or th e p u rch a se of extra
+T h e A T O stra tegy in volv ed low er stock -ca rry in g costs
+v is-a`-v is th e M T S stra te gy , b oth b eca u se of th e n a rrow in g d ow n of th e n u m b er of item s in stock an d b eca u se of
+th eir low er u n it cost. M oreov er, th is stra teg y req u ired less
+ca p a city th a n th e M T O stra teg y b ec au se it allow ed a lotsizin g p olic y . H ow ev er, in th e en v iron m en t u n d er stu d y ,
+th e h ig h ord er size v ariab ility [ see ( 2) ] a n d th e still la rg e
+n u m b er of sem i- n ish ed p rod u cts [ see ( 1) ] ca u sed th e
+A T O strateg y a lso to req u ire v ery h ig h stock s. I n ord er
+to ov ercom e th e d ra w b a ck s of th e a p p roa ch es m en tion ed
+a b ov e, th e ad op tion of a h y b rid form of p r od u ction c on trol strateg ies w a s con sid ered . T h e h y b rid ity referred to
+h ere is c all ed a ssortm en t h y b rid ity ( G iesb er t a n d V a n
+D er T a n g 1992) an d con sists of th e a d op tion of d i å eren t
+p u re p rod u ction stra te gies for th e d i å erent item s m a k ing
+u p th e overall corp ora te p rod u ct ran g e. T hese item s ca n
+b e either en d p rod u cts c h ara cterized b y di å eren t p osition s of th e cu stom er ord er d ec ou p lin g p oin t ( i.e. b oth
+stan d a rd prod u cts m a n u fa ctu red to stoc k an d sp ec ia l
+p rod u cts b a sed on cu stom er sp eci ca tion s) or c om p on en ts of end p rod u cts ( henc e in clu d ed in th eir p rod u ct
+stru ctu re) m an u fa c tu red a ccord in g to d i å eren t C O D P
+I n th e c ase u nd er stu dy , a h y b rid A T O –M T O strateg y
+w as c on sid ered . T h e m a in issu e to a d d ress h ere w a s strat-
+eg y im p lem en ta tion , i.e. th e selection of th e item s to b e
+p rod u ced a s M T O a n d to b e a ssem b led as A T O . A n
+A R T 2 n eu ra l n et w ork ( K u n g 1993) w a s u sed to p erform
+T o p rop erly d esig n a n A N N , the m ain elem ents
+in v olv ed in th e ch oice of a con trol stra teg y for a n item
+m u st b e con sid ered . T h ese a re a s follow s.
+Downloaded by [Universitaetsbibliothek Innsbruck] at 10:17 31 October 2017
+Setu p tim es: th e long er th e setu p tim e, th e w orse th e
+M T O stra teg y a ssoc ia ted to it, a s m ore tim e is
+U nit costs a n d rel at ed in v en tory-ca rry in g costs: th e
+h igh er th e un it cost, th e b et ter th e M T O stra tegy
+O rder size v a ria b ility : togeth er w ith cu stom er ord er
+freq u en cy , th is p ara m eter a å ects th e in v en to ry
+lev els need ed for a n A T O strateg y ; th u s, th e h ig h er
+th e order size v a ria b ility , th e b et ter th e M T O strategy a ssoc iated to it.
+C u stom er ord er freq u en cy : th e h ig h er th e cu stom er
+ord er freq u en cy , th e b et ter th e A T O stra tegy associa ted to it.
+P rocessin g tim es: th e A T O stra teg y can b e u sed
+su ccessfu lly to m an a g e item s w ith lon g er p rocessin g
+tim e, a s th eir d ep leted stoc k can b e replen ish ed in
+T h e n etw ork u sed to h an d le th is p rob lem featu res  v e
+in p u t n eu ron s rep resen tin g th e a b ove-listed  v e d ecision
+v a ria b les. A fter receiv in g a n in p u t pa ttern for ea ch ite m ,
+th e n et w ork crea tes clu sters of item s w ith sim ila r in p ut
+v a ria b les. T h e n eu ra l a p p roach a ssu m es th e in itial u se of
+a M T O -b a sed p rod u ction con trol stra teg y for a ll item s,
+a n d th erefore req u ires th e id en ti c ation of th e item s th at
+m ig h t b est b e m a n a g ed throu g h a n A T O a p p roach , p rov id ed th e targ et service lev el ( ex p ressed a s ex p ected v a lu e
+T h e n u m b er a n d siz e of th e clu sters crea ted in th e
+resu lt ing A R T n et w ork d ep en d on a ty p ica l p a ra m et er
+of th e A R T a rch itectu re ( i.e. th e v ig ila n ce th resh old )
+w h ich d et erm in es th e d eg ree of d iscrim in a tion b et w een
+d i å eren t ca teg ories: a la rge v ig ila n ce v a lu e cla ssi es th e
+in p u t p a tt ern s in g rea t d et ail, w h erea s a sm a ll v igila n ce
+v a lu e p rovid es ju st a rou g h cla ssi ca tion . H ere follow s a
+d escrip tion of th e p roced u re to b e follow ed . T o sta rt w ith ,
+th e item sa m p le b est m a n ag ed th roug h a n A T O
+a p p roa ch is in p u t in to th e n et w ork after settin g th e vigila n c e p a ra m et er to a  xed v alu e ( w ith th e in pu ts b ein g
+m a x im u m cu stom er ord er freq u en cy , setu p tim e a n d p rocessin g tim e, p lu s m in im u m u n it cost a n d v a ria b ility
+F igu re 3. F lo w ch a rt fo r th e n eu ra l netw ork a p p ro a ch .
+d eg ree of the ord er size) . T h is trig g ers on e of th e ou tp u t
+n eu ron s, rep resen tin g th e A T O c lu ster. N ex t, a ll item s
+a re p resen ted to th e n et w ork an d th e resu lt ing in p u t
+p a tt ern s trig ger sev er al ou tp u t n euron s, each of w h ich
+rep resen ts a d i å eren t ca teg ory . A c la ssi c a tion is th erefore p erform ed .
+T h e item s cla ssi ed in to th e A T O c lu ster a re to b e
+m a n ag ed as A T O , w h ile th ose cla ssi ed in to a ll th e
+oth er clu sters a re to b e m a n ag ed a s M T O . D i å eren t
+cla ssi ca tion s are ob ta in ed b y low erin g th e v ig ilan ce pa ra m et er, w ith a d ecrea sing n u m b er of clu sters b ein g trig g ered a n d clu ster size b ec om in g b ig ger a n d b ig g er: a
+g row in g n u m b er of n ew item s is in clu d ed in to th e A T O
+clu ster in an ord er th a t re ects th eir sim ila rity from a n
+T h e neu ral n et w ork a p p roach referred to in  g u re 3
+w or ks a s follow s. A cu stom er serv ic e lev el ( SL ë ) is set a s a
+con st raint to b e m et ( a service lev el b ein g d e n ed a s th e
+ra tio b et w een ord ers prod u c ed on tim e an d th e tota l
+n u m b er of ord ers receiv ed ) . A  rst, ten ta tive h igh -v ig ila n ce th resh old is set in the N N , an d a te nta tiv e cla ssi ca tion is p erform ed a n d tested w ith th e h elp of a
+sim u lation m od el of th e prod u c tion sy stem . T h e pu rp ose
+of th is sim u la tion is to ch eck w h et h er cu stom er sa tisfa ction req u irem ent s a re m et. I f th is a tte m p t fails, a less
+restrictiv e vig ilan ce th resh old is set a nd a n ew cla ssi c ation is p erform ed . T h e cla ssi ca tion ob ta in ed is th en
+tested a g ain w ith th e h elp of th e sim u la tion m od el .
+T h is itera tiv e p roced u re stop s w h en a fea sible cla ssi c ation is d eveloped b y th e n eu ral n et w ork ( i.e. w h en th e
+T h is sp ec ial a p p lic ation of A N N s to th e P P C d om a in
+d em on stra te s th a t even d i æ cu lt ta sk s, e.g. th e con tem p orary ev a lu a tion of  v e d i å erent p a ra m et ers u sed to
+Downloaded by [Universitaetsbibliothek Innsbruck] at 10:17 31 October 2017
+F ig u r e 4. D isc ret e-ev ent sim u l at ion for t he t ra inin g of A N N
+h a n d le a h y b rid p rod u ction con trol strateg y , ca n be su ccessfu ll y m an a g ed b y A N N s.
+4.2. U sing A N N s as a decision support system ( D SS) f or
+plant parameter de nition in a paintshop
+T h e com p lex it y of p rod u ction sy stem s a n d th e fa stm ov in g ev olu tion of p rod u ct scen a rios req u ir e a p eriod ica l m od i ca tion of th e p rod u ction system con  g u ration
+a n d th e P P C sy stem s su p p orting it. U ser-frien d ly , fast
+a n d  ex ib le d esig n tools a re n eed ed for th is p u rp ose.
+Sim u la tion h as prov ed to b e a p ow erfu l tool, ev en th ou g h
+its reg u la r u se – p a rtic ular ly in P P C p rocesses – ha s
+som e d ra w b ack s a tta c hed to it ( tim e c on su m p tion b eing
+on e of th e m ost im p orta n t of th em ) . A s th is ca se stud y
+sh ow s [ 11] , A N N s c an b e u sed as a d ecision sup p ort
+sy stem for th e settin g of P P C p a ra m et ers ( Ca v a lieri et
+al. 1997) . I n p articu la r, th e ob jectiv e h ere is to g iv e
+tw o p a ram eters ( i.e. n u m b er of b u å ers a n d m a xim u m
+w ork-in -p rog ress) th e m ost a p p rop ria te v a lu es req u ired
+to fu l l cu stom er ord ers over a certa in p la n n in g p eriod .
+A  ow ch a rt for th is ap p roa ch is sh ow n in  g u re 4. A
+sim u la tion m od el of a real-life plan t is develop ed to tra in
+a m u lt i-lay er p ercep tron A N N . O n ce tra in ed , th e A N N
+ca n p erform th e sa m e fu n ction a s th e sim u la tion. T h is
+en su res th a t, on ce the p a in tsh op pa ra m eters are en tered
+in th e form of in p u t v ariab le s X i ( t ) , the resu lt in g ou tpu t
+v a ria b les Y i ( t ) ca n b e directly ev alu a ted b y th e A N N
+T h u s, on e of th e m ost im p orta n t p rop ert ies of A N N s is
+a ctu ally their in trin sic a b ility to crea te a n im p lic it m od el
+of th e w h ole op era tion of a system sta rtin g from th e o å lin e lea rn in g of a lim ited b u t sign i ca n t n u m b er of exa m p le s.
+F ou r d i å eren t p rod u ct ty p es are m a n u fa ctu red b y th e
+p la n t u n d er stu d y : m et ro w ag on s, tra m w a g on s a n d ra ilw ag on s for lon g - a n d sh ort-d ista n ce p a ssen g er tra in s. T h e
+p la n t is m a d e u p of th ree shop s: th e b od y sh op , w h ere
+w ag on s a re p repa red for p a in tin g ; th e p a in t sh op itself,
+w h ere th e p aintin g p roc ess ta kes p la ce; an d th e trim
+sh op , w h ere w ag on s are c om p leted .
+T h e focu s h ere is on th e p a in tsh op, as it a cts as a b ottlen eck for th e en tire p rod u ction p la n t (  g u re 5) . T h e
+p a in tsh op d ep a rtm ent is d iv id ed in to sev er al a rea s ( i.e.
+p a in tin g p repa ra tion , retou c hin g, d ry in g , et c.) , w h ile th e
+rem a in in g sp a ce is u sed a s a sy stem b u å er. W a g on s en ter
+th e p a in tsh op th rou g h th e in p u t/ou tpu t area, a n d m ov e
+th rou g h th e d i å eren t d ep a rtm en t a reas a ccord ing to th eir
+rou tin g sc h ed u le. W h en a task is com p leted a n d th e n ex t
+op erat in g a rea is b u sy , th e w a g on is d el iv ered to th e
+b u å er area. A s th e fou r p rod u cts h a v e d i å eren t c yc les,
+ca p a city req u irem en ts for ea ch tech n ologica l a rea
+d ep en d on th e p rodu ct m ix to b e p rod u ced in th e p la n n in g p eriod : th erefore th e size of th e tech n olog ica l a n d
+b u å er a rea s m u st b e ch an g ed a ccord in g to th e sch ed u led
+p rod u ction m ix to a ch ieve th e b est p la n t p erform a n ce.
+T w o perform an c e pa ra m eters a re ad d ressed h ere, i.e.
+m ea n th rou g h p u t tim e a n d n um b er of item s m a n u fa ctu red in th e p la n n in g period for ea ch of th e fou r p r od u ct
+g rou p s. T h e prob lem in p u ts a re th e tw o design pa ra m et ers ( i.e. n u m b er of b u å er s a n d m ax im u m w ork -in p rogress) a n d th e q u a n tities ex p ec te d to b e p rod u ced by
+th e system in th e p la n n ing p eriod ( ta b le 2) .
+T h e gen era tion of d ata a b ou t p la n t op era tion b y
+th e sim ulation m odel is ob ta in ed b y v a ry in g th e six
+in p u t v a ria b les ov er a d iscr et e ra n ge of v a lu es ( ta b le 3
+rep orts th e v a lu es of th ese v a ria b les, y ield in g 4020
+fea sib le ru n s ou t of th e 11 340 run s of a fu ll fa ctoria l
+T a b le 2. Sy m b ols a d op ted for t he d esign a n d p erform a nc e
+M a x n u m b er of w a gon s ( m ax W I P )
+Downloaded by [Universitaetsbibliothek Innsbruck] at 10:17 31 October 2017
+O u t p u t p erform a nc e v a ri ab les
+M ean t h ro u g h p u t tim e of m et ro w ag ons
+M ean t h ro u g h p u t tim e of sh ort -d ist an ce t ra in
+M ean t h ro u g h p u t tim e of lo ng -d ista nc e tr ain
+M ean t h ro u g h p u t tim e of t ra m w a g ons
+N u m b er of m etro w ag ons p ro d u ce d
+N u m b er of sh or t-d ista nc e tr ain w a g on s p ro d u ced
+N u m b er of lon g -d ist an ce t ra in w a gons p ro d u c ed
+N u m b er of tra m w a g on s p r od u ced
+F ig u r e 6. A N N in p u ts a n d ou tp u ts.
+T a b l e 3. D esign of sim u l at ion ex p erim en ts.
+A s th e A N N u n d er stu d y h a s to c arry ou t reg ression
+a n d g en era liza tion ta sk s, a m u lti-lay er p ercep tron
+( M L P ) w ith a b a ck -p rop ag a tion lea rn in g a lg orith m
+w a s selected a s th e n etw ork a rch itectu re.
+T h e m ost su ita b le top olog y w a s ch osen after testin g
+sev era l A N N con  g u ration s w ith a d i å eren t n u m b er of
+h id d en le vel s a n d a d i å eren t n u m b er of n eu ron s in ea ch
+lev el; d i å erent in teru n it con n ection m ech an ism s w ere
+a lso tested . T h e tra in ing of the A N N is p erfor m ed as
+T o p rov id e th e A N N w ith a p rop er tra in ing d a ta set,
+tw o p relim in a ry a n alyses w ere p erform ed on th e a cq u ired
+d a ta. T h e  rst on e w a s a correla tion a n a ly sis of th e
+p rob lem va ria b le s, w h ose resu lt s a re rep orted in ta b le
+4. I t ca n b e seen th a t n on e of th e in p u t v aria b les is
+a b le to ex p la in th e b eha v iou r of th e d ep en d en t ou tpu t
+v a ria b les by itself d u e to the low va lu es of th e resu lt in g
+correla tion in d ex . A s a con seq u en ce, a ll in pu ts m u st b e
+Pr od u ced q u an tities of Long-d istan ce w ago n s
+F igu re 7. T h ro u gh p u t tim e of tra m w a g on ( T 4) as a fu nc tion of
+th e ex p ect ed nu m b er of lo ng -d ista nc e tr a in w a gon s ( E Q 3) a n d
+tra m w a g on s ( E Q 4) p ro d u ce d .
+T h e secon d an alysis a im s a t v erify in g w h et h er th e
+w h ole in p u t su rfa ce sh ou ld b e u sed in th e tra in in g d ata
+set. W h en th e resp on se of th e p rod u ction sy stem to d ifferen t v a lu es of th e desig n a n d in p u t va ria b les is ex a m in ed (  g u re 7) , a con sisten t b eh a v iour of th e m ea n
+th rou g h p u t tim e is ob serv ed in the in itia l p eriod ( ‘ a t
+zon e’) . T h is tren d ten d s to tu rn in to a steep er a nd steep er
+th rou g h p u t tim e cu rv e ( ‘p ea k z on e’) as th e sy stem
+a p p roa ch es its con gest ion poin t. G iv en th is resp on se su r-
+T ab le 4. C orrela t ion m at rix fo r in p u t a nd ou tp u t v a ria b le s.
+T a b l e 5. P erform a nc e of th e tra in ed A N N .
+A cc u r at ely est im a ted p a t ter ns
+T a b le 6. P er for m a n ce of t he re gr ession m od el.
+Downloaded by [Universitaetsbibliothek Innsbruck] at 10:17 31 October 2017
+A cc u r at ely est im a ted p a t ter ns
+fa ce, a tra in in g d a ta set com p osed of p a ttern s ev en ly
+d istrib u ted ov er th e in p u t su rfa ce w ould p rob a b ly resu lt
+in a n over t ting of th e A N N , especia ll y in th e  a t zon e.
+T o av oid th is p rob lem , a p rop er b a la n ce of p a ttern s from
+th e tw o zon es ( i.e. th e  a t zon e a n d p ea k zon e) m u st b e
+selected : to ach iev e th is g oal few p a tt erns from the  at
+zon e an d m ore p a ttern s from th e p ea k zon e a re in clu d ed
+T h e an a ly sis of resu lt s w a s ca rried ou t u sin g a va lid ation set m ad e u p of 360 p a ttern s. Sp ecia l a tten tion w a s
+d ev ote d to th e follow in g m ea su rem en ts.
+M ax im u m error for b oth th e th rou g h p u t tim e an d
+th e nu m ber of w a g on s p rod u ced in th e p la n n in g
+M ean error for th e tw o p a ra m et ers m en tion ed
+a b ov e th rou g h ou t th e com p let e v alid a tion d ata set.
+N u m b er of p a ttern s a ccu rat ely estim at ed b y th e
+A N N ( a p a tt ern is sa id to b e estim a ted a ccu ra tely
+b y th e A N N w h en th e error is less th an th e 10% of
+th e correct v a lu e) . T h is in d ex is a m ea su re of th e
+T h e resu lt s a re rep orte d in ta b le 5. T h e m a x a nd m ea n
+errors a re m ea su red in da y s a n d u n its for m ea n th rou gh p u t tim es ( T 1, T 2, T 3 a n d T 4) a n d q u a n tities p rod u ced
+( Q 1, Q 2, Q 3 a n d Q 4) , resp ec tiv ely , w h erea s p a tt ern estim a tion a cc ura cy is ex p ressed b y p ercen ta g e va lu es. T h e
+tab le sh ow s a g ood p erform a n ce of th e A N N a s a p la n t
+em u la tor: ov er 95% of th e m ea n th roug h p u t tim e p attern s a re estim a te d a ccu ra tely, ev en if a low er p ercen ta g e
+( b u t still close to 90% ) is foun d for q u a n tities p rod u ced .
+4.2.4. Comparison with a reg ression model
+A m u lt ip le lin ea r reg ression m od el w a s tested u sin g th e
+sam e d a ta in a n attem p t to b uild a b enc h m ark b a sed on a
+trad ition al a n a ly tica l tech n iq u e. I n ord er to m od el th e
+rela tion sh ip b etw een d ep en d en t ou tp u t v a ria b les Y i ( i.e.
+T 1, T 2, T 3, T 4, Q 1, Q 2, Q 3 an d Q 4) a n d in p u t v a ria b les X j ( i.e. E Q 1, E Q 2, E Q 3, E Q 4, B an d W ) , a sta n d a rd tra n slog fu n ction a l form w a s a d op ted :
+I n tab le 6, th e b eh av iou ra l results of th e reg ression
+m od el a re repo rte d. A com p a rison w ith th e corresp on d in g resu lt s of ta ble 5 sh ow s th at th e A N N a p p roac h g ua ra n tees a m ore fa v ou r ab le p erform a n ce; th is is tru e b oth
+for m a x im u m d ata p red ic tion error a n d for th e resu lt in g
+g en era liza tion le vel ( h en ce for th e a ccu ra cy of p red iction
+A s a con clu sion , w e c an sa y th at th is ca se stu d y sh ow s
+h ow th e train ed A N N ca n b e run p eriod ica lly to q u ick ly
+d et erm in e th e b est p ossib le p la n t c on  g u ra tion ( i.e. b u ffer size) b a sed on th e p rod u ction m ix for th e p la n n in g
+T ab le 7. R eferenc e ta b le : A N N a p p lic at ion ty p es.
+Downloaded by [Universitaetsbibliothek Innsbruck] at 10:17 31 October 2017
+( b ) S elf-or ga n izin g fea tu re m a p
+A l loc at ion of p ro d u ct ion m ix q u an tities in a m u lt i-site en v ironm en t
+D em a n d fo rec astin g a s tim e se ries p re d ic tor
+D a t a p rep ro ce ssor fo r sm oot hin g ( a ) a nd ca teg oriz ing ( b ) n oisy d a t a
+G enera tion of t he sch ed u lin g solu tion
+M u lt i-c riteria ev alu a tor of a solu tion g en er at ed b y a n op tim iz at ion
+Su p p ort fo r tu nin g p a ra m eter s of sched u lin g h eu ristic a p p ro a ch es
+D isp at ch ing str a teg y selec tor b a sed on th e sy st em st a tu s
+O n -line sched u ler b a se d on t he sy stem st at u s
+R eco gn it ion of th e ty p e of ou t-of-co nt ro l situ a tion s
+Select ion of th e p r od u ct ion c on tr ol stra tegy
+I t b elo n g s t o t h e c la ss o f su p erv ised m u lt ila y er fe ed fo rw a rd n et w ork s.
+T h is is t h e m ost w id esp rea d , ev en t h o u g h ot h er n eu ra l m o d els a re u sed ( i.e. in t era c t iv e a n d co m p etit iv e n et w ork , G a u ssia n m a c h in e, Bolt zm a n n
+D i å eren t n eu ra l m o d els h a v e b een p rop o sed b y resea rch ers t o p erfo rm t h is t a sk : ju st a few o f t h em h a v e b een rep o rt ed .
+T a b l e 8. F u n ction al cla ssi ca tion of A N N a r ch itec tu res.
+– M u lt ilay er p er cep tr ons ( M L P )
+– G ener a l r eg re ssion n eu ra l netw or k
+– A d a p t iv e r eson an ce t heor y ( A R T )
+I n tera ct iv e an d c om p et itiv e n et w or k
+A rti cial neu ra l n et w orks h a v e b een th orou g h ly
+stu d ied an d a p p lied to th e in d u stria l en gineerin g d om a in
+in th e la st d eca d e. I n p a rticu la r, ap p lica tion s ta rg et ed to
+th e p rod u ction p la n n in g an d con trol area h a v e dr aw n
+th e resea rch ers’ a tte n tion. O b v iou sly n ot a ll a sp ects of
+th e P P C d om a in a re covered b y A N N a p p lica tion s.
+T a b le 7 lists all th e ap p lica tion s d escrib ed in th is p a p er
+b a sed on th e typ e of P P C p rob lem a d d ressed , th e fu n ction p erfor m ed by th e A N N , a n d th e A N N arc hitectu re
+u sed . A few com m en ts stem from th e a n a ly sis of th is
+F irst, m a n y a p p lica tion s ( [ 2] , [ 3a ] , [ 7] a n d [ 8] ) ex p loit
+th e b asic ch a ra cteristic of on e sp eci c typ e of A N N ( i.e.
+th e su p erv ised m u lt ilay er feed -forw a rd n eu ra l n et w ork )
+to tu rn th em in to u n iv ersal a p p rox im a tors of fu n ctions
+I n th is ca se, th e in trin sic cap ab ility of n eu ra l n et w ork s
+to in tern a ll y b u ild com p lex ca use- an d -e å ect rela tion sh ip s
+b et w een in p u t a n d ou tp u t v aria b les, ev en in u n k n ow n
+fu n ction a l form s, m a k es th eir u se v ery help fu l in som e
+p rob lem s. I n su ch situ ation s, A N N s a re u sed a s a tool
+to d escrib e th e em p irical k n ow led g e g a th ered a b ou t a
+p rob lem . I f d a ta ab ou t this k n ow le d g e a re av a ilab le ,
+th ey ca n b e u sed d irectly to tra in a n et w ork; oth erw ise
+a da ta set can , e.g . b e g en era ted th rou g h sim u lation , as
+A secon d ca te gory of a pp lica tion s ( [ 1] a n d [ 4] in ta b le
+7) lev era g es th e op tim iza tion ca p a b ilities of a d i å eren t
+cla ss of A N N s ( see cla ss 2 in ta b le 8) . I n th is p a rticu la r
+con te xt , A N N s u su a lly b eh a v e as op tim a l solu tion g en era tors in resou rce a lloca tion p rob lem s w ith c on stra in ts.
+H ow ev er, it sh ou ld b e p oin te d ou t th a t th is ty p e of a p p lica tion , w id ely stu d ied in th e ea rly 1990s a s a p oten tia l
+w ay to com p let ely solv e P P C p rob lem s, h a s sh ow n som e
+im p lem en ta tion lim its ( b oth in size a n d com p lex ity
+term s) w h en a p p lied to rea l-life in d u stria l ca ses. A d i å eren t, m ore p rom isin g a p p roa ch in th is a rea is rep resen ted
+b y h y b rid tools ( [ 5] a n d [ 6] in tab le 7) ; h ere, A N N s a re
+u sed in conju nc tion w ith oth er c om p u tin g tech n iq u es to
+p erform a m ore con gen ia l ev a lu a tion fu n ction , w h ile th e
+g en era tion of a solu tion is en tru sted to oth er tec hn iq u es.
+T h e n et w ork s u sed in th is k in d of a p p lication u su a lly fa ll
+F in ally , a th ird c ateg ory of a p p lic ation s ( [ 3b ] , [ 9] a n d
+[ 10] ) in v olv es c la ssi ca tion an d clu st erin g p roblem s for
+th e solu tion of w h ich sp eci c n eu ra l arch itec tu r es a re
+u sed ( see cla ss 3 in ta b le 8) . T h e m ajor bene ts A N N s
+p rovid e v is-a`-v is oth er a p p roa ch es w h en ap p lied to su ch
+p rob lem s a re to b e fou n d in their intrin sic p a ra llelism
+Downloaded by [Universitaetsbibliothek Innsbruck] at 10:17 31 October 2017
+th a t a llow s th em to ta k e in to a ccou n t a la rge n u m b er of
+cla ssi ca tion p a ram eters at th e sa m e tim e.
+A s a  n a l con clu sion , it cou ld b e stated th a t th e u se of
+A N N s in th e P P C d om a in in v olv es rea son a b le b ene ts
+b u t a lso som e lim ita tions. O n on e h a n d , A N N s a llow
+m a n y P P C prob lem s to b e solv ed in a m ore e æ cient
+a n d /or e å ectiv e w a y ; on th e oth er ha n d , th eir a p p lic ation
+to som e sp eci c p rob lem s ( i.e. sc h ed u lin g , et c.) p rov id es
+p a rtially u n sa tisfa ctory resu lt s, esp ec ia lly if com p a red
+w ith th e p erform a n ce of oth er tools.
+M oreov er, it sh ou ld n ot b e forg ott en th at A N N s a re
+a n yth in g b u t a com p u tin g tech n iq u e, a n d th erefore th eir
+u se is on ly p ro ta b le w h en th e con tex t of th e p rob lem
+a llow s them to m a k e th e m ost ou t of their p ecu liarities. I n
+th is sen se th e u se of A N N s a s a tool for the solu tion of
+P P C p roblem s ca n b e con sid ered v ery h elp ful, a n d it ca n
+b e sa id th a t th ey h av e p rov id ed a sig n i ca n t c on trib ution
+to im p rov in g th e solu tion of P P C p rob lem s.
+T h e a u th ors w ish to th a nk P rofessor A sb jørn R olsta d aÊ s
+for in v itin g th em to w rite th is pa p er. A lso, th ey w ish to
+th a nk E len a C orra d i an d A lb erto P ortioli for th eir u sefu l
+con trib u tion to th e ‘P rod u ction con trol stra teg y selection ’
+ca se stu d y . T h e ca se stu d y ‘U sin g A N N s a s a d ecision
+su p p ort sy stem ( D SS) for p lan t p a ram ete r d e n ition in
+a p a in tsh op ’ w as dev elop ed in colla b oration w ith M a rku s
+fo r m in im izin g t ot al a ct u a l  ow tim e b y n eu ra l netw ork s.
+International J ournal of P roduction Research , 30, 503–511.
+Cavalieri, S., Rabe , M., a nd Taisch, M., 1997, A neu r al net w ork ap p ro ac h to th e p la nt d esig n p r ob le m . P roceeding s of the
+1st International Conference on Eng ineering D esig n and A utomation ,
+E D A ‘97, B an g k ok , T h aila n d , C D -R O M .
+Cavalieri, S. , an d Taisch, M., 1996, N eu ra l netw ork s in
+h y b r id in t ellig en t m a nu fa ctu ri ng sy st em s. P roceeding s of the
+A PM S ‘96, International Conference on A dvances in Production
+M anag ement Systems, K y oto, J ap a n, p p . 591–596.
+Cheng, C.-S., 1997, A neu r al netw ork a p p ro a ch for th e an a ly sis
+of c on tr ol ch ar t p a tt ern s. International J ournal of Production
+Cho, H., a nd Wysk, R. A., 1993, A ro b u st a d ap t iv e sch ed u ler
+fo r a n in tellig ent w or k sta tion c on t ro ller. International J ournal
+Corra di, E., Portioli, A., an d Taisch , M., 1996 H y b r id p ro d u ction c on tr ol stra t eg ies: a c om p ar ison b et w een a lg orit hm ic
+a n d neu r al b a sed a p p ro a ch . P roceeding s of A PM S ‘96
+International Conference on A dvances in P roduction M anag ement
+Systems, K y oto, J a p a n , p p . 579–584.
+Currie , K. R., 1992, A n int elligent g r ou p ing al gorit hm fo r
+c ellu la r m a nu fa ctu rin g . Computers and Industrial Eng ineering ,
+an d Le Clair , S.R., 1993, S el f-im p r ov in g p ro c ess c on tr ol fo r m ole cu l ar b ea m ep ita x y . International J ournal
+of A dvanced M anuf acturing T echnolog y , 8, 244–251.
+Cybenko, G., 1989, A p p r ox im a tion b y su p erp osition s of sig m oid al fu nc tion. M athematical Control, Sig nals, and Systems , 2, 303–
+Dagli, C. , an d Sittisathancha i, S., 1993, G en etic neu r o-sc hed u l er fo r job sh op sc hed u lin g. Computers and Industrial
+Foo, Y. P. S. , a n d Takefuji, Y., 1988a , S t oc ha st ic neu r al n et w ork s fo r so lv in g job -shop sch ed u lin g : P a rt 1. P ro b le m p re nd
+sen ta tion . Proceeding s of the IEE E 2 International Conf erence on
+N eural N etworks , S a n D iego, V ol. 2, p p . 275–282.
+Foo, Y. P. S. , an d Takefuji, Y., 1988b , St oc ha stic n eu ra l n et w ork s fo r so lv in g job -sh op sch ed u lin g : P a rt 2. A rc hit ect u r e
+a nd sim u la tion s. Proceeding s of the IEEE 2
+Conf erence on N eural N etworks , S a n D ieg o, V ol. 2, p p . 283–290.
+Foo, Y. P. S. , a n d Takefuji, Y., 1988c, I n teg er linear p r og ra m m in g n eu ra l netw ork s fo r job sh op sch ed u ling . P roceeding s of
+the IEEE 2nd International Conf erence on N eural N etwork s, S a n
+Giesbert, P. , a nd Van Der Tang, L., 1992, D y na m ics of th e
+c u stom er or d er d ec ou p ling p oint : im p a ct on in fo rm at ion
+sy stem s fo r p ro d u c tion c on tr ol. P roduction P lanning and
+Gunasekaran, A., Goyal , S. K., Virtanen, I., a nd Yli-Olli,
+1993, P ro d u ct ion p la nn in g a n d co nt ro l in a u t om a ted m an u fa ct u r ing sy st em s. Production Planning & Control , 4, 2–16.
+Hao, G., Shang, J. S. , a n d Vargas, L. G., 1995, A n eu ra l
+n et w ork m od el for on -lin e c on tr ol of  ex ib le m a n u fa ct u r ing
+sy stem s. International J ournal of Production Research , 33, 2835–
+Higgins, P. , a n d Browne , J., 1992, M a st er p r od u ction sc hed u l e: a co nc u r re nt p la nn ing ap p ro ac h. P roduction P lanning &
+Hill , T., O’Conor , M., a nd Remus, W., 1996, N eu ra l n et w ork
+m od els for tim e series for eca sts. M anag ement Science , 42, 1082–
+Hopfield, J. J., an d Tank, D. W., 1985, N eural Computation of
+D ecisions in O ptimization P roblems , Biol. C y b ern etic s, V ol. 52,
+Hornik, K., Stinchcombe , M., an d White , H., 1989,
+M u ltila y er fe ed for w ar d n etw ork s a re u niv er sa l a p p r ox im a t or s. N eural N etwork s , 2, 359–366.
+Hou, T.-H., Lin, L., an d Scott , P. D., 1993, A n eu ra l n et w ork -b ased a u tom a t ed in sp ect ion sy st em w it h a n a p p lic at ion
+t o su r fa c e m ou nt d ev ic es. International J ournal of Production
+Hruschka , H., 1993, D eter m inin g m a rk et resp on se fu nc tion s
+b y neu ra l n et w or k m od eling : A co m p a rison t o ec on om etr ic
+t ech n iq u es. European J ournal of O perational Research , 66, 27–35.
+Huang, H. H., a n d Wang, H. P., 1993, M a ch in e fa u lt cla ssi c at ion u sin g a n A R T 2 n eu ra l n et w ork . International J ournal of
+A dvanced M anufacturing T echnolog y , 8, 194–199.
+Huang, C. N., L im, C. C. , a n d Ming, C. L., 1992, C om p a rison
+of im a ge p r oc essin g alg orit hm s an d neu r al netw ork s in
+Hwarng, H. B. , a nd Hubele , N. F., 1992, B oltzm a nn m a ch ines
+t ha t l ea rn t o r ecog niz e p a ttern s on c on tr ol c ha rt s. Statistics and
+Hwarng, H. B. , a nd Hubele , N. F., 1993a , B ac k -p r op a ga t ion
+p at tern rec og n izer s fo r X co n tro l c ha rt s: m et hod olog y a n d
+p er for m a n ce. Computers and Industrial Eng ineering , 24, 219–235.
+a nd Hubele , N. F., 1993b , X co nt ro l ch ar t
+p a tt ern id ent i ca tion t hr ou g h e æ c ien t o å -lin e neu r al n et w ork tra in ing . IIE T ransactions , 25, 27–40.
+Hwarng, H. B., 1995, M u ltila y er p erc ep t ro n s fo r d et ect in g
+c y c lic d a t a on c on tr ol ch ar ts. International J ournal of
+I man, R., a n d Conover , W. J., 1983, M odern Business Statistics
+J ones, A. T., a nd Rabelo, L. C., 1993. R ea l-t im e d ecision
+m a k ing u si ng n eu ra l nets, sim u la tion a n d g enetic a lg or ith m s.
+International J ournal of F lexible A utomation and Integ rated
+Kamal , S. , an d Burke , L. I., 1996. F A CT : A new n eu ra l net w ork -b a sed
+Downloaded by [Universitaetsbibliothek Innsbruck] at 10:17 31 October 2017
+International J ournal of P roduction Research , 34, 919–946.
+Kim, J. S., Nang, J. H., Yoon, H., an d Ma eng, S. R., 1992, A
+B oltzm a nn m a ch ine for sc hed u lin g m u ltip ro ce ssor ta sk s w it h
+t im e c on st ra in ts. Proceeding s of the International J oint Conf erence
+on N eural N etworks , Beijing , Ch in a, V ol. 1, p p . 493–499.
+Kim, S. Y., Lee , Y. H., an d Agnihotri, D., 1995, A h y b r id
+a p p r oa ch to se q u en cin g job s u sing h eu rist ic r u le s an d neu r al
+n et w or k s. P roduction P lanning & Control , 6, 445–454.
+Kung, S. Y., 1993, D igital N eural N etworks ( N ew J er sey :
+Lee , Y. H., Bhaskaran, K., a n d Pinedo, M., 1992, A h eu rist ic
+t o m inim iz e t h e t ota l w eig h ted ta rd iness w ith seq u en ce
+d ep en d ent set u p s. T ec hn ica l R ep or t, I E O R
+C olu m b ia U n iv ersity , N Y , U S A .
+Lee , W. L., Spedding, T. A., De Souz a , R., a n d L ee , S. S. G.,
+1996, N eu r al sim u la t ion of a p ro toty p e k ey b oa rd a ssem b ly
+Lin, H., Yih, Y., an d Salvendy, G., 1995, N eu ra l netw ork b a sed fa u lt d ia g nosis of hy d ra u lic fo rg in g p r esses in C h ina .
+International J ournal of P roduction Research , 33, 1939–1951.
+Luxhøj , J. T., Riis, J. O., an d Stensballe , B., 1996, A h y b r id
+eco nom etr ic-neu r al n et w or k m od el ing a p p ro a ch fo r sa le s
+fo r eca st ing . International J ournal of P roduction Economics, 43,
+Moon, Y. B. , a n d J a nowski, R., 1995, A n eu ra l n et w ork
+a p p r oa ch fo r sm oot h ing a nd ca tegori zin g n oisy d a ta .
+Nagasaka , K., I chihashi, H., a n d L eonard, R., 1995, N eu ro fu zz y G M D H a nd it s ap p lica tion t o m od ell ing g ri nd ing ch ar a ct er istics. International J ournal of Production Research , 33, 1229–
+Pham, D. T., an d Oz temel , E., 1992, C on t ro l ch a rt p a tt er n
+r ecog nit ion u sin g n eu ra l net w or k s. J ournal of Systems
+Pham, D. T., an d Oz temel , E., 1994, C on t ro l ch a rt p a tt er n
+r ecog nit ion u sing le ar nin g v ect or q u a n tiz at ion n et s.
+International J ournal of P roduction Research , 32, 721–729.
+Pollard, J. F., Broussard, M. R., Garrison, D. B. , a nd San,
+K. Y., 1992, P r oc ess id en ti ca tion u sin g neu r al netw ork s.
+Computers and Chemical Eng ineering , 16, 253–270.
+Rogers, D. M., a nd Dagli, C. H., 1996, A n int elligent co n tro l
+sy stem u sin g n eu ra l netw ork s. Integ rated Computer-A ided
+Sabuncuoglu, I., a nd Gurgun, B., 1996, A neu r al n et w ork
+m od el fo r sch ed u lin g p r ob lem s. European J ournal of
+Shtub , A., a n d Zimerman, Y., 1993, A n eu ra l- netw ork b a sed a p p ro a ch for estim at in g t he co st of a ssem b ly
+sy stem s. International J ournal of P roduction Economics , 32, 189–
+an d Lee , W. H., 1994, A n exp er t n eu ra l
+n et w ork sy st em for d y na m ic job sh op sc hed u lin g. International
+J ournal of Production Research , 32, 1759–1773.
+Smith, A. E., 1994, X -b a r a R co n tro l ch a rt int er p r eta tion
+u sin g n eu ra l co m p u ting . International J ournal of P roduction
+Sun, Y.-L. , an d Yih, Y., 1996, A n int ellig en t c on tr oll er fo r
+m a nu fa ctu rin g cel ls. International J ournal of P roduction
+Suresh, N. C. , a n d Kaparthi, S., 1994, P er for m a n ce of fu zzy
+A R T n eu ra l netw ork fo r g ro u p t ec hn ol og y c ell for m a t ion .
+International J ournal of Production Research , 32, 1693–1713.
+Thawonmas, R., Shiratori, N., an d Noguchi, S., 1992, R ea lt im e neu ra l n etw ork sch ed u ler. P roceeding s of the International
+J oint Conference on N eural N etworks , Be ijin g, C h ina , V ol . 1,
+Toure , S., Rabelo, L., an d elasco , T., 1993, A rt i cia l n eu ra l
+n et w ork s fo r  ex ib le m a nu fa ctu ri ng sy stem s sch ed u ling .
+Computers and Industrial Eng ineering , 25, 385–388.
+Vaithyanathan, S. , a n d I gnizo , J. P., 1992, St och a stic n eu ra l
+n et w ork for re so u rce co nstr ain ed sch ed u lin g . Computers and
+Vaithyanathan, S., Burke , L. I., a nd Magent , M. A., 1996,
+M a ssiv ely p ar allel a na lo g ta b u sea rch u sin g neu r al netw ork s
+a p p lied to sim p le p la n t lo ca tion p ro b lem s. European J ournal of
+Van Hulle , M. M., 1991, A goa l p r og ra m m ing n et w ork fo r
+m ix ed in teg er lin ea r p ro g ra m m in g : a ca se st u d y fo r t he job
+sh op sc hed u lin g p ro b le m . International J ournal of N eural
+Venugopal , V., an d Narendran, T. T., 1992, N eu ra l n et w ork
+m od el fo r d esig n ret riev a l in m a n u fa ct u r ing sy st em s.
+Vepsalainen, A., an d Morton, T. E., 1987, P riori ty r u le s fo r
+job sh op s w it h w eig h ted ta rd iness c osts. M anag ement Science ,
+Violante , N., Pontrandolfo, P. , a n d Okogbaa , O. G., 1996,
+H op  eld n eu ra l n et w ork fo r a tra n sn a tiona l ent er p r ise’s
+m a nu fa ctu rin g netw ork . I n L . F . M c G in n is, W . G . Su lliv an
+a nd M . M . A hm a d ( ed s) F lexible A utomation and Intelligent
+M anuf acturing ( N ew Y ork : Beg ell H ou se) , p p . 88–98.
+Vollmann, T. E., Berry , W. L., a n d Whybark, D. C., 1991,
+M anuf acturing P lanning and Control System ( H om ew ood , I L :
+Western Electric, 1958, Statistical Q uality Control Handboo k
+( I n d ia n ap olis: W ester n E l ect ric) .
+Widrow , B., Rumelhart, D. E., a n d Lehr , M. A., 1994,
+N eu ra l netw ork s: a p p lica t ion s in in d u stry , b u siness a n d
+scien ce . Communications of the A CM , 37, 93–105.
+Wu, H. J., 1993, A hy b rid a p p ro a ch fo r op tim a l p ro d u c t d esign
+w it h m u lt ip le cr iter ia d ecision m ak in g . Proceeding s of the IN N S
+1993 I n ter na tion a l C on ferenc e of N eu ra l N etw ork S oc iety ,
+P or tla n d , O reg on, V ol . 1, p p . 424–427.
+Yan, D., Cheng, M., Popplewell , N., an d Balakrishnan, S.,
+1995, A p p lic at ion of n eu ra l n etw ork s fo r su r fa ce r ou g hn ess
+m ea su re m ent in  n ish tu rn in g. International J ournal of
+Zhang, C.-S., Yan, P.-F. , a n d Chang, T., 1991, Solv ing job sh op sc hed u lin g p ro b lem w ith p riorit y u sing n eu ra l n etw ork .
+P roceeding s of the International J oint Conf erence on N eural N etworks ,
+Zhou, D. N., Cherkassky, V., Baldwin, T. R., a n d Hong, D.
+W., 1990, S ca lin g neu r al netw ork fo r job -sh op sch ed u ling .
+P roceeding s of the International J oint Conference on N eural
+N etworks , S a n D ieg o, V ol . 3, p p . 889–894.

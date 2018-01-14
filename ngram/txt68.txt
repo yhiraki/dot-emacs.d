@@ -1,0 +1,511 @@
+2012 11th International Conference on Machine Learning and Applications
+Reinforcement Learning for Production Ramp-up - A Q-Batch Learning Approach
+Stefanos Doltsinis1, Pedro Ferreira2, Niels Lohse3
+emxsd@nottingham.ac.uk, 2P.Ferreira@nottingham.ac.uk,
+limited similarity between different manufacturing systems
+which poses a significant challenge for finding effective
+ramp-up policies. The specific characteristics of each system
+will generate unique disturbances and make the acquired
+knowledge case specific and not always possible to reuse.
+Manufacturing systems are generally composed of
+stations (sub-systems) or machines which are ramped-up
+independently from each other. In addition, their ramp-up is
+sequential and iterative. These characteristics allow the
+ramp-up process to be formalised as a Markov Decision
+Process (MDP) where operator actions cause observable
+state transitions which affect the ramp-up status of a station.
+Capturing the dependencies between actions and reactions
+allows machine learning methods to be used to find good
+policies for the ramp-up of observed stations.
+This paper reports a reinforcement learning (RL)
+approach to reduce ramp-up time demonstrated by a QLearning algorithm. RL is identified as a promising approach
+which performs well for the specific characteristics of the
+decision making process during ramp-up. A literature review
+is carried out in the next section which supports the problem
+definition in section III. The reinforcement learning
+approach for ramp-up is presented in section IV followed by
+the experimental description in section V and the results in
+section VI. The paper is concluded along with proposed
+Abstract—The ramp-up process is a significant bottleneck
+during the development of manufacturing systems. The effort
+and time required to ramp-up a system is largely dependent on
+the effectiveness of the human decision making process to
+select the most promising action and improve the system.
+Although existing work has identified significant factors
+influencing ramp-up performance, little has been done to
+support the actual process. This work approaches ramp-up as
+sequence of technical changes which aim to get a
+manufacturing system to a desirable performance in the fastest
+time. A reinforcement learning approach is proposed to
+support decisions during ramp-up. The aim is to capture the
+dynamics between an operator and the system and support
+time reduction of the process. A batch learning approach has
+been identified as promising since it matches the practical
+aspect of decision making during ramp-up. It is combined with
+a Q-learning algorithm which provides theoretical foundation
+of optimum convergence. The learning approach has been
+demonstrated on a highly automated production station during
+its ramp-up and the generated policy was shown to have
+significant impact on the ramp-up time reduction.
+Keywords-Reinforcement Learning; Manufacturing; RampUp; Decision Making Systems;
+Ramp-up is the process that starts after the system
+development phase has finished and the physical build starts.
+The objective of the process is to bring a system to its
+required production capacity. During its ramp-up a
+manufacturing system is adjusted and changed until it
+becomes sufficiently stable (disturbances reduced to
+minimum) and its production output reaches the desired level
+[1]. Ramp-up of modern manufacturing systems has turned
+into a very complex process which commonly leads to long
+delays and an increased time-to-market. The required time is
+highly dependent on the system integrators’ knowhow and
+ability to make the correct decisions under uncertainty. The
+human involvement in the decision making process and the
+highly uncertain environment, make the process both
+The knowledge is currently mainly owned by the
+personnel involved in the ramp-up phase which often makes
+it difficult to share and retain within an organisation.
+Additionally, market pressures to quickly deliver products
+and reduce cost, something which restricts the available time
+for experimentation. This hinders the complete
+understanding of the individual ramp-up behaviour of a
+system. Increased use of sensors in automation systems
+combined with more powerful embedded control systems
+make it plausible to investigate the application of machine
+learning approaches to support the ramp-up process and
+enable more transferable knowledge retention.
+The challenge for machine learning during ramp-up is the
+978-0-7695-4913-2/12 $26.00 © 2012 Crown Copyright
+A significant amount of work relates the level of
+knowledge during ramp-up to the time the process requires,
+which affects a companies’ revenue [2-4]. The significance
+of knowledge and the problem of knowledge loss is also put
+forward as a bottleneck in contemporary manufacturing
+systems [4, 5]. References show that work has been done to
+support ramp-up understanding from a managerial
+perspective without tackling the technical aspects of the
+Learning techniques such as Machine Learning (ML)
+methods and semantic models have been used in
+manufacturing to formalise knowledge [6, 7]. Literature
+provides reports on machine learning applications in
+manufacturing, which are restricted to support certain
+processes rather than a whole manufacturing phase. In
+contrast to that, it is important to model ramp-up as a generic
+phase in order to enable machine learning that is process
+independent. This can enable the generation of knowledge
+that can be used repeatedly across different ramp-up cases.
+Reinforcement learning (RL) is a machine learning
+approach based on a sequential environment response which
+emulates the process of human learning [8]. Ramp-up
+incorporates practical characteristics that can take advantage
+of RL properties, such as the episodic learning and the
+for the ramp-up process and make automatic learning, an
+Figure 1 presents the overview of learning during rampup. In it one can see the important aspects related to ramp-up
+that will be utilised during learning. The acquired data from
+monitoring the process, namely sensors data or human
+observations, will serve as the basis for the analysis of the
+ramp-up state. Additionally, it is expected that human
+operators take actions which lead to different states. These
+actions, if captured, can be related to system understanding
+and consequent future improvement. The combination of the
+captured actions and the ramp-up process state provide the
+means to enable a reinforcement learning approach.
+Nevertheless, the use of a reinforcement leaning requires a
+Although the concept of reinforcement learning is not
+widely applied in the manufacturing, it is still not new in the
+manufacturing literature. Reinforcement learning techniques
+have been used in problems such as scheduling [9, 10],
+production goal regulation [11] and the concept of Biological
+Ramp-up is a significant manufacturing phase, which
+incorporates characteristics such as uncertain information,
+abstract definition and lack of data and makes machine
+learning applications a challenge. RL algorithms, such as
+batch learning, present good results while dealing with
+limited data [13] and make RL promising for ramp-up
+applications. In [13] BL algorithms are presented to perform
+well in complex domains with limited amount of data where
+algorithms like experience replay achieve maximum data
+Only a few works have focused on promoting learning
+during production ramp-up. In [14] the overall assembly
+lines are semantically mapped in order to define attributes
+and characteristics during ramp-up. In that approach, the
+ontology of the ramp-up process is defined, though without
+targeting the correlations between the main concepts such as
+the product, the process and the equipment. Significant work
+has been reported in the same direction by the collaborative
+project EU FRAME [15]. In [15] the requirement of learning
+during ramp-up has been highlighted. A combination of
+semantics and machine learning algorithms is proposed and a
+nearest neighbour’s based algorithm is developed with
+promising results. However, the required amount of data is a
+drawback of the algorithm. Finally, [1] reports results on a
+RL approach during Ramp-Up, which provides a model free
+Monte Carlo algorithm applied for ramp-up time reduction
+under a Copy-Exactly case study. In this paper similar
+concepts are applied with the aim to define a formal learning
+approach enabling a wide range of algorithms.
+The human knowledge and their decision making is very
+efficient although quite complex process. Experts’ reasoning
+becomes complex and difficult to replicate by computers.
+This poses a significant challenge for the learning methods
+aiming to replicate such decision making. Nevertheless
+formal methods can incorporate advantages such as,
+knowledge transferability between operators, generalisation
+to similar equipment and decision making under different
+The process of human learning creates a number of
+challenges. Humans tend to be overconfident when applying
+changes, which can lead to bad results [5]. Additionally,
+knowledge transferring and sharing between individuals is a
+time consuming process with no guarantee of results. The
+generalisation of knowledge in terms of similar equipment is
+also quite challenging, especially when the manufacturing
+system is composed of several different processes. The
+problem lies in the abstraction of not only the equipment but
+also the processes the equipment perform.
+The use of learning algorithms is a way of overcoming
+such issues, while supporting the human decision process. In
+order to provide this support it is crucial to establish a model
+Figure 1 Learning during Ramp-up, an overview
+Current practices provide two main strategies for system
+ramp-up. These are the single time ramp-up and the
+repetitive ramp-up process. In the first case, ramp-up
+happens once and presumably with little to no significant
+knowledge of its behaviour (Figure 1 - Case 1). This means
+that learning would have to occur online (during the actual
+ramp-up process) with limited data and exploration. In the
+second case, ramp-up has been achieved before, and thus the
+aim is to replicate a previous ramp-up process (Figure 1 Case 2). The data is fed to the learning process in batches
+while model based (indirect) and model free (direct)
+algorithms can be used to generate system transitions and
+state values respectively. An interesting aspect arises if the
+batch data would be used as initialisation of algorithms used
+for the single time ramp-up cases of similar stations. It is
+controller, which considers the overall aim and acts
+accordingly. In the second loop, in Figure 2, the RL process
+monitors the decision making process and collects online
+data. Additionally data batches can be fed in the system
+identification. These can be used to learn a model and the
+model’s state values. Based on that, a policy is generated
+(adjustment mechanism) that targets reward maximisation.
+The policy can then be used as a recommendation during a
+ramp-up process, to the operator who is concerned with the
+final action choice. The recommendation is a decision under
+criteria and a forecast mechanism which can differ
+depending on the performance targets during ramp-up. In
+order to achieve a formal definition of the learning approach,
+important to note that there is no guarantee that ramp-up
+process replication will provide same system performances.
+Nevertheless, there is a level of commonality that should be
+considered when establishing how learning should be
+In order to formalise ramp-up, it is required to model the
+dynamics concerned with how the processes affect each
+other. The ramp-up dynamics include human decision and
+equipment disturbances, two factors that make the process
+stochastic and difficult to predict. Additionally ramp-up is a
+sequential process driven by environment response with a
+limited amount of data. Markov Decision Process (MDP)
+modelling is a powerful tool for stochastic processes and
+combined with reinforcement learning has the potential to
+deal with the aforementioned ramp-up characteristics [16]. A
+learning approach should be able to be used for either
+learning its dynamics (transition model) or the response of
+the system, aiming to extract a policy. Following the
+aforementioned analysis, in the next section a learning
+approach is proposed in order to support decision making
+The ramp-up process description proposed by [17]
+defines ramp-up as sequence of experiences which gradually
+builds knowledge in regard to the systems behaviour. The
+same view is shared in this work and the proposed approach
+will take advantage of the acquired experience by using
+machine learning methods to generate knowledge.
+The sequential structure followed in RL matches the
+ramp-up process and can support learning based on multicriteria, which is also the usual case. Furthermore, it is
+important to define what the learning is considered for.
+Learning can refer to model learning (system dynamics) or
+learning how to apply this model (policy generation) based
+on maximising a reward. Common approaches, aim to learn
+a model first before a policy is generated. One of the
+advantages of reinforcement learning is that to export a
+policy does not necessarily require the prior information for
+the system, since knowledge can be based on instant
+response and not on an explicit model. This is a significant
+advantage since during ramp-up the limited data does not
+Reinforcement learning is a learning method based on a
+feedback (reward) coming from the environment. The idea is
+that the learner (controller) interacts with the system by
+applying changes (actions) while their effect is monitored
+through the reaction of the environment. Based on this, a
+policy is generated which tries to maximise the received
+reward. The described sequence of actions during ramp-up
+from a reinforcement learning perspective is summarised in
+Figure 2 where the decision making process is presented as a
+Model Identification Adaptive Control (MIAC).
+In practice, learning takes place complementary to rampup and in support to its decision making process. In the first
+loop, in Figure 2, the ramp-up process is under the operator’s
+control, without any further support. The process goes on
+until its performance is considered to be adequate. The
+output of the system (performance) is fed back to the
+Figure 2 Reinforcement Learning during Ramp-up
+The model of the ramp-up process, as discussed above, is
+formulated as a decision making process following a MDP
+framework. MDP is a powerful framework for modelling
+sequential decision making problems under uncertainty
+conditions. Moreover, it enables reinforcement learning,
+which is seen as the appropriate approach to acquire
+knowledge for the ramp-up process. Ramp-up can be said to
+be a Markov process, since in practice the information used
+for decision making, usually regards the last state only. This
+is defined as the Markov property, and is a notable
+assumption for the modelling of the ramp-up process. It
+further guarantees convergence to an optimal solution for a
+range of algorithms. Regardless even if a process within
+ramp-up does not incorporate the Markov property, a model
+can be designed as such by choosing the right state variables.
+A MDP for ramp-up consists of the process states, a list of
+actions, a reward and the process horizon.
+The state variables are those that describe the system’s
+condition at every time epoch. The state variables are chosen
+with the aim to support the learning process, while they
+include all the essential information of the process. An
+exhaustive state description would generate a large state
+space, which would require large amount of data for
+exploration. In fact, during ramp-up a large state space
+would probably never be explored and its policies would be
+case specific. It is proposed that the state parameters are
+chosen to be similar to those a human would use to define
+the system’s condition. These are descriptive variables that
+can provide information in a more compact form. Following
+the analysis of ramp-up in [17] a state ୲ ൌ ሼଵ୲ ǡ ୲ଶ ‫ ڮ‬ǡ ୲୫ ȁሽ
+in time epoch  ‫  א‬is defined as a set of state variables
+୫ ‫ א‬. A framework has been proposed in [17] in order to
+define performance during ramp-up which also enables the
+state definition. Ramp-up performance is broken down to
+three main factors, namely, functionality, quality and
+optimisation. The state variables are either discrete or
+discretised in order to create a short but meaningful state
+space. The state variables are presented in Table 1.
+The actions define the policy or decision rules as part of
+the decision process output. These can be defined in different
+forms based on the process targets. Assuming that the
+actions are Markovian and not history dependent, the policy
+is defined as deterministic if a decision at time  is ୱ ሺ୲ ሻ ‫א‬
+ୱ and hence the policy ୑ୈ can be said to be Markovian
+deterministic. Although the nature of the problem is rather
+probabilistic, a deterministic policy should cope better with
+limited data. The policy is further defined as stationary, since
+ramp-up is a process independent of time and only dependent
+on the system’s state. The actions during ramp-up cannot be
+predefined and the action list is case and domain specific.
+However, based on the definition of the state space, certain
+types of actions can be defined as generic. The list should
+include actions which can directly affect the state variables.
+The emphasis is placed on the description of the action and
+not on its specification. That means that actions are
+qualitatively defined but not quantitatively. This is in order
+for the policy to capture the differences between the
+operators. The generated policy will then be independent of
+The horizon of the decision epoch is the one to
+characterise the process as finite or infinite. A Finite horizon
+process is the one which looks ahead up to a certain number
+of steps and aims for an optimal action according to this
+horizon. An infinite process would presumably consider
+infinite future rewards in order to define a return. In practice,
+that generates a distinction in reinforcement learning
+problems between episodic and continuous problems. In the
+episodic case ( ൏ Ğ), learning happens between episodes,
+and the return is based on the accumulated rewards received
+throughout an episode. The discounting factor, although it
+may affect the decision maker’s choice, it does not have any
+difference on the theoretical results of the episodic case [16].
+Ramp-up can be seen as a continuous problem or as an
+episodic. Referring to Figure 1 and the two practices of
+learning, it is clear that in the first case, ramp-up is presented
+as a continuous task. The second option is the sequential
+ramp-up phases which are treated as independent processes
+which one after the other show improvement. The model
+proposed in this work is able to cope in principle with both
+cases; however changes on the reward should make the
+learning process align with the practical limitations of the
+In order to use an indicator for ramp-up progress, the
+performance measures proposed by [17] are aligned with the
+state definition. Three measures are defined and handled
+differently based on their significance, by allocating them
+weights in the overall framework. Equations 1-4 present the
+Where  ൌ ൣ୤ ǡ ୯ ǡ ୭ ൧ is the weight vector and
+ୖ୙ ൌ ൣ୤ ǡ ୯ ǡ ୭ ൧ is the performance metrics vector.
+System Disturbances Set: The disturbance set  ‫ א‬ሾͲǡͳሿ consists of
+disturbances ୨ ‫  ؿ‬identified by operational deviation, identified by
+time excess. Observations ୨ ‫  ؿ‬are used to characterise
+disturbances that cannot be captured by a sensor but by an operator. 
+is the disturbance parameter number,ୡ cycle time and ୡ୲ is its target
+Product Quality Parameters Set:  ‫ א‬ሾͲǡͳሿ, is the set of quality
+parameters for a ramp-up state space. Every quality parameter, ୨ ‫ ؿ‬
+of the produced product, defines if every quality objective  is
+Cycle Time Parameters Set: ୨ is a set composed of the three types
+of parameters ୮ ǡ ୢ ǡ ୭ . Three are the cycle time parameters. Every
+Overall Cycle Time To is split into every process cycle time which is
+independent to the rest and defined as cycle time duration Td. The
+cycle time phase Tp indicates delay between processes and the finally
+the overall cycle time is considered. All the three of them should be
+ୢ ൌ  ቐ ͳǡ  
+the available data do not include a good or optimal policy,
+then it is not possible to generate one either.
+New data sets are allowed to come as learning samples
+and are treated as exploration. That gives a combination of
+online and offline learning practices. Batch reinforcement
+learning algorithms present practical advantages for the
+repetitive ramp-up case since they can guarantee a policy
+convergence. The fact that policies are applied by operators
+with some type of knowledge enhances the exploration
+value. The experience replay algorithm presents efficiency
+under small data batches, while it guarantees convergence
+under certain criteria. Additionally, its use through a
+temporal difference (TD) learning type update algorithm
+provides stable behaviour. A Q-Learning algorithm will be
+used in BRL for the demonstration of the proposed learning
+In this section, the proposed approach is combined with a
+Q-Learning algorithm and validated through an experimental
+process. The validation covers the repetitive ramp-up case,
+since this is seen to be more complete for inferring and
+The equipment used is a fully automatic production
+station, part of a ten stations production system (SMC HAS200). The station (see Figure 3) is comprised of three
+independent processes, two of them are pick and place and
+one is a filling process. The system operates through
+pneumatic actuators and controlled through a PLC. This
+system provided a learning model of 128 states and a list of 6
+Results indicate good convergence of the applied
+algorithm and the quality of the exported policy. The Qlearning algorithm was run for the range of  ൌ ͲǤͲͷ and
+In order to emulate a repetitive process, several ramp-up
+processes were carried out independently to each other. The
+operators carrying out the process were different in every
+case and had no expert understanding to the system’s
+behaviour. The generated datasets are perceived as very
+valuable since they provide a naturally followed exploration.
+This is believed to accelerate learning and give good results
+although constant exploration is not happening. The initial
+state of the station was chosen similar in all cases and a
+number of disturbances were induced to emulate ramp-up.
+In order to evaluate the proposed approach, the learned
+policy was used to ramp-up the station and the performance
+of the system was compared to the previous cases Figure 5.
+After five ramp-up sessions, the data is processed offline in
+batch mode. The reward was calculated for all ramp-up
+states using Equation 4. A Q-Learning algorithm was used in
+a batch update mode with experience replay until
+convergence was achieved. The values of ¤ and  were
+varied to compare results. The list of available actions was
+Figure 4 Policy comparison and variation through iterations
+Figure 4 includes three diagrams which from top to
+bottom show the policy change for every iteration step, the
+policy change for every experience re-play iteration and
+finally the change of the Q-Value matrix. It has to be
+mentioned that every experience set is composed of 85 steps
+which generates one experience iteration. For the policy
+comparison, a hash function (MD5) is used to generate a
+unique identity for every policy matrix. The diagrams
+concern the two extreme values ߛ ൌ 0.1 and ߛ ൌ 0.9, while
+ܽ ൌ 0.05. In the first two diagrams, the policy stops updating
+after more than 5100 and 6000 step-iterations and after 57
+and 105 experience iterations, for the two presented cases
+respectively. Although the policy oscillates a lot on the step
+by step iteration for every full experience iteration remains
+the same. That shows the variation of the policy during an
+experience set until convergence. For different ߛ values the
+algorithm exports a different policy. This is due to the
+increased emphasis on the next state-action value which
+becomes dominant for higher ߛ values to the exported policy
+and hence the different exported policies cannot be said to be
+wrong since the target has changed. It is a matter of the
+Batch reinforcement learning (BRL) is a RL approach,
+which does not allow the learner to interact directly with the
+environment [8]. That does not give the option of exploration
+to the learner and the learning process is independent of the
+applied policy. Batch RL algorithms aim to discover the best
+policy within the applied policies, rather than seeking the
+optimal policy through interaction. If the transitions within
+problem interpretation to define the horizon of prediction
+and the discount factor of future returns. In principle, since
+ramp-up is an episodic problem, the longer the prediction
+Finally the quality of the learned policy has been
+evaluated by applying it during ramp-up of the same station.
+The aim of the application is not to find the optimal policy
+for ramp-up but to indicate the ramp-up process
+improvement after a small number of episodes. The policy
+for ߛ ൌ0.1 and ܽ ൌ0.01 is used complementary to support an
+operator to ramp-up the same equipment. In Figure 5 the
+received reward of the exported policy is presented against
+all the initial ramp-up processes. A couple of interesting
+remarks are that in 8 out of 10 states, the proposed action
+was followed by the operator. In two of the cases, the states
+were unexplored. Finally the policy shows overall time
+reduction by 4 to 8 steps, comparing to all of the initial
+The reported work is partially funded by the European
+Commission as part of the CP-FP 246083-2 IDEAS project.
+[1] S. C. Doltsinis and N. Lohse, "A model-free reinforcement learning
+approach using Monte Carlo method for production Ramp-up policy
+improvement - A copy exactly test case," in 14th IFAC SYmposium on
+Information Control Problems in Manufacturing, 2012, pp. 16281634.
+[2] C. Terwiesch and Y. Xu, "The Copy-Exactly Ramp-Up Strategy:
+Trading-Off Learning With Process Change," IEEE Transactions on
+Engineering Management, vol. 51, pp. 70-84, 2004.
+[3] J. E. Carrillo and C. Gaimon, "Improving manufacturing performance
+through process change and knowledge creation," Management
+[4] S. Fjällström, K. Säfsten, U. Harlin, and J. Stahre, "Information
+enabling production ramp-up," Journal of Manufacturing Technology
+[5] C. Terwiesch and R. E. Bohn, "Learning and process improvement
+during production ramp-up," International Journal of Production
+[6] L. Monostori, A. Markus, H. Van Brussel, and E. Westka mpfer,
+"Machine learning approaches to manufacturing," CIRP Annals Manufacturing Technology, vol. 45, pp. 675-x7, 1996.
+[7] N. Lohse, H. Hirani, and S. Ratchev, "Equipment ontology for
+modular reconfigurable assembly systems," International Journal of
+Flexible Manufacturing Systems, vol. 17, pp. 301-314, 2005.
+[8] M. Wiering and M. Van Otterlo, Reinforcement Learning: State-OfThe-Art: Springer, 2012.
+[9] X. Li, J. Wang, and R. Sawhney, "Reinforcement learning for joint
+pricing, lead-time and scheduling decisions in make-to-order
+systems," European Journal of Operational Research, vol. 221, pp.
+[10] Y. C. Wang and J. M. Usher, "Application of reinforcement learning
+for agent-based production scheduling," Engineering Applications of
+Artificial Intelligence, vol. 18, pp. 73-82, 2005.
+[11] M. Shin, K. Ryu, and M. Jung, "Reinforcement learning approach to
+goal-regulation in a self-evolutionary manufacturing system," Expert
+Systems with Applications, vol. 39, pp. 8736-8743, 2012.
+[12] K. Ueda, I. Hatono, N. Fujii, and J. Vaario, "Reinforcement learning
+approaches to Biological Manufacturing System," CIRP Annals Manufacturing Technology, vol. 49, pp. 343-346, 2000.
+[13] S. Kalyanakrishnan and P. Stone, "Batch reinforcement learning in a
+[14] K. Konrad, M. Hoffmeister, M. Zapp, A. Verl, and J. Busse,
+"Enabling fast ramp-up of assembly lines through context-mapping of
+implicit operator knowledge and machine-derived data," vol. 371
+[15] E. Project. (2012). Fast Ramp-up and Adaptive Manufacturing
+Environement (Frame). Available: http://www.frame-eu.org
+[16] M. L. Puterman, Markov Decision Processes: Discrete Stochastic
+Dynamic Programming, 2nd ed.: WILEY, 2005.
+[17] S. C. Doltsinis, Ratchev,S, Lohse, , "A Framework for Performance
+Measurement during Production Ramp-up of Assembly Stations,"
+Submitted to European Journal of Operational Research, 2012.
+In this work, a RL approach has been reported for
+production ramp-up time reduction. The ramp-up process has
+been defined as a MDP with a set of technical characteristics
+which forms the formal process for learning. The proposed
+approach targets offline ramp-up learning, combining MDP
+modelling and batch reinforcement learning.
+The proposed approach was evaluated experimentally
+with a use of a production station to emulate ramp-up and
+applying a Q-Learning algorithm. The algorithm was shown
+to perform well despite the limited amount of data. The
+evaluation shows high applicability of the policy due to the
+combination of RL with human decision and the operator’s
+exploration which can accelerate RL results.
+Future approaches should explore the use of similarity
+measures for states to further reduce the data reliance by
+generalising actions for unexplored states. A more
+exhaustive experimental investigation should be carried out
+to further test the proposed approach. Moreover, future work
+should also test online learning since it poses significant
+challenges due to lack of data and limited exploration.
+Finally, a very interesting aspect of this approach could
+be revealed by investigating model based approaches
+(indirect learning). The amount of required data before
+learning a model should be investigated. Indirect learning
+could provide a transferable model, or the required
+knowledge for model initialisation which can reduce the
+number of iterations and increase the quality of the policy.

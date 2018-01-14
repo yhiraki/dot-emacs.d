@@ -1,0 +1,665 @@
+This article was downloaded by: [University of Innsbruck]
+Access details: Access Details: [subscription number 912307195]
+Informa Ltd Registered in England and Wales Registered Number: 1072954 Registered office: Mortimer House,
+37-41 Mortimer Street, London W1T 3JH, UK
+International Journal of Production Research
+Publication details, including instructions for authors and subscription information:
+http://www.informaworld.com/smpp/title~content=t713696255
+An explicit analysis of the lead time syndrome: stability condition and
+Bari Selçuk a; Ivo J. B. F. Adan b; Ton G. de Kok a; Jan C. Fransoo a
+Department of Technology Management, Technische Universiteit Eindhoven, Eindhoven, The Netherlands b
+Department of Mathematics and Computer Science, Technische Universiteit Eindhoven, Eindhoven, The
+To cite this Article Selçuk, Bari, Adan, Ivo J. B. F., de Kok, Ton G. and Fransoo, Jan C.(2009)'An explicit analysis of the lead time
+syndrome: stability condition and performance evaluation',International Journal of Production Research,47:9,2507 — 2529
+To link to this Article: DOI: 10.1080/00207540701420552
+URL: http://dx.doi.org/10.1080/00207540701420552
+Full terms and conditions of use: http://www.informaworld.com/terms-and-conditions-of-access.pdf
+This article may be used for research, teaching and private study purposes. Any substantial or
+systematic reproduction, re-distribution, re-selling, loan or sub-licensing, systematic supply or
+distribution in any form to anyone is expressly forbidden.
+The publisher does not give any warranty express or implied or make any representation that the contents
+will be complete or accurate or up to date. The accuracy of any instructions, formulae and drug doses
+should be independently verified with primary sources. The publisher shall not be liable for any loss,
+actions, claims, proceedings, demand or costs or damages whatsoever or howsoever caused arising directly
+or indirectly in connection with or arising out of the use of this material.
+International Journal of Production Research
+An explicit analysis of the lead time syndrome: stability condition
+Baris Selçuka*, Ivo J.B.F. Adanb, Ton G. de Koka and Jan C. Fransooa
+Department of Technology Management, Technische Universiteit Eindhoven,
+Eindhoven, The Netherlands; bDepartment of Mathematics and Computer Science, Technische
+Universiteit Eindhoven, Eindhoven, The Netherlands
+Downloaded By: [University of Innsbruck] At: 09:40 16 October 2009
+Updating planned lead times in response to changing workload levels leads to
+erratic ordering behaviour, resulting in even larger variability in the workload
+levels and flow times. This phenomenon is called lead time syndrome, and
+describes the cyclic interaction between adaptive planned lead times and order
+sizes. Although it has been conceptually defined and intuitively accepted, formal
+analysis with analytical evaluation of the phenomenon has not been conducted.
+The objective of this paper is to provide a stronger understanding of the lead time
+syndrome, and to give new insights into the effects of frequently updating planned
+lead times. We develop a two-dimensional Markov process to model a single-item
+production process with orders released sensitive to the planned lead time. Using
+matrix-geometric methods, analytical results on the utilization level and the
+variability in the system are presented in relation to the frequency of updating
+the planned lead time. Although the average utilization level is always retained,
+the lead time syndrome causes an increase in the average workload level and the
+actual flow times of the completed orders. The variability of the planned lead time
+increases with the update frequency except at the utilization boundaries, where
+the relative effect of the update frequency diminishes.
+Keywords: lead time setting; order release; quasi-birth-and-death processes;
+Planned lead time is one of the key modeling parameters in the planning and control of
+multi-stage production–distribution systems. It refers to the estimated/planned duration of
+time that elapses between the release time of an order and the time that the order is
+completed and made available to customers or down-stream production stages. Setting the
+correct planned lead times that fit the associated production–distribution systems has been
+of concern both in academia and industry for decades. This is due to the fact that planned
+lead time is a fixed parameter that refers to a dynamic and uncertain frame on a
+The research on lead time management can be classified into three related lines:
+(1) workload control to satisfy fixed planned lead times, (2) due-date assignment
+associated with the existence of internal due-dates, and (3) setting planned lead times for
+time-phased order releases in a Material Requirements Planning (MRP) context. Workload
+*Corresponding author. Email: b.selcuk@tm.tue.nl
+ISSN 0020–7543 print/ISSN 1366–588X online
+Downloaded By: [University of Innsbruck] At: 09:40 16 October 2009
+control is a means of stabilizing the flow times based on the intuition derived from Little’s
+law, and it is related to orders to be loaded to the shop or not. Due-date assignment is
+complementary to workload control, since it is related to the scheduling of the orders that
+are loaded. MRP can be considered as an order release mechanism that aims to satisfy
+forecasted demand, and provides inputs for the control of the workload at specific workcentres and assignment of due-dates to specific orders. The planned lead time in this case is
+used to fine-tune the inventory position with demand forecasts. In this paper, we consider
+modeling and evaluating the situation with dynamic planned lead times.
+The due-date assignment literature provides us with numerous techniques for setting
+the planned lead times dynamically. The most popular utilize the order characteristics
+together with dynamic shop load information. Examples include Total Work Content
+(TWK)—the planned lead time of an order is set in proportion to the total processing time
+of the order (Conway et al. 1967, Kanet 1986)—and Jobs in Queue (JIQ)—the flow time of
+an order is estimated based on a proportion of the total number of orders in queue on its
+routing (Chang 1994). The majority of the studies in this line are conducted in a produceto-order job-shop environment concentrating on service-related performance measures
+such as the average length of the planned lead time, tardiness, earliness, etc. One of the
+fundamental assumptions is that the order characteristics are determined externally and
+independently from the planned lead time, which generally holds true for engineer-toorder situations. However, in batch processing industries, for example, where the orders
+are released and processed in batches of production items, the orders are generally released
+according to some anticipated knowledge of the total demand levels during the planned
+lead times. In a multi-stage production–inventory system, one would expect that the
+planned lead times are used for coordination purposes between stages.
+Fixed planned lead times have been widely accepted in an MRP context. The concept
+of fixed planned lead times is further developed by De Kok and Franso (2003), and by
+Spitter et al. (2005) within the context of planning supply chain operations with capacity
+constraints. Fixed planned lead times have also been commonly used in various make-tostock settings (e.g., Karaesmen et al. (2002) and Liberopoulos and Koukoumialos (2005)).
+Most of the studies on setting planned lead times for MRP systems approach the problem
+from a static view, and strive to find fixed planned lead times that best fit the planned
+situation (e.g., Yano (1987), Molinder (1997) and Enns (2001)). Hoyt (1978) was the first
+to criticize fixed planned lead times, and argued that planned lead times should be
+dynamic, in the sense that they reflect the dynamic operational characteristics of a
+production process, in particular by looking at the average queue length and the average
+output realized. This discussion was further enhanced by Kanet in a series of papers; he
+first investigated the various effects that planned lead times have on a multi-stage
+production–inventory system (Kanet 1982), then he emphasized the favourable results in
+terms of order tardiness achieved by the TWK rule (Kanet 1986). Since then, the research
+on dynamic planned lead times for supply chain situations has not attracted much
+attention. The state-of-the-art on this topic models the dynamic planned lead times from
+the perspective of job-shop scheduling, where the job-arrival patterns are derived from an
+MRP explosion process (e.g., Zijm and Buitenhek (1996) and Lambrecht et al. (1998)). The
+available techniques have been shown to give a considerable improvement over fixed
+planned lead times (see Vandaele et al. (2000) for a case study). Additionally, Homem-deMello et al. (1999) presents a method for setting release times for jobs in a stochastic
+production flow line. However, these studies do not consider the effect of dynamic planned
+lead times on the order generating process. Recently, Enns and Suwanruji (2004)
+Downloaded By: [University of Innsbruck] At: 09:40 16 October 2009
+International Journal of Production Research
+investigated the use of exponentially smoothed planned lead times, and showed the
+sensitivity of the system to safety lead time factors and lot-sizing choices. Selçuk et al.
+(2006) also used exponentially smoothed planned lead times for a capacitated multi-stage
+make-to-stock system and identified the conditions that generate erratic order
+The variability introduced by frequent updates of planned lead times has been
+discussed by various researchers and is generally denoted as the lead time syndrome
+(Mather and Plossl 1978). It is argued that closing the gap between planned lead times and
+actual flow times by updating the planned lead times results in uncontrolled order release
+patterns. As the planned lead times become larger, orders must be released earlier, queues
+become longer and flow times become longer, which again causes larger planned lead
+times. This results from the fact that, while releasing the orders, the relationship between
+workload and flow times is ignored. The general consensus is that the lead time syndrome
+causes instability, and must be avoided. This reasoning has become one of the main
+arguments for controlling manufacturing flow times within the predetermined norms
+instead of forecasting them (e.g., Tatsiopoulos and Kingsman (1983), Plossl (1988),
+Kingsman et al. (1989), Zäpfel and Missbauer (1993), and Breithaupt et al. (2002)). The
+mean and the variability of the time that an order spends on the shop floor can be reduced
+significantly by workload control. However, the total order flow time as seen from an
+order release perspective may still possess a high level of variability.
+Consequently, there are a number of opportunities for a continuing discussion on
+dynamic planned lead times in different contexts. In this paper, we aim to shed some
+formal light on this discussion by emphasizing the variability introduced by the lead time
+syndrome. We argue that an explicit analysis of the phenomenon is needed to propose
+The lead time syndrome is becoming increasingly relevant due to the opportunity of
+frequent information exchange enabled by recent advances in data processing and storage
+technologies. Ubiquitous information such as inventory levels, work-in-process, and shop
+conditions at various stages of the supply chain may be available continuously to update
+planning parameters. An important question is to what extent all this information should
+be used to update plans and planning parameters. Insights based on the lead time
+syndrome would suggest making limited use of these updating capabilities due to the
+increased variability in the order release in response to the operational changes. Let us
+describe the lead time syndrome using an example.
+1.1 Lead time syndrome: an example from MRP
+Consider a producer of a single item and a downstream stock point where orders are
+released based on the MRP logic. tables 1–3 provide the changes in the planned order
+releases depending on how the lead time changes. Gross requirements refer to the
+anticipated future independent/dependent demand for the item during each period.
+Scheduled receipts are the total quantity of items released previously and scheduled to be
+replenished by the end of each period. Projected available balance indicates the current
+and future anticipated inventory level for the item at the end of each period. Assume that
+in period 1 the planned lead time is set to two periods. The plan for the order releases in
+this case is given in Table 1. To keep it simple the gross requirements are expressed in
+terms of the lot size, which is equal to d in our example. In period 1 and with a planned
+Table 1. MRP record in period 1, planned lead time two periods.
+Table 2. MRP record in period 2, planned lead time three periods.
+Downloaded By: [University of Innsbruck] At: 09:40 16 October 2009
+Table 3. MRP record in period 2, planned lead time one period.
+lead time of two periods, orders of sizes d are planned to be released at the start of periods
+Assume that due to temporary deviations in production the scheduled order to be
+received within period 1 cannot be finished, which causes the orders in the pipeline to be
+delayed for one period. Then, in order to be realistic, the planned lead time is increased to
+three periods at the start of period 2. As given in Table 2, the previously planned order of
+size d at the start of period 2 is now changed to 2d due to the increase in the planned lead
+On the other hand, it may well be the case that production occurs faster than
+anticipated and the released order of period 1 is finished within period 1. Considering this
+unexpected decrease in the workload the planned lead time is decreased to one period and,
+consequently, the previously planned order of size d for period 2 is now canceled.
+Our analysis in Tables 1–3 is also in line with the fact that MRP systems are equivalent
+to somewhat generalized base-stock systems, with the key difference being that MRP
+systems make decisions at each level using an echelon target stock that includes a forecast
+of future final demand. A detailed analysis of the equivalence of MRP and base-stock
+systems can be found in Lambrecht et al. (1984) and Buzacott et al. (1992). In Tables 1–3,
+one can easily check that the base-stock level is equal to d  (planned lead time þ 1). One
+should also note that the effect of updating the planned lead time is only transient (only
+the order of period 2 is affected) under the assumption that the planned lead time is going
+to be fixed in the future. The lead time syndrome is then realized when we repeatedly
+An illustration of the lead time syndrome is provided in Table 4 for a duration of 12
+time periods. The demand is deterministic with a fixed level of d units/period, and the
+International Journal of Production Research
+Downloaded By: [University of Innsbruck] At: 09:40 16 October 2009
+periodic production may vary by an expected quantity of d units/period. In each time
+period the following sequence of events occurs: the planned lead time is set according to
+the total workload divided by the expected production quantity, the order for that period
+is released, produced items are delivered to the stock point, and demand is realized. The
+initial planned lead time is two periods with a total workload of 2d.
+A standard order of size d is placed in period 1. In period 2, production cannot occur
+due to a temporary breakdown, and the total workload increases to 3d units. Therefore,
+the planned lead time is increased to three periods. The order in period 3 now includes the
+static case order plus an additional period’s demand, thereby increasing the total workload
+to 4d units. As a result, the planned lead time is increased to four periods, and in period 4
+an order of size 2d is again placed. The vicious cycle continues, and in period 6 the planned
+lead time is increased to six periods, and the workload to 6d units. In this period, 2d units
+are produced due to faster production. Thus, the planned lead time is not changed in
+period 7, and a static order of size d is placed. Production increases in period 7, reducing
+the workload to 5d units and the planned lead time to five periods in period 8. The new
+order now includes the static order minus the excess of one period demand, which results
+in cancelation of the static order. This causes a further decrease in the workload and
+therefore in the planned lead time. The cyclic effect continues and in week 11 the planned
+One can see from Table 4 that the deviation in the production quantities is amplified
+and carried through the workload levels by erratic order releases caused by updating the
+planned lead time. This behaviour seems quite arbitrary for a rational planner, but the
+phenomenon is generally considered to be a relevant problem in real-life decision-support
+systems (IBM 1972), and also within the industrial dynamics of Forrester (1980).
+In this paper we concentrate our analysis on the production process, specifically the
+workload level, utilization and the flow time of orders. From the perspective of the
+production department the orders are generated externally by an inventory planner, which
+may be a MRP, base-stock or similar system. We model the production process as a singleserver queue with continuous arrival and processing of production orders. A twodimensional Markov process is developed for this purpose, and using matrix-geometric
+methods we tackle the following research questions.
+. How does the lead time syndrome affect the stability of the production process?
+. What is the effect of the update frequency on the performance of the production
+The outline of the paper is as follows. In section 2 we describe the essential features of the
+problem setting, and the lead time setting procedure. We then describe the Markov
+process, its solution and the stability condition. Then, in section 4 we provide the
+performance evaluation results in relation to the update frequency. Finally, section 5
+provides the contributions and conclusions of this study with further research directions.
+Downloaded By: [University of Innsbruck] At: 09:40 16 October 2009
+We model a production department facing a stochastic arrival of production orders. Under
+static conditions, orders of a single lot-size are placed according to a Poisson process with
+rate . Due to the dynamic planned lead time, orders can be released in an integer number of
+lot-sizes. A change in the planned lead time may yield additional lots to be released for
+production or some lots to be canceled. During the rest of this paper, each production lot is
+referred to as a single job in the queueing system. w denotes the number of jobs being
+processed (WIP) in the shop, and the total workload is ŵ ¼ w þ b, where b is the number of
+jobs waiting in the production backlog to be loaded to the shop floor. There is a WIP limit,
+W0, that indicates the size and the speed of the shop floor with respect to a single job. The
+shop is assumed to handle at most W0 jobs at the same time, and when the shop is totally
+loaded, arriving jobs are put in the backlog queue, and loaded to the shop each time a job is
+completed and leaves the shop. The backlog queue is modeled as a single-server system with
+FCFS processing discipline. The WIP in the shop is processed within exponentially
+distributed time intervals with rate  jobs/time unit. An illustration of our queueing system
+is given in Figure 1. The following examples may further clarify the situation.
+Example 2.1: The shop has a single machine that operates with exponentially distributed
+processing times with rate . There is a buffer in front of the machine that can store at
+Example 2.2: The shop has multiple manufacturing centres. Jobs can follow different
+routes in the shop. The possibility that different jobs interfere (setups, processor sharing,
+etc.) with each other depends on the WIP level in the shop. Each job is processed fast when
+the WIP level is low and vice versa. Jobs are processed in parallel with independent,
+identically distributed exponential processing times with rate /WIP. Since the minimum
+of the exponentials is also exponential with a rate equal to the sum of the rates, the overall
+processing rate is  irrespective of the WIP level in the shop.
+Figure 1. A single-server queueing system with adaptive planned lead time.
+Downloaded By: [University of Innsbruck] At: 09:40 16 October 2009
+International Journal of Production Research
+Figure 1 illustrates the relationship between the production department and the
+inventory planner. The flow of information is represented by dashed lines, and the solid
+lines refer to the physical flow of jobs. The inventory planner is responsible for
+determining the number of jobs released or the number of jobs suspended from the
+backlog queue. The production department continuously reviews the workload status and
+quotes a planned lead time to the inventory planner.
+The planned lead time is determined based on the expected flow time of the last job
+currently residing in the backlog. When the backlog queue is empty, w^  W0 , the lead time
+is set to a fixed level, L0, referring to the minimum estimated flow time. When there are
+jobs waiting in the backlog, then an estimate of the waiting time in the backlog is added to
+L0. From the memoryless property of the exponential processing times it is straightforward
+that, at any point in time, the expected duration of time to finish b jobs through the
+production process is b/. Here, the planned lead time is determined based on a logic
+similar to those procedures that have previously been applied in the literature, such as
+TWK and JIQ (Kanet 1986, Chang 1994). The estimated waiting time is set by a
+management constant multiplied by the term b/. Since  is constant, without loss of
+generality we can write the planned lead time as a function of the total workload level:
+where  is a management constant and the planned lead time is an integer. In other words,
+the planned lead time is based on the production department’s perception of the range of
+the number of jobs that can be finished in a certain time frame. Implicitly,  refers to the
+update frequency. For greater , the lead time is updated more frequently, and for smaller
+, the lead time is updated less frequently. We define the reciprocal of the update
+frequency, r ¼ 1 / , as the increase or decrease in the number of jobs in the backlog, b, in
+order to have one unit of increase or decrease in the planned lead time, respectively.
+In a realistic setting, although the planning process is a very complex task including
+human intervention, the underlying relationship as described in section 1 still remains valid.
+Depending on the situation, the degree of response to the change in the planned lead time
+may vary but, generally, depends on the traffic intensity through a decision function h().
+When the planned lead time is fixed, orders of standard size are given with rate . When the
+lead time is increased, an amount h() is added to the standard order, and when there is a
+decrease in the planned lead time, an excess h() is canceled from the production backlog.
+From the perspective of the production department, jobs are canceled. From the systems
+perspective, jobs do not disappear, but are suspended from the production backlog until the
+time new jobs are released. From the base-stock policy (Base-stock ¼ L  ), one may expect
+that h() ¼ . However, due to various factors in the planning process, the response can be
+different. For example, the planner may anticipate an increase/decrease trend in the
+planned lead time and over-react by setting h() 4 . On the other hand, the planner may
+react to dampen the variability, and smooth the production orders by setting h() 5 . In
+this study, for modeling purposes we apply h() ¼ 1.
+^ and b(t) as the total number of jobs in the system and the number of jobs in the
+backlog at time t, respectively. We model this queueing system as a two-dimensional
+Downloaded By: [University of Innsbruck] At: 09:40 16 October 2009
+Figure 2. Transition rate diagram for the process {X4(t), t  0}.
+Markov process defined by {Xr(t), t  0}, Xr ðtÞ ¼ ðwðtÞ;
+is the planned lead time defined by the update parameter r. We use r as a subscript because
+it determines the characteristics of the process. When b(t) ¼ r  (Lr(t)  L0) þ r  1, an
+arrival triggers an increase in the planned lead time and an additional job is ordered
+immediately. When b(t) ¼ r  (Lr(t)  L0), a departure triggers a decrease in the planned
+lead time and a job is canceled immediately. As long as b(t) remains in between, the system
+behaves as an ordinary M jMj 1. An illustration of the process {Xr(t), t  0} with r ¼ 4 is
+The process has a quasi-birth-and-death (QBD) structure in the diagonal direction of
+Lr ðtÞÞ coordinates. For clearness of presentation, we transform the state space of
+the process {Xr(t), t  0} into the standard QBD format. The new process is defined by
+{Yr(t), t  0}, Yr ðtÞ ¼ ðL^ r ðtÞ; b^r ðtÞÞ, where L^ r ðtÞ ¼ Lr ðtÞ  L0 and b^r ðtÞ ¼ wðtÞ
+The state space of the process {Y r(t), t  0} can be partitioned into the set of boundary
+states {(0, W0),(0, W0 þ 1) , . . . , (0, 2),(0, 1)} and levels l, where level l is the set of
+states {(l,0),(l,1), . . . , (l,r  2),(l,r  1)}, l ¼ 0, 1, . . . ; the transition rate diagram for the
+process {Y4(t), t  0} is shown in Figure 3. Note that (0, W0) corresponds to the empty
+Throughout the rest of the paper we will concentrate on the explicit solution of the
+QBD process {Yr(t), t  0}. As can be seen in Figure 3, for every r ¼ 2, 3, . . . , the right drift
+occurs from state (l, r  1) to (l þ 1, 1), and the left drift occurs from state (l þ 1, 0) to
+(l, r  2), l ¼ 0, 1, . . . . To conveniently describe the infinitesimal generator Q(r) of the
+process, {Yr(t), t  0}, we will employ the following notation for square matrices with
+arbitrary dimension k 4 0. We will denote the identity matrix by I (k), and the right and left
+R and T L , respectively. Therefore, ðT R Þi;j ¼ iþ1;j and ðT L Þiþ1;j ¼ i;j
+for i, j ¼ 0, 1, . . . , k1, where i,j denotes the Kronecker delta. Further, we define the kdimensional unit column-vector on the jth coordinate by eðkÞ
+the states are in lexicographic order, the generator Q(r) is
+Downloaded By: [University of Innsbruck] At: 09:40 16 October 2009
+International Journal of Production Research
+Figure 3. Transition rate diagram for the process {Y4(t), t  0}.
+Q(r) is partitioned into matrices that provide the transition rates between and within the
+0 is the transition rate matrix from level l to level l þ 1, and
+rates within level l, l ¼ 0, 1, . . . , . AðrÞ
+matrix from level l to level l  1, l ¼ 1, 2, . . . , . Further, Z 0ðW0 rÞ , ZðW
+transition rate matrices from, within and to the set of boundary states. We represent these
+Theoretically, for W0 ! 1 the planned lead time is never updated, and the stability
+condition is / 5 1. This is the case where the production department is assumed to have
+an infinite capacity relative to the size of the orders such that the delivery time is always
+kept at the level of the minimum flow time independent of the workload level. This is a
+common assumption in classical inventory control theory. The same stability condition
+also holds for r ! 1, which also yields a fixed planned lead time. Throughout the rest of
+Downloaded By: [University of Innsbruck] At: 09:40 16 October 2009
+Figure 4. Transition rate diagram for the Markov process with generator A(r).
+This is the utilization of the production department in a static system.
+For finite r and finite W0, the stability condition of the QBD process, {Yr(t), t  0}, can
+be derived from Neuts’ mean drift condition (Neuts 1981). The Markov process defined by
+the generator Q(r) is ergodic (stable) if and only if
+where e(r) is an r-dimensional column vector of ones, and ðrÞ ¼ ððrÞ
+steady-state probability vector of the Markov process with generator
+where 0(r) is an r-dimensional row vector of zeros.
+Condition (1) has an intuitive interpretation. The generator A(r) describes the
+behaviour of the QBD process {Yr(t), t  0} in the (vertical) b^r ðtÞ direction. Weighted by
+the steady-state probabilities in the vertical direction, if the mean drift to the left,
+2 e , is greater than the mean drift to the right,  A0 e , then the process is stable.
+In order to explicitly determine stability condition (2) for every update parameter r, we
+need to have a detailed look at the Markov process defined by the generator A(r). It has r
+states, and its transition rate diagram is given in Figure 4. By utilizing the global balance
+principle, we can derive a relationship between the probabilities ðrÞ
+implies that condition (2) always reduces to  5 1. This is summarized in Theorem 3.1.
+Theorem 3.1: For every update parameter r ¼ 2, 3, . . . , the Markov process defined
+by {Yr(t), t  0} is stable if and only if
+Our findings in this section lead to the interesting conclusion that the stability
+condition of the system is independent of whether or not the lead time is updated. If the
+system is stable under the static policy that employs a fixed planned lead time, we will not
+see increasing uncontrollable congestion once we start to update the planned lead time in
+International Journal of Production Research
+response to a changing workload level. The stability is always satisfied for all update
+frequencies. An intuitive explanation is that the increase in the total workload due to
+placing additional jobs in response to an increase in the planned lead time is balanced by
+the decrease in the total workload due to canceling jobs in response to a decrease in the
+planned lead time. The frequency of updating the planned lead time varies depending on
+the choice of the update parameter r ( ¼ 1/r), but the rates of job addition and job
+cancelation stay balanced in the long run, therefore stability is retained.
+Downloaded By: [University of Innsbruck] At: 09:40 16 October 2009
+For the derivations performed in the rest of the paper we assume the queuing system is
+stable, that is  5 1. Let pðrÞ ðl; jÞ be the steady-state probability that the QBD process
+{Yr(t), t  0} is in state (l, j). From the equilibrium equations for the boundary states, we
+l denote the vector of equilibrium probabilities for level l. Therefore,
+l ¼ ðp ðl; 0Þ; p ðl; 1Þ; . . . ; p ðl; r  2Þ; p ðl; r  1ÞÞ;
+The equilibrium equations for level l are
+Note that we have eliminated the boundary probability p(r)(0, 1) in equation (1) by
+substituting the expression in equation (4). The normalization equation is
+which, by substituting equation (4), reduces to
+Given that the Markov process with generator Q(r) is ergodic, the equilibrium
+probability vectors are determined by deploying the matrix-geometric form,
+where the r-dimensional rate matrix R(r) is the minimal non-negative solution of the
+Matrix geometric methods, initiated by Neuts (1981), serve as a powerful framework
+for analysing and (approximately) solving large classes of stochastic processes of GjMj1
+type in a unified manner. In order to solve for the steady-state properties of the process,
+Downloaded By: [University of Innsbruck] At: 09:40 16 October 2009
+one should determine the rate matrix R(r) that solves equation (9). The problem of finding
+an explicit rate matrix is still a developing research area. Structural results have been
+provided by Ramaswami and Latouche (1986) for QBD processes with transition matrices
+of rank 1. Van Leeuwaarden and Winands (2005) describe a class of QBD processes for
+which an explicit rate matrix can be found. Based on the results of Ramaswami and
+Latouche (1986), we provide an explicit solution for the rate matrix R(r) of the QBD
+process {Yr(t), t  0} for every update parameter, r.
+Theorem 3.2: Given that the Markov process with generator Q(r) is ergodic, the rate matrix
+R(r) that exactly solves the matrix quadratic equation (9) for every r ¼ 2, 3, . . . is given by
+In order to determine the steady-state distribution of {Yr(t), t  0} we need to derive pðrÞ
+from equilibrium equation (5) and normalization equation (7). Using the explicit
+expression for the rate matrix and the matrix geometric form (8), equilibrium equation
+Solving this system of linear equations we obtain
+p(r)(0, 0) from the normalization equation (7). First, let us rewrite
+the term l¼0 pl e by substituting (8), which is going to simplify the solution,
+Since the rate matrix R(r) has rows of zero, except for the last one, the power matrices
+International Journal of Production Research
+The stability of the QBD process {Yr(t), t  0} directly implies (R(r))r1,r1 ¼ r1 5 1. This
+can also be verified by the fact that, if {Yr(t), t  0} is stable, then the largest eigenvalue of
+the rate matrix R(r) is less than 1 (Theorem 1.7.1 of Neuts (1981)). The lower diagonal
+structure of R(r) directly implies that the largest eigenvalue is (R(r))r1,r1. Hence,
+Downloaded By: [University of Innsbruck] At: 09:40 16 October 2009
+is an r-dimensional column vector of ones, except that the last row is equal to
+Employing the explicit expression for RðrÞ
+This result, together with our findings in equations (12) and (13) to represent pðrÞ
+Then, using this result in the normalization equation and solving the normalization
+which directly implies that the probability of an empty system is given by
+As a direct conclusion of equation (17), the utilization of the system is found to be
+insensitive to the lead time update and is always equal to . This is in line with our findings
+on the stability condition of the system. It reveals the fact that updating the planned lead
+time does not increase or decrease the long-run average traffic intensity in the system. The
+rate at which the jobs are loaded to the shop is the same as in the static case.
+In this section we answer our second research question by investigating the effect of the
+update frequency on the performance of the production department. The key performance
+indicators are related to the cost performance, the delivery performance, and the
+nervousness created in the planning system. To avoid intricacy in the notation and the
+analysis, it should be noted that the parameter r refers to the reciprocal of the update
+Downloaded By: [University of Innsbruck] At: 09:40 16 October 2009
+We have shown in the previous section that the dynamic and static utilization levels are
+equal. Therefore, keeping a large number of jobs as workload introduces inefficiency, and
+increased costs are incurred due to, for example, material handling and inventory holding.
+Maintaining a utilization level of  implies that the average number of jobs in process is
+the same both in the static and dynamic situation. Thus, our attention is on the average
+number of jobs in the backlog. Let B (r) denote the random variable for the backlog level
+The larger the backlog level, the higher the costs that the production unit has to face.
+Using the explicit derivations provided in the previous section we formulate the
+relationship between the static and dynamic case average backlog levels in the following
+Proposition 4.1: The average number of jobs in the production backlog of a dynamic system
+is always larger than it is under a static system, and their relationship is given by
+where the average backlog level under the static situation is E ½Bð1Þ ¼ W0 þ1 =ð1  Þ, and
+is a monotonically increasing function of the update frequency  ¼ 1/r for r=2, 3, . . . .
+Proposition 4.1 has an intuitively appealing interpretation. We see that updating the
+planned lead time increases the long-term average backlog level by a multiplicative term,
+which is a function of the utilization level and the update frequency. We call this term the
+lead-time-update effect, and denote it by (, r). When the planned lead time is increased,
+additional jobs are released, increasing the backlog level until the planned lead time is
+decreased. On average, this results in a higher average backlog level, although the uilization
+of the production department does not change. It is a fundamental intuition from Hopp and
+Spearman (2000) that an inefficient increase in congestion is undesirable due to the increase
+in order processing, material handling and inventory holding costs. The monotonicity of
+(, r) implies that the fixed planned lead time policy yields the lowest cost situation. As the
+production department becomes more sensitive to changes in its workload level by more
+frequent updating of the planned lead time, more workload is generated.
+Figure 5 illustrates the level of increase in the average number of jobs in the backlog as
+a function of utilization for different update frequencies. For the highest update frequency,
+ ¼ 1/2, and utilization level close to 1, the backlog level is twice as much as it is when the
+planned lead time is fixed. As the update frequency decreases, the deteriorating effect
+significantly decreases. The lead-time-update effect is relatively small for low utilization
+levels, and increases as the utilization increases.
+International Journal of Production Research
+Downloaded By: [University of Innsbruck] At: 09:40 16 October 2009
+Figure 5. The lead-time-update effect, (, r); 0 5  51 and r ¼ 1/,  ¼ 1/2, 1/3, 1/4, 1/5.
+In addition, the delivery performance of the jobs is evaluated by considering the actual
+duration that the processed jobs spend between the moment that they are released and the
+moment that they are completed. The random variable for the job flow time is denoted by
+C (r), and it is the flow time of a finished job (not canceled). As the average workload level
+increases in the dynamic case, we would also expect to see, on average, longer flow times.
+The result we have found is even stronger, as provided in the following Proposition.
+Proposition 4.2: Given that only the last job in the backlog queue can be canceled, the flow
+time of a processed job in the dynamic situation is stochastically greater than or equal to the
+flow time of a job in the static situation
+where C(1) denotes the random variable for the flow time of a job in the static situation
+This result is related to the increased variability in the release pattern of jobs created by
+updating the planned lead time. When the planned lead time is updated, jobs are released
+earlier than they would be under the static case. Some of the jobs are canceled. However,
+the net input rate does not differ from the static case, and, on average, jobs spend more
+time in the system, causing worse delivery performance of the production department.
+Further, Proposition 4.2 directly implies that a certain (e.g. 90th) percentile of the flow
+time distribution of the completed jobs in the dynamic case is greater than or equal to that
+in the static case. Thus, the service level in terms of the percentage of jobs completed in a
+certain time frame will never improve once the production department starts to quote
+In addition to the actual flow time, it is also important to analyse the mean and the
+variability of the planned lead time. From the perspective of the inventory planner, a very
+long and a highly variable lead time is undesirable. A long lead time increases the
+uncertainty, and an erratic lead time increases both the variability in inventory and the
+nervousness in the planning decisions. Let L (r) denote the random variable for the planned
+lead time quoted by the production department, and its probability mass function is given by
+The first and second moments of the distribution of the planned lead time are derived
+based on the update frequency as follows.
+Proposition 4.3: The first and second moments of the probability distribution of the lead
+time quoted by the manufacturer are given by
+Downloaded By: [University of Innsbruck] At: 09:40 16 October 2009
+Let us denote the average increase over the minimum planned lead time due to
+updating the planned lead time as L(r), which is given by
+The relationship between the average number of jobs in the backlog and the average
+planned lead time follows directly from equations (18) and (19). It gives an analytical
+Equation (21) provides insight into the fundamental inventory replenishment
+behaviour; as the estimated delivery time increases, the inventory position is increased
+by larger orders, in turn generating an increased workload. As exemplified in section 1, the
+longer the planned lead time becomes, the greater the production backlog. Here, we
+emphasize the insight that the long-term average behaviour of a physical phenomenon
+(number of jobs in the backlog) is expressed in terms of the long-term average behaviour of
+a dynamic planning parameter (planned lead time) and a coefficient determined by its
+The coefficient of variation of the planned lead time CV[L(r)] follows from equations
+qﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃ
+The lead time distribution depends on the design variables, including L0,W0 and r. For
+a specific situation with L0 ¼ 1 and W0 ¼ 1, CV[L(r)] is depicted as a function of the
+utilization level for different update frequencies in Figure 6. Starting from zero for a
+utilization level close to zero, the coefficient of variation of the planned
+as the utilization increases, and asymptotically approaches
+For a given utilization level, CV[L(r)] increases as the update frequency increases.
+However, the relative effect of the update frequency depends on the utilization level. The
+update frequency is more influential for moderate values of , i.e. 0.5    0.8. The effect
+diminishes at the utilization boundaries. For a utilization level close to zero it is trivial that
+International Journal of Production Research
+Downloaded By: [University of Innsbruck] At: 09:40 16 October 2009
+Figure 6. Coefficient of variation of the lead time, CV[L(r)]; 0 5  5 1 and r ¼ 1/,  ¼ 1/2, 1/
+there will be no variation. For a utilization level close to 1, the marginal effect of the
+update frequency diminishes since the system inherently possesses very high variability. As
+a result, for moderate levels of utilization, the planned lead time should be updated less
+frequently in order to decrease the nervousness in planning decisions.
+We have modeled a situation known as the lead time syndrome in the literature. Our study
+was motivated by a lack of analytical analysis for production–inventory systems utilizing
+dynamic, adaptive planned lead times based on the workload status. We have provided
+insightful results concerning the stability condition and the performance evaluation of
+systems with adaptive planned lead times. We are aware of the fact that the results depend
+on the specific policy by which the planned lead time is updated, and the planner’s
+response to changes in the planned lead time. At the same time we believe that our
+problem setting is realistic in the sense that it describes the phenomenon, and the type of
+behaviour described in this paper can be experienced with common planning tools such as
+MRP, linear programming or base-stock policies. In this study, for a stationary demand
+and a stationary production process, we have shown the following.
+. Production planning systems utilizing dynamic load-dependent planned lead
+times can be modeled through a two-dimensional Markov process and solved
+explicitly using matrix geometric analysis.
+. The stability condition and utilization level are independent of whether or not the
+. When the planned lead time is updated in response to a changing workload level,
+the average number of jobs waiting in the production backlog increases by a
+multiplicative term, which is larger for a higher utilization level and higher update
+. Although the utilization does not change, due to the increased variability in the
+workload, the flow time of the processed jobs increases as the lead time is
+Downloaded By: [University of Innsbruck] At: 09:40 16 October 2009
+. The variability of the planned lead time increases with the update frequency, with
+the exception that the effect diminishes at utilization boundaries.
+The analysis and results provided in this study promote further improvements in modeling
+and analysing dynamic, adaptive systems. The strength of our analysis lies in the modeling
+of the update frequency, which is an important design parameter for dynamic, adaptive
+planning tools. The update frequency is related to the sensitivity of the production
+department to changes in the workload status. There is also the response of the inventory
+planner, modeled by h(), which is related to the degree that the inventory planner is
+sensitive to changes in the planned lead time. In this respect, it would be an interesting
+extension to consider alternative strategies in setting h() and to evaluate the joint effect of
+h() and the update frequency. It would also be interesting to extend the analysis by
+considering multiple stages of the supply chain.
+Our results in the previous section imply that, under stationary conditions, the fixed
+planned lead time policy is preferable. However, it is unclear what the best policy would be
+when the demand pattern is non-stationary. In that case, new policies may need to be
+developed (Selçuk et al. 2007). The analysis for non-stationary demand or production
+conditions is an interesting research direction.
+For r ¼ 4, 5, . . . we obtain, by balancing the flow out and into the set {0, 1, . . . , k}, k ¼ 0, 1, . . . , r2,
+Equations (A.1) and (A.2) together with condition (2) show that the system is stable for every
+r ¼ 2, 3, . . . as long as  5 1. This completes the proof of Theorem 3.1.
+We apply the results of Ramaswami and Latouche (1986) and derive explicit solutions using matrix
+algebra. Given the Markov process with generator Q(r) is ergodic, the rate matrix R(r) that exactly
+International Journal of Production Research
+solves the matrix quadratic equation (9) is given by
+describe the rate matrix in more detail. First, let us denote the
+1 þ A0 e ðer2 Þ Þ by A3 . Then, R has rows of zeros except for the
+last one, and we can write its last row as
+Downloaded By: [University of Innsbruck] At: 09:40 16 October 2009
+3 are zero. The second row of ðA3 Þ , denoted by ða3ð1Þ Þ , solves the
+By exploiting the tri-diagonal structure of AðrÞ
+Consequently, due to equation (B.2), this derivation yields
+r1 ¼ ð;  ð1 þ Þ;  ð1 þ Þ; . . . ; 
+The expected number of jobs in the backlog is given by
+and using the relationship we have found in equation (14), and the derivation of pðrÞ
+and (13), we further simplify this equation as
+Let us denote the first and second terms on the right-hand side of equation (C.1) by Br(1) and
+Br(2), respectively. We first write Br(1) in its explicit form, and then write Br(2) similarly in order to
+provide an explicit expression for E [B(r)]. From equations (12) and (13),
+In addition, equation (15) implies that the term R(r) e(r)/(1r1) is a column vector of zeros except
+that the last row is equal to 2/(1). Then, using equation (C.2) and the explicit solution for
+p(r)(0, 0), provided in equation (16), we can rewrite Br(1) as
+Similar derivations are performed to determine Br(2), and we rewrite it as
+Downloaded By: [University of Innsbruck] At: 09:40 16 October 2009
+Then, the average number of jobs in the backlog given in equation (C.1) can be written explicitly as
+From the stability condition,  5 1, it directly follows that
+which implies that the lead time update effect (, r) is monotonically increasing in the update
+Together with equation (C.5) this completes the proof of Proposition 4.1.
+Let us assume that the static system is initially empty and consider a realization of arrival times and
+processing times of jobs; let aj denote the jth arrival time at the shop and let j denote the jth
+processing time in the shop. Now we couple the static and dynamic system by assuming that the
+dynamic system is also initially empty and fed by exactly the same stream of jobs; therefore, aj is the
+jth (external) arrival time in the dynamic system. It is important to note that, in the dynamic system,
+additional jobs may be generated at the jth arrival and additional jobs may leave (i.e. be canceled)
+when a job finishes processing. Further, we assume that the processing times of the jobs are exactly
+the same as in the static system, i.e. the jth processing time in the dynamic system is j.
+Let w^ r ðtÞ denote the workload, i.e. the number of jobs in the dynamic system at time t; the
+subscript refers to the update parameter r in the dynamic system. Similarly, w^ 1 ðtÞ denotes the
+workload in the static system at time t. Now we immediately have that w^ r ðtÞ  w^ 1 ðtÞ, or, more
+where L^ r ðtÞ is the quoted lead time at time t minus L0. Figure 7 shows a sample path of w^ 1 ðtÞ and
+w^ r ðtÞ for r ¼ 2 and W0 ¼ 1. Note that, in both systems, processing of the jth job starts at exactly the
+The claim is that, for all t  0, the jth job in the queue of the static system arrives later (or
+at the same time) than the jth job in the dynamic system. The claim is immediate from
+equation (D.1): an arriving job in the static system will find at most as many jobs in the queue as the
+International Journal of Production Research
+Downloaded By: [University of Innsbruck] At: 09:40 16 October 2009
+Figure 7. Realization of the workload w^ 1 ðtÞ (solid line) and w^ r ðtÞ (dashed line) for r ¼ 2 and W0 ¼ 1.
+corresponding job in the dynamic system. Thus, if the job in the static system is the jth in the queue,
+then the jth job in the dynamic system was already present or arrived at the same time. Further, since
+the job cancelation policy in the dynamic system is to only cancel the last job in the queue, the
+position of both jobs in the queue will remain the same until they have been processed.
+Since the flow time is the difference between the arrival and completion time, the above claim
+Using the explicit derivation of the rate matrix in equations (10) and (11), and pðrÞ
+rewrite the probability mass function of the lead time as follows:
+ ð1  r1 Þðr1 Þl1 ; l ¼ 1; 2; . . . :
+The lead time quoted by the manufacturer to its customers is L0 plus a random variable. We rewrite
+L (r) in terms of its distribution characteristics as follows:
+where the random variable L̃r has a geometric distribution with success probability r1,
+Consequently, the average lead time is given by
+Similarly, using the moments of the geometric random variable L~ r , we solve for the second moment
+Together with equation (E.1) this completes the proof of Proposition 4.3.
+Downloaded By: [University of Innsbruck] At: 09:40 16 October 2009
+Breithaupt, J.W., Land, M., and Nyhuis, P., 2002. The workload control concept: theory and
+practical extensions of load oriented order release. Production Planning & Control, 13,
+Buzacott, J.A., Price, S.M., and Shanthikumar, J.G., 1992. Service level in multistage MRP and base
+stock controlled production systems, In: G. Fandel, T. Gulledge and A. Jones, eds. New
+directions for operations research in manufacturing. Berlin: Springer, 445–463.
+Chang, F.C.R., 1994. A study of factors affecting due-date predictability in a simulated dynamic job
+shop. Journal of Manufacturing Systems, 13, 389–406.
+Conway, R.W., Maxwell, W.L., and Miller, L.W., 1967. Theory of scheduling. London: AddisonWesley.
+De Kok, A.G. and Fransoo, J.C., 2003. Planning supply chain operations: definition and
+comparison of planning concepts, In: A.G. De Kok and S.C. Graves, eds. Handbook in
+operations research and management science, vol. 11: design and analysis of supply chains.
+Enns, S.T., 2001. MRP performance effects due to lot size and planned lead time settings.
+International Journal of Production Research, 39, 461–480.
+Enns, S.T. and Suwanruji, P., 2004. Workload responsive adjustment of planned lead times. Journal
+of Manufacturing Technology and Management, 15, 90–100.
+Forrester, J.W., 1980. Industrial dynamics. 10th ed. MIT Press.
+Homem-de-Mello, T., Shapiro, A., and Spearman, M.L., 1999. Finding optimal material release
+times using simulation-based optimization. Management Science, 45, 86–102.
+Hopp, W.J. and Spearman, M.L., 2000. Factory physics foundations of manufacturing
+management. 2nd ed. New York: McGraw-Hill.
+Hoyt, J., 1978. Dynamic lead times that fit today’s dynamic planning (Q.U.O.A.T. lead times).
+IBM, Manufacturing activity planning, 1972. Communications oriented production information and
+control system. Vol. 5, NY: IBM: White Plains.
+Kanet, J.J., 1982. Towards understanding lead times in MRP systems, Product Inventory
+Kanet, J.J., 1986. Towards a better understanding of lead times in MRP systems. Journal of
+Karaesmen, F., Buzacott, J.A., and Dallery, Y., 2002. Integrating advance order information in
+make-to-stock production. IIE Transactions, 34, 649–662.
+Kingsman, B.G., Tatsiopoulos, I.P., and Hendry, L.C., 1989. A structured methodology for
+managing manufacturing lead times in make-to-order companies. European Journal of
+Lambrecht, M.R., Muckstadt, J.A., and Luyten, R., 1984. Protective stocks in multi-stage
+production systems. International Journal of Production Research, 22, 1001–1025.
+Lambrecht, M.R., Ivens, P.L., and Vandaele, N.J., 1998. ACLIPS: a capacity and lead time
+integrated procedure for scheduling. Management Science, 44, 1548–1561.
+Downloaded By: [University of Innsbruck] At: 09:40 16 October 2009
+International Journal of Production Research
+Liberopoulos, G. and Koukoumialos, S., 2005. Tradeoffs between base stock levels, numbers of
+kanbans and production lead times in production—inventory systems with advance demand
+information. International Journal of Production Economics, 96, 213–232.
+Mather, H. and Plossl, G.W., 1978. Priority fixation versus throughput planning. Product Inventory
+Molinder, A, 1997. Joint opimization of lot-sizes, safety stocks and safety lead times in an MRP
+system. International Journal of Production Research, 35, 983–994.
+Neuts, M.F., 1981. Matrix-geometric solutions in stochastic models: an algorithmic approach.
+Baltimore: The Johns Hopkins University Press.
+Plossl, G.W., 1988. Throughput time control. International Journal of Production Research, 26,
+Ramaswami, V. and Latouche, G., 1986. A general class of Markov processess with explicit matrixgeometric solutions. OR Spectrum, 8, 209–218.
+Selçuk, B., Fransoo, J.C., and De Kok, A.G., 2006. The effect of updating lead times on the
+performance of hierarchical planning systems. International Journal of Production Economics,
+Selçuk, B., Fransoo, J.C. and De Kok A.G., 2007. Supply chain operations planning with load
+dependent planned lead times, Working paper, Technische Universiteit Eindhoven,
+Spitter, J.M., Hurkens, C.A.J., De Kok, A.G., Negenman, E.G., and Linstra, J.K., 2005. Linear
+programming models with planned lead times. European Journal of Operational Research, 163,
+Tatsiopoulos, I.P. and Kingsman, B.G., 1983. Lead time management. European Journal of
+Vandaele, N.J., Lambrecht, M.R., De Schuyter, N., and Cremmery, R., 2000. Spicer off-highway
+products division—brugge improves its lead-times and scheduling performance. Interfaces, 30,
+Van Leeuwaarden, J.S.H. and Winands, E.M.M., 2006. Quasi-birth-and-death processes with an
+explicit rate matrix. Stochastic Models, 22, 77–98.
+Yano, C.A., 1987. Setting planned lead times in serial production systems with tardiness costs.
+Zäpfel, G. and Missbauer, H., 1993. New concepts for production planning and conrol. European
+Journal of Operational Research, 67, 297–320.
+Zijm, W.H.M. and Buitenhek, R., 1996. Capacity planning and lead time management. International
+Journal of Production Economics, 46/47, 165–179.

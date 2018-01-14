@@ -1,0 +1,942 @@
+Setting planned lead times for a make-to-order production
+CHEE-CHONG TEO1,2,∗ , ROHIT BHATNAGAR1,3 and STEPHEN C. GRAVES1,4
+Singapore-MIT Alliance, 2 School of Civil & Environmental Engineering and 3 Nanyang Business School, Nanyang Technological
+University, Nanyang Avenue, Singapore 639798
+Sloan School of Management, Massachusetts Institute of Technology, Cambridge, MA 02139-4307, USA
+Received February 2009 and accepted July 2010
+This article considers a make-to-order manufacturing environment with fixed guaranteed delivery lead times and multiple product
+families, each with a stochastic demand process. The primary challenge in this environment is how to meet the quoted delivery times
+subject to fluctuating workload and capacity limits. The tactical planning parameters are considered, namely, the planning windows
+and planned lead times. The planning process that is modeled is the one in which the demand represents a dynamic input into
+the master production schedule. A planning window for each product family controls how the schedule of each product family is
+translated into a job release. It can be thought of as the slack that exists when the fixed quoted delivery lead time is longer than the
+total planned production lead time. Furthermore, the planned lead time of each station regulates the workflow within a multi-station
+shop. The model has underlying discrete time periods to allow the modeling of the planning process that is typically defined in time
+buckets; within each time period, the intra-period workflow that permits multiple job movements within the time period is modeled.
+The presented model characterizes key performance measures for the shop as functions of the planning windows and planned lead
+times. An optimization model is formulated that is able to determine the values of these planning parameters that minimize the
+[Supplementary materials are available for this article. Go to the publisher’s online edition of IIE Transactions for additional results
+of the simulation study in Section 6 of this manuscript.]
+Keywords: Make-to-order, production smoothing, master production schedule, material requirements planning, planned lead time,
+Managing customer lead times in the face of demand uncertainty is a critical challenge faced by Make-To-Order
+(MTO) firms that, unlike make-to-stock firms, cannot use
+finished goods inventory to buffer against demand variations. Some firms continually adjust the delivery times
+quoted to customers depending on capacity load; others
+quote fixed (or a tight range of) lead times to their customers, while varying the production rate in response to
+demand fluctuations. The fixed quoted delivery time represents a lead time guarantee to customers that the manufacturer strives to meet with high likelihood. Rao et al.
+(2005, p. 400) highlight that the fixed lead time strategy
+enables the firm “to set clear expectations to customers,”
+and thereby improves customer satisfaction. For example,
+Toyota’s mass-customized Camry Solaras cars have a 5-day
+delivery lead time after they are ordered by dealers (Robinson, 1999). Weng (1999) reports an industrial application in
+an MTO lighting fixture manufacturer wherein the use of a
+10-day fixed lead time policy significantly improved the ontime performance of deliveries. The fixed lead time strategy
+has been utilized in industries where lead times are largely
+dictated by the market and when predictability is valued
+by customers; e.g., customized printed circuit boards, for
+which customers need to coordinate the concurrent availability of components to build an assembly.
+If the MTO manufacturer adopts a fixed lead time strategy, it has to first set the fixed lead time, which involves
+complex trade-offs encompassing decisions at the strategic
+and tactical level. The manufacturer must consider its market position in terms of its pricing, competitors’ lead times,
+and market requirements as well as its own production
+capability in meeting the lead time. The setting of the fixed
+quoted delivery lead time is a cross-functional decision,
+involving marketing, sales, and production departments.
+After determining the fixed lead time, the manufacturer
+must make tactical and operational decisions on how best
+to meet this guaranteed fixed lead time. In this article we
+assume that the firm has adopted a fixed lead time strategy
+and has set the delivery lead time, and we focus herein on
+the tactical production decisions needed to support such
+a strategy. To meet the fixed lead time, the MTO manufacturer must be able to flex its production capability.
+For instance, the manufacturer might utilize overtime or
+subcontracting in periods of high demand; alternatively, it
+might plan to operate at a lower capacity utilization level
+so as to have regular-time capacity available to meet high
+demand. In either case there is a cost for this flexibility,
+due to underutilized capacity or premium production costs
+Typically, the two core functions at the tactical level
+needed to support a fixed lead time policy are the Material Requirements Planning (MRP) and Master Production
+Scheduling (MPS). We consider the two sets of planning parameters that have the most influence on regulating the flow
+of work in such an environment, namely, the planned lead
+times in the MRP and the planning window in the MPS.
+The Planned Lead Time (PLT) is a key input for MRP and
+is used to project how long each job will spend in each production step or workstation. There is a trade-off involved
+in setting the PLT; a short PLT leads to a more variable
+workload at the workstation, while a long PLT results in
+more Work-In-Process (WIP) at the station.
+The planning window is the difference between the
+quoted delivery lead time and the total planned production lead time for a job. We assume the MPS is smoothed
+over the planning window (if a slack exists) while preserving
+the integrity of the fixed quoted delivery lead time. There is
+prior evidence that regulating the release of work to a shop
+provides benefits. A longer planning window allows greater
+smoothing of the MPS, which leads to a less variable job
+release into the shop and subsequently fewer occurrences
+of “spikes” in capacity loading. The idea is to avoid releasing surges of customer orders that would otherwise cause
+capacity saturation with no significant increase in throughput. In addition, Vollmann et al. (2005, p. 321) highlight
+the growing importance of production smoothing in nonrepetitive and MTO production, as firms increasingly need
+to respond to customer pressure for greater flexibility in
+volume and product mix. It is also well documented in
+the just-in-time literature that a stable MPS facilitates process and quality improvements. Without a stable production environment, resources tend to be channeled to react
+to changes in production output instead of achieving process improvements. Furthermore, a smoothed MPS leads to
+more stable requirements for raw materials or components,
+which results in lower component safety stock and/or a
+more stable delivery schedule for suppliers.
+The key challenge in developing the model is how to
+incorporate both the planning system decisions and the
+workflow control decisions for a production network. On
+the one hand, most MPS and MRP systems use time buckets of equal intervals (e.g., a day, a week, or a work shift)
+as the underlying time unit for the key manufacturing decisions; the planned production output, inventory levels, and
+job releases are specified for each time bucket in the planning horizon. On the other hand, job flow occurs at much
+shorter time intervals (essentially in continuous time) and it
+is important to capture the dynamics of these intra-period
+job movements. The problem is further complicated by the
+presence of multiple products in the context of MTO manufacturing, where we need to capture the planning decisions
+and job routings of each individual product.
+To connect the discrete-time planning system and the
+intra-period job flows, we extend the Tactical Planning
+Model (TPM) of Graves (1986). The TPM is a discretetime model in which all transitions within the model are
+governed by an underlying time period. The model assumes
+that all job movements from one station to another occur
+only at the start of each time period, which corresponds to
+the planning time bucket in the context of this article. This
+assumption is restrictive in many situations where jobs can
+make multiple moves between stations within a single time
+bucket. We address this limitation and extend the model
+by allowing work to flow between workstations throughout each period and not only at the start of the period.
+To our knowledge, work on intra-period job movement
+in multi-station systems has not been previously reported
+in the literature. Due to the structure of the TPM-based
+workflow model, the workflow of each product family can
+be modeled individually. Hence, the TPM extension is able
+to capture the key planning and workflow attributes of
+each product family, including the demand process, release
+planning, job routing, planning windows, and PLT at each
+We model how the stochastic demand process is translated into the MPS, where its smoothness is controlled with
+the length of the planning window. We then model the
+workflow in a multi-station production network, in which
+the MPS determines the job release and the PLTs control
+the production at each station. In this fashion, we model the
+linkage between the MPS planning process and the workflow in the production network. Our model determines the
+variance of production requirements (a measure of capacity
+requirements) and the expected WIP level at each workstation. This allows us to characterize the trade-off between
+the capacity requirements and WIP inventory as it depends
+on the planning windows and the PLTs. We embed the
+model in an optimization model to determine the PLTs
+In the next section, we review related work. In Section
+3, we describe the problem setting and explain the roles of
+the planning window and PLT in production smoothing. In
+Section 4, we develop the model that permits multiple job
+Planned lead times for a make-to-order system
+movements in each discrete-time bucket and subsequently
+develop a workflow model for a single-product family. We
+then discuss how we can extend the model to characterize
+the production of multi-product families in Section 5. In
+Section 6, we discuss the results of a simulation study to
+validate the model. In Section 7, we formulate an optimization model to set the planning windows and PLTs. Section
+8 presents an example that illustrates how the model can
+be used to support tactical planning of a MTO production system. We conclude in Section 9 with a discussion of
+Much of the literature on managing customer lead times in
+MTO manufacturing is on due date management. Earlier
+work encompasses setting of due dates and sequencing of
+orders (see surveys in Cheng and Gupta (1980) and Baker
+(1984)). The trade-off in this problem is that tight due dates
+reflect better responsiveness to customer demand but may
+be difficult or costly to achieve due to conflicts with sequencing objectives. Subsequent work includes the additional consideration of order acceptance decisions; i.e., the
+effect of quoted due date toward customer orders. More
+recent work considers the additional dimension of how
+pricing affects customer demand, often together with order
+acceptance decisions. The reader is referred to the review
+by Keskinocak and Tayur (2004) for details of the various
+aspects of the due date management policies.
+The literature on due date setting focuses on a singlestage aggregated system, for which the firm has some flexibility to vary the quoted delivery lead time. Our research
+differs in that we consider the production planning aspects
+of how best to satisfy a fixed quoted delivery lead time
+for a multi-stage, multi-product system. The due date setting models support real-time operational decisions for the
+variable lead time strategy. In contrast, our model is not
+intended for real-time decisions. Rather, we focus on the
+production-related tactics of setting the internal lead times
+in order to support the fixed lead time strategy.
+There is a limited amount of research that deals with
+MTO manufacturers who quote a fixed delivery lead time.
+Cruickshanks et al. (1984) consider production smoothing
+in a single-stage manufacturing process and introduce the
+concept of the planning window. We also utilize the concept of the planning window to smooth the MPS; however,
+in addition, we model production smoothing over a multistage production network. So and Song (1998) consider a
+single-product, single-stage queueing system with a fixed
+quoted delivery lead time. They characterize the lead time,
+price, and capacity expansion decisions with the objective
+to maximize profits subject to a service constraint. Rao
+et al. (2005) also consider a single-stage problem with a
+fixed quoted delivery lead time with similar decision variables (except that it excludes capacity decisions). Rather
+than a service constraint, their model assumes a completely
+reliable delivery lead time achieved by outsourcing in times
+of capacity shortfall. Our model is similar to theirs in that
+we also assume the delivery lead time is always met through
+subcontracting or overtime, if necessary. Both So and Song
+(1998) and Rao et al. (2005) focus on the strategic decision
+of determining the fixed delivery lead time to maximize
+profits for a single-stage system that produces an aggregate product. In contrast, our model addresses the tactical decisions associated with MPS and setting the release
+process and workflow control policies in a multi-station,
+Another related research area encompasses analytical models that determine the optimal PLTs. Weeks
+(1978), Kanet (1986), Matsuura and Tsubone (1993), and
+Matsuura et al. (1996) develop single-stage models, whereas
+Yano (1987) and Gong et al. (1994) formulate serial multiechelon models. Our article differs in that we model a general network of workstations with no restriction on process
+routes by focusing on tactical planning rather than detailed
+scheduling, from which we achieve considerable tractability.
+The prior work assumes an exogenous job arrival process,
+but we determine work releases that are generated from the
+demand process and explicitly model how the discrete-time
+planning process affects workflow and behavior of individual workstations. For a job shop, Graves (1986) presents
+the TPM that highlights the trade-off between production
+smoothness and WIP in selecting the PLT at each workstation. Other work that is related to the TPM includes Graves
+(1988a, 1988b, 1988c), Fine and Graves (1989), Graves et al.
+(1998), Graves and Hollywood (2001), Hollywood (2005),
+Teo (2006), and Teo et al. (2009). In this article, we extend
+the TPM in a number of ways. First, we explicitly model
+the release process for a multi-product MTO environment.
+Second, we model the dynamics of job flows within each
+time bucket, allowing us to characterize how the planning
+process affects workflow. Third, we use the model to formulate an optimization model to support the setting of
+Our extension of the TPM is an effort to address the gap
+between discrete-time planning models and continuoustime workflow models; Karmarkar (1993, p. 320) states,
+“There is a need for an approach that will work at the planning level, so that facility loading under seasonal demand
+can be analyzed. The technical problem here is that planning models tend to be in discrete time while queuing and
+scheduling models are in continuous time.”
+Planning models involve dividing the planning horizon
+into discrete time periods that correspond to the time buckets; the models determine the optimal production quantities and capacity plans in each bucket that satisfy aggregate
+resource constraints. However, to characterize the specific
+shop workflow and capacity loading requires the capturing
+of the intra-period processing and movement of jobs.
+Work on clearing functions (see, for example,
+Karmarkar (1989), Asmundsson et al., (2006), and Selcuk
+et al. 2008) is similar in intent to our TPM extension, since
+this work also attempts to connect discrete-time planning
+with continuous-time shop behavior. A non-linear clearing
+function approximates the queue congestion due to capacity loading by specifying the amount of work “cleared” in a
+given time period by a resource as a non-linear function of
+WIP; the function is embedded in optimization models for
+aggregate production planning. Our model also assumes
+a WIP-dependent production output (as will be seen) but
+differs in that the production output in each time period is
+to preserve the integrity of PLTs. Furthermore, our intent
+is more to determine the planning tactics (i.e., the PLTs and
+planning windows) rather than detailed production plans.
+to complete production of each order exactly a week after
+the receipt of the order. Each workstation is assigned a station PLT for each product family, denoted as n i k. It is the
+intended amount of time required for each job from product family k to complete its processing at the workstation,
+including both processing and waiting time. We associate a
+product PLT PPLTk with each product family, which is the
+total planned time required for an item of product family
+k to be completed by the shop. Each product family has
+predetermined distinct routings that define the sequence of
+workstations that a product must visit for processing; we
+permit re-entry in which a routing can re-visit any workstation. If the product family k has a single routing, PPLTk is
+the planned time required for a job from product family k
+to move through the route, which we express as
+We begin with a summary of notations in Table 1.
+We consider an MTO production system that produces
+a variety of products. We assume that end items can be
+grouped into product families that consist of products with
+similar designs and production processes. We define the
+MPS at the product family level (see Vollmann et al. (2005)
+for defining a group of end items as the MPS unit). Each
+product family k has a fixed quoted delivery lead time, denoted as DLTk ; for instance, if a product family has a fixed
+DLTk of (say) a week, then the manufacturer would commit
+where ωi k is the number of times each job from product
+family k visits workstation i . A product family may have
+multiple routings; e.g., if the end item requires assembly of
+multiple parts. In this case, each routing indexed by r (k)
+has to satisfy Equation (1) and, in addition, ωi,r (k) replaces
+ωi k, which denotes the number of times each job in routing
+Index for time period (i.e., planning time bucket)
+Index for workstations, i = 1, 2, . . . , m (i = 0 represents the dummy station)
+Index for sub-period at workstation i , si = 1, 2, . . . , pi
+Length of each sub-period si at workstation i (i = 1/ pi )
+Fixed quoted delivery lead time for product family k
+Product planned lead time for product family k
+Length of planning window for product family k
+Penalty cost per hour of capacity shortfall at workstation i
+Unit WIP inventory holding cost at workstation i for product family k
+Station planned lead time at workstation i for product family k
+Number of times each job from product family k visits worstation i
+Average amount of work input to station i generated by a unit of output at station j
+Production requirements (in workhours) at workstation i in period t
+Nominal capacity at workstation i (in workhours) per period t
+Queue length (in workhours) for product family k at workstation i at start of period t
+Amount of workload that arrives at workstation i in period t
+Zero-mean noise term at workstation i in period t
+Production requirement (in workhours) at workstation i in sub-period si of length i
+Queue length (in workhours) at start of sub-period si of length i
+Column vector {P0t , P1t , . . . , Pmt }
+Column vector {Q0t , Q1t , . . . , Qmt }
+Column vector {A0t , A1t , . . . , Amt }
+Planned lead times for a make-to-order system
+Fig. 1. Relationship between DLTk , PPLTk , and Wk .
+The MPS can be smoothed over the planning window. The
+relationship between DLTk, PPLTk , and Wk is illustrated
+Jobs to be completed in period t + PPLTk need to be
+released in period t. In any period t, to determine the release
+quantity, the production level to be completed in t + PPLTk
+is set with knowledge of all contracted orders for delivery
+over the planning window encompassing period t + PPLTk
+to t + DLTk. We express the length of the planning window
+We assume the production over the planning window is
+leveled, where a larger Wk allows a greater extent of smoothing. We illustrate the MPS smoothing with an example in
+the Appendix. We note that if DLTk = PPLTk , then Wk =
+1: this corresponds to no smoothing as the releases in each
+period t must correspond exactly to the orders due in time
+The smoothing of the MPS results in early production
+(and release) of some orders. We do not explicitly consider
+the inventory of finished products that result from the orders that are built ahead of time. There is very little risk in
+holding this inventory, as it has been made to order. Furthermore, orders that are built in advance can be delivered
+to customers who accept early deliveries. Alternatively, the
+built-ahead inventory might be shipped by a more economical mode given the additional time for shipping before the
+due date. In both cases, there is an opportunity to provide
+additional value to the customer. Therefore, we argue that
+the finished goods inventory level is not a crucial planning
+The workload at each workstation varies over time due to
+both varying job arrivals and inherent production variability. Sources of the inherent production variability include
+dissimilar processing requirements of jobs, machine breakdowns, setups, and yields. In face of the workload variability, a larger n i k allows smoother production (as will be
+seen) and a higher likelihood for the workstation to meet
+the station PLT. However, with a larger n i k, jobs stay longer
+at the workstation, which leads to a higher WIP inventory.
+We let Pi t be the production requirement in workhours
+at workstation i in time period t. We define production requirement Pi t as the production output required at workstation i in period t in order to ensure that the work-in-queue
+satisfies the station PLTs. The motivation for this specification is to model current planning practice. In MRP systems,
+the MPS for end items, after offsetting for the station PLTs,
+is translated into production requirements at each workstation. To achieve coordination of production with scheduled
+receipts of both produced and procured components, the
+station PLT is used to determine job start times at each
+workstation using the well known backward scheduling
+We assume that the production requirements at each
+workstation are controlled by its station PLTs. Specifically,
+the production schedule is regulated by the job start times
+whereby a job is not required to be produced earlier even
+if capacity is available. Effectively, each workstation produces a quantity sufficient to fulfill the station’s PLT of
+each product family in each period. We do not consider the
+procured components in our model and assume the scheduled receipts of purchased components are always reliable.
+Finally, we like to stress that our intent is to capture the
+tactical level issues; i.e., how best to set the internal lead
+times to meet the fixed quoted delivery lead time in normal
+operating circumstances. Thus, we do not take into account
+the actual detailed operational decisions that might deviate
+from the tactics deployed in the model; e.g., expediting of
+a particular order from an important customer.
+There are several planning decisions to make in the MTO
+1. For each product family, given the fixed DLTk and the
+constraint PPLTk ≤ DLTk, how does one assign n i k to
+each workstation? This decision must account for the
+trade-off between capacity requirements in the face of
+variable workload and WIP level at each workstation.
+2. The planner must consider the trade-off between the
+smoothing of the MPS and the time allowed at the workstations. Increasing the PPLTk means a longer n i k for
+job completion at the workstations; however, a longer
+PPLTk results in a shorter planning window, yielding
+a more variable job release pattern over time and thus
+greater variability in job arrivals to the workstations. A
+larger PPLTk also leads to a longer time spent at the
+workstations, and thus higher WIP levels.
+3. The planner must consider the interdependence of workflow between the workstations. In addition, each station
+can process jobs from multiple product families and the
+production planner must take into account the interactions between the various product families.
+Our model helps the planner in setting n i k for each workstation, which determines the PPLTk and Wk. In considering the trade-off between capacity requirements and WIP
+levels, we consider the sum of expected total penalty cost
+due to capacity shortfall and expected WIP inventory holding cost.
+We let ci be the penalty cost per workhour of capacity
+shortfall for workstation i ; h i k be the unit WIP inventory
+holding cost (per workhour per period) at workstation i
+for product family k; Mi be the nominal capacity for workstation i in workhours per period; and Qi kt be the queue
+length in workhours for product family k at station i at
+where x+ = max(x, 0). The term ci E[Pi t –Mi ]+ denotes the
+expected penalty cost incurred due to capacity shortfall;
+i.e., if Pi t > Mi . A higher variability of Pi t leads to a higher
+expected penalty cost and its variability is influenced by
+PPLTk , n i k and Wk, as described earlier.
+We interpret the expected penalty cost as follows. We
+assume that each workstation can always output the production requirement; that is, there are no rigid capacity
+constraints but there is a nominal capacity limit Mi . When
+Pi t exceeds Mi , we assume that the workstation is able to
+accomplish the production requirement but that it incurs
+an additional cost ci per hour for all production in excess of
+the nominal capacity. For instance, we might assume that
+in times of high workload, a workstation takes expediting actions, e.g., overtime and subcontracting, to produce
+the jobs within the stations’s PLT. The workstation would
+then incur an expediting cost ci (Pi t –Mi ) for its production
+that is beyond its nominal capacity. (Our use of convex
+cost functions in modeling production systems in similar
+to Holt et al. (1960), which is one of the earliest works that
+The key to this research is to characterize Pi t to enable
+us to compute the expected penalty cost. In essence, we determine the first two moments of Pi t wherein the variance
+of Pi t represents a measure of variability of the production requirements. By further assuming Pi t is normally distributed, we are able to compute the expected penalty cost.
+In addition, we determine the expected WIP level E[Qi t ].
+This allows us to develop an expression for Equation (3)
+that we use as an objective function in an optimization
+model to support the setting of Wk and n i k.
+In this section, we develop the characterization of Pi t for a
+single aggregate product family. We first extend the TPM
+of Graves (1986) to allow multiple work movements within
+a time period to characterize the intra-period transfer of
+production requirements. We then present how we convert
+the stochastic demand for a single-family into a smoother
+MPS and release. Next we model the workflow in a general
+network of workstations. (In Section 5, we build upon this
+single-family model to incorporate multiple families.)
+4.1. Multiple job movements in a discrete time bucket
+Since we are modeling a single product family, we drop the
+subscript k for notational convenience. We start with the
+discrete time period t with length of one time unit, corresponding to that for the planning time bucket (e.g., a day or
+a week). We sub-divide each period t into pi equal subintervals and use index si , where si = 1, 2, . . . , pi , to denote
+the sub-periods at workstation i . We define the length of
+We assume that work arrives at the start of each subperiod and the workflow is measured in units of work content at a station (e.g., hours) rather than jobs. We assume
+that the production requirement at workstation i in subperiod si of length i , denoted by Y(i , si ), is a linear
+function of its queue length at the start of sub-period si ,
+Y(i , si ) = (i /n i )X(i , si ) for si = 1, 2, . . . , pi , (4)
+where n i ≥ i . Equation (4) is similar to the linear control
+rule of the TPM in Graves (1986) but differs in that Equation (4) is expressed as a function of the size of the time grid;
+as such, we allow arrivals to the workstation throughout
+We interpret Equation (4) as follows: in order to realize
+the station’s PLT, the workstation i must not allow work to
+wait for more than n i periods and thus we approximate that
+it must process close to (i /n i ) of the work-in-queue in each
+sub-period. We note that the production requirements vary
+according to the work-in-queue to ensure that the actual
+lead time for nearly all of jobs in the queue matches the station’s PLT. Furthermore, when a relatively high workload
+arrives to join the queue, the workload would be “spread”
+over the station’s PLT. Thus, a larger n i k permits a relatively smoother production requirement as it permits more
+workload leveling. (Note that the production–workload relationship in Equation (4) aligns with empirical findings in
+labor psychology that show that productivity, and thus production rate, in some human-operated production systems
+increases with workload because of the effect of work pressure on human performance; see Bertrand and Van Ooijen
+We further assume that the arrival of work to the workstation in period t, which we denote as Ai t , occurs uniformly over period t. In particular, we assume that the
+arrival amount at the start of each sub-period is equal to
+Ai t / pi . The validity of this assumption depends upon the
+characteristics of the arrival stream as well as the length of
+the time period. If the arrival stream is highly varying and
+consists of only a few arrivals in each period, then this
+Planned lead times for a make-to-order system
+assumption may be less reasonable. Similarly, this
+assumption will be more valid if the time period is long
+compared to the inter-arrival times, as this will result in
+a more even spread of the workload within each period.
+Nevertheless, although we recognize that the variability of
+inter-arrival times affects the expected queuing time, we
+note that the purpose of our model is for tactical planning; therefore, we are more concerned with the aggregate
+random arrivals Ai t in each time bucket, rather than the
+detailed random variations within the time period.
+We define Qi t as the queue length at the start of period
+t prior to any arrival. We have the boundary condition for
+the queue length at the first sub-period within each time
+For si = 2, . . . , pi , we model the queue length at the start
+of sub-period si by the balance equation:
+X(i , si ) = X(i , si − 1) − Y(i , si − 1) + Ai t / pi .
+By substituting Equation (4) into Equation (6), we obtain
+X(i , si ) = (1 − (i /n i ))X(i , si − 1) + Ai t / pi .
+We express Pi t as the sum of the production requirements
+We use Equations (5) and (7) to find that:
+X(i , si ) = Qi t + Ai t − [1 − (i /n i )]X(i , pi ).
+We now substitute Equation (9) into Equation (8) to get
+Pi t = Qi t + Ai t − [1 − (i /n i )] X(i , pi ).
+From Equation (10), in order to get an expression for Pi t ,
+we need to find X(i , pi ). From Equation (7) and repeated
+Therefore, the production in each time period is a linear
+function of both the work-in-queue at the start of the period
+and the arrivals during the period. The coefficients for the
+linear function depend on the size of the subintervals.
+By letting the length of the sub-period go to zero, we
+obtain the continuous-time limits for β i (i ) and γ i (i ). In
+effect, we assume that Equation (4) holds at every instant
+in time, which corresponds to a fluid-like workflow. Since
+i = 1/ pi by definition, we obtain the continuous-time
+We can now restate Equation (12) for the continuoustime function as
+where β i and γ i are given above. The validity of the fluid
+flow assumption yielding Equation (13) depends on the
+frequency of job movements in each time bucket; a higher
+frequency would suggest a more fluid workflow. However,
+in situations where job flow rates are low, we expect the
+sub-period coefficients β i (i ) and γ i (i ) to be more appropriate. In such cases, i is set to a value on the order of
+the average inter-arrival time. For notational consistency,
+we will use βi and γi for the subsequent model development.
+The balance equation for workstation i at the start of
+We substitute Equation (13) into Equation (14) and perform repeated substitution to obtain:
+We can use Equation (11) to re-write Equation (10) as
+If the arrival stream {Ai t } to the workstation were independent and identically distributed (i.i.d.) with variance
+σ 2 , then we find the variance of production requirements
+(The arrival stream to a station from upstream stations is generally not i.i.d. but correlated over time. We
+X(i , pi ) = [1 − (i /n i )] pi −1 × Qi t + (1 + [1 − (i /n i )]
+Fig. 2. σ (Pi t ) computed for different sub-period lengths (with σ = 1).
+consider correlated arrivals in Section 4.3.) In Fig. 2 we
+compare the standard deviation of Pi t , denoted by σ (Pi t ),
+obtained using the continuous-time coefficients βi and γi
+with that computed with the sub-period coefficients β i (i )
+We observe that the results are close over a reasonable
+range of flow rates; at i = 0.1 and i = 0.05 (i.e., corresponding to 10 and 20 arrivals per period, respectively),
+the percentage differences are 2.6% and 1.2% respectively.
+Thus, we expect Equation (13) to be a reasonable approximation. In Section 6, we discuss the suitability of the coefficients for different job flow rates based on a simulation
+We have expressed Equation (13) in terms of the parameters βi and γi , both of which are functions of n i .
+To see how Equation (13) behaves for different values of
+n i , we graph Var (Pi t ), βi , and γi as functions of n i in
+Fig. 3. We observe that Var (Pi t ) decreases with larger values of n i ; i.e., a longer station PLT leads to a smoother
+We denote the demand in period t by Dt and assume that
+the demand process is i.i.d. over time with mean E[Dt ]. As
+discussed in Section 3.1, the production planner smoothes
+the MPS by considering the orders not yet released into
+production as a demand queue, waiting to be released into
+To model the work release, we introduce a dummy workstation that is the first station that a job “visits” before it is
+released to the shop. The queue at the dummy station represents the order backlog of work waiting to be released. In
+each period, the job arrival to the dummy station is the demand Dt and the production output of the dummy station
+corresponds to the job release in that period. Denoting station 0 as the dummy station, we model the MPS smoothing
+Fig. 3. Var(Pi t ), β i , and γ i as functions of n i (with σ = 1).
+Planned lead times for a make-to-order system
+where W  1. Equation (17) is equivalent to Equation (4)
+and the linear control rule of the TPM. In Equation (17),
+we assume that in order to ensure an order in the input
+queue does not wait for more than W periods, the shop
+attempts to release 1/W of the on-hand orders in each
+period. Furthermore, Equation (17) models the smoothing
+of the release by spreading the on-hand orders evenly over
+The material balance equation for the dummy station is
+By substituting Equation (17) into Equation (18) to replace Q0t in Equation (18), we obtain:
+namely, a first-order exponential smoothing model with
+1/W as the smoothing parameter. A larger value of W
+results in a smoother job release into the shop.
+We model the work arrivals to workstation i by
+where φi j is a positive scalar. We assume that each time unit
+of production requirement at workstation j generates φi j
+time units of input to station i on average. When station j
+represents the dummy station, we assume that each order
+unit triggers φi j time units of work, on average, for station
+i . We note that φ0 j = 0 for all j and that φ j 0 is the average
+amount of work that starts at workstation j for each new
+To analyze the workflow model, we combine the production functions in Equations (13) and (17) and express the
+where  is a square matrix with elements φi j . By substituting Equation (21) into (20), we obtain:
+where I is an identity matrix. Note that F−1 exists since it is a
+diagonal matrix, with each diagonal element being positive.
+The term ζ t is a column random vector that combines
+both demand arrivals to the dummy station and the noise
+arrivals to the workstations; it has Dt−1 in the first row and
+{ξ1t , . . . , ξmt } in the next m rows. The term ξi t is a zeromean noise term that represents any inherent production
+variability in the arrival stream to station i . The noise signifies any deviation between actual and expected workload,
+based on the upstream production levels. We assume that
+the amount of noise is independent of the work arrivals.
+We can use ξi t to model the sources of variability due to
+machine failures, setups, production yields, or any dissimilarity in processing requirements within the product family.
+Here we adopt the concept of effective processing time. The
+effective processing time is the adjusted processing time that
+incorporates the variability of processing requirements as
+well as the time that is unavailable for processing due to
+random events. See Hopp and Spearman (2000) for a more
+Now by substituting Equations (21) and (22) into Equation (23), we have that:
+where H = (I − G)−1 F and B = I − H(I − ). We can
+show that the matrix (I − G) is invertible as long as the
+spectral radius of  is less than one, which is a necessary
+condition for the system to reach steady state, as will be
+seen. Assuming an infinite history for the system, we obtain by repeated iteration:
+where Pt = {P0t , P1t , . . . , Pmt } , Qt = {Q0t , Q1t , . . . , Qmt } ,
+and At = {A0t , A1t , . . . , Amt } are column vectors and m is
+the number of workstations. F is a diagonal matrix with first
+diagonal element equal to 1/W and the remaining diagonal
+elements set to βi (i = 1, 2, . . . , m). G is a diagonal matrix
+with zero as the top element and γi (i = 1, 2, . . . , m) as the
+We express the work arrivals to the workstations given
+We combine the balance equations for the workstations in
+Equation (14) and for the dummy stations in Equation (18)
+We denote the expectation of vector ζt by the vector µ, a
+column vector with E[Dt ] in the first row as the only nonzero element, since by definition, the noise terms {ξi t } have
+zero mean. From Equation (25), we obtain the expectation
+Note that E [P] does not depend on the planning parameters but depends only on the workflow matrix  and the
+vector µ. The variance of the production vector is given by
+where Var(ζt ) is a covariance matrix that consists of the
+variance of Dt and the covariances of the noise terms
+ξi t . We note that Equation (27) provides the production
+variances for each station as well as the covariance for
+each pair of workstations. These covariances are useful for
+understanding the interdependence among workloads at
+We can compute the power series in Equation (27) using the methods in Graves (1986). We show in Teo (2006)
+that the series in Equation (24) converges if and only if the
+spectral radius of  is less than one. This condition ensures
+that a unit of work processed at one station cannot eventually generate more than one unit of work for the same
+workstation; otherwise, the system will not reach a steady
+Now we compute the expected queue length at each station from Equation (22):
+E[Q] = F−1 (I − G)E [P] = F−1 (I − G) (I − )−1 µ
+The above results require independence between the demands of the product families. We can relax this assumption to incorporate correlated demands by building a single
+linear-systems model in which the first k terms of the noise
+vector ζkt correspond to the demand processes for the k
+product families. We can then incorporate the demand correlations into the covariance matrix for the noise vector ζkt .
+The single-family model assumes a single workflow matrix
+ and assumes a single PLT for each workstation. To apply
+the model to a multi-product setting, each station has to
+have a common station PLT across all product families
+and all product families have same workflow and routing
+through the shop. In this section we show how to relax
+these restrictions and extend the single-family model for
+We consider a manufacturing system with multiple product families and where each workstation processes jobs
+from one or more families. We assume that each workstation i has a PLT of n i k for each product family that
+visits the workstation. Furthermore, each product family
+is allowed to have its own DLTk , PPLTk , and planning
+We first analyze the production for each individual product family. We model each product family as in the singlefamily model; i.e., each product family k has a dummy
+station and has column vector ζkt and matrix k to model
+each family’s demand, noise levels, and routing. Furthermore, each product family has to satisfy Equations (1) and
+(2) for the DLTk, PPLTk , and planning window Wk of each
+product family. We use the single-family model to characterize the production requirements and queue lengths for
+product family k; i.e., E[Pk], Var(Pk), and E[Qk].
+Similar to the single-family model, we assume an infinite capacity (albeit with a finite nominal capacity Mi ) at
+each workstation. Hence each workstation can always meet
+the production requirements for all product families processed at that station. By further assuming that demand
+is independent between the product families, we obtain
+the mean and variance of the total production requirements and the total queue lengths by aggregating across all
+We perform a simulation study to test the accuracy of
+Equation (27). Specifically, we aim to validate the following
+workflow assumptions in deriving Equation (27).
+1. We permit the production requirements to vary within
+each period according to Equation (4); thus, if jobs move
+instantly downstream upon completion, the arrival process to the downstream stations will also vary, which
+contradicts the uniform-arrival assumption.
+2. We model flow of discrete jobs but assume workflow is
+measured in units of work content (e.g., hours).
+3. In deriving the continuous-time coefficients βi and γi ,
+we assume that each job flows continuously like a fluid
+and that the production output satisfies Equation (4)
+at every instant of time. We assume that the sub-period
+coefficients β i (i ) and γ i (i ) can depict job flow of
+We simulate a six-station serial flow system with a stationary work input at the first station. Processing times
+are fixed and equal at all stations. The motive for such a
+simplified simulation model is to attain a controlled experiment and to test whether the accuracy of Equation (27)
+deteriorates for the downstream workstations. In the simulation model, discrete jobs are processed and jobs move
+immediately to the next station upon completion, instead
+of flowing downstream uniformly over each time period as
+assumed in the model. For the work input with mean of
+80 workhours and standard deviation of 20 workhours, we
+experiment with different processing times (1, 2, 4, 8, and
+16 hours) to vary the fluidity of workflow; the longer the
+processing time, the less fluid (i.e., more lumpy) the workflow. In addition, we assume the station PLTs are equal for
+all stations, and we experiment with different values (1, 2,
+and 3 periods). Note that the utilization levels are not an
+Planned lead times for a make-to-order system
+experimental factor because we assume flexible capacity. A
+more detailed discussion of the simulation setup and results
+The results are encouraging as the study shows that
+Equation (27) computed using β i and γ i is reasonably accurate for a wide range of job fluidity. The average percentage error in the standard deviation of Pi t for processing
+times of 1, 2, 4, and 8 hours is 2.3% and the maximum
+error is 6.5%. As expected, the errors computed for the
+less fluid 16-hour jobs using β i and γ i are relatively higher,
+with the largest percentage error at 17.6%. The sub-period
+coefficients β i (i ) and γ i (i ) yield a reasonably accurate
+approximation for the 16-hour jobs with a percentage error of 2%. We observe no obvious trends in percentage
+errors between the different stations and the station PLTs.
+We also test the model’s robustness to production variability by experimenting with different standard deviations of
+processing times, namely, 0.4, 0.6, 0.8, and 1.0 hour for a
+mean processing time of 4 hours. The average percentage
+The simulation model consists of a serial flow system
+that processes a single-product family. We offer a few comments to how we can extend the simulation results to
+the multi-family, general network setting. Since the multifamily model involves modeling each product family independently using family-specific parameters, the validity
+of the multi-family model depends on the model for each
+individual product family. Therefore, we focus our attention on the generalized routing of a single product family,
+wherein each workstation can receive a job stream from
+multiple stations and its output can be dispatched to more
+than one workstation. One limitation arises if the arrival
+streams at a workstation (of the same product family) are
+of vastly different levels of fluidity. For instance, a workstation receives two arrival streams, one with lumpy jobs at
+low frequencies and the other with high fluidity; as such,
+there is no appropriate set of coefficients that is able to
+match the fluidity of both streams. We note that this limitation does not occur if the arrival streams are of suitably
+high fluidity, in which case the coefficients βi and γi would
+match both streams. We expect this could be a probable
+scenario because as stated earlier, βi and γi give accurate
+computations for a reasonably wide range of job fluidity.
+Likewise, if the streams are from different product families,
+the limitation will not happen because a family-specific set
+of coefficients can be employed to match the fluidity of each
+We formulate a non-linear optimization program for the
+multi-family model. Our objective is to minimize the total
+expected expediting cost plus total WIP inventory holding
+cost. The decision variables are Wk and n i k. We assume the
+delivery lead time DLTk is exogenously determined for each
+ωi,r (k) n i k + Wk − 1 = DLTk, ∀k, r (k),
+The objective function is the total expected cost in Equation (3), wherein Pi t is a function of both Wk and n i k, and
+Qi kt is a function of n i k. We assume that the production
+requirement Pi t is normally distributed. We note that Pi t
+is normally distributed if the demands and noise terms are
+normal random variables. We use the mean and variance
+of Pi t from Equation (29) and Equation (30), respectively,
+to evaluate the first term of the objective function by the
+The first set of constraints combines Equations (1) and
+(2) for product family k, defining the relationship between
+the planning windows, station PLTs, and DLTs for every
+routing rk. The second and third sets of constraints ensure a
+lower bound of at least ak and bi on the planning windows
+and n i k of each workstation i, respectively. A smaller n i k
+would imply a need for frequent monitoring at the workstation to track the job progress. Likewise, a short planning
+window would require more efforts in monitoring the MPS.
+Hence, both ak and bi are managerial inputs that must be
+set appropriately in order to avoid complications in production control.
+We have not established the convexity of the objective
+function. As a consequence we cannot ensure that we obtain the global optimum to this non-linear optimization
+program. Nevertheless, from our computational experience
+with test problems, we observe that standard non-linear optimization algorithms perform very reliably on this problem: from a wide range of starting points, for each test
+problem we always obtain the same solution. In the next
+section we report on one computational study. Teo et al.
+(2009) report another computational study based on an
+application of the model to an oil-rig manufacturer.
+We use a real-world setting to illustrate the use of the model
+and to draw some insights. We consider a production shop
+that is part of a manufacturing facility of an oil-rig builder.
+Teo et al. (2009) present a case study on another larger
+facility of the same oil-rig builder in which the model’s predictive capability is validated. The data presented in this
+section has been altered to protect proprietary information. However, the resulting qualitative relationships and
+insights drawn from this example are the same as they
+The shop processes and cuts steel plates into required
+dimensions, which are then used for downstream production stages to construct the necessary steel assemblies. The
+shop operates in an MTO environment because the internal
+customer orders are highly customized, resulting in numerous possible cutting dimensions and plate thicknesses. The
+delivery lead times for the internal orders are fixed to facilitate planning in the downstream processes. The production
+control is based on PLTs in which the production schedules
+synchronizes with the “scheduled receipts” of engineering
+drawings for the cutting dimensions. In addition, due to
+the large physical size of the plates (each weighing 0.5 to 10
+tons) and the space constraints in the facilities, the stations
+usually produce a quantity that is just sufficient to meet
+the station PLTs, to avoid taking up the downstream shop
+As part of ongoing improvement efforts, management
+was examining how best to group the numerous production
+options into product families and how to set PLTs appropriately. In this example, we categorize the customer orders
+according to the plate thickness into two product families:
+Thick Plates and Thin Plates. The shop consists of four
+workstations, namely Blasting, NC (Numerical Control)
+Gas Cut, NC Plasma Cut, and Manual Cut. The process
+flow map, including the dummy stations to model the MPS
+Raw steel plates (both Thick Plates and Thin Plates) are
+first sent to the Blasting station where ball grids are splashed
+onto the plate surfaces to remove impurities, followed by
+an application of a corrosion preventive paint. The blasted
+Thick Plates are then transferred to the NC Gas Cut station,
+which is capable of cutting the Thick Plates. The blasted
+Thin Plates are moved to the NC Plasma Cut station, which
+can only cut the Thin Plates. The steel plates are then sent
+to the Manual Cut station where the final cutting is done
+The demands for both product families have been found
+to be i.i.d. over time and are approximately normally distributed. The daily demand for the Thick Plates has a mean
+of 20 plates and standard deviation of ten plates, while the
+demand for Thin Plates has a mean of 26 plates and standard deviation of 12 plates. The demands for the product
+families are uncorrelated. The fixed delivery lead times for
+the Thick Plates and Thin Plates are 9 days and 8 days, respectively. We show in Table 2 the expectation and standard
+deviation of the effective processing times at each workstation. The standard deviation of the effective processing time
+is mainly due to the different processing requirements for
+the different plates. Table 2 shows the nominal capacity
+available per day in workhours. Each workstation has flexibility to expand its capacity in each day by subcontracting
+its production to nearby shops. The subcontracting cost
+per hour for outstanding work at each workstation is also
+We set up the workflow matrices for Thick Plates and
+Thin Plates, denoted by Thick and Thin respectively, as:
+For example, each workhour at Blasting generates on
+average 1.69/0.55 = 3.08 workhours for the NC Gas Cut
+station; i.e., φ43 = 3.08. To set up the variance of the vector ζt , we note that the off-diagonal terms of the matrix
+are all equal zero as there is assumed to be no correlation
+between the demands or the random variability at the stations. We set the diagonal elements for the dummy stations
+(first two rows) equal to the variance of the daily demand;
+the diagonal elements for the workstations (bottom four
+rows) represent the variance of the noise terms Var(ξi t )
+due to the variability in the processing times, which we set
+to the variance of the workload for the mean number of
+jobs processed at the station per day. For example, at the
+Planned lead times for a make-to-order system
+The expectation and standard deviation of processing times at the Blasting station are identical for both product families.
+Blasting station, the mean number of Thick Plates processed per day is 20 and the standard deviation of the processing time is 0.35 hour, which Var(ξi t ) = 20(0.35)2 = 2.45
+hour2 . We assume that the noise term at each station is
+normally distributed. The matrices for the variances of ζ t
+In the base case, the raw plates are “pushed” into production with planning window Wk = 1 (i.e., no smoothing of
+the MPS). Each station has a common station PLT n i k
+for both product families. Table 3 shows the values of Wk
+and n i . The table also shows the computed mean and standard deviation of the production requirement as well as
+the queue length at each station. Due to the normality assumption for the demands and variability at each station,
+the production requirements at the stations are also normally distributed; this allows us to compute the probability
+of subcontracting. We also compute the expected subcontracting cost and holding cost per day, which are also shown
+The release into the production shop is highly variable as
+there is no smoothing of the MPS. At the Blasting station,
+there is a relatively high probability of 0.21 that the shop
+has to subcontract the outstanding work. The expected
+subcontracting cost of the Blasting station is $223.40 per
+day. The other workstations have much lower probabilities
+of insufficient nominal capacity. The queue length at the
+Manual Cut station is the highest, with 293.8 hours of workin-queue, resulting in a daily holding cost of $216.50.
+We increase the planning windows of each product family
+to 3 days. To keep the delivery lead time fixed, this increase
+in the planning window must be compensated by a reduction of the station PLTs at the stations. We observe in the
+base case that the Manual Cut station has the second lowest expected subcontracting cost and the highest inventory
+holding cost. Hence, we choose to reduce the station PLT
+of the Manual Cut station from 3 days to 1 day.
+Table 4 shows that the releases for both product families
+become less variable. The standard deviation of the release
+for Thick Plates falls from 10 to 4.47 plates and that for
+the Thin Plates from 12 to 5.37 plates. The smoother release results in less variable job arrivals at the workstations
+which in turn causes smoother production requirements.
+For example, the standard deviation of production requirements for the Blasting station decreases from 3.38 hours
+in the base case to 2.76 hours. This leads to a reduction
+in the probability of subcontracting at the Blasting station
+from 0.21 to 0.16, with a corresponding fall in expected
+subcontracting cost from $223.40 to $119.60. The NC Gas
+Cut and the NC Plasma Cut also undergo a reduction in
+expected subcontracting costs due to the less variable work
+arrival from the Blasting station; this illustrates how production variability at an upstream station can affect the
+The Manual Cut station experiences two opposite effects
+on its production variability. On the one hand, the longer
+planning windows lead to smoother job arrivals to the station, but it now has a shorter station PLT to smooth the
+arrival variability. The combined effect causes an increase in
+production variability at the workstation. We note that its
+expected subcontracting cost rises from $21.37 to $77.14.
+However, its queue length decreases from 293.79 hours to
+97.9 hours with a decline in expected holding cost from
+$216.50 to $72.12. Overall, the expected total cost for the
+shop falls from $712.86 in the base case to $495.33.
+We obtain the optimal planning windows and station PLTs
+using the optimization model in Section 7, where we set
+ak = 1 for all k and bi = 1 for all i . The optimal solution
+and associated results are shown in Table 5. The optimal
+solution involves further reducing the station PLTs of the
+Blasting station and NC Plasma Cut station and to a lesser
+extent the NC Gas Cut station; in turn, the planning windows are increased. Even though the total expected subcontracting cost increases, the decrease in the total expected
+holding cost more than offsets this increase; thus, it leads to
+a reduction in the total cost. The minimum expected total
+cost is $464.09, which translates into a 34.9% cost savings
+In addition, we can also use the model for various “what–
+if” analyses. For example: what if the delivery lead time is
+reduced? What if the nominal capacity at a station is increased? We can also utilize the model to determine the impact of unplanned changes: what if the demand increases?
+Planned lead times for a make-to-order system
+If the subcontracting costs are raised, should we acquire
+more capacity? The model can be employed to determine
+the impact of these changes on the expected total cost to
+In this article, we model an MTO manufacturing environment that has a fixed quoted delivery lead time. We focus
+on the setting of the planning windows and station PLTs,
+which are two key tactical planning parameters. We develop for a single aggregate product a workflow model that
+allows intra-period workflows. We show how to characterize the production requirements as well as the expected
+queue lengths for each workstation. We then extend the
+single-family model to systems with multiple families. We
+embed the model into a non-linear optimization program
+to find the optimal values of the planning parameters.
+We illustrate the use of the model with a small case example from a shop that processes steel plates for oil-rig
+One possible extension to this research is to model the
+stability of the MPS when it is subject to changes in customer orders. In our model, we assume that there is no
+change to the order quantity after the customer order is
+received. However, in many MTO firms, it is common for
+customers to adjust or modify their orders within the delivery lead time. Thus, an important enhancement to the
+model would be to incorporate the dynamics of the MPS
+and its impact on the production flow, especially in light of
+the techniques that are used to achieve a stable MPS; e.g.,
+firm planned orders, frozen time periods, and time fencing
+It would also be worthwhile to explore how the model
+can be employed to provide feedback in supporting the setting of the fixed quoted delivery lead time. The feedback
+mechanism would be equivalent to the approach in hierarchical planning, wherein our model serves as a disaggregation model that provides feedback to the more aggregate
+models (see, for example, So and Song (1998) and Rao et al.
+(2005)) that determine the fixed quoted delivery lead time.
+It would facilitate the capturing of the problem at different
+detail levels; i.e., aggregated data for setting the fixed lead
+time and more detailed production data for determining
+This research has been supported by the Singapore–MIT
+Alliance (SMA) program. The authors thank the Departmental Editor, Associate Editor, and three anonymous referees for their valuable comments which greatly improved
+Asmundsson, J.M., Rardin, R.L. and Uzsoy, R. (2006) Tractable nonlinear production planning models for semiconductor wafer fabrication facilities. IEEE Transactions on Semiconductor Manufacturing,
+Baker, K.R. (1984) Sequencing rules and due-date assignments in a job
+Bertrand, J.W.M. and Van Ooijen, H.P.G. (2002) Workload based order
+release and productivity: a missing link. Production Planning and
+Cheng, T.C.E. and Gupta, M.C. (1989) Survey of scheduling research
+involving due date determination decisions. European Journal of
+Cruickshanks, A.B., Drescher, R.D. and Graves, S.C. (1984) A study
+of production smoothing in a job shop environment. Management
+Fine, C.H. and Graves, S.C. (1989) A tactical planning model for manufacturing subcomponents in mainframe computers. Journal of Manufacturing and Operations Management, 2(1), 4–34.
+Gong, L., De. Kok, T. and Ding, J. (1994) Optimal leadtimes planning in
+a serial production system. Management Science, 40(5), 629–632.
+Graves, S.C. (1986). A tactical planning model for a job shop. Operations
+Graves, S.C. (1988a) Determining the spares and staffing levels for a repair
+depot. Journal of Manufacturing and Operations Management, 1(2),
+Graves, S.C. (1988b) Extensions to a tactical planning model for a job
+shop. in Proceedings of the 27th IEEE Conference on Decision and
+Control, IEEE Press, Piscataway, NJ, pp. 1850–1855.
+Graves, S.C. (1988c) Safety stocks in manufacturing systems. Journal of
+Manufacturing and Operations Management, 1(1) 67–101.
+Graves, S.C. and Hollywood, J.S. (2001) A constant-inventory tactical
+planning model for a job shop. Working paper, MIT, Cambridge,
+Graves, S.C., Kletter, D.B. and Hetzel, W.B. (1998) A dynamic model for
+requirements planning with application to supply chain optimization. Operations Research, 46(3), 35–49.
+Hollywood, J.S. (2005) An approximate planning model for distributed
+computing networks. Naval Research Logistics, 52(6), 590–605.
+Holt, C.C., Modigliani, F., Muth, J.F. and Simon, H.A. (1960) Planning
+Production, Inventories and Work Force, Prentice Hall, Englewood
+Hopp, W.J. and Spearman, M.L. (2001) Factory Physics: Foundations of
+Manufacturing Management, second edition, Irwin McGraw Hill,
+Kanet, J.J. (1986) Toward a better understanding of lead times in MRP
+systems. Journal of Operations Management, 6(3), 305–315.
+Karmarkar, U.S. (1989) Capacity loading and release planning with
+work-in-progress (WIP) and lead-times. Journal of Manufacturing
+Karmarkar, U.S. (1993) Manufacturing lead times, order release and
+capacity loading, in Handbooks in Operations Research and Management Science, Volume 4. Logistics of Production and Inventory, Graves, S.C., Rinnooy Kan, A.H., Zipkin, P.H. (eds), NorthHolland, Amsterdam, The Netherlands, pp. 287–329.
+Keskinocak, P. and Tayur, S. (2004) Due date management policies, in
+Handbook of Quantitative Supply Chain Analysis; Modeling in the
+E-Business Era, Simchi-Levi, D., Wu, S.-D. and Shen, Z.-M. (eds),
+Matsuura, H. and Tsubone, H. (1993) Setting planned lead times in
+capacity requirements planning. Journal of the Operational Research
+Matsuura, H., Tsubone, H. and Kanezashi, M. (1996) Setting planned
+lead times for multi operation jobs. European Journal of Operational
+Rao, U.S., Swaminathan, J.M. and Zhang, J. (2005) Demand and production with uniform guaranteed lead time. Production and Operations
+Robinson, A. (1999) Toyota to test quick turn on Solara, available at
+http://www.automotivenews.com (accessed January 4, 2010).
+Selcuk, B., Fransoo, J.C. and De Kok, A.G. (2008) Work in process clearing in supply chain operations planning. IIE Transactions, 40(3),
+So, K.C. and Song, J.-S. (1998) Price, delivery time guarantees and capacity selection. European Journal of Operational Research, 111, 28–
+Teo, C.C. (2006) A tactical planning model for make-to-order environment under demand uncertainty. Ph.D. Thesis, Nanyang Technological University, Singapore (Singapore–MIT Alliance).
+Teo, C.C., Bhatnagar, R. and Graves, S.C. (2009) An application of master
+schedule smoothing and planned lead times control. Production &
+Vollmann, T.E., Berry, W.L., Whybark, D.C. and Jacobs, F.R. (2005)
+Manufacturing Planning and Control for Supply Chain Management,
+fifth edition, McGraw-Hill, New York, NY.
+Weeks, J.K. (1978) Optimizing planned lead times and delivery date, in
+Proceedings of the 21st American Production and Inventory Control
+Weng, K.Z. (1999) Strategies for integrating lead time and customerorder decisions. IIE Transactions, 31(2), 161–171.
+Yano, C.A. (1987) Setting planning leadtimes in serial production systems
+with earliness costs. Management Science, 33(1), 95–106.
+We consider a product family with DLTk = 4, PPLT = 2,
+and planning window of length = 4 – 2 + 1 = 3. The current period is t = 0. The production planner has to decide
+on the MPS and the planned releases over the planning
+horizon that ranges from t = 0 to t = 4. To simplify the
+example, there are no orders after period t = 4 and there is
+no planned inventory at t = 1. We illustrate the smoothing
+The second row shows orders contracted to be delivered
+in each period, from t = 2 to 4. We do not state the order
+quantities for period t = 0 and t = 1, as they are already
+in process and are thus inconsequential. In this example,
+we smooth the MPS by spreading the orders as evenly as
+possible over the planning window, which ranges from t =
+2 to t = 4; in particular, we level the MPS at 20 units
+for each period of the planning window. Since the order
+quantity in t = 2 is only ten units, the MPS results in a
+planned inventory of ten units in period t = 2 that is carried
+over to period t = 3 and is finally applied to the order in
+t = 4. Furthermore, since the PPLTk = 2, we release jobs
+two periods earlier to meet the corresponding MPS. For
+instance, we plan to release 20 units at t = 0 to meet the
+Chee-Chong Teo is an Assistant Professor at Nanyang Technological
+University (NTU), Singapore. He received his B.Eng. from NTU and
+both his M.Sc and Ph.D from the Singapore–MIT Alliance Program.
+Since 2006, he has been a faculty member at the School of Civil &
+Environmental Engineering. At NTU, he teaches courses in supply chain
+management and freight transportation. His research interests are in
+operations management in the context of production–inventory systems
+Rohit Bhatnagar is an Associate Professor at Nanyang Business School,
+NTU, Singapore, and Faculty Fellow of the Singapore–MIT Alliance
+Program. He received his B.Tech. from IT-BHU, India; M.B.A. from the
+Indian Institute of Management, Bangalore, India; and Ph.D. in Operations Management from McGill University, Canada. He teaches courses
+in operations management, supply chain management, quality management, and quantitative methods. His recent research has focused on a
+variety of design and planning issues in manufacturing and supply chain
+systems, including problems arising in facility location, supply routing,
+and inventory optimization. He has served as an Assessor for the Singapore Quality Award and Manufacturing Excellence Award (MAXA).
+Stephen C. Graves is the Abraham J. Siegel Professor of Management
+Science at MIT. He received his A.B. and M.B.A. from Dartmouth College and completed his Ph.D. in Operations Research at the University
+of Rochester. Since 1977 he has been a faculty member at the MIT Sloan
+School of Management. He has joint faculty appointments with both
+the Mechanical Engineering Department and the Engineering Systems
+Division at MIT. He is a Faculty Fellow of the Singapore–MIT Alliance.
+He teaches classes in supply chain planning and design and his primary
+research interests are in the design and planning of manufacturing systems and supply chains; recent efforts have considered supply-chain optimization, the evaluation of manufacturing flexibility, and various tactical
+issues arising in e-retailing. As of January 2009 he is the editor-in-chief of
+Manufacturing & Services Operations Management, the INFORMS journal for operations management. He has been selected as an INFORMS
+Fellow, an MSOM Fellow, and a POMS Fellow.
+Copyright of IIE Transactions is the property of Taylor & Francis Ltd and its content may not be copied or
+emailed to multiple sites or posted to a listserv without the copyright holder's express written permission.
+However, users may print, download, or email articles for individual use.

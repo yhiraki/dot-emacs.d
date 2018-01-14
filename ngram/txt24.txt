@@ -1,0 +1,2274 @@
+Copyright 2006 by the American Psychological Association
+0033-295X/06/$12.00 DOI: 10.1037/0033-295X.113.2.358
+How might one account for the organization in behavior without attributing it to an internal control
+structure? The present article develops a theoretical framework called behavioral dynamics that integrates an information-based approach to perception with a dynamical systems approach to action. For a
+given task, the agent and its environment are treated as a pair of dynamical systems that are coupled
+mechanically and informationally. Their interactions give rise to the behavioral dynamics, a vector field
+with attractors that correspond to stable task solutions, repellers that correspond to avoided states, and
+bifurcations that correspond to behavioral transitions. The framework is used to develop theories of
+several tasks in which a human agent interacts with the physical environment, including bouncing a ball
+on a racquet, balancing an object, braking a vehicle, and guiding locomotion. Stable, adaptive behavior
+emerges from the dynamics of the interaction between a structured environment and an agent with simple
+control laws, under physical and informational constraints.
+Keywords: perception and action, perceptual–motor control, dynamical systems, self-organization,
+system (the neuroreductionist view), the structure of internal representations (the cognitivist view), or in the contingencies presented by the environment (the behaviorist view). This is unsatisfying because it merely displaces the original problem of
+behavioral organization to a preexisting internal or external structure, begging the question of why that particular organization
+obtains and how that specific structure originated.
+The challenge of accounting for organized behavior without
+resorting to an a priori controller was articulated by Gibson (1979):
+The organization of behavior has been a central concern of
+psychology for well over a century. How is it that humans and
+other animals can generate behavioral patterns that are tightly
+coordinated with the environment, in the service of achieving a
+specific goal? This ability to produce stable yet adaptive behavior
+raises two constituent issues. On the one hand, it implicates the
+coordination of action, such that the many neuromusculoskeletal
+components of the body become temporarily organized into an
+ordered pattern of movement. On the other, it implicates perception, such that information about the world and the body enables
+appropriate actions to be selected and adapted to environmental
+conditions. At a basic level, the problem of the organization of
+behavior is thus synonymous with the problem of perception and
+action. Moreover, an adequate theory of perceptually controlled
+action would provide a platform for understanding more “cognitive” behavior such as extended action sequences, anticipatory
+behavior oriented to remote goals, or predictive behavior that takes
+account of hidden environmental properties.
+It seems natural to presume that observed organization in behavior implies ipso facto the existence of a centralized controller—a pattern generator, action plan, or internal model that is
+responsible for its organization and regulation. Such an assumption
+has been commonplace in psychology, cognitive science, neuroscience, and robotics. In each domain, organization in behavior has
+been attributed to prior organization in the structure of the nervous
+Locomotion and manipulation . . . are controlled not by the brain but
+by information. . . . Control lies in the animal– environment system. . . .
+The rules that govern behavior are not like laws enforced by an
+authority or decisions made by a commander; behavior is regular
+without being regulated. The question is how this can be. (p. 225)
+Although the quotation asserts Gibson’s belief that behavior is
+regular without being centrally controlled, the question of how this
+can be remains open. His suggestion is that, rather than being
+localized in an internal (or external) structure, control is distributed
+over the agent– environment system. I interpret this statement to
+imply that biology capitalizes on the regularities of the entire
+system as a means of ordering behavior. Specifically, the structure
+and physics of the environment, the biomechanics of the body,
+perceptual information about the state of the agent– environment
+system, and the demands of the task all serve to constrain the
+behavioral outcome. Adaptive behavior, rather than being imposed
+by a preexisting structure, emerges from this confluence of constraints under the boundary condition of a particular task or goal.
+In the present article, I attempt to synthesize recent ideas to show
+how the organization of behavior can be attributed to the dynamics
+of the agent– environment interaction under such constraints and
+seek to develop a coherent theoretical framework for understanding perception and action.
+Human and animal behavior exhibits two complementary attributes that need to be accounted for: stability and flexibility. On
+Preparation of this article was supported by the National Eye Institute
+(Grant EY10923) and the National Institute of Mental Health (Grant K02
+MH01353). I thank Benoit Bardy and the University of Paris XI for their
+generosity during preparation of the manuscript, and Elliot Saltzman and
+Peter Beek for their comments on an earlier draft.
+Correspondence concerning this article should be addressed to William
+H. Warren, Department of Cognitive and Linguistic Sciences, Brown
+University, Providence, RI 02912. E-mail: william_warren_jr@brown.edu
+the one hand, behavior is characterized by stable and reproducible
+low-dimensional patterns.1 These patterns are stable in the sense
+that the functional form of movement is consistent over time and
+resists perturbation and reproducible in that a similar pattern may
+recur on separate occasions. On the other hand, behavior is not
+stereotyped and rigid but flexible and adaptive. Although action
+patterns exhibit regular morphologies, the agent is not locked into
+to a rigidly stable solution but can modulate the behavioral pattern.
+To the extent that such flexibility is tailored to current environmental conditions or task demands, it implicates perceptual
+Let me state the proposal intuitively at the outset. Adaptive
+behavior can be characterized on (at least) two levels of analysis.
+At the level of perception and action, the agent and the environment can be treated as a pair of mutually coupled dynamical
+systems.2 They are coupled mechanically, through forces exerted
+by the agent, and informationally, through sensory fields that are
+structured by the environment (optic, acoustic, haptic, olfactory,
+etc.). Agent– environment interactions give rise to emergent behavior that has a dynamics of its own, which I call the behavioral
+dynamics. At this second level of analysis, the time evolution of
+behavior can be formally described by a dynamical system, which
+may represented as a vector field. The core claim is that stable
+behavioral solutions correspond to attractors in the behavioral
+dynamics, and transitions between behavioral patterns correspond
+to bifurcations. Such stabilities do not inhere a priori in the
+structure of the environment or in the structure of the agent but are
+codetermined by the confluence of task constraints and
+perceptual–motor control laws. It is in this sense that, as Gibson
+(1979) proposed, control lies in the agent– environment system.
+One consequence of this account is that behavior can be understood as self-organized, in contrast to organization being imposed
+from within or without. Behavior patterns emerge in the course of
+learning, development, and even evolution through a bootstrapping
+process in which agent– environment interactions give rise to the
+behavioral dynamics, and stabilities in these dynamics in turn act
+to capture the behavior of the agent. During bootstrapping, the
+agent actively explores the vector field for a task, both contributing
+to and locating its stabilities; to express this combination of creation and discovery, one might say that stable solutions are enacted
+by the agent (Varela, Thompson, & Rosch, 1991). Reciprocally,
+attractors in the behavioral dynamics feed back to fix the agent’s
+action patterns and control laws, in a form of circular causality.
+Thus, rather than a central controller dictating the intended behavior, the agent develops perceptual–motor mappings that tweak the
+dynamics of the system in which it is embedded so that the desired
+behavior arises from the entire ensemble. From the agent’s point of
+view, the task is to exploit physical and informational constraints
+to stabilize the intended behavior. As shown below, the solution
+may rely more or less upon physical or informational regularities,
+depending on the nature of the task. Consequently, behavior is not
+prescribed by internal or external structures, yet within the given
+constraints there are typically a limited number of stable solutions
+The study of adaptive behavior can, of course, be extended to
+more micro (e.g., neuromuscular) levels of analysis but at the price
+of introducing a higher dimensional and hence less tractable description. The approach taken here is to adopt a scale of description
+that is commensurate with the scale of observed regularity. Systematicity in goal-directed behavior is manifested in lowdimensional action patterns directed at medium-scale features of
+the environment and guided by higher order informational variables, whereas at the level of neuromuscular degrees of freedom,
+such behavior exhibits considerable contextual variation. Although
+it is important to study the correlates between the neural support
+for action and observed behavioral patterns, I would argue that this
+relationship is complementary rather than reductive. A theoretical
+account of behavior must incorporate goals, information, physics,
+and properties of the world that are not directly reducible to a
+neural level (Koenderink, 1999). Thus, the aim of this article is to
+seek a lawful account of behavior at a functional level.
+Explaining behavioral organization by postulating an antecedent
+internal representation that specifies the movement pattern has a
+long history in theories of motor control and has also been influential in recent theories of perception and action. In this section, I
+cursorily review the major modern approaches, including the recent disenchantment with a representational view.
+Beginning in the 1960s and 1970s, the motor programming
+approach attributed movement patterns to motor plans that specified a sequence of muscle commands (Keele, 1968) or to more
+abstract motor schemata that specified the form of a class of
+movements, with the details filled in through a hierarchical control
+scheme (Greene, 1972; R. A. Schmidt, 1975). Environmental and
+biomechanical constraints played little role in the formulation of
+such programs, and perception was simply assumed to deliver the
+required input, such as the coordinates of a target. This approach
+essentially redescribed the organization of action in the form of a
+time-independent internal representation, without resolving the
+question of how that representation was arrived at to begin with. A
+related problem was that motor programs tended to ignore the
+time-dependent kinematics and dynamics of the peripheral musculoskeletal system involved in the execution of movement (Bernstein, 1967), one that became apparent with the advent of robotic
+control. Specifically, because the relation between a motor command or muscle activation and the resulting movement is nonlinear
+and context dependent, the motor system must somehow determine
+the command that is required to achieve a desired outcome.
+To address this problem, work in computational motor control
+increased the demands on representation, introducing internal
+models of the controlled system or “plant” (M. I. Jordan & Wolpert, 1999; Kawato, 1999). First, inverse models of the dynamics
+One indication of their low dimensionality is that principalcomponents analysis of the kinematics of whole-body movements with
+many degrees of freedom reveals that the variability can be largely accounted for by the first several modes (Daffertshofer, Lamoth, Meijer, &
+Beek, 2004; Hollands, Wing, & Daffertshofer, 2004).
+Exactly where lines between agent and environment are drawn is
+largely a matter of convenience, because in the end this analysis applies to
+of the musculoskeletal system were proposed to compute the
+command that, given the current state of the system, will produce
+the desired movement (Kawato, Furawaka, & Suzuki, 1987; Shadmehr & Mussa-Ivaldi, 1994). More recently, forward models of the
+musculoskeletal system have been proposed to compensate for
+sensory delays by rapidly predicting the movement outcome, given
+the current state of the system and an efference copy of the motor
+command (Wolpert, Ghahramani, & Jordan, 1995). As M. I. Jordan and Wolpert (1999) put it, the controller in effect controls the
+internal model, not the physical body. Finally, because both types
+of models depend on knowing the current state of the musculoskeletal system, a process of state estimation based on a Kalman
+filter has also been proposed (Wolpert et al., 1995).
+This control engineering approach is committed to particular
+mechanisms at Marr’s (1982) algorithmic level of description that
+represent prior knowledge on the part of the nervous system about
+the motor apparatus and its context, which must ultimately be
+accounted for by the theory. To the extent that internal models can
+be learned on the basis of motor practice alone (M. I. Jordan &
+Wolpert, 1999), they gain in plausibility. For example, forward
+models might be learned by comparing the predicted movement
+outcome for a given motor command with the actual outcome and
+using the difference as an error signal. Inverse models, by contrast,
+are more difficult to learn because of nonlinearities in the input–
+output mapping and the absence of a “correct” motor command to
+serve as a teaching signal, although Kawato et al. (1987; Wolpert
+& Kawato, 1998) developed a feedback error learning scheme to
+do so. For the most part, motor theories have not addressed
+agent– environment interactions. One exception is the recent extension of forward models to anticipate the weight of environmental objects (Wolpert & Ghahramani, 2000). Whether these particular architectures and assumptions offer an appropriate description
+of biological systems remain an open question.
+Recent work within an optimal control framework (Engelbrecht,
+2001; Todorov & Jordan, 2002) considers the problem at the level
+of computational theory (Marr, 1982). Optimal control is a set of
+techniques for determining the control signals for a system with
+given dynamics that will minimize an objective or cost function
+while satisfying specified constraints (Kirk, 1970). In this approach, movement trajectories are not explicitly planned but are a
+consequence of the objective function and the system’s dynamics.
+Most work in this vein has focused on the nature of the objective
+function, such as minimizing jerk, energy, motor variance, or
+performance error (Flash & Hogan, 1985; C. M. Harris & Wolpert,
+1998). But Berthier, Rosenstein, and Barto (2005) pointed out that
+taking full advantage of the natural dynamics of the task is often
+the essence of the problem. Indeed, using a method such as
+reinforcement learning (Kaelbling, Littman, & Moore, 1996; Sutton & Barto, 1998) to acquire a sensor– effector mapping that
+exploits the natural dynamics can yield stable movement patterns
+without explicit internal models (Berthier et al., 2005; Collins,
+Ruina, Tedrake, & Wisse, 2005; Ng, Kim, Jordan, & Sastry, 2004).
+This points theorists toward a richer analysis of the natural dynamics and other task constraints as a basis for understanding the
+A reliance on internal models has recurred in theories of perception and action, which seek to account for adaptive behavior as
+an agent interacts with its environment. Consistent with this view,
+the function of perception is commonly taken to be the construction of an internal 3-D representation of the environment from
+inadequate sensory data (Knill & Richards, 1996; Marr, 1982).
+This representation is thought to be sufficiently rich and general
+purpose to provide the basis for any action, such that neither the
+relevant information nor the structure of the representation depends on the particular task. In robotics, for example, a standard
+control architecture has used what Brooks (1995) called the
+“sense–model–plan–act” framework, in which sensor input is used
+to construct a 3-D model of the immediate environment. This
+world model provides the basis for computing an explicit action
+plan, which is finally executed by the robot’s effector system.
+An analogous model-based framework has recently been applied to perception and action in biological systems. Loomis and
+Beall (2004) argued that the control of complex action requires
+both a perceptual representation of the surrounding environment
+and an internal model of the plant dynamics—including the body,
+manipulated objects, controlled vehicles, and other aspects of the
+physical world with which the agent interacts. The primary evidence for a perceptual representation is that “visually directed”
+actions, such as blind walking to a previously viewed target, can be
+performed for a short time after vision is removed, implying a
+persisting representation of the spatial layout. However, such
+off-line behavior might also be supported by partial, task-specific
+knowledge of a few target locations rather than a world model
+(Ballard, Hayhoe, & Peltz, 1995), and in either case, it does not
+follow that representations are invoked in ordinary online control
+when occurrent information is available. In an interactive task such
+as steering a slalom course, accurate performance actually depends
+on seeing the next upcoming target, and error increases dramatically if it goes out of sight (Duchon & Warren, 1997). Similarly,
+Loomis and Beall (2004) argued that an internal model of plant
+dynamics would be supported by successful control of a vehicle
+after vision is removed, but current evidence shows that driving
+performance degrades sharply under these conditions (Hildreth,
+Beusmans, Boer, & Royden, 2000; Wallis, Chatziastros, &
+A middle path has been proposed in the form of the two visual
+systems hypothesis (Milner & Goodale, 1995; Norman, 2002). In
+this view, online, visual–motor behavior is ascribed primarily to
+the dorsal visual pathway, whereas off-line, model-based behavior
+is ascribed to the ventral visual pathway. However, positing neural
+loci for these functions does not constitute a theory of either one,
+and an account of the informational and dynamical bases of
+perception and action is still called for. Another sort of compromise might be to accept a role for inverse and forward models in
+low-level motor control, for example to solve the inverse dynamics
+problem, without generalizing them to world and plant models in
+The model-based approach leads to a somewhat solipsistic view
+of perception and action, in which the perceiver is not actually in
+contact with the environment but only an internal representation
+thereof (Fodor, 1980), and the actor does not actually control his or
+her own body but only an internal model thereof (M. I. Jordan &
+Wolpert, 1999). The fact that behavior is generally effective and
+adaptive is attributed to the functional fidelity of these representations, which presumes they are grounded in the physical world.
+However, this reliance on internal representations in cognitive
+theory faces numerous conceptual and philosophical obstacles
+(Bickhard & Terveen, 1995; Searle, 1980; Shannon, 1993; Shaw,
+2003). For instance, one must account for the origin of representational content without appealing in circular fashion to the very
+perception and action abilities they purport to explain. If perceptual states are representations, how is it possible for the agent to
+know what they stand for without presuming some other direct
+access to the world? Similarly, invoking representations in action
+also runs the risk of an explanatory regress, accounting for organization in behavior by attributing it to prior organization in the
+representational realm. Such considerations have led other researchers to seek an account of behavior that minimizes the role of
+The dynamical approach to human movement developed in the
+1980s and 1990s and has had a significant impact in the motor
+control literature (Kelso, 1995; Kugler, Kelso, & Turvey, 1980;
+Kugler & Turvey, 1987; Saltzman & Kelso, 1987). This view
+emphasizes physical principles and concepts from nonlinear dynamics to explain interlimb coordination as a natural process of
+pattern formation. One strength of the approach is its promotion of
+dynamics as a common theoretical language for describing the
+world, the body, and the neural and sensory couplings involved in
+In his seminal research on coordination, Kelso and his colleagues (Haken, Kelso, & Bunz, 1985; Kelso, Scholz, & Schöner,
+1986; Scholz, Kelso, & Schöner, 1987) found that two oscillating
+limbs are stably entrained at phase relations of 0° and 180° and
+undergo a spontaneous phase transition from an antiphase to an
+in-phase pattern as the frequency of movement is increased. Borrowing from the analysis of physical systems (Haken, 1977), Kelso
+and colleagues refer to phase as an order parameter, because it
+indexes the order or organization of the movement, and refer to
+frequency as a control parameter, because it induces a qualitative
+change in phase at a critical value. Kelso and colleagues christened
+the formal analysis of such coordination phenomena coordination
+The observation that similar coordination phenomena occur
+between perceptually coupled oscillators, such as a swarm of
+Malaysian fireflies (Ermentrout & Rinzel, 1984), the limbs of two
+people (R. C. Schmidt, Carello, & Turvey, 1990), and even the
+perceived stability of two moving lights (Bingham, Zaal, Shull, &
+Collins, 2001), led Kelso to view coordination dynamics as fundamentally informational rather than physical (Kelso, 1994, 1995;
+Schöner & Kelso, 1988a). Information can serve as a coupling
+medium and can specify required coordinative relations (i.e., the
+desired limb phasing) but must be expressed in the same dimensions as the order parameter itself (i.e., phase). This view of
+informational variables emphasizes their mirroring of coordination
+dynamics rather than their specification of environmental conditions. The varied interactions an agent has with a complex environment call for a richer account of the information that guides
+In addition, most research on coordination dynamics to date has
+focused on fairly simple tasks with stationary dynamics, such as
+rhythmic movement or interlimb coordination. For perception and
+action in a complex world, the dynamics are often nonstationary,
+evolving as the interaction between agent and environment unfolds. The present article thus shifts emphasis from the dynamics
+of movement coordination to the behavioral dynamics—the dynamics of temporal and spatial coordination between an agent and
+its environment. Although this bears similarities to what Saltzman
+and Kelso (1987) have called “task dynamics,” I use the term
+behavioral dynamics to emphasize adaptive behavior by an agent
+in an environment, coupled by perceptual information.
+Alongside the dynamical approach to movement there developed the ecological perception–action approach to the control of
+behavior (Gibson, 1958/1998, 1979; Lee, 1976, 1980; Shaw, Kugler, & Kinsella-Shaw, 1990; Turvey & Carello, 1986; Warren,
+1988, 1998). This view emphasizes the role of occurrent information in guiding behavior, in the form of optic, acoustic, haptic, or
+olfactory fields that are structured by and are specific to the state
+of the agent– environment system. The research program involves
+determining what informational quantities govern naturalistic behaviors like reaching, catching, hitting, standing posture, or locomotion. Information is viewed as regulating action directly, in a
+task-specific manner, rather than contributing to a general-purpose
+world model for the planning of action. The strength of this
+information-based approach is its analysis of action-relevant informational variables, but it has yet to show how they can be
+integrated with the dynamics of action (Beek & van Wieringen,
+1994). That is a central aim of the present article.
+Related developments also transpired in artificial intelligence,
+with the questioning of model-based vision and model-based control. The active vision approach (Bajcsy, 1988; Ballard, 1991)
+sought alternatives to the difficulty of computing a sufficiently
+detailed general-purpose world model and instead advocated taking advantage of task constraints to arrive at simple, specialpurpose solutions for specific tasks. To steer a robot vehicle, for
+example, several groups developed visual servoing systems that
+exploited specific image features, such as the boundary corresponding to the edge of the road, to directly control the vehicle,
+rather than computing a 3-D reconstruction of the scene (Raviv &
+Herman, 1993). As Brooks (1991a) put it, the world is its own best
+model, and sensor systems can obtain information as needed for
+the task at hand. This point has been echoed in human vision by
+results on change blindness (O’Regan, 1992; Rensink, O’Regan, &
+Clark, 1997) and gaze behavior in natural tasks (Ballard et al.,
+1995; Hayhoe, 2000), which suggest that perception is strongly
+dependent on the attended information and that any visual representation of the world is fragmentary and fleeting.
+At the same time, researchers in behavior-based robotics
+(Brooks, 1986, 1991b) and the simulation of behavior (Beer, 1990;
+Meyer & Wilson, 1991) sought alternatives to model-based control. Emphasizing that an agent is embodied in a physical platform
+and embedded in a physical world, they proposed exploiting such
+constraints to simplify the control architecture. In behavior-based
+robots, behavior emerges from the interaction between a structured
+world and an agent endowed with elementary behavioral routines,
+rather than being planned in advance on the basis of a world
+model. However, such systems are purely reactive, and their behavioral repertoire has been limited; they also tend to have a
+hierarchical control structure, thus preserving a discrete logic atop
+An instructive alternative has been developed by Schöner and
+his colleagues (Schöner & Dose, 1992; Schöner, Dose, & Engels,
+1995), in which behavior is governed by a dynamical system
+defined over the state of the robot and the sensed state of the
+environment. Flexibility is obtained from nonlinearity by having
+elementary behaviors compete with one another, rather than having a fixed dominance hierarchy. Thus, both agent and environment contribute to control, and a common dynamical language is
+applied at all levels of description. Similar ideas have been formulated by Shaw (Shaw, Kadar, Sim, & Repperger, 1992; Shaw et
+al., 1990, Beer (1995, 1997), and Smithers (1994). The present
+framework for biological control is indebted to the approach of
+My argument synthesizes four themes that run through this
+spectrum of research: (a) Embodiment and embeddedness. The
+agent possesses a physical body and is embedded in a physical
+environment, which provide nontrivial sources of constraint on
+stable behavioral solutions. (b) Information-based control. Behavior is guided by occurrent information about the state of the
+agent– environment system. The available information provides
+another important source of constraint on stable solutions. (c)
+Task-specificity. Control relations are task specific, mapping relevant informational quantities to relevant action variables. This
+allows the agent to adopt special-purpose solutions that make
+minimal demands on internal representation, rather than generalpurpose solutions that depend on elaborated world and plant models. (d) Emergent, self-organized behavior. Behavior emerges from
+the interaction of the agent and the environment, under physical,
+informational, and task constraints. By emergent I mean a pattern
+of behavior that does not reside a priori in the individual components of the system but is a consequence of their interdependence
+and interaction (Bar-Yam, 2004; Corning, 2002). Reciprocally, the
+dynamics of this interaction feed back to capture the individual
+components, serving to stabilize particular action patterns. In this
+way, new forms of adaptive behavior are self-organized.
+In what follows, my aim is to understand the stabilization of
+adaptive, goal-directed behavior. First, some pertinent concepts
+from nonlinear dynamics are introduced, prefatory to a formal
+description of the dynamics of perception and action. I then describe a taxonomy of tasks based on physical and informational
+stability and illustrate the framework by developing three examples: ball bouncing, pole balancing, and braking. Finally, I put
+these ideas to work in a theory of the behavioral dynamics of
+Before we can consider the dynamics of perception and action,
+some basic concepts must be introduced. (Readers already familiar
+with these topics can skip to the next section.) The field of
+nonlinear dynamics offers useful tools for analyzing and modeling
+patterns of stability and change in a system’s behavior. In the
+present context, the dynamical hypothesis proposes that the morphology of human and animal behavior can be formalized in terms
+of low-dimensional dynamical systems (Kugler et al., 1980; Yates
+& Iberall, 1973). In particular, preferred stable modes of behavior
+can be identified with attractors, and qualitative transitions between them with bifurcations in the system’s dynamics.
+Dynamics is the study of change in a system over time (see
+Acheson, 1997; D. W. Jordan & Smith, 1977; Strogatz, 1994). One
+way to represent change is in the form of a time series, which plots
+the value of a particular variable as an explicit function of time.
+Over time, for example, a variable might settle down to a stable
+equilibrium, blow up to infinity, repeat in a regular periodic
+pattern, exhibit irregular chaotic patterns, behave randomly, or
+switch suddenly from one pattern to another. More generally, a
+system can be described by a set of state variables (x1, x2,. . . xn),
+and its current state by a location in the state space defined by
+those variables. The behavior of the system is thus characterized
+by changes in the state variables and can be represented as a
+trajectory in state space, so that time is implicit.
+The aim of analysis is to formalize this behavior as a dynamical
+system, a system of first-order differential equations in which the
+rate of change in each variable is a function of the current state of
+Exhibited behavior corresponds to solutions of these equations of
+motion for given initial conditions and can be represented as
+trajectories in state space. Loci in state space toward which trajectories converge from different initial conditions are known as
+attractors, and those from which trajectories diverge as repellers.
+Continuous change in system parameters can produce sudden
+changes in the number or stability of attractors or repellers, which
+are known as bifurcations. By formally expressing behavior in this
+way, one can achieve a deeper understanding of the underlying
+morphology of stabilities and instabilities that govern observed
+Dynamical systems can be classified in terms of their dimensionality, the number of state variables minimally required to
+predict the future state of the system, and their linearity, whether
+the equations of motion contain nonlinear terms.3 A onedimensional system has a single state variable x. For example,
+is a linear system that describes the exponential decay in x, where
+the parameter r determines the rate of decay. A parameter is
+simply a term that changes on a slower time scale than does a state
+variable. The dynamics of the system can be represented in a phase
+portrait (see Figure 1a), which plots ẋ as a function of x. Because
+this is a one-dimensional system, its trajectory lies on the abscissa
+and the vector field or flow is represented by arrows, whereas the
+curve plots the system’s velocity at each value of x. In this case the
+curve is a straight line that crosses the abscissa with a negative
+slope. This indicates an asymptotic approach to a stable fixed point
+or point attractor at (x, ẋ) ⫽ (0, 0), where the velocity goes to zero.
+Variables that are raised to a power greater than one, form products, are
+arguments of trigonometric functions, and so on.
+Figure 1. A one-dimensional linear system (Equation 2), illustrating point-attractor dynamics. a: Phase portrait
+plotting the rate of change of x as a function of state variable x, with a point attractor at (0, 0). b: Exponential
+decay in x as a function of time, showing particular solutions of Equation 2 for two different initial conditions.
+The rate of approach and hence the stability of the attractor is
+determined by the slope of the curve at the fixed point, corresponding to r; the inverse of the slope (1/r) is its relaxation time, the
+characteristic time scale of the dynamics. The trajectory of a
+particular solution x(t) is plotted as a function of time for different
+initial conditions x0 at t0 in Figure 1b, illustrating exponential
+decay. A point attractor is a useful model for biological behavior
+that tends toward a goal value or stable equilibrium, although the
+asymptotic approach must be considered an idealization.
+Things get more interesting in nonlinear systems. Consider the
+whose phase portrait appears in Figure 2a (for r ⬎ 0). This curve
+possesses two negative zero crossings, corresponding to two point
+attractors, but also crosses the abscissa with a positive slope at x ⫽
+0, known as an unstable fixed point or repeller. A repeller behaves
+like a fixed point because if the system has a value of precisely x ⫽
+0 it will remain at that value, but it is unstable because a slight
+perturbation will result in acceleration away from the fixed point,
+toward the neighboring attractors. Because of the topology of
+one-dimensional dynamics, a pair of attractors must be separated
+by a repeller, and vice versa; this places nontrivial constraints on
+the morphology of behavior. An unstable fixed point is a useful
+model for inverted pendulum dynamics such as standing posture or
+balancing a pole on end. In these cases the challenge for the agent
+is to use information to stabilize a dynamically unstable fixed
+Moreover, if the parameter of this system is varied continuously, a discontinuous change occurs (see Figures 2b and 2c):
+As r is decreased, the two attractors converge upon the repeller,
+collide in a half-stable fixed point (r ⫽ 0), and then coalesce
+into a single point attractor (r ⬍ 0). Such a qualitative change
+in the number or stability of attractors is a bifurcation, and the
+parameter that brings it about is the control parameter. If it is
+run backward, a single point attractor bifurcates into two attractors with a repeller in between as r increases. This example
+is called a supercritical pitchfork bifurcation,4 and the reason
+becomes obvious when one plots the bifurcation diagram,
+which represents the fixed points of x as a function of the
+control parameter r (see Figure 2d). In any particular instance,
+the branch a physical system actually takes will depend on
+random fluctuations or noise. Such instabilities are signatures
+of nonlinearity and reveal the organization of the system’s
+stable states, and they also allow for flexibility and creativity in
+behavior. For example, maintaining the control parameter near
+the bifurcation point at r ⫽ 0 keeps the system in a marginally
+stable state from which different attractors are readily
+It turns out that there is a limited family of routes by which
+attractors can come into or go out of existence, or change from
+stable to unstable, in nonlinear systems. The set of possible bifurcations thus offers models for qualitative transitions in biological
+behavior, suggesting a dynamical account of the formation and
+dissolution of behavioral patterns. Instability near bifurcation
+points is also particularly revealing of the low-dimensional dynamics that underlie behavior and is useful in reconstructing the
+system’s equations of motion (Haken, 1988).
+Two-dimensional systems possess more complicated dynamics,
+in particular periodic behavior. Consider first a linear harmonic
+In the subcritical version, a repeller splits into two repellers separated
+Figure 2. A one-dimensional nonlinear system (Equation 3), illustrating the pitchfork bifurcation. a: Phase
+portrait for r ⬎ 0, with two attractors separated by a repeller. b: Phase portrait for r ⫽ 0, with a half-stable fixed
+point. c: Phase portrait for r ⬍ 0, with a point attractor. d: Bifurcation diagram, plotting the fixed points of x as
+a function of the control parameter r. Solid curves represent attractors, and the dashed curve represents a repeller.
+which requires two state variables, position (x1 ⫽ x) and velocity
+(x2 ⫽ ẋ),5 and has parameters of mass m, damping b, and stiffness
+k. This can be rewritten as a dynamical system in the following
+orbit (see Figure 3a), because the mass slows to a velocity of zero
+(ẋ) at its extreme x positions and accelerates to peak positive or
+negative velocity as it passes through its equilibrium position (x ⫽
+0). With different initial conditions, or if perturbed, the system will
+adopt a different closed orbit with a different amplitude. These
+concentric orbits are thus neutrally stable and do not act as
+In an undamped system (b ⫽ 0), once the mass is set into motion
+it will continue to oscillate forever with a constant amplitude. This
+yields an elliptical trajectory in the phase plane known as a closed
+Both position and velocity are necessary to describe the current state
+and predict the future of a mass–spring system, because the oscillating
+mass can occupy the same position with either a rightward (positive) or
+Figure 3. Phase portraits for several two-dimensional systems. a: Undamped linear oscillator (Equation 4, b ⫽
+0), showing neutrally stable orbits for different initial conditions. b: Damped linear oscillator (Equation 4, b ⬎ 0),
+showing trajectories converging to a spiral attractor at (0, 0) from different initial conditions. c: Forced linear
+oscillator, showing trajectories converging to a limit cycle attractor from different initial conditions.
+attractors. If damping is added (b ⬎ 0), the mass slows to rest at
+the static equilibrium point in the center (x, ẋ) ⫽ (0, 0), which is
+a stable focus or spiral attractor (see Figure 3b).
+In nonlinear systems, closed orbits can form periodic attractors
+known as limit cycles. For example, suppose we force the harmonic oscillator,
+using an intrinsic forcing function that depends on the system’s
+own phase ␾, like a grandfather clock with an escapement. This
+renders the oscillator nonlinear because the forcing function is
+periodic and autonomous because it does not depend explicitly on
+time. The system now displays self-sustained oscillation with a
+stable frequency and amplitude. In the phase plane (see Figure 3c),
+the trajectories all spiral asymptotically toward a single closed
+orbit and return to it following a perturbation. Hence, the orbit is
+a stable limit-cycle attractor,6 and the point in the center is an
+unstable fixed point that repels the system toward the limit cycle.
+Another autonomous limit cycle is the van der Pol oscillator,
+Rather than being externally forced, it has a nonlinear damping
+term that depends on the oscillator’s position. This acts like normal
+positive damping when 兩x兩 ⬎ 1 but changes to negative damping
+when 兩x兩 ⬍ 1. Thus, if the amplitude of oscillation is either too
+large or too small, it is returned to the limit cycle that passes
+through 兩x兩 ⫽ 1. Other examples include the Rayleigh oscillator,
+which has a nonlinear damping that depends on velocity, and the
+Duffing oscillator, which has a nonlinear stiffness. Periodic attractors have an associated family of bifurcations as well. For example, the onset of oscillation is captured by the Hopf bifurcation. In
+its subcritical version, a stable fixed point that is surrounded by a
+limit cycle suddenly becomes unstable, so the system jumps to the
+Such self-sustained periodic behavior is ubiquitous in biology,
+ranging from locomotor gaits and circadian rhythms to skills such
+as hammering, dribbling, hopping on a pogo stick, or bouncing a
+ball on a racquet. Coupled nonlinear oscillators can exhibit stable
+entrainment, in which their phases and frequencies become mode
+locked (D. W. Jordan & Smith, 1977). Local interactions between
+oscillatory components thus offer a natural basis for explaining
+temporal coordination in biological systems (Haken et al., 1985;
+Kopell, 1988; Strogatz & Steward, 1993; von Holst, 1980).
+Finally, three-dimensional nonlinear systems can exhibit complex, chaotic dynamics. For example, by extrinsically forcing a
+nonlinear oscillator such as the Duffing, one can observe strange
+attractors, chaotic oscillations that remain in a bounded region of
+state space but never settle down into a stable orbit. In this case the
+oscillator is nonautonomous because the forcing function depends
+explicitly on time, and hence the system has three state variables
+(x, ẋ, t). Such chaotic systems may also undergo bifurcations. For
+example, the classic period-doubling route to chaos proceeds
+through a series of bifurcations to a chaotic regime, doubling the
+number of oscillations per cycle at each critical value of a control
+There is thus a limited bestiary of attractors and bifurcations out
+of which behavior can be assembled. This suggests the hypothesis
+that the essential forms of all stable patterns of biological behavior
+are composed of low-dimensional fixed points, limit cycles, or
+strange attractors, with a restricted topology of layouts. Similarly,
+transitions between behavioral patterns should take the form of a
+limited set of bifurcations. Nonlinear dynamics thus provides a
+powerful theoretical language for characterizing the morphology
+of behavior, in terms of which specific theoretical claims about
+Armed with this array of concepts, let us return to the original
+question of adaptive behavior in biological systems. In this section
+I propose an approach to goal-directed behavior at two levels of
+analysis (see Figure 4). The first level is that of the components of
+the system—the agent and environment—and their interactions in
+the course of detecting information and controlling action, which
+have been referred to as the perception–action cycle (Kugler &
+Turvey, 1987; Warren, 1988). Local interactions between these
+components give rise to the global behavior of the system. The
+second level of analysis is a low-dimensional description of this
+global behavior, the behavioral dynamics (Fajen & Warren, 2003).
+My aim is to show how the behavioral dynamics both arise from
+the specifics of perception and action and reciprocally act to
+Let us begin by supposing that the agent and the environment
+can be treated as a pair of coupled dynamical systems, with the
+where e is a vector of environmental state variables, f is a vector
+of external forces, a is a vector of agent state variables (which
+describes the current state of the action system), and i is a vector
+of informational variables. This is trivially true of the environment,
+which is governed by laws of physics ⌽ that can be expressed in
+the form of differential equations. Change in the environment is
+thus a function of its current state together with any external forces
+Following the dynamical approach to action, I also assume this
+to be the case for the agent. Specifically, the action system, with its
+many neuromuscular and biomechanical degrees of freedom, behaves as a low-dimensional dynamical system for a given task
+(Saltzman & Kelso, 1987; Scholz & Schöner, 1999). Although this
+formulation does not explicitly represent biological noise, stochastic models of coordination dynamics have been developed
+(Schöner, Haken, & Kelso, 1986). However, adaptive behavior
+does not consist in coordinated movement per se but in goaldirected action that is tailored to the environment. Hence, a few
+control variables must be left free to vary, which may be regulated
+by perceptual information. Thus, an action is some function of the
+current state of the action system together with informational
+variables i, according to a law of control ⌿.
+Conversely, an unstable limit cycle would repel the system away from
+its closed orbit. Note that in a deterministic two-dimensional system,
+trajectories in the phase plane cannot cross, for the system cannot move in
+two different directions from a given state.
+Figure 4. Schema of the dynamics of perception and action.
+The agent and environment are coupled in two ways. First, an
+transforms the vector of action variables into muscle activation
+patterns that produce forces in the environment, consistent with the
+biomechanics of the neuromusculoskeletal system. This is essentially a cover term for the inverse dynamics problem in motor
+control, which might be resolved via inverse models (M. I. Jordan
+& Wolpert, 1999) or synergies that define postural vector fields
+(Berkinblitt, Feldman, & Fukson, 1986; Giszter, Mussa-Ivaldi, &
+Bizzi, 1993). These agent-produced forces serve as coupling terms
+in the environment’s equations of motion. Action is thus characterized as a relation defined over the agent, causal forces, and the
+maps properties of the agent– environment system into informational variables, in accordance with what Gibson (1966, 1979)
+called laws of ecological optics, acoustics, haptics, and so on.
+These informational variables serve as coupling terms from the
+environment in the agent’s laws of control. Information consists of
+patterns of stimulation at the receptors that are specific to the
+ecological state of affairs and are therefore useful in controlling
+action. For example, optical patterns reflected from environmental
+surfaces to a point of observation provide information about the
+layout of surfaces, the properties of objects and events, and the
+position and movement of the observer. Of course, these variables
+must be detected and used by perceptual systems that are tuned to
+particular patterns of stimulation, with attendant issues of sensitivity and noise. In many cases, a presumptive environmental
+property (e.g., euclidean distance) may not be specified by the
+available information or accurately recovered by the perceptual
+system; instead, the agent may capitalize on task-specific variables
+(e.g., declination angle; Ooi, Wu, & He, 2001) that suffice to guide
+behavior under ecological conditions. Perception is thus charac-
+terized as a relation defined over the environment, information,
+We can now trace the perception–action cycle. When an agent
+performs an action, changes in action system variables yield forces
+exerted by the end effectors in the environment. These forces alter
+the state of the environment, perhaps changing the layout of
+surfaces, the properties of objects, or the position of the agent. As
+a consequence, new information is generated about the current
+state of the agent– environment system. The informational quantities in turn act to modulate the control variables of the action
+system, altering the forces exerted in the environment (with a
+perceptual–motor delay), and the cycle iterates.
+During locomotion, for example, the step cycle applies a force
+against the substrate, and the reaction force propels the body and
+observation point forward. This alters the egocentric directions of
+obstacles and goals and generates an optic flow pattern at the
+observation point, which are in turn used to govern the next step
+cycle. Or, when hammering a nail, each action changes the environment physically, generating visual, acoustic, and haptic information about the new conditions that is then used to modify the
+next stroke. The challenge at this level of analysis is to describe the
+physical constraints on the task, identify the informational variables that are actually detected and used to guide behavior, characterize the coordination dynamics of the action system, and
+formulate the control laws by which the former regulate the latter.
+Adaptive, goal-directed behavior emerges from these local interactions between an agent governed by control laws and an
+environment governed by physical laws. At the second level of
+analysis, the time evolution of this global behavior—its behavioral
+dynamics—is formally characterized. The global state of the system with respect to the task goal can be described in terms of a
+small number of key behavioral variables (x). Thus, the behavioral
+dynamics are expressed as a higher-level dynamical system,
+where x is a vector of behavioral state variables and s of system
+parameters, which defines a vector field for the system’s behavior.
+Exhibited behavior corresponds to solutions of this set of equations, represented as trajectories in the space of behavioral variables. Thus, goals may be expressed as loci in state space toward
+which trajectories converge, corresponding to attractors in the
+behavioral dynamics. Conversely, states to be avoided are regions
+from which trajectories diverge, corresponding to repellers. Finally, sudden transitions between behavioral patterns are related to
+changes in the number or stability of these fixed points as system
+parameters are varied, corresponding to bifurcations in the behavioral dynamics. Behavioral flexibility can thus be achieved by
+dwelling near these regions of instability (Kelso, 1995). When
+modeling behavior at this level, the challenge is to identify the
+task-relevant variables; empirically determine the layout of attractors, repellers, and bifurcations; and infer the system’s equations of
+These two levels are linked in both directions. In an “upward”
+direction, the behavioral dynamics emerge from relations among
+the physics of the environment, the biomechanics of the body,
+informational variables, and control laws at the first level. Adaptive behavior is thus not a property of the agent alone, but of the
+system as a whole, and consequently cannot simply be dictated by
+the nervous system. Rather, the role of the nervous system is to
+adjust the mapping between informational variables and control
+variables (i.e., control laws) so as to give rise to stabilities in the
+behavioral dynamics that correspond to the intended behavior. In
+a “downward” direction, attractors in the behavioral dynamics act
+to capture the perception–action cycle. Specifically, the morphology of this vector field has behavioral consequences that can be
+perceived, such as sensing one’s own energy expenditure, the
+variability of action, or task success. These observations provide a
+feedback that serves to fix control laws and index parameter values
+that yield effective behavior. Perception and action systems thus
+manifest the properties of upward and downward causality that are
+characteristic of emergent behavior and self-organization (BarYam, 2004; Haken, 1977).
+As the agent interacts with the world, the behavioral dynamics
+are likely to evolve. Previous work on coordination dynamics has
+focused on fairly simple tasks with stationary dynamics, such as
+rhythmic movement or bimanual coordination. But in more complex adaptive behavior, the dynamics may depend on the agent’s
+interaction with the environment. The landscape of attractors and
+repellers can shift as the agent navigates through it, and bifurcations open up new behavioral avenues as others are closed off. The
+trajectory of behavior thus unfolds as agent and environment
+interact, guided by tracking the evolving stabilities. Moreover,
+because the system is nonlinear, this behavioral trajectory is highly
+sensitive to initial conditions and susceptible to noise. The body is
+a complex system with many interdependent neuromusculoskeletal
+components, and these processes contribute to high-dimensional
+complexity in what is essentially a low-dimensional action pattern
+(Newell & Corcos, 1993). Such effects can cascade through a
+behavioral sequence, altering the initial conditions for the next
+action and sending behavior down qualitatively different paths
+(Van Orden, Holden, & Turvey, 2003). Such historical contingency can make individual behavior notoriously difficult to predict, particularly in noisy biological systems. Consequently, researchers may need to be satisfied with theories that capture the
+dynamical “deep structure” of behavior—the morphology of attractors, repellers, and bifurcations for a given task—rather than
+one that can precisely predict individual behavior on particular
+In summary, a formal description of behavior requires identifying a system of differential equations whose vector field corresponds to the observed pattern of behavior, with attractors corresponding to goal states, repellers to avoided states, and
+bifurcations to qualitative behavioral transitions. But an explanation of adaptive behavior further requires showing how these
+behavioral dynamics arise from interactions among the system’s
+components, that is, how a stable solution is codetermined by
+physical and informational constraints. Ultimately, it must be
+shown how behavior is self-organized through feedback from the
+The control problem with which we began is now recast in terms
+of the dynamics of the agent– environment system. From the
+agent’s perspective, the problem becomes one of tweaking the
+dynamics of the system in which it is embedded so as to enact
+stabilities for the intended behavior. The lever at the agent’s
+disposal is the law of control, and here lies the psychological heart
+Typically, a control law in perception and action is thought of as
+a mapping from task-specific information to a movement variable,
+m ⫽ f (i) (see Warren & Fajen, 2004). But the way in which
+information can influence movement is by means of modulating
+the dynamics of the action system. Thus, it is more appropriate to
+write control laws as a function in which informational variables
+modulate the control variables of a dynamical system:
+This control law has two implicit parts: First is a dynamical system
+that represents the organization of the action system for a particular task, ȧ ⫽ ⌿(a), which Kelso (1995) referred to as the “intrinsic dynamics.” Second is an informational coupling term in
+which optic, acoustic, haptic, and so forth variables i modify the
+control variables of the dynamical system. The resulting control
+law does not specify the kinematics of movement per se but rather
+relaxes to an attractor in the action variables a that corresponds to
+the desired action. The effector function ␤ then converts this limit
+value of the action variable into muscle activation and thence limb
+kinematics and endpoint forces, given the biomechanics of the
+For information to modulate the action system, it is essential that
+informational variables be commensurate with control variables.
+That is, low-dimensional informational terms, which reflect higher
+order relations among many elementary variables, must map to
+low-dimensional control terms, which reflect higher order relations
+among the many degrees of freedom of the musculoskeletal system. To be commensurate, these informational and control terms
+must have the same dimensions and are typically expressed in the
+A pertinent example is the optic flow field, the pattern of optical
+motion produced at a moving point of observation during terrestrial locomotion (Gibson, 1950; Warren, 2004). Here, relations
+defined over many elementary local motions form a global flow
+pattern, which contains a focus of expansion in the direction of
+self-motion or heading. The focus of expansion constitutes a
+higher order variable that specifies the current heading direction
+(azimuth angle), relative to which the directions of goals and
+obstacles can also be defined. Thus, high-dimensional local motions are compressed into a low-dimensional variable that is commensurate with behavior. On the action side, gait patterns reflect
+the compression of many neuromusculoskeletal degrees of freedom into a task-specific organization, such that the action system
+behaves as a low-dimensional dynamical system with a few free
+control variables. One of these control variables is the direction of
+force applied against the ground, which determines the current
+heading direction. The informational and control terms are thus of
+the same dimensionality and are expressed in the same variable
+(azimuth angle), such that the direction of a goal with respect to the
+current heading can directly control the direction of force application. I develop this case in some detail below. Other control
+relations may not be quite as transparent, of course, and can
+involve more complex variables and scaling factors. But the point
+is that, for a given task, the agent need only map low-dimensional
+information to low-dimensional control variables, thereby simplifying the control problem.7
+Control variables may be of two types: state variables or parameters. In addition, information may regulate a control variable
+by three possible manners of coupling: continuous modulation,
+periodic adjustment, or discrete resetting. Crossing control variables with manners of coupling yields six logically possible control modes that an agent can exploit to shape the dynamics for the
+task at hand, which are illustrated below.
+First, information may influence the state variables of a system
+(e.g., its position and velocity). This is achieved by allowing
+informational quantities to contribute to the dynamics, altering the
+attractive states (Schöner & Kelso, 1988b; Schöner, Zanone, &
+Kelso, 1992). In the simple one-dimensional system of Equation 2,
+for instance, the intrinsic dynamics possess a fixed point at a ⫽ 0.
+However the goal state may be at another value that is specified by
+information, a ⫽ i. Adding an informational coupling term ci,
+shifts the attractor along the abscissa toward i. The magnitude of
+the shift is determined by the relative strength of the information
+and action terms (determined by coefficients c and r). A special
+case occurs when c ⫽ r, so information about the goal state
+completely determines the resulting fixed point:
+In this case, the attractor shifts to the specified location at a ⫽ i,
+and the system relaxes to the goal state. An early example is the
+equilibrium-point model of single joint movement (Asatryan &
+Feldman, 1965; Latash, 1993). Note that i might be discretely reset
+to a fixed value so the attractor is stationary (Asatryan & Feldman’s, 1965, original proposal), continuously modulated so that
+the attractor location evolves in time (an equilibrium point trajectory), or adjusted periodically so that the attractor regularly shifts
+position (yielding a rhythmic movement). Information and control
+are commensurate because the informational variable specifies the
+goal state of the system in the terms of the state variable a.
+An illustrative case of state control is provided by Schöner’s
+(Dijkstra, Schöner, & Gielen, 1994; Schöner, 1991) model of the
+visual regulation of standing posture. The intrinsic postural dynamics are modeled as a second-order system similar to Equation
+6, with a fixed point at (x, ẋ) ⫽ (0, 0) corresponding to upright
+stance. Visual information about postural sway is provided by the
+relative rate of optical expansion e(x, t) ⫽ ␪˙ /␪, the inverse of Lee’s
+(1976; Lee & Lishman, 1975) time-to-contact variable, where ␪ is
+the visual angle of a frontal surface patch. Information is treated as
+a continuous forcing function, such that a coupling term is added
+where c is the coupling strength, ␣ is the damping, ␻ is the
+eigenfrequency of the postural system, and 冑Q␰t is a stochastic
+term that introduces random fluctuations. Information effectively
+shifts the resulting fixed point along the x dimension, such that
+optical expansion leads to backward postural acceleration, and
+optical contraction to forward acceleration. Because the optic flow
+is itself determined by postural position and velocity, the information is defined in the same terms as the control variables.
+Second, information may modulate the parameters of a system,
+affecting its state indirectly. For the one-dimensional system of
+Equation 2, this is equivalent to adding the informational coupling
+term i to parameter r, so the control law becomes
+In this case, the parameter affects the slope of the function in
+Figure 1a and hence the relaxation time to the fixed point, whose
+location remains constant. For the nonlinear system of Equation 3,
+on the other hand, modulation of the control parameter can take the
+system through a bifurcation, changing its stability and the number
+In a two-dimensional system such as Equation 4, discrete resetting of the stiffness parameter k changes its frequency of oscillation and in some cases its amplitude as well (Kay, Kelso, Saltzman, & Schöner, 1987). Continuous modulation of the parameter
+can also amplify the system’s oscillation, a phenomenon known as
+parametric excitation (Hayashi, 1964; Nayfeh & Mook, 1979). A
+familiar example is pumping on a swing: Periodically raising and
+lowering one’s center of mass decreases and increases the effective
+length (and hence the natural frequency) of the pendulum, boosting
+Kay and Warren (1998, 2001) first demonstrated parametric
+excitation in biological coordination by showing that gait synchronizes to posture during walking (see also Jirsa, Fink, Foo, & Kelso,
+2000). Specifically, when postural sway is driven by an oscillating
+visual display at various frequencies, the step cycle becomes
+entrained to the visual driver at specific integer mode locking
+ratios (1:1, 2:1, 3:2, etc.). Such superharmonic entrainment, in
+which the natural frequency of the driven oscillator (gait) is higher
+than the frequency of the driver (visual display), is only stable in
+parametrically forced systems. The results are consistent with
+continuous modulation of a gait “stiffness” parameter.
+In summary, control laws involve mapping informational variables to state variables or parameters of a dynamical system, with
+three manners of coupling. This offers six possible control modes
+by which information can influence the dynamics of behavior.
+The function of perception and action is to stabilize behavior on
+the goal for a given task while maintaining adaptive flexibility. To
+For simplicity, informational variables themselves appear in the control law of Equation 12, ignoring for the moment the complexities of the
+detection process. In principle, this term could be expanded to incorporate
+a perceptual transduction function, so that the registered values of these
+A swing actually combines parametric and state control, because
+pumping both changes the length of the pendulum and shifts the center of
+mass backward and forward, changing its state.
+this end, control laws use information to modulate the dynamics of
+the action system. The behavioral outcome is a consequence of the
+interaction among the control laws, the biomechanics of the body,
+and the physics of the environment. In many instances, these
+physical constraints can simplify the control problem by determining stable or preferred solutions. The degree to which a stable
+solution is sitting in the physics of the task awaiting discovery or
+is created by the appropriate use of information depends on the
+nature of the task. The agent contributes to the solution by discovering the relevant physical and informational quantities and
+identifying control laws that yield successful, stable behavior.
+Finally, to avoid getting locked into a rigidly stable solution, the
+agent also uses information to maintain adaptive flexibility (Beek,
+A taxonomy of tasks can be developed on the basis of their
+inherent physical stability. First are those that possess passively
+stable solutions given by the physics of the task, for example, a
+point attractor or limit cycle. This is perhaps the simplest case,
+because the solution is highly constrained and can be discovered
+via perceptual–motor exploration. Second are tasks that are inherently unstable, such as those characterized by an unstable fixed
+point. These require active stabilization, by means of control laws
+that use information to counteract the physical instability. This is
+a more challenging case because, although the solution is physically constrained in the sense that the goal state is picked out by
+the fixed point, the agent must discover the relevant information
+and identify an effective control law. Moreover, there is no guarantee that a realizable solution exists. Third are tasks that are
+neutrally stable, with no intrinsic fixed points. A stable solution
+thus depends on identifying informational variables that allow the
+goal to be realized. This case is difficult because, in the absence of
+physical constraints, the solution space is a level playing field until
+fixed points are created by the appropriate use of information. To
+show the process of stabilization at work, I present examples of the
+three basic cases from the recent literature.
+bouncing is qualitatively stable when impact acceleration is between zero and a negative value equal to ⫺2g(1 ⫹ ␣2)/(1 ⫹ ␣)2
+and is maximally stable in a smaller region within this range. In
+this regime, if the system is perturbed, it will self-correct to a
+constant impact acceleration and bounce height. This means that
+the ball can be bounced blindly as long as the racquet keeps going
+at a constant frequency, requiring no sensory information.
+In empirical tests of humans bouncing a ball on a racquet in one
+dimension, Sternad and her colleagues (Schaal et al., 1996; Sternad, Duarte, Katsumata, & Schaal, 2000, 2001) found that the
+mean impact acceleration did indeed lie within the stable range on
+the vast majority of trials, clustered about the maximally stable
+region (see Figure 5). Moreover, with practice, participants progressively homed in on the stable region. The results indicate that
+people exploit the physics of the system to enact a stable solution
+But they also appear to rely on perceptual information to bring
+the system into the passively stable region and to keep it there.
+First, visual information about the ball’s trajectory may have been
+used at start-up to adjust the racquet oscillation and bring the
+system into the stable range, for when testing the role of vision,
+Sternad et al. (2001) instructed participants to close their eyes only
+after stable bouncing was achieved. Second, information appears
+to have contributed to ongoing stabilization. Sternad et al. (2001)
+found that removal of either visual or haptic information significantly increased the variability in impact acceleration compared
+with a full-information control. Moreover, when bouncing a virtual
+ball with a physical racquet, participants responded to a sudden
+Stabilizing a Passively Stable System: Follow the
+Consider first a deceptively simple task that is a textbook
+example in nonlinear dynamics: bouncing a ball on a racquet in
+one (vertical) dimension. As racquet frequency increases, the
+bouncing ball system actually exhibits the period-doubling route to
+chaos (Guckenheimer & Holmes, 1983; Tufillaro, Abbott, &
+Reilly, 1992). But our interest is in stable Period 1 bouncing, in
+which the period of the ball is equal to one racquet period and it
+bounces to a constant height. In the purely passive case, the
+racquet oscillates sinusoidally with a constant frequency (␻) and
+amplitude (A) without active control, and the ball falls with gravitational acceleration (g) and rebounds from the racquet with a
+coefficient of restitution (␣) less than 1.
+Counterintuitively, Period 1 bouncing is passively stable when
+impact occurs during the decelerative phase of racquet motion
+(Dijkstra, Katsumata, de Rugy, & Sternad, 2004; Schaal, Sternad,
+& Atkeson, 1996)—that is, in the upward swing between the
+racquet’s approximately horizontal position (where its velocity is
+maximum and deceleration is zero) and its highest position (where
+its velocity is zero and deceleration is maximum). Specifically,
+Figure 5. Passive stability in bouncing a ball on a racquet. Standard
+deviation of racquet acceleration at impact as a function of impact acceleration; each data point represents the mean and standard deviation of a
+30-s trial (N ⫽ 6). Open symbols are eyes-open trials, and filled symbols
+are trials in which the eyes were closed after stable bouncing was achieved.
+Theoretical curve is computed from a nonlocal Lyapunov stability analysis,
+in arbitrary units. Inset is a frequency histogram of impact acceleration for
+the same data. Note that nearly all trials lie in the passively stable region
+between ⫺11.44 and 0 m/s2 and cluster around the maximally stable region
+between ⫺5 and ⫺2 m/s2. Reprinted from “Bouncing a Ball: Tuning Into
+Dynamic Stability,” by D. Sternad et al., 2001, Journal of Experimental
+Psychology: Human Perception and Performance, 27, p. 1169. Copyright
+2001 by the American Psychological Association.
+change in g or ␣ within one cycle (Siegler, Mantel, Warren, &
+Bardy, 2003). Indeed, de Rugy, Wei, Müller, and Sternad (2003)
+observed that when ␣ was randomly perturbed on a single bounce,
+participants adjusted the racquet period to bring the ball back into
+the stable range on the next impact. They successfully modeled
+this behavior with a “period controller,” which uses the perceived
+period of the ball’s flight to modulate the period of racquet motion.
+These results indicate that visual information is used to regulate
+racquet motion on a cycle-to-cycle basis, suggesting that ball
+bouncing involves a mixed regime that blends passive stability and
+active control. In addition, bouncing can be sustained outside the
+stable region with positive impact accelerations, by using vision
+alone to actively stabilize the system (Siegler et al., 2003).
+To adjust the period of racquet motion, it is reasonable to
+assume that observers use visual information about the duration of
+the ball’s flight, specifically, the time (tc) remaining until the ball
+will arrive the height of the previous contact (hc). Several candidate variables that specify this arrival time can be identified. First,
+the arrival time can be determined from the peak height of the
+ball’s trajectory (hp), given that g is known:
+Second, the arrival time can be predicted from the ball’s launch
+velocity (v0), given that g is known: tc ⫽ v0/g. Third, the arrival
+time from the peak of the ball’s trajectory is equal to the first half
+period of the ball’s flight: tc ⫽ ␶/2. The advantage of this variable
+is that it holds irrespective of the gravitational constant and thus
+does not depend on a known g. Finally, arrival time is also
+specified haptically because the flight period is related to the force
+at impact, which also depends on a known g. Siegler et al. (2003)
+found that participants recover from a sudden change in g as
+quickly as they do from a sudden change in ␣, indicating that
+visual control does not depend on a known g. Furthermore, they
+adapt to a change in g by adjusting both the racquet’s period and
+amplitude but adapt to a change in ␣ by adjusting only amplitude.
+The results are consistent with the use of information about the
+ball’s flight period to control the period of racquet motion.
+The behavioral dynamics of the bouncing task can thus be
+conceptualized as follows. The environment consists of the ball–
+racquet system in a gravitational field with constants g and ␣,
+governed by the mechanics of falling bodies and collisions (⌽).
+Given the task of Period 1 bouncing, the action system is organized
+as a nonlinear limit-cycle oscillator generating vertical periodic
+movements of the arm. A control variable such as the stiffness
+parameter scales the period of oscillation. These two dynamical
+systems are coupled mechanically by the force applied to the ball
+and informationally by optic (and haptic) variables that specify the
+ball’s flight period. The control law (⌿) uses these variables to
+modulate the stiffness parameter on each cycle, so that the racquet
+period matches the specified ball period. At the level of the
+behavioral dynamics, these cyclic interactions have regions of
+passive stability with minimal active adjustments, which feed back
+during learning to capture the preferred impact acceleration and
+phase. The stable solution for bouncing a ball on a racquet thus
+takes advantage of both physical constraints, which define passive
+stability, and informational constraints, which allow the agent to
+Active Stabilization of an Unstable System: Pole
+Now consider the problem of functionally stabilizing an unstable fixed point. A good example is the task of balancing an
+inverted pendulum, a staple of control theory (Barto, Sutton, &
+Anderson, 1983; Kwakernaak & Sivan, 1972). A pole will balance
+unaided if its angle to the vertical (␪) is precisely zero, but given
+a slight perturbation it will fall with an angular acceleration inversely proportional to its length. With a bit of practice, people can
+learn to balance a pole upended on one hand (or a chair on the
+chin) by applying appropriate horizontal forces to its base.
+The control-theoretic approach to such a planar cart–pole problem is to derive a linear control strategy in which the horizontal
+force F is computed as a weighted sum of the state variables of the
+system, typically the angle (␪) and angular velocity (␪˙ ) of the pole
+and the position (x) and velocity (ẋ) of the cart that supports it. The
+problem thus boils down to determining fixed coefficients for each
+state variable, given the mechanics of a particular pendulum. This
+generally results in successful solutions in which the pole oscillates about the vertical without falling. But do biological systems
+stabilize an inverted pendulum in this manner? In the present view,
+rather than a general solution based on elementary state variables,
+it is likely that people find a control law that maps higher order
+informational variables into higher order control variables.
+To address these questions, Foo, Kelso, and Guzman (2000)
+recorded people’s behavior as they tried to balance a pole attached
+to a cart that was moved by hand along a horizontal track. During
+successful 30-s trials, the pole tended to oscillate by a few degrees
+in a regular pattern of overshooting the vertical and being recovered again by a hand adjustment, occasionally punctuated by
+undershooting. The authors hypothesized a higher order informational variable called “time-to-balance” (␶bal), an angular version
+of Lee’s time-to-contact variable (Lee, Young, & Rewt, 1992).
+Specifically, the ratio between the current pole angle (with respect
+to the vertical) and its rate of change specifies the time remaining
+until the pole arrives at the vertical position, if angular velocity
+Foo et al. (2000) pointed out that rate of change in this variable
+(␶˙ bal) can be interpreted in terms of the angular deceleration of the
+pole as it approaches the vertical (Lee, 1976). A value in the range
+0 ⬍ ␶˙ bal ⬍ 0.5 specifies that the current deceleration is too great,
+and if maintained, the pole will undershoot the vertical and could
+fall. A value of ␶˙ bal ⫽ 0.5 indicates that the current deceleration,
+if held constant, will bring the pole to rest precisely at the vertical.
+However, because this fixed point is unstable the subsequent
+motion of the pole would be unpredictable, so control would
+become reactive. A value in the range 0.5 ⬍ ␶˙ bal ⬍ 1.0 specifies
+that the current deceleration is too low and the pole will overshoot
+the vertical— but it will remain controllable with subsequent adjustments. A ␶˙ bal ⫽ 1.0 corresponds to a constant angular velocity,
+and ␶˙ bal ⬎ 1.0 specifies that the pole is accelerating toward the
+vertical, which will lead to a large overshoot. If maintained in this
+regime over several cycles, the amplitude of oscillation would
+increase and the system would become uncontrollable.
+Consistent with this analysis, the data show that prior to overshoots, the time series of ␶˙ bal hovers between 0.87 and 0.97 at peak
+hand velocity. In contrast, prior to undershoots the mean values of
+␶˙ bal are between 0.18 to 0.36 at peak hand velocity. Foo et al.
+(2000) argued that the hand’s peak velocity is a critical control
+point at which information is used to initiate a new adjustment,
+such as reversing hand direction or launching a new movement in
+These findings lead Foo et al. (2000) to propose a visual control
+strategy based on ␶˙ bal: To stabilize an inverted pendulum, keep ␶˙ bal
+between 0.5 and 1.0 at peak hand velocity. To implement this
+strategy, they defined a control law in which the force to be applied
+by the hand (scaled to the length and mass of the pendulum) is a
+linear weighted function of pole angle and hand position,
+where ␤ is a constant as in a standard controller. Stabilization is
+achieved by using time-to-balance information ␶bal to periodically
+modulate the “stiffness” parameter ␣ at each control point in the
+cycle. In brief, ␣ is adjusted by an amount based on how far the
+current value of ␶˙ bal is outside the interval {0.5, 1.0}. The resulting
+force returns ␶˙ bal into the controllable range, keeping the pole
+balanced. Simulations of this strategy applied to a model cart–pole
+system produced time series that are qualitatively similar to the
+human data, including antiphase coordination between hand and
+pole velocity, ␶bal values near zero for most of a cycle, and ␶˙ bal
+This analysis can be cast into the behavioral dynamics framework as follows. The environment is governed by the physics of
+the inverted pendulum in a gravitational field (⌽). The action
+system is organized as an oscillator that generates horizontal
+movements of the hand, with both state and parametric control
+variables. The agent is mechanically coupled to the pole via the
+force exerted on the cart and informationally coupled via visual
+information about the pole angle ␪ and ␶˙ bal and visual or haptic
+information about hand position x. The control law (⌿) uses this
+information to continuously modulate the state variables determining applied force F and to periodically adjust the “stiffness”
+parameter ␣. At the level of the behavioral dynamics, this gives
+rise to small periodic fluctuations in pole angle, stabilizing it in the
+neighborhood about the fixed point at (␪, ␪˙) ⫽ (0, 0).
+Thus, the pole is dynamically balanced by exploiting a combination of physical and informational constraints that allow the
+agent to functionally stabilize the system. Although the inverted
+pendulum is physically unstable, the solution to the pole balancing
+problem is still constrained by the existence of an unstable fixed
+point that clearly picks out a goal state.
+Active Stabilization of a Neutrally Stable System: Braking
+In the previous example, the physics of the inverted pendulum
+limits the solution space for stabilizing the system. But in many
+perceptual–motor tasks, the physical and biomechanical constraints are weak or nonexistent. The system is thus neutrally stable
+in the sense that there are no intrinsic fixed points and no inherently preferred or unpreferred states. However, informational constraints can play a role analogous to physical constraints when the
+agent can identify higher order variables that permit the functional
+A good example is provided by Lee’s (1976) theory of the visual
+control of braking. Imagine that the agent is traveling toward an
+obstacle at a distance z, and the task is to decelerate to a stop right
+in front of it, such that (z, ż) ⫽ (0, 0). The intrinsic physics of the
+situation offer little constraint, for left to itself the body or vehicle
+will continue to hurtle toward a collision, slowing slightly due to
+friction. There is no fixed point in this case because the position at
+which the vehicle will finally stop depends entirely on initial
+conditions. Thus, the active stabilization of braking at (z, ż) ⫽ (0,
+0) must rely upon informational constraints.
+Lee (1976) based his analysis of braking on the ␶ variable,
+which denotes the ratio of an object’s visual angle (␣) over its rate
+of change (␣˙ ) and corresponds to the first-order time to contact
+(limits to this analysis have been discussed by Tresilian, 1990,
+1999). The time derivative of this variable (␶˙ ) specifies the adequacy of the current deceleration, as just described for the case of
+pole balancing. Specifically, a value of ␶˙ ⫽ ⫺1.0 indicates a
+constant velocity approach and hence an eventual crash.9 A value
+in the range ⫺1.0 ⬍ ␶˙ ⬍ ⫺0.5 specifies that the current deceleration is too low and, if maintained, would result in a collision, so
+the agent should increase the brake. A ␶˙ ⫽ ⫺0.5 indicates that the
+current deceleration will bring the agent to a precise stop at the
+obstacle if held constant. And finally, a ␶˙ ⬎ ⫺0.5 specifies that the
+current deceleration is too high and would lead one to stop short of
+the obstacle, so the agent should decrease the brake. Thus, ␶˙ ⫽
+⫺0.5 corresponds to the boundary between a crash state and a safe
+state if the current deceleration is maintained. Note that the visual
+system need not be sensitive to ␶˙ per se, which depends on
+detecting an optical acceleration, but could be sensitive to a sufficiently small difference ⌬␶, which depends on detecting a threshold change in optical velocity.
+Yilmaz and Warren (1995) experimentally tested several ␶˙ strategies as well as alternative hypotheses based on the simple rate of
+expansion (␣˙ ) or computing deceleration from spatial variables.
+Participants viewed an interactive display of approach to a road
+sign, with or without a ground plane that added information about
+speed and distance. They controlled their deceleration with a linear
+“brake,” a spring-loaded mouse in which deceleration was proportional to position. The data were quite consistent with a ␶˙ strategy,
+with an overall mean ␶˙ of ⫺0.51. However, the time series of
+braking behavior revealed that participants did not hold ␶˙ constant
+at ⫺0.5, as some have suggested (Kaiser & Phatak, 1993; Kim,
+Turvey, & Carello, 1993; Lee, 1976), but rather made a series of
+brake adjustments at a rate of about one per second. A detailed
+analysis showed that the direction and magnitude of each adjustment depended upon the current value of ␶˙ . This relationship is
+represented in Figure 6, which plots the mean change in ␶˙ during
+a brake adjustment as a function of the value of ␶˙ at the onset of
+the adjustment. The slope of the function is exactly ⫺1.04, and it
+crosses the abscissa at a value of ␶˙ ⫽ ⫺.52 (r ⫽ .98). This means
+that if ␶˙ ⬍ ⫺0.52, participants increase their deceleration, and if
+The signs of these values are negative, consistent with Lee’s (1976)
+original analysis. Otherwise, this is analogous to the pole-balancing analysis in the preceding section.
+change in brake position (⌬x) is proportional to the distance of ␶˙
+Figure 6. Active stabilization of a neutrally stable system: Phase portrait
+for braking to stop at an obstacle. Mean change in ␶˙ during a brake
+adjustment as a function of ␶˙ at the onset of the adjustment, based on 4,800
+trials (N ⫽ 12). Note that the regression line indicates a point attractor at
+a ␶˙ of ⫺0.52, close to the theoretical value of ⫺0.50, with a slope of ⫺1.04
+(r ⫽ .98). Reprinted from “Visual Control of Braking: A Test of the ␶˙
+Hypothesis,” by E. H. Yilmaz and W. H. Warren, 1995, Journal of
+Experimental Psychology: Human Perception and Performance, 21, p.
+1010. Copyright 1995 by the American Psychological Association.
+␶˙ ⬎ ⫺0.52, they reduce their deceleration— by an amount that on
+average brings ␶˙ back to a criterial value of ⫺0.52.10
+Note that Figure 6 actually represents the phase portrait of the
+informational variable ␶˙ . It reveals that participants stabilize their
+braking behavior by enacting a point attractor in the dynamics of
+␶˙ . This is not an arbitrary solution but reflects the informational
+structure of the task, specifically the relation between higher order
+variables and deceleration conditions, which corresponds to the
+boundary between a crash state and a safe state. Note also that
+braking is effected via periodic discrete adjustments of a control
+variable, in this case the state variable of brake position, which
+directly determines the braking force and deceleration.
+The visual control of braking can be placed in the behavioral
+dynamics framework as follows. The environment consists of the
+obstacle, the vehicle and brake dynamics, and the road surface,
+governed by the laws of physics (⌽). The action system is presumably organized as a second-order system similar to Equation 6,
+with an equilibrium point at a desired brake position x. The agent
+is mechanically coupled to the environment via force exerted on
+the brake and informationally coupled via ␶˙ . Provisionally, the
+control law can be modeled by a difference equation in which the
+where ␶˙ depends on brake position x, b scales the amplitude of
+brake adjustment, and ␧ is a noise term that produces random overand undercorrection. This works because ␶˙ is roughly proportional
+to deceleration and hence to brake position during most of the
+controlled approach. The control law thus uses the current value of
+(⫺0.52 ⫺ ␶˙ ) to regulate the change in brake position. This exerts
+a braking force on the vehicle and produces a deceleration according to physical laws, which in turn affects the informational
+variable ␶˙ . At the level of the behavioral dynamics, this use of
+information serves to stabilize braking behavior in the neighborhood of (z, ż) ⫽ (0, 0).
+These three examples illustrate how biological systems use
+information to find a passively stable solution, to actively stabilize
+an unstable system, or to actively stabilize a neutrally stable
+system. In the first case, a solution is given by the physics of the
+task and can be discovered through perceptual–motor exploration.
+In the second case, information is used to stabilize an unstable
+system, but the solution is narrowly constrained by the physics of
+the task. Finally, in the third case, information is used to enact
+stable states based on the informational structure of the task.
+Information may be used to influence a state variable, such as
+brake position, or to modulate a parameter, such as the stiffness of
+the oscillator in bouncing or pole balancing. Finally, such control
+variables may be modulated continuously, periodically adjusted on
+each cycle, or discretely reset to a fixed value. Empirical research
+on such whole agent– environment systems is required to model
+the specifics of the perception–action cycle and to formally characterize the behavioral dynamics of a given task.
+A Case Study: Behavioral Dynamics of Locomotion
+The time has come to put these concepts to work. The goal of
+this section is to show how adaptive behavior actually arises from
+agent– environment interactions by pursuing a model system in
+some depth. Fajen and I have recently developed a theory of the
+dynamics of locomotor behavior, in which the elements of the
+current framework have been modeled and empirically tested
+(Fajen & Warren, 2003, 2004; Fajen, Warren, Temizer, & Kaelbling, 2003). Our approach to modeling human locomotor path
+formation is influenced by the work of Schöner et al. (1995) on a
+Imagine yourself walking through Grand Central Station in New
+York City. To reach the exit, you must adopt a route through a
+complex dynamic environment. First, you must steer toward a
+stationary goal—the exit. At the same time, you must avoid
+stationary obstacles, such as benches and luggage. Worse, you also
+have to avoid moving obstacles, such as baggage carts and other
+passengers—some of which are simultaneously trying to avoid
+you. Along the way, you might spot a passing acquaintance and try
+There are small individual differences in this criterial value, indicating
+more risky or conservative braking, and in the slope of the line, indicating
+to intercept this moving target—which may also seek to intercept
+or evade you. Locomotion in a complex changing environment
+requires integrating these four elementary behaviors (stationary
+goal, stationary obstacle, moving target, moving obstacle) to generate a locomotor path, a surprisingly difficult task that mobile
+robots have yet to master. Below I show that human locomotor
+paths can be understood as dynamic trajectories that unfold online
+as the agent interacts with its environment.
+The path of locomotion is unconstrained, which puts it in the
+class of neutrally stable systems that must be functionally stabilized by information. Most interesting, the dynamics evolve as the
+agent moves through the environment, making this the first case in
+which the dynamical approach has been applied to a nonstationary
+real-world behavior. To address this problem, Fajen and I (Fajen &
+Warren, 2003) developed a model of the behavioral dynamics of
+locomotion. In this research program, we record human walking in
+simple cases and use the data to specify a component model for
+each of the four basic behaviors. We then fix the parameter values
+and attempt to predict locomotor paths in more complex situations
+by linearly combining these components. Finally, we infer possible
+control laws that give rise to the observed behavior. If we can
+formalize the locomotor dynamics for an individual agent, this
+may ultimately allow us to model interactions among multiple
+agents in a complex environment like Grand Central Station.
+Recall that exhibited behavior can be analyzed as a trajectory in
+the state space of behavioral variables, where attractors correspond
+to goal states and repellers to avoided states. The desired aim is to
+describe the behavioral dynamics of the task by formalizing a
+dynamical system with a vector field that corresponds to the
+Consider first the task of steering to a stationary goal. The
+behavioral variables are defined as the current heading direction ␾
+with respect to an arbitrary reference axis (see Figure 7) and the
+current turning rate ␾˙ . Walking speed is fairly constant in the data,
+so for the moment assume a constant speed v. From the agent’s
+current (x, z) position, a goal lies in the direction ␺g at a distance
+dg. The simplest description of steering is to bring the heading
+error, the angle between the current heading direction and the goal
+direction, to zero (␾ ⫺ ␺g ⫽ 0). The goal direction is thus an
+attractor of heading in state space at (␾, ␾˙ ) ⫽ (␺g, 0). The distance
+of the goal (or equivalently, its time to contact) might also be
+expected to influence steering, because the agent may need to turn
+Because the agent is embodied, the physical body must undergo
+angular acceleration to change its direction of travel, and thus it is
+reasonable to assume that a description of steering behavior requires at least a second-order system. To get an intuition, imagine
+that the agent’s current heading direction is attached to the goal
+direction by a damped spring (see Figure 7). Angular acceleration
+toward the goal direction would thus depend on the stiffness of the
+spring and be resisted by the damping. To make the attractiveness
+of the goal depend on its distance, the goal distance is used to
+modulate the spring stiffness parameter continuously.
+To specify these functions, a series of studies determined how
+the locomotor path is influenced by the directions and distances of
+Figure 7. Definition of variables for locomotor behavior: Heading direction in an extrinsic coordinate frame ␾, direction of goal or obstacle ␺, and
+heading error in an intrinsic coordinate frame ␤ ⫽ ␾ ⫺ ␺. Steering behaves
+as though the heading direction were attached to the goal direction by a
+goals and obstacles (Fajen & Warren, 2003). The research was
+carried out in the Virtual Environment Navigation Lab (VENLab)
+at Brown University, a 12 m ⫻ 12 m room in which a participant
+can walk freely wearing a head-mounted display (60° horizontal ⫻
+40° vertical) while head position is recorded with a sonic–inertial
+tracking system. On each trial, the participant walked forward on
+a textured ground plane for 1 m, then a goal post appeared, and the
+task was simply to walk to the goal. The first experiments varied
+the initial heading error (0° to 25°) and goal distance (2 m to 8 m).
+The data revealed that participants turned onto a straight path to
+the goal (see Figure 8a) but did so more rapidly when the goal had
+a larger heading error or was at a closer distance. The time series
+of heading error showed that it converged to zero from all initial
+conditions (see Figure 8b), with an angular acceleration that increased linearly with heading error and decreased exponentially
+with goal distance. Thus, the goal direction does in fact behave like
+We modeled this behavior with an angular version of the “mass–
+spring” equation (Equation 4), in which angular acceleration ␾˙ is
+a function of both heading error (␾ ⫺␺g) and goal distance (dg),
+The “damping” term indicates that the resistance to turning is
+proportional to the turning rate; the b parameter determines the
+slope of this function, expressing the ratio of damping to body
+mass (in units of s⫺1). The “stiffness” term reflects the finding that
+angular acceleration increases linearly with heading error, at least
+over the tested range of ⫺25° to ⫹25°.11 The kg parameter
+determines the slope of this function and hence the attractiveness
+of the goal, expressing the ratio of stiffness to mass (in units of
+It is interesting that Reichardt and Poggio (1976) determined a similar
+function for steering in the housefly that was also linear over this range.
+Figure 8. Human steering to a goal at a distance of 2, 4, or 8 m. a: Mean walking paths for an initial heading
+error of 20°. b: Mean time series of heading error, with initial values of ⫾10° or ⫾20°. Adapted from
+“Behavioral Dynamics of Steering, Obstacle Avoidance, and Route Selection,” by B. R. Fajen and W. H.
+Warren, 2003, Journal of Experimental Psychology: Human Perception and Performance, 29, p. 348. Copyright
+2003 by the American Psychological Association.
+s⫺2). Finally, the attractiveness of the goal decreases exponentially
+with distance, where c1 determines the rate of decay and c2 a
+minimum value (to ensure that one will steer toward distant goals).
+The slope of the “stiffness” function is thus modulated by distance.
+Least squares fits to the mean time series of heading error yielded
+parameter values of b ⫽ 3.25, kg ⫽ 7.50, c1 ⫽ 0.40, and c2 ⫽ 0.40.
+Simulations of the experimental conditions generate locomotor
+paths that are very close to the human data (see Figure 9a) and time
+series of heading error that converge to zero in a similar manner
+(see Figure 9b). The fits to the mean time series accounted for a
+proportion of .980 of the variance, indicating that model behavior
+is highly similar to the mean human behavior. Thus, the model
+successfully captures the basic form of walking to a goal, in which
+the goal direction behaves like an attractor of heading whose
+strength increases with angle and decreases with distance. Although four free parameters may seem to be overkill, it turns out
+that simpler models do not account for the observed variation in
+human paths. Recall as well that the modeling strategy is to fix
+these values and predict behavior in more complex environments
+Rushton, Wen, and Allison (2002) proposed but did not test a
+simpler hypothesis for steering to a goal in which, rather than
+bringing the heading error to zero, the agent holds the goal at a
+fixed eccentricity from the body’s midline, corresponding to one
+free parameter. This generates paths in the form of equiangular
+spirals, with greater curvature (higher turning rate) near the end of
+the trajectory, as the target is approached. However, data from
+Fajen and Warren (2003) clearly show the opposite pattern: Humans turn onto a straight path to the target with greater curvature
+at the beginning of the trajectory. An alternative hypothesis proposes that the agent steers to cancel target drift, the optical velocity
+of the target (Llewellyn, 1971; Rushton et al., 2002). As formalized by Wilkie and Wann (2003), the model has only two parameters, analogous to a stiffness term and a damping term, and
+generates more humanlike trajectories that depend on target eccentricity and distance. However, simulations of their model produced spiral paths to the goal that differ from the human data (see
+Fajen & Warren, 2005). The heading error does not go to zero but
+gets stuck at a constant nonzero value. This may be ameliorated by
+choosing appropriate stiffness and damping values for each initial
+condition, but that effectively adds free parameters that depend on
+goal distance and direction. Thus, apparently simpler models based
+on fixed eccentricity or target drift do not generate realistic human
+Now consider the task of avoiding a stationary obstacle. From
+the agent’s current position, an obstacle lies in the direction ␺o at
+a distance do. The simplest description of obstacle avoidance is the
+converse of steering to a goal: to increase the heading error
+between the current heading and the obstacle direction (␾ ⫺ ␺o ⬎
+0 ). The obstacle direction thus acts like a repeller of heading at (␾,
+␾˙ ) ⫽ (␺o, 0). In addition, its distance (or time to contact) is also
+likely to influence steering behavior, for nearby obstacles must be
+avoided before more distant ones. Returning to our intuitive
+model, imagine that the heading direction is repelled from the
+Figure 9. Model simulations of steering to a goal at 2, 4, and 8 m. a: Paths for an initial heading error of 20°.
+b: Time series of heading error for initial values of ⫾10° or ⫾20°. Adapted from “Behavioral Dynamics of
+Steering, Obstacle Avoidance, and Route Selection,” by B. R. Fajen and W. H. Warren, 2003, Journal of
+Experimental Psychology: Human Perception and Performance, 29, p. 350. Copyright 2003 by the American
+obstacle direction by a second angular spring, whose stiffness is
+modulated by the distance of the obstacle.
+Fajen and Warren (2003) recorded detours taken around a single
+obstacle en route to a goal. On each trial, the participant began
+walking toward a goal post, and after 1 m, an obstacle post
+appeared. The initial angle between the obstacle and the path (1°
+to 8°) as well as the obstacle’s initial distance (3 m to 5 m) were
+manipulated. Once again, both the direction and distance of the
+obstacle influenced the path (see Figure 10a), and the heading was
+repelled from the obstacle direction such that the heading error
+diverged from zero in all conditions (see Figure 10b). In this case,
+angular acceleration decreased exponentially with both heading
+We (Fajen & Warren, 2003) modeled this behavior with a
+component having a repeller in the direction of the obstacle by
+␾¨ ⫽ ⫺b␾˙ ⫹ ko(␾ ⫺ ␺o)(e⫺c3兩␾⫺␺o兩)(e⫺c4do).
+The form of the stiffness term reflects the finding that angular
+acceleration decreases exponentially to the right or left of the
+obstacle; the amplitude of this function is determined by the
+parameter ko and its decay rate by c3 (in units of rad⫺1), and it
+asymptotes to zero. The stiffness also decreases exponentially to
+zero with obstacle distance, where parameter c4 is the decay rate
+(in units of m⫺1). To fit the model to the mean time series of
+heading error, Fajen and I kept the previous parameter values for
+the goal component fixed and added the obstacle component to it,
+yielding parameter values of ko ⫽ 198.0, c3 ⫽ 6.5, and c4 ⫽ 0.8.
+Simulations reproduced the mean human paths (e.g., see Figure 11a) and time series (see Figure 11b), accounting for a proportion of .975 of the variance. The model thus captures the
+behavioral dynamics of obstacle avoidance, such that the direction
+of the obstacle behaves like a repeller of heading whose strength
+decreases with both heading error and obstacle distance.
+Note that the model relies only on a limited perceptual sample
+of the environment, not a full world model. The influence of
+obstacles asymptotes to zero at a distance of around 4 m and an
+angle of ⫾ 60° about the heading direction. Moreover, because the
+distance functions are gradually decreasing exponentials, the
+model is not sensitive to error in perceived distance. Adding 10%
+Gaussian noise into all perceptual variables and model parameters
+induces a standard deviation of only a few centimeters in the path’s
+lateral position around an obstacle, demonstrating the robustness
+of the model. Currently, the model treats obstacles as points, so a
+larger obstacle or surface must be represented as a set of points at
+finite intervals, such that the repulsion functions sum over space.
+Now that elementary goal and obstacle components have been
+formulated, can they be used to predict more complex behavior? In
+the model, routes emerge from the agent’s interaction with the
+environment, rather than being explicitly planned in advance.
+Fajen and I began with the simplest case of route selection,
+Figure 10. Human obstacle avoidance, with an initial distance of 3, 4, or 5 m and an initial heading error of
+⫺4°. a: Mean walking paths. b: Mean time series of heading error. Adapted from “Behavioral Dynamics of
+Steering, Obstacle Avoidance, and Route Selection,” by B. R. Fajen and W. H. Warren, 2003, Journal of
+Experimental Psychology: Human Perception and Performance, 29, pp. 352 and 353. Copyright 2003 by the
+comparing a shorter “inside” path around an obstacle to a longer
+“outside” path (Fajen & Warren, 2003). Given initial conditions
+for an outside path, the model predicts that the route will switch to
+an inside path as the angle between the goal and the obstacle
+increases to 7°–10° and as the distance of the goal decreases,
+making it more attractive. Humans exhibited both of these effects,
+but the switch occurred at a somewhat smaller angle of 2°– 4°. This
+may be because the first experiments did not sample cases in
+which the participant had to cross in front of an obstacle. However,
+adjusting the obstacle parameter c4 from 0.8 to 1.6 is sufficient for
+the model to exhibit switching in the human range. Parameter c4
+might be thought of as a “risk” parameter, for higher values cause
+the repulsion function to decay more rapidly with distance, allowing a closer approach to obstacles. The agent’s body size is thus
+implicitly represented in the model by the repulsion parameters.
+Route switching results from competition between the attraction
+of the goal and the repulsion of the obstacle, and the choice of
+whether to steer right or left appears as a bifurcation in the model
+dynamics. The vector field of the behavioral dynamics, in this case
+an acceleration field computed from Equations 21 and 22, is
+plotted in Figure 12 for an agent at different locations in the
+environment. When the agent is far from the obstacle at (0, 0) (see
+Figure 12a) it exerts no influence, so there is a simple attractor in
+the goal direction (see Figure 12b). But as the agent moves through
+the environment, the vector field evolves. If the obstacle is be-
+tween the agent and the goal, the model is bistable, such that both
+outside and inside paths are attractive with a repeller in between
+(see Figure 12c); the selected route then depends upon the agent’s
+initial conditions. As the agent moves around the obstacle, the
+curve lifts off the abscissa and the vector field undergoes a tangent
+bifurcation, such that only one route remains stable (see Figure
+12d). The “choice” of a particular route can thus be understood as
+a consequence of bifurcations in the system’s dynamics.
+One advantage of the model is that it scales linearly with the
+complexity of the scene, simply adding one “spring” term for each
+object. Essentially, the heading direction at any moment is the
+resultant of all spring forces acting on the agent. The next step in
+complexity is a configuration of two obstacles en route to a goal,
+creating three possible routes (Fajen & Warren, 2001). In this
+experiment, the goal and the near obstacle were in fixed positions,
+while the lateral position of a slightly farther obstacle was manipulated. As the angle between the far obstacle and the goal increases
+from 0° to 10°, the model predicts a particular sequence of route
+switching: from outside the far obstacle, to outside the near obstacle, to in between them. Participants demonstrated exactly this
+The success of the model is that it enables one to understand the
+“surface structure” of exhibited locomotor paths and route switching in terms of the “deep structure” of the underlying dynamics of
+attractors, repellers, and bifurcations. As the agent moves through
+Figure 11. Model simulations of obstacle avoidance, with an initial distance of 3, 4, or 5 m and an initial
+heading error of ⫺4°. a: Model paths. b: Time series of heading error. Adapted from “Behavioral Dynamics of
+Steering, Obstacle Avoidance, and Route Selection,” by B. R. Fajen and W. H. Warren, 2003, Journal of
+Experimental Psychology: Human Perception and Performance, 29, p. 353. Copyright 2003 by the American
+the world, the dynamics evolve, for as the directions and distances
+of goals and obstacles change, the attractors and repellers shift and
+bifurcations occur. Thus far, the online steering dynamics are
+empirically sufficient to account for human locomotor paths without assuming explicit path planning or an internal world model.
+Fajen and I subsequently developed a third model component
+that intercepts a moving target simply by modifying Equation 21 to
+null change in the bearing direction of the target, a type of
+“constant bearing” strategy (Fajen & Warren, 2005). A fourth
+component was also added for avoiding a moving obstacle, creating a repeller in the constant bearing direction (Cohen & Warren,
+2005). Currently, the group at Brown University is testing whether
+linear combinations of these four components can predict human
+paths through complex dynamic environments through complex
+dynamic environments; thus far we have closely predicted paths
+and switching behavior for a moving target with a stationary
+obstacle (Bruggeman & Warren, 2005), a moving target with a
+moving obstacle, and a moving target with a stationary and a
+moving obstacle. The model thus appears to scale to complex
+configurations with no free parameters. Once elementary locomotor behaviors for an individual agent are formalized, our aim is to
+use the model to simulate interactions among multiple agents,
+including pedestrian traffic flow and crowd behavior.
+Now that a formal description of the behavioral dynamics of
+steering and obstacle avoidance has been developed, let us return to
+the level of control laws. The central argument of this article is that
+observed behavior emerges from an agent governed by control laws
+interacting with an environment governed by physical laws to stabilize a behavioral outcome. I thus wish to show how control laws for
+locomotion can give rise to the behavioral dynamics just described.
+First consider the informational coupling between agent and
+environment. Given that turning rate depends on the heading error,
+steering does not appear to be based simply on the visual direction
+of a goal or obstacle but rather on the angle between the object and
+the current direction of locomotion. This implicates information
+related to the current heading (␾) or object-relative heading (␤ ⫽
+␾ ⫺ ␺). Conveniently, information is available in the optic flow
+that specifies both the absolute heading (␾flow) and the objectrelative heading (␤ ⫽ ␾flow ⫺ ␺). Human observers are quite
+accurate at judging their heading with respect to an object from
+optic flow alone or in conjunction with extraretinal information
+about eye movements (Lappe, Bremmer, & van den Berg, 1999;
+Warren, 2004). For terrestrial animals, the current heading is also
+given by proprioceptive information about the locomotor axis
+Figure 12. Sample vector fields (␾ vs. ␾˙ ) for steering around an obstacle en route to a goal. a: Four sampled
+positions on typical inside and outside routes. The goal is denoted by X, the obstacle by O. b– e: Vector fields
+at the four positions. Each vector has a vertical component that represents the angular acceleration (␾¨ ) and a
+horizontal component that represents the angular velocity (␾˙ ) at the corresponding point in phase space. Solid
+curves represent nullclines at which ␾¨ is zero. Filled circles represent point attractors, and open circles represent
+repellers. Filled arrows indicate the goal direction (␺g), and open arrows indicate the obstacle direction (␺o).
+Reprinted from “Behavioral Dynamics of Steering, Obstacle Avoidance, and Route Selection,” by B. R. Fajen
+and W. H. Warren, 2003, Journal of Experimental Psychology: Human Perception and Performance, 29, p. 357.
+Copyright 2003 by the American Psychological Association.
+(␾prop), and hence the heading error is redundantly specified by the
+egocentric direction of the object with respect to the felt locomotor
+axis (␤ ⫽ ␾prop ⫺ ␺). There is converging evidence that both optic
+flow and egocentric direction contribute to the control of walking
+to a goal (Rushton, Harris, Lloyd, & Wann, 1998; Warren, Kay,
+Zosh, Duchon, & Sahuc, 2001) as well as to joystick steering (Li
+& Warren, 2002; Wilkie & Wann, 2003; for an overview see
+These findings led me and my colleagues to propose a control
+law for steering to a goal (Warren et al., 2001) in which turning is
+a function of the current heading error given by a linear combination of egocentric direction and optic flow:
+intended heading. Body motion can thus be represented as a
+where the mass term is incorporated in the parameters as before,
+and the parameter values are fixed. The damping parameter is
+interpreted as a physical constraint related to centripetal force and
+thus need not be learned. The observed angular acceleration is thus
+a function of the discrepancy between the current and intended
+heading (␾ ⫺ ␾⬘). Finally, the resulting change in heading alters
+the information available at the moving eye in accordance with the
+laws of ecological optics, resulting in a shift of the optic flow as
+well as the visual directions of goals and obstacles.
+It is now possible to see how the behavioral dynamics emerge
+from the interaction between an agent governed by control laws
+and an environment governed by physical laws. As described in
+Fajen and Warren (2003), Philip Fink simulated this perception–
+action cycle for steering around an obstacle to a goal, by embedding the first-order control law (Equation 22) within a secondorder body (Equation 23). The resulting paths were
+indistinguishable from those generated by the model of the behavioral dynamics (Equation 19). Moreover, the time series of heading
+error fit the mean human data and accounted for a proportion of
+.991 of the variance (parameter values kg ⫽ 59.1625, c1 ⫽ .0555,
+c2 ⫽ .01125, ko ⫽ 842, c3 ⫽ 2.74063, c4 ⫽ .04653, bb ⫽ .0375,
+kb ⫽ 592).12 This result demonstrates formally how the
+perception–action cycle gives rise to the behavioral dynamics.
+The coefficient kg is a rate constant. The contribution of the flow
+is weighted by the observer’s velocity v, which influences the flow
+rate, and by w, a measure of the visual area and magnitude of optic
+flow due to environmental structure. Thus, as the observer travels
+faster or as there is more visual structure, steering will be increasingly dominated by the optic flow, consistent with experimental
+evidence (Fink & Warren, 2002; M. G. Harris & Carre, 2001;
+Warren et al., 2001; Wilkie & Wann, 2002; Wood, Harvey,
+Young, Beedie, & Wilson, 2000). Conversely, with little visual
+structure, the egocentric direction of the target will dominate (J. M.
+Harris & Bonas, 2002; Rushton, Harris, & Wann, 1999). Such
+redundancy is highly adaptive, for it allows locomotor guidance to
+be robust under varying environmental conditions.
+In the preceding experiments on steering dynamics, it was also
+found that the influence of the goal decays exponentially with
+distance (or equivalently, time to contact). The control law can
+␾˙ ⬘ ⫽ ⫺kg[(␾prop ⫺ ␺g) ⫹ wv(␾flow ⫺ ␺g)](e⫺c1dg ⫹ c2).
+This control law is represented as a first-order dynamical system
+that relaxes to an attractor for the intended heading in a direction
+␾⬘ with a relaxation rate ␾˙ ⬘. The prime indicates that the intended
+heading is a control variable, and its relaxation rate is distinct from
+a physical turning rate. In principle, the equation can be expanded
+␾˙ ⬘ ⫽ ⫺kg[(␾prop ⫺ ␺g) ⫹ wv(␾flow ⫺ ␺g)](e⫺c1dg ⫹ c2)
+⫹ ko[(␾prop ⫺ ␺g) ⫹ wv(␾flow ⫺ ␺g)](e⫺c3兩␾⫺␺o兩)(e⫺c4do).
+The system relaxes to a heading that is determined by the current
+configuration of goals and obstacles. This control law thus maps
+low-dimensional informational variables that specify heading error
+into a low-dimensional control variable for the intended heading.
+The control law is what the agent’s perceptual–motor system must
+learn, including the form of the first-order function (which is the
+same for each component), the relaxation rates kg and ko, the
+spread of the obstacle repulsion function (which reflects the
+agent’s body size), and the decay rates for obstacles and goals with
+Next consider the mechanical coupling between agent and environment. Given an intended heading direction, the locomotor
+system transforms this control variable into forces exerted in the
+environment. Effectively, this means changing the direction of
+motion of the body’s center of mass and simultaneously rotating
+the trunk via forces applied through the supporting foot against the
+ground (Patla, Adkin, & Ballard, 1999). Reaction forces produce a
+change in the direction of travel in accordance with the laws of
+physics. Given that the physical body is an inertial system, it must
+undergo angular acceleration and will necessarily lag behind the
+We are now in a position to consider how such adaptive behavior patterns might come about. The aim is to show how stable
+behavior could arise through a process of self-organization,
+thereby circumventing an appeal to a priori internal organization.
+Such pattern formation processes typically occur in physical systems with many simple interacting components (Haken, 1977;
+Nicolis & Prigogine, 1989), but they also occur in biological
+systems with more complex components that are coupled together
+by sensory information (Camazine et al., 2001; Murray, 1989;
+Yates, 1987). I wish to extend such an analysis to the interactions
+between a complex individual and a complex environment under
+certain physical and informational constraints.
+Self-organization is the spontaneous formation of ordered states
+in complex systems under specific boundary conditions. First, it is
+typically observed in open systems composed of many individual
+components with many degrees of freedom. Second, the components must be coupled together so that they are interacting locally
+and simultaneously. Third, the presence of fluctuations or instabilities produces a symmetry-breaking event, which launches the
+pattern-formation process. Most important, there must be a nonlinear positive feedback that amplifies the initial instability, so that
+the emerging pattern feeds back to capture the behavior of individual components. In effect, this acts to compress or enslave the
+These parameter values are different from those for the behavioral
+dynamics because they reflect the relaxation rate for a first-order control
+law, which is embedded in a second-order physical system.
+system’s degrees of freedom into an ordered spatial or temporal
+pattern. This form of circular causality is the hallmark of selforganization, by which specific patterns emerge from nonspecific
+To illustrate, consider the question of why geese fly in a “V.”
+One might assume that such species-typical behavior is governed
+by an innate program for a particular flocking pattern, but it can
+also be understood as a product of self-organization. In this case,
+the components are individual birds, which are coupled by an
+aerodynamic field. Because of the bird’s morphology, air flow
+over the wing creates a rolling vortex cylinder—an updraft—that
+trails behind it and may be exploited by another goose flying off
+the wingtip of the bird ahead. Hainsworth (1987, 1989) calculated
+that this yields an energy savings of up to 51%, so that a migrating
+flock can actually travel twice as far on one feeding.
+A pattern-formation account proposes that a symmetry-breaking
+event occurs when a few birds in a flock fall into advantageous
+positions behind one another. This initiates the formation of a
+vortex field, which feeds back to capture the behavior of neighboring birds. As each bird contributes to the growing field, it
+becomes increasingly advantageous for the rest of the flock to fall
+into line. Note that the birds are not compelled to adopt this pattern
+by a physical force but rather are guided into it by sensory
+information about the energetic cost of their positions in the field.
+The V formation thus emerges from the interactions of the geese
+and their avian environment under aerodynamic, metabolic, and
+informational constraints. The “innate” components are wing morphology and a general sensitivity to metabolic cost rather than a
+specific behavior per se. Although this view of flocking is still
+under debate, it offers a plausible account of behavioral pattern
+formation that avoids an appeal to genetic neural programs.
+The bootstrapping of adaptive behavior can similarly be understood as resulting from the coupling between a complex agent and
+a complex environment. As the agent interacts with the environment in a particular task, this generates a vector field at the level
+of the behavioral dynamics with attractors that correspond to stable
+task solutions. The appearance of these stabilities breaks the symmetry of a homogeneous behavioral state space. Just as the geese
+explore the vortex field and sense its energetic consequences,
+which feed back to capture their behavior, so the agent explores the
+vector field and perceives its behavioral consequences, providing
+a sensory feedback that organizes stable behavior. By hypothesis,
+this search is made tractable by a confluence of physical, biomechanical, and informational constraints that renders the search
+space low-dimensional, with well-defined stabilities.
+How might such a bootstrapping process be envisioned for a
+particular task? There are at least three levels at which the dynamics of a task must be considered (Saltzman & Munhall, 1992).
+Graph dynamics refers to change in the functional relations among
+system components that determine a dynamical regime—abstractly, the function that defines a dynamical system. Parameter
+dynamics refers to change in the parameters of this function, which
+can alter the attractor layout by shifting attractor loci or taking the
+system through a bifurcation. When performing an action, state
+dynamics refers to the evolution of the system from initial conditions to attractor states.
+In learning a new behavior, at the graph level the agent must
+adopt a dynamical regime that is suited to the task at hand, such as
+a point-attractor or limit-cycle dynamic. The regime is significantly constrained by the nature and the goal of the task. During
+the task of bouncing a ball periodically on a racquet, for example,
+an oscillatory regime is dictated by the physics of the task. The
+appropriate regime might be discovered through perceptual–motor
+exploration (Newell, Liu, & Mayer-Kress, 2001) or jumpstarted by
+imitation or instruction. The resulting action mode leaves a limited
+number of parameters and other control variables free to vary, such
+as the stiffness and phase of racquet oscillation.
+Once the agent begins to interact with the environment, the
+vector field of the behavioral dynamics becomes defined. To
+discover its stabilities and instabilities, the learner must explore
+these dynamics at the parameter level and observe the behavioral
+consequences, such as the stability of the ball’s bounce height and
+period. In essence, the agent jointly searches a space of control
+variables and a space of informational variables to determine a
+control law for the task. One possible mechanism for doing so is
+reinforcement learning (Kaelbling et al., 1996; Sutton & Barto,
+1998), which finds a “policy” that maps perception to action so as
+to optimize an objective function, such as stability. Reinforcement
+learning depends on the presence of appropriate task constraints,
+and there is a direct trade-off between the degree of constraint and
+the time for learning to converge or whether it converges at all.
+Thus, as Berthier et al. (2005) emphasized, an explanation of the
+organization of behavior rests crucially upon an understanding of
+the intrinsic dynamical and informational constraints.
+Consider first the problem of searching the space of control
+variables. The adopted dynamical regime limits the dimensionality
+of this space, leaving only a few parameters and state variables free
+to vary, thus simplifying the search. Further, the relevant control
+variables can be quickly identified because manipulating them
+produces an immediate effect on task-relevant aspects of behavior.
+Stable solutions may then be found by using efficient search
+procedures to explore these control variables and sensing the
+behavioral outcome (Krinskii & Shik, 1964; Newell et al., 2001;
+Newell & McDonald, 1992). In ball bouncing, the passively stable
+regime might be found by varying the stiffness and phase of
+racquet oscillation while observing the ball’s trajectory. At some
+values, bouncing is unstable and difficult to sustain. When impact
+occurs during the racquet’s decelerative phase, the ball’s period
+and amplitude are less variable, providing a feedback that may be
+used to tune the control parameters. Sternad et al. (2000) found
+that, with only 20 min of practice, the mean impact acceleration
+shifted exponentially from the border of the stable range (⫺1.0
+m/s2) to the center of maximum stability (⫺3.6 m/s2).
+At the same time, the agent must search the space of informational variables. The dimensionality of the information space is
+limited by the task constraints and further reduced by observing
+the covariation of relevant informational variables with control
+adjustments. In the bouncing example, the task itself defines the
+trajectory of the ball as relevant. As the stiffness and phase of
+racquet oscillation are varied, they affect the period, peak height,
+and velocity of the ball, picking them out as candidate informational variables. Finally, exploring possible couplings to the racquet control variables will result in more or less successful and
+stable bouncing, allowing the agent to identify a control law.
+Recent research on perceptual and perceptual–motor learning
+suggests that informational variables tend to be explored from
+simple to complex (Jacobs, Runeson, & Michaels, 2001; Smith,
+Flach, Dittman, & Stanard, 2001). For example, Smith et al. (2001)
+investigated the novel task of releasing a pendulum to hit an
+approaching ball. The task constraints define a clear goal with a
+single control variable, the time of release. Participants quickly
+detected that a successful hit covaries with the ball’s expansion
+rate or visual angle at the time of release, and they initially adopted
+one of these lower order variables to control the action. But as they
+observed a wider range of conditions (ball velocity, size, distance),
+the early correlation broke down, and they adopted a higher order
+ratio of these variables. Such results suggest that the perceptual
+system searches informational variables by determining whether
+they covary with successful action and eventually converges on
+higher order variables that bear invariant relations over a wide
+range of conditions. The learner thus follows trajectories through
+information space that converge on informational stabilities (Jacobs & Michaels, 2006).
+In principle, stable behavioral solutions could be identified on
+the time scale of learning, development, or evolution (Thelen &
+Smith, 1994). In each case, a process of exploration is involved,
+searching the space of control and informational variables and
+their couplings. What makes this search tractable is that task
+constraints reduce the dimensionality of the problem, and the
+covariation of informational and control variables picks out relevant relations. Stabilities and instabilities in the resulting vector
+field are sensed perceptually, providing a feedback that fixes the
+control laws for the task. What is learned is thus not an internalized
+model of the environment or the interaction but a task-specific
+mapping from informational to control variables that serves to
+stabilize behavior over a range of conditions. In this manner,
+adaptive behavior emerges through a process of self-organization.
+Now consider how the elementary locomotor behaviors described above might get bootstrapped over ontogenetic or phylogenetic time. At the graph level, the dynamical regime is constrained to fixed-point dynamics by the nature of the task, because
+by definition one steers toward goals and away from obstacles.
+Informational variables that specify heading, such as the optic
+flow, and control variables for steering, such as the direction of
+force application, are presumably discovered on the basis of their
+systematic covariation. To identify control laws, the agent must
+explore particular mappings of informational to control variables,
+and the behavioral outcome acts as a feedback to select the form of
+the law. Exploration of parameter space reveals stable regions that
+produce effective paths to the goal and unstable regions that result
+in collisions, missed targets, or oscillations. At this level, an
+objective function such as minimum variance (maximum stability),
+minimum energy expenditure, or least action presumably plays a
+role in setting parameter values that yield optimum paths through
+the environment (Flascher, 2004; Sparrow & Newell, 1998). Of
+course, different parameter settings may be learned for variants of
+the task, as when steering on foot, on a bicycle, or in a car: The
+control relations may be quite similar in each case, but the parameter values must be adapted to the dynamics of the vehicle.
+In summary, self-organization over the course of learning or
+evolution results in parameterized control laws for steering and
+obstacle avoidance. The agent’s constrained interactions with the
+environment generate the behavioral dynamics in a form of “upward” causality, and conversely, stabilities in the vector field act
+“downward” to fix control laws and their parameter values.
+The framework as presently articulated is intended to apply to
+online perception and action and assumes certain boundary conditions, including a task goal and available perceptual information.
+The approach thus faces challenges in accounting for behavior that
+appears to go beyond the occurrent information, behavior that
+Clark (1997) dubbed “representation-hungry.” This includes (a)
+sequential behavior that seems to require representational specification, (b) anticipatory behavior oriented toward goals that are
+remote in time or space, (c) predictive behavior that takes account
+of hidden properties or behaviors of environmental entities, and (d)
+strategic behavior requiring richer contextual knowledge. Although the present behavioral dynamics framework does not account for these capabilities explicitly, it can provide a platform for
+approaching such “cognitive” behavior in dynamical terms. In this
+section I discuss the current limitations of the approach and speculate rather freely about possible extensions that may go beyond
+Ongoing behavior is often composed of sequences of actions,
+defined by a series of subtasks or subgoals. Consider the task of
+making a peanut butter and jelly sandwich (Land & Hayhoe,
+2001), which involves a sequence such as getting out the ingredients, putting a slice of bread on a plate, grasping and opening a jar,
+grasping and loading the knife, spreading peanut butter on the
+bread, and so on. Some complex behavior is composed of action
+sequences that exhibit nonadjacent dependencies that cannot be
+accounted for by simple stimulus–response chains—the classic
+problem of serial order (Lashley, 1951; Terrace, 2005). For example, spreading peanut butter depends on having opened the jar, but
+there may be any number of intervening actions, such as opening
+the jelly or putting the bread on the plate. In fact, it has been
+observed for behaviors such as brushing one’s teeth or grooming in
+rodents that the overall structure of behavior over instances is more
+stable than is the sequence of component movements (Berridge,
+1990; Reed, Montgomery, Schwartz, Palmer, & Pittenger, 1992).
+Serial behavior is usually taken to imply a preexisting internal
+representation that specifies the sequence of actions, such as a
+hierarchical action plan or script. However, the observed variability in action sequences also suggests that behavior may be dynamically assembled on each occasion.13
+One approach to sequential behavior is to suggest that each
+action corresponds to a dynamical regime but that the sequence of
+regimes is specified by an antecedent action plan. Saltzman (1995)
+proposed such a hybrid scheme for generating the sequence of
+Lashley (1951) himself sketched a dynamical view: Temporal sequences are created on the fly in reverberatory circuits by interactions
+between current inputs, ongoing activity, and traces of prior inputs and
+articulatory speech gestures necessary to produce a syllable, using
+a predefined “gestural score.” This scheme preserves a dynamical
+account at the level of individual actions while conceding a timeindependent representation at the level of the sequence.
+An alternative approach is to characterize how dynamical regimes change over time, that is, to describe the system’s graph
+dynamics. Keijzer (1998) has sketched such an approach on the
+basis of coupled multiscale dynamics. Interactions between the
+nervous system, the body, and the environment occur at multiple
+spatiotemporal scales, each with its intrinsic dynamics and selforganizing tendencies—what one might call a nested behavioral
+dynamics. For example, Iberall and McCulloch (1969) observed
+that much human and animal behavior is composed of marginally
+stable, periodic action modes such as gait, drinking, feeding,
+work–rest, play, sleep–wake, and so forth. These nested rhythms
+yield large-scale patterns of behavior and can be dynamically
+regulated by coupling or switching among the marginally stable
+Keijzer (1998) similarly proposed that a behavioral sequence is
+generated by modulating the intrinsic dynamics at appropriate
+points to yield a trajectory through the action modes that is
+sufficient for the task at hand. The short time-scale dynamics are
+modulated by “internal control parameters” embodied in neural
+networks; they are coupled to larger scale dynamics, yielding a
+particular behavioral trajectory. In present terms, these modulations correspond to the graph dynamics, which determine the
+attractor layout and when the system bifurcates from one regime to
+another. The large-scale behavioral outcome feeds back to modify
+the neural networks so that learning occurs. Because a behavioral
+trajectory is assembled afresh on each occasion, the action sequence is historically contingent and variable, allowing for the
+flexibility observed in ordinary action sequences.
+It is clear how basic action modes such as feeding and drinking
+might arise in such a system and how they might be phased with
+behavior on other time scales. But Keijzer (1998) admitted that
+fine-grained sequences such as making a sandwich are at the upper
+end of behavioral complexity. Coupled multiscale dynamics offer
+one avenue to understanding such sequential behavior, but a more
+detailed theory remains to be developed, including precisely how
+patterns of mode switching may be acquired in learning. Saltzman,
+Lofqvist, and Mitra (2000) have argued that recurrent neural
+networks provide a plausible embodiment of such graph dynamics
+Anticipatory behavior refers to actions that are constrained not
+only by the immediate environment but also by some remote goal
+state. In contrast to online perception and action, anticipatory
+behavior may be organized on relatively large spatiotemporal
+scales and is not completely guided by occurrent information.
+A plausible approach to anticipatory behavior was the motivation for Keijzer’s (1998) coupled multiscaled dynamics program.
+What is required is a long-term trajectory that emerges from
+short-term neural– body– environment interactions and is sufficient
+to arrive in the neighborhood of the desired goal state. In Keijzer’s
+(1998) view, it is the coupling between dynamics at different
+scales that generates such macroscopic forms. Specifically, the
+behavioral dynamics at a short time scale are modulated by neural
+control parameters to guide the formation of the behavioral trajectory over longer time scales. Reciprocally, the longer term dynamics influence the short-term interactions, for example by altering
+environmental conditions or making new information available.
+Self-organized order is thus extended over larger spatiotemporal
+scales so that distal goals can be achieved. Again, this gestures
+toward an approach that remains to be developed in substance.
+Predictive behavior refers to actions that depend on hidden
+aspects of the environment, such as object properties (e.g., mass,
+fragility, slipperiness) or behavior patterns (e.g., projectiles travel
+in parabolic arcs, rabbits follow zigzag paths). For example, when
+reaching to grasp an object, the hand deceleration phase is longer
+when the target object is a lightbulb than when it is a tennis ball
+(Marteniuk, MacKenzie, Jeannerod, Athenes, & Dugas, 1987).
+Predictive behavior thus seems to require that the agent possess
+internal representations of the entities involved, including their
+The first line of attack on this problem is to reanalyze the
+available information to determine whether the behavior is truly
+predictive or exploits prospective information—occurrent information that specifies a future event. The best-known example is the ␶
+variable described earlier, which specifies the immanent arrival of
+an approaching object (Lee, 1976). Abernathy and Russell (1987)
+have shown that the arm and racquet movements involved in a
+badminton stroke provide prospective information about the trajectory of the shuttle, and the same may also hold for a baseball
+The second line of attack is to look for simple perceptual–motor
+mappings or relations between visible and hidden properties that
+would support adaptive behavior without a full-blown internal
+world model. For instance, skilled cricket batsmen make accurate
+high-speed pursuit eye movements to track the ball as it approaches the bat from its bounce point on the ground (Land &
+McLeod, 2000). Hayhoe, Mennie, Gorgos, Semrau, and Sullivan
+(2004) argued that the batsmen must use a learned internal model
+of the dynamic properties of the world, together with current visual
+information, to predict the ball’s trajectory. In support, they
+showed that when the bounciness of the ball is suddenly changed,
+novice catchers require several trials to adapt their pursuit movements to track the new ball. However, a simple visual–motor
+mapping exists between the bounce and the pursuit path that could
+be learned over a few trials, without presuming an internal model
+of the world’s physics. Similarly, simple relations between the
+visible properties of an object and its hidden fragility, mass, or
+characteristic motion would allow adaptive behavior without resorting to an elaborated world model. Learning these relations
+must be based on past perceptual–motor encounters that reveal
+information about an object’s hidden properties, so they can be
+incorporated into a control law or embodied in parameter settings
+for interacting with that class of objects. This framing of the
+problem leads back to the nested time scales of agent– environment
+Strategic behavior is influenced by richer contextual knowledge
+about the aspect of the world with which the agent is interacting,
+such as its history, event statistics, or conventional rules, or context, which are only partially observable. Consider a baseball
+batter’s expectation that the pitcher will throw a fast ball, given the
+pitcher’s style, recent history of pitches, the score, the count, and
+the runners on first and third. Gray (2002) has shown that the
+timing of a batter’s swing depends heavily on recent pitch speeds
+and the current pitch count, perhaps because visual information
+was limited (the ball was a virtual display and the pitcher was not
+visible). At this point the limits of the present framework have
+been reached and other cognitive processes may be called for, such
+as learning through language or by inductive inference from observations. Yet even for strategic behavior, much of the relevant
+knowledge is acquired through agent– environment interactions,
+and its influence is manifested through modulations of the multiscaled behavioral dynamics.
+Let us return to the issue with which we began, the role of
+internal representation in the organization of behavior. As commonly used in cognitive science, the term implies more than a
+mere correlation between internal and external states. Specifically,
+it refers to an internal state that designates an external state for a
+user and plays a functional and causal role in behavior (Dennett,
+1969; Dretske, 1988). In perception and action, the key properties
+of internal representations are twofold. First, a perceptual representation is an internal state whose functional role is to “stand in”
+for features of the environment, the body, or their relations in
+guiding behavior (Clark, 1997; Haugeland, 1991). A representation is not bound to the information or the behavioral context that
+originally produced it, so it can serve to guide behavior in the
+absence of occurrent information and be used to plan other actions
+off-line. Second, an action representation includes a set of instructions that specify a motor sequence that leads to a desired outcome
+(Keijzer, 1998). Thus, it represents both the intended goal state of
+the agent– environment system and an action plan that will achieve
+At what point should a perceptual–motor relation be considered
+to be such an internal representation? At one end of the spectrum
+are full-blown internal models, detailed general-purpose representations of the world, the body, and their interactions, which specify
+a behavioral pattern and can be used to plan a variety of actions
+off-line. These clearly satisfy the criteria for internal representations. At the other end of the spectrum are control laws, simple
+mappings between occurrent information about the immediate
+environment and the control variables of the action system. Although they constitute a weak form of perceptual–motor knowledge based on learning, they do not meet the standards of a
+First, control laws depend on the presence of occurrent information and do not “stand in” for anything that is perceptually
+unavailable. Thus, they do not serve to guide behavior in the
+absence of information and cannot be used for off-line planning. In
+the steering dynamics model presented above, registering the cur-
+rent direction and time to contact of goals and obstacles (within
+4 m) might be thought of as a continually updated viewer-centered
+world model, but it satisfies none of the representational criteria
+for one. Empirically, moreover, existing data suggest that performance on interactive tasks degrades sharply after vision is removed, and thus any such spatial knowledge does not appear to
+Second, control laws do not constitute a specification of a
+particular action pattern. Rather, they serve to modulate the
+dynamics of the larger agent– environment system in which
+they are embedded, and behavior arises from the entire ensemble. Control laws thus complement the dynamics of the system,
+rather than reifying a model of the world, the plant, and their
+interactions internally. An elegant illustration of this principle
+is offered by recent work on “passive dynamic” robots (Collins
+et al., 2005; McGeer, 1990). Control systems for most bipedal
+robots prescribe the angle and velocity at each joint over time,
+based on a detailed inverse model of the plant. In contrast,
+passive dynamic bipeds exploit the natural physics of pendulums to generate a walking pattern and require minimal active
+control. Because of its physical design, Tedrake’s biped (Collins et al., 2005) possesses an inherent step-to-step stability,
+which is continually optimized for current inertial and ground
+surface conditions by reinforcement learning. The learning algorithm explores the parameter space of ankle actuators with
+small random changes, senses the velocity of lateral sway in the
+subsequent step cycle, and converges on a stable limit-cycle
+solution within a few minutes. Moreover, passive bipeds use an
+order of magnitude less energy (per kg-m) than active biped
+robots—about the same as walking humans— even though energy is not explicitly optimized. The gait pattern thus results
+from a simple mapping between sensors and actuators that
+complements the system’s natural dynamics, without replicating the entire system in an internal model.
+It is for structures intermediate to these clear cases that
+questions arise. For example, the internal control parameters
+proposed by Keijzer (1998) to account for behavioral sequences
+might appear to be candidates for internal representations because, at a coarse grain of analysis, they are correlated with
+behaviors. But they differ in that they do not model the world
+and the agent and do not specify behavioral patterns. Rather,
+control parameters correspond to context-dependent tweaks that
+eventuate in appropriate actions by virtue of the multiscaled
+dynamical system of which they are a part. More sophisticated
+mappings that incorporate learned relations between perceivable and hidden properties also fall short of internal models, for
+occurrent information about the perceivable properties is then
+sufficient to guide appropriate action. However, strategic behavior, off-line planning, or conditions of partial observability
+may force an appeal to internal representations or knowledge
+structures. Nevertheless, one must still account for such representations in terms of their grounding in perception and action.
+For example, it is conceivable that a dynamical perceptual–
+motor process might become detached from its original informational and behavioral context to form an emergent representation, which could then be deployed in mental practice,
+imagery, off-line planning, or strategic reasoning (cf. Barsalou,
+1999; Grush, 2004). Under the present approach, invoking such
+representations to explain behavior should be viewed as a last
+It is generally understood that any perception–action policy can
+be equivalently described by a mapping (i.e., a discrete lookup
+table or continuous function) or by an internal model and a
+planner, although there are trade-offs in terms of space and time
+(L.P. Kaelbling, personal communication, August 8, 2005). The
+question is which description is more parsimonious and appropriate for theories of biological systems, given the conceptual challenges faced by internal representations. To the extent that natural
+constraints and behavioral dynamics are incorporated into these
+theories, they can serve to simplify the control of behavior and
+In this article I have considered how the organization of adaptive behavior might derive from physical and informational constraints in natural environments. I have argued that organized
+behavior need not be attributed to a centralized controller, internal
+models, or representations. Instead, I have tried to show how
+control could lie in the agent– environment system by developing
+the notion of behavioral dynamics. Interactions between the agent
+and environment under physical, informational, and task constraints give rise to the behavioral dynamics, an evolving vector
+field that reciprocally captures the agent’s behavior. The agent
+modulates the dynamics of the system in which it is embedded via
+the lever at its disposal—a control law—to enact a stable and
+adaptive task solution. The exhibited behavior is thus genuinely
+emergent. It is in this sense, as Gibson (1979) foresaw, that
+behavior can be regular without being regulated.
+Abernathy, B., & Russell, D. G. (1987). Expert–novice differences in an
+applied selective attention task. Journal of Sport Psychology, 9, 326 –
+Acheson, D. (1997). From calculus to chaos: An introduction to dynamics.
+Oxford, England: Oxford University Press.
+Asatryan, D. G., & Feldman, A. G. (1965). Functional tuning of the
+nervous system with control of movement or maintenance of a steady
+posture: I. Mechano-graphic analysis of the work of the joint on execution of a postural task. Biophysics, 10, 925–935.
+Bajcsy, R. (1988). Active perception. Proceedings of the IEEE 76, 8,
+Ballard, D. (1991). Animate vision. Artificial Intelligence, 48, 57– 86.
+Ballard, D., Hayhoe, M., & Peltz, J. (1995). Memory representations in
+natural tasks. Cognitive Neuroscience, 7, 66 – 80.
+Barsalou, L. W. (1999). Perceptual symbol systems. Behavioral and Brain
+Barto, A. G., Sutton, R. S., & Anderson, C. W. (1983). Neuron-like
+adaptive elements that can solve difficult learning control problems.
+IEEE Transactions on Systems, Man, and Cybernetics, 5, 834 – 846.
+Bar-Yam, Y. (2004). A mathematical theory of strong emergence using
+multiscale variety. Complexity, 9, 15–24.
+Beek, P. J. (1989). Timing and phase locking in cascade juggling. Ecological Psychology, 1, 55–96.
+Beek, P. J., & van Wieringen, P. C. W. (1994). Perspectives on the relation
+between information and dynamics: An epilogue. Human Movement
+Beer, R. D. (1990). Intelligence as adaptive behavior. San Diego, CA:
+Beer, R. D. (1995). A dynamical systems perspective on agent–
+environment interaction. Artificial Intelligence, 72, 173–215.
+Beer, R. D. (1997). The dynamics of adaptive behavior: A research
+program. Robotics and Autonomous Systems, 20, 257–289.
+Berkinblitt, M. B., Feldman, A. G., & Fukson, O. I. (1986). Adaptability of
+innate motor patterns and motor control mechanisms. Behavioral and
+Bernstein, N. (1967). The coordination and regulation of movements.
+Berridge, K. C. (1990). Comparative fine structure of action: Rules of form
+and sequence in the grooming patterns of six rodent species. Behaviour,
+Berthier, N. E., Rosenstein, M. T., & Barto, A. G. (2005). Approximate
+optimal control as a model for motor learning. Psychological Review,
+Bickhard, M. H., & Terveen, L. (1995). Foundational issues in artificial
+intelligence and cognitive science: Impasse and solution. Amsterdam:
+Bingham, G. P., Zaal, F. T. J. M., Shull, J. A., & Collins, D. R. (2001). The
+effect of frequency on the visual perception of relative phase and phase
+variability of two oscillating objects. Experimental Brain Research, 136,
+Brooks, R. A. (1986). A robust layered control system for a mobile robot.
+IEEE Journal of Robotics and Automation, 2, 12–23.
+Brooks, R. A. (1991a). Intelligence without representation. Artificial Intelligence, 47, 139 –160.
+Brooks, R. A. (1991b). New approaches to robotics. Science, 253, 1227–
+Brooks, R. A. (1995). Intelligence without reason. In L. Steels & R. A.
+Brooks (Eds.), The artificial life route to artificial intelligence (pp.
+Bruggeman, H., & Warren, W. H. (2005). Integrating target interception
+and obstacle avoidance. Journal of Vision, 5, 311.
+Camazine, S., Deneubourg, J-L., Franks, N. R., Sneyd, J., Theraulaz, G., &
+Bonabeau, E. (2001). Self-organization in biological systems. Princeton,
+Clark, A. (1997). The dynamical challenge. Cognitive Science, 21, 461–
+Cohen, J. A., & Warren, W. H. (2005). Switching behavior in moving
+obstacle avoidance. Journal of Vision, 5, 312.
+Collins, S., Ruina, A., Tedrake, R., & Wisse, M. (2005, February 18).
+Efficient bipedal robots based on passive– dynamic walkers. Science,
+Corning, P. A. (2002). The re-emergence of “emergence”: A venerable
+concept in search of a theory. Complexity, 7, 18 –30.
+Daffertshofer, A., Lamoth, C. J. C., Meijer, O. G., & Beek, P. J. (2004).
+PCA in studying coordination and variability: A tutorial. Clinical Biomechanics, 19, 415– 428.
+Dennett, D. C. (1969). Content and consciousness. London: Routledge &
+de Rugy, A., Wei, K., Müller, H., & Sternad, D. (2003). Actively tracking
+‘passive’ stability in a ball bouncing task. Brain Research, 982, 64 –78.
+Dijkstra, T. M. H., Katsumata, H., de Rugy, A., & Sternad, D. (2004). The
+dialogue between data and model: Passive stability and relaxation behavior in a ball bouncingtask. Nonlinear Studies, 11, 319 –345.
+Dijkstra, T. M. H., Schöner, G., & Gielen, C. C. A. M. (1994). Temporal
+stability of the action–perception cycle for postural control in a moving
+visual environment. Experimental Brain Research, 97, 477– 486.
+Dretske, F. (1988). Explaining behavior: Reasons in a world of causes.
+Duchon, A. P., & Warren, W. H. (1997). Path planning vs. on-line control
+in visually guided locomotion. Investigative Ophthalmology and Visual
+Engelbrecht, S. (2001). Minimum principles in motor control. Journal of
+Ermentrout, G. B., & Rinzel, J. (1984). Beyond a pacemaker’s entrainment
+limit: Phase walk-through. American Journal of Physiology, 246, R102–
+Fajen, B. R., & Warren, W. H. (2001). Behavioral dynamics of on-line
+route selection in complex scenes. Abstracts of the Psychonomic Society,
+Fajen, B. R., & Warren, W. H. (2003). Behavioral dynamics of steering,
+obstacle avoidance, and route selection. Journal of Experimental Psychology: Human Perception and Performance, 29, 343–362.
+Fajen, B. R., & Warren, W. H. (2004). Visual guidance of intercepting a
+moving target on foot. Perception, 33, 689 –715.
+Fajen, B. R., & Warren, W. H. (2005). Behavioral dynamics of intercepting
+a moving target. Manuscript submitted for publication.
+Fajen, B. R., Warren, W. H., Temizer, S., & Kaelbling, L. P. (2003). A
+dynamical model of visually-guided steering, obstacle avoidance, and
+route selection. International Journal of Computer Vision, 54, 15–34.
+Fink, P. W., & Warren, W. H. (2002, May). Velocity dependence of optic
+flow strategy for steering and obstacle avoidance. Paper presented at the
+meeting of the Vision Science Society, Sarasota, FL.
+Flascher, I. (2004). Goal-centered approach to the measurement of humansystem performance. Unpublished doctoral dissertation, University of
+Flash, T., & Hogan, N. (1985). The coordination of arm movements: An
+experimentally confirmed mathematical model. Journal of Neuroscience, 5, 1688 –1703.
+Fodor, J. A. (1980). Methodological solipsism considered as a research
+strategy in cognitive psychology. Behavioral and Brain Sciences, 3,
+Foo, P., Kelso, J. A. S., & de Guzman, G. C. (2000). Functional stabilization of unstable fixed points: Human pole balancing using time-tobalance information. Journal of Experimental Psychology: Human Perception and Performance, 26, 1281–1297.
+Gibson, J. J. (1950). Perception of the visual world. Boston: Houghton
+Gibson, J. J. (1998). Visually controlled locomotion and visual orientation
+in animals. Ecological Psychology, 10, 161–176. (Original work published 1958).
+Gibson, J. J. (1966). The senses considered as perceptual systems. Boston:
+Gibson, J. J. (1979). The ecological approach to visual perception. Boston:
+Giszter, S. F., Mussa-Ivaldi, F. A., & Bizzi, E. (1993). Convergent force
+fields organized in the frog spinal cord. Journal of Neuroscience, 13,
+Gray, R. (2002). Markov at the bat: A model of cognitive processing in
+baseball batters. Psychological Science, 13, 542–547.
+Greene, P. H. (1972). Problems of organization of motor systems. In R.
+Rosen & F. Snell (Eds.), Progress in theoretical biology (Vol. 2, pp.
+Guckenheimer, J., & Holmes, P. (1983). Nonlinear oscillations, dynamical
+systems, and bifurcations of vector fields. New York: Springer.
+Grush, R. (2004). The emulation theory of representation: Motor control,
+imagery, and perception. Behavioral and Brain Sciences, 27, 377– 442.
+Hainsworth, F. R. (1987). Precision and dynamics of positioning by Canada geese flying in formation. Journal of Experimental Biology, 128,
+Hainsworth, F. R. (1989). Wing movements and positioning for aerodynamic benefit by Canada geese flying in formation. Canadian Journal of
+Haken, H. (1977). Synergetics: An introduction. Berlin: Springer-Verlag.
+Haken, H. (1988). Advanced synergetics: Instability hierarchies of selforganizing systems and devices. Berlin: Springer-Verlag.
+Haken, H., Kelso, J. A. S., & Bunz, H. (1985). A theoretical model of phase
+transitions in human hand movements. Biological Cybernetics, 51, 347–
+Harris, C. M., & Wolpert, D. M. (1998, August 20). Signal-dependent
+noise determines motor planning. Nature, 394, 780 –784.
+Harris, J. M., & Bonas, W. (2002). Optic flow and scene structure do not
+always contribute to the control of human walking. Vision Research, 42,
+Harris, M. G., & Carre, G. (2001). Is optic flow used to guide walking
+while wearing a displacing prism? Perception, 30, 811– 818.
+Haugeland, J. (1991). Representational genera. In W. Ramsey, S. P. Stich,
+& D. E. Rumelhart (Eds.), Philosophy and connectionist theory (pp.
+Hayashi, C. (1964). Nonlinear oscillations in physical systems. New York:
+Hayhoe, M. (2000). Vision using routines: A functional account of vision.
+Hayhoe, M., Mennie, N., Gorgos, K., Semrau, J., & Sullivan, B. (2004).
+The role of prediction in catching balls. Journal of Vision, 4, 156.
+Hildreth, E. C., Beusmans, J. M. H., Boer, E. R., & Royden, C. S. (2000).
+From vision to action: Experiments and models of steering control
+during driving. Journal of Experimental Psychology: Human Perception
+Hollands, K. L., Wing, A. M., & Daffertshofer, A. (2004, November).
+Principle components in contemporary dance movements. Paper presented at the meeting of the Society for Neuroscience, San Diego, CA.
+Iberall, A. S. (1977). A field and circuit thermodynamics for integrative
+physiology. I Introduction to the general notions. American Journal of
+Iberall, A. S., & McCulloch, W. S. (1969). The organizing principle of
+complex living systems. Transactions of the American Society of Mechanical Engineers: Journal of Basic Engineering, 19, 290 –294.
+Jacobs, D. M., & Michaels, C. F. (2006). An ecological theory of
+information-based perceptual learning. Manuscript submitted for
+Jacobs, D. M., Runeson, S., & Michaels, C. F. (2001). Learning to visually
+perceive the relative mass of colliding balls in globally and locally
+constrained task ecologies. Journal of Experimental Psychology: Human
+Perception and Performance, 27, 1019 –1038.
+Jirsa, V. K., Fink, P., Foo, P., & Kelso, J. A. S. (2000). Parametric
+stabilization of biological coordination: A theoretical model. Journal of
+Jordan, D. W., & Smith, P. (1977). Nonlinear ordinary differential equations. Oxford, England: Clarendon.
+Jordan, M. I., & Wolpert, D. M. (1999). Computational motor control. In
+M. Gazzaniga (Ed.), The cognitive neurosciences (pp. 601– 620). Cambridge, MA: MIT Press.
+Kaelbling, L. P., Littman, M. L., & Moore, A. W. (1996). Reinforcement
+learning: A survey. Journal of Artificial Intelligence Research, 4, 237–
+Kaiser, M. K., & Phatak, A. V. (1993). Things that go bump in the light:
+On the optical specification of contact severity. Journal of Experimental
+Psychology: Human Perception and Performance, 19, 194 –202.
+Kawato, M. (1999). Internal models for motor control and trajectory
+planning. Current Opinion in Neurobiology, 9, 718 –727.
+Kawato, M., Furawaka, K., & Suzuki, R. (1987). A hierarchical neural
+network model for the control and learning of voluntary movements.
+Kay, B. A., Kelso, J. A. S., Saltzman, E. L., & Schöner, G. (1987).
+Space–time behavior of single and bimanual rhythmical movements:
+Data and limit cycle model. Journal of Experimental Psychology: Human Perception and Performance, 13, 178 –192.
+Kay, B. A., & Warren, W. H. (1998). A dynamical model of the coupling
+between posture and gait. In D. A. Rosenbaum & C. E. Collyer (Eds.),
+Timing of behavior: Neural, computational, and psychological perspectives (pp. 293–322). Cambridge, MA: MIT Press.
+Kay, B. A., & Warren, W. H. (2001). Coupling of posture and gait: Mode
+locking and parametric excitation. Biological Cybernetics, 85, 89 –106.
+Keele, S. W. (1968). Movement control in skilled motor performance.
+Keijzer, F. (1998). Doing without representations which specify what to
+do. Philosophical Psychology, 11, 269 –302.
+Kelso, J. A. S. (1994). The informational character of self-organized
+coordination dynamics. Human Movement Science, 13, 393– 413.
+Kelso, J. A. S. (1995). Dynamic patterns: The self-organization of brain
+Kelso, J. A. S., Scholz, J. P., & Schöner, G. (1986). Nonequilibrium phase
+transitions in coordinated biological motion: Critical fluctuations. Physics Letters A, 118, 279 –284.
+Kim, N,-G., Turvey, M. T., & Carello, C. (1993). Optical information
+about the severity of upcoming contacts. Journal of Experimental Psychology: Human Perception and Performance, 19, 179 –193.
+Kirk, D. E. (1970). Optimal control theory: An introduction. Englewood
+Knill, D. C., & Richards, W. (Eds.). (1996). Perception as Bayesian
+Koenderink, J. J. (1999). Brain scanning and the single mind. Perception,
+Kopell, N. (1988). Toward a theory of modeling central pattern generators.
+In A. H. Cohen, S. Rossignol, & S. Grillner (Eds.), Neural control of
+rhythmic movements in vertebrates (pp. 369 – 413). New York: Wiley.
+Krinskii, V. I., & Shik, M. L. (1964). A simple motor task. Biophysics, 9,
+Kugler, P. N., Kelso, J. A. S., & Turvey, M. T. (1980). On the concept of
+coordinative structures as dissipative structures. In G. E. Stelmach & J.
+Requin (Eds.), Tutorials in motor behavior (pp. 3– 47). Amsterdam:
+Kugler, P. N., & Turvey, M. T. (1987). Information, natural law, and the
+self-assembly of rhythmic movement. Hillsdale, NJ: Erlbaum.
+Kwakernaak, H., & Sivan, R. (1972). Linear optimal control systems. New
+Land, M. F., & Hayhoe, M. (2001). In what ways do eye movements
+contribute to everyday activities? Vision Research, 41, 3559 –3565.
+Land, M. F., & McLeod, P. (2000). From eye movements to actions: How
+the batsmen hit the ball. Nature Neuroscience, 3, 1340 –1345.
+Lappe, M., Bremmer, F., & van den Berg, A. V. (1999). Perception of
+self-motion from visual flow. Trends in Cognitive Science, 3, 329 –336.
+Lashley, K. S. (1951). The problem of serial order in behavior. In L. A.
+Jeffires (Ed.), Cerebral mechanisms in behavior (pp. 112–136). New
+Latash, M. L. (1993). Control of human movement. Champaign, IL: Human
+Lee, D. N. (1976). A theory of visual control of braking based on information about time-to-collision. Perception, 5, 437– 459.
+Lee, D. N. (1980). Visuo-motor coordination in space–time. In G. E.
+Stelmach & J. Requin (Eds.), Tutorials in motor behavior (pp. 281–295).
+Lee, D. N., & Lishman, J. R. (1975). Visual proprioceptive control of
+stance. Journal of Human Movement Studies, 1, 87–95.
+Lee, D. N., Young, D. S., & Rewt, D. (1992). How do somersaulters land
+on their feet? Journal of Experimental Psychology: Human Perception
+Li, L., & Warren, W. H. (2002). Retinal flow is sufficient for steering
+during simulated rotation. Psychological Science, 13, 485– 491.
+Llewellyn, K. R. (1971). Visual guidance of locomotion, 91, 224 –230.
+Loomis, J. M., & Beall, A. C. (2004). Model-based control of perception/
+action. In L. M. Vaina, S. A. Beardsley, & S. K. Rushton (Eds.), Optic
+flow and beyond (pp. 421– 441). Dordrecht, the Netherlands: Kluwer.
+Marr, D. (1982). Vision. San Francisco: Freeman.
+Marteniuk, R. G., MacKenzie, C. L., Jeannerod, M., Athenes, S., & Dugas,
+C. (1987). Constraints on human arm movement trajectories. Canadian
+McGeer, T. (1990). Passive dynamic walking. International Journal of
+Meyer, J. A., & Wilson, S. W. (Eds.). (1991). From animals to animats.
+Milner, A. D., & Goodale, M. A. (1995). The visual brain in action.
+Oxford, England: Oxford University Press.
+Murray, J. D. (1989). Mathematical biology. Berlin: Springer-Verlag.
+Nayfeh, A. H., & Mook, D. T. (1979). Nonlinear oscillations. New York:
+Newell, K. M., & Corcos, D. M. (Eds.). (1993). Variability and motor
+control. Urbana–Champaign, IL: Human Kinetics.
+Newell, K. M., Liu, Y.-T., & Mayer-Kress, G. (2001). Time scales in motor
+learning and development. Psychological Review, 108, 57– 82.
+Newell, K. M., & McDonald, P. V. (1992). Searching for solutions to the
+coordination function: Learning as exploratory behavior. In G. E. Stelmach & J. Requin (Eds.), Tutorials in motor behavior II (pp. 517–532).
+Ng, A. Y., Kim, J., Jordan, M., & Sastry, S. (2004, December). Autonomous helicopter flight via reinforcement learning. Paper presented at the
+Eighteenth Annual Conference on Neural Information Processing
+Nicolis, G., & Prigogine, I. (1989). Exploring complexity: An introduction.
+Norman, J. (2002). Two visual systems and two theories of perception: An
+attempt to reconcile the constructivist and ecological approaches. Behavioral and Brain Sciences, 25, 73–144.
+Ooi, T. L., Wu, B., & He, Z. J. (2001, November 8). Distance determined
+by the angular declination below the horizon. Nature, 414, 197–200.
+O’Regan, J. K. (1992). Solving the “real” mysteries of visual perception:
+The world as an outside memory. Canadian Journal of Psychology, 46,
+Patla, A. E., Adkin, A. L., & Ballard, T. (1999). Online steering: Coordination and control of the body centre of mass, head and body reorientation. Experimental Brain Research, 129, 629 – 634.
+Post, A. A. (2000). Effects of task constraints on the relative phasing of
+rhythmic movements. Enschede, the Netherlands: PrintPartners Ipskamp.
+Raviv, D., & Herman, M. (1993). Visual serving from 2-D image cues. In
+Y. Aloimonos (Ed.), Active perception (pp. 191–226). Hillsdale, NJ:
+Reed, E. S., Montgomery, M., Schwartz, M., Palmer, C., & Pittenger, J.
+(1992). Visually based descriptions of an everyday action. Ecological
+Reichardt, W., & Poggio, T. (1976). Visual control of orientation behavior
+in the fly: I. A quantitative analysis. Quarterly Review of Biophysics, 9,
+Rensink, R. A., O’Regan, J. K., & Clark, J. J. (1997). To see or not to see:
+The need for attention to perceive changes in scenes. Psychological
+Rushton, S. K., Harris, J. M., Lloyd, M., & Wann, J. P. (1998). Guidance
+of locomotion on foot uses perceived target location rather than optic
+Rushton, S. K., Harris, J. M., & Wann, J. P. (1999). Steering, optic flow,
+and the respective importance of depth and retinal motion distribution.
+Rushton, S. K., Wen, J., & Allison, R. S. (2002). Egocentric direction and
+the visual guidance of robot locomotion: Background, theory, and implementation. In H. H. Bülthoff, S.-W. Lee, T. A. Poggio & C. Wallraven (Eds.), Biologically motivated computer vision: 2nd International
+Workshop (pp. 576 –591). Berlin: Springer-Verlag.
+Saltzman, E. L. (1995). Dynamics and coordinate systems in skilled
+sensorimotor activity. In R. Port & T. van Gelder (Eds.), Mind as
+motion: Explorations in the dynamics of cognition (pp. 149 –173). Cambridge, MA: MIT Press.
+Saltzman, E. L., & Kelso, J. A. S. (1987). Skilled actions: A task dynamic
+approach. Psychological Review, 94, 84 –106.
+Saltzman, E. L., Lofqvist, A., & Mitra, S. (2000). “Clocks” and “glue”—
+Global timing and intergestural cohesion. In M. B. Broe & P. Pierrehumbert (Eds.), Papers in laboratory phonology V (pp. 88 –101). New
+Saltzman, E. L., & Munhall, K. G. (1992). Skill acquisition and development: The roles of state-, parameter-, and graph-dynamics. Journal of
+Schaal, S., Sternad, D., & Atkeson, C. G. (1996). One-handed juggling: A
+dynamical approach to a rhythmic movement task. Journal of Motor
+Schmidt, R. A. (1975). A schema theory of discrete motor skill learning.
+Schmidt, R. C., Carello, C., & Turvey, M. T. (1990). Phase transitions and
+critical fluctuations in the visual coordination of rhythmic movements
+between people. Journal of Experimental Psychology: Human Perception and Performance, 16, 227–247.
+Scholz, J. P., Kelso, J. A. S., & Schöner, G. S. (1987). Non-equilibrium
+phase transitions in coordinated biological motion: Critical slowing
+down and switching time. Physics Letters, A123, 390 –394.
+Scholz, J. P., & Schöner, G. (1999). The uncontrolled manifold concept:
+Identifying control variables for a functional task. Experimental Brain
+Schöner, G. (1991). Dynamic theory of action–perception patterns: The
+‘moving room’ paradigm. Biological Cybernetics, 64, 455– 462.
+Schöner, G., & Dose, M. (1992). A dynamical systems approach to
+task-level system integration used to plan and control autonomous
+vehicle motion. Robotics and Autonomous Systems, 10, 253–267.
+Schöner, G., Dose, M., & Engels, C. (1995). Dynamics of behavior: Theory
+and applications for autonomous robot architectures. Robotics and Autonomous Systems, 16, 213–245.
+Schöner, G., Haken, H., & Kelso, J. A. S. (1986). A stochastic theory of
+phase transitions in human hand movement. Biological Cybernetics, 53,
+Schöner, G., & Kelso, J. A. S. (1988a, March 25). Dynamic pattern
+generation in behavioral and neural systems. Science, 239, 1513–1520.
+Schöner, G., & Kelso, J. A. S. (1988b). A synergetic theory of
+environmentally-specified and learned patterns of movement coordination: I. Relative phase dynamics. Biological Cybernetics, 58, 71– 80.
+Schöner, G., Zanone, P. G., & Kelso, J. A. S. (1992). Learning as change
+of coordination dynamics: Theory and experiment. Journal of Motor
+Searle, J. R. (1980). Minds, brains, and programs. Behavioral and Brain
+Shadmehr, R., & Mussa-Ivaldi, F. (1994). Adaptive representation of
+dynamics during learning of a motor task. Journal of Neuroscience, 14,
+Shannon, B. (1993). The representational and the presentational. New
+Shaw, R. E. (2003). The agent– environment interface: Simon’s indirect or
+Gibson’s direct coupling? Ecological Psychology, 15, 37–106.
+Shaw, R. E., Kadar, E., Sim, M., & Repperger, D. W. (1992). The
+intentional spring: A strategy for modeling systems that learn to perform
+intentional acts. Journal of Motor Behavior, 24, 3–28.
+Shaw, R. E., Kugler, P. N., & Kinsella-Shaw, J. M. (1990). Reciprocities
+of intentional systems. In R. Warren & A. Wertheim (Eds.), Perception
+and control of self-motion (pp. 579 – 619). Hillsdale, NJ: Erlbaum.
+Siegler, I., Mantel, B., Warren, W. H., & Bardy, B. (2003, August).
+Behavioral dynamics of a rhythmic ball-bouncing task. Paper presented
+at the Progress in Motor Control IV meeting, Caen, France.
+Smith, M. R. H., Flach, J. M., Dittman, S. M., & Stanard, T. (2001).
+Monocular optical constraints on collision control. Journal of Experimental Psychology: Human Perception and Performance, 27, 395– 410.
+Smithers, T. (1994, December). What the dynamics of adaptive behavior
+and cognition might look like in agent– environment interaction systems.
+In Proceedings of the Third International Workshop on Artificial Life
+and Artificial Intelligence: The role of dynamics and representation in
+adaptive behavior and cognition (pp. 135–153). Universidad del Pais
+Sparrow, W. A., & Newell, K. M. (1998). Metabolic energy expenditure
+and the regulation of movement economy. Psychonomic Bulletin &
+Sternad, D., Duarte, M., Katsumata, H., & Schaal, S. (2000). Dynamics of
+a bouncing ball in human performance. Physical Review E, 63, 011902.
+Sternad, D., Duarte, M., Katsumata, H., & Schaal, S. (2001). Bouncing a
+ball: Tuning into dynamic stability. Journal of Experimental Psychology: Human Perception and Performance, 27, 1163–1184.
+Strogatz, S. H. (1994). Nonlinear dynamics and chaos. Reading, MA:
+Strogatz, S. H., & Steward, I. (1993). Coupled oscillators and biological
+synchronization. Scientific American, 269, 102.
+Sutton, R. S., & Barto, A. G. (1998). Reinforcement learning: An introduction. Cambridge, MA: MIT Press.
+Terrace, H. S. (2005). The simultaneous chain: A new approach to serial
+learning. Trends in Cognitive Sciences, 9, 202–210.
+Thelen, E., & Smith, L. B. (1994). A dynamic systems approach to the
+development of cognition and action. Cambridge, MA: MIT Press.
+Todorov, E., & Jordan, M. I. (2002). Optimal feedback control as a theory
+of motor coordination. Nature Neuroscience, 5, 1226 –1235.
+Tresilian, J. R. (1990). Perceptual information for the timing of interceptive
+Tresilian, J. R. (1999). Visually timed action: Time-out for ‘tau’? Trends in
+Tufillaro, N. B., Abbott, T., & Reilly, J. (1992). An experimental approach
+to nonlinear dynamics and chaos. Redwood City, CA: Addison Wesley.
+Turvey, M. T., & Carello, C. (1986). The ecological approach to perceiving–acting: A pictorial essay. Acta Psychologica, 63, 133–155.
+Van Orden, G. C., Holden, J. G., & Turvey, M. T. (2003). Selforganization of cognitive performance. Journal of Experimental Psychology: General, 132, 331–350.
+Varela, F., Thompson, E., & Rosch, E. (1991). The embodied mind.
+von Holst, E. (1980). On the nature of order in the central nervous system.
+In C. R. Gallistel (Ed.), The organization of action (pp. 81–107).
+Hillsdale, NJ: Erlbaum. (Original work published 1937)
+Wallis, G. M., Chatziastros, A., & Bulthoff, H. H. (2002). An unexpected
+role for visual feedback in vehicle steering control. Current Biology, 12,
+Warren, W. H. (1988). Action modes and laws of control for the visual
+guidance of action. In O. Meijer & K. Roth (Eds.), Movement behavior:
+The motor–action controversy (pp. 339 –380). Amsterdam: NorthHolland.
+Warren, W. H. (1998). Visually controlled locomotion: 40 years later.
+Warren, W. H. (2004). Optic flow. In L. M. Chalupa & J. S. Werner (Eds.),
+The visual neurosciences, v. II (pp. 1247–1259). Cambridge, MA: MIT
+Warren, W. H., & Fajen, B. R. (2004). From optic flow to laws of control.
+In L. Vaina, S. Beardsley, & S. K. Rushton (Eds.), Optic flow and
+Warren, W. H., Kay, B. A., Zosh, W. D., Duchon, A. P., & Sahuc, S.
+(2001). Optic flow is used to control human walking. Nature Neuroscience, 4, 213–216.
+Wilkie, R. M., & Wann, J. P. (2002). Driving as night falls: The contribution of retinal flow and visual direction to the control of steering.
+Wilkie, R. M., & Wann, J. (2003). Controlling steering and judging
+heading: Retinal flow, visual direction, and extra-retinal information.
+Journal of Experimental Psychology: Human Perception and Performance, 29, 363–378.
+Wolpert, D. M., & Ghahramani, Z. (2000). Computational principles of
+movement neuroscience. Nature Neuroscience, 3, 1212–1217.
+Wolpert, D. M., Ghahramani, Z., & Jordan, M. I. (1995, September 29). An
+internal model for sensorimotor integration. Science, 269, 1880 –1882.
+Wolpert, D. M., & Kawato, M. (1998). Multiple paired forward and inverse
+models for motor control. Neural Networks, 11, 1317–1329.
+Wood, R. M., Harvey, M. A., Young, C. E., Beedie, A., & Wilson, T.
+(2000). Weighting to go with the flow? Current Biology, 10, R545–
+Yates, F. E. (Ed.). (1987). Self-organizing systems. New York: Plenum
+Yates, F. E., & Iberall, A. S. (1973). Temporal and hierarchical organization in biosystems. In J. Urquhart & F. E. Yates (Eds.), Temporal aspects
+of therapeutics (pp. 17–34). New York: Plenum Press.
+Yilmaz, E. H., & Warren, W. H. (1995). Visual control of braking: A test
+of the tau-dot hypothesis. Journal of Experimental Psychology: Human
+Perception and Performance, 21, 996 –1014.

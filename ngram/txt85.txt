@@ -1,0 +1,364 @@
+International Journal of Production Research
+ISSN: 0020-7543 (Print) 1366-588X (Online) Journal homepage: http://www.tandfonline.com/loi/tprs20
+The construction of production performance
+manufacturing with artificial neural networks
+To cite this article: C.-L. Huang (1999) The construction of production performance prediction
+system for semiconductor manufacturing with artificial neural networks, International Journal of
+Production Research, 37:6, 1387-1402, DOI: 10.1080/002075499191319
+To link to this article: http://dx.doi.org/10.1080/002075499191319
+Full Terms & Conditions of access and use can be found at
+http://www.tandfonline.com/action/journalInformation?journalCode=tprs20
+Download by: [Universitaetsbibliothek Innsbruck]
+int. j. prod. res., 1999, vol. 37, no. 6, 1387± 1402
+The construction of production performance prediction system for
+semiconductor manufacturing with arti® cial neural networks
+Downloaded by [Universitaetsbibliothek Innsbruck] at 09:32 01 November 2017
+C.-L. HUANG ² §, Y .-H. HUA NG ² , T.-Y . CHA NG ³ , S.-H. CHA NG §,
+C.-H. CHUNG ³ , D.-T. HUA NG ³ and R .-K. LI² *
+The major perf ormance measurements for waf er f abrication system comprise
+WIP level, throughput and cycle time. These measurements are in¯ uenced by
+various f actors, including machine breakdown, operator absence, poor dispatching rules, emergency order and material shortage. Generally, production managers use the WIP level pro® le of each stage to identify an abnormal situation,
+and then make corrective actions. However, such a measurement is reactive, not
+proactive. Proactive actions must e ectively predict the future performance, analyze the abnormal situation, and then generate corrective actions to prevent perf ormance f rom degrading. This work systematically constructs arti® cial neural
+network models to predict production perf ormances f or a semiconductor manuf acturing factory. A n application f or a local DR AM waf er fabrication has
+demonstrated the accuracy of neural network models in predicting production
+Three major performance measurements in a wafer fabrication consist of the
+WIP level, throughpu t (move volume) and cycle time. The relationship s among
+these performance measurements and the disturbanc e factors (e.g. machine breakdown, material shortage and emergency order) are quite complicated. For instance,
+machine breakdow n may increase the WIP level, prolong the cycle time, and thereby
+in¯ uence the throughpu t of the downstream stages even further. A circumstance in
+which disturbanc e events occur daily poses di culty for the production manager to
+maintain system performance. Therefore, the undesirable e ects must be known in
+advance so that the proper corrective actions can be taken to prevent degrading
+performance. In practice, production managers use the WIP level pro® le of each
+operation stage to identify an abnormal situation and make necessary correcting
+actions. Such a measurement is reactive, not proactive. A proactive way must predict
+the future performance, identify and analyze an abnormal situation , and then generate necessary corrective actions to prevent abnormal performance decreasing.
+Several models, includin g simulation , queueing, spreadsheet, regression and
+neural networks, can be employed to predict production performance. Of these,
+² Department of Industrial Engineering and Management, National Chiao Tung
+University, 1001 Ta Hsueh R oad, Hsinchu, Taiwan 30050, R epublic of China.
+³ Production Control Department, Mosel Vitelic Inc., Hsinchu, Taiwan, R epublic of
+§ Department of Industrial Engineering and Management, Minghsin Institute of
+Technology, Hsinchu, Taiwan, R epublic of China.
+* To whom correspondence should be addressed.
+Downloaded by [Universitaetsbibliothek Innsbruck] at 09:32 01 November 2017
+simulation , regression and neural networks are the most widely used. In order to
+build a simulation model to predict and control the performance of a system subject
+to disturbances, the characteristics of these disturbances must ® rst be estimated and
+used as input variables. Then by introducing changes in these characteristics their
+e ect on the system performances (output variable) can be methodically evaluated.
+However, considering all the system disturbances in one simulation model is extremely di cult. Moreover, detailed simulation s require an enormous amount of
+time and money to write and maintain, especially in the semiconductor manufacturing environment; in addition , several hours are necessary to run them even on a
+powerful computer (Connors et al. 1996 ) . Besides this, the accuracy in predicting
+wafer fabricatio n performance with simulation model still remains questionable due
+Multiple regression is a general statistical technique used to analyze the relationship between a single dependent (predicted ) variabl e and several independen t ones
+(predictors) . Multiple linear regression produces a linear approximation to ® t the
+data. Variable transformation allows, to some extent, the linear regression methods
+to handle nonlinea r cases. However, such a transformation may make it di cult to
+interpret the results. We could always ® nd a polynomial of a higher degree that
+would yield a perfect ® t to a speci® ed data set. Thus, this results in over® tting and
+an inabilit y of the regression model to generalize (Shyur et al. 1996 ) .
+Neural networks are becoming more and more well known, and have been
+successfully implemented in manufacturing (Udo 1992, Zhang and Huang 1995 ) .
+For instance, Philipoo m et al. (1994 ) using neural network models, forecast the
+order due-date in a ¯ ow shop manufacturing system. The neural network model
+yielded better forecasting results than conventiona l due-date assignment approache s
+Using historical data as the input variables, the regression model and neural
+network model can represent the properties and variation s of a system. When a
+system is stable, acceptable forecasting accuracy using the two models is expected.
+However, ® nding a nonlinea r regression model that can correspond to the historical
+data and represent the system’ s status is di cult. Many independen t variables must
+be considered in our case. Furthermore, some of the data do not ® t the basic
+assumptions of regression models. Thus, additiona l data transformations are necessary to generate our regression model. A lternatively , creating neural network models
+does not have the above conditions . Moreover, in practice, neural network models
+can yield better results than regression models (Philipoo m et al. 1994, Shyur et al.
+1996 ) . Using the neural network models to predict wafer fabrication’ s production
+(1 ) Neural networks can obtain a probable result even if the input data are
+(2 ) A well-trained neural network model can provide a real time forecasting
+(3 ) Creating a neural network model does not necessitate understanding the
+complex relationshi p among input variables.
+Back-propag ation neural networks (BPN ) are widely used, and they produce good
+results in prediction and pattern recognition . Therefore, this work attempts to construct BPN prediction models. A ccording to the ® eld managers’ experiences, WIP
+level and wafer move in previous time periods and upstream operation stages are
+Production perform ance prediction system
+Downloaded by [Universitaetsbibliothek Innsbruck] at 09:32 01 November 2017
+An example of three-layer backpropagation neural network.
+selected as the input variables in our BPN model. A systematic construction procedure is presented in the third section.
+Neural networks are computing systems that incorporat e a simpli® ed model of
+the human neuron, organized into networks similar to those found in the human
+brain. A rti® cial neural networks are computer simulations of biologica l neurons.
+Neural networks are composed of processing elements (nodes) and connections.
+Each processing element has an output signal that fans out along the connections
+to the other processing elements. Each connection is assigned a relative weight. A
+node’ s output depends on the threshold speci® ed and the transfer function. The two
+types of learnin g are supervised and unsupervise d. For supervised learning, a set of
+training input vectors with a corresponding set of target vectors is trained to adjust
+the weights in a neural network. For unsupervised learning, a set of input vectors is
+proposed; however, no target vectors are speci® ed. Our approach towards the performance prediction problem is based on supervised neural networks. Supervised
+learning neural network models include back-propaga tion, counter-propagatio n network and learning vector quantization , of which, the back-propaga tion model is
+most extensively used and is therefore selected here.
+A back-propag ation neural network (BPN ) can be layered into many levels, with
+or without hidden layers exhibited between an input and an output layer. Figure 1
+illustrates a network of neurons that are organized into a three layer hierarchy.
+Back-propag ation learning employs a gradient-descent algorith m (R umelhart and
+McClelland 1989) . Through a supervised learning rule, the collected training data set
+comprises an input and an actual target output. The gradient-des cent learning algorithm enables a network to enhance the performance by self-learning. Two phases are
+availabl e for computation : forward and backward. In the forward phase of backpropagatio n learning, the input data pattern is directly passed into the hidden layer.
+Each element of the hidden layer calculate s an activatio n value by summing up the
+Downloaded by [Universitaetsbibliothek Innsbruck] at 09:32 01 November 2017
+weighted inputs and then transforms the weighted input into an activity level by
+using a transfer function (the sigmoid function is broadly used ) . The resulting activity is allowed to spread throug h the network to the outpu t layer. If a di erence
+arises, i.e. an error term, the gradient-des cent algorith m is used to adjust the connected weights, in the backward phase. This learning process is repeated until the
+error between the actual and desired output (target) converges to a prede® ned
+threshold. A trained neural network is expected to predict the output when a new
+In the backward phase, the network output yk is compared with the target value
+tk to determine the associated error for that pattern with that unit. Based on this
+error, the factor d k is computed. d k is used to distribute the error at output unit Y k
+back to all units in the previous layer (the hidden units that are connected to Y k ) . It is
+also used to update the weights between the output and the hidden layer. In a similar
+manner, the factor d j is computed for each hidden unit Zj . d j is used to update the
+weights between the hidden layer and the input layer.
+A fter all the d factors have been determined, the weights for all layers are
+adjusted simultaneous ly. The adjustment to the weight W jk (from hidden unit Z j
+to output unit Y k ) is based on the factor d k , the activatio n zj of the hidden unit Z j,
+and the learning rate h . The adjustment to the weights v ij (from input unit Xi to
+hidden unit Z j) is based on the factor d j , the activatio n x i of the input unit, and the
+learning rate h . The equation utilized to adjust the weights for the output layer k is
+change to be made in the weight from the jth to kth unit,
+The back-propaga tion rule for changing weights for the hidden layer j is
+D vij is the change to be made in the weight from the ith to jth unit,
+x i is the ith element of the input pattern.
+A s ® gure 2 shows, constructing a BPN prediction model involves three steps: (a)
+performing correlation analysis to obtain proper input variables, (b ) applyin g experimental design method to determine a good level combinatio n of input variables, and
+(c) applyin g an experimental design method to determine the optimum BPN structure.
+Creating a BPN model initially involve s determining the input variables.
+A ccording to our observation in wafer fabrication , the followin g factors heavily
+in¯ uence the future performance of each operation stage.
+Production perform ance prediction system
+Downloaded by [Universitaetsbibliothek Innsbruck] at 09:32 01 November 2017
+(1 ) WIP levels of the current and previous two or three operation stages.
+(2 ) Move volume of current and previous two or three operation stages.
+(3 ) Disruptive factors such as machine breakdown , preventive maintenance,
+operator absence, and poor dispatchin g priorities.
+The results presented here demonstrate that the ® rst two factors, WIP levels and
+move volume, are signi® cantly explanator y variables for the third one. Therefore, we
+select the ® rst two factors as our input variables.
+The fact that the performances of previous days and the future performances of
+an operation stage correlate with each other necessitates that two further concepts,
+operation stage window and operation time window must be de® ned to construct a
+Operation stage window: the total number of operation stages involved in constructing the BPN prediction model, which include the current operation stage and
+previous operation stages. For instance, if the information retrieved for the BPN
+model includes only the current operation stage and the previous two operation
+stages, then the operation stage window = 3.
+Operation time window: the size of time lagged to capture historical information
+from previous days. For instance, the information is captured from the current day
+and the previous two days to predict the performance of the current day. Then the
+Figure 3 displays a BPN prediction model which is generated to predict the
+performance of stage S on date t+ 1 (MOVE s,t+ 1 and WIPs,t+ 1 ) , where t denotes
+the observed day, and the input factors’ operation stage window = 2 and operation
+Based on the data obtaine d so far, a correlation analysi s has been performed to
+help determine the input variables. Table 1 depicts the correlation coe cients of the
+predicted performance and historical information from di erent input combination s
+Downloaded by [Universitaetsbibliothek Innsbruck] at 09:32 01 November 2017
+(operation stage windows and operation time windows) . The correlation coe cients
+shown in bold type are extremely high, indicatin g that the input variable s are acceptable. The p-values of this correlation analysis (H 0 : q = 0, H 1 : q
+0 ) are also examined, as listed in table 2. The p-values indicate that the predicted variables are not
+independent of the input variable s (p-value % 0.0001 ) . The three-day historical WIP
+levels and move volumes in operation stage s 1 do not correlate well with the
+predicted move volumes (p-value > 0.05 ) , but they still correlate with the WIP
+level on date t+ 1; theref ore, those input variables cannot be excluded. The same
+scenario arises for the three-day historical WIP levels, and move volumes in operation stage s 2 do not correlate well with the WIP levels on date t 1.
+D eterm ination of the operation tim e window and operation stage window
+The correlation analysis in section 3.1 allows us to con® rm the appropriaten ess of
+the input variables chosen by previous experience. However, not all the input variables are expected to input to our model. In this study, the experimental design
+approac h is employed to derive a better combinatio n of operation stage window
+and operation time window so that the prediction error and model complexity can be
+reduced. By adoptin g previous experience, a 3 3 factorial design is generated. The
+operation stage window and operation time window are determined as the experimental factors (or treatments) . Each factor is classi® ed into three levels (table 3 ) .
+Cumulatively, nine di erent BPN models are created.
+The data set used to perform the experiment, consisting of 180 records for
+six months of daily data, was collected from the Mosel Vitelic Inc., which is a
+famous DRA M wafer fabricator in Taiwan. These data include the normal and
+abnormal occurrences. A ll the examined stages are located in the following manufacturing modules: photo, etching, thin ® lm and di usion. We delete 50 records
+whose data are not complete. To provide a mean for checking the BPN prediction
+agains t existing data, the remaining 130 records of available data are sub-divide d
+into two sets. The ® rst set, called training data, is used to construct the prediction
+model. 106 records of training data are available . To prevent over-training , the
+second set, called testing data (24 records ), is used to assess the prediction model’ s
+performance during the training process. This training process is repeated until the
+testing error, error between the actual and desired output from the testing data,
+converges to a prede® ned threshold value. The mean error percentage (MEP) and
+coe cient of varianc e (CV ) are calculated to assess the performance of created BPN
+Three-day historical Move volumes of stage s , s
+Three-day historical WIP levels of stage s , s
+Three-day historical WIP levels of stage s, s
+The correlation coe cients between the input variables and predicted variables.
+Three-day historical WIP levels of stage s, s
+Downloaded by [Universitaetsbibliothek Innsbruck] at 09:32 01 November 2017
+Production perform ance prediction system
+Three levels for operation stage window and operation time window.
+Downloaded by [Universitaetsbibliothek Innsbruck] at 09:32 01 November 2017
+² A 5-stage average testing error (measured by MEP) for the WIP.
+³ Minimum average predicted error for both WIP and Move.
+Prediction errors for WIP level and move volume.
+Owing to the limitation s of time and cost, only ® ve di erent stages were examined in this experiment. A lthough the results cannot be used to represent the
+entire production line, the same analysis procedure can be applie d to analyse any
+operation stages in the entire production line. Table 4 summarizes the testing error
+and the performance judgment measures for all the nine WIP level and move volume
+prediction models. Hence, the average values of MEP used to identify the optimum
+model are calculated (table 5) , since the output layer include s the above two predicted variables.
+The data are also examined by a two-way A NOVA analysi s (table 6 ) . Some of
+those results for a 5% signi® cance level can be summarized as follows.
+(1 ) The interactions between the operation time window and operation stage
+window are insigni® cant but close to the signi® cance level.
+(2 ) The factor e ects of the operation time window are insigni® cant.
+(3 ) The factor e ects of the operation stage window are signi® cant.
+Based on the above experiment, we can conclude the following .
+Production perform ance prediction system
+Duncan’ s multiple range test f or prediction errors (alpha
+Downloaded by [Universitaetsbibliothek Innsbruck] at 09:32 01 November 2017
+² Minimum averag e predicted error for WIP and Move.
+Two-way A NOVA analysis results for prediction errors ( alpha
+No. of hidden nodes for the hidden layer (HN )
+Note a denotes the number of input nodes; b denotes the number of output nodes.
+(1 ) The optimum size of operation stage window (2 or 3 ) can be derived from
+Duncan’ s multiple range test (Montgomery 1984 ), as shown in ® gure 4.
+(2 ) Increasing the size of operation time window does not reduce the prediction
+error, but increases the complexity of the prediction model.
+(3 ) The optimum model exists when operatio n stage window = 3 and operation
+D eterm ination of BPN m odel’ s structure
+A BPN model has an input layer, an output layer, and several hidden layers.
+Increasing the number of hidden layers increases the complexity of a BPN model.
+However, a guarantee does not exist that the model’ s performance will be improved
+with an increasing number of hidden layers. Based on previous experience, only one
+² A 5-stage average testing error for the WIP and Move.
+Downloaded by [Universitaetsbibliothek Innsbruck] at 09:32 01 November 2017
+A verage predicted errors for WIP and Move.
+(No. of inputs nodes No. of output nodes) /2 NH
+or two hidden layers yield a better error convergenc e (Y ei 1993 ) . The number of
+nodes in a hidden layer is another factor in¯ uencing the training process of creating a
+BPN model. Basically, more nodes in a hidden layer result in a smaller prediction
+error but a longer training time. Yei (1993 ) also recommended the following principle to determine the number of hidden nodes for the hidden layer: HN (number of
+hidden nodes) = (a + b) /2, where a denotes the number of input nodes and b denotes
+Sensitivity analysi s is also performed to obtain a more re® ned structure of our
+BPN model. The previous BPN model with operation time window = 1 and operation stage window = 3 are modi® ed by di erent numbers of hidden layers and nodes.
+Table 8 lists all the level’ s combination s. From the average predicted error for WIP
+and Move shown in table 8, the following results are observed.
+(1 ) The number of hidden nodes should be determined by Y ei’ s formula
+(2 ) One or two hidden layers can yield a better prediction performance and
+therefore do not waste the training time.
+These predicted errors are examined by a two-way A NOVA analysis . Those results
+suggest that the di erences among predicted errors are insigni® cant. Therefore,
+advance d analysi s does not have to be applied. The optimum case in table 8 was
+chosen to be the structure of our BPN prediction model.
+Only ® ve stages were examined in our experiment. However, these results can not
+be used to represent the actual circumstances of the entire wafer fabrication .
+A ccording to the results of section 3.2 and 3.3, an optimum level’ s combinatio n
+Production perform ance prediction system
+Downloaded by [Universitaetsbibliothek Innsbruck] at 09:32 01 November 2017
+Predicted values VS real values for WIP level.
+was obtaine d by considering the minimum average prediction error for WIP and
+move volume. Table 9 lists the optimum level’ s combinations.
+Figures 5 and 6 plot the predicted values and the real values: one for the WIP and
+the other for the move volume. A s those ® gures reveal, using the optimum BPN
+Downloaded by [Universitaetsbibliothek Innsbruck] at 09:32 01 November 2017
+Predicted values VS real values f or move volume.
+performance prediction model obtained herein has an average prediction error of
+Next the prediction errors were more closely examined. That examinatio n con® rmed a relationship between prediction error and the average variance of stage WIP
+Production perform ance prediction system
+Downloaded by [Universitaetsbibliothek Innsbruck] at 09:32 01 November 2017
+Prediction errors and the variances of stage WIP and Move.
+and move volume. In generally, an operation stage with a larger average variance has
+a large prediction error, as shown in table 10. Figure 7 depicts their relationships , as
+represented by the scatter chart. From this chart, a ® eld manager can realize that for
+the operation stage with a smaller average variance the predicted performance from
+the BPN prediction model is more reliable .
+Moreover, a multiple regression model was compared with the neural network
+prediction model. The models can be expressed as
+By using the stepwise regression process, a prediction error of 26% was obtained .
+However, the prediction performance is not as high as the BPN model. For the cases
+presented here, the BPN prediction model is more appropriat e than the regression
+model under the criteria of minimum prediction error.
+M anagerial implications and implementation
+The previous section explored how to select an optimum BPN prediction model
+to accurately predict wafer fabrication performance. Herein, we recommend using a
+two-stage (creating and running ) implementation procedure to implement the BPN
+Downloaded by [Universitaetsbibliothek Innsbruck] at 09:32 01 November 2017
+BPN prediction model’ s implementation process.
+prediction model. Figure 8 illustrates the detailed process of these two stages. In the
+creating stage, the BPN model is trained by the new data obtained from the wafer
+fabrication . For this study, six months of information can adequately generate a
+In the running stage, the prediction results obtained from the BPN model are
+compared with the standard performance measures (standard WIP level and target
+move volume ) . The di erence in this comparison (expressed as `low’ , `normal’ , or
+`high’ ) allows managers to quickly respond to any undesirable circumstances (table
+11) . The corrective action s are based on the interpretations of various combination s
+of low, normal and high levels of the predicted outputs. Hence, the way in which
+these levels are de® ned becomes very important. Logically, the reliability of this
+classi® cation into levels is bound to be highly dependent on the magnitude of the
+prediction error. A lthough an experienced manager can roughly determine the levels
+with his own experiences and adjust these levels accordingly, the quality aspect of the
+prediction control level should be further studied.
+De® ning a standar d WIP level and a target move volume at any stage is quite
+complex. A lthough this issue is not discussed here, the manager’ s experience and the
+historical data help us to obtain a rough standard: (1) standard WIP level, average
+WIP during the past one week; and (2 ) target move, month output divide d by the
+number of work days. For instance, if the month output is 36 000 wafers and there
+are 30 work days in a month, a rough target move for one stage may be 1200 wafers
+per stage daily. (36 000 wafers/30 work days = 1200 wafers/stage/day ) .
+Model retraining becomes necessary when a system is changed (e.g. new routing
+is added ) . Otherwise, the current BPN model loses its ability to accurately predict the
+new system’ s performance. The followin g criteria can be applied to determine the
+schedule for the model retraining: (1 ) new routing is added, or (2 ) cumulated prediction errors are outside the control limits after some time periods, e.g. two or three
+Possible reasons and corrective actions for low performance in stage S .
+Evaluate the impacts on downstream stage to avoid downstream
+Solve the machine or operation problems of the upstream stage
+Change the lot priority of upstream stage to obtain more moves
+Change the lot priority of upstream stage to obtain more moves
+Solve the machine or operation problems of stage S or upstream
+Evaluate the impacts on downstream stage to avoid downstream
+R eallocate machine to obtain more moves and to reduce WIP
+A llocate machine properly to obtain more moves
+Solve the machine or operation problems of downstream stage
+Machine down or PM in stage S or in upstream
+Machine down or preventive maintenance ( PM )
+Machine for engineering use (Machine lent )
+Downloaded by [Universitaetsbibliothek Innsbruck] at 09:32 01 November 2017
+Production perform ance prediction system
+Production perform ance prediction system
+Training is the most time-consuming process in creating a BPN model. However,
+a well-trained BPN model can satisfy the requirement of real time running . Many
+commercial neural network program s with a powerful learning ability and good user
+interfaces have been developed . Such tools can be easily adapted by managers. In
+addition , to conserve the model construction time, the BPN model can only be
+applied to the key stages (includin g the bottleneck stages) .
+Downloaded by [Universitaetsbibliothek Innsbruck] at 09:32 01 November 2017
+This work constructs a performance prediction model that is capable of providing an advanced warning for the performance change of each operation stage in a
+DRA M wafer fabrication . The study of the BPN prediction model applied to a local
+wafer fabrication o ers promising results when using a three-layer back-propaga tion
+neural network, thereby allowing for a more accurate prediction of the WIP level
+and move volume in the next time period for each wafer fabrication operation stage.
+Experimental results demonstrate that the optimum model is available when the
+input nodes include all the previous day’ s information (WIP level and move
+volume ) for three continuous previous stages. A lso, the prediction results con® rm
+that our model can provide a roughly 80% forecasting accuracy based on the existing data. Based on the BPN model construction procedure presented in this study,
+the Mosel Vitelic Inc. is now planning to construct and implement the performance
+A lthough the preliminary results are encouraging , additional study is necessary
+to improve the forecasting accuracy. In this study, the WIP level and move volume
+are the only two input variables. However, our models do not exhibit other factors
+that in¯ uence the production performance, such as machine breakdow n and dispatching rules. If more data can be obtained and new factors that can in¯ uence
+production performance can be included, more promising and meaningful models
+The authors would like to thank the referees for their valuabl e comments and
+CONNORS, P., FEIGIN, G. E. and Y AO , D. D., 1996, A queueing network model f or semiconductor manuf acturing. IEEE T ransactions O n Semiconductor Manufacturing, 9 , 412±
+MONTGOMERY , D. C., 1984, D esign and Analysis of Experim ents ( New Y ork: Wiley) .
+R UMELHART, D. E. and MCCLELLAND , J. L., 1989, Paralled D istributed Processing:
+Explorations in the Microstructure of Cognition ( Cambridge, MA : MIT Press ) .
+PHILIPOOM, P. R., R EES, L. P. and WIEGMANN, L., 1994, Using neural networks to determine
+internally-set due date assignments f or shop scheduling. D ecision Sciences, 25 , 825± 851.
+SHYUR , H.-J., LUXHOJ , J. T. and WILLIAMS, T. P., 1996, Using neural networks to predict
+component inspection requirements f or aging aircraf t. Computers and Industrial
+UDO , G. J., 1992, Neural networks applications in manufacturing processes. Computers and
+Y EI, I.-C., 1993, Neural Networks Applications and Practice (Taiwan: Zu-Lin Publishing ) .
+ZHANG , H.-C. and HUANG , S.-H., 1995, Applications of neural networks in manuf acturing: a
+state-of-the-art survey. International Journal of Production Research, 33 , 705± 728.

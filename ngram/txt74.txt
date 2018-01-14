@@ -1,0 +1,350 @@
+International Journal of Production Research
+ISSN: 0020-7543 (Print) 1366-588X (Online) Journal homepage: http://www.tandfonline.com/loi/tprs20
+manufacturing using knowledge discovery in
+To cite this article: Israel Tirkel (2013) Forecasting flow time in semiconductor manufacturing
+using knowledge discovery in databases, International Journal of Production Research, 51:18,
+5536-5548, DOI: 10.1080/00207543.2013.787168
+To link to this article: http://dx.doi.org/10.1080/00207543.2013.787168
+Full Terms & Conditions of access and use can be found at
+http://www.tandfonline.com/action/journalInformation?journalCode=tprs20
+Download by: [Ben Gurion University of the Negev]
+International Journal of Production Research, 2013
+Vol. 51, No. 18, 5536–5548, http://dx.doi.org/10.1080/00207543.2013.787168
+Forecasting ﬂow time in semiconductor manufacturing using knowledge discovery in
+Industrial Engineering and Management, Ben-Gurion University, Beer-Sheva, Israel
+Downloaded by [Ben Gurion University of the Negev] at 00:16 15 February 2016
+(Received 28 July 2012; ﬁnal version received 11 March 2013)
+Semiconductor manufacturing is characterised by a complex production process, advanced equipment, and volatile
+demand. Flow time (FT), noted cycle time in semiconductor manufacturing, is a key measure in the operations. This
+study develops FT forecasting models using knowledge discovery in databases. It follows cross industry standards for
+data mining, with the focus on business understanding, data pre-processing and classiﬁcation techniques. The data
+include wafer lot transactions extracted from the manufacturing execution system of an 8-inch ﬂash memory factory. The
+FT is forecasted for a single lot at a given production step. The models are constructed using 70% of the data and the
+rest 30% for their evaluation. The results illustrate that a decision tree model achieves 76.7% accuracy and a neural
+network model 88.2%. The novelty of this work is in a thorough understanding of operations, a single data source, and
+common classiﬁcation techniques used to obtain high accuracy results. The models can generate FT forecasting for a
+single production step, a line segment or a complete line. They can be used to improve short term planning, overall
+operations and supply chain efﬁciency, via shift scheduling, labour and materials requirements planning, inventory
+Keywords: data mining; ﬂow time; forecasting; knowledge discovery; scheduling; semiconductor manufacture
+This study engages the ﬁelds of forecasting and knowledge discovery in databases, for wafer fabrication ﬂow time (FT).
+This section introduces these areas and deﬁnes the study’s goal.
+The ﬁeld of forecasting is considered here in the context of operations planning, and may be classiﬁed among several
+dimensions (Makridakis, Wheelwright, and Hyndman 1998; Nahmias 2009), one of which is time horizons as follows:
+Short term (e.g. days, weeks) for shift schedules, materials requirements planning, and inventory management.
+Intermediate term (e.g. weeks, months) for labour and other resources requirements planning, and product sales
+Long term (months, years) for capacity planning, and production decisions.
+This work develops short term FT forecasting models for shift scheduling, resource requirements planning, inventory
+Subjective (qualitative) forecasting, human judgment based on personal or group expert opinions.
+Objective (quantitative) forecasting, using data and analysis methods.
+Sanders and Manrodt (1994) reviewed forecasting methods practised in 500 US corporations, mostly manufacturing. They
+displayed growing familiarity and use of quantitative methods, sometimes limited by lack of data and organisational
+support. In wafer fabrication huge amounts of data are continuously collected. The transactions history used here are
+easily accessible off a single system’s database.
+International Journal of Production Research
+Time series methods, where only the past values of a series is used for prediction.
+Causal methods, where data from other sources than the series are analysed and linked to the series for
+Downloaded by [Ben Gurion University of the Negev] at 00:16 15 February 2016
+Causal methods have been intensely applied in analytical models such as regression and econometrics (Fildes 2006).
+They have been also applied with simulation of complex problems, to avoid simplifying assumptions and enable the
+models to be closer to practice. Applications of knowledge discovery in databases (KDD) and data mining (DM) have
+grown with the increase of computing power (Fildes et al. 2008). This work applies KDD process and DM techniques
+DM is deﬁned as discovering meaningful patterns and trends by sifting through large databases, for extracting useful
+information or knowledge (Mitchell 1999; Larose 2005). It is frequently interchanged with KDD and with machine
+learning (ML), while creating some confusion among these deﬁnitions (Mitchell 1999; Azevedo and Santos 2008; Han,
+Kamber, and Pei 2011). This ambiguity might be caused by different terminologies used in various communities (e.g.
+databases, artiﬁcial intelligence, business), and is clariﬁed here. The ﬁeld of ML traditionally refers to the study of algorithms and techniques which enable computers to learn from experience (Mitchell 1997; Langley 1998). Some of the
+ML methods (e.g. classiﬁcation) are applied in DM. KDD refers to the overall process of discovering useful knowledge
+from data, including the steps of: data selection, data pre-processing, data transformation, data mining, and interpretation
+and evaluation (Fayyad, Piatetsky-Shapiro, and Smyth 1996). Notice the ﬁrst three steps include different forms of data
+preparation, and only the fourth step relates to DM.
+Among various ML methods used in DM, classiﬁcation is the most common for forecasting (or prediction, as noted
+in DM). It consists of a learning step, where the model is constructed, and a classiﬁcation step, where the constructed
+model is used for prediction. Classiﬁcation is performed into predetermined labelled classes and is considered supervised
+learning, versus unsupervised learning (e.g. clustering) where classes are not predetermined. The learning step uses a
+training dataset and the classiﬁcation step uses a testing dataset, both independently created of the designated dataset.
+Classiﬁcation techniques may be categorised into basic or advanced methods (Han, Kamber, and Pei 2011). This
+work applies one technique of each category, accordingly:
+Decision tree (DT) is the most common method in DM. Its structure includes nodes representing attributes and
+branches representing their values. DT analysis is straight-forward to understand. The results obtained are
+considered accurate and equivalent to other basic methods, such as rule induction (RI) classiﬁcation which can
+be easily transformed from DT, and naïve Bayesian classiﬁcation (NBC) which relies on Bayes theory. Figure 1
+illustrates a simple DT structure with classiﬁcation into two classes (A and B).
+Neural networks (NN) is structured as a set of interconnected input/output nodes (neurons) acting as processing
+units, where each connection is associated with a weight. Each node can take a few inputs and produce a single
+output, which can then become the input to other nodes. NN structure includes an input layer (of nodes), one
+or more hidden layers, and an output layer. Figure 2 illustrates a NN structure with one hidden layer.
+Downloaded by [Ben Gurion University of the Negev] at 00:16 15 February 2016
+Figure 2. NN structure with one hidden layer.
+Bose and Mahapatra (2001) reviewed 70 DM business applications. They illustrated the breakdown of ML techniques
+usage with DT (49%) and NN (14%) being on top. They also compared the techniques performance, indicating that DT
+can best handle large datasets and be most explained, while NN has the best predictive accuracy and ability to handle
+The most common standard used in applying KDD is Cross Industry Standard Process for Data Mining (CRISPDM). Comparison of KDD to CRISP-DM reﬂects high similarity in their process steps (Azevedo and Santos 2008), see
+Table 1. CRISP-DM and its naming conventions are followed here. Clementine is one of the common and most
+complete software packages used for DM applications in various ﬁelds, including manufacturing (LaRose 2005; Koksal,
+This work presents the comprehensive research initiated in Tirkel (2011). The rest of the paper reviews KDD and
+DM semiconductor manufacturing applications in Section 2. Sections 3 through 6 follow the KDD process, starting with
+business understanding of Wafer Fabrication FT in Section 3, Data Understanding and Preparation in Section 4,
+Modelling in Section 5, Results and Evaluation in Section 6. Conclusions are presented in Section 7.
+Organisations have been collecting huge volumes of data from development, operations, products, and customers.
+Mitchell (1999) stated that research will inﬂuence DM applications in medicine, ﬁnance, intelligence analysis, public
+policy, marketing, and manufacturing. Han, Kamber, and Pei (2011) described applications in ﬁnance, retail, telecom,
+science, engineering, intrusion detection, prevention, and recommender systems. Other studies investigated additional
+disciplines, for instance, business (Bose and Mahapatra 2001), logistics and transportation (Rahman, Desa, and Wibowo
+International Journal of Production Research
+Applications in areas such as banking, ﬁnance and marketing provide very good results, yet manufacturing applications
+are not as broad (Wang et al. 2007). Harding et al. (2006) presented a DM applications survey of 90 papers in various
+manufacturing areas: production processes, fault detection, maintenance, decision support, and product quality improvement. They indicated a fast growth in semiconductor manufacturing applications, and reviewed numerous papers in
+process technology but only a couple in operations.
+Coudhary, Harding, and Tiwari (2009) presented a comprehensive survey on DM applications in manufacturing, with
+more than 150 papers. Rather than relating to the applications based on the manufacturing areas, the review is structured
+per the functions performed on data, including: characterisation and description, association, classiﬁcation, prediction,
+clustering and evolution analysis. Their work reﬂected on rapid growth in semiconductor manufacturing applications,
+including yield improvement, fault detection and quality, and two papers on FT prediction.
+Downloaded by [Ben Gurion University of the Negev] at 00:16 15 February 2016
+Following are a few representative examples of various semiconductor manufacturing areas where data mining
+Shin and Park (2000) proposed a hybrid machine learning strategy using a NN and memory based learning, which
+is a variant of K-nearest neighbour (KNN), for yield prediction. An overall integrated framework for a yield management system was proposed including design, but with no demonstration using simulated or historical data. Motorola
+researchers applied NN and RI on poor yield factors taken from manufacturing data (Gardner and Bieker 2000). They
+illustrated 3–15% yield increase and a 10 times faster solution compared with a common statistical process control
+approach. Industrial engineering researchers from Taiwan investigated bump soldering process quality (Chien, Li, and
+Jeang 2006). They conducted an empirical study using DT to improve yield, and revealed relationships among controllable input factors and target class. Another study suggested a hybrid data mining approach, combining statistics and NN,
+for pattern extraction from wafer bin map for yield improvement (Hsu and Chien 2007). This work was implemented in
+a semiconductor fab in Taiwan and used by the fab engineers.
+Intel employees applied ML on large datasets using DT (Utlaut and Anderson 2004), including two studies. The ﬁrst
+was for equipment commonality of defects generated by radio frequency. The second was for chip performance detected
+by early in-line electrical testing. Both studies indicated that DM can replace traditional statistical methods. In a
+different research, Intel’s employees from diverse teams (process technology, manufacturing, marketing, and information
+systems) performed a comprehensive research (Goodwin et al. 2004) including:
+Process tools signals study for yield variation between and within lots. DT was used on a unique Intel data
+Microprocessors performance prediction based on fab, sort and test (bin speed, yield) data, using DT.
+In the Intel’s team study mentioned above (Goodwin et al. 2004) three techniques were used to predict FT. DT achieved
+the highest accuracy, illustrating 2–3 days gap for the whole line, followed by NN and then KNN. In a different research
+(Chien et al. 2005), FT was predicted using a multi-stage process, given production operation status (e.g. work-in-process,
+throughput, utilisation). Unsupervised learning (self-organising-map) was used to cluster machines based on utilisation.
+Then, DT was used to extract the classiﬁcation rules, followed by polynomial regression to predict FT as a function of
+work-in-process. Finally, NN was used to improve the accuracy to several percent in all the three clusters.
+Arizona State University researchers and Intel process control employees predicted FT of lots while running in the
+production line (Backus et al. 2006). They concluded that DT is preferred over KNN and NN techniques, explained by
+DT ability to handle both categorical and continuous variables. Lot processing data was collected in the ﬁrst part of the
+line, and then used to predict FT in the last one-third of the line. In another study (Chang, Wang, and Ting 2008) fuzzy
+NN was developed for FT estimation using simulated data. Factors identiﬁed included order processing time, total
+work-in-process and total jobs in system, and utilisation of bottleneck machines. Total data included were 240 in numerous training iterations. Estimation accuracy indicated preference over other techniques (as measured in mean square
+error), but absolute accuracy rate was not speciﬁed. A recent study (Meidan et al. 2011) predicted waiting-in-line time
+(vs. FT), using simulated data and applying NBC, DT, NN, and multinomial logistic regression. The techniques were
+applied in a multi-stage process for feature selection and then prediction. The best results achieved 72–73% accuracy.
+To the best of our knowledge, these are all the studies that apply KDD and DM for forecasting FT in semiconductor
+manufacturing. They reﬂect frequent use of DT and NN techniques. Some of their modelling limitations include: use of
+simulation generated vs. actual data, ability to predict FT for only part of the line or only for the overall fab (or large
+clusters), use of a few data sources and types (e.g. equipment, process), and multi-stage data analysis processes. The
+proposed models use a single data source (e.g. lot transactions), apply a single step DM analysis, rely on a detailed level
+(e.g. step) and enable prediction for a single step through a complete line while achieving high accuracy. The forecasts
+can be used to improve short term planning and overall operations and supply chain efﬁciency, via shift scheduling,
+labour and materials requirements planning, inventory management and delivery schedules. Some examples include
+plans for: day/night shifts’ labour, work-in-process per step, machine maintenance, and delivery to downstream factories.
+The forecasts can be applied in direct planning or via job-shop control systems (Ioannoun and Dimitriou in press).
+Downloaded by [Ben Gurion University of the Negev] at 00:16 15 February 2016
+This section introduces FT as a key measure in wafer fabrication, and explains its signiﬁcance in the fab operations.
+Semiconductor manufacturing is characterised by a complex multistage production process, involving billions of
+dollars’ worth of advanced equipment and volatile demand (Kumar et al. 2006; Zhang et al. 2007). Moore (1975)
+projected that semiconductor complexity will approximately double every two years, in terms of chip density and miniaturisation. This projection, known as Moore’s Law, was realised and affected operations complexity as well. Current
+investment in a new wafer fabrication facility (fab) exceeds $5B, and includes a production process with more than 500
+steps, almost 1000 machines, and lengthy FT duration (e.g. several weeks or months).
+Robinson, Fowler, and Neacy (2003) thoroughly review wafer fabrication performance measures, indicating FT is
+one the top ﬁve. Kumar et al. (2006) mentions FT as one of four key metrics used by companies to improve their manufacturing performance. FT signiﬁcance is known in terms of reduced inventory and faster response to market (Leachman
+and Ding 2011). It has become one of the hottest research ﬁelds due to its impact on cost and on-time delivery (Zhang
+et al. 2007), and its conjunction with other performance measures including throughput, capacity, utilisation, and yield.
+FT investigation is associated with the areas of scheduling, supply chain, stochastic processes (queuing), operations
+FT is deﬁned as the elapsed time between the start and completion of a task. The average time of m wafer lots
+(indexed j = 1, 2, … , m) spent in any single production step i, is deﬁned by,
+where; Start Time1; j ¼ 0 and Start Timei; j ¼ Complete Timei1; j :
+The components of a wafer lot FT regularly include: transport, waiting-in-line, and machine process. The transport
+time is accounted to manual move, automatic move via material handling system, or both. The waiting-in-line time is
+accounted to a busy machine, unavailable machine (e.g. maintenance, set-up), or wait time for a batch of wafer lots.
+Machine process time usually includes the time required to load/unload wafer lots on/off a machine. In practice,
+following a wafer lot process at a machine an additional activity may be required, for instance, analysis by an engineer.
+Consequently, the FT of a wafer lot j in a production step i, is deﬁned by,
+FTij ¼ Transportij þ Wait in lineij þ Machine processij þ Add: activityij
+The manufacturing execution system (MES) records all operational transactions and attributes through wafer
+fabrication, and commonly tracks the time fragments between the following transactions:
+Previous step move-out (depart) and current step move-in (process start), including transport time and
+Current step move-in and move-out, including machine process time and an additional activity time, if it exists.
+Figure 3 illustrates the wafer lot FT time components and the time fragments commonly tracked by MES.
+Some forecasting models, for instance queuing systems, disregard the transport time and/or the additional activity.
+Other models consider the process time as ﬁxed although it varies due to the quantity of wafers in a lot, the quantity of
+International Journal of Production Research
+Downloaded by [Ben Gurion University of the Negev] at 00:16 15 February 2016
+lots in a batch, or other causes. Sometimes, transport time may also be considered as ﬁxed, although it varies due to
+travel distance or system’s congestion. Here, FT is forecasted starting at the previous step move-out and through the
+current step move-out. The impacting factors that are considered by the model’s attributes, are extracted off the MES,
+for instance: production tool and step, product type, quantity of wafers, handling (e.g. manual vs. automatic), rework,
+time of day (relevant to shift work sequence, e.g. breaks), or time of week (e.g. holidays). These and others attributes
+are presented and explained in Sections 4 and 5. Clearly, thorough data understanding and preparation are essential for
+This section describes the data extraction, structure and attributes, and the veriﬁcation and integrity audit. It is then
+followed with the dataset preparation for modelling.
+The dataset extracted from MES contained wafer lot transactions sampled during two years, at 37 production steps
+representing the ﬁve typical fabrication processes: diffusion, thin-ﬁlms, lithography, etching, and planarisation. Each
+record included data of a single wafer lot processed in a single production step, including:
+lot type: production (for sale), engineering (for experiments), development (future process), or short-loop (for
+(7) transaction type, time and wafers quantity,
+(8) transaction owner identiﬁcation (system or human), and
+(9) additional status attributes (e.g. rework, hold, scrap).
+The raw dataset included 8000 records by 43 attributes. It was ﬁrst analysed via MS Excel and then uploaded to
+SPSS Clementine for most of the analysis. Attribute types were deﬁned per Clementine naming conventions: 22 quantitative (scale), 11 qualitative (nominal), and 10 two-categorical (ﬂag).
+The dataset was initially assessed using descriptive statistics. Quantitative attributes were analysed for range, outliers
+and extremes. Qualitative data were analysed for types and unique values, enabling understanding and veriﬁcation.
+Dataset veriﬁcation was performed via auditing the records for completeness and quality. Incomplete records (e.g.
+missing values) and inadequate content (e.g. inappropriate values) were eliminated. Attributes consistently empty were
+veriﬁed with the fab personnel as not in use, and then eliminated. Some attributes were identiﬁed as redundant (e.g.
+duplicate) and also eliminated. At the end of this phase the dataset was reduced to 6865 records by 27 attributes, 54%
+of the original dataset, with no information (knowledge) loss.
+Deeper understanding of the data indicated that additional information can be extracted by splitting the existing
+Downloaded by [Ben Gurion University of the Negev] at 00:16 15 February 2016
+Date and time split into three attributes: day count, day in week, and time of day.
+Lot number split into ﬁve attributes: fab id, silicon vendor id, lot start year, lot start work-week, and lot serial
+This ﬁnalised the creation of all explanatory attributes.
+The target attribute, lot FT, was calculated as the duration between previous production step move-out date and time
+and current step move-out. Also calculated were the durations between previous step move-out and current step movein, and between current step move-in and move out, which add up to the lot FT (Figure 3). These durations were not
+included in the ﬁnal model, but used only for analysis (e.g. conﬁrm variability of machine process times). As a result,
+Further statistical analysis was performed on the extended dataset. As expected, high correlations were identiﬁed
+between quantitative attributes (e.g. move-out and move-in times). Also, scatter plots revealed expected associations
+between qualitative attributes (e.g. production steps and tool types). No additional ﬁltering was performed as a result of
+Since the study attempts to forecast FT of production lots, records of lot types designated for other purposes (e.g.
+development) were eliminated, downsizing the dataset to 5927 records. Finally, the dataset was split into two parts: (i)
+training dataset with 70% of the records, and (ii) testing dataset with the rest 30%. The split was performed at random.
+This section describes the classiﬁcation model construction using 70% of the data, including the feature selection
+process and the FT target function deﬁnition.
+Selection (reduction) of attributes was objectively performed based on the data analysis and understanding. Out of 37
+attributes 19 features were selected considering attributes’ redundancy, as follows:
+Attributes previously left in the dataset for veriﬁcation and analysis (e.g. date and time).
+Attributes left in the dataset for analysis, but should not be part of the model (e.g. lot FT breakdown, current
+Table 2 presents the complete feature set detailing the feature name, type, content, and format.
+In order to reduce the size of the complete feature set, additional elimination of attributes was manually and subjectively performed based on expert knowledge. Thus, 11 features were selected out of 19, considering the following:
+Attributes partially correlated within the dataset, and possibly indicate some redundancy.
+Attributes having minor contribution to FT forecasting, as evaluated per the author’s knowledge and
+This concluded a second feature set based on manual selection. Finally, using Clementine auto routine procedure for
+‘screening predictors’ (SPSS 2005), the complete feature set was objectively reduced to a minimum size (using test
+signiﬁcance level of 0.1). The third auto set consisted of only seven features.
+By the end of the feature selection process, three sets were generated for the classiﬁcation model construction:
+Figure 4 illustrates the selected feature sets, and the relations among them.
+FT durations were analysed using the complete dataset. Computed FT mean at 0.36906 days and SD at 0.83795 days.
+Figure 5 illustrates the FT histogram for values up to 1.5 days (less than 4% fall above 1.5 days).
+International Journal of Production Research
+Downloaded by [Ben Gurion University of the Negev] at 00:16 15 February 2016
+The FT target function was deﬁned based on the analysis and consultation with the fab operations personnel. They
+evaluated the shifts work content (e.g. tasks) and structure (e.g. pass-downs, breaks) in the 12-hour long shifts (i.e. day,
+night), while considering the FT density function. Their conclusion was that efﬁcient and effective management of each
+shift schedule can rely on time intervals no less than 3 hours long. Thus, the FT forecasting target function was deﬁned
+by classifying the durations into 10 intervals (bins), as follows:
+8 equal intervals of FT in the ﬁrst day (3 h each).
+9th interval for FT between 24 and 48 days.
+These intervals were used in classifying the FT durations by the models.
+The selection of DM techniques applied in the KDD process were based on Section 1 and 2, and on the type of data
+explained in Sections 3 and 4. The feature sets included continuous and categorical attributes, and the target function’s
+Downloaded by [Ben Gurion University of the Negev] at 00:16 15 February 2016
+attribute was continuous but binned into nominal values. Based on Section 1, DT and NN techniques are adequate for
+classiﬁcation of this type of data. Based on Section 2, these techniques are among the most frequently used in semiconductor ﬂow time prediction applications. Other techniques have been shown less preferred (e.g. Bayesian).
+Following the construction, both models were evaluated using 30% of the data. The FT forecasting accuracy was
+evaluated comparing the three feature sets, each maximised via different parameters speciﬁed below (e.g. pruning). The
+summary presents the best results achieved.
+The DT model that achieved the highest accuracy was trained with the complete features set, using the following
+The model’s training runtime was less than 3 min. (Intel Core i5 2.5 GHz 4 GB RAM).
+Figure 6 illustrates the DT model results of predicted class vs. actual class. This model achieved total prediction
+accuracy of 76.7% (1343 out of 1751). Notice that the forecasting error (confusion) is relatively larger in the lower
+classes, as reﬂected by the columns’ height off the diagonal. Figure 7 illustrates the DT model accuracy per class
+Figure 6. DT model results – predicted class vs. actual class.
+Downloaded by [Ben Gurion University of the Negev] at 00:16 15 February 2016
+International Journal of Production Research
+Figure 7. DT model accuracy and accumulated actual lots per class.
+Figure 8. NN model results – predicted class vs. actual class.
+(columns) in respect to the amount of accumulated actual lots per the same class (line). Notice that the forecast accuracy
+in classes 1–4 (0–12 hours FT) is at 57–97% for 83% of the lots. The forecast accuracy in classes 5–8 (12–24 hours
+FT) is at 26–55% for 9% of the lots. In classes 9–10 (more than 1 day FT) the accuracy is increases for less than 8% of
+the lots. Applying the DT model with the manual and the auto feature sets achieved lower accuracy results of 50.7%
+The NN model that achieved the highest accuracy was a three hidden layers model, trained with the complete
+feature set, and using following model parameters:
+Network topology: input layer – 19 neurons, hidden layer #1 – 25 neurons, hidden layer #2 – 18 neurons, hidden layer #3 – 10 neurons, and output layer – 1 neuron.
+The model’s training runtime was less than 4 minutes (Intel Core i5 2.5 GHz 4 GB RAM).
+Figure 8 illustrates the NN model results predicted class vs. actual class. This model achieved total prediction
+accuracy of 88.2% (1545 out of 1751). Notice that for all the classes the forecasting error (confusion) is relatively low.
+The results achieved with a single hidden layer were signiﬁcantly inferior, and the results achieved with a two hidden
+layer were almost equivalent to the NN three layers model (runtime was slightly longer), yet both were well above the
+results achieved with the DT model. Figure 9 illustrates the NN model accuracy per class (columns) in respect to the
+amount of accumulated actual lots per the same class (line). Notice that the forecast accuracy in classes 1–4 (0–12 hours
+Downloaded by [Ben Gurion University of the Negev] at 00:16 15 February 2016
+Figure 9. NN model accuracy and accumulated actual lots per class.
+FT) is at 89–98% for 83% of the lots. The forecast accuracy in classes 5–8 (12–24 hours FT) is at 66–89% for 9% of
+the lots. In classes 9–10 (more than 1 day FT) the accuracy is very low for less than 8% of the lots. Clearly, the model
+works better for a shorter FT durations, and poorly for FT durations above 24 hours.
+Applying the NN model with the manual and the auto feature sets achieved lower accuracy results of 52.7% and
+This study developed wafer fabrication FT forecasting models using knowledge discovery in databases. The process
+followed cross industry standard for data mining, with focus on business understanding, data pre-processing and classiﬁcation techniques. The models were based on wafer lot transactions data extracted from the manufacturing execution
+system of an 8-inch ﬂash memory factory. The FT was forecasted for a single lot at a given production step, and the
+results illustrated that a DT model achieves 76.7% accuracy and a NN model 88.2%. Following are the conclusions
+The NN model consistently achieved higher forecasting accuracy compared with DT (all feature sets) which
+The complete feature set consistently achieved higher forecasting accuracy compared with the other sets (using
+both DT and NN) which strengthens this set’s selection.
+Though distinguished in accuracy, DT and NN results are characterised by little confusion between distinctly
+different classes, which strengthens the quality of both models.
+The choice of NN model with three (or two) hidden layers indicates that a linear discriminator, as in DT, is
+Both models reﬂect very high accuracy at the lowest classes which deteriorates with higher classes; the deterioration is faster in the DT model which explains the NN superiority.
+High NN accuracy for up to 24 hours FT compared with poor accuracy beyond 24 hours, is aligned with the
+known forecast characteristics for longer forecasts (Nahmias 2009).
+The novelty of this work is in fundamental business understanding, thorough data pre-processing, the simplicity in using
+a single source data and common classiﬁcation techniques, and detailed forecasting level. It is unique in suggesting
+practical models and accurate results by providing FT forecasting for a single production step, a line segment or a
+complete line. The models’ implementation can improve short term planning and overall operations and supply chain
+efﬁciency via shift scheduling, labour, machines and materials requirements planning, inventory management and
+The author would like to thank Sylvain Bouhnik, of Micron Fab12, for supporting this study with data and feedback.
+International Journal of Production Research
+Downloaded by [Ben Gurion University of the Negev] at 00:16 15 February 2016
+Azevedo, A., and M. F. Santos. 2008. “KDD, SEMMA and CRISP-DM: A Parallel Overview.” IADIS European Conference Data
+Backus, P., M. Janakiram, S. Mowzoon, G. C. Runger, and A. Bhargava. 2006. “Factory Cycle-time Prediction with a Data-Mining
+Approach.” IEEE Transactions on Semiconductor Manufacturing 19 (2): 252–258.
+Bose, I., and R. K. Mahapatra. 2001. “Business Data Mining – A Machine Learning Perspective.” Information & Management 39:
+Chang, P. C., Y. W. Wang, and C. J. Ting. 2008. “A Fuzzy Neural Network for the Flow Time Estimation in a Semiconductor Manufacturing Factory.” International Journal of Production Research 46 (4): 1017–1029.
+Chien, C. F., C. W. Hsiao, C. Meng, K. T. Hong, and S. T. Wang. 2005. “Cycle Time Prediction and Control Based on Production
+Line Status and Manufacturing Data Mining.” IEEE International Symposium on Semiconductor Manufacturing: 327–330.
+Chien, C. F., H. C. Li, and A. Jeang. 2006. “Data Mining for Improving the Solder Bumping Process in the Semiconductor Packaging
+Industry.” Intelligent Systems in Accounting, Finance and Management 14: 43–57.
+Choudhary, A. K., J. A. Harding, and M. K. Tiwari. 2009. “Data Mining in Manufacturing: A Review Based on the Kind of Knowledge.” Journal of Intelligent Manufacturing 20 (5): 501–521.
+Fayyad, U., G. Piatetsky-Shapiro, and P. Smyth. 1996. “From Data Mining to Knowledge Discovery in Databases.” AI Magazine 17
+Fildes, R. 2006. “The Forecasting Journals and Their Contribution to Forecasting Research: Citation Analysis and Expert Opinion.”
+International Journal of Forecasting 22: 415–432.
+Fildes, R., K. Nikolopoulos, S. F. Crone, and A. A. Syntetos. 2008. “Forecasting and Operational Research: A Review.” Journal of
+the Operations Research Society 59: 1150–1172.
+Gardner, M., and J. Bieker. 2000. “Data Mining Solves Tough Semiconductor Manufacturing Problems.” Conference on Knowledge
+Goodwin, R., R. Miller, E. Tuv, A. Borisov, M. Janakiram, and S. Louchheim. 2004. “Advancements and Applications of Statistical
+Learning Data Mining in Semiconductor Manufacturing.” Intel Technology Journal 8 (4): 325–336.
+Han, J., M. Kamber, and J. Pei. 2011. Data Mining: Concepts and Techniques. 3rd ed. Waltham: Elsevier by Morgan Kaufmann.
+Harding, J. A., M. Shahbaz, A. Srinivas, and A. Kusiak. 2006. “Data Mining in Manufacturing: A Review.” Journal of Manufacturing Science and Engineering 128: 969–976.
+Hsu, S. C., and C. F. Chien. 2007. “Hybrid Data Mining Approach for Pattern Extraction from Wafer Bin Map to Improve Yield in
+Semiconductor Manufacturing.” International Journal of Production Economics 107: 88–103.
+Ioannou, G., and S. Dimitriou. 2012. “Lead Time Estimation in MRP/ERP for Make to Order Manufacturing Systems.” International
+Journal of Production Economics 139 (2): 551–563.
+Koksal, G., I. Batmaz, and M. C. Testik. 2011. “A Review of Data Mining Applications for Quality Improvement in Manufacturing
+Industry.” Expert Systems with Applications 38: 13448–13467.
+Kumar, N., K. Kennedy, K. Gildersleeve, R. Abelson, C. M. Mastrangelo, and D. C. Montgomery. 2006. “A Review of Yield Modelling Techniques for Semiconductor Manufacturing.” International Journal of Production Research 44 (23): 5019–5036.
+Langley, P. 1998. Elements of Machine Learning. San Francisco, SA: Morgan Kaufmann.
+Larose, D. T. 2005. Discovering Knowledge in Data: An Introduction to Data Mining. New Jersey, NJ: Wiley on-line library.
+Leachman, R. C., and S. Ding. 2011. “Excursion Yield Loss and Cycle Time Reduction in Semiconductor Manufacturing.” IEEE
+Transactions on Automation Science and Engineering 8 (1): 112–117.
+Makridakis, S., S. C. Wheelwright, and R. J. Hyndman. 1998. Forecasting: Methods and Applications. 3rd ed. New York: Wiley.
+Meidan, Y., B. Lerner, G. Rabinowitz, and M. Hassoun. 2011. “Cycle-time Key Factor Identiﬁcation and Prediction in Semiconductor
+Manufacturing Using Machine Learning and Data Mining.” IEEE Transactions on Semiconductor Manufacturing 24 (2):
+Mitchell, T. M. 1997. Machine Learning. Singapore: McGraw Hill.
+Mitchell, T. M. 1999. “Machine Learning and Data Mining.” Communications of the ACM 42 (11): 30–36.
+Moore, G. E. 1975. “Progress in Digital Integrated Electronics.” IEEE International Electron Devices Meeting, IEDM Tech. Digest,
+Nahmias, S. 2009. Production and Operations Analysis. 6th ed. Singapore: McGrow Hill.
+Rahman, F. A., M. I. Desa, and A. Wibowo. 2011. “A Review of KDD-data Mining Framework and Its Application in Logistics and
+Transportation.” 7th International Conference on Networked Computing and Advanced Information Management, 175–180.
+Robinson, J. R., J. Fowler, and E. Neacy. 2003. Capacity Loss Factors. Menlo Park, CA: A work paper of Fab Time.
+Sanders, N. R., and K. B. Manrodt. 1994. “Forecasting Practices in US Corporations Survey Results.” Interfaces 24 (2): 92–100.
+Shin, C. K., and S. C. Park. 2000. “A Machine Learning Approach to Yield Management in Semiconductor Manufacturing.” International Journal of Production Research 38 (17): 4261–4271.
+SPSS Inc. 2005. Clementine 10.0 User’s Guide, Screening Predictors (Feature Selection).
+Tirkel, I. 2011. “Cycle Time Prediction in Wafer Fabrication Line by Applying Data Mining Methods.” Advanced Semiconductors
+Downloaded by [Ben Gurion University of the Negev] at 00:16 15 February 2016
+Utlaut, T., K. Anderson. 2004. “On the Use of Machine Learning in the Semiconductor Industry Examples and Case Studies.” Intel
+Wang, K., S. Tong, B. Eynard, L. Roucoules, and N. Matta. 2007. “Review on Application of Data Mining in Product Design and
+Manufacturing.” IEEE Computer society 4th International Conference on Fuzzy Systems and Knowledge, Discovery, 613–618.
+Zhang, M. T., J. Fowler, T. W. Y. Chen, J. G. Shanthikumar, and C. F. Chien. 2007. “Editorial E-manufacturing in the Semiconductor
+Industry.” IEEE Transactions on Automation Science and Engineering 4 (4): 485–487.

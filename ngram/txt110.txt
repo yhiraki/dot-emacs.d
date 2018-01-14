@@ -1,0 +1,897 @@
+European Journal of Operational Research 173 (2006) 683–700
+Manufacturing lead time estimation using data mining
+Atakan Öztürk, Sinan Kayalıgil, Nur E. Özdemirel
+Industrial Engineering Department, Middle East Technical University, 06531 Ankara, Turkey
+Received 14 April 2004; accepted 4 March 2005
+We explore use of data mining for lead time estimation in make-to-order manufacturing. The regression tree
+approach is chosen as the speciﬁc data mining method. Training and test data are generated from variations of a
+job shop simulation model. Starting with a large set of job and shop attributes, a reasonably small subset is selected
+based on their contribution to estimation performance. Data mining with the selected attributes is compared with linear
+regression and three other lead time estimation methods from the literature. Empirical results indicate that our data
+mining approach coupled with the attribute selection scheme outperforms these methods.
+ 2005 Elsevier B.V. All rights reserved.
+Keywords: Production; Lead time estimation; Knowledge-based systems; Data mining; Regression trees
+The three means of job shop control in a maketo-order environment are manufacturing lead time
+(LT) estimation, order review and release, and job
+ﬂow control through dispatching. These constitute
+the instruments for eﬀective resource management
+with customer service quality and cost concerns.
+The objective is to realise a competitive delivery
+Corresponding author. Tel.: +90 312 210 4788; fax: +90 312
+E-mail addresses: aozturk@tis.havelsan.com.tr (A. Öztürk),
+skayali@ie.metu.edu.tr (S. Kayalıgil), nurevin@ie.metu.edu.tr
+schedule while running the shop ﬂoor activities
+smoothly with both less congestion and less idleness by means of better synchronisation.
+LT estimation is critical as it exclusively aﬀects
+customer relations and shop ﬂoor management
+practices. Due date quoting, which means commitment to meeting customer orders on time, is a direct outcome of LT estimation. Short lead times
+improve a manufacturerÕs image and future sales
+potential. However, not only short but also accurate and precise lead time estimates are desirable.
+Developing methods to infer LT from the real
+shop data constitutes a classical challenge in shop
+management literature, as it is aﬀected by many
+factors such as the process needs, batching
+0377-2217/$ - see front matter  2005 Elsevier B.V. All rights reserved.
+A. Öztürk et al. / European Journal of Operational Research 173 (2006) 683–700
+practices, shop congestion and dispatching rules. It
+is well known that a much larger portion of LT is
+spent either waiting in queues or in transit than in
+actual processing. This makes it hard to predict the
+LT. Although actual process needs can be predeﬁned with suﬃcient accuracy, the delays to be
+faced are contingent upon shop status in real time,
+which is hard to infer in advance. Estimation gets
+even harder with longer lead times because uncertainty increases as the variance in job mixes and
+Analytical, experimental and heuristic methods
+have been proposed given the multi-faceted nature
+of the problem. The uncertainty that prevails and
+dependence on various factors are addressed in almost all methods. However, associations among
+factors, conditional presence of relations, and clustering of lead times in response classes may as well
+be explored. Hence, knowledge based techniques
+can also assist in LT estimation. These techniques
+are suitable for representing complex and situation
+speciﬁc interactions in the form of structured rules.
+One source of such knowledge is applying data
+mining (DM) on data gathered from shop operation. This is the motivating conception we have
+DM essentially encompasses information gathering by discovering the patterns hidden in available data. Given that a homogeneous control
+policy (in terms of batching, order release and dispatching) is applied in a particular shop, it is possible that ﬂow times of diﬀerent jobs behave along
+some typical patterns. To explore these patterns
+calls for an approach based on extracting knowledge from past data.
+We seek to analyse the applicability and merit
+of DM as a knowledge extraction tool in LT estimation. Our purpose is to demonstrate that, compared to other methods in literature, DM is a
+competitive method for the diﬃcult managerial
+task of LT estimation. Most of the traditional
+methods assume models in pre-speciﬁed factors
+(i.e. job and shop attributes) and are based on estimating necessary model parameters. Unlike these
+methods, DM is exploratory both in selecting the
+signiﬁcant factors and in expressing the LT in
+terms of these factors. This is a natural result of
+the knowledge extraction capability of DM.
+We take the regression tree approach as the speciﬁc DM method. In expressing the induced
+knowledge we aim at exploring the use of a wide
+range of factors to be later reduced to a parsimonious set. This way, many potential associations
+and interdependencies among these factors will
+be accounted and tested for their signiﬁcance.
+We use the data generated by a job shop simulation model as input for DM. This way we gain access to an unlimited source of data in a controlled
+We review LT estimation and DM methods in
+the next two sections. Section 4 is devoted to
+description of the simulated manufacturing environment. We present the speciﬁc DM approach
+adopted for LT estimation in Section 5. It is here
+that we focus on the attribute selection in this speciﬁc problem. Section 6 summarises our experimental results followed by our conclusions in
+2. Review of lead time estimation methods
+Lead time estimation has often been seen critical in planning shop operations. In an early work
+reviewing the roles of and the ways to handle lead
+times, Tatsiopoulos and Kingsman (1983) emphasise that manufacturing lead times lie ‘‘at the heart
+Due date determination has been addressed
+both as a decision making problem with various
+tradeoﬀs (Siedmann and Smith, 1981) and as an
+estimation problem. In the former approach a
+computational method is sought to establish a
+policy for due date assignment. In the latter the
+purpose is to infer an expected duration under a
+given set of operating conditions. Cheng and
+Gupta (1989) in their often cited survey investigate scheduling issues involving due date determination. They address linkages among due dates,
+dispatching rules and job completion times in static and dynamic shops. LT is also regarded an
+essential element in negotiating with the
+customer (Moodie, 1999). Kingsman and Mercer
+eﬀects jointly to infer probability of winning
+A. Öztürk et al. / European Journal of Operational Research 173 (2006) 683–700
+LT is essentially made up of manufacturing
+ﬂow time sometimes inﬂated by factors like allowances for material acquisition and timing of order
+release to shop ﬂoor. Hence ﬂow time is often the
+sources of factors aﬀecting ﬂow times. Earlier
+studies have taken job related parameters (such
+as total work content and number of operations)
+into account in rules like CON, TWK, SLK, and
+NOP (Smith and Siedman, 1983). Shop related
+measures such as total shop load at the time of
+order arrival or shop congestion on an orderÕs
+prospective route have been considered in later
+rules. JIQ (Eilon and Chowdhury, 1976) and JIS
+(Weeks, 1979) are two well known examples.
+Using job and shop status data in combination
+has proven to be more eﬀective (Weeks, 1979;
+Experiments have shown that shop related measures speciﬁc to an order are more eﬀective than
+aggregate shop congestion indicators in estimating
+ﬂow times (Ragatz and Mabert, 1984). LT estimation based on dynamic aspects like operating conditions at the time of order arrival have been
+emphasized recently (Veral, 2001). This work
+makes use of queuing theoretic ﬁndings and assumes that utilisation rate and process time are
+factors deﬁning the ﬂow time. The proposed model
+is quadratic in both factors. Higher order terms
+also appear in another approach (Ruben and
+Vig and Dooley (1991) base their OFS (operation ﬂow time sampling) and COPS (congestion
+and operation ﬂow time sampling) rules on the fact
+that ﬂow times are correlated. A sample of recently
+completed orders is used to infer ongoing average
+ﬂow time per operation to reﬂect near term shop
+congestion. Their results support the previous
+ﬁndings about superiority of using shop conditions. However signiﬁcant diﬀerences between the
+rules are found depending on shop balance.
+Probability distribution based approaches
+explicitly consider the impact of variance either
+of the workload (e.g. JIQ) or of the error in estimation. Enns (1995) refers to an earlier work (Bertrand, 1983) making use of the normal distribution
+in quoting LT estimates subject to uncertainty.
+Hopp and Sturgis (2000) treat ﬂow time as a normal distributed random variable and base LT estimation on a service level requirement.
+The eﬀect of dispatching rules on the performance of due date estimation has been inquired
+since the early work of Eilon and Chowdhury
+(1976). They demonstrate that the interaction between LT estimation and dispatching rule has a
+signiﬁcant impact on due date related performance
+measures. Dispatching rule eﬀects have been addressed in later studies as well (Vig and Dooley,
+1991; Enns, 1995; Sabuncuoglu and Hommertzheim, 1995; Sabuncuoglu and Comlekci, 2002).
+Flow time estimation is found harder under FCFS
+than with due date dependent dispatching rules
+LT estimation methods in general are in the
+form of estimating parameters of a pre-assumed
+mathematical model. This is often realised by
+regression applied on ﬂow time data generated
+by a shop simulation model. Analytical methods
+involving optimisation of LT based objectives are
+rare (Cheng and Gupta, 1989) as such results are
+diﬃcult to generalize. As the estimation method
+moves from ‘‘generic’’ to ‘‘speciﬁc’’ the prediction
+quality improves. Two distinct accounts (Ragatz
+and Mabert, 1984; Sabuncuoglu and Comlekci,
+2002) concur that one generic form of LT estimation does not necessarily perform well for all
+shops, not even for all jobs in a given shop.
+Comparisons among alternative methods of LT
+estimation are based upon the resulting lateness
+and tardiness related measures. Means and standard deviations of these measures are regarded
+critical. Mean absolute error (Enns, 1995) and
+mean square error are sometimes used to measure
+DM is typically used for generating information
+(through some form of learning) by discovering
+the patterns hidden in available data. The data
+used for DM are usually in tabular form where
+rows are transactions or instances, and columns
+A. Öztürk et al. / European Journal of Operational Research 173 (2006) 683–700
+3.1. Decision and regression tree construction
+One basic factor that classiﬁes DM methods is
+the type of learning, i.e. whether it is supervised
+or unsupervised. Purpose of supervised learning
+is to discover the relationship between the attributes and a response variable. In unsupervised
+learning a response variable is not identiﬁed and
+the aim is to explore the associations among the
+Fig. 1 depicts a schematic outlook of DM methods which can be classiﬁed under four major headings: (1) decision and regression tree construction,
+(2) rule induction, (3) associative modelling, and
+(4) clustering. Except clustering all are supervised
+learning methods. The ﬁrst two mainly aim at prediction, and the last two deal with discovering the
+associations among the attributes. Because our
+purpose is prediction, we brieﬂy review the ﬁrst
+two methods in this section. Interested reader
+may refer to Agrawal et al. (1993) and Srikant
+and Agrawal (1997) for associative modelling.
+Clustering is described by Michaud (1997) and
+Zait and Messatfa (1997). We also discuss attribute selection and discretisation, which are critical
+elements of some DM applications. We conclude
+this section with a brief account of DM applications in manufacturing.
+A decision tree is a structure that aims at
+branching the data in a top–down fashion. If the
+response variable is discrete (also called class or
+ordinal or categorical) as in the case of being ill
+or not, then a decision tree is constructed. Trials
+are made in order to divide the transactions into
+nodes with a total impurity (in terms of dissimilar
+attributes) less than that of the parent node. Each
+division is based on a single attribute, selected to
+bring the largest reduction in impurity. However,
+large decision trees are diﬃcult to interpret. Therefore, they are simpliﬁed and decision rules (also
+called production rules) are derived from the trees.
+A decision rule is of the form ‘‘if hconjunctioni,
+then class = C’’. The conjunction is composed of
+conditions deﬁned on one or more attributes,
+and the resulting class is the conclusion part of
+Decision tree based algorithms are mainly built
+upon two major works, CART (classiﬁcation
+and regression trees) and C4.5. CART (Breiman
+et al., 1984) uses binary trees, where exactly two
+new nodes are created at each branching. The
+impurity measure used is the Gini index, which
+Fig. 1. A classiﬁcation of data mining work.
+A. Öztürk et al. / European Journal of Operational Research 173 (2006) 683–700
+takes a smaller value as the probability of ﬁnding a
+class at that node gets larger. This probability is
+estimated by the fraction of transactions belonging
+to the class. C4.5, introduced by Quinlan (1993), is
+based on an earlier algorithm by the same author,
+ID3. The impurity measure used by C4.5 is
+As for the continuous response values, which
+lead to regression tree development, the basic principles of tree growth are the same. However, while
+decision trees can exploit frequency of a class at a
+node as the basis for impurity, variance ﬁgures
+must be employed in regression trees. Basic methods in this area are CART and M5.
+The regression tree construction procedure of
+CART is fundamentally the same as the decision
+tree development. The total impurity measure of
+an oﬀspring node is the weighted sum of the variances of transactions in that node (Markham
+et al., 1998). The M5 regression tree algorithm
+(Quinlan, 1992) is similar to CART with two basic
+diﬀerences. The impurity measure in M5 is based
+on sample standard deviation instead of sample
+variance. Also, instead of predicting a ﬁxed value
+at a terminal node, training transactions falling
+into a node are used for ﬁtting a linear regression
+Rule induction is the process of constructing
+rules directly from data rather than deriving them
+from an explicit decision tree. Conjunctions of the
+rules are created and the set of ‘‘best’’ rules are
+found. Two rule induction methods, CN2 and
+CN2 was proposed by Clark and Niblett (1989).
+It follows a top–down approach. The algorithm
+ﬁrst starts with an empty set of ‘‘complexes’’. A
+complex is a logical statement of the form ‘‘attribute X < (P)x AND attribute Y < (P)y
+AND . . .’’. In each iteration, more specialised complexes are tested for signiﬁcance and are added to
+the ‘‘qualiﬁed’’ complex set. The signiﬁcance of a
+candidate rule is tested using a likelihood ratio
+ITRULE is a top–down procedure proposed by
+Smyth and Goodman (1992). Rules are again in
+the form of ‘‘if hcondition yi then hclass xi’’. The
+algorithm proceeds using the J-measure, J(xjy),
+which in a way represents the power of class x
+for the transactions satisfying y. At ﬁrst, K rules
+are constructed, each conditioned on a single attribute. Rule construction proceeds using depth-ﬁrst
+search on a tree with the objective of maximizing
+the smallest J-measure among the K rules.
+3.3. Attribute selection and discretisation
+Attribute selection aims at ﬁnding subsets of
+attributes that are at least as strong as the whole
+set in terms of predictive power, thus the motivation is to eliminate irrelevant attributes (Kohonenko and Hong, 1997).
+Discretisation is the process of converting continuous attributes to discrete ones without signiﬁcant loss of information. Dougherty et al. (1995)
+categorises discretisation algorithms as: (1) supervised versus unsupervised depending on whether
+or not labelled classes are present, (2) local versus
+global meaning individual ranges or joint regions
+are considered for attribute values, and (3) static
+versus dynamic as to whether or not interdependencies between attributes are accounted for.
+Although attribute selection and discretisation
+are diﬀerent tasks, they are often tackled jointly,
+since the attributes that are discretised are also
+tested for their predictive power (Kohonenko
+and Hong, 1997). Liu and Setiono (1997) have
+developed the Chi2 algorithm, which partitions
+continuous data points into buckets to be merged
+later on. In each iteration the merging operation is
+validated by a signiﬁcance test based on the Chisquare distribution. Attributes that are found irrelevant to the target class turn out to have a single
+The contextual merit approach (Hong, 1997)
+sorts attributes according to their prediction performance in the presence of other attributes. This
+feature emphasises the ‘‘contextual’’ nature of the
+algorithm. The smaller the number of attributes
+used in separating transactions, the larger will be
+their marginal discriminative power or merit.
+Attributes are ﬁrst sorted by their merit, and those
+few having the least merit are eliminated to discover potential power of the remaining attributes.
+A. Öztürk et al. / European Journal of Operational Research 173 (2006) 683–700
+Using contextual merit, Hong (1997) proposes a
+3.4. Data mining applications in manufacturing
+Apte et al. (1993), Markham et al. (1998), and
+Koonce and Tsai (2000) present DM applications
+in the manufacturing contexts. These studies address classiﬁcation of defects in manufacturing,
+rule induction to determine the number of kanbans, and DM applied to discover patterns in shop
+schedules, respectively. Although current applications are limited, Kingsman et al. (1996) speciﬁcally
+underline the potential for DM in make-to-order
+settings, hinting that decision rules induced by
+A hypothetical manufacturing environment is
+created through computer simulation to generate
+the controlled data needed in this study. These
+data are afterwards input to the DM tools and
+to alternative LT estimation methods, and their
+Three distinct job shops (identiﬁed as SHOP-V,
+SHOP-A and SHOP-I) previously proposed in a
+similar context (Ruben and Mahmoodi, 2000)
+are deﬁned to represent various make-to-order
+environments. All parts are forced to visit the ﬁrst
+machine is necessarily common to all the routes
+in SHOP-A. Fig. 2 depicts part routes in SHOPV and SHOP-A. These two shop types are preferred in order to have well deﬁned bottleneck
+stages. In SHOP-V the bottleneck is closest to
+the order release point, hence inferences on LT
+made at the time of release have a high likelihood
+to hold. Contrary to SHOP-V, bottleneck is the
+furthest stage in SHOP-A, hence LT is much harder to predict. SHOP-I, on the other hand, is a balanced system, which does not impose any
+restrictions on part routes. Following is a summary of shop and order characteristics common
+• There are six machines in each shop as this
+number is found ‘‘adequate to represent the
+complex structure of a job shop’’ (Ramasesh,
+• Ten part types are produced in a shop instance,
+• Number of machines on a partÕs route is discrete normal with mean 4 and standard deviation 2. The distribution is truncated such that
+this number is between 2 and 6. Once the number of machines on a route is generated, and the
+ﬁrst (last) machine on the route is ﬁxed in
+are assigned at random provided that a machine
+• Orders arrive in homogenous batches with
+exponentially distributed interarrival times.
+Part type (a predetermined routing) is randomly
+Fig. 2. Part ﬂow in (a) SHOP-V and (b) SHOP-A.
+A. Öztürk et al. / European Journal of Operational Research 173 (2006) 683–700
+• Batch sizes are distributed uniformly between 1
+and 10 to create orders of varying work content.
+• Orders are released to the shop as soon as they
+arrive since our aim is to compare LT estimation methods rather than to test any particular
+• FCFS rule is used for dispatching as LT estimation is found harder under this rule.
+• For processing of an order on a machine, a
+sequence independent setup time per batch
+and a run time per piece are generated from lognormal distribution (Dudley, 1963; Law and
+Kelton, 2000). Lognormal probability density
+represents the right-skewed behaviour of process times and is declared appropriate for modelling randomness as the product of a number
+of component processes (Banks et al., 2001).
+The mean and the standard deviation of run
+time per piece are 10 minutes and 2 minutes,
+respectively. The parameters for setup time
+per batch are 55 minutes (mean run time per
+piece multiplied by the average batch size) and
+11 minutes. Although not constant, setup and
+process times are assumed to be known upon
+• Delays caused by part transfers between
+• No pre-emption is allowed and machines are
+Ramasesh (1990) suggests that machine utilization rates must be in the range 85–94% for eﬀective
+analysis. Moreover, LT estimation literature (e.g.
+Sabuncuoglu and Hommertzheim, 1995) suggests
+that LT estimation gets much harder for higher
+congestion levels. To achieve this with the shop
+parameters given above, various mean order interarrival times are tried in pilot runs. Using these
+pilot test results, the mean order interarrival times
+are set at 125, 125 and 100 minutes for SHOP-V,
+SHOP-A and SHOP-I, respectively. With these
+parameters, the bottleneck machine in each shop
+type is found to have an average utilisation of
+88%. Besides these, mean interarrival time of
+125 minutes is also considered for SHOP-I to
+test a balanced system with a lower utilisation
+In this section, we ﬁrst discuss an initial set of
+attributes that we expect will have potential use
+in LT estimation. Next, we describe our DM methodology choices based on the characteristics of
+alternative methods reported in the literature. Performance measures used in evaluating DM and
+comparing it with other LT estimation techniques
+are presented later. Finally, we brieﬂy explain our
+As DM attributes, we use various statistics collected from the simulated system as orders arrive
+or depart. A complete list of attributes is given in
+Table 1. Our aim in starting out with a long list
+is to include all potentially useful attributes to begin with and to identify in the process those that
+are essential in LT estimation. Here, the motivation is to explore the potential of as many data
+items as possible in extracting knowledge on LT
+Attributes 1–5 in Table 1 are static. These are
+used to capture part type characteristics. Most of
+the remaining attributes are dynamic meaning that
+they reﬂect the order/shop status at the time a new
+order arrives. Some attributes (1–12) are used to
+capture the order properties whereas others are
+about the shop status. Attributes 7 and 8 reﬂect
+the orderÕs work content given its batch size (attribute 6). As one source of variability in the shop is
+the interarrival times, it is tracked by attribute 9.
+To monitor the shopÕs recent completion performance, moving averages of interdeparture times
+and ﬂow times (attributes 10–12) are kept. Attributes 13–17, which are also found in Veral
+(2001), constitute a myopic set measuring the current shop load in terms of number of orders/parts
+in the system. Machine utilisations (attributes 18–
+20) are emphasised by Kingsman et al. (1996).
+Average waiting times in machine queues, relative
+queue lengths also used by Ooijen and Bertrand
+(2001), and potential loads of machines (attributes
+21, 23 and 25) are longer term measures of the
+shopÕs load distribution. PotenTot is the basic
+A. Öztürk et al. / European Journal of Operational Research 173 (2006) 683–700
+Part type of the arriving order which deﬁnes the orderÕs routing
+Number of operations in the orderÕs route
+Average, minimum and maximum number of part types that visit the machines on the orderÕs route
+Total expected work content of the order (mean setup time + mean process time · BatchSize
+Total actual process time of the order (computed as in TWK using actual setup and process
+Moving average of interarrival times of the last nine orders (used to reﬂect the recent
+Moving average of interdeparture times of the last 30 orders (completion of 30 orders
+Moving average of ﬂow times of the last 30 orders having the same part type
+Expected ﬂow time of the order estimated by the average ﬂow time of all orders
+having the same part type as the arriving order
+Number of orders present in the shop upon the orderÕs arrival
+Number of parts waiting or in process at all the machines on the orderÕs route upon its arrival
+Number of parts waiting or in process at the ﬁrst machine on the orderÕs route upon its arrival
+Number of parts waiting or in process at the last machine on the orderÕs route upon its arrival
+Number of parts waiting or in process at the most loaded machine on the orderÕs route
+Average, minimum and maximum of the machine utilisations on the orderÕs route upon its arrival
+Sum of the average waiting times in queue for all the machines on the partÕs route upon its arrival
+Diﬀerence between average waiting times at the two machines in the shop having the maximum
+Average of the relative queue lengths of the machines on the orderÕs route upon its arrival
+(relative queue length of a machine is found as actual queue length at the time of arrival
+Diﬀerence between maximum and minimum relative queue lengths among the machines
+Total expected potential load of the machines on the orderÕs route upon its arrival
+(includes work content of the orders that are in the shop and are yet to visit those machines)
+Diﬀerence between maximum and minimum potential loads among the machines on
+‘‘look ahead’’ attribute, providing a measure of the
+shopÕs load in the near future. Dispersion is a factor proposed in LT estimation in earlier works
+(Weeks, 1979; Enns, 1995). Attributes 22, 24 and
+26 are included as various forms of range or deviation measures.
+Throughout the simulation runs, every order
+arrival is treated as a ‘‘transaction’’ to be fed into
+the DM analysis. All attribute values are stored as
+a new transaction upon arrival of an order. The
+response variable (realised ﬂow time) for each
+transaction is also recorded at completion of the
+We have selected our DM methodology considering three basic criteria. These are: (1) type of
+A. Öztürk et al. / European Journal of Operational Research 173 (2006) 683–700
+training (supervised or unsupervised), (2) purpose
+of DM which is prediction in our case, and (3) nature of attributes and the response variable (categorical or continuous values).
+Value of the response variable (realised ﬂow
+time of an order) is recorded for every order
+departing from the system. Hence, our problem involves analysis with a number of ‘‘independent’’
+attributes and a dependent variable whose value
+is known. (Note that job and shop attributes are
+not independent in the statistical sense. We use
+the term independence only to indicate that ﬂow
+time will be deﬁned by these attributes.) Therefore,
+we have chosen to use supervised learning. In real
+life systems similar data can be collected with the
+help of computer integrated shop ﬂoor control systems, as Sabuncuoglu and Comlekci (2002) also
+Since our purpose is predicting the LT, as opposed to association of attributes or clustering,
+we have adopted the tree (and rule) construction
+Most of our attributes and in particular the response variable are continuous in nature. However, since most DM work and software deal
+with categoric attributes, we have considered both
+discrete and continuous approaches before making
+a choice. As the DM tool, we have tried See5 and
+Cubist, both of which are developed by Quinlan
+(2003). See5 is the MS Windows implementation
+of C5.0, which is an enhanced version of the
+C4.5 (Quinlan, 1993). Cubist, which is based on
+M5 (Quinlan, 1992), is particularly suitable for
+continuous attributes as it makes use of regression
+trees. Both packages generate a decision tree and
+produce a ‘‘ruleset’’ by simplifying the tree.
+In using See5, we discretised the ﬂow time, originally measured in minutes, expressing it in days
+where a day is 480 minutes. Using discrete values
+for the ﬂow time resulted in loss of precision in
+estimation. For example, two transactions occurring at the 479 and 481 minutes hence separated
+by 2 minutes will be classiﬁed one full day apart.
+The realised and predicted values for a transaction
+can be as disparate as 120 and 950 minutes and the
+prediction error will be taken as one day. This
+makes precise prediction and error estimation
+During the pilot test runs with See5 a misclassiﬁcation rate of 20–30% was encountered. (A transaction having an realised ﬂow time of X days is
+misclassiﬁed, if the predicted ﬂow time for the
+order is diﬀerent from X days.) Although we tried
+various options available in See5, we could not
+reduce the misclassiﬁcation rate signiﬁcantly. If,
+however, a prediction interval of plus or minus
+one day is deemed acceptable, then the misclassiﬁcation rate drops below 10%. Note that this
+implies an absolute prediction error of about
+Cubist, on the other hand, constructs a decision
+tree by minimizing the sample standard deviation
+on newly created nodes at each branching. Every
+new node supplies an additional condition to take
+part in the resultant rule. Eventually, Cubist applies linear regression to the set of transactions
+classiﬁed in each terminal node. Hence, conclusion
+part of each rule is a distinct linear regression
+A sample of Cubist output is given in Fig. 3.
+The condition in Rule 1 is that the PotenTot attribute of a transaction is less than 370 minutes.
+When this holds for a transaction, the accompanying regression model for predicting the ﬂow time
+¼ 10.1509 þ 0.156 PotenTot þ 53 NoInFirst
+We do not propose to use such models built
+around all 26 attributes. This would increase variance of the estimates without adding much to the
+modelÕs predictive power. Instead, we intend to select a relatively small but signiﬁcant subset as will
+be described in Section 5.4, and repeat Cubist runs
+In Fig. 3 ‘‘Average jerrorj’’ and ‘‘Relative
+jerrorj’’ shown at the bottom of the Cubist output
+are the values for the average and relative absolute
+prediction error. The average absolute diﬀerence
+between realised and predicted ﬂow times is
+A. Öztürk et al. / European Journal of Operational Research 173 (2006) 683–700
+91 minutes, much less than the 480 minutes found
+by See5. Relative absolute error is the ratio of the
+given average absolute error to the average absolute error of the overall ﬂow time average, were
+it used as a naı¨ve estimate. The last measure is
+the correlation coeﬃcient between realised and
+We also compared See5 and Cubist in terms of
+their worst case performance. The diﬀerence between realised and predicted ﬂow times could be
+as large as eight days in See5, whereas it never exceeded two workdays (960 minutes) in Cubist.
+Hence, we concluded that Cubist is superior to
+See5 for our problem and used Cubist in the rest
+• Average realised ﬂow time per order: Used to
+give an idea about the magnitude of the manufacturing LT and is identical in all situations to
+• Average absolute error: Average over all transactions of the absolute diﬀerence between realised and predicted ﬂow time.
+• Coeﬃcient of variation (CV) of absolute error.
+• Relative error: Ratio of the methodÕs average
+absolute error to the would-be average absolute
+error if the overall ﬂow time average were the
+• Mean square error (MSE): Average over all
+transactions of the squared diﬀerence between
+• Adjusted R2 where a regression model is used.
+We use the following performance measures in
+evaluating the DM approach and comparing it
+In addition to these performance measures, we
+examined the percentage of transactions with
+underestimated (overestimated) ﬂow times to yield
+tardiness (earliness) assuming the estimated LT is
+A. Öztürk et al. / European Journal of Operational Research 173 (2006) 683–700
+quoted as the due date. The average tardiness and
+the average earliness are also considered. These
+measures are mainly used for control purposes.
+Percentages of tardy and early orders should both
+be close to 50%. Average tardiness and earliness
+should give some idea about the symmetry in prediction errors.
+We have started the DM analysis with the initial set of 26 attributes given in Table 1. In fact
+most of these attributes are interdependent or
+correlated, and using all of them would result in
+redundancies. Besides, data collection in a real
+shop would be a serious burden with all those
+attributes. Hence, we need to select a small subset
+of attributes that has the highest predictive power
+and that is essential in estimating LT with acceptable accuracy. Using the minimal number of
+attributes is also in line with the observation
+made by Ragatz and Mabert (1984) that additional factors in LT estimation yield diminishing
+Most attribute selection methods in DM literature deal with categoric attributes and are not
+applicable for continuous attributes. Therefore,
+we have devised an empirical attribute selection
+(or elimination) procedure. MSE is used as the primary performance measure in attribute elimination as proposed by Breiman (1996). Our
+selection procedure assumes that occurrences of
+an attribute in Cubist rules is an indicator of its
+predictive power. To identify the most frequently
+used attributes, occurrence of an attribute is
+checked in the condition and/or the regression
+parts of individual Cubist rules. The weighted
+attribute usage ratio for attribute i, WAURi, is
+where j is the rule index, N is the number of rules
+in the ruleset, wj is the number of transactions that
+satisfy condition of rule j (available in the Cubist
+output), xij is one if attribute i is used in rule j
+Attribute selection is performed in successive
+stages starting with the set of all candidates
+and getting more demanding at each stage. We
+eliminate attributes gradually as we increase the
+WAUR threshold by increments of 0.1 at each
+stage. For example, at the threshold level of
+50%, only those attributes having WAUR values
+larger than 0.5 are kept, and the remaining attributes are dropped. MSE is monitored in the
+meantime as the threshold is increased. MSE
+did not grow in the initial stages of attribute removal. The attributes left just before MSE starts
+increasing steeply are selected. Further details of
+attribute selection are given in the following
+We have experimented with four shop types,
+(125), where ﬁgures in parentheses for the last
+two shops are the mean interarrival times. Ten
+routing instances are generated for each of the four
+two replications for each shop instance. The ﬁrst
+replication is for training, i.e. Cubist is run to construct a ruleset using the transactions generated
+from this replication. The second replication is
+used for testing, i.e. the rules generated from the
+ﬁrst replication are applied to predict the ﬂow
+times. Performance measures are based on the test
+Replication length is taken as 10,000 days, and
+the ﬁrst 100 days are truncated to eliminate the initial bias. Note that output analysis issues such as
+checks for normality and independence are irrelevant, since we use simulation not for prediction
+but for generating transactions for DM. About
+38,000 transactions are generated in each replication. A Cubist run for 38,000 transactions takes
+30–120 seconds depending on the number of attributes on a 1400 MHz personal computer with
+Firstly pilot runs were performed for attribute
+selection. Then, using the selected attributes, we
+performed our production runs and compared
+A. Öztürk et al. / European Journal of Operational Research 173 (2006) 683–700
+our approach with other (some more recently proposed) LT estimation methods.
+We applied the attribute selection scheme described in Section 5.4 to three speciﬁc shop instances selected from the 10 generated for each
+shop type. The ﬁrst two instances for a shop are
+chosen from the ‘‘average’’ ones, where typical
+characteristics such as the number of visitations
+per part type and per machine are close to their
+targeted mean levels. In the third instance chosen,
+these characteristics are far from their mean values
+Pilot Cubist runs were made for the three instances with all the 26 attributes. Rulesets generated contain 25–40 rules in general. Table 2
+summarises performance of the Cubist test runs.
+SHOP-V seems to be the easiest shop to predict
+with the lowest MSE. Average absolute error is
+97 minutes (9% of the average realised order ﬂow
+time), slightly larger than the 91 minutes found
+in the training run but smaller than the mean interarrival time. MSE statistics for SHOP-A and
+SHOP-I (125) are twice as large as that of
+SHOP-V. Average absolute error is 12% and
+15% of the average realised ﬂow time for these
+two shops. SHOP-I (100) proves to be the most
+diﬃcult to predict with an average absolute error
+of 193 minutes (14% of the average realised ﬂow
+time). Another observation is that ﬂow time is
+overestimated in more than half (52–53%) of the
+transactions. This implies that realised ﬂow time
+distribution is slightly skewed to the right compared to predicted ﬂow time distribution. The
+same pattern is also observed in our production
+Results of our attribute selection scheme are
+summarised in Fig. 4(a) and (b). In these ﬁgures
+MSE values for SHOP-V and SHOP-A are plotted against increasing WAUR threshold levels
+for the three instances of each shop (SHOP-I
+shows similar behaviour and thus is not included).
+The plots indicate that diﬀerent instances of the
+same shop exhibit very consistent behaviour. This
+justiﬁes attribute selection based only on only
+three shop instances. There are clear cut WAUR
+levels after which MSE starts a sharp increase,
+means that eliminating attributes up to those
+levels does not aﬀect the performance of DM
+Attributes selected for the four shop types are
+shown in Table 3. We have two sets for each shop.
+The conservative set is taken at the highest WAUR
+level after which MSE starts increasing. The risky
+set is obtained at the next level of increase in MSE.
+The former set guarantees a minimum error performance, the latter minimises the number of attributes hence the data collection eﬀort. In particular,
+TotProcTime, NoInFirst and PotenTot are common to all four shops and are found essential
+regardless of the shop type and the WAUR level.
+All three are load related measures. TotProcTime
+is a static job characteristic. NoInFirst and
+Using all 26 attributes, average of three shop instances for each shop type.
+A. Öztürk et al. / European Journal of Operational Research 173 (2006) 683–700
+Fig. 4. MSE values for three instances of (a) SHOP-V and (b) SHOP-A as WAUR threshold increases.
+Conservative and risky sets of selected attributes
+PotenTot are dynamic shop estimates with a weak
+6.2. Comparison of data mining approach with other
+The DM approach is compared with four other
+methods. The ﬁrst method is linear regression
+where independent variables are restricted to the
+attributes in the conservative and risky sets given
+in Table 3. A third and larger attribute set (generated at 40% WAUR level) is also used for control
+purposes. This is performed to explore the value
+added by CubistÕs decision tree and the partitioning introduced by the condition part of the
+The second comparison method is a recent proposal due to Ruben and Mahmoodi (2000). We use
+where LT estimate for an arriving order i (LTi) is
+given by an expression with three elements: number of parts waiting or in process at the bottleneck
+machine k (Qk), number of parts waiting in machine queue j on the route Ri of part i (Qj), and
+interaction between the two. These variables, except the interaction terms, are among the DM
+attributes. The bottleneck for SHOP-I is taken as
+the maximum loaded machine at the time of the
+A. Öztürk et al. / European Journal of Operational Research 173 (2006) 683–700
+The third method is also a recent suggestion by
+Hopp and Sturgis (2000). It represents LT for
+where l(ni) is the mean ﬂow time and r(ni) is the
+estimated standard deviation of ﬂow time with ni
+jobs present in the system. ﬀ is called the fudge factor and is used to adjust the LT estimation dynamically to account for a service level. The service level
+a, which is percentage of tardy orders tolerated, is
+set at 50% to make the method comparable with
+DM. This eliminates the standard deviation component in the main formula as z0.50 = 0. The load
+dependent mean ﬂow time and its standard deviation are based on predeﬁned critical work-in-process levels. Details of estimating l(ni) and r(ni)
+can be found in Hopp and Sturgis (2000). Their
+method is also based on the number of orders in
+system, but uses a quadratic regression model in
+estimating l(ni) as opposed to multiple linear
+models used in Cubist. Hence, the restriction of linear conduct in Cubist is evaluated against a quadratic approach. Expected ﬂow time in an empty
+system, l(0), is replaced with the intercept b0 estimated from regression equation. Otherwise regression cannot be run since realised ﬂow time for some
+transactions is shorter than l(0) due to randomness. Critical work-in-process levels are found by
+using the mean setup and process times of the shop
+instance. Interdeparture times are estimated from
+simulation, which turned out to be the same as
+interarrival times as the shops reach steady state.
+The last method is the traditional TWK (total
+work content). It is chosen since it is widely accepted and based on the attribute TotProcTime,
+which is one of the top three most important attributes found in our DM implementation. In implementing the method, the shop instance dependent
+LTi = k * TotProcTimei, are determined so as to
+All the models above are ﬁrstly ﬁt to a sample
+of around 1000 transactions randomly drawn from
+the training data set (a total of 38,000 transactions
+on the average) for each shop instance to assure
+independence of data points. To validate the sampling, regression runs are also made using the
+whole training data set. Models ﬁt to the sample
+are found as successful as those found using the
+All comparison methods are applied to each of
+the 10 instances of four shops. The average results
+are summarised in Table 4. The ﬁrst observation
+regarding Cubist is that the absolute, relative and
+mean square error values are not larger than those
+in Table 2. Hence, we can conclude that even the
+risky attribute sets perform almost as well as the
+whole set of 26 attributes, and the attribute selection scheme has been successful. With conservative
+attribute sets for diﬀerent shop types, average
+absolute error is 8–15% of the average realised
+order ﬂow time. The same range is 9–16% with risky attribute sets. MSE values obtained with risky
+attribute sets are 5–23% larger than those obtained
+with conservative sets. Relative behaviour of the
+shops is also the same as in Table 2; SHOP-V is
+again the easiest to predict and SHOP-I (100) is
+the most diﬃcult. This is expected because the bottleneck in SHOP-V, which is an important indicator of the shopÕs load, is visited early on, and this
+makes prediction more accurate. In SHOP-I, however, routings are random and bottlenecks may
+Linear regression with selected attributes performs 6–15% worse than Cubist with conservative
+attribute sets, and 4–13% with risky ones in terms
+of the average absolute error. The diﬀerence can be
+attributed to CubistÕs decision tree and use of a different regression model in each node. In fact, Cubist results with conservative attribute sets are
+better than all regression results for all four shops;
+this is true even with risky attributes for the ﬁrst
+three shops. Compared to the other three methods,
+performance of linear regression with selected
+attributes is the closest to that realised by Cubist.
+This is probably because of the relatively linear
+nature of ﬂow time data. The regression tree
+approach would be particularly stronger than
+straightforward regression when higher order
+dependencies (nonlinearity) exist in the data. This
+fact is also underlined by Apte and Weiss (1997).
+The relative insensitivity of linear regression to
+all three attribute sets probably indicates the bottom-line eﬀectiveness of the method, given the
+Comparison of data mining approach with other methods
+A. Öztürk et al. / European Journal of Operational Research 173 (2006) 683–700
+Average of 10 shop instances for each shop type.
+A. Öztürk et al. / European Journal of Operational Research 173 (2006) 683–700
+Cubist and linear regression outperform the
+other methods by a wide margin. Average absolute
+errors for diﬀerent shops are 37–117% larger with
+the method by Ruben and Mahmoodi, and 41–
+97% larger with Hopp and SturgisÕ approach relative to the performance of Cubist even with risky
+attribute sets. However, there is not a signiﬁcant
+diﬀerence in CV of absolute error among diﬀerent
+methods. This indicates that improved accuracy in
+DM is not attained at the expense of loss in precision. MSE values for these two methods are twice
+as large as those found with Cubist. Relative error
+and adjusted R2 are two measures reﬂecting how
+well a model explains the variability in ﬂow time.
+Relative error remains in the range 0.18–0.43 with
+Cubist and linear regression, whereas the range is
+0.38–0.62 with the other two methods. Adjusted
+R2 values are between 0.78 and 0.95 with linear
+regression. They drop to 0.55–0.77 in Ruben and
+MahmoodiÕs, and 0.35–0.54 in Hopp and SturgisÕ
+regression models. These results indicate that the
+attributes selected and the regression tree approach used in DM are more eﬀective in selecting
+the critical factors and estimating LT compared to
+the other models. TWK is always much worse in
+terms of all performance measures. The largest differences between Cubist and other methods are
+We have demonstrated use of DM, speciﬁcally
+the regression tree approach, in make-to-order
+manufacturing LT estimation. Simulating four
+shop types generates the training and test data
+for DM. The analysis starts with a large set of
+attributes reﬂecting static and dynamic order and
+shop characteristics. We have developed an empirical scheme to select a reasonably small subset of
+attributes having a relatively high predictive
+power. We have compared our DM approach with
+linear regression and three other LT estimation
+Our attribute selection scheme proves to be
+eﬀective. Eliminating attributes up to a certain
+point does not decrease the estimation quality.
+Hence, the conservative sets of attributes selected
+are almost as successful as the full set of attributes,
+regardless of the shop type. We can conclude that
+DM was particularly successful in exploring the
+patterns in data and determining critical attributes
+in LT estimation. Some of the selected attributes
+are common to all shop types. In particular, total
+process time of the order, number of parts waiting
+or in process at the ﬁrst machine on the orderÕs
+route, and total expected potential load of the machines on the orderÕs route prove to be essential.
+Among the three shop types, SHOP-V is the
+easiest to predict with DM. For this shop, average
+absolute error is below 9% of the average realised
+ﬂow time with conservative or risky attribute sets.
+Our results indicate that the regression tree approach of DM coupled with our attribute selection
+Among these, linear regression with selected attributes has the closest estimation quality to DM.
+TWK has the worst performance. We can conclude that the knowledge-based approaches constitute a viable alternative and can prove more
+eﬀective in estimating LT compared to many other
+models. Instead of postulating a model and estimating its parameters from the data, DM focuses
+on learning what the data may reveal with all its
+Our study can be complemented by its application in an actual manufacturing environment. The
+application seems feasible given the computer integrated resource planning and shop ﬂoor control
+systems supported by state-of-the-art data warehousing software available today. A shop ﬂoor
+control system can be adjusted to collect the necessary data, and data warehousing can be used to extract the DM attribute values from these data.
+This underlines the essence of systematic treatment
+of historical data to be used not only for report
+generation but also for modelling purposes to provide decision support.
+DM is known to be eﬀective with large amounts
+of data. In this study we have used simulation as
+the data source. In a real life manufacturing system, accumulation of suﬃcient data for DM may
+take a long time during which the environment
+(part mix, demand, processes and so on) may
+change. Therefore, the potential of using DM with
+A. Öztürk et al. / European Journal of Operational Research 173 (2006) 683–700
+limited amount of data may be worthwhile to
+We have observed that attribute selection is an
+essential part of the DM process. Most attribute
+selection methods in DM literature deal with categoric attributes, and they are not directly applicable to continuous attributes as in our case. It seems
+there is a need to adapt these methods or to develop new ones for selection of continuous attributes.
+We expect that nonlinearity in ﬂow times introduced by batching practices, stoppages caused by
+machine breakdowns, use of due date based dispatching rules, and time losses caused by changeovers, will increase the diﬀerence in performance
+between DM and linear regression in favour of
+the former. Therefore the strength of DM, in particular that of regression trees, can be explored by
+experimenting with data having higher order
+dependencies between the DM attributes and the
+ﬂow time. Artiﬁcial neural networks, which were
+applied with success to a variety of production
+planning and control problems, can also be used
+for LT estimation as an alternative to regression
+An important research area in manufacturing
+domain would be use of DM for order review
+and release. DM can be used to produce sets of
+rules that will guide the decision maker in choosing the appropriate release times. Another application area can be determination of part families and
+This research is supported by the Turkish Science and Research Council (TUBITAK) under
+Agrawal, R., Imielinski, T., Swami, A., 1993. Mining association rules between sets of items in large databases. In:
+ACM SIGMOD International Conference on Management
+Apte, C., Weiss, S.M., 1997. Data mining with decision trees
+and decision rules. Future Generation Computer Systems 13
+Apte, C., Weiss, S.M., Grout, G., 1993. Predicting defects in
+disk drive manufacturing: A case study in high dimensional
+classiﬁcation. In: IEEE Annual Conference on AI Applications, Orlando, FL.
+Banks, J., Carson II, J.S., Nelson, B.L., Nicol, D.M., 2001.
+Discrete-event System Simulation, third ed. Prentice Hall,
+Bertrand, J.W.M., 1983. The use of workload information to
+control job lateness in controlled and uncontrolled release
+production systems. Journal of Operations Management 3
+Breiman, L., 1996. Bagging predictors. Machine Learning 24
+Breiman, L., Friedman, J.H., Olshen, R.A., Stone, C.J., 1984.
+Classiﬁcation and Regression Trees. Wadsworth, London.
+Cheng, T.C.E., Gupta, M.C., 1989. Survey of scheduling
+research involving due date determination decisions. European Journal of Operational Research 38 (2), 156–166.
+Clark, P., Niblett, T., 1989. The CN2 induction algorithm.
+Dougherty, J., Kohavi, R., Sahami, M., 1995. Supervised and
+unsupervised discretization of continuous features. In: The
+Twelfth International Conference on Machine Learning,
+Dudley, N.A., 1963. Work-time distributions. International
+Journal of Production Research 1, 137–144.
+Eilon, S., Chowdhury, I.G., 1976. Due dates in job shop
+scheduling. International Journal of Production Research
+Enns, S.T., 1995. A dynamic forecasting model for job shop
+ﬂowtime prediction and tardiness control. International
+Journal of Production Research 33 (5), 1295–1312.
+Hong, S.J., 1997. Use of contextual information for feature
+ranking and discretization. IEEE Transactions on Knowledge and Data Engineering 9 (5), 718–730.
+Hopp, W.J., Sturgis, M.L.R., 2000. Quoting manufacturing due
+dates subject to a service level constraint. IIE Transactions
+Kingsman, B.G., Mercer, A., 1997. Strike rate matrices for
+integrating marketing and production during the tendering
+process in make-to-order subcontractors. International
+Transactions in Operations Research 4 (1), 251–257.
+Kingsman, B.G., Hendry, L., Mercer, A., de Souza, A., 1996.
+Responding to customer inquiries in make-to-order companies: Problems and solutions. International Journal of
+Production Economics 46–47 (December), 219–231.
+Kohonenko, I., Hong, S.J., 1997. Attribute selection for
+modelling. Future Generation Computer Systems 13 (2–3),
+Koonce, D.A., Tsai, S.-C., 2000. Using data mining to ﬁnd
+patterns in genetic algorithm solutions to a job shop schedule.
+Computers and Industrial Engineering 38 (3), 361–374.
+Law, A.M., Kelton, W.D., 2000. Simulation Modeling and
+Analysis, third ed. McGraw-Hill, Singapore.
+Liu, H., Setiono, R., 1997. Feature selection via discretization.
+IEEE Transactions on Knowledge and Data Engineering 9
+A. Öztürk et al. / European Journal of Operational Research 173 (2006) 683–700
+Markham, I.S., Mathieu, R.G., Wray, B.A., 1998. A rule
+induction approach for determining the number of kanbans
+in a just-in-time production system. Computers and Industrial Engineering 34 (4), 717–727.
+Michaud, P., 1997. Clustering techniques. Future Generation
+Moodie, D., 1999. Demand management: The evaluation of
+price and due date negotiation strategies using simulation.
+Journal of Production Operations Management Society 8
+Quinlan, J.R., 1992. Learning with continuous classes. In: 5th
+Australian Joint Conference on Artiﬁcial Intelligence, Singapore, pp. 343–348.
+Quinlan, J.R., 1993. C4.5: Programs for Machine Learning.
+Quinlan, J.R., 2003. See5 and Cubist online user guides,
+Rulequest Research Data Mining Tools, Available from:
+Ragatz, G., Mabert, V., 1984. A framework for the study of due
+date management in job shops. International Journal of
+Ramasesh, R., 1990. Dynamic job shop scheduling: A survey of
+simulation research. OMEGA 18 (1), 43–57.
+Ruben, R.A., Mahmoodi, F., 2000. Lead time prediction in
+unbalanced production systems. International Journal of
+Sabuncuoglu, I., Comlekci, A., 2002. Operation-based ﬂowtime
+estimation in a dynamic job shop. OMEGA 30 (6), 423–442.
+Sabuncuoglu, I., Hommertzheim, D.L., 1995. Experimental
+investigation of an FMS due-date scheduling problem: An
+evaluation of due-date assignment rules. International
+Journal of Computer Integrated Manufacturing 8 (2),
+Siedmann, A., Smith, M.L., 1981. Due date assignment for
+production systems. Management Science 27 (5), 571–581.
+Smith, M.L., Siedman, A., 1983. Due date selection procedures
+for job-shop simulation. Computers and Industrial Engineering 7 (3), 199–207.
+Smyth, P., Goodman, R., 1992. An information theoretic
+approach to rule induction from databases. IEEE Transactions on Knowledge and Data Engineering 4 (4), 301–316.
+Srikant, R., Agrawal, R., 1997. Mining generalized association
+rules. Future Generation Computer Systems 13 (2–3), 161–
+Tatsiopoulos, I.P., Kingsman, B.G., 1983. Lead time management. European Journal of Operational Research 14 (4),
+van Ooijen, H.P.G., Bertrand, J.W.M., 2001. Economic duedate setting in job-shops based on routing and workload
+dependent ﬂow time distribution functions. International
+Journal of Production Economics 74 (1–3), 261–268.
+Veral, E., 2001. Computer simulation of due-date setting in
+multi-machine job shops. Computers and Industrial Engineering 41 (1), 77–94.
+Vig, M.M., Dooley, J.K., 1991. Dynamic rules for due-date
+assignment. International Journal of Production Research
+Weeks, J.K., 1979. A simulation study of predictable due-dates.
+Zait, M., Messatfa, M., 1997. A comparative study of clustering
+methods. Future Generation Computer Systems 13 (2–3),

@@ -1,0 +1,606 @@
+Journal of Manufacturing Technology Management
+Work load responsive adjustment of planned lead times
+S.T. EnnsPattita Suwanruji, (2004),"Work load responsive adjustment of planned lead times", Journal of Manufacturing
+Technology Management, Vol. 15 Iss 1 pp. 90 - 100
+http://dx.doi.org/10.1108/09576060410512365
+Downloaded by University of Innsbruck At 05:52 04 November 2015 (PT)
+Downloaded on: 04 November 2015, At: 05:52 (PT)
+References: this document contains references to 14 other documents.
+To copy this document: permissions@emeraldinsight.com
+The fulltext of this document has been downloaded 1128 times since 2006*
+Users who downloaded this article also downloaded:
+Emilio Bartezzaghi, Gianluca Spina, Roberto Verganti, (1994),"Lead-time Models of Business Processes", International Journal
+of Operations &amp; Production Management, Vol. 14 Iss 5 pp. 5-20 http://dx.doi.org/10.1108/01443579410056768
+Richard J. Tersine, Edward A. Hummingbird, (1995),"Lead-time reduction: the search for competitive advantage", International
+Journal of Operations &amp; Production Management, Vol. 15 Iss 2 pp. 8-18 http://dx.doi.org/10.1108/01443579510080382
+Stig-Arne Mattsson, (2007),"Inventory control in environments with short lead times", International Journal of Physical
+Distribution &amp; Logistics Management, Vol. 37 Iss 2 pp. 115-130 http://dx.doi.org/10.1108/09600030710734839
+Access to this document was granted through an Emerald subscription provided by emerald-srm:269832 []
+If you would like to write for this, or any other Emerald publication, then please use our Emerald for Authors service
+information about how to choose which publication to write for and submission guidelines are available for all. Please visit
+www.emeraldinsight.com/authors for more information.
+Emerald is a global publisher linking research and practice to the benefit of society. The company manages a portfolio of
+more than 290 journals and over 2,350 books and book series volumes, as well as providing an extensive range of online
+products and additional customer resources and services.
+Emerald is both COUNTER 4 and TRANSFER compliant. The organization is a partner of the Committee on Publication Ethics
+(COPE) and also works with Portico and the LOCKSS initiative for digital archive preservation.
+*Related content and download information correct at time of download.
+distribution requirements planning (DRP), flow
+time allowances are controlled through the use
+of planned lead times. These planned lead
+times are normally static parameters specified
+within the item master file. Adjustments are
+seldom made although the benefits of updating
+planned lead times have long been recognized
+(e.g. Orlicky, 1975; Hoyt, 1978). In part this is
+owing to a lack of prescriptive methods that
+Instead, there has been a tendency to use
+inflated static planned lead times to cover
+``worst-case'' scenarios. This results in high
+work-in-process (WIP) levels and sluggish
+volumes. The effect of MRP planned lead times
+on WIP levels and delivery performance has
+Methods to select or readjust planned lead
+times may use either steady-state or dynamic
+work load information. In the former case,
+queuing relationships may be used to predict lot
+flow times. An additional attraction of this
+approach is that lot size optimization can be
+Vandaele (1996) illustrated this approach using
+GI/G/1 queuing relationships for a single
+station case. However, if arrival streams are not
+assumptions, it is difficult to estimate the
+appropriate interarrival time distributions.
+Furthermore, in a multiple-stage context using
+delays due to the time-phased nature of order
+prediction. These problems can be reduced if it
+is assumed interarrival times at stations are
+independent. In this case the assumption of
+relationships to be applied. The justification
+manufacturing networks there is a high degree
+Downloaded by University of Innsbruck At 05:52 04 November 2015 (PT)
+S.T. Enns is an Associate Professsor and Pattita Suwanruji
+is a PhD Candidate, both in the Department of Mechanical
+and Manufacturing Engineering, University of Calgary,
+Distribution operations, Lead times, Lot size,
+Mechanisms to adjust planned lead times based on current
+work loads are desirable for time-phased planning systems.
+This paper investigates the use of exponentially smoothed
+order flow time feedback in setting planned lead times
+dynamically. The system studied is a supply chain with
+capacity-constrained processing stations and transit times
+between stations. Lot sizes are based on the minimization of
+flow times using queuing approximations. Both seasonal
+and level demand patterns with uncertainty are considered.
+Since both dependent and independent demands are
+assumed at each station, customer delivery performance
+depends on the distribution of inventory along the supply
+chain. Results show that dynamic planned lead time setting
+can be used effectively to control delivery performance along
+the supply chain. Performance is also influenced significantly
+The Emerald Research Register for this journal is available at
+The current issue and full text archive of this journal is
+This research was supported in part by a grant from
+the National Science and Engineering Research
+Journal of Manufacturing Technology Management
+# Emerald Group Publishing Limited . ISSN 1741-038X
+Work load responsive adjustment of planned lead times
+Journal of Manufacturing Technology Management
+Downloaded by University of Innsbruck At 05:52 04 November 2015 (PT)
+of splitting and merging of work flow streams
+and therefore interarrival times fall into an
+approximate negative exponential distribution.
+Hill and Raturi (1992) suggested this as a
+research study emphasizing MRP lot-sizing.
+Work load feedback or lot flow time feedback
+can also be used in setting planned lead times.
+Hoyt (1978) illustrated the use of work load
+profiles to estimate queue time requirements. This
+approach is responsive to changing work load
+conditions but requires good information on the
+current shop status and lot service times. Another
+approach is to use exponentially smoothed
+feedback on the actual flow times being observed.
+Enns (2002) demonstrated the feasibility of
+setting the planned lead times on the basis of
+exponentially smoothed order flow time feedback
+exponentially smoothed feedback by examining
+configuration of interest involves parts going
+through a linear series of capacity-constrained
+stages with transportation time between stages.
+In addition, it is assumed there is independent
+customer demand at each stage. The fact that
+both independent and dependent demand are
+uncertainty along the supply chain stage must
+be taken account during planning. In order to
+inventory must be balanced throughout the
+stages using safety stock or planned lead times.
+This configuration could represent a supply
+chain in which some lot processing, inspection
+or packaging activity is required at each station.
+The investigation of appropriate lot size
+selection is also extended in this paper. Lot size
+selection is based on minimizing lot flow times
+distributions is dealt with by simply assuming
+several different interarrival time coefficients of
+variation. Optimal lot sizes are determined for
+each set of interarrival time assumptions and
+performance is then compared using each set of
+lot sizes computed. The objective is to determine
+how these lot sizes affect performance and
+whether the use of lot sizes based on M/G/1
+queuing assumptions, which are much easier to
+deal with, provide satisfactory performance.
+This section briefly describes the experimental
+test bed, the supply chain scenario used in
+evaluating the planning system, the lot size
+selection algorithm, the dynamic planned lead
+time setting mechanism, and the experimental
+The supply chain investigated was managed
+generated on a periodic basis. The concepts and
+requirements planning (MRP). However, the
+approach is applied to the distribution of goods
+manufacturing facility. Further information on
+DRP logic and application can be found in
+Martin (1983), Maskell (1988), Ross (1988),
+Ho (1990), and Suwanruji and Enns (2002).
+time-phased planning performance, such as
+that used in MRP or DRP systems, requires two
+modules. The first module is a planning system
+and the second is a simulation program to
+emulate information and material flow through
+the production or distribution system. A test
+transparent was used in this research. The
+Excel workbook. Worksheets were used for the
+user interface, while the time-phased logic was
+implemented through extensive use of Visual
+ARENA 5.0 software (Kelton et al., 2002).
+Communication between the two modules was
+Figure 1 provides an illustration of the test
+bed components. The solid arrows represent
+represent material flow. The lower section of
+the diagram represents the supply chain being
+simulated. Batches, or lots, of parts are
+capacity-constrained stations are represented as
+squares. Further details of the test bed may be
+Work load responsive adjustment of planned lead times
+Journal of Manufacturing Technology Management
+Downloaded by University of Innsbruck At 05:52 04 November 2015 (PT)
+regenerated once per period, with the period
+assumed to be one week. The DRP system was
+operated as a time-bucketed system with 20
+time buckets per week. Assuming five working
+days per week, this is equivalent to four time
+requirements, as determined by the master
+schedule, were assumed to be required at the
+start of each day. The shipping policy was also
+such that one fifth of actual weekly demand was
+shipped at the start of each day. Therefore, the
+timing of master schedule requirements to fill
+shipments. If sufficient stock was not available
+to fill the complete daily order, shipment was
+delayed until sufficient inventory was available.
+supply chain. The supply chain was assumed to
+have four stages, with transit times and a
+capacity-constrained processing station making
+up each stage. As well, it was assumed that
+independent demand occurred at each station.
+Therefore, the same part type at each station
+has both independent and dependent demand.
+However, for planning logic and performance
+measurement purposes, the part type orders
+demand must be distinguished and are given
+different numbers. For example, P7 and P8 are
+the same except that P7 represents the part
+customers) while P8 represents the part having
+The processing and transportation of parts
+were assumed to occur in lots (or batches). The
+lot setup times at all stations was two hours.
+This is equivalent to 0.05 periods since the
+assumption of 40 hours per period was made.
+The processing times per part were assumed to
+be 0.028, 0.037, 0.056 and 0.112 hours at
+stations S1 through S4, respectively. These
+processing times are inversely proportional to
+Work load responsive adjustment of planned lead times
+Journal of Manufacturing Technology Management
+Downloaded by University of Innsbruck At 05:52 04 November 2015 (PT)
+the quantity of parts processed at each station.
+For example, an average daily independent
+demand of 50 at each stage, illustrated in
+Figure 2, would result in average weekly part
+flows of 250, 500, 750 and 1,000 at stations S1
+through S4 respectively. Therefore, if equal lot
+sizes were used at all stages, the station
+utilization levels would all be equal. The setup
+and part processing times were fixed. The
+average transit times between all stations was
+However, actual lot transit times were normally
+distributed, with a coefficient of variation of
+0.10. No break downs at stations were assumed
+to occur. Lots in queue were processed on the
+basis of earliest part due date and no lot
+followed a sinusoidal pattern with a seasonal
+cycle length of 52 periods (one year). The
+independent weekly demand forecasts, used to
+drive master scheduling, were assumed to be
+unbiased. Demand uncertainty was controlled
+by setting the coefficient of variation for actual
+weekly demand relative to forecast weekly
+demand patterns could be adjusted to vary
+station. As well, the demand patterns at various
+stations could be offset to control the variability
+of work loads through time across stations.
+Figure 3 shows the demand forecast and actual
+demand for one cycle at a single station when
+the mean weekly demand is 250, the seasonal
+coefficient of variation is 0.10. Figure 4 shows
+the forecasts for P1, P3, P5 and P7 when all the
+cyclical amplitudes are 25, but the lags are set at
+The decision variables of interest in this
+research are the lot size and the planned lead
+time settings. Selection of appropriate values to
+Figure 4 Seasonal lag for independent demand parts
+obtain desired delivery performance, while
+discussed in the next sections. Lot sizes are
+important in determining the mean flow time
+and inventory at each station while planned lead
+times are used to control delivery performance.
+No safety stock level was explicitly used.
+However, remnant inventory due to lot size
+rounding during master scheduling provided
+The fixed order quantity (FOQ) lot sizing
+policy was used for all parts. The size of lots was
+based on minimizing the weighted average lot
+Work load responsive adjustment of planned lead times
+Journal of Manufacturing Technology Management
+flow times at each station m, Wm , under GI/G/1
+queuing assumptions. The following simple
+weighted average flow times (Whitt, 1983).
+This relationship is exact under M/G/1 queuing
+assumptions, where the lot interarrival time
+coefficient of variation, ca;m , is one due to
+Downloaded by University of Innsbruck At 05:52 04 November 2015 (PT)
+Eqs (1)-(5), allow average flow times to be
+estimated (Whitt, 1983). To find lot sizes that
+minimize average flow times, we need to find
+the partial derivative of Wm with respect to the
+lot size for each part type j processed at station
+m. The resulting set of simultaneous equations
+can then be set equal to zero and solved to
+determine optimal lot sizes. The differential
+equations to minimize lot flow times as a
+function of lot sizes for each part type were
+where Wq;m is the weighted mean time in queue,
+xm is the weighted mean lot service time, ca;m is
+the coefficient of variation for lot interarrival
+times, cs;m is the coefficient of variation for lot
+service times and m is the station utilization
+including setup times, for n part types processed
+demand rate, Qj is the part type lot size, Pj is the
+part processing rate and j is the lot setup time.
+ j is based on average total demand for a given
+part type, including independent demand and
+The utilization rate, including setup times, at
+station m is then given by the following:
+If it is assumed the lot setup times and part
+coefficient of variation of lot service times
+A set of j simultaneous equations for each
+station m were solved to obtain the optimal lot
+sizes for all n part types processed at station m.
+Note that for the supply chain modeled, the
+Following substitution, the weighted mean lot
+flow time at station m can be written as follows:
+Work load responsive adjustment of planned lead times
+Journal of Manufacturing Technology Management
+transportation (or transit) time, the queue time,
+the setup time and the lot processing time. The
+relationships used in dynamic planned lead time
+setting can be clarified by referring to Figure 6.
+The order flow time, Fi;j , for lot i of part type j
+Downloaded by University of Innsbruck At 05:52 04 November 2015 (PT)
+number of part types passing through each
+station can be reduced to one and therefore the
+equations can be simplified considerably. The
+Excel Solver add-in was used for the purpose of
+Planned lead times determine the probability
+that a lot will be available at the due date
+established by the planning system. If planned
+lead times are too short, lots will be tardy and
+tardy lots mean parts may not be available when
+an order is released for the next downstream
+stage. If lead times are too long, excessive
+inventory will be carried in the supply chain.
+Figure 5 clarifies the release, due date and time
+Since order flow times are dependent on work
+loads, planned lead times should be adjusted as
+work loads vary. The planned lead times in this
+actual order flow time at each stage. The
+order flow time is the time between when an
+order for a lot of a given part type is released and
+Therefore, the order flow time includes the
+waiting time for upstream parts if these are not
+in stock at the time of order release, the
+where Ci;j is the completion time for the lot and
+order flow times for each part type j can then be
+perform well. Tests performed using alternative
+values of indicated that results were not very
+sensitive to the value of the smoothing constant
+The planned lead time for part type j at any
+given time t, PLTt;j , can then be determined as
+where bpp is the number of buckets per period
+and Sj is a safety flow allowance for part type j,
+equal to the time interval for an integer number
+of buckets. The planned lead times are rounded
+Work load responsive adjustment of planned lead times
+Journal of Manufacturing Technology Management
+Downloaded by University of Innsbruck At 05:52 04 November 2015 (PT)
+Figure 6 Flow time and planned lead time references
+to the nearest time bucket by subtracting 0.5
+and then rounding up the the nearst integer, as
+designated by the d e brackets. These equations
+assume that the exponentially smoothed flow
+times, planned lead times and safety flow
+allowances are specified in terms of periods. As
+previously stated, planning was based on 20
+P8 were always set to be equal. The values of Sj
+for all independent demand parts (P1, P3, P5
+The third factor was the lot size combination.
+These combinations were based on assuming a
+coefficient of variation of lot interarrival times
+at each station, ca;m , and then using this ca;m to
+find approximately optimal lot sizes. The ca;m
+values assumed were 0.25, 0.50, 0.75 and 1.00.
+The ca;m values were set equal for each of the
+four stations at any given combination of
+experimental settings. The lot sizes for part
+types P2, P4, P6 and P8, using Eq. (6) with
+each ca;m value, are shown in Table I. The shop
+utilization rates, including setup and processing
+times, for each combination of lot sizes are
+shown in the bottom row of Table I. It should
+be noted that the lot sizes based on ca;m  1:00
+are the optimal lot sizes if M/G/1 queuing
+The 20 combinations of experimental settings
+allowance and four lot size combinations) were
+replications were 260 periods long (five years).
+The first 52 periods were used for initialization,
+Three factors were used in the experimental
+design. The first factor was the demand pattern,
+demand levels. The stationary level had a mean
+weekly demand of 250 for P1, P3, P5 and P7
+and a weekly demand coefficient of variation of
+0.10. Since demand was generated and shipped
+on a daily basis, this corresponded to a mean
+coefficient of variation of 0.22. The seasonal
+demand pattern also had a mean of 250, but
+demand followed a sinusoidal pattern with a
+cycle length of 52 weeks and an amplitude of
+25. The cycles for customer demands at each
+station were offset so that loads along the
+supply chain did not peak simultaneously at all
+stations. The seasonal lag for P1, P3, P5 and P7
+was set at 0, 13, 26 and 39 weeks, respectively.
+allowance setting, Sj , used to control delivery
+performance at stations along the supply chain.
+This factor was set at five levels for P2, P4, P6
+and P8. These levels ranged from 0 to 0.40 time
+periods, in increments of 0.10 periods. This
+increment corresponds to the length of four
+time buckets. The value of Sj for P2, P4, P6 and
+Table I Lot sizes for various ca,m values
+Work load responsive adjustment of planned lead times
+Journal of Manufacturing Technology Management
+Downloaded by University of Innsbruck At 05:52 04 November 2015 (PT)
+with the remaining run used for data collection.
+Initial planned lead times were set equal to
+expected transit times plus lot setup and
+were used for the distributions determining
+Performance analysis was based on inventory
+and customer delivery measures. Inventory was
+measured on the basis of part counts within the
+performance was measured in terms of both
+delivery mean tardiness and the proportion of
+Figure 8 On time delivery vs inventory for seasonal demand
+The dynamic behavior of planned lead times is
+illustrated in Figure 7 under level demand and
+in Figure 8 under seasonal demand. Only the
+planned lead times for the most upstream stage
+(P8) and the most downstream stage (P2) are
+illustrated. As expected, the variability of
+variability of demand from various sources tend
+requirements are more stable. The differences
+in planned lead time settings between the level
+and seasonal demand patterns was not great. In
+part this was because the demand variability
+due to uncertainty was quite high relative to the
+seasonal pattern variability. Furthermore, the
+lag of the demand patterns at the various
+echelons was set so seasonal variabilities tend to
+be offset each other, especially at upstream
+stations. However, it can be noted the planned
+lead times at downstream stations vary more
+when demand is seasonal. As well, it was found
+that the time-average planned lead times were
+slightly higher for the seasonal demand pattern.
+This is consistent with expectations since the
+relationship between utilization and queue
+length is not linear. Therefore, we expect queue
+lengths to be disproportionately large at peak
+seasonal utilizations and this causes planned
+Table II. These results are also plotted in
+Figure 9 shows the delivery mean tardiness
+versus mean inventory counts for the level
+represent performance when ca;m values of
+0.25, 0.50, 0.75 and 1.00 were used to set
+lot sizes. The points moving right along the
+curve correspond to increasing values of the
+safety allowance, Sj . In other words, the
+points furthest to the left represent results
+lead time is specified (Sj  0). Figure 10
+Figure 7 On time delivery vs inventory for level demand
+Work load responsive adjustment of planned lead times
+Journal of Manufacturing Technology Management
+Downloaded by University of Innsbruck At 05:52 04 November 2015 (PT)
+Figure 9 Delivery mean tardiness vs inventory for level demand
+Figure 10 On time delivery vs inventory for level demand
+proportion of deliveries on time is plotted
+The results showed improved performance as
+the values of ca;m used to determine lot sizes
+were reduced. Figure 9 shows that delivery
+mean tardiness was substantially lower for a
+given level of inventory when lot sizes were
+based on a ca;m of 0.25 versus 1.0. Likewise, the
+proportion of deliveries on time, shown in
+Figure 10, increased for a given level of
+inventory when lot sizes were based on a ca;m of
+performance deteriorated and became erratic. It
+appeared this was due to queues building up as
+a result of excessively small lot sizes and
+correspondingly high utilization levels. Using a
+determining lot sizes resulted in the best
+performance for the level demand scenario
+The actual of interarrival time coefficients of
+variation were also monitored and found to
+experiments. As expected, the values increased
+Work load responsive adjustment of planned lead times
+Journal of Manufacturing Technology Management
+Downloaded by University of Innsbruck At 05:52 04 November 2015 (PT)
+slightly from upstream stations to downstream
+variability. As well, it was observed that the
+coefficients of variation increased slightly as the
+lot sizes decreased. The amount of safety
+allowance did not appear to affect interarrival
+Similar results are shown in Figure 11 and
+Figure 12 for the seasonal demand pattern.
+When this set of figures is compared to the level
+demand figures, it can be observed that delivery
+performance for any level of inventory is not as
+good under seasonal demand. This is consistent
+observation is that the best ca;m value to be used
+for lot size determination with seasonal demand
+is 0.50. Lot sizes based on a ca;m value of 0.25
+perform very poorly. Therefore, it can be
+concluded that larger lot sizes are appropriate
+for seasonal demand than for level demand. It
+peaks, the smaller lot sizes based on a ca;m of
+0.25 result in too many setups and therefore
+machine utilization becomes excessive. This
+planned lead time adjustment based on work
+loads is viable in a capacity-constrained
+distribution system. Exponentially smoothed
+feedback can be used to effectively set planned
+lead times even when queuing delays cannot be
+readily predicted. In a supply chain scenario
+where there is both dependent and independent
+demand at various stages, dynamic planned
+lead times which include a safety allowance can
+be used to control inventory and delivery
+performance along the complete supply chain.
+The results are not intended to demonstrate
+that dynamic planned lead time adjustment
+performance however. Safety stock, which was
+not included as an experimental factor in this
+research, may also prove beneficial. Since safety
+stocks are often considered best to address
+demand uncertainty while safety allowances are
+considered best for lead time uncertainty, it is
+conjunction with dynamic planned lead times
+The results also lead us to conclude that
+assumptions regarding lot interarrival time
+variability make a big difference when queuing
+relationships are used for lot sizing. Significant
+differences in lot sizes affect both inventory and
+delivery performance. It further appears that
+the assumption of Poisson arrivals (ca;m of 1.0)
+and use of M/G/1 queuing relationships may
+lead to excessively large lot sizes. However,
+small lot sizes based on interarrival time
+variability assumptions that are too low will also
+parameters for lot sizing are dependent on
+This research may be considered exploratory
+in some respects and the need for a number of
+further investigations can be pointed out. First,
+while the use of exponential smoothing in
+setting planned lead times appeared to work
+well, there is an inherent lag in responsiveness
+common to all simple exponential smoothing
+Figure 11 Delivery mean tardiness vs inventory for seasonal demand
+Figure 12 On time delivery vs inventory for seasonal demand
+Work load responsive adjustment of planned lead times
+Journal of Manufacturing Technology Management
+Downloaded by University of Innsbruck At 05:52 04 November 2015 (PT)
+models. Therefore adjustments to trends and
+time-phased planning systems the forecasting
+horizon shows anticipated future changes in
+demand which may, in turn, affect shop work
+loads and flow times. Exploiting this forward
+performance objectives. One approach might be
+to use feedback on actual observed delivery
+performance to adjust the safety allowance
+within the planned lead time. In this research
+the safety allowances at each stage were set to
+be equal during an experimental run. However,
+it was observed that the delivery performance
+for downstream stations (e.g. P1) was not as
+good as for upstream stations (e.g. P7). Since
+especially under seasonal demand assumptions,
+it would be advantageous to set downstream
+The third area requiring further investigation
+is that of capacity-constrained lot-size setting.
+When demand patterns are level, it would be
+possible to observe the actual lot interarrival
+time coefficients of variation and use these to
+set lot sizes that perform well. However, when
+demand patterns are seasonal the interarrival
+time patterns are non-stationary and estimating
+an appropriate level of interarrival time
+variability is much more difficult. Future
+Journal of Production Research, Vol. 39 No. 3,
+Enns, S.T. (2002), ``Work load responsive adjustment of MRP
+planned lead times'', in BaykasogÏlu, A. and Dereli, T.
+(Eds), Proceedings of the 2nd International Responsive
+Manufacturing Conference, Gaziantep, Turkey,
+Hill, A.V. and Raturi, A.S. (1992), ``A model for determining
+tactical parameters for materials requirements
+planning systems'', Journal of the Operational
+Research Society, Vol. 43 No. 6, pp. 605-20.
+Ho, C. (1990), ``Distribution requirements planning:
+a generalised system for delivery scheduling in a
+multi-sourcing logistic system'', International Journal
+of Physical Distribution & Logistics Management,
+Hoyt, J. (1978), ``Dynamic lead times that fit today's dynamic
+planning (QUOAT lead times)'', Production and
+Inventory Management, Vol. 19, pp. 63-72.
+Kelton, W.D., Sadowski, R.P. and Sadowski, D.A. (2002),
+Simulation with Arena, McGraw-Hill, New York, NY.
+Lambrecht, M.R. and Vandaele, N.J. (1996), ``A general
+approximation for the single product lot sizing model
+with queueing delays'', European Journal of
+Operational Research, Vol. 95 No. 1, pp. 73-88.
+Martin, A.J. (1983), ``DRP (distribution resource planning)
+± can you afford not to have it?'', Twenty-Sixth APICS
+Annual Conference Proceedings, New Orleans,
+Maskell, B.H. (1988), ``Distribution resource planning: Part 2
+± a practical approach'', Manufacturing Systems, Vol. 6
+Orlicky, J. (1975), Material Requirements Planning,
+Ross, D. (1988), ``Integrating the information flow'',
+Industrial Management, Vol. 12 No. 9, pp. 7-9.
+Suwanruji, P. and Enns, S.T. (2002), ``Information and logic
+requirements for replenishment systems within supply
+chains'', International Journal of Operations and
+Whitt, W. (1983), ``The queueing network analyzer'', The Bell
+Systems Technical Journal, Vol. 62 No. 9,
+Enns, S.T. (2001), ``MRP performance effects due to lot size
+and planned lead times settings'', International
+Lambrecht, M.R., Ivens, P.L. and Vandaele, N.J. (1998),
+``ACLIPS: a capacity and lead time integrated
+procedure for scheduling'', Management Science,
+Downloaded by University of Innsbruck At 05:52 04 November 2015 (PT)
+1. Chandandeep S. Grewal, S.T. Enns, Paul Rogers. 2015. Dynamic reorder point replenishment strategies for a capacitated supply
+chain with seasonal demand. Computers & Industrial Engineering 80, 97-110. [CrossRef]
+2. Chandandeep S. Grewal, S. T. Enns, Paul RogersDynamic adjustment of replenishment parameters using optimum-seeking
+3. Bariş Selçuk, Ivo J. B. F. Adan, Ton G. de Kok, Jan C. Fransoo. 2009. An explicit analysis of the lead time syndrome: stability
+condition and performance evaluation. International Journal of Production Research 47, 2507-2529. [CrossRef]
+4. Julia Pahl, Stefan Voß, David L. Woodruff. 2007. Production planning with load dependent lead times: an update of research.
+Annals of Operations Research 153, 297-345. [CrossRef]

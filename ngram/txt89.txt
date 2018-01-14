@@ -1,0 +1,450 @@
+A Journal Devoted to the Problems of Capital Investment
+ISSN: 0013-791X (Print) 1547-2701 (Online) Journal homepage: http://www.tandfonline.com/loi/utee20
+Flow time and product cost estimation by using an
+artificial neural network (ANN): A case study for
+To cite this article: Aslan Deniz Karaoglan & Omur Karademir (2017) Flow time and product cost
+estimation by using an artificial neural network (ANN): A case study for transformer orders, The
+Engineering Economist, 62:3, 272-292, DOI: 10.1080/0013791X.2016.1185808
+To link to this article: http://dx.doi.org/10.1080/0013791X.2016.1185808
+Accepted author version posted online: 05
+Full Terms & Conditions of access and use can be found at
+http://www.tandfonline.com/action/journalInformation?journalCode=utee20
+Download by: [Universitaetsbibliothek Innsbruck]
+http://dx.doi.org/./X..
+Flow time and product cost estimation by using an artificial
+neural network (ANN): A case study for transformer orders
+Aslan Deniz Karaoglana and Omur Karademirb
+Downloaded by [Universitaetsbibliothek Innsbruck] at 08:16 15 November 2017
+Department of Industrial Engineering, Balikesir University, Balikesir, Turkey; b Organized Industrial Zone, BEST
+In electromechanical industrial corporations, determining the production cost of the orders according to the technical specifications
+demanded by the customer has great importance in giving an accurate
+price offer. Labor cost is one of the important and most variable cost
+components that must be estimated in order to give an accurate price
+offer. In this study, a feed-forward back-propagation artificial neural network (FF-BPN) is used to predict the flow times of power transformer
+orders of a transformer producer according to the technical specifications given by the customer. The results of this study show that the prediction capability of an artificial neural network is very good for this type
+of problem and results in better cost estimation than current company
+practice. A case study is carried out for a manufacturer of electrical transformers in Turkey.
+The electromechanical industrial sector is a labor-intensive and competitive sector that has
+high asset turnover and a low profit margin. Therefore, it is essential to calculate the cost of the
+received orders with a low variance in order to give realistic price offers and compete in this
+industry. The main factors of a product cost are the labor, material, and overhead costs. The
+material cost can be predicted with a low variance because the material costs of the received
+orders are estimated from the bill of materials. The overhead cost can be added to the unit
+production costs by taking previous experiences into consideration. The labor cost is another
+important cost component that has almost 20% share in the overall cost.
+Calculation of the material cost of a transformer is a routine purchasing activity. The difference between prescribed and actual material costs in this case study is ±1%, which is acceptable because of the high precision level. However, this is not the case for the labor cost. The real
+labor cost can only be calculated after production, although the price offer must be prepared
+before production. In the electromechanical industrial sector, most of the sales are obtained
+by tender offers. All qualified companies can participate in the tender offers, and the best price
+offers determine which company gets the contract. If the price offer of a particular company is
+Balikesir University, Engineering Faculty, Department of Industrial Engineering, , Cagis Campus, Balikesir, Turkey.
+Color versions of one or more ﬁgures in the article can be found online at http://www.tandfonline.com/utee.
+©  Institute of Industrial & Systems Engineers
+Downloaded by [Universitaetsbibliothek Innsbruck] at 08:16 15 November 2017
+below the accrued cost, the company loses money, whereas there is a possible risk of not winning the order if the offer is too high. Thus, accurate prediction of the labor cost in preparing
+the tender offer before production is of great importance.
+In the company that is selected for this study, a labor–intensive project-type production
+system is used to produce transformers. With the exception of a few similar transformers
+produced frequently, there are unlimited types of different transformer orders received from
+customers. If an order for a transformer that is not produced previously is received by the
+company, the way to calculate the labor time is to review the flow times of previously produced transformers from the database and try to estimate the possible flow time and labor
+cost inferentially for the current order. In other words, there is no computational practice in
+the company to calculate the processing times and flow times accurately. This causes problems
+in giving accurate price offers to the customers.
+The prior studies in the literature on this subject can be classified into three groups. The
+first is analytical methods that used objective functions and constraints to find the optimum
+solution for production flow time, the main determinant of labor cost. These methods produce good results and can mostly find the optimum solution for small-sized problems under
+some assumptions such as the processing times are known before the production. However,
+when the dynamic job shop conditions are considered, these assumptions make accurate flow
+time prediction impossible. For large-sized problems, using heuristics is a good alternative
+to obtain nearly optimum results. However, making assumptions about processing times is
+still required and this causes unrealistic solutions for real industrial systems under dynamic
+production conditions. The second group is simulation and regression-based methods. These
+methods are used effectively for large-sized problems by employing calculated probability distributions or previous data. Artificial intelligence is the third group. These methods also give
+acceptable results for real industrial systems under dynamic job shop conditions. Our study
+focuses on the area of artificial intelligence methods.
+There are several relevant prior studies in the literature that used artificial intelligence techniques to estimate flowtime. Arizono et al. (1992) studied the prediction and minimization
+of the total actual flow time by using a Gaussian machine model. They used job sequences,
+processing times, setup time, and starting times as input to predict the actual flow time. Vig
+and Dooley (1993) used mixed flow time estimation, and Lee and Kim (1993), Hill and Remus
+(1994), and Statake et al. (1994) worked on scheduling with artificial neural network (ANN)
+by using general job and shop characteristics (such as average number of parallel resources,
+average number of processing steps per job, and the number of operations required by jobs).
+Udo (1994) used proportional workload function, cumulative distribution function, the total
+work content (TWK), and constant allowance methods for the same purpose. Enns (1995)
+used a dynamic forecasting model to estimate the due date by using forecasting errors and the
+confidence interval of the delivery performance level. Smith et al. (1995) predicted the due
+date and flow time with the aid of dispatching rules by using general job characteristics (number of jobs, number of operations, processing times, and so forth) and shop floor information. Sabuncuoglu and Gurgun (1996) combined algorithmic and ANN (Hopfield network)
+approaches and used jobs, job sequences, and machines as input in a single machine job shop.
+Mean tardiness and minimum cycle time were the performance measures used. W. Chen and
+Muraki (1997) developed a network by using back-propagation neural networks (BPNs) to
+predict the completion time and job schedule. In addition, this network was able to update the
+status of the job shop on-line. In the following years, regression analysis, fractional factorial
+design, full factorial design, and response surface methodology (RSM) were used in different studies for the same purpose (Harris 1997; Ivanescu et al. 2002; Raaymakers et al. 2001;
+Downloaded by [Universitaetsbibliothek Innsbruck] at 08:16 15 November 2017
+Veral 2001; Veral and Mohan 1999). In these studies, the average number of identical
+resources, average number of processing steps, average overlap, standard deviation of the processing times, workload balance, processing times, workstation utilization, dispatching rules,
+shop configurations, job characteristics, transporter speed, buffer capacity, shop load, and
+routing configurations are used as factors (input variables) for due date or flow time estimation. Raaymakers et al. (2001) focused on the combined characteristics of a group of jobs and,
+in their following work, Raaymaker and Weijters (2003) compared the performance of their
+previous results with new results that were obtained by ANN. The authors used regression
+models and ANN to predict makespan. Lengyel et al. (2003) used TWK, constant allowance,
+and feasibility function (FF) for due date prediction. Hsu and Sha (2004) used ANN to forecast the due date under different shop floor control strategies. They used dispatching rules,
+TWK, and just in queue. Sha et al. (2007) used regression analysis and analytical methods
+together for due date estimation. Li et al. (2007) combined the BPN model and genetic algorithms (GAs) for completion time prediction. Genetic algorithms were adopted in the BPN
+to determine the BPN’s parameters and to improve the accuracy of estimated time of completion. Alenezi et al. (2008) developed a support vector regression model for real-time flow
+time prediction in multiresource, multiproduct systems. Patil (2008) developed an enhanced
+ANN-based due date quotation model using machine learning, evolutionary, and metaheuristics learning concepts. Patil used a genetic algorithm to determine the topology of the artificial
+neural network. Patil used job shop characteristics such as number of operations, sum of processing times, and number of jobs waiting in the queue as factors to estimate the due date. Zhu
+et al. (2008) trained neural networks by using Petri net simulation for different manufacturing
+resources and product types to predict the due date. Baykasoglu et al. (2008) used adaptive
+response rate exponential smoothing, last data point, dynamic total work content method,
+dynamic processing plus waiting, and analysis of variance for due date and flow time estimation. In their study, number of machines at each work station, route for each job, processing
+times for each route, and transportation times are used as factors. Alpay and Yüzügullu (2009)
+used full factorial design, simulation, and some other analytical methods for the same purpose and they used processing times, number of operations, number of jobs in queues, and
+mean flow time of latest three jobs as factors. Asadzadeh et al. (2011) presented a flexible
+algorithm based on ANN, fuzzy regression, and conventional regression for forecasting lead
+time. T. Chen and Wang (2013) estimated the job cycle time by using principle component
+analysis, fuzzy logic, and BPN. Kumru and Kumru (2014) used ANN to forecast operation
+times in metal industry. Table 1 summarizes the literature review for the prior studies that
+These prior studies generally focused on the characteristics related to the job or job shop
+such as processing times, cycle times, variances, number of workstations, workload, number of jobs in the queues, and other factors to predict the flow time. However, these studies are presented under the assumption that the processing times and/or their probability
+distributions are either known or can be calculated from prior data. The literature review
+given in Table 1 indicates that there is no prior study that uses product specifications or
+order specifications demanded by the customer to predict the processing times and flow time
+instead of using general job and shop characteristics. In other words, the processing times and
+flow times have not been predicted by using the properties of the product and the customer
+This is the motivation for the present study. In this study, in order to give an accurate
+price offer to the customer for products that were not manufactured previously, the flow times
+were estimated to calculate the labor cost before production based on technical specifications
+Table . Summary of literature review for artiﬁcial intelligence.
+Downloaded by [Universitaetsbibliothek Innsbruck] at 08:16 15 November 2017
+(power, voltage, and so forth) demanded by the customer (not the general job and shop characteristics such as number of jobs waiting in the queue, number of workstations, and so forth).
+Our aim is to provide a more accurate bid price than is currently achieved by the company.
+The production system of the selected transformer producer is described in the following section. The ANNs are described next. In addition, the performance comparison for the ANN
+Downloaded by [Universitaetsbibliothek Innsbruck] at 08:16 15 November 2017
+Figure . Summarized production ﬂow chart for oil-type transformer.
+and the factorial design is given in the same section. Results and discussions are given in the
+next section. Finally, the conclusions are summarized in the last section.
+Production system of this case study company
+A transformer is an electrical device that is used to convert one alternating current voltage
+level to another through electromagnetic induction. By using this device, electric power can
+be transmitted to consumers that are far away from its source. Transformers are the devices
+that can distribute the voltage and current of electric power according to need (Harlow 2012).
+This study was carried out in a company that produces oil-type and dry-type cast resin
+transformers in Turkey. In the company, the manufacturing line is designed for a laborintensive project-type production that is composed of sequential processes. A summarized
+production flowchart for the oil type transformer is given in Figure 1. Figure 2 is a photo of a
+Downloaded by [Universitaetsbibliothek Innsbruck] at 08:16 15 November 2017
+The production operations of the company consist of four main steps. They are (1) magnetic core production, (2) winding production, (3) active part assembly, and (4) final assembly. Magnetic core production, winding production, and mechanical production processes
+are done in parallel and all start at the same time when the job order is placed into production. Then the magnetic core and windings are assembled. This assembled product is called
+the “active part” of the transformer; that is, the part that converts one alternating current
+voltage level to another through electromagnetic induction. While these operations continue,
+mechanical parts (vessel, shutter, and other components) are produced by the mechanical
+production process. The active part is then set into a vessel. By this operation the critical processes are completed. Following this operation, assembly of the shutter is performed and then
+the oil filling and assembly of other required parts are completed.
+In magnetic core production, the company utilizes cold-rolled grain-oriented silicon steel,
+which has high conductivity and low power losses. Core material is sliced and cut into dimensions that are planned as per the needs of the specifications prepared by the engineering
+department. All of the lamination sheets, which are sometimes of a length up to 4 to 4.5 m,
+are stacked manually. The winding operation is performed with a closed pressurized building
+technology. The windings are built on computer numerical control (CNC)-controlled horizontal and vertical machines. Depending on the power rating, voltage levels, and the customer specification, several different winding techniques are applied. Active part assembly is
+another critical operation where the semifinished products of magnetic core production and
+the winding operations are assembled. During the manufacturing process, insulation paper on
+copper conductors, insulation material between windings, and insulation parts in supporting
+structures are exposed to humidity. This moisture impacts the forces that the active part can
+withstand. In this regard, drying of the complete active part is a requirement in transformer
+production. Therefore, all active parts are dried in ovens. The period of drying is based on the
+voltage levels and insulation quantities. Following the drying process, the active part is prepared for a pressing operation in order to increase short circuit withstanding capability of the
+transformer. This operation, which is a critical factor for a high-quality product, enables the
+producer to increase stability of the windings and the active part. The active part is inspected
+once more in order to ensure the quality. Following this inspection, the active part is inserted
+into the vessel and fixed. Subsequently, the cover is closed, the tank is taken into a vacuuming
+operation, and the tank is filled with oil. Following oil filling, the transformer is left to rest
+before factory tests and the period of rest depends on the capacity of the transformer. After
+completing the test procedures, production of the transformer is complete.
+Although the production process seems unique for transformer production, the processing times of each operation and the flow times of each order vary according to the technical
+specifications that are demanded by the customer. In this study, the flow time of the oil type
+transformers for each order is predicted by using ANNs with the consideration of the technical data instead of using general job and shop characteristics. The following section gives a
+brief description of the materials and methods used in this study.
+Flow time estimation of transformers by the aid of ANN
+The company exports its products to 75 countries and has a wide range of products including
+rectifiers, current rectifiers, wind turbine transformers, and medium power transformers that
+change levels under load. These products have a variety of standards that vary according to
+Table . List of factors that have an eﬀect on processing times and their levels.
+Downloaded by [Universitaetsbibliothek Innsbruck] at 08:16 15 November 2017
+Weight of core (amount of cold-rolled grain-oriented silicon steel)
+customer and local specifications. The same transformer designs with equal power and voltage
+output may be completely different because of customer technical specification variations.
+Because of these design differences, both material content and labor time are far from being
+standardized. To perform accurate prediction of flow times (mostly depending on processing
+times) and labor costs of orders, a feed-forward back-propagation artificial neural network
+(FF BPN) was employed by using a Matlab (Natick, MA: MathWorks) program. The factors
+that have effect on the processing times and their levels are given in Table 2.
+The historical processing times for each order that varies according to the customer’s contract requirements or local specifications are obtained from Oracle ERP database of the company. For this purpose, a data set that is composed of 200 different specifications was selected.
+These samples are selected randomly. However, to obtain better generalization capability from
+the ANN, we try to take into account the samples that have high representation capability.
+Because of confidentiality, the original data are not given in this article. Instead, coded values
+of specifications and the processing times are used for training the network and performing
+prediction. The input matrix for the training data set is coded by dividing each column by
+its maximum value, and in this way all of the results became smaller than one and normalized. The NLTC (no-load tap changer) and OLTC (on-load tap changer) terms are qualitative
+variables whose values are expressed verbally. Therefore, these values are numbered 1 and 2,
+respectively, and divided by 10 for the normalization because 1 is a bias value. Coded values
+for the sample data set are listed in Table 3.
+The parameters of the ANN are usually set up by several techniques like trial and error,
+genetic algorithm, simulated annealing algorithm, design of experiment techniques (RSM,
+factorial design, Taguchi), and so forth to minimize the mean square error (MSE) of the predicted results of ANN. In this study, the network topology is determined by using trial-anderror methods. Preliminary investigations are conducted to choose a suitable network topology and training algorithm for the network. The design parameter for hidden layers is fixed
+to two hidden layers after numerous preliminary trials. The ANN topology used in this study
+is presented in Figure 3 (Ham and Kostanic 2001; Karaoglan 2011).
+According to our experiments performed to investigate the appropriate topology of the
+network, the following factors were used: number of neurons at each layer (from 4 to 16),
+type of activation function (purelin, tansig, logsig), learning rates (lr; 0.01 to 0.40 with different combinations for each experimental trial), and momentum constants (mc; from 0.3
+to 0.9 with different combinations for each experimental trial) are used. The performance
+measurement of the study is the MSE and 0.001 is the target MSE value. MSE results of
+each parameter combination are recorded in a matrix that is defined in Matlab. Experimental
+runs are carried out to determine the MSE for each combination of parameters. The parameter combination that gives the minimum MSE is selected from the records as the optimum
+Downloaded by [Universitaetsbibliothek Innsbruck] at 08:16 15 November 2017
+Table . Coded values for sample data set selected from  units.
+Deﬁnitions for the factors: power: power of the transformer; voltage: voltage of the transformer; NLTC/OLTC: having load top
+charger in the design or not; cold-rolled grain-oriented silicon steel: amount of core material that is composed of cold-rolled
+grain-oriented silicon steel; copper: amount of copper that is used in windings; ST -steel: amount of ST -steel that is used
+in vessel production; oil: amount of oil that is used to ﬁll the transformer for insulation and cooling the transformer; ﬂow
+Figure . ANN topology for the given problem.
+Downloaded by [Universitaetsbibliothek Innsbruck] at 08:16 15 November 2017
+training parameters. A total of 19 different topologies are constructed with various network
+parameter combinations of mc and lr (a total of 463 combinations) and are summarized in
+In Table 4, for line 1, the number of neurons in each hidden layer is determined as 4 for
+both layers. The activation functions for all layers are determined as logsig and in this way the
+topology is fixed. Then different combinations of momentum coefficient (mc: 0.5, 0.6, 0.7, 0.8;
+four different values) and learning rate (lr: 0.1, 0.7, 0.1, 0.15; four different values) are examined (for this single topology given in line 1, 16 different trial combinations are examined).
+The MSE values are recorded and the training parameters with minimum MSE values are
+selected as the optimum parameter values for the given topology. This is repeated for all 19
+different topologies given in Table 4. In Table 4, I, H1, H2, and O represent the input, hidden,
+and output layers, respectively; “Min MSE” is the calculated MSE value for the optimum lr
+and mc combination, “Expected Value” is the observed flow time, and the “Predicted Value”
+column is the predicted flow time by the selected optimum ANN for the related row. Finally,
+“PE” represents the prediction error between the expected and the predicted value of flow
+time by ANN. The summarized ANN training result are given in Table 4.
+In this study, according to the data given in Table 4, minimum MSE (0.000055) is reached
+with the network topology given in the ninth row. In this topology, 13 neurons are used for
+each hidden layer. The logsig activation function is used for the neurons of the input and
+output layers, and the tansig activation function is used for the neurons of hidden layers. The
+optimum training parameters of this network are 0.35 for lr and 0.9 for mc. The total mean
+prediction error that is calculated from observed and predicted values for the determined
+optimum network topology (ninth topology in Table 4) is 0.2336% for the training set (which
+is composed of 200 observations). It is clearly observed from Table 4 that the memorization
+capability of the net is good enough for the training data set. The optimum network topology
+The trained network model was then tested by using six different experimental data points
+(check data) that were not used in the training process. Results of the ANN predictions with
+the test data set are presented in Table 6 and Figure 4.
+It is seen from Table 6 and Figure 4 that the ANN prediction is in good agreement with
+the experimental results. This outcome shows that the selected ANN model can be used
+effectively for flow time prediction in transformer production or similar production systems. The performance comparison for the proposed ANN topology is given in the following
+The performance of the proposed ANN is compared with the results of a factorial design,
+which is one of the widely used design of experiments techniques. Factorial designs have been
+employed previously in the literature for predicting flow time. Their main advantage is easy
+implementation and effective computation. The regression model of factorial design for the
+given problem is given in Equation (1) (Castillo 2007; Giesbrecht and Gumpertz 2004; Mason
+y = β0 + β1 x1 + β2 x2 + · · · + β7 x7 + β8 x1 x2 + · · · + β28 x6 x7 + β29 x1 x2 x3 + · · ·
++ β63 x5 x6 x7 + β64 x1 x2 x3 x4 + · · · + β99 x4 x5 x6 x7 + β100 x1 x2 x3 x4 x5 + · · ·
++ β120 x3 x4 x5 x6 x7 + β121 x1 x2 x3 x4 x5 x6 + · · · + β127 x2 x3 x4 x5 x6 x7
+Values in bold: Selected network topology and its optimum training parameters.
+Table . Summarized training results of trials for  diﬀerent network topologies.
+Downloaded by [Universitaetsbibliothek Innsbruck] at 08:16 15 November 2017
+Table . Optimum network topology and its parameters.
+Downloaded by [Universitaetsbibliothek Innsbruck] at 08:16 15 November 2017
+Number of neurons at each hidden layer respectively
+Transfer functions of hidden layers, respectively
+Transfer functions of input layer and output layer
+Figure . Performance of the ANN topology that is selected as the optimum one.
+Regression coefficients for the factorial design model can be calculated by using
+where Y is the output matrix and X is the input matrix, and ε is the residuals (random error
+term). The least square estimator of the β matrix that is composed of coefficients of the regression equation is calculated by the given formula in Equation (3):
+The X matrix is composed of the observed values given in Table 3 and the mathematical equation given in Equation (4) is calculated by using Equations (1)–(3). For this purpose, the Minitab (State College, PA: Minitab, Inc.) statistical analysis program is used. In the
+case in which the interactions are considered in the mathematical model, the performance of
+Table . List of ANN predictions with check data set.
+Downloaded by [Universitaetsbibliothek Innsbruck] at 08:16 15 November 2017
+Table . Performance of factorial design for the factor levels given in Table .
+Downloaded by [Universitaetsbibliothek Innsbruck] at 08:16 15 November 2017
+the model decreases dramatically for the confirmation tests so that only the linear terms are
+selected. The R2 (coefficient of determination) value for the model given in Equation (4) is
+calculated as 0.995 by using the factor values given in Table 3.
+Flow Time = −0.0201215 − 0.371798 (Power) + 0.0984925 Voltage + 0.125379 (NLTC/OLTC)
+−0.366960 Weight of Core + 0.480010 Weight of windings
++0.829958 Weight of tank + 0.223555 Weight of oil .
+Performance tests are performed by using the data given in Table 3 and Table 7. In addition,
+the results of the performance comparison for the check data are given in Table 8 for the ANN
+and the regression equation of factorial design.
+However, the mean accuracy (calculated by using check data set) for the regression model
+given in Equation (4) is calculated as 89.4% and the accuracy is calculated as 97.31% for the
+ANN predictions. Therefore, the generalization capability of the ANN is impressive for this
+type of problem where the technical specifications demanded by the customer are directly
+used as factors instead of using the job or shop characteristics (which is the common practice
+in the literature) to predict the flow time. The results for cost estimation obtained by this study
+Table . Performance comparison of ANN and factorial design with check data set.
+Downloaded by [Universitaetsbibliothek Innsbruck] at 08:16 15 November 2017
+The problem encountered while giving a price offer for a product that will be produced for the
+first time is to determine the quote as accurately as possible with a low deviation. Because the
+actual costs arise after the completion of production while the offering price to the customers
+happens at the bidding stage, offering a high price risks losing a bid. On the other hand, giving
+a low price offer may cause a loss or a low profit margin. Therefore, it is essential to calculate
+the total cost in order to determine the price offer accurately.
+There are three main cost items that are taken into account when preparing the price offer.
+The first one is raw materials (stainless steel, oil, copper, etc.) and equipment components
+(bushing, tap changer, electric panel, etc.) costs. These comprise the total material cost. These
+cost items can be estimated correctly with a deviation of ±1–2% according to the material
+list, which is obtained from preliminary product design during the order. The same applies
+in overhead cost, which is another important cost item. In the case study company, the actual
+overhead cost is computed by considering the expenses such as electricity, heating, administrative, marketing and selling, distribution, etc. (except the expenses related to flow time of
+each order, labor cost, and material cost). Then it is allocated to the orders by considering
+the share of each order’s cost in the total variable cost that is calculated in a particular time
+period. This allocation key is used to balance the distributed overhead cost to the orders by
+discussing their prices. This is the allocation of actual overhead cost.
+However, at the time of tender offer the proportion of total variable cost of a particular
+order during the period of production is not known by the company. For a particular tender
+offer, overhead cost is predicted by considering the overhead cost already incurred for the
+same period of the previous year. This previously observed overhead cost is multiplied by the
+annual inflation rate and then allocated to each order at tender offer on the basis of a multiplier
+coefficient that is calculated by dividing the material cost of each order at tender offer to the
+total material cost incurred for the same period of the previous year.
+As for the calculation of labor costs, it is necessary to determine the flow time based on
+the technical specifications of the received orders in a most accurate way. This study focuses
+on flow time estimation with a minimum deviation. This section examines how the improved
+flow time estimation yields better bid price estimates for the company. For this purpose, the
+data used in Tables 9–12 and the results of the calculations are reviewed.
+In Table 9, the estimated and the actual costs are given for 20 samples listed in Table 3
+using current company flow time estimation methods. Due to commercial confidentiality, the
+numbers are scaled by multiplying a coefficient with the actual costs and keeping the ratios
+constant between them. The first column of Table 9 denotes the sample number that connects
+Table 3 and Table 9. The second column of Table 9 (column A) indicates the coded flow time
+values that are given in Table 3. In column B flow time values that are estimated before production are also coded due to commercial confidentiality. Columns C and D state “labor costs
+that occur after the production takes place” and “labor costs estimation based on the technical specifications of the received orders before the production takes place,” respectively. These
+costs are obtained by multiplying the flow time values by the hourly labor costs.
+Multiplying the coded flow time values with actual hourly labor costs will result in the
+calculation of coded costs instead of accrued costs. This will make it difficult for the reader
+to follow the article. Therefore, in order to obtain the closest cost values, coded flow time
+values are multiplied by a specially coded hourly labor cost (650,000 euro/h); ultimately this
+calculation provides realistic actual cost values. Labor costs calculated in this way are given in
+columns C and D, respectively. These two columns show that the difference between expected
+Table . Expected and actual cost values of the sample in Table .
+production (euro) cost (euro) production (euro) cost (euro) production (euro)
+Downloaded by [Universitaetsbibliothek Innsbruck] at 08:16 15 November 2017
+Table . Estimated bid price by company methods, actual bid price, and the estimated bid price by ANN for the sample data in Table .
+Downloaded by [Universitaetsbibliothek Innsbruck] at 08:16 15 November 2017
+Table . Expected and actual cost of check data given in Table .
+production (euro) cost (euro) production (euro)
+Downloaded by [Universitaetsbibliothek Innsbruck] at 08:16 15 November 2017
+Flow time estimation Labor cost estimation with
+Table . Estimated, actual, and estimated price oﬀer with ANN and results.
+Downloaded by [Universitaetsbibliothek Innsbruck] at 08:16 15 November 2017
+Downloaded by [Universitaetsbibliothek Innsbruck] at 08:16 15 November 2017
+and actual labor costs for 20 samples that are given in the table varies around an average of
+The estimated and actual costs of raw materials and equipment, which are other important
+cost items, are shown in columns E and F, respectively. Columns G and H show the estimated
+and actual overhead costs. Columns I and J are the actual total cost and the estimated total
+Table 10 compares the errors between actual cost and estimated cost by comparing current company costing methods with costing using ANN. As mentioned previously, the cost
+values are multiplied by a certain coefficient due to commercial confidentiality, but the relationship between them reflects actual relationships. Column M shows the difference between
+the estimated labor cost and the actual labor cost using current company methods. Similarly,
+column N shows the estimation error between the actual labor cost and estimated labor cost
+when the flow time value was predicted by the ANN. When the estimation errors are examined in columns M and N, it shows that labor cost estimation is closer to the actual costs if
+the flow time estimation is done by ANN. Column O is found by summing up the labor cost
+estimation by ANN with raw material costs (Column F) and overhead (Column H), which are
+shown in Table 9. Overheads, raw material, and equipment costs are not predicted by ANN,
+so the company’s predicted values are used for these values.
+For better performance comparison between company methods and ANN, MSE is used.
+MSE can be calculated by the formula given in Equation (5):
+where ŷi is the estimated total cost (by company methods or ANN), yi is the observed total
+cost, and n is the sample size. In Table 10, the error in total cost estimates (euro) by company
+methods and ANN can be seen in columns P and R, respectively. This result indicates that the
+ANN method is better for total cost estimate.
+Calculations and analyses for the values given in Table 6 are presented in Tables 11 and
+12. The results are important to demonstrate the performance of the ANN because the ANN
+is faced with these samples for the first time since they were not utilized during the ANN
+Upon analyzing the results in Table 12, the error in total cost estimates by the ANN is lower
+than the company methods. The MSE is calculated by using columns P and R, respectively.
+These results show that the proposed ANN approach can be used by the sales department as
+Calculating the production times and labor costs accurately is important in cost estimation.
+For the company in this case study, except for a few similar transformers produced frequently,
+there are numerous types of different transformer orders received from customers. This causes
+difficulty in giving accurate price offers to customers because of unknown processing times
+and flow times of orders to be produced for the first time. According to the literature review, it
+is observed that the existing studies try to estimate flow times using the characteristics related
+to the job or shop (such as processing times, number of resources, and so forth). In this case
+study, the input variables are the technical specifications demanded by the customer. Using
+technical specifications directly to estimate the flow time of an order before production was
+not applied previously for this type of problem. In this study, an artificial neural network that
+uses technical specifications demanded by the customer is designed to predict the flow time
+(and in this way predicts the labor cost). Using technical specifications directly to estimate the
+flow time is a novel approach. The results show that the accurate prediction capability of the
+ANN improves the cost estimate for this type of problem. As future research, support vector
+machine, GA, linear vector quantization neural networks, and RSM will be investigated to
+solve this flow time and cost estimation problem and their performances will be compared.
+Downloaded by [Universitaetsbibliothek Innsbruck] at 08:16 15 November 2017
+The authors thank the Best Transformers Company for its support and Melike Sultan Karasu Asnaz and
+Dr. Akin Atas, whose support was invaluable in completion of this article. Finally, the authors thank the
+editor, area editor, and anonymous referees, whose valuable suggestions led to improved organization
+Aslan Deniz Karaoglan received a diploma degree in industrial engineering from Gazi University
+(Turkey) and Ph.D. in industrial engineering from Dokuz Eylul University (Turkey). His research interests are statistical process control, design of experiments, neural networks, scheduling, and Petri nets.
+Omur Karademir received an M.Sc. degree in industrial engineering from Balikesir University
+(Turkey) and works for a transformer producer.
+Alenezi, A., Moses, S.A. and Trafalis, T.B. (2008) Real-time prediction of order flow times using support
+vector regression. Computers & Operations Research, 35(11), 3489–3503.
+Alpay, S. and Yüzügullu, N. (2009) Dynamic job shop scheduling for missed due date Performance.
+International Journal of Production Research, 47(15), 4047–4062.
+Arizono, I., Yamamoto, A. and Ohta, H. (1992) Scheduling for minimizing total actual flow time by
+neural networks. International Journal of Production Research, 30, 503–511.
+Asadzadeh, S.M., Azadeh, A. and Ziaeifar, A.A. (2011) Neuro-fuzzy-regression algorithm for improved
+prediction of manufacturing lead time with machine breakdowns. Concurrent Engineering-Research
+Baykasoglu, A., Gocken, M. and Unutmaz, Z.D. (2008) New approaches to due date assignment in job
+shops. European Journal of Operational Research, 187(1), 31–45.
+Castillo, E.D. (2007) Process optimization—a statistical approach. Springer: New York, NY.
+Chen, T. and Wang, Y.C. (2013) An iterative procedure for optimizing the performance of the fuzzyneural job cycle time estimation approach in a wafer fabrication factory. Mathematical Problems in
+Engineering Article, 2013: 740478. doi:10.1155/2013/740478
+Chen, W. and Muraki, M. (1997) An action strategy generation framework for on-line scheduling
+and control system in batch processing with neural networks. International Journal of Production
+Enns, S.T. (1995) A dynamic forecasting model for job shop flowtime prediction and tardiness control.
+International Journal of Production Research, 33(5), 1295–1312.
+Giesbrecht, F.G. and Gumpertz, M.L. (2004) Planning, construction, and statistical analysis of comparative experiments. John Wiley & Sons, Inc.: Hoboken, NJ.
+Ham, F.M. and Kostanic, I. (2001) Principles of neurocomputing for science and engineering, 1st ed.
+Harlow, J.H. (2012) Electric power transformer engineering, 3rd ed. Boca Raton, FL: CRC Press.
+Harris, C.R. (1997) Modelling the impact of design, tactical, and operational factors on manufacturing
+system performance. International Journal of Production Research, 35(2), 479–499.
+Downloaded by [Universitaetsbibliothek Innsbruck] at 08:16 15 November 2017
+Hill, T. and Remus, W. (1994) Neural network models for intelligent support of managerial decision
+making. Decision Support Systems, 11(5), 449–459.
+Hsu, S.Y. and Sha, D.Y. (2004) Due date assignment using artificial neural networks under different shop
+floor control strategies. International Journal of Production Research, 42(9), 1727–1745.
+Ivanescu, C.V., Fransoo, J.C. and Bertrand, J.W.M. (2002) Makespan estimation and order acceptance
+in batch process industries when processing times are uncertain. OR Spectrum, 24(4), 467–495.
+Karaoglan, A.D. (2011) An integrated neural network structure for recognizing autocorrelated and
+trending processes. Mathematical & Computational Applications, 16(2), 514–523.
+Kumru, M. and Kumru, P.Y. (2014) Using artificial neural networks to forecast operation times in metal
+industry. International Journal of Computer Integrated Manufacturing, 27(1) 48–59.
+Lee, Y.H. and Kim, S. (1993) Neural network applications for scheduling jobs on parallel machines.
+Computer and Industrial Engineering, 25, 227–230.
+Lengyel, A., Hatono, I. and Ueda, K. (2003) Scheduling for on-time completion in job shops using
+feasibility function. Computers & Industrial Engineering, 45, 215–229.
+Li, S., Li, Y., Liu, Y., and Xu, Y. (2007) A GA-based NN approach for makespan estimation. Applied
+Mathematics and Computation, 185(2), 1003–1014.
+Mason, R.L., Gunst, R.F. and Hess, J.L. (2003) Statistical design and analysis of experiments, 2nd ed. John
+Montgomery, D.C. (2001) Design and analysis of experiments, 5th ed. John Wiley & Sons, Inc.: New
+Patil, R.J. (2008) Using ensemble and metaheuristics learning principles with artificial neural networks
+to improve due date prediction performance. International Journal of Production Research, 46(21),
+Raaymakers, W.H.M., Bertrand, J.W.M. and Fransoo, J.C. (2001) Makespan estimation in batch process
+industries using aggregate resource and job set characteristics. International Journal of Production
+Raaymakers, W.H.M. and Weijters, A.J.M.M. (2003) Makespan estimation in batch process industries:
+a comparison between regression analysis and neural networks. European Journal of Operational
+Sabuncuoglu, I. and Gurgun, B. (1996) A neural network model for scheduling problems. European
+Journal of Operational Research, 93, 288–299.
+Sha, D.Y., Strorch, R.L. and Liu, C.H. (2007) Development of a regression-based method with casebased tuning to solve the due date assignment problem. International Journal of Production Research,
+Smith, C.H., Minor, E.D. and Wen, H.J. (1995) Regression-based due date assignment rules for
+improved assembly shop performance. International Journal of Production Research, 33, 2375–2385.
+Statake, T., Katsumi, M. and Nakamura, N. (1994) Neural network approach for minimizing the
+makespan of the general job-shop. International Journal of Production Economics, 33, 67–74.
+Udo, G.J. (1994) A simulation study of due date assignment rules in a dynamic job shop. Journal of the
+Operations Research Society, 45(12), 1425–1435.
+Veral, E.A. (2001) Computer simulation of due-date setting in multi-machine job shops. Computers &
+Veral, E.A. and Mohan, R.P. (1999) A two-phased approach to setting due-dates in single machine job
+shops. Computers & Industrial Engineering, 36(1), 201–218.
+Vig, M.M. and Dooley, K.J. (1993) Mixing static and dynamic flowtime estimates for due-date assignment. Journal of Operations Management, 11, 67–79.
+Zhu, H.P., Zhan, H.H., Liu, F.M., and Liang, Y.M. (2008) Combination of high-level Petri net simulation
+and neural network ensemble and its application in the prediction of order due date. Proceedings of
+Information Technology and Environmental System Sciences, 4, 413–417.

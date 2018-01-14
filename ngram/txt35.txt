@@ -1,0 +1,419 @@
+International Journal of Medical Informatics 94 (2016) 1–7
+Contents lists available at ScienceDirect
+International Journal of Medical Informatics
+Using machine learning to support healthcare professionals in making
+Flávio H.D. Araújo a,∗ , André M. Santana b , Pedro de A. Santos Neto b
+Campus Senador Helvídio Nunes de Barros, Federal University of Piauí, Picos, Piauí, Brazil
+Department of Computing, Federal University of Piauí, Teresina, Piauí, Brazil
+Background: Preauthorisation is a control mechanism that is used by Health Insurance Providers (HIPs) to
+minimise wastage of resources through the denial of the procedures that were unduly requested. However, an efﬁcient preauthorisation process requires the round-the-clock presence of a preauthorisation
+reviewer, which increases the operating expenses of the HIP. In this context, the aim of this study was to
+learn the preauthorisation process using the dental set from an existing database of a non-proﬁt HIP.
+Methods: Pre-processing data techniques as ﬁltering algorithms, random under-sample and imputation
+were used to mitigate problems that arise from the selection of relevant attributes, class balancing and
+ﬁlling unknown data. The performance of classiﬁers Random Tree, Naive bayes, Support Vector Machine
+and Nearest Neighbor was evaluated according to kappa index and the best classiﬁers were combined by
+Results: The number of attributes were reduced from 164 to 15 and also were created 12 new attributes
+from existing discrete data associated with the beneﬁciary’s history. The ﬁnal result was the development
+of a decision support mechanism that yielded hit rates above 96%.
+Conclusions: It is possible to create a tool based on computational intelligence techniques to evaluate the
+requests of test/procedure with a high accuracy. This tool can be used to support the activities of the
+professionals and automatically evaluate less complex cases, like requests not involving risk to the life
+© 2016 Elsevier Ireland Ltd. All rights reserved.
+Although Brazil has a public and universal health system, its
+supplementary health market is one of the largest worldwide.
+The National Health Agency (Agência Nacional de Saúde)—ANS
+[2] reports that there are currently approximately 1500 health
+insurance providers (HIPs) in Brazil, totalling more than 50 million people covered (ANS 2013). However, ANS also reported that
+most HIPs are in a very difﬁcult ﬁnancial situation. The costs of
+small companies exceed their revenue, mid-sized companies are at
+their operating limit, and only large companies have any ﬁnancial
+HIPs have different control mechanisms for continuously verifying whether requests are being ﬁled adequately and avoiding
+improper requests and even intentional fraud. Among these con-
+E-mail addresses: ﬂavio86@ufpi.edu.br (F.H.D. Araújo),
+andremacedo@ufpi.edu.br (A.M. Santana), pasn@ufpi.edu.br (P. de A. Santos Neto).
+http://dx.doi.org/10.1016/j.ijmedinf.2016.06.007
+1386-5056/© 2016 Elsevier Ireland Ltd. All rights reserved.
+trol mechanisms, preauthorisation (claim approval) stands out and
+can be deﬁned in this context as conducting a technical review of
+the requested procedures/tests/treatments to determine the best
+option for the patient, thereby avoiding unnecessary requests.
+We summarise the health preauthorisation process here. After
+a healthcare professional or an associated provider (hospital or
+clinic) requests a test or procedure, the HIP determines whether
+the request conforms with existing standards and if the clinical
+protocols that have been established in the contract between the
+parties are legal. If the analysis of the preauthorisation reviewer
+is positive, then the test/procedure is authorised; otherwise, the
+operator questions the petitioner about the merits of the request
+and does not authorise the request. Fig. 1 is a schematic of the
+Health systems all over the world are facing considerable pressure to reduce costs while having to sustain or even improve the
+quality of health service delivery [16]. High cost is the primary
+obstacle to developing an efﬁcient preauthorisation process. In
+small HIPs, for instance, few events per day occur that require
+preauthorisation. Thus, it very expensive to maintain a round-the-
+F.H.D. Araújo et al. / International Journal of Medical Informatics 94 (2016) 1–7
+Fig. 1. Schematic of preauthorisation process.
+Fig. 2. Methodology for automated learning of the healthcare preauthorisation process.
+clock preauthorisation reviewer to analyse requests. However, the
+absence of a preauthorisation reviewer can result in unnecessary
+procedures being requested, which places strong ﬁnancial pressure on the HIP. An alternative that many companies often use
+is to forego active control while maintaining a strong audit process to block the payment of procedures/tests/treatments that have
+been performed on the basis of unsuitability or so-called disallowance. This procedure, however, results in signiﬁcant burnout
+of the involved parties, creates disharmonious relationships and
+makes the provision of health services a highly antagonistic process. That is, this process is not conducive to a strong and lasting
+The preauthorisation process critically affects patients’ health
+because the denial of a procedure could potentially result in a
+patient’s death. Thus, the preauthorisation mechanism must be
+carefully considered to prevent problems.
+The preauthorisation process in most HIPs is facilitated by computer technology, i.e., there is a data record of orders and the
+results of requests (authorised/unauthorised). Therefore, supervised learning techniques can be used to learn the preauthorisation
+process by analysing the data that are stored in HIP databases (DBs).
+However, most HIP DBs have problems such as redundant and
+missing values that reduce the quality of the available information. Thus, pre-processing techniques are required to improve data
+quality before a learning process can be performed. In this study,
+we used earlier studies in which pre-processing techniques were
+used to improve data followed by an automated learning process
+as references. These studies were compared in Table 1.
+A literature review showed that numerous studies in the medical ﬁeld have used pre-processing techniques combined with
+machine learning algorithms to facilitate the decision-making
+process. However, data from HIPs were used to facilitate decisionmaking in only three studies. The objectives of the study of Barros
+et al. [4] and Martins et al. [15] were different from those of
+the present study: the aforementioned authors used information
+about the HIP to ﬁnd production rules to associated patients with
+certain groups of diseases, whereas our objective was to automate the learning of the preauthorisation process. However, Araújo
+et al. [3] had a similar objective to that of the present study, i.e.,
+the automated learning of the preauthorisation process. However,
+Araújo et al. [3] used medical data from a HIP to learn medical
+preauthorisation, whereas we used dental data to learn dental
+In the present study, a mechanism for supporting healthcare
+preauthorisation was developed to assist healthcare professionals
+in decision-making, whereby a potential decision was generated by
+learning the HIP database. Thus, this process is an important tool
+This paper is structured as follows: all of the steps for learning the preauthorisation process are described in Section 2; the
+results obtained using the classiﬁers are presented in Section 3;
+a discussion about how to use the proposed methodology and the
+limitations of this work are presented in Section 4; conclusions and
+suggestions for future studies are described in Section 5.
+Pre-processing techniques were used in this study to improve
+the quality of the data in a HIP database. These data were then
+combined with machine learning algorithms to learn the healthcare
+preauthorisation process. In this study, we used dental data, but
+the original version of this technique was performed using medical
+data [3]. Fig. 2 shows all of the steps that were performed in this
+study. Details on the execution of each step are given below.
+First, the HIP’s analysts generated a DB (DB-Original) that contained all of the data that were related to the dental procedures.
+This DB had 164 attributes; however, for ethical and legal reasons,
+all of the data that identiﬁed individuals, such as IDs, SSNs, dates of
+birth, addresses and phone numbers, were removed from the DB. In
+addition, an artiﬁcial key was generated for the DB to identify all of
+the anonymous individuals. The resulting database from which the
+attributes that identiﬁed individuals were eliminated was called
+The DB-EL comprised 133 attributes of which many attributes
+were irrelevant and in a format that was incompatible with the
+algorithms that were used during the mining phase. Therefore, the
+DB-EL was subjected to pre-processing to improve the data quality
+and decrease the amount of irrelevant information.
+An attribute selection step was performed in the ﬁrst step of
+pre-processing. This selection was performed by manual and auto-
+F.H.D. Araújo et al. / International Journal of Medical Informatics 94 (2016) 1–7
+Related works that used pre-processing techniques to improve data followed by an automated learning process.
+The authors used data pre-processing and supervised machine
+learning techniques to automate the learning of the
+preauthorisation process. The data used were collected from
+2007 to 2012 and contained information on requests for
+medical procedures/tests for the beneﬁciaries of a public and
+The authors applied pre-processing techniques to a data set for
+the beneﬁciaries of a supplementary health plan to prepare the
+data for use in data mining algorithms to identify disease
+patterns. The data used were collected during 2010 from a HIP
+DB containing information on procedures in hospitals,
+laboratories and medical ofﬁces for the beneﬁciaries of a HIP in
+The authors used the same DB and methodology to select data
+and attributes as [4] to reﬁne this database for use with data
+mining algorithms. The goal was to extract production rules to
+determining whether selected patients had certain groups of
+Pre-processing was used to resolve the primary problems
+associated with the data, that is, to eliminate irrelevant
+attributes and treat unbalanced classes. Following the data
+improvement, two methods were used to learn the
+preauthorisation process, rule induction and C4.5 [18]. The
+holdout [9] method yielded similar results using both
+classiﬁers, with hit rates of approximately 90%.
+These data were subjected to a data cleaning process to
+eliminate ineffectual records or inconsistent data. Finally, an
+attribute pre-selection process was performed to eliminate
+attributes that were not format compatible with the data
+mining techniques. The authors reduced the attributes from
+120 to 55 and the number of records used by 14%.
+The authors used three public medical DBs (for dermatological,
+breast cancer and spinal problems) that are widely used in the
+literature to evaluate and compare different machine learning
+algorithms to investigate the feasibility of using data
+classiﬁcation algorithms to facilitate the disease diagnosis
+The selected data were used with C5.0 [18] algorithms and
+fuzzy genetic programming (FGP) [21] and the extracted rules
+were validated by the holdout and cross-validation methods.
+The rules that classiﬁed a set of attributes for patients as not
+belonging to groups with certain diseases had a hit rate above
+97%. However, the rules that classiﬁed a set of attributes for
+patients as belonging to groups with certain diseases obtained
+The BayesNet, C4.5, Logistic Model Tree (LMT), NBtree,
+RandomForest, RandomTree, RepTree and Simple Cart [19]
+algorithms were compared using the following metrics:
+Precision, F-Measure, ROC Curve and Kappa [20]. The holdout
+method was used to validate the results. The BayesNet was the
+best algorithm for predicting breast cancer and dermatology
+diagnoses, with over 90% accuracy. The LMT was the best
+algorithm for the diagnosis of spinal problems, with
+15) Has the procedure been initially inspected?
+16) Number of tests performed by the beneﬁciary in the respective month
+17) Number of tests performed by the beneﬁciary in the respective semester
+18) Number of tests performed by the beneﬁciary in the respective year
+19) Number of identical tests performed by the beneﬁciary in the respective month
+20) Number of identical tests performed by the beneﬁciary in the respective semester
+21) Number of identical tests performed by the beneﬁciary in the respective year
+22) Number of tests of identical complexity level performed in the respective month
+23) Number of tests of identical complexity level performed in the respective semester
+24) Number of tests of identical complexity level performed in the respective year
+25) Number of requests made by the beneﬁciary in the respective month
+26) Number of requests made by the beneﬁciary in the respective semester
+27) Number of requests made requested by the beneﬁciary in the respective year
+mated selection. In the manual selection process, the domain expert
+and the data analyst eliminated data with the following attributes:
+a) attributes that were unknown and not used by professionals
+at the time of preauthorisation, b) attributes that were unﬁlled
+in every instance of the database and c) attributes that exhibited
+equal values (default ﬁlling) in all of the instances of the database.
+A total of 89 attributes were eliminated in the manual selection
+step, such that only 44 attributes remained in the resulting DB-MS
+database. The automated attribute selection was performed using
+the DB-MS by calculating the gain ratio [18] for each of the 44
+attributes, of which 29 had zero gain and were therefore eliminated
+from the database. The resulting DB-AS database contained only 15
+attributes. After the manual and automated selection steps, the HIP
+domain expert created new attributes based on his knowledge of
+the preauthorisation process. Thus, 12 attributes were created from
+existing discrete data associated with the beneﬁciary’s history. All
+of the new attributes had gain ratios above zero and were thus
+F.H.D. Araújo et al. / International Journal of Medical Informatics 94 (2016) 1–7
+added to the DB-AS to generate the DB-EXP. These attributes are
+Some of the selected attributes had unﬁlled values in the DBEXP; thus, the problem of missing data was treated. In this case,
+imputation using the mean was chosen to ﬁll the empty values [5].
+Numerous data were in a format that was incompatible with the
+classiﬁcation algorithms used; thus, these data were transformed
+[24]. Standardisation, conversion of qualitative into quantitative attributes and information extraction of complex data-type
+attributes (the extraction of the month of a date-type attribute)
+One feature of the data from the DB-Final was that the number
+of authorised procedures (7688) was much higher than the number of unauthorised (3597) procedures. However, most machine
+learning algorithms have difﬁculty in creating a model that accurately classiﬁes examples in a minority class [6]. Therefore, class
+balancing was performed using random over-sampling [12] and the
+minority class data were replicated for later use with the learning
+algorithms. Thus, the balanced set comprised the same amount of
+authorised and unauthorised procedures (7688). After all of the previous phases were completed, the classiﬁcation algorithms were
+used to learn the behaviour of the preauthorisation reviewers based
+The following supervised learning algorithms were used in this
+study: the RandomTree (RT) [1], the Naive Bayes (NB) algorithm
+[13], the support vector machine (SVM) [11] and the nearest neighbour (NN) algorithm [10]. These algorithms were selected because
+they belong to different paradigms of supervised learning: a symbolic paradigm, a statistical paradigm, a connectionist paradigm
+and an example-based paradigm [17], respectively. The performance of each of the classiﬁers was evaluated to achieve the best
+performance in learning the preauthorisation process.
+Finally, the classiﬁers with the best performance were determined and combined using ensembles. An ensemble is a set of
+classiﬁers in which individual decisions are combined to classify
+a new case. Ensembles can be more precise than their constituent
+individual classiﬁers and can thus improve the predictive power
+of the learning algorithms. There are several ways to combine
+classiﬁers of which the primary methods are weighted voting,
+unweighted voting and using a mean [11]. All of the obtained results
+The algorithms used were tested using the WEKA tool [23] with
+10-fold cross-validation as the evaluation method. In this evaluation method, the original dataset is randomly partitioned into 10
+data subsets with the same size. One subset is chosen from the
+10 subsets to validate the model, and the nine remaining subsets
+are used for training. This process is repeated 10 times, and each
+of the 10 subsets is used only once for validation. At the end of
+this process, the mean of the 10 generated results is calculated to
+produce a single estimate. The advantage of this method is that all
+of the data subsets are used both for training and for evaluation.
+The statistical measures for the evaluation of the algorithms used
+were Precision (P), Recall (R), Accuracy (A), F-Measure (FM), Area
+Under the ROC curve (AUC) and Kappa index (K) [22]. According to
+[14], the accuracy level of the Kappa index can be classiﬁed into 5
+levels of performance: “Poor” (K ≤ 0.2), “Reasonable” (0.2 < K ≤ 0.4),
+“Good”(0.4 < K ≤ 0.6), “Very Good”(0.6 < K ≤ 0.8) and “Excellente”
+and answered by a specialist who is responsible for authorizing HIP
+Three different evaluations were performed for each of the
+aforementioned four classiﬁers to demonstrate the importance of
+pre-processing. The two datasets (replicated and non-replicated)
+were used in each of the evaluations. All of the parameters resulting
+from the manual selection (DB-MS) were used in the ﬁrst evaluation; only the attributes resulting from the automated selection
+(DB-AS) were used in the second evaluation; and the attributes that
+were automatically selected together with the attributes created
+by the expert, after treatment of the unknown values and transformations (DB-Final), were used in the third evaluation. Fig. 3 is a
+schematic showing how the evaluations were performed for each
+Table 3 compares the results of the Precision, Recall, Accuracy,
+F-Measure, AUC and Kappa index for the algorithms that were
+tested using the attributes that were obtained after manual selection (DB-MS), automated selection (DB-AS) and the ﬁnal attributes
+Table 3 shows that very similar results were obtained using the
+attributes resulting from manual and automated selection. However, with the removal of irrelevant attributes in the automated
+selection process, this second classiﬁcation resulted in a lower
+training time for the classiﬁers. Using the attributes of the DB-Final
+produced the best results for all of the classiﬁers.
+Using the replicated set considerably improved the classiﬁcation performance. Kappa index values in Table 3 show that the NB
+failed to learn the preauthorisation process, because the other three
+tested classiﬁers exhibited “Very Good” performance for the nonreplicated set using the attributes of the DB-Final. Moreover, the
+three classiﬁers exhibited “Excellent” performance for the replicated set using these same attributes.
+The Z-test [8] was performed to statistically comparatively evaluate the results of the classiﬁers at a signiﬁcance level of 5% to assess
+whether the tested classiﬁers were signiﬁcantly different from each
+other. The test results showed that the RT, the SVM and the NN
+exhibited signiﬁcantly equivalent performances that were higher
+After obtaining the best classiﬁers for learning the preauthorisation process, the classiﬁer ensemble (which consisted of the RT,
+the SVM and the NN) was performed. Table 4 shows the results
+of this ensemble (for the replicated and non-replicated sets) using
+three combination criteria: the mean of the individual outputs of
+the classiﬁers, unweighted voting and weighted voting. Note that
+the attributes of the DB-Final were used for this test.
+Table 4 shows that the best results of this ensemble were
+obtained using the weighted voting criterion. The Kappa values
+in Table 4 show that using criterion-weighted voting resulted
+in “Excellent” performances for both the replicated and nonreplicated data sets.
+The use of the ensemble (criterion-weighted voting) improved
+almost all of the evaluated metrics, with the exception of the AUC
+metric, over using the best individual classiﬁer (NN) using the replicated data set and the attributes of the DB-Final. Thus, using this
+classiﬁer ensemble in a real HIP scenario would correctly classify
+We used the dental set from an existing database of a nonproﬁt HIP that contained real records that were collected from
+2007 to 2013 for the automated learning of the preauthorisation
+reviewer’s behaviour. All the requests of that base were analyzed
+The authorization request to conduct medical/dental procedures is something quite common in Brazil. In general, the number
+of positive responses is signiﬁcantly higher than the one of negative
+responses. This shows that the problem displays quite unbalanced
+classes. This unbalance can be used favorably to treat the problem.
+An incorrect positive response generates an additional cost to a
+F.H.D. Araújo et al. / International Journal of Medical Informatics 94 (2016) 1–7
+Fig. 3. Schematic of the evaluations performed for each of the classiﬁers.
+Comparison between the results for the classiﬁers.
+Results for classiﬁers for RT, SVM and NN ensembles.
+HIP, which is a problem, although a minor one. An incorrect negative response may generate considerable damage, especially when
+the case involves the risk of somebody’s death.
+Due to the problem characteristics it is noteworthy that the
+introduction of an automatic tool for evaluating requests can
+greatly reduce the number of requests forwarded for evaluating
+by a human. Many of the positive authorizations could be automatically evaluated.
+In the case of evaluations which involve negative authorizations,
+an automatic tool could be used as a way of helping in the human
+review. This could be used to start a debate among evaluators, in
+order to generate more precise answers to distinct cases. The entire
+process of using an automated tool can be summarized in Fig. 4.
+The accuracy value obtained by using the methodology was 96%,
+which means that on average only 4 procedures out of every 100
+requested and due to be authorised, would be analyzed by the
+F.H.D. Araújo et al. / International Journal of Medical Informatics 94 (2016) 1–7
+Fig. 4. Flowchart of steps performed after the request of a test/procedure using the tool.
+preauthorisation reviewer. The Recall value, on the other hand, was
+98%, which means that on average 2 out of every 100 requested procedures that should not be authorised, would be permitted. This
+means that the savings generated by the 96 requests that need not
+be analyzed by the preauthorization reviewer is much higher than
+the extra costs produced by the 2 procedure that would be carried
+This study has some limitations. One of them has to do with the
+fact that we have not used the dental chart data associated with
+the requests. Unfortunately, these data showed inconsistencies and
+mistakes in ﬁlling out the forms, facts that turned them into unreliable information and could disrupt the learning process. If it were
+possible to use such information, there would be good chances of
+Another important point concerns the lack of basic information
+on the decision-making. It is well known that health markets have
+particular characteristics in each region. These kinds of features,
+such as a speciﬁc morbidity proﬁle or regional epidemics, are well
+known by reviewers, but not registered in the databases used for
+learning. The aspects of this example, as well as several others, were
+ignored in this work because we think that they do not jeopardize
+What also has to be considered more speciﬁcally is a deeper
+evaluation of denied cases. It would be interesting in this context to
+conduct an interview with the preauthorization reviewer, in order
+to better understand the conditions that made him issue such a
+decision. However, the responsible for authorizations was no more
+at the HIP, at the moment in question, which made a face to face
+In this study, we used data that are common to HIP environments. There is a common set of information available to all
+operators, but each one of them also possesses speciﬁc information
+that could certainly be used in the learning process. This is why it
+will always be necessary to carry out previous studies before implementing a tool in a new HIP. Preliminary studies are also essential to
+extend this work to other health areas, since there are different contexts in every scenario, with much larger numbers of procedures
+• Health systems all over the world are facing considerable
+pressure to reduce costs while having to sustain or even
+improve the quality of health service delivery
+• In the present study, a mechanism for supporting healthcare
+preauthorisation was developed to assist healthcare professionals in decision-making, whereby a potential decision was
+• The final result was the development of a decision support
+mechanism that yielded hit rates above 96%.
+• It is possible to create a tool based on computational intelligence techniques to evaluate the requests of test/procedure
+with a high accuracy. This tool can be used to support the
+activities of the professionals and automatically evaluate less
+complex cases, like requests not involving risk to the life of
+After the data were pre-processed, four classiﬁers with different
+machine learning paradigms were tested: RT, NB, SVM and NN.
+The three classiﬁers (RT, SVM and NN) that yielded superior results
+were combined using an ensemble, and criterion-weighted voting
+exhibited the best performance. Using the classiﬁer ensemble in a
+real scenario for a HIP would correctly classify approximately 96%
+In future studies, we will investigate methods to extract the
+rules used by the classiﬁers to classify authorised and unauthorised
+procedures. The extracted rules will be analyzed by the domain
+expert of a HIP who will give his or her opinion on the interpretation
+Flávio H. D. Araújo: responsible for performing the work, create
+André M. Santana: deﬁned the classiﬁcation methods to be
+used, techniques for evaluation of data and information gain, and
+Pedro de A. Santos Neto: proposed the study, obtained the data
+from a Health Insurance Providers and served as expert analysing
+results and explaining situations, also reviewed the paper.
+In this study, we demonstrated the potential of using computational intelligence techniques to model the behaviour of
+preauthorisation reviewers (professionals who evaluate whether
+medical/dental claims should be authorised) based on the historical data of a particular HIP. Pre-processing techniques were used
+in order to prepare data from a HIP database for automated learning of the preauthorisation process. These data were used in an
+attribute selection step, followed by the treatment of missing data
+for certain attributes. The problem of unbalanced classes had to be
+addressed before the preauthorisation process could be learned.
+The authors thank the National Institute of Science and Technology for Software Engineering (Instituto Nacional de Ciência e
+Tecnologia para Engenharia de Software − INES) for partial support of this study and the Infoway company for encouragement
+and important contributions to this research.
+[1] D. Aldous, The continuum random tree, Ann. Probab. (1991).
+F.H.D. Araújo et al. / International Journal of Medical Informatics 94 (2016) 1–7
+[2] ANS, Caderno de informação da saúde suplementar. <http://www.ans.gov.br>,
+[3] F.H.D. Araújo, L. Moraes, A.M. Santana, P.A.N. Santos, P. Adeodato, E.M. Leao,
+Evaluation of the use of computational intelligence techniques in medical
+claim processes of a health insurance company, Int. Symp. Comput.-Based
+[4] F.E. Barros, E. Romão, A.A. Constantino, C.L. Souza, Data mining pre-processing
+for beneﬁciaries of health insurance, J. Health Inform. (2011) 19–26.
+[5] G.E.A.P.A. Batista, M.C. Monard, An analysis of four missing data treatment
+methods for supervised learning, Appl. Artif. Intell. 17 (5–6) (2003) 519–533.
+[6] G.E.A.P.A. Batista, R.C. Prati, M.C. Monard, A study of the behavior of several
+methods for balancing machine learning training data, SIGKDD Explorations
+[7] B.F. Chimieski, R.D.R. Fagundes, Association and classiﬁcation data mining
+algorithms comparicion over medical datasets, J. Health Inform. (2013) 44–51.
+[8] R.G. Congalton, K. Green, Assessing the Accuracy of Remotely Sensed Data:
+Principles and Practices, Taylor and Francis Group, 2009.
+[9] T.G. Dietterich, Statistical Tests for Comparing Supervised Classiﬁcation
+Learning Algorithms. Technical Report, State University, Oregon, 1997.
+[10] E. Fix, J.L. Hodges, Discriminatory Analysis, Nonparametric Discrimination:
+Consistency Properties, US Air Force School of Aviation Medicine, 1951 (477+).
+[11] S. Haykin, Neural Networks: A Comprehensive Foundation, Hall P editor, 2001.
+[12] N. Japkowicz, S. Stephen, The class imbalance problem: a systematic study,
+[13] G. John, P. Langley, Estimating continuous distributions in bayesian classiﬁers,
+Proceedings of the Eleventh Conference on Uncertainty in Artiﬁcial
+[14] J. Landis, G. Koch, The measurement of observer agreement for categorical
+[15] O.L.F. Martins, F.E. Barros, W. Romão, A.A. Constantino, C.L. Souza, Application
+of machine learning algorithms to date mining about beneﬁciaries of health
+insurance, J. Health Inform. (2012) 43–49.
+[16] T. Mettler, Anticipating mismatches of HIT investments: developing a
+viability-ﬁt model for e-health services, Int. J. Med. Inform. (2015), Available
+online from: http://dx.doi.org/10.1016/j.ijmedinf.2015.10.002.
+[17] T.M. Mitchell, Machine Learning, McGraw-Hill, 1997.
+[18] J.R. Quinlan, Induction of decision tree, Mach. Learn. (1986) 81–106.
+[19] L. Rokach, O. Maimon, Data Mining with Decision Trees: Theory and
+Applications, World Scientiﬁc Publishing, Singapore, 2008.
+[20] G.H. Rosenﬁeld, K.A. Fitzpatrick-lins, A coefﬁcient of agreement as a measure
+of thematic classiﬁcation accuracy, Photogramm. Eng. Remote Sens. (1986)
+[21] W.K. Sung, Algorithms in Bioinformatics: A Practical Introduction, A Chapman
+[22] J.M. Tenorio, A.D. Hummel, F.M. Cohrs, V.L. Sdepanian, I.T. Pisa, H.F. Marin,
+Artiﬁcial intelligence techniques applied to the development of a
+decision–support system for diagnosing celiac disease, Int. J. Med. Inform. 10
+[23] I.H. Witten, E. Frank, M.A. Hall, DATA MINING: Practical Machine Learning
+Tools and Techniques, Morgan Kaufmann, 2011.
+[24] C. Zhang, S. Zhang, Q. Yang, Data preparation for data mining, Appl. Artif.

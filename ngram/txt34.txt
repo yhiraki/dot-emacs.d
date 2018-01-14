@@ -1,0 +1,564 @@
+Using learning networks to help improve manufacturing
+Centre for Research in Innovation Management, University of Brighton, Brighton, UK
+Innovation which requires the acquisition of new or improved technologies involves a technical and managerial learning process
+and it raises the policy question of how best to encourage and enable relevant learning. The absence or lack of experience in this
+domain is a particular problem for smaller firms (SMEs) and for enterprises in economies in transition—such as in the countries
+of the former Soviet Union or in eastern Europe. Successful technology transfer requires considerable management expertise as
+well as the availability of suitable solutions. This paper reports on one experimental approach used on a pilot basis in Romania to
+facilitate the absorption of ‘new’ manufacturing practices, which involves the development of ‘learning networks’ as an aid to this
+process.  1999 Elsevier Science Ltd. All rights reserved.
+Keywords: Learning; Manufacturing; SMEs; Soviet Union; Technological; Transfer
+Technological change is essential to the survival and
+growth of individual firms and to the development of
+national competitiveness. However, organizational
+research and accumulated experience demonstrate that
+simply generating new ideas is not the same as making
+effective use of them—the classical divide between
+‘invention’ and ‘innovation’. This problem of technology transfer is of considerable relevance to policymakers and has led to an extensive range of policy measures aimed at trying to ‘close the gap’ between availability and actual use of new technology (Dodgson and
+Managing technological change presents a series of
+demanding challenges, of which four are particularly
+important. Firstly, it is not easy for a management team
+to have sufficient understanding of potential technologies to take an informed judgement about which are
+likely to be appropriate. Secondly, investment in new or
+different technologies can be considerable and require
+major commitments of resources. Thirdly, there is a need
+to manage a learning and unlearning process. Lastly, the
+* Corresponding author: E-mail: john6@mistral.co.uk
+acquisition of technologies is not the same as implementation—there have been many cases where the potential
+of a technology has not been exploited by a firm.
+Few firms generate their own basic technologies. In
+most cases technologies are transferred into the firm.
+Many difficulties arise because technology transfer is not
+a simple transaction. Among many factors which render
+technology transfer complex and difficult to manage are:
+쐌 Innovation is not an event but an extended process
+within an extended time line, which involves consideration of technological knowledge and finance,
+marketing, human resources, strategic positioning, etc.
+쐌 Transactions in innovation are not always on the basis
+of one firm to another but often involve many firms
+and may proceed through intermediaries. In particular
+small/medium-sized enterprises (SMEs) often require
+the aid of some form of ‘bridging’ agent or institution
+쐌 Technology is a complex and multi-dimensional
+‘commodity’ involving both embodied and intangible
+knowledge, much of which may remain in tacit form.
+For example, a new manufacturing process involves
+hardware, software and knowledge about how to use
+쐌 Technologies are dynamic and develop in terms of
+0166-4972/99/$ - see front matter  1999 Elsevier Science Ltd. All rights reserved.
+PII: S 0 1 6 6 - 4 9 7 2 ( 9 9 ) 0 0 0 2 5 - 5
+J. Bessant, D. Francis / Technovation 19 (1999) 373–381
+their functionality—often with bewildering speed. It is
+necessary for frequent re-appraisals of technological
+progress and trajectory to be undertaken.
+Information about innovations and enabling technologies is not freely and widely available, especially for
+SMEs who may lack awareness and access to relevant
+Users are often unable to articulate their needs or
+define problems rather than symptoms—thus they risk
+being unable to specify which technologies they
+require for transfer, or acquire inappropriate technologies.
+Traditional models of technology transfer assume that
+cost is the main factor accounting for diffusion. But
+studies of innovation adoption suggest that other factors influence the adoption decision and that the role
+of subjective perception on the part of the adopter is
+As Voss points out, much of the innovation literature
+neglects the question of implementation—yet the
+transfer of complex new ideas into successful practice
+is often an extended process involving considerable
+learning and adaptation. (Voss, 1986; Leonard-Barton, 1988).
+These issues suggest strongly that successful technology transfer requires considerable management
+expertise as well as the availability of suitable solutions.
+The absence or lack of experience in this domain is a
+particular problem for SMEs and for enterprises in economies in transition—such as in the countries of the former Soviet Union or in eastern Europe.
+Innovation which requires the acquisition of new or
+improved technologies involves a technical and managerial learning process and it raises the policy question
+of how best to encourage and enable relevant learning.
+This paper reports on one experimental approach used
+on a pilot basis in Romania, which involves the development of ‘learning networks’ as an aid to this process.
+It is worth briefly reviewing the context in which this
+project took place. Romania, along with many eastern
+European economies is involved in a difficult transition
+process towards adopting market-based economics.
+Institutions are in a state of flux, with many being forced
+to close while others suffer dramatic cuts. For those that
+remain, there is a major task of reconfiguration, a process
+which involves not only scaling down and decentralization but, also, profound rethinking of the business principles under which they are organized and operate. Of
+particular relevance to our discussion are the following
+쐌 Manufacturing industry is, in general, very weak with
+inappropriate capacity, outdated plant and processes
+and with an orientation towards large-scale mass production which is out of line with the world market
+trends towards global standards and micro-market
+customization with an emphasis on non-price factors.
+There is a very low awareness of the importance of
+marketing. The techniques of systematic market
+research are almost entirely absent. Moreover, there
+are inadequate funds for developing marketing skills
+The historic separation of R & D into institutes and
+away from the operation of individual firms has left
+companies without an internal dynamic and an unbalanced set of firm-level capabilities.
+Manufacturing management is underdeveloped and
+steeped in a tradition of ‘command and control’,
+appropriate for output-oriented mass production. In
+order to implement some of the ‘new’ manufacturing
+philosophies such as ‘total quality management’,
+‘just-in-time’ production and cellular manufacturing
+there is a need to move towards alternative models of
+organization based on teamwork and decentralization.
+In other words, there is a requirement for re-tooling
+not only the physical plant and equipment but also
+the mental frameworks which underpin manufacturing
+The availability of the ‘new’ manufacturing technologies, which include not only physical equipment but
+also such mental models, is limited and largely based
+on high-cost, short-term external consulting projects.
+Within Romania, the technology support infrastructure (research institutes, universities, etc.) is suffering
+from transitional problems of a similar nature and
+lacks awareness or knowledge about many of the
+‘new’ manufacturing technologies within the context
+of increasingly globalizing industrial change drivers.
+The implications for Romanian manufacturing industry are that to develop a competitive approach considerable learning will be needed along a number of dimensions. Table 1 summarizes some of the key challenges.
+The prescription for moving to the right hand side of
+this table is well known and widely proven. Experiences
+in Japan, and more recently across the Western world,
+have demonstrated the potential of the new approaches
+to manufacturing. Also, it is now understood that much
+of the change does not necessarily involve high capital
+investment (Bessant, 1991; Kaplinsky, 1994; Schonberger, 1995). For example, the ‘lean’ revolution owes
+much more to rethinking production organization and
+management than investment in new equipment
+For Romania, the challenge is to acquire technologies
+that are relevant, build on potential areas of strength,
+affordable and capable of being implemented. Even if a
+technology is available and proven, it will need to be
+J. Bessant, D. Francis / Technovation 19 (1999) 373–381
+Emergent challenges in developing manufacturing competitiveness
+Scale economy based on large lot production
+Hierarchical command and control organization
+Supply chains operate on arms-length and adversarial basis
+Customized, flexible production (with a high degree of intrinsic
+Non-price factors—quality, innovation, delivery, variety, design—
+Demand is fragmented and markets segmented
+Economies of scope, based on small lot high flexibility production
+Co-operative networks and high trust relations
+absorbed and implemented within a particular context.
+This will involve managerial and technological learning—in acquiring new concepts, in experimenting with
+new approaches and in capturing and internalizing the
+knowledge gained. The remainder of this paper considers
+the underlying challenges behind developing such learning and how the process might be underpinned by
+Learning of this kind is not a unique problem—it is
+a truism that all organizations need to learn and change
+if they are to survive. Work by de Gies and others has
+drawn attention to the importance of developing learning
+capabilities and embedding them within the organization
+(de Gies, 1996). Survival is seen less as the adoption of
+one specific solution than a continuing process of matching needs and means by learning. Recognition of this
+need has led to growing emphasis on the concept of
+‘learning organizations’ and on the mechanisms through
+which this capability can be developed (Leonard-Barton,
+1988; Senge, 1990). One aspect is the possibility of gaining traction and support for the learning process through
+working with others in what we term ‘learning networks’. Before we look at this it is useful to consider
+some basic ideas about organizations and how they
+There is much discussion of learning in organizations,
+but we can draw out a number of common themes,
+including the following. First, learning can be viewed as
+a cyclical process (see Fig. 1), involving a combination
+of experience, reflection, concept formation and experimentation (Kolb and Fry, 1975). Acquiring new competence in manufacturing will require activity in all four
+of the phases. This does not happen by accident—the
+Full learning takes place only when the cycle is completed—thus much effort and activity in one or more
+quadrants may not lead to learning that is transformational. Commonly, organizations are preoccupied with
+experiment rather than reflection—but a lack of critical
+review (reflection) may result in inappropriate and
+wasted efforts, or in reinforcing old approaches.
+It is also important to recognize that learning is not
+automatic—there must be motivation to enter the cycle.
+A problem in the Romanian context is the lack of external stimulus to change—until recently the economy
+functioned in closed fashion and market-led signals
+about the need and direction of change were not
+Firms often fail to learn because they are isolated and
+lack support for key stages in the process. Evidence suggests that learning can be supported by structures, procedures, etc. to facilitate the operation of the learning
+cycle—for example, through the use of external facilitation.
+A particular problem with learning about new technologies is that much of the knowledge which needs to be
+absorbed is not available in codified form. Since effective learning involves both tacit and formal components
+a key task is to capture and codify—to make learning
+J. Bessant, D. Francis / Technovation 19 (1999) 373–381
+explicit (Nonaka, 1991). This process involves the
+accumulation and connection of data into information
+and knowledge—simply introducing new concepts to
+firms via know-how exchanges or seminars may not
+Finally, learning may take place in ‘adaptive’ mode—
+learning to do what we do better—or it may involve reframing and radical change (what some writers term a
+‘paradigm shift’), in which the perception of the problems to be solved and the potential set of solutions
+change (Senge, 1990; Bessant, 1991) The challenge of
+a ‘paradigm shift’ is greater because it needs ‘outside
+the box’ perspectives and involves high risks, and often
+substantial costs; there is also a fear of ‘letting go’ of
+old ways of thinking and acting. This is likely to be of
+particular significance in the Romanian context, since
+Learning to learn—meta-learning—is an important
+aspect of this process and requires the capacity to design
+and operate learning systems (Argyris and Schon, 1970).
+The basis of most literature on learning is at an individual level, but recent years have seen a strong focus
+on the concept of ‘learning organizations’. There is
+debate about whether organizations themselves actually
+learn or whether it is simply a learning process for the
+individuals within them (Hedberg, 1981; Garvin, 1993).
+The following points summarize the key themes in
+쐌 Individuals engage in a learning processes but the
+organization provides the context in which this takes
+place—some environments are more conducive than
+쐌 Individuals interact and share knowledge, and this can
+become part of the organizational culture—the pattern
+of shared concepts, values, beliefs, etc. (Schein,
+1984). This culture is an artifact of the organization
+and, where strong, can survive the departure of individuals and the entry of new individuals who become
+socialized into it. Thus we can speak of an organization learning and having some form of memory where
+its learning accumulates and which guides its subsequent behaviour.
+쐌 Much of the influence of culture lies in the informal
+and tacit realm, but it can be captured and formalized
+as knowledge and routines. For example, formal programmes of directed experiment and reflection (R and
+D) can lead to increased codified and tacit knowledge—the technological competence of the firm. Equally, programmes which attempt to capture tacit
+knowledge in exemplified procedures also contribute
+to making tacit knowledge explicit—e.g. in ISO 9000.
+쐌 Learning is influenced by opinion leaders within an
+organization (Rogers, 1984). Those responsible for
+formulating policy must support the learning process
+if it is to become an influential factor affecting the
+firm’s organization development trajectory.
+쐌 Several mechanisms appear to help with the process
+of sharing and making knowledge explicit, including
+the exchange of perspectives, shared experimentation,
+display of learning achieved, measurement of learning, etc. (Garvin, 1993). At their heart, such mechanisms represent ways of supporting and developing
+a shared learning cycle, as discussed above.
+Learning is not automatic. There are a number of
+points at which learning fails to happen unless a potential blockage is dealt with. For example, many firms
+stumble at the first hurdle by failing to recognize the
+need to learn, or else by recognizing the stimulus but
+choosing to ignore or discount it. (This phenomenon
+often gives rise to the ‘not invented here’ problem which
+is commonly seen in the field of technological change
+(Tidd et al., 1997)). Others may recognize the need for
+learning but become locked in an incomplete cycle of
+experiment and experience, but with little or no time or
+space given to reflection or to allow the entry of new
+concepts. For others, the difficulty lies in organising and
+mobilizing learning skills, while in other cases the difficulty lies in making use of the rich resource of tacit
+knowledge—things people know about but are unable to
+describe or articulate (Polanyi, 1967; Nonaka, 1991).
+Table 2 summarizes the key blocks to learning.
+In the Romanian context it is clear that many of these
+blocks and barriers are present. The relative insulation
+from the development of market awareness, the overreliance on old mental models about production organization, the emphasis on working to plan rather than to
+order, etc. all conspire to create ‘non-learning’ organizations and militate against the transfer of new concepts.
+7. Intra- and inter-organizational learning—can
+Most of the literature related to learning organizations
+relates to intra-organizational processes, but there is a
+strand concerned with inter-organizational learning—
+learning with or from others. The advantages of this
+approach are similar to those which relate to group/interpersonal learning and can, at least partly, address the
+The potential benefits of shared learning include the
+J. Bessant, D. Francis / Technovation 19 (1999) 373–381
+Search for new solutions is too localized
+쐌 In shared learning there is a high potential for challenge and structured critical reflection from different
+쐌 Different perspectives can introduce new concepts or
+쐌 Shared experimentation can reduce risks and maximize opportunities for trying new things out.
+쐌 Shared experiences can be supportive and confirmational—strengthening the individual.
+쐌 Shared learning helps explicate the system’s principles, seeing the patterns—separating ‘the wood from
+쐌 Shared learning provides an environment for surfacing assumptions and exploring mental models outside
+of the normal experience of individual organizations—this helps reduce the ‘not invented here’
+It is thus possible to argue that there may be value in
+designing and building networks which offer some form
+of additional and complementary support for the learning
+processes that go on in individual firms.
+A relevant concept here is that of ‘action learning’,
+pioneered by Reg Revans (Revans, 1980). Action learning stresses the value of experiential learning and the
+benefits which can come from gaining different forms
+of support from others in moving around the learning
+cycle. Part of Revans’ vision involved the idea of ‘comrades in adversity’, working together to tackle complex
+and open-ended problems (Pedler et al., 1991). This
+approach effectively builds upon some of the principles
+outlined above and provides a framework for designing
+and operating what we term ‘learning networks’.
+8. Learning networks vs. networks that learn
+Formal networks (such as those set up to enable supply or technological collaboration) offer many opportunities for learning to take place—by sharing ideas, trying out experiments, etc. But such learning, important
+though it is, is essentially a ‘by-product’ of the main
+completion problem—understanding and support for all phases
+purpose of the network. We would like to differentiate
+these from a specific type of network which we are terming ‘learning networks’, where the primary purpose is
+to enable some kind of learning to take place. For
+example, a ‘best practice’ club in which firms from different sectors gather together to share experiences and
+to study new concepts would be a learning network.
+This concept of a ‘learning network’ can be
+a network formally set up for the primary purpose of
+increasing knowledge, expressed as increased
+This definition implies a number of features:
+쐌 Formal setting up, rather than informal evolution;
+쐌 A primary learning target—this defines what
+learning/knowledge is the network intended to enable;
+쐌 A structure for operation, with boundaries about who
+쐌 Processes which can be mapped on to the learning
+쐌 The measurement of learning outcomes which feeds
+back to operation of the network and which eventually
+enables a decision to be taken as to whether or not to
+These features may be weakly or strongly developed
+in different kinds of learning network, but they represent
+structure and process aspects which could be explored
+further1. A growing number of such ‘learning networks’
+have been established, and there is some evidence that
+they can assist in the transfer of new concepts such as
+continuous improvement (Bessant, 1995). Their relevance is particularly in situations where there is a need
+The exploration of the concept of learning networks and how they
+might be designed and operated is the subject of a major research
+programme involving the Universities of Bath, Brighton and Cambridge. Details can be found in (Harland, 1995) or from the Project
+ION website at www.labs.bt.com/people/callagjg/ion
+J. Bessant, D. Francis / Technovation 19 (1999) 373–381
+to increase the level of capability across a broad sector
+or group—for example, in mastering new concepts like
+‘total quality management’ or ‘world class manufacturing’. Although such learning can and does take place in
+informal networks and clusters, there is growing evidence that purposive structures and mechanisms built
+around formal learning networks can accelerate the process (Kaplinsky et al., 1999). However, one problem in
+this mode of learning appears to be maintenance in the
+long term, particularly when initial sources of funding
+(to support network operations, provision of facilitation,
+etc.) come to an end. It appears that such networks survive only when there is sufficient ‘ownership’ among
+members to take over their operation and development.
+A second issue—again, the subject of further
+research—is the type of technology which is the subject
+of the learning network. Examples exist of a wide variety
+of technologies whose evolution and diffusion have been
+assisted through learning networks—from ‘hard’ systems (such as robots, rapid prototyping and electronics
+assembly equipment) through to ‘soft’ technologies such
+as ‘just-in-time’, quality management and supply chain
+management. A major advantage offered by learning networks is in dealing with ‘configurational technologies’,
+which require adaptation and modification in the light
+of user experience (Fleck, 1988). This suggests that this
+approach will be most suited to technologies which are
+If we return to the Romanian case it can be argued
+that there might be scope for setting up some form of
+learning network as an explicit venture to enable learning to take place around the theme of new manufacturing
+and the transfer of appropriate technologies.
+The approach described below formed the basis of a
+pilot project, funded under the European Union’s
+PHARE programme, to facilitate industrial restructuring
+쐌 working with a selected group of organizations in several regions to build pilot learning networks for supporting improved manufacturing capabilities;
+쐌 working with a selected group of people, drawn from
+institutes within the science and technology support
+infrastructure (research institutes, etc.) to develop
+their skills as co-ordinators and facilitators for such
+This second strand raises an important issue; research
+on learning networks suggests that brokers/facilitators
+play a key role in determining success or otherwise
+(Bessant and Tsekouras, 1997). But, as we have already
+noted, the change needs for Romanian technology institutes and similar bodies is also one which requires con-
+siderable learning. It became necessary to run a two-step
+development process where the first stage allowed learning among the participants about ‘new manufacturing’
+before the second stage, which involved the development
+of particular facilitator skills for designing and running
+The purposes of the CENTRIM team’s intervention
+were clear but broad. We were to install a process whereby firms in Romania could acquire influential constructs, paradigms and methodologies that had rendered
+the average firm in the West relatively efficient and
+effective. In other words, our task was to facilitate a kind
+of technology transfer, but the technology to be transferred was more of a craft than a hard science: we were
+As change agents we focused on three dimensions:
+쐌 our technology emphasis was manufacturing;
+쐌 our population target was production managers.
+This strategic focus provided an embryonic methodology for the initial ‘tuning-in’ trip to Romania. Looking
+at the overall situation as a force field (Lewin, 1947) it
+was easy to list hindering forces but helping forces were
+less easily identified—they included ‘soft’ issues like
+motivation, pride, education, commitment, and ‘harder’
+factors such as a very low cost of skilled labour and a
+range of exploitable assets and resources.
+Discussions following this visit led to the design of a
+number of prototype learning networks which would
+have regional facilitators (drawn largely from the RTO
+(Research & Technology Organization) infrastructure)
+and which would particularly focus on trying to help
+develop new manufacturing concepts within the emerging private sector. Firms represented included electronics, ceramics and instrumentation. This design was
+largely opportunistic, building on links with key RTOs
+and following guidance from relevant government
+It was with this background that the intervention was
+designed. Three main principles were adopted:
+1. We would provide educational input. There was a
+general lack of understanding of the current global
+manufacturing paradigm. We felt that Romanian
+managers could not invent this—we needed to provide structured coaching and learning.
+2. We would work through facilitators using the ‘barefoot doctor’ notion developed in China more than 30
+years ago. Respected people from a community can
+make a huge impact—if given basic training in facilitation and key techniques.
+3. We would seek to establish learning networks of
+company representatives to provide support, shared
+experience and a higher expectation level on each
+J. Bessant, D. Francis / Technovation 19 (1999) 373–381
+CENTRIM staff developed the educational input. It
+consisted of five structured workshops, each lasting a
+day, at which production managers (the targets for the
+intervention) would join together to learn specific techniques for reviewing the performance of their companies. After each workshop they were expected to apply
+the ideas in their own firms and report back next time.
+That way ideas were tested immediately—a kind of JIT
+(just-in-time) learning process following the principles
+of action learning (Revans, 1983; French and Bell,
+The topics for the workshop were chosen for their relevance and accessibility. One was on waste, another on
+quality, a third on continuous improvement (CI), a fourth
+on human factors and the last on operations strategies.
+Taken together, these represented key basic areas of
+knowledge needed by a manufacturing organization.
+It was envisaged that there would be six to eight participants to each group, each from a different company.
+However, we wanted firms to have broadly similar production management processes to ease the learning process.
+A highlight of the intervention was the training of six
+facilitators in the UK. A detailed manual was prepared
+and each facilitator had the opportunity to develop skills
+in delivering the content and management of the workshop process. The response was excellent and the
+materials were translated. Armed with a mission, a methodology and key skills CENTRIM staff participated in
+the launch before withdrawing. By 1997 there were six
+learning groups operating—evolving their own way of
+working on the foundation of the CENTRIM methodology.
+The project described above was a pilot activity and
+one which ran over a short time scale. Six networks were
+formally identified and initial meetings were held, and
+it is significant that these extended outside the capital
+and into other regions of the country. It is, however,
+difficult to evaluate the programme, not least because
+of the rapid changes and the resource constraints which
+continue to obtain in Romania. However, at the level of
+developing a network of facilitators it does appear that
+considerable personal and collective learning did take
+place and this laid the early foundations for further work.
+On the basis of this experience we would suggest that
+the model is worth pursuing further, and that it offers
+an important addition to the policy armoury for enabling
+In particular it addresses some of the issues described
+in the early part of this paper—especially the complex
+and intangible nature of much of the technology which
+needs to be transferred. There is growing recognition
+that the problem of technology transfer is one of learning, and also that learning is not an automatic activity
+within most enterprises. Learning to learn, and policies
+which support this, is a relatively new theme but one
+which is likely to be of considerable relevance in the
+future. Although much of the early literature on learning
+in organizations was largely prescriptive, or else it was
+assumed that investments in individual training and
+development would lead to improvements in learning,
+this is giving way to more detailed accounts of particular
+approaches to the development of learning (Garvin,
+While much of this literature is concerned with intrafirm learning, there is growing interest in inter-firm
+learning and there is a valuable convergence with studies
+being carried out of networking and clustering as an
+alternative mode of economic development. For some
+time it has been recognized that particular configurations
+of firms in particular regions have been able to achieve
+what Schmitz calls ‘collective efficiency’—that is, that
+together a group of small firms can overcome the traditional economic barriers to development (Schmitz,
+1997). Examples abound, but include the ‘industrial districts’ of Italy, Spain and other European countries, and
+the significant clustering observed in Brazil and Pakistan
+around particular regions but also concentrated on particular sectors or product groups (Piore and Sabel, 1982;
+These models have become a focus of interest among
+policy-makers, and efforts to stimulate the clustering and
+networking of firms are underway in a variety of countries. One element of such clustering is that the process
+of learning and capability-building is enhanced and supported—arguably through ‘action learning’/experience
+sharing principles of the kind we discussed earlier. For
+example, in the case of the textile industry cluster in
+Italy one outcome of the networking was the setting up
+of shared R and D (learning) among the many small
+firms. This led, over many years, to the formal establishment of a shared technology institute (CITER) and to
+the development of a rich and robust learning network,
+the result of which is a technologically strong and highly
+competitive export-oriented industry (Murray, 1993).
+The work described here also highlights a number of
+potential sites for failure in building and operating learning networks. There is a real risk that, without external
+pressures on firms to enter a learning cycle, and in the
+absence of active facilitation, such experimental networks will atrophy. A number of policy programmes
+have tried to establish learning networks—for example,
+‘best practice clubs’—and have supported these with
+‘pump-priming’ resources (Semlinger, 1995). However,
+many of these quickly fall into dis-use once the initial
+support is withdrawn (Danish Technological Institute,
+1991). There is a need for further work on the design of
+such programmes to provide effective long-term support,
+J. Bessant, D. Francis / Technovation 19 (1999) 373–381
+through better training of facilitators and intermediaries
+(Bessant and Rush, 1995), and through increasing the
+sense of involvement and active ownership of the networks. One interesting development here is work in a
+number of countries to use the supply chain as a vehicle
+for transferring learning. In this model the incentive to
+learn comes from the need to upgrade competence in
+order to continue as a supplier— but evidence suggests
+that the model works best when there is also active and
+broadly based facilitation of the process (Kaplinsky et
+At the level of the individual enterprise, the experience of developing the pilot learning networks in Romania has led to the CENTRIM team identifying four main
+areas for future research and development. Firstly, we
+need to understand more about the process of helping
+directors and managers to take informed decisions about
+potentially useful technologies—at present these cognitive processes are something of a ‘black box’. Secondly,
+we need to be clearer about helping facilitators to be
+effective—especially supporting them when things go
+wrong. Thirdly, it is important to see technology transfer
+as an intervention into the sociology of the firm and to
+understand that the techniques of organization development need to be integrated into a development model.
+Lastly, we need to understand when education, facilitation, coaching, reflection and challenge are useful processes for the opinion leaders who are the targets of
+Argyris, C., Schon, D., 1970. Organizational Learning. Addison Wesley, Reading, MA.
+Bessant, J., 1991. Managing advanced manufacturing technology: the
+challenge of the fifth wave. NCC–Blackwell, Oxford/Manchester.
+Bessant, J., 1995. Networking as a mechanism for technology transfer:
+the case of continuous improvement. In: Kaplinsky, R., den Hertog,
+F., Coriat, B. (Eds.), Europe’s Next Step. Frank Cass, London.
+Bessant, J., Rush, H., 1995. Building bridges for innovation: the role
+of consultants in technology transfer. Research Policy 24, 97–114.
+Bessant, J., Tsekouras, G., 1997. Learning networks. Working paper,
+Carlsson, B., Jacobsson, S., 1993. Technological systems and economic performance: the diffusion of factory automation in Sweden.
+In: Foray, D., Freeman, C. (Eds.), Technology and the Wealth of
+Nations. Pinter Publishers, London, pp. 77–94.
+Danish Technological Institute, 1991. Network co-operation—achieving SME competitiveness in a global economy. Danish Technological Institute.
+de Gies, A., 1996. The living company. Harvard Business School
+Dodgson, M., Bessant, J., 1996. Effective Innovation Policy. Thomson
+Fleck, J., 1988. Innofusion or diffusation? University of Edinburgh,
+French, W., Bell, C., 1995. Organisational development: behavioural
+science interventions for organisation improvement, 4th ed. Prentice–Hall, Englewood Cliffs, NJ.
+Garvin, D., 1993. Building a learning organisation. Harvard Business
+Harland, C., 1995. Networks and globalisation. Review, Engineering
+Hedberg, B., 1981. How organisations learn and unlearn. In: Nystrom,
+H., Starbuck, W. (Eds.), Handbook of Organisation Design. Oxford
+Kaplinsky, R., 1994. The challenge of easternisation. Frank Cass, London.
+Kaplinsky, R., Bessant, J., Lamming, R. 1999. Using supply chains to
+diffuse ‘best practice’. Centre for Research in Innovation Management, Brighton.
+Kolb, D., Fry, R., 1975. Towards a theory of applied experiential learning. In: Cooper, C. (Ed.), Theories of group processes. John
+Leonard-Barton, D., 1988. Implementation as mutual adaptation of
+technology and organization. Research Policy 17, 251–267.
+Lewin, K., 1947. Frontiers in group dynamics: concept, method and
+reality in the social sciences. Human Relations 1 (1), 5–41.
+Murray, R., 1993. CITER. In: Rush, H. et al. (Eds.),
+Background/benchmark study for Venezuelan Institute of Engineering. CENTRIM, University of Brighton, Brighton.
+Nonaka, I., 1991. The knowledge creating company. Harvard Business
+Pedler, M., Boydell, T., Burgoyne, J., 1991. The learning company: a
+strategy for sustainable development. McGraw–Hill, Maidenhead.
+Piore, M., Sabel, C., 1982. The Second Industrial Divide. Basic Books,
+Polanyi, M., 1967. The Tacit Dimension. Routledge and Kegan
+Revans, R., 1980. Action Learning. Blond and Briggs, London.
+Revans, R., 1983. Action Learning 2. G. Wills/IMCB, Buckingham.
+Rogers, E., 1984. Diffusion of Innovation. Free Press, New York.
+Schein, E., 1984. Coming to a new awareness of organisational culture.
+Semlinger, K., 1995. Public support for firm networking in Baden–
+Wurttemburg. In: Kaplinsky, R., Coriat, B., den Hertog, F., Andreason, L. (Eds.), Europe’s Next Step. Frank Cass, London.
+Senge, P., 1990. The fifth discipline. Doubleday, New York.
+Schmitz, H., 1995. Collective efficiency: growth path for small firms.
+Journal of Development Studies 31 (4), 529–566.
+Schmitz, H., 1997. Collective efficiency and increasing returns. Working paper 50, Institute of Development Studies, University of Sussex.
+Schonberger, R., 1995. Building a Chain of Customers. Free Press,
+Tidd, J., Bessant, J., Pavitt, K., 1997. Managing innovation: integrating
+technological, organizational and market change. John Wiley,
+Voss, C., 1986. Implementation of advanced manufacturing technology. In: Voss, C. (Ed.), Managing Advanced Manufacturing
+Womack, J., Jones, D., 1997. Lean Thinking. Simon and Schuster,
+David Louis Francis is Senior Research Fellow in Agile Manufacturing
+and leader of the Innovation Consulting Group at the Centre for Research
+in Innovation Management at the University of Brighton. He is a behavioural scientist specializing in competitive strategy, human resource development and innovation management. He has worked with many organizations in Europe, the Far East and the USA. Dave has written or co-authored
+27 books, including Teambuilding Strategy, Top Team Building, Managing Your Own Career, Effective Problem Solving, Unblocking Organizational Communication and Step-by-Step Competitive Strategy. During
+1996 Dave led the ‘Partnership with People’ research team. The project
+was established by the Department of Trade and Industry and exhaustively
+studied how successful companies manage people in the mid-1990s.
+J. Bessant, D. Francis / Technovation 19 (1999) 373–381
+John Bessant is currently Professor of Technology Management and Head
+of the Centre for Research in Innovation Management at the University
+of Brighton. He is also a Professor at the Science Policy Research Unit
+at the University of Sussex. His research and consultancy activities centre
+on organizational and infrastructure development to support innovation,
+with particular emphasis on the problems of smaller firms. He is the author
+of over 50 articles and nine books, including Managing Innovation (John
+Wiley and Sons, 1997) and Effective Innovation Policy (International

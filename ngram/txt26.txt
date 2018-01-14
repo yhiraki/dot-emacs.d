@@ -1,0 +1,47 @@
+9) Working Title: Production planning using dynamic planned lead times: A
+Production planning and control (PPC) systems are designed to efficiently manage the flow of
+materials and goods and the utilization of people, equipment and capacity. In order to handle the
+complexity of manufacturing firms, it is advantageous to decompose the management task into
+partial parts coordinated by a hierarchical structure (see Bertrand et al. 1990). Planning levels
+are interrelated by instructions (e.g. order release decision of upper/centralized planning level)
+and feedback (e.g. system feedback from lower planning level such as decentralized sequencing
+decisions for a production unit). This basic structure is fundamental for PPC systems and without
+the management of lead-times the hierarchical coordination is undermined.
+Determining an appropriate planning value for lead-times is a rather difficult task. Planned leadtimes refer to the planned time that elapses between the release of an order (the period an order
+enters the manufacturing system) and its completion. Thus planned lead-times are a planning
+parameter. In contrast, the actual time an order takes to make it through the production system
+is called production lead-times or flow-times (hereinafter flow-times) and is used as a
+performance measure. Flow-times consist of processing, setup, control, transport, and waiting
+times whereas the latter is the governing factor. Waiting times are a result from queuing (e.g.
+jobs queue before and after processing) which heavily depends on the amount of jobs in the
+system. Especially in make-to-order (MTO) industries with complex material flow (e.g. job shops)
+realized flow-times are often erratic and too long. There are two alternative research approaches
+handling planned lead-times differently: either by a reactive lead-time management approach
+(lead-times are supposed to be an exogenous variable) or by a pro-active approach (lead-times
+are supposed to be an endogenous variable).
+The reactive lead-time management approach includes three streams of research
+(1) Due date assignment models, (2) Material Requirement Planning and (3) Forecasting
+of lead-times (w.r.t. (3) see Selcuk et al. 2006, 2009; Enns, Suwanruji 2004; Selcuk
+The pro-active lead-time management approach aims to control the actual flow-times to
+match pre-determined norms - the workload control concept.
+The focus of this thesis is on the reactive lead-time management approach. Only few studies
+(Selcuk et al. 2006; 2009; Enns, Suwanruji 2004; Selcuk 2013) exist on this topic and to the best
+of our knowledge no study on this topic uses a machine learning approach. In the field of
+operations management machine learning is mostly used for flexible manufacturing systems,
+due date assignment/quotation and scheduling. This thesis should design a model of a
+manufacturing system that uses a reactive lead-time management approach by using a machine
+The student should start with a description of the general (methodical) approach and the
+relationship to other methods like neural networks, meta-models, decision trees etc… The model
+size and specific characteristics as well as a possible benchmark model should be discussed
+with the advisor. Additionally (after the completion of the concept of this thesis), there is a
+possibility that the student gets access to data from a semi-conductor company.
+Keywords: dynamic planned lead times, production planning, machine learning
+Bertrand, J.W.M.; Wortmann, J.C.; Wijngaard, J.: Production control: A structural and design oriented
+Enns, S.T.; Suwanruji, P.: Workload responsive adjustment of planned lead times. Journal of
+Manufacturing Technology and Management, Vol.15, p.90–100, 2004.
+Selçuk, B.; Adan, I.; De Kok, T.; Fransoo, J.: An explicit analysis of the lead time syndrome: stability
+condition and performance evaluation. International Journal of Production Research, Vol.47 (9),
+Selçuk, B.: Adaptive lead time quotation in a pull production system with lead time responsive demand.
+Journal of Manufacturing Systems, Vol.32 (1), p.138-146, 2013
+Selçuk, B.; Fransoo, J.; De Kok, T.: The effect of updating lead times on the performance of hierarchical
+planning systems. International Journal of Production Economics, Vol.104 (2), p.427–440, 2006.

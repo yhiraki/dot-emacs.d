@@ -1,0 +1,700 @@
+Robotics and Computer-Integrated Manufacturing 20 (2004) 553–562
+Learning policies for single machine job dispatching
+Department of Information Management, Kun Shan University of Technology, Tainan Hsien 710, Taiwan
+Department of Industrial Engineering, Mississippi State University, P.O. Box 9542, 260 McCain Bldg, Miss. Sate, MS 39762, USA
+Reinforcement learning (RL) has received some attention in recent years from agent-based researchers because it deals with the
+problem of how an autonomous agent can learn to select proper actions for achieving its goals through interacting with its
+environment. Each time after an agent performs an action, the environment’s response, as indicated by its new state, is used by the
+agent to reward or penalize its action. The agent’s goal is to maximize the total amount of reward it receives over the long run.
+Although there have been several successful examples demonstrating the usefulness of RL, its application to manufacturing systems
+has not been fully explored. In this study, a single machine agent employs the Q-learning algorithm to develop a decision-making
+policy on selecting the appropriate dispatching rule from among three given dispatching rules. The system objective is to minimize
+mean tardiness. This paper presents a factorial experiment design for studying the settings used to apply Q-learning to the single
+machine dispatching rule selection problem. The factors considered in this study include two related to the agent’s policy table
+design and three for developing its reward function. This study not only investigates the main effects of this Q-learning application
+but also provides recommendations for factor settings and useful guidelines for future applications of Q-learning to agent-based
+r 2004 Elsevier Ltd. All rights reserved.
+Keywords: Reinforcement learning; Q-learning algorithm; Dispatching rule selection
+In recent years, a new paradigm called agent
+technology has been widely recognized as a promising
+paradigm for developing software applications able to
+support complex tasks. An agent can be viewed as a
+computational module that is able to act autonomously
+to achieve its goal [1,2]. In fact, agents can be used to
+represent physical shop-ﬂoor components such as parts,
+machines, tools, and even human beings. Each agent is
+in charge of information collection, data storage, and
+decision-making for the corresponding shop ﬂoor
+component. A popular scheme to achieve cooperation
+among autonomous agents is through the negotiationbased contract-net protocol [3]. The contract-net protoCorresponding author. Tel.: 662-325-7624; fax: 662-325-7618.
+E-mail address: usher@engr.msstate.edu (J.M. Usher).
+0736-5845/$ - see front matter r 2004 Elsevier Ltd. All rights reserved.
+col provides the advantage of real-time information
+exchange, making it suitable for shop ﬂoor scheduling
+and control. The idea of the agent-based approaches has
+also offered a promising solution for controlling future
+manufacturing systems requiring ﬂexibility, reliability,
+In the application of multi-agent systems, one
+signiﬁcant issue for improving an autonomous agent’s
+capability deals with the question of how to enhance an
+agent’s intelligence. Learning is one mechanism that can
+provide the ability for an agent to increase its
+intelligence while in operation. Reinforcement learning
+(RL), developed in the early 1990s, has generated a lot
+of interest from the research community. As opposed to
+the popular approach of supervised learning whereby an
+agent learns from examples provided by a knowledgeable external supervisor [2], reinforcement learning
+requires that the agent learn by directly interacting with
+Y.-C. Wang, J.M. Usher / Robotics and Computer-Integrated Manufacturing 20 (2004) 553–562
+the system (its environment) and responding to the
+receipt of rewards or penalties based on the impact each
+action has on the system. Although there have been
+several RL applications demonstrating the usefulness of
+RL [5,6], its application to manufacturing systems has
+Given that our previous study [7] revealed that Qlearning works well when used by a learning agent to
+select dispatching rules for different system objectives,
+this paper focuses on understanding the important
+design aspects of the application of the Q-learning
+algorithm. The study presents a factorial experiment
+design for studying the effects of applying Q-learning
+(a reinforcement learning algorithm) to the singlemachine dispatching-rule selection problem under various conditions of system loading and job due date
+tightness. Dispatching rules have been applied to
+scheduling problems for several decades because of
+their ease of implementation and low computational
+requirement. Some dispatching rules are very powerful
+for ﬁnding a good schedule with regard to a speciﬁc
+system objective. Criteria for dispatching rule selection
+usually takes into account the shop status and the
+overall system objective. In this study, a single-machine
+agent dynamically selects one of the three dispatching
+rules (EDD, SPT, and FIFO) and applies the rule to
+pick a job from the queue for processing. The Qlearning algorithm is applied for the purpose of
+constructing the rule-selection policy table. The factors
+considered in this Q-learning application consist of two
+factors for constructing the agent’s policy table and
+three factors for developing its reward function. This
+study not only investigates the main effects of this Qlearning application but also provides recommendations
+for factor settings and useful guidelines for future
+applications of Q-learning to agent-based production
+RL deals with the problem of how an autonomous
+agent can learn to select proper actions for achieving its
+goals through interacting with its environment. In the
+RL framework, a learning agent must be able to
+perceive information from its environment in order to
+determine the current state of the environment. The
+agent then chooses an action to perform based on the
+perceived state. The action taken may result in a change
+in the state of the environment. Based on the new state,
+there is an immediate reinforcement that is used to
+reward or penalize the selected action. These interactions between the agent and its environment continue
+until the agent learns a decision-making strategy that
+maximizes the total reward. Sutton and Barto [6] deﬁned
+four key elements for dealing with the RL problems: a
+policy, a reward function, a value function and a model
+of the environment. A policy deﬁnes the agent’s
+behavior for each of the number of given states. A
+reward function speciﬁes the overall goal of the agent
+that guides the agent towards learning to achieve the
+goal. A value function speciﬁes the value of a state or a
+state-action pair indicating how good it (the state or the
+state-action pair) is in the long run. A model of the
+environment predicts the next state given the current
+Besides the above four elements, a key assumption in
+the RL framework is that the deﬁnition of the current
+state used by each agent to make its decision should
+summarize everything important about the complete
+sequence of past states leading to it. Some of the
+information about the complete sequence may be lost,
+but all that really matters for the future should be
+contained within the current state signal. Therefore, the
+application environment should satisfy the Markovian
+property such that the environment’s next state can be
+predicted given the current state and action. Under this
+assumption, the interaction of an agent and its environment can be called a Markov Decision Process (MDP).
+2.2. Generalization and function approximation
+For a small RL problem represented by a tractable
+number of states, the estimates of value functions is
+easily represented as a table with one entry for each state
+or for each state-action pair. However, for larger
+problems involving a huge number of states or actions,
+efﬁciently updating information accurately in such a
+large table may be a problem. Function approximation
+is currently a popular method to resolve this issue and
+involves utilizing some approach that generalizes
+experience from a small subset of examples to develop
+an approximation over a larger subset. Currently, neural
+networks represent the most popular approach for
+function approximation in large RL problems [6].
+Exploration and exploitation is another important
+issue in RL problems. Exploration entails the agent
+trying something that has not been done before in order
+to get more reward, while in exploitation the agent
+favors actions that were previously taken and rewarded.
+Exploitation may take advantage of guaranteeing a
+good expected reward in one play, but exploration
+provides more opportunities to ﬁnd the maximum total
+reward in the long run. One popular approach to deal
+with this trade-off issue is the –greedy method [6]. The
+–greedy method involves selecting, with probability
+Y.-C. Wang, J.M. Usher / Robotics and Computer-Integrated Manufacturing 20 (2004) 553–562
+(1), the action with the best value (exploitation),
+otherwise, with small probability , an action is selected
+2.4. RL applications to manufacturing systems
+Mahadevan et al. [8,9] developed a new model-free
+average-reward algorithm called SMART for continuous-time semi-Markov decision processes. They applied
+the SMART algorithm to the problem of optimal
+preventative maintenance of a single machine in a
+production inventory system. In their system, there was
+a single machine capable of producing multiple types of
+products with multiple buffers for storing each of the
+different products. Whenever a job is ﬁnished, the
+machine needs to decide to either undergo maintenance
+or start another job. Machine maintenance costs and
+time are less than repair costs and time. In other words,
+frequent maintenance may not be economical but
+machine failures resulting from a lack of maintenance
+will often require more time and cost to repair. In their
+maintenance problem, the state of the system is a 10dimensional vector of integers that consists of the
+numbers of ﬁve different products manufactured since
+the last repair or maintenance and the buffer levels of
+the ﬁve products. They compared the maintenance
+policy learned from SMART to two well-known
+maintenance heuristics. They found that SMART is
+more ﬂexible than the two heuristics in ﬁnding proper
+maintenance schedules as the costs are varied.
+Mahadevan and Theocharous [10] also applied
+SMART to the problem of optimizing a 3-machine
+transfer line producing a single product type. The
+system goal is to maximize the throughput of the
+transfer line while minimizing WIP and failures. They
+compared the policy from SMART to a kanban
+heuristic. Their results showed that the policy learned
+by SMART requires fewer items in inventory and results
+in fewer failures than with the Kanban heuristic.
+Paternina-Arboleda and Das [11] extended the work of
+Mahadevan and Theocharous [10] to deal with a 4machine serial line and compared SMART to more
+existing control policies. They examined the system with
+constant demand rate and Poisson demand rate. Under
+these two circumstances, SMART outperformed those
+heuristic policies on average WIP level and average WIP
+Zhang and Dietterich [12] applied RL to a job shop
+scheduling problem involving the scheduling of the
+various tasks that must be performed to install and test
+the payloads placed in the cargo bay of the NASA space
+shuttle for each mission. The objective of this problem
+was to schedule a set of tasks without violating any
+resource constraints while minimizing the total duration. The scheduling approach Zhang and Dietterich
+employed was an iterative repair-based scheduling
+method that started with generating a critical path
+schedule by ignoring the resource constraints and
+incrementally repairing the schedule to ﬁnd a shortest
+conﬂict-free schedule. In their system, each state is a
+complete schedule and each action is a schedule
+modiﬁcation. They applied the temporal difference
+algorithm TD(l) (an RL algorithm) to this scheduling
+problem. After taking an action to repair the schedule
+the scheduler receives a negative reward if the new state
+still contains constraint violations. This reward function
+essentially forces the scheduler to not only ﬁnd a
+conﬂict-free schedule but also to do it in fewer iterations.
+The performance of the iterative repair-based procedure
+with a simulated annealing (SA) method was compared
+with the one using the TD method. Their results showed
+that one iteration of the method with TD is equivalent
+to about 1.8 iterations of the method with SA.
+Aydin and Ozrtemel [13] proposed an intelligent agentbased scheduling system in which agents are trained by a
+new RL algorithm they refer to as Q-III. They employed
+Q-III to train the resource agents to dynamically select
+dispatching rules. Their state determination criterion
+consists of the buffer size of the machine and the mean
+slack time of the queue. The rewards were generated
+based on some selection rules obtained from the literature
+(i.e., SPT is best when the system is overloaded). The
+thresholds used in the rules for determining the systems
+status were obtained through trial-and-error procedures.
+Three dispatching rules: SPT, COVERT, and CR, are
+available for each resource agent to select for their use.
+The authors compared the proposed scheduling system
+trained by their RL mechanism to the above three
+dispatching rules. Their results showed the RL-scheduling system outperformed the use of each of the three rules
+individually in mean tardiness for most of the testing
+More and more work on practical implementations of
+RL techniques to different ﬁelds has been reported. One
+of the successful stories about RL applications was
+Tesauro’s TD-Gammon [14], which was used to play the
+backgammon game. TD-Gammon was developed based
+on the TD(l) algorithm and a multi-layer neural
+network for function approximation. The latest version
+of the TD-Gammon was able to play the backgammon
+game close to the level of the best human player in the
+Another famous application was the elevator-dispatching problem. Modern elevator dispatchers are
+usually designed heuristically. Crites and Barto [15]
+applied the Q-learning to a four-elevator, 10-ﬂoor
+system. Each elevator made its own decision independently of the other elevators. There were some
+constraints placed on the decisions. The system they
+Y.-C. Wang, J.M. Usher / Robotics and Computer-Integrated Manufacturing 20 (2004) 553–562
+dealt with had more than 1022 states. Like TDGammon, Crites and Barto also employed a neural
+network to represent the action-value function. Their
+RL-based dispatchers outperformed other existing dispatching heuristics on the customer’s average waiting
+RL has also been widely applied to robotics motion
+control. Singh and Bertsekas [16] used the TD(0)
+algorithm to ﬁnd dynamic channel allocation policies
+in cellular telephone systems. Their study showed that
+RL with a linear function approximation is able to ﬁnd
+better dynamic channel allocation policies than two
+other existing policies. Sutton [17] applied a RL
+algorithm, called the Sarsa algorithm, to controlling
+the motions of a two-link robot. Mahadevan et al. [18]
+successfully applied RL to navigating a delivery robot
+3. Single machine dispatching rule selection with Qlearning
+This research considers a single-machine production
+system containing a single buffer for storing jobs
+awaiting processing. Jobs arrive continuously according
+to a Poisson process. Each job consists of only one
+operation requiring variant processing time and the
+machine can process only one job at a time. If the
+machine is idle when a job arrives then the job will start
+processing immediately, otherwise the job will be sent to
+the buffer. In this research, selection of the next job
+from the buffer for processing is conducted based on
+one of the three dispatching rules, EDD, SPT, and
+FIFO. The system objective is to minimize the mean
+tardiness of the ﬁnished jobs. The selection of a
+dispatching rule will be based on the current policy in
+use by the Q-learning algorithm. The response is the
+mean tardiness measured after the learning process
+achieves steady state. The effects of applying the Qlearning technique to the dispatching rule selection
+problem are examined under various system conditions
+involving variations in system loading conditions and
+job due date tightness. Moreover, the best factor level
+combination for each condition is determined.
+The original Q-learning algorithm was proposed by
+Watkins in 1989. The goal of this algorithm is to learn
+the state-action pair value, Q(s, a), which represents the
+long-term expected reward for each pair of state and
+action (denoted by s and a, respectively). The Q values
+learned with this algorithm have been proven to
+converge to the optimal state-action values, Q [19].
+The optimal state-action values for a system represent
+the optimal policy that the agent intends to learn. The
+standard procedure of the Q-Learning algorithm is
+Step 1: Initialize the Q(s, a) value functions arbitrarily
+Step 3: Following a certain policy (e.g. e–greedy),
+select an appropriate action (a) for the given state (s0).
+Step 4: Execute the selected action (a), receive
+immediate reward (r), and perceive the next state s1.
+Step 5: Update the value function as follows:
+Qðs0 ; aÞ ¼ Qðs0 ; aÞ þ a½r þ g maxb Qðs1 ; bÞ  Qðs0 ; aÞ:
+Step 7: Go to Step 3 until state s0 represents a terminal
+Step 8: Repeat Steps 2–7 for a number of episodes.
+Each iteration of Steps 2–7 represents a learning cycle,
+also called an ‘‘episode’’. The parameter, a, is the stepsize parameter and inﬂuences the learning rate. The
+parameter, g, is called the discount-rate parameter,
+0pgp1, and impacts the present value of future
+rewards. The Q(s, a) values are initialized arbitrarily.
+If no actions for any speciﬁc states are preferred, then
+when starting the Q-learning procedure all the Q(s, a)
+values in the policy table can be initialized with the same
+value. If some prior knowledge about the beneﬁt of
+certain actions is available, the agent may prefer taking
+those actions in the beginning by initializing those Q(s,
+a) values with larger values than the others. Then these
+actions will be favored initially. This can shorten the
+learning period. Step 3 involves the tradeoff of exploration and exploitation and many state-action pair
+selection methods may be used in this step.
+There are a number of factors that one can
+manipulate in applying the Q-learning algorithm. Our
+desire was to determine the signiﬁcance of the various
+factors for this application. The main factors that are
+The threshold value setting for determining states.
+Number of ranges for determining reward/penalty.
+The threshold value setting for determining reward/
+Approaches to setting reward/penalty magnitude.
+Approaches for exploration and exploitation.
+These factors are described in more detail in the
+Y.-C. Wang, J.M. Usher / Robotics and Computer-Integrated Manufacturing 20 (2004) 553–562
+4.1. Factors for constructing the policy table
+Factors A and B inﬂuence the construction of the
+rule-selection policy table. In the single-machine system,
+the learning agent’s decision on which dispatch rule to
+employ for selecting a job from the buffer is based on
+the status of the system buffer. Several choices are
+available for deﬁning the buffer’s status, these include
+such measures as the number of the jobs in the buffer,
+the number of the tardy jobs in the buffer, or the
+tardiness or lateness of those jobs. For this study, the
+estimated mean lateness of the number of jobs in
+the buffer is adopted as the state determination criterion
+in the policy table. This value was chosen over
+job tardiness since it is able to distinguish between early
+jobs (unlike the tardiness measure). When constructing
+a policy table, the individual states deﬁning the buffer’s
+status have to be associated with speciﬁed ranges
+of possible values. Therefore, deﬁning (A) number
+of ranges, and the endpoints (thresholds) of (B) the
+range of values for each state represents those factors
+that must be considered in the learning algorithm’s
+Given that the agent’s decision involves selecting an
+appropriate dispatching rule, two special conditions
+need to be considered. The ﬁrst is when the buffer is
+empty and the second occurs when there is only one job
+in the buffer. For the former condition, no dispatching
+rule is needed to determine what job to process next
+because there is no job in the buffer. In the latter
+condition, since there is only one job, no matter what
+dispatching rule is employed the same job will be
+selected. The conditions for these two special cases are
+represented in the policy table using two dummy states.
+Therefore, only when there are two or more jobs in the
+buffer does the Q-learning algorithm select one of the
+three dispatching rules. In order to implement this
+capability, the system also maintains a measure of the
+number of jobs in the buffer, as well as the estimated
+Factor A deﬁnes the number of states (without
+counting the dummy states) in the policy table and
+Factor B deﬁnes the thresholds values for each state
+thereby creating the speciﬁc range of values. For a given
+number of states, the range for each state is deﬁned as a
+multiple (m) of the expected mean processing time
+(EMPT). At smaller values of m for factor B the system
+is better able to distinguish differences between jobs at
+the lower end of the lateness spectrum with jobs that are
+very late being grouped together in the last interval as it
+acts as the catchall. As the value of m increases, more
+intervals are provided for differentiating late jobs, but at
+the expense of decreased resolution of the other
+intervals. In this experimental study, the number of
+states is set to either 10 states or 20 states and m is set to
+either 1 or 3. Table 1 provides an example of a policy
+When using the policy table, if the previous system
+state corresponds to a dummy state, updating Q(s, a) is
+unnecessary. However, if the previous state is not a
+dummy state but the new state is one of the two dummy
+states (i.e., one job in queue), then an update in this
+situation is treated differently because the Q(s, a) values
+for both dummy states is ﬁxed at zero. The agent should
+still get the reward/penalty for such decisions, so under
+these circumstances, the Q(s, a) value is updated using
+the following equation instead of Eq. (1).
+4.2. Factors for developing the reward function
+Factors C, D, and E are concerned with the
+development of an appropriate reward function. A
+reward function is guided based on the goal of the
+learning agent. In this study, the machine agent’s goal is
+to minimize the mean tardiness of the ﬁnished jobs.
+Therefore, a job’s tardiness is used to determine the
+amount of the reward or penalty for the agent’s decision
+An example of a 10 state policy table (EMST: expected mean service time)
+Y.-C. Wang, J.M. Usher / Robotics and Computer-Integrated Manufacturing 20 (2004) 553–562
+(dispatching rule selection). The tardier a job is, the
+greater the penalties assigned to the learning agent. The
+agent receives a reward only when the selected job is
+Factor C deﬁnes the number of ranges for determining the amount of reward/penalty. The use of more
+ranges in the reward function permits the reward or
+penalty associated with each decision the agent has
+made to be expressed more precisely. Using too few
+ranges results in the system not being able to differentiate between the decisions made by the agent in that
+the outcomes (measured by tardiness) are not distinguishable since they lie within the same range and
+therefore result in the same penalty or reward.
+Factor D determines the size of each range, and
+therefore, with a ﬁnite number of ranges, it also deﬁnes
+the overall range the reward function covers. Like factor
+B, each range is determined using a Multiple (n) of
+the expected mean processing time (EMPT), which is
+also set to either 1 or 3. Similar to factor B, a large value
+of n for factor D permits distinguishing between jobs
+that are extremely tardy when the system is under heavy
+loading condition or employing some dispatching rules
+Factor E impacts the magnitude of the reward and
+penalty assigned to each range of the reward function.
+By design the penalty is made to increase linearly across
+the ranges as job tardiness grows. However, a reward is
+assigned only in the case which the job tardiness is zero.
+The question then becomes how much reward should be
+appropriate with respect to the linearly increasing
+penalties. In this experimental study, two values of
+factor E (1 or 10) are used for rewarding job that ﬁnish
+before their due date. The penalties applied to ranges
+associated with tardy jobs were ﬁxed to permit us to
+Factor E may impact the Q(s, a) values in the policy
+table. When the system is under heavy loading conditions or jobs are assigned with very tight due dates, most
+of the jobs will be tardy. The Q(s, a) values in the policy
+table may all be negative. Under such circumstances
+(very few early jobs), a decision for an early job is very
+important because it provides some positive amount
+(reward) for the Q(s, a) value. Using a larger reward for
+the decisions resulting in early jobs should more strongly
+inﬂuence the Q(s, a) values. Table 2 presents an example
+When starting the Q-learning algorithm, the values of
+the state-action pairs, Q(s, a) can be initialized arbitrarily or assigned speciﬁc relative values to represent the
+conﬁdence in favoring each possible alternative. Factor
+F represents the strategy of setting the initial values of
+the state-action pairs. In this study, all the values of the
+state-action pairs are initialized to zero since all the
+actions for each state are assumed to be an equally valid
+choice. This approach starts the system from a neutral
+state assuming no a priori knowledge of which
+dispatching rule is best to use in any situation.
+Therefore, the system would be required to learn from
+scratch. Other possible alternatives might have been to
+favor the wrong choice or correct choice initially. It is
+believed that either approach would have only impacted
+the run time making it take longer or shorter depending
+on how far off or close the initial values were to the
+Factor G is the step-size parameter, a, which is a
+small positive fraction that inﬂuences the learning rate.
+The value of this factor can be constant or varied from
+step to step. In the latter case, the steps become smaller
+and smaller as learning progresses to assure convergence
+of Q(s, a) values. With a constant step-size parameter,
+the Q(s, a) values never completely converge but
+continue to vary in response to the most recently
+received rewards. This is more desirable for a nonstationary system [6].
+Factor H is the discount-rate parameter, g. As g
+approaches zero, the agent is more myopic because it
+takes immediate reward into account more strongly. On
+the other hand, as g approaches 1, the agent will be more
+farsighted reducing the impact that recent results have
+Factor I concerns the approach for exploration and
+exploitation. The –greedy method is adopted in this
+study. If  is set to 0.1, then 10% of the time the strategy
+will be to randomly select one of the three dispatching
+rules independent of their Q(s, a) values, while the
+other 90% of the time the dispatching rule with the best
+Several example systems, such as those illustrated in
+[6] apply the Q-learning algorithm with settings of
+a=0.1, g=0.9, and e=0.1. This study uses these same
+common parameter settings for the three factors G, H,
+and I across all experimental runs. Table 3 summarizes
+the experimental factors and their levels.
+Y.-C. Wang, J.M. Usher / Robotics and Computer-Integrated Manufacturing 20 (2004) 553–562
+A full factorial (25) experiment is conducted under the following
+5. Design of experiment and the methodology
+The purpose of this study is to identify the factors
+related to the application of the Q-learning algorithm
+that are signiﬁcant when used by an agent for learning
+an appropriate policy for dispatching rule selection. The
+factors considered in experimentation and their levels
+are shown in Table 3. Testing involved using a
+simulation of a single-machine with an inﬁnite buffer
+with no consideration of potential machine failures.
+The simulation is conducted under four different sets
+of system conditions by varying the mean inter-arrival
+time of jobs to the system and due date tightness. The
+time between job arrivals to the system follows an
+exponential distribution with a mean of 8 representing a
+heavy loading condition and 10 for a light loading
+condition. The estimated processing times (EPT) of jobs
+were uniformly distributed between 6 and 8. The
+resulting mean system utilization is 87.5% under the
+heavy loading condition and 70% under the light
+loading condition. The due date of the job was
+determined based on the following equation:
+Due Date ¼ Arrival time þ Allowance factor  EPT:
+Due date tightness is controlled by adjusting the
+allowance factor. In this study, the allowance factor is
+drawn from the uniform distribution between 1.2 and
+1.8, U[1.2, 1.8], for jobs with tight due dates and
+between 1.7 and 2.3, U[1.7, 2.3], for jobs with loose due
+dates. The real processing time (RPT) of each job was
+generated using a normal distribution with a mean of
+EPT and standard deviation of EPT/10. Given the
+possibility that a normal distribution may generate an
+extreme value, the RPT values were constrained to be
+For each control factor combination setting used in
+the experiment, the learning horizon was monitored and
+analyzed to make sure that the learning process had
+reached steady state. As a result, a horizon of 200,000
+job completions was determined as an appropriate run
+length under all conditions in order to guarantee that
+learning had reached steady state. After completing
+these 200,000 jobs as a system warm-up, 300,000
+additional jobs are processed by the system and the
+mean tardiness of these additional jobs is calculated and
+recorded as a single observation for an experiment. A
+full factorial (25) experiment was conducted with ten
+replications under each of the four different system
+Table 5 provides a summary of the experimental
+results. Each value represents the mean of 10 replications. For each system condition, the analysis of
+variance (ANOVA) is used to identify strong effects
+and their interactions on a response. According to the Ftest (signiﬁcance level of 0.05), the four-way interaction
+of A, B, D, and E and the three-way interaction of B, C,
+and D were found signiﬁcant for system condition HT.
+For system condition HL, two three-factor interactions
+(BDE and CDE) and a main effect of factor (A) were
+found to be signiﬁcant. For system condition LT, three
+four-factor interactions (ABDE, ABCE, and BCDE)
+were identiﬁed as statistically signiﬁcant. For system
+condition LL, one four-way interaction (ABCE) and
+four three-factor interactions (ADE, BDE, CDE, and
+BCD) were found signiﬁcant with respect to the mean
+The ANOVA results found no signiﬁcant main effects
+for the factors and only indicated that higher-order
+interactions were signiﬁcant. Therefore, to further
+investigate the best factor level combination, Duncan’s
+multiple range test (at 0.05 level of signiﬁcance) is
+applied to each signiﬁcant interaction found and
+For the system condition HT (high load with tight due
+dates), the factor interactions ABDE and BCD were
+found to be signiﬁcant. Table 6 shows the factor level
+setting combinations for these two interactions that
+Duncan’s test indicated as being best. (In the table, a
+lowercase letter for a factor represents the level 1 setting
+for that factor while an uppercase letter indicates use of
+the level 2 setting.). It was found that the best setting
+Y.-C. Wang, J.M. Usher / Robotics and Computer-Integrated Manufacturing 20 (2004) 553–562
+Summary of Experimental Results (0: level 1, 1: level 2)
+Best factor level combinations for various system conditions
+Results of Duncan’s for system condition HT
+Best factor level combination (all ﬁve factors): ABCDE
+combination for the interaction of control factors A, B,
+D, and E, was when all the factors were at level 2. For
+the interaction of control factors B, C, and D, no
+signiﬁcant difference was detected between the settings
+BCD, BCd, bCd, and bcd. From these results it can be
+concluded that the best control factor level combination
+for system condition HT is to set all control factors at
+level 2. Table 7 lists the various combinations of
+favorable settings found when this same approach was
+applied for each of the four system conditions.
+As a basis of another comparison, the performance of
+the system using only one of the three dispatching rules
+(EDD, SPT, or FIFO) at a time was determined and
+Results of using the individual dispatching rules and the Q-learning
+compared with the Q-learning algorithm using the
+recommended factor settings. Table 8 shows the
+resulting system performance for each case under each
+of the four system conditions. Of the three dispatching
+rules, SPT was identiﬁed as the favored rule for system
+conditions HT, HL, and LT, while EDD outperformed
+the other two rules for system condition LL. This aligns
+with the scheduling strategy prescribed by Morton and
+Pentico [20] based on their study of several heuristics for
+a static single-machine problem. They found that to
+minimize tardiness, one should schedule lightly loaded
+shops using EDD and schedule heavily loaded shops
+When the Q-learning algorithm was applied with the
+recommended factor settings, the learning agent yielded
+the best performance for one (HL) of the four system
+conditions. However, in each case, the resulting policy
+derived by Q-learning favored the best rule for the
+condition. It selected the SPT rule 91.7%, 79.9%, and
+89.7% of the time for system condition HT, HL, and
+LT, respectively, but selected SPT only 69.7% of the
+time for system condition LL. SPT is known the best for
+minimizing the number of tardy jobs [20]. However, for
+minimizing mean tardiness, SPT may cause some jobs
+Y.-C. Wang, J.M. Usher / Robotics and Computer-Integrated Manufacturing 20 (2004) 553–562
+with long processing time to be very tardy causing the
+overall mean tardiness to be worse even though there are
+only a few tardy jobs. In our reward function, only nontardy jobs receive a reward, therefore it is not surprising
+that the selection percentage of SPT for the LL case is
+this high. A high selection percentage for SPT means
+that, most of the times, the Q value representing the
+action of selecting SPT is larger than the Q values for the
+other two rules. Given that the performance of the
+system when employing either EDD or FIFO are nearly
+the same, it is not surprising that the selection
+percentages for EDD and FIFO are so close for all the
+Recommendations of applying Q-learning algorithm to single machine
+5. Size of each range for determining the
+Given prior success at applying Q-learning for the
+dispatching rule selection problem [7] this study
+conducted a factorial experiment for studying the
+factors important to the design and implementation of
+the Q-learning algorithm to the single machine dispatching rule selection problem. According to the results
+in Table 7, it is better to design the policy table with
+more states (control factor A) and the reward function
+with more ranges (control factor C) independent of the
+due date tightness when the system is under heavy
+loading conditions. With the mean lateness of the jobs in
+the buffer as the state determination, the number of
+states can be inﬁnite. Then a large amount of memory
+may be required to build up approximations of the value
+functions. Although the tabular method (arrays or
+tables with one entry for each state) in this study is
+much simpler and easier to implement, the experimental
+results reveal that more states are better. Therefore, we
+suggest that it may be advantageous to use the function
+approximation approach instead of the tabular method.
+Based on the experimental results, the ranges for
+determining the states (control factor B) and for
+determining penalties (control factor D) should be wider
+when job due dates are tight. This is because tight due
+date setting may result in some jobs being very tardy,
+particularly when applying SPT as the selection rule.
+The use of wider ranges (control factor B and D) permits
+the system agent to better distinguish the different jobs
+at these higher tardiness levels providing a more
+accurate identity of the real system status. Also, a
+reward function that is more able to distinguish between
+the various levels of the tardy jobs provides more
+accurate responses regarding the agent’s decisions.
+Also, under the condition with tight due date jobs, it
+is better to assign more reward (control factor E) to the
+action for early jobs. When most of the completed jobs
+register as tardy, a lot of the Q values in the policy table
+accumulate and become very large negative values.
+Hence, the magnitude of the reward (a positive value)
+becomes important because it is better able to provide a
+larger impact when a proper action is selected. The
+results indicate that the best factor level combinations
+found for the conditions with loose due dates (system
+condition HL and LL) are the same and favor more
+states with narrower ranges for the policy table and
+Table 9 summarizes the experimental results as the
+recommendations for applying Q-learning to the single
+machine scheduling problem. These recommendations
+are not universal, but they provide a glimpse as a ﬁrst
+step at exploring application of reinforcement learning
+in manufacturing scheduling. Overall, the results show
+that more states in the policy table and more ranges for
+the reward function will improve learning performance.
+When job due dates are tight, the use of wider ranges for
+determining the states and for determining penalties
+resulted in better performance than use of narrow
+ranges. In addition, the reward magnitude proved
+crucial under such conditions. This issue should be
+[1] Brenner W, Zarnekow R, Witting H. Intelligent software agents.
+[2] Weiss G. Multiagent systems: a modern approach to distributed
+artiﬁcial intelligence. Cambridge, MA: MIT Press; 1999.
+[3] Smith R. The Contract Net Protocol: high level communication
+and control in distributed problem solver. IEEE Trans. Comput.
+[4] Shen W, Norrie DH, Barthès J-PA. Multi-agent systems for
+concurrent intelligent design and manufacturing. London: Taylor
+[5] Mahadevan S, Kaelbling LP. The NSF workshop on reinforcement learning: summary and observations. AI Mag 1996:89–97.
+[6] Sutton RS, Barto AG. Reinforcement Learning: An Introduction.
+[7] Wang Y-C, Usher JM. A study of reinforcement learning applied
+to dynamic single-machine job dispatching. The sixth interna-
+Y.-C. Wang, J.M. Usher / Robotics and Computer-Integrated Manufacturing 20 (2004) 553–562
+tional engineering design and automation conference. Maui,
+Das TK, Gosavi A, Mahadevan S, Marchalleck N. Solving semiMarkov decision problems using average reward reinforcement
+learning. Manage. Sci. 1999;45(4):560–74.
+Mahadevan S, Marchalleck N, Das TK, Gosavi A. Selfimproving factory simulation using continuous-time averagereward reinforcement learning. Proceedings of the 14th international machine learning conference. 1997. p. 202–10.
+Mahadevan S, Theocharous G. Optimizing production manufacturing using reinforcement learning. The 11th international
+FLAIRS conference. AAAI Press; 1998. p. 372–77.
+Paternina-Arboleda CD, Das TK. Intelligent dynamic control
+policies for serial production lines. IIE Trans 2001;33:65–77.
+Zhang W, Dietterich TG. A reinforcement learning approach to
+job-shop scheduling. Proceedings of the 14th international joint
+conference on artiﬁcial intelligence, 1995. p. 1114–20.
+Aydin ME, Oztemel E. Dynamic job-shop scheduling using
+reinforcement learning agents. Robotics Autonomous Systems
+Tesauro G. Temporal difference learning and TD-Gammon.
+[15] Crites RH, Barto AG. Improving elevator performance using
+reinforcement learning. In: Touretzky DS, Mozer MC, Hasselmo
+ME, editors. Advances in neural information processing systems:
+proceedings of the 1995 conference. Cambridge, MA: MIT Press;
+[16] Singh SP, Bertsekas D. Reinforcement learning for dynamic
+channel allocation in cellular telephone systems. Advances in
+neural information processing systems: proceedings of the 1996
+conference. Cambridge, MA: MIT Press; 1997. p. 974–80.
+[17] Sutton RS. Generalization in Reinforcement learning: successful
+examples using spare coarse coding. In: Touretzky DS, Mozer
+MC, Hasselmo ME, editors. Advances in neural information
+processing systems: proceedings of the 1995 conference. Cambridge, MA: MIT Press; 1996. p. 1038–44.
+[18] Mahadevan S, Khaleeli N, Marchalleck N. Designing agent
+controllers using discrete-event Markov models. AAAI fall
+symposium on model-directed autonomous systems. Cambridge:
+[19] Watkins CJCH, Dayan P. Q-learning. Machine Learning
+[20] Morton TE, Pentico DW. Heuristic scheduling systems. New

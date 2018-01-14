@@ -1,0 +1,509 @@
+INT. J. PROD. RES., 1997, VOL. 35, NO. 12, 3483-3507
+An action strategy generation framework for an on-line scheduling and
+control system in hatch processes with neural networks
+An on-line scheduling and control system in batch process management consists
+of three modules: a variability check module, action strategy generation module
+(ASGM) and corrective action module. ASGM is the key kernel of the above
+system, in which an appropriate modification mode is selected from alternative
+ones based on the plant status. In the proposed ASGM framework, a backpropagation neural network as a decision making sub-module is adopted, the
+preprocessor consisting of data collector, data filter, and data scale and the postprocessor as a simple distance-based classifier are developed to lead to significant
+improvement in recognition performance and detection of the 'unknown" class.
+The effectiveness of the proposed framework is demonstrated by experiments on
+two multipurpose batch plant case studies.
+Since the schedule developed beforehand may become inefficient, or even unfeasible in a dynamically changing environment, then the ability to react to unexpected
+disruptions during the execution of a schedule is an important part of production
+management in batch plants. In this reactive scheduling, the schedule should be
+required to achieve the production objectives, and to maintain stable operations
+to a degree. Chen et al. (1994) and Ishii and Muraki (1996c) had proposed a generic
+framework for an on-line scheduling and control system in batch process management, which consists of three modules as shown in Fig. 1. i.e. (I) Variability check
+module (VCM): recognizing the disruptions that a change in the environment introduces into the schedule, (2) Action strategy generation module (ASGM): selecting an
+appropriate modification mode to resolve these disruptions, (3) Corrective Action
+Module (CAM): applying the modification mode.
+VCM is activated when production information is updated, and predicts scheduling disruptions or performance inefficiency in the future by simulation. It defines
+schedule modification timing, which is a trigger to activate ASGM. ASGM selects
+the most appropriate and effective modification mode to remove disruptions or
+performance inefficiency predicted by VCM. It strikes a balance among the schedule
+improvement capabilities, computational requirements and non-disruptive elTects.
+CAM modifies the schedule based on the mode selected by ASGM, and informs
+VCM of the modified schedule. VCM checks the feasibility and evaluates performance ofthe modified schedule, and activates ASGM again when the schedule is still
+infeasible or inefficient. Otherwise, VCM registers the modified schedule as a new
+working schedule for the process control system.
+t Department of Industrial Engineering and Management, Tokyo Institute of Technology,
+12-1, Oookayama 2-chome Meguro-ku, Tokyo. 152 Japan.
+*To whom correspondence should be addressed.
+Scheme of the on-line scheduling and control system's structure.
+The issues of VCM and CAM have been actively discussed in the Ch.E domain
+for some years, for example, Cott and Macchietto (1989a,b), Becraft et al. (1991),
+Kanakamedala t'/fl/. (1994), Ishii and Muraki (1996a, b). However, the key kernel of
+The objective of this paper is to develop an ASGM framework for selection of
+the most appropriate modification mode to support the on-line scheduling and control system. It is assumed that CAM and VCM functions are complete and accessible
+to ASGM. This assumption implies that ASGM accepts inputs (i.e. plant status)
+from VCM and sends outputs (i.e. the most appropriate modification mode) lo
+CAM. The eftectiveness of the proposed framework is demonstrated by simulation
+experiments of the multipurpose batch plants.
+The remainder of this paper is organized as follows. In §2, previous research and
+an overview of the ASGM framework are described, and a detailed discussion is
+provided in §3. The simulation results are discussed in §4. Finally, in §5 we summarize the conclusion of this paper.
+Plant status, which is the input vector of ASGM. can be divided into two: one
+part is an abstract characterization of repair flexibility for the whole schedule, such
+as system congestion, equipment utilization, batch later factor, scheduling criteria;
+the other part is predictive of the effectiveness of applying a particular modification
+mode, such as waiting time constraints between tasks, tardiness and slack of tasks. In
+this research, we adopt eleven dependent factors, which are enumerated from this
+On-line scheduling and control using a neural network
+total number of task types processed al equipment group r
+mean processing time of the .v task type on the equipment group r
+number of s tasks/total number of tasks processed in equipment group r
+number of equipments in group r that can process the .v task type
+total number of tasks required for batch /
+number of tasks already completed for batch /
+deviation of the workload of each equipment group
+deviation of the utilization of each piece of equipment
+total remaining processing time for batch / at itsyth task, where /*y = Y!
+remaining number of tasks for batch / atyth task.
+viewpoint, and each factor value can be obtained as illustrated in Table I. Some
+plant status factors have also been extensively employed and studied in real-time
+systems for FMS or job-shop type production systems which work under the
+dynamic changes of production information (Wu and Wysk 1988, Rabelo and
+Alptekin 1989, Cho and Wysk 1993. Sim et al. 1994). It should be noted that the
+input vector (plant status) can be extended if other important plant status factors,
+such as processing time distribution and stable conditions, are essential.
+In this subsection, we describe the modification modes, which are the output of
+ASGM. The set of possible modification modes used in the current system, which
+range from a low level (Tl) to a high level (T4). are followed:
+• Tl: only shift task starting and stop times. Ti implements a considerable less
+sophisticated reactive method to resolve disruptions by simply 'pushing' (or
+•pulling") operations forward (or backward) in time.
+• T2: resource reassignment. T2 provides a method for revising the schedule of
+designated equipment items or resource types (typically aggregate).
+• T3: resequencing of task or orders. T3 provides a method for revising the
+scheduling decisions relative to some contiguous portion of a given order's
+• T4: model modification need. T4 amounts to relaxation of temporal and capacity constraints. Specific model modification includes 'change the due dale
+constraint of the tardy batch (so it is no longer considered tardy—^a trivial
+repair)", 'reduce the plant load', 'increase number of shifts', and "increase
+In the modes, scheduling modification in the high level includes modifications in
+the low levels. For example, a resequencing mode (T3) considers resource reassignment mode (T2), such as units, utilities, operators, and so on, and start and completion times of each task (Tl) together with the production sequence. On the other
+hand, schedule modifications in the timing shifting mode (Tl) adjust start and completion times of each task under a fixed production sequence and resource assignment.
+To respond to the dynamically changing environment, we should modify the
+schedule to achieve the goal of production. Moreover it is also important to keep
+stable operations to a degree, since in many chemical industry applications it is
+highly desirable or even essential to minimize undue changes in the plans for preparatory tasks and supporting activities, such as material requirements and shipping
+scheduling and the like, to avoid the associated costs and delays. Thus, each modification action should be kept as low level as possible.
+Note that the modification modes can be extended or reduced, if necessary.
+The selection of a suitable modification mode in ASGM is essentially a decision
+making problem based on the status of batch plant. There are a targe number of
+potential technologies to establish ASGM. Expert systems (Pedersen 1989), for
+example, have been tested in industries on decision making problems which require
+human expertise to solve the problems. Wu and Wysk (1988) have proposed a multipass expert control system which applies an expert system technology and discreteevent simulation in FMS scheduling. In their system, an expert system generates
+potential scheduling alternatives based on real-time .shop information and scheduling
+knowledge, and a simulation system evaluates the alternatives based on the performance. The neural networks (NN) are an alternate potential and anticipated technology applicable for ASGM. In this approach, neural networks perform the
+On-line scheduling and control using a neural network
+function of a pattern classifier, mapping a vector from the input space to a modification mode space. Cho and Wysk (1993) applied neural network technology in FMS
+scheduling. In their system, a neural network was used to dynamically select a set of
+promising dispatching strategies, which guided the future part movements in an
+FMS. based on shop information. Sim et al. (1994) apply a feed-forward back
+propagation neural network to recognize the individual contributions of traditional
+dispatch rules in the dynamic job shop scheduling problem. Many other applications
+have been presented {for example, Rabelo and Alptekin 1989, Gonzalez et al. 1991,
+Khaw et at. 1991). The primary advantage of neural networks over model-based and
+expert system approaches is that neural networks are trained with available plant
+data and theoretically no prior knowledge of the system is required. Model based
+methods and expert systems require longer development time and a detailed knowledge of the on-line scheduling for good performance,
+As mentioned in detail in §4, we investigate the performance of ASGM, in which
+a basic neural network is directly applied, and show that no good performance can
+be achieved. The reason is that the performance of neural networks is directly related
+to the comprehensives of training data. To achieve robust performance, data must be
+distributed across all regions of the input space that are of interest. It has been
+demonstrated that performance of neural networks often deteriorates when extrapolating into regions of the input space for which the network has not been trained,
+and that its ability to interpolate is not always acceptable. Only information from the
+same region of the input space represented by the calibration data can be reliably
+identified, so it is necessary to filter data from regions of the input space for which
+the network has not been trained, but later used to update training of the network.
+Today vast quantities of data of batch plants are available to train a neural
+network. However, if all information from VCM is included in the input space,
+rarely will the data cover the entire input space with a meaningful amount. It
+often becomes scattered sparsely over the space or clustered into a few regions.
+Therefore, the question of how to understand the data and limitations then becomes
+vital. In this work, neural network performance is improved via preprocessing ofthe
+In a batch plant, the production circumstances, such as production requirements,
+performance measure, etc.. may be changed frequently, and it is often the case that
+only a limited production circumstance is represented by the training data. In addition, in most actual cases, the possible number of disruptions that may occur are
+virtually unlimited. Therefore, the ASGM should have a mechanism for which a
+network considers the 'unknown" class possibility, i.e. a problem for which the neural
+network has not been trained. Calibration data are never exhaustive and rarely
+contain representations of every modification mode possible.
+Figure 2 illustrates an ASGM framework proposed in this paper, which consists
+of three sub-modules: a Preprocessor, a Neural network, and a Postprocessor (PNP).
+The preprocessor generates a scaled input vector for the neural network from the
+plant status, then it includes three functions: data collector, data filter, and data scale
+to enhance the network identification ability and to account for potential weakness
+in plant data, while only minimal engineering development is required. These functions are discussed in detail in the following section and they are critical to successful
+implementation ofthe PNP. Because an event associated with changes of plant status
+does not always affect the performance o f a schedule, the preprocessor is called by
+the VCM (Ishii and Muraki, 1996c) whenever disruptions or degradation of a sched-
+Figure 2. Overview of the ASGM framework (PNP).
+ule in the future are found by discrete-event simulation in the VCM when any event
+The neurai network (a backpropagation network is adopted in the current
+research) retains all the weights obtained from training programming. When the
+scaled input vectors received from the preprocessor are put into the neural network,
+a promising modification mode (for example, time shifting, resource reassignment,
+resequencing, etc.) to guide future courses of action across the equipment level is
+On-line scheduling and control using a neural network
+produced- In other words, the neural network plays the role of a decision maker
+which produces the modification modes suitable for current plant status.
+The network identification is finally double checked with simple distance-based
+classifiers in the postprocessor, similar to those used by Dietz ct al. (1989). which
+tests for the appearance of "unknown' system problems.
+The proposed method centres on the analysis of a single record which is sent by
+data collector. All records are processed in the same manner, and identification of
+the dataset as a whole must be made in terms of the percentages of records identified
+For test purpose, two batch plant case studies are investigated. These two cases
+are ubiquitous in the chemical industry. We intend to demonstrate the effectiveness
+of PNP in the on-line scheduling and control system using these simple but representative examples.
+The first case study, i.e. Multipurpose Batch Plant A (MBP-A) of 3 products
+(PAl. PA2. PA3). consists of 13 equipment items grouped into 7 (Reactor: RAl.
+RA2. RA3. Filter: FA I. FA2, Dryer: DAI. DA2). Plant data are shown in Table 2.
+PAl has four processing tasks in its recipe, PA2 four, and PA3 five. Each task can be
+processed in multiple equipment- All the intermediates are assumed to be stable in
+MPB-A. In order to validate the capability of PNP to identify the modification
+modes in more complex batch plant, we study another example, i.e. the
+Multipurpose Batch Plant B (MPB-B) case of four products, and part of the plant
+data (PBI, PB4) are shown in Table 3. MBP-B has 26 equipment items grouped into
+9 (Reactor: RBI. RB2, RB3, Filter: FBI. FB2, Dryer: DBI. DB2) and the unstable
+Basic propagation neural networks are employed in the current research for a
+comparison target with the proposed PNP. The number of hidden layer nodes relies
+crucially on performance. In the current research, these considerations led to a
+selection of the 11-7-4 neural network for MBP-A and 11-11-4 for MBP-B.
+Plant status usually has some characteristic patterns if the plant is 'normal'.
+Typically, in a batch plant, sufficient data are available to the well-defined region
+of'normal" mode. However, in many cases only a small set of data representing the
+modification modes may be available. Moreover, this set of data only represents very
+limited production circumstances, while changing frequently in a batch plant. There
+are at least two ramifications of this situation. (l)The most important information is
+not the absolute region of the space in which the training data lie. Tn other words,
+drawing boundaries of any shape around training data are not sufficient to distinguish all modification modes. (2) The correspondence between plant status and modification modes depends crucially on the production circumstances. It may be
+impossible to differentiate among distinct modification modes in various production
+circumstances. Thus, an algorithm that draws boundaries around training data may
+eventually confuse two classes in various production circumstances.
+The best solution to this problem is to find an input space in which the two
+modification modes can be distinguished in all production circumstances.
+However, with limited plant data, such an ideal input space may not be available.
+Without meaningful additional plant data presented to network, it is necessary for
+a/b batch size/processing lime corresponding to the batch size.
+0 the number of the equipment in one equipment type.
+X indicates that particular unit cannot process the corresponding task,
+the data collector to provide a mapping of the input space to give a clear understanding of where the training data lie. In this research, we introduce the 'address'
+concept to the data collector for training data comparison of mode Ti with the
+normal mode. Because the address provides a tnap of the input space, a prototype
+of the normal mode that represents similar production circumstances can be found.
+On-line scheduling and control using a neural network
+On-line scheduling and control using a neural network
+Under this scheme, each piece of training data has a corresponding normal mode
+prototype, and its effect is to ahgn patterns to a more meaningful prototype. Notice
+that an input vector to be used in identification or training must have a corresponding address from the 'normal" mode dataset. This condition is usually not a problem
+as rich datasets are nearly always available to represent the normal mode. However,
+such a condition is really an asset, because the only inputs that a network identifies
+are in regionsof the input space for which it has been trained. It will not be forced to
+interpolate or extrapolate. Because workload level, utilization level and scheduling
+criteria generally affect the production circumstances, the current research adopts
+the above three as the address variables. Other address variables can be added if
+The data collector organizes data into groups of 'similar' values by reducing
+precision of the address variables. In partitioning the database into subsets, there
+are precise bounds on value variation for a subset of data streams. It partitions these
+subsets into "collections' and collections into clusters, for which partial ordering is
+defined. As a result of data collector, patterns of variation can be presented in a
+Figure 3 illustrates the preprocessing procedure applied in this work. A sample
+vector 5, is simply defined as a datum sample of the plant status of a batch plant at a
+given time /. in which «, are the address variables, Sj are the other status variables
+Each variable. «^ or Sj is valued and scaled relative to its corresponding span,
+(and is therefore restricted to values between zero and one). The scaling is not only
+for obtaining values suitable for input to a neural network, but also for comparing
+Each 5, vector maps into a vector S,* (see Fig. 3) where the address variables, o^.
+are reduced into precision integer values. It can be defined us a] ^ int(fl,//?,)./J; is the
+precision, which is obtained from some knowledge of the system. The set of
+Aj - {a],aj,a^) is the 'address' of a particular 5* because it represents a certain
+region of the input space. This sorting refers to the ordering of the rows of D (i.e.
+5,^*) according to the address A,. The result is a grouping of ^4, with identical address
+values. A reduced database D, can be produced simply by calculating the average for
+all Sj in Si with the identical A,. In addition, if a meaningful number of datapoints do
+not fall into a given address, that address is simply omitted from the reduced dataset
+(but later used to update training of the network).
+In order to cluster more tightly each class of modification modes and improve
+performance, the data filter and data scale combine positive attributes of physical
+scaling and normalization in a manner well suited for the network identification.
+Figure 4 illustrates the scaling method. Small sections of two reduced datasets are
+shown. One represents basecase or normal mode, and the other test data. Notice that
+the first three elements of each row of ^^ comprise the address variables Aj. Vectors
+iS', in the test dataset are subtracted from the corresponding vector in the normal
+dataset. If a corresponding address does not exist, the vector is omitted from the
+further calibration or identification. Note that the address remains unchanged and is
+generally not submitted to the identifier. The resulting difference vector is normalized
+and its Euclidean norm can be computed. These vectors 5, and norms M,, represent
+Step 1. Receive a test/training sample vectx)r 5, from VCM.
+a^ = address variable (part of plant status)
+Step 2. Reduce precision of address variables by defining ruler,
+(breaks continuous space into discrete regions)
+Step 3. Form database D comprising sample vectors
+Step 4. Sort row vectors of D ' such that sj * are sorted in ordered values o
+Step 6. Summarize plant status within each address.
+Step 6. Search the corresponding address in norm dataset, if doesn't exit, g.
+otherwise, subtract from the corresponding normal vector.
+Step 7. Normalize the vector, and then submit to the ANN.
+the direction and distance of a test vector relative to its corresponding basecase
+Each vector S' in a reduced database (which is a product of data collector) is
+scaled through the above procedure. A simple distance-based classifier determines
+On-line scheduling and control using a neural network
+whether the computed distance from normal mode Mj is large enough to be identified into an abnormal one. This is accomplished by comparing M^ with a threshold
+value Th\ established during calibration. The primary concern is whether the deviation from normal mode is significant enough to warrant attention. Note that in the
+current research, the Euclidean norm is used which results in elTectively spherical
+Recent advances in neuroscience and in computer science have sparked renewed
+interest in neural networks for problem solving. At present, the most frequently
+applied network is the basic multi-layer perceptron network with backpropagation
+learning, the so-called backpropagation network. The backpropagation learning
+algorithm is an error-correcting learning procedure which generalizes the WidrowHoff algorithm {or delta rule) to multilayer networks. Backpropagation is intended
+for networks with an input layer, one or more hidden layers, and a single output
+layer. Each layer is fully connected to the succeeding layer, and connections within a
+layer or from higher to lower layers are prohibited. A derivation of the backpropa-
+gation algorithm is also provided by Rumelhart and McClelland (1986). Note that
+PNP is not limited to the use of backpropagation network.
+As inputs to the network, the unit directional vectors 5, are used. During identification, 5, is presented to the network for identification only if the distance A/,, is
+greater than the threshold Th\, which is established for normal identification. Note
+that normal mode is not included in the set of classes identified by the neural network.
+In the postprocessor, the network identification must be verified. This verification
+step is necessary due to the network's weakness in detecting unknown problems. This
+verification is distance-based and searches for vectors which are dissimilar to any of
+the previously-experienced datasets. The distance measure applied is given by
+ll'Sf-'S'/Tyll. (SiTi represents the vector from training set 7, with the same address
+as Si) i.e.. the distance between Sj and the unit directional vector representing the
+problem class identified by the network (mode T,). The distance employed here Is
+again the Euclidean distance; but can be any norm desired. If this distance is greater
+than a pre-established threshold Th2 (determined during calibration), the vector is
+This experiment will demonstrate the application of PNP presented and compare
+its performance with that of a basic backpropagation network to identify modification modes.
+PNP is applied to the case studies described in §2.2. The following discussion
+exemplifies the melhod and compares results with standard backpropagation network analysis.
+The data collector incorporates primary important information variables. In this
+experiment, the resulting input sample vector is given by:
+Next, the input space, composed of «,//?/. is discretized through reduced precision. Discretizing the input space allows the establishment of an A^ for each input
+region (hypercube) to be defined. Reducing precision requires the definition of a ruler
+for each indexed variable. The ruler definition of each variable comprising the batch
+The rulers are applied to each record in a historical dataset to assign an address,
+and given by the concatenation of the reduced precision inputs. Appropriate statistics is computed with each address. The o,. a2, and u, of each record comprise Aj.
+On-line scheduling and control using a neural network
+The remaining columns of dataset comprise 5"; and are average variable values for a
+specific address. Notice that a meaningful number of datapoints must fall into an
+address to be included in the reduced dataset. For the purposes of this experiment,
+we adopt 10 datapoints as a minimum for each address.
+As mentioned in §4.2, it is assumed that datasets representing the modification
+modes along with normal mode are available. Each dataset is scaled based on the
+zero and span of the relevant variable ('physical" scaling). This resulting data is
+processed by data collector, leading to a set of reduced databases.
+The scaling discussed in §3 is applied. Under the normalization procedure, the
+normal mode is represented by the zero vector and only the unit vector 5, is presented to the neural network for training or identification. Those vectors from a
+given test set that have a corresponding basecase vector with identical address are
+identified by the neural network. To illustrate the clustering effect of data collector,
+Figure 5 (a) shows data points (from reduced datasets) representing normal mode,
+T2 mode and T3 mode. For simplicity, only two dimensions .v,. s^ are considered.
+Figure 5 (b) illustrates the same data when each point is subtracted from its corresponding basecuse vector (i.e. 'normal" dataset with the identical address). The subtraction of an appropriate basecase vector transforms intermingling sets of patterns
+into reasonably well-separated clusters. It should be noted that Fig. 5 represents an
+intermediate step before normalization, and that the data at this step is not the
+pattern sent to the neural network. However, it is used to demonstrate the effect
+of subtracting an appropriate basecase prototype.
+Establishing a threshold for basecase identification Th\ and for detecting
+unknown problems Th2 is nontrivial for a system in which a good simulation is
+not available. In this research, the following pragmatic approach is employed as
+• Th] establishment. Calculating Th\ as the average norm of the vector between
+two sets of normal data, ||5,,,,,,,,,t - 5,>,,,,,,,y|l over all vectors in the normal class.
+It is unreasonable to expect that modification problems can be discerned below
+this threshold. In practice, it may be necessary to implement a value 10-15%
+• Th2 establishment. Calculating Th2 as the average of ||S;7-ji - SjnW over all
+vectors in a particular modification mode class, in a similar way as the basecase
+threshold is established. However, unlike Th\, the threshold Thl represents the
+distance betwen unit vectors. In this manner, one could calculate a 77i2 for
+each modification mode class. However, in this work, it is reasonable to
+assume that a single value of 77)2 will be adequate for all modification mode
+By the simple methods described above, Th\ and 7Vi2, are established as 0-11 and
+Input to the network is eight plant status of Table 1 (S],S2.-• • ^s^) after data
+filtering and normalization. The number of hidden layer nodes and the training
+parameters are also chosen by the experiments on the network performance. A
+learning rate of 0-9 is chosen for this research because of the lower computational
+Figure 5(a). Scatter plot of reduced data.
+Figure 5(b). Data after subtraction from appropriate normal prototype.
+cost. The other reason is that the 2-3% error at convergence is acceptable. In a
+similar manner, we choose the coefficient ofthe momentum term as 0-6 for the MBPA case study and 0-68 for the MBP-B case study in the current research. The backpropagation network applied here comprises eight input layer nodes, eight hiddenlayer nodes, four output layer nodes.
+On-line .scheduling and control using a neural network
+In the experiments, the base schedules are generated for three products in MBPA, and four products in MBP-B. In the base schedule, it is assumed that each
+product has only two different processing sequences. This assumption is relaxed
+For these plants, different disruptions with various magnitudes are simulated,
+and introduced in one of the first three batches of products at randomly chosen
+points distributed. The equipment unavailability is randomly generated between 4
+and 10 units of time while the processing time deviations are randomly generated
+In this paper, the problem of selecting the modification modes is addressed
+through the application of PNP. The aim is to capture the complex relationship
+that exists between performance measures and the modification modes in a dynamic
+environment. The proposed approach entails a training phase and a use/test phase.
+The training phase begins with several simulations of a particular batch plant
+(MBP-A or MBP-B). The modification modes and the plant status are varied across
+the simulations. Performance measures, which are balanced among the schedule
+improvement capabilities and no-disruptive effects, are collected at the end of eaeh
+simulation, so that each simulation provides one input-output pair for the network
+training. Simulations are run on some training experimental scenarios for MBP-A
+and MBP-B each other. To cover different production circumstances, the training
+scenarios are designed according to a balanced complete block design for 3 levels
+{low. medium, high) of each product. The following shows 3 levels (number of
+batches) of each product in MBP-A and MBP-B used to train the network in this
+In the use/test phase, four test scenarios are added to the experiment, designed
+for two levels of each product according to standard orthogonal experiment array.
+The following shows 4 test scenarios used in the experiment for MBP-A and MBP~B.
+For example, in MBP-A (6. 12. 12) means, in the current time, the plant is run on 6
+batches of PAl. 12 of PA2 and 12 of PA3 (see next page).
+The scheduling criteria considered in this experiment are average tardiness, average flow, and makespan. All these criteria are considered in each scenario. The
+training samples and test samples are obtained by simulated annealing algorithm
+(Chen and Jiang 1992). All training samples are simulated on the training experimental scenarios, and test samples are obtained from all experimental scenarios. A
+training or test sample consists of an input vector (plant status) and a corresponding
+desired output vector (an appropriate modification mode).
+Training data are about 4000 samples from each of the representative mode
+classes. The network is trained to produce a high outpiil {between 0-90 and 10) in
+the output node paired with the appropriate mode and a low output (between 0 0
+and 01) for all other output nodes. Under normal mode, all outputs should be low.
+Data are accessed randomly, both in terms of the training set selected and within the
+training set itself. Data presented to the input layer are scaled between 0 and 1,
+according to appropriate zero and span of each variable. The network is calibrated
+(trained) with five sets of training data; each represents the one normal and four
+modification modes. Each training sample reflects only the training experimental
+scenario. The network's recall is examined or the generalization capability in the
+test experimental scenarios. In identification, an output node signal below 0-70 is
+Performance studies will be undertaken on both the trained basic network identifier and the trained PNP. In batch process management, it is important to correctly
+identify a suitable modification mode, on the other hand, generating a feasible
+modification mode is also a practical requirement for ASGM. To investigate the
+efficiency of ASGM. we evaluate the performance with respect to correctness of
+identification and feasibility of modification, including: (l)generalization in the
+training scenario as the calibration data; (2) generalization in some test experimental
+scenarios, which have not been trained by the network. (3) identifying 'new' system
+problems (problems not represented by the training data),
+In the training scenario, the trained neural network performs reasonably well
+about 75% (see Table 4a. Table 6a). however, lower than about 95% of PNP (see
+Table 5a. Table 7a). One reason for this result is that plant status varied randomly
+during simulations. While there may be some overlap between calibration data and
+test data, there is no guarantee that the input space covered by test data is represented by the calibration data. Thus, the neural network is frequently attempting to
+extrapolate (or 'generalize') into new regions. In many cases, its performance is
+Table 4(b) demonstrates the basic neural network performance on the test scenarios in the case MBP-A. In most cases, as the production circumstances change, the
+network identification performance decreases obviously, and also has similar results
+on the guarantee of feasible solutions. An important problem appears when examining the results with regard to modes T2 and T3. Although the network satisfactorily identifies these two modes in the training scenarios respectively (the same as that
+in the calibration data), in most cases, its mis-identifies mode T2 data into T3 in the
+On-line scheduling and control using a neural network
+'' Numbers indicate a percentage ofall records identified. Each record can only be assigned
+'' Feasible solutions to react the dynamic environment.
+Generalization by basic network on case A (training scenario).
+Numbers indicate a percentage of all records identified. Each record can only be assigned
+Feasible solutions to react the dynamic environment.
+Table 4{b). Generalization by basic network on case A (test scenario).
+test scenarios. Similarly, its mis-identifies mode T3 data as T2. The reason for this
+phenomenon discussed in § 3 is that two class modes are liable to confuse by the data
+limitation as production circumstances vary, i.e. modes T2 and T3 data occupy
+approximately the same region of the pattern space. The simple qualitative investigation is illustrated in §41-2 (see Fig. 5). Similar phenomena also occurred on modes
+T3 and T4. There are at least two solutions to this problem. One is to represent a
+wide range of production circumstances by the training data. Such comprehensive
+' Numbers indicate a percentage of all records identilied. Each record can only be assigned
+Feasible solutions to react the dynamic environment.
+Generalization by PNP on case A (training scenario).
+" Numbers indicate a percentage of all records identified. Each record can only be assianed
+*• Feasible solutions to react the dynamic environment.
+Generalization by PNP on case A (test scenario).
+datasets may be difficult to come by. In the absence of such data, a second method is
+to iticorporate the 'address' concept and proper preprocessing methods with neural
+networks. Although applied in the test scenarios. PNP identifies the appropriate
+modes reasonably well as shown in Table 5(b) and Table 7(b). Furthermore, the
+On-line scheduling and control using a neural network
+^ Numbers indicate a percentage of all records identified. Each record can only be assigned
+'' Feasible solutions to react the dynamic environment.
+Generalization by basic network on case B (training scenario).
+Numbers indicate a percentage of all records identified. Each record can only be assigned
+Feasible solutions to react the dynamic environment.
+Table 6(b). Generalization by basic network on case B (test scenario)
+guarantee of feasible solutions is maintained at a high level (higher than 90%).
+Comparison of these results with Table 4(b) and Table 6(b) demonstrates a
+marked improvement in performance in identifying modification modes under varying production circumstances, which have not been represented in the training phase.
+The method of identifying the unknown class is simple thresholding as discussed
+in 1)3. For example, the neural network has been trained by the data from the
+•' Numbers indicate a percentage ot all records identified. Each record can only be assigned
+*" Feasible solutions to react the dynamic environment.
+Table 7(a). Generalization by PNP on case B (training scenario).
+' Numbers indicate a percentage of all records identified. Each record can only be assigned
+^ Feasible solutions to react the dynamic environment.
+Table 7(b). Generalization by PNP on case B (test scenario).
+variation in processing time. For MBP-A case study, the
+negative variation (-10%) in the processing time are given
+the basic backpropagation network mis-identifies most of
+the class of normal. However, the average distance between
+On-line scheduling and control using a neural network
+"with-10% processing lime variation which had not been trained.
+^ Numbers indictiic a percentage of all records identified. Each record can only be assigned
+PNP vs basic NN (detecting unknown classf
+Table 9(a). Comparison of the PNP and the basic NN on case A.
+Table 9(b). Comparison of the PNP and the basic NN on case B.
+each Si and its prototype in normal mode is very large (0-56). Thus, PNP indicates
+that an unknown system problem has been detected.
+It becomes clear from the above results of correctness and feasibility that PNP
+dominates the basic neural network. These results show that PNP for batch process
+management must be robust. To prove that PNP dominates the basic ncura! network, analysis of variance (ANOVA) is run (Scheffe 1959, Cho and Wysk 1993). To
+increase homogeneous eflects of 100 replications, randomized complete block (RCB)
+designs are adopted. RCB designs remove an identified source of variability from the
+experimental error for a general design so that the ANOVA provides more precise
+results. The differences between PNP and the basic neural network are compared as
+The results of the ANOVA are summarized in Table 9. As can be seen in Table 9.
+the above hypothesis is rejected at the significance level 0 01 for all the test scenarios
+on the basis of F_vaiue(> F^(0 01)). Therefore, it can be concluded that the efficiency
+of PNP is much better than that of the basic neural network. These results suggest
+that the utilization of PNP has a great effect on the efficiency of ASGM.
+In this paper, we propose the framework of ASGM (PNP) consisting of preprocessor, post-processor and neural networks for identifying an appropriate and effective modification mode. The preprocessor includes data collector, data filter and data
+scale to enhance the network identification ability. The postprocessor as a simple
+distance-based classifier allows a detection of the "unknown" class. The primary idea
+of PNP is that understanding the data and its limitations is vital to any reliable
+neural network analysis. The performance of PNP relative to the basic backpropagation network based on scaled data is demonstrated. The realistic simulations are
+examined on two batch plant case studies.
+It is clear from experimental results that performance of PNP is much better than
+that of the basic neural network approach both on the correct identification and the
+guarantee of feasible solutions, and that PNP is effective in detecting unknown
+system problems and robust in the problem scale on performance measures.
+Further work is required to improve the reliability of identifying in retrofitting
+plant scenarios, and to incorporate structures like the one presented here with more
+BECRAFT. W. R.,Guo. D.Z..LEE. P. L.. and NEWELL. R.B.. 1991. Fault diagnosis strategies
+for chemical plants: a review of the competing technologies. Fourth huernational
+Engineer ing. Montebello. C a n a d a . II ( ] 2 ) . p p . 1-15.
+CHEN, W . , and JIANG, W . S., 1992, Scheduling of muliipurposc batch processes via improved
+simulated annealing. Control ami Decision. 7 (supplemenl). 211-215.
+CHEN, W . , MURAKI. M . . and JIANG. W . S., 1994. Research of intelligent scheduling system
+for batch processes. In Aihance.': in Management Science (Beijing. China: International
+CHO. H . . and WYSK. R . A., 1993. A robust adaptive scheduler for an intelligent workstation
+controller. Internatiomti Journal of Production Restarcli. 31. 771-789.
+COTT. B. J.. and MACCHIETTO. S.. 1989a. An integrated approach to computer-aided operalion of batch chemical plants. Computers and Chemical Engineering. 13(1/2), 1263-1271
+COTT, B. J.. and MACTHIETTO. S.. 1989b. Minimizing the effects of batch process variability
+using on-line schedule modification. Computers and Chemical Engineering. 13. 105-i 13
+DiETz, W. E., KiECH. E. L., and ALI. M . . 1989. Classification of data patterns using an autoassociative neural network topology. Transactions of the 2nd International Conference on
+Industrial and Engineering Applications of AI and E.xpert Svstems, University of
+Tennessee Space Institute. Tuilahoma. TN.
+GONZALEZ. L. C , SUTTON, J.. FELDER, C.. and RrcHARD. M.. 1991. The use of neural net-
+works to solve resource-constrained process schedtiling problems. Proceedings of The
+Fourth International Conference on Industrial and Engineering AppHeations on Artificial
+Intelligence and Expert Systems, pp. 338-344.
+On-line scheduling and control using a neural network
+IsHii.N., and MURAKI. M . , 1996a., A process-variability-based on-line scheduling and control
+system in multiproduct batch process. Computers and Chemical Engineering, 20, 217234.
+ISHii, N., and MURAKI. M . . 1996b, An extended dispatching rule approach in on-line
+scheduling framework for batch process management. International Journal of
+IsHil. N., and MURAKI. M . , 1996C. A generic framework for on-line scheduling and control
+system in batch process management. Computers and Chemical Engineering, in press.
+schedule modification in multi-purpose batch chemical plants. Industrial Engineering
+KHAW. J . . SIONG. L. B,. LIM. L., YONG. D . . JUT. S. K . , and FANG. L. C . 1991, Shop floor
+scheduling using a three-dimensional neural network model. Proceedings of the
+In/ernalional Conference on Computer Integrated Mamifaduring. pp. 563-566.
+PEDERSEN, K , , 1989. Expert Systems Programming (New York: Wiley).
+RABEIX). L . C . and ALPTEKIN. S.. 1989. Integrating scheduling and control functions in
+computer integrated manufacturing using artificial intelligence- Computers and
+RuMELHART, D., and MCCLELLAND, J., 1986, Purallei Distributed Processing. Vols I and 11
+SCHEFFE, H . , 1959. The Analy.sis of Variance (New York: Wiley).
+SIM. S. K . , YEO, K . T . , and LEE. W . H . , 1994. An expert neural network system for dynamic
+job shop seheduling. Iniernatiomit Journal of Production Research, 32, 1759-1773.
+Wu, D. S,, and WYSK. R . A., 1988. Multi-pass expert control system A control/scheduling
+structure for flexible manufacturing cells. Journal of Manufacturing Systems, 7,107-120.

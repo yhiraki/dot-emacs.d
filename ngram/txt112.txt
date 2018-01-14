@@ -1,0 +1,302 @@
+Computers & Operations Research 35 (2008) 3489 – 3503
+Real-time prediction of order ﬂowtimes using
+Abdulrahman Alenezia , Scott A. Mosesb,∗ , Theodore B. Trafalisb
+a School of Industrial Engineering, Purdue University, West Lafayette, IN 47907, USA
+b School of Industrial Engineering, University of Oklahoma, 202 W. Boyd, Room 124, Norman, OK 73019, USA
+In a make-to-order production system, a due date must be assigned to new orders that arrive dynamically, which requires predicting
+the order ﬂowtime in real-time. This study develops a support vector regression model for real-time ﬂowtime prediction in multiresource, multi-product systems. Several combinations of kernel and loss functions are examined, and results indicate that the linear
+kernel and the -insensitive loss function yield the best generalization performance. The prediction error of the support vector
+regression model for three different multi-resource systems of varying complexity is compared to that of classic time series models
+(exponential smoothing and moving average) and to a feedforward artiﬁcial neural network. Results show that the support vector
+regression model has lower ﬂowtime prediction error and is more robust. More accurately predicting ﬂowtime using support vector
+regression will improve due-date performance and reduce expenses in make-to-order production environments.
+䉷 2007 Elsevier Ltd. All rights reserved.
+Keywords: Due-date assignment; Support vector regression; Real-time ﬂowtime prediction
+Manufacturers are increasingly choosing to operate in a make-to-order rather than make-to-stock mode. Operating in
+a make-to-order production mode provides greater ﬂexibility, but it introduces the problem of due-date assignment. In
+most make-to-order systems due-date performance is lower than desired, which indicates the difﬁculty manufacturers
+have setting appropriate due dates, even though due-date assignment is one of the most important customer service
+In a make-to-order environment, new orders for a given quantity of a manufactured product arrive dynamically, and a
+due date must be assigned at the time that the order arrives. Assigning the due date essentially requires that the ﬂowtime
+of the order be predicted in real-time. The ﬂowtime Fi of an order i is deﬁned as the time interval between its arrival
+and its completion. The predicted ﬂowtime is denoted by F̂i and computing this variable is the focus of this paper.
+Various techniques can be employed to predict the ﬂowtime of an order. A brief review of relevant research highlights
+some of the challenges faced when attempting to predict ﬂowtime, particularly for multi-resource production systems
+and when real-time prediction is required. See Moses et al. [1] for a more complete review. In practice, a constant value
+(i.e., ﬁxed lead time) is by far the most commonly used approach, even though the ﬂowtimes of individual orders vary
+∗ Corresponding author. Fax: +1 405 325 7555.
+E-mail address: moses@ou.edu (S.A. Moses).
+0305-0548/$ - see front matter 䉷 2007 Elsevier Ltd. All rights reserved.
+A. Alenezi et al. / Computers & Operations Research 35 (2008) 3489 – 3503
+signiﬁcantly and a single constant value will be a poor estimate. Several parametric policies (beginning with [2]) have
+been described that estimate ﬂowtime as a linear function of a single attribute of the order or the system. However,
+these linear functions require ofﬂine tuning and furthermore are not highly effective since the relationship of ﬂowtime
+to system parameters and status is highly complex. Queuing theory can be used to calculate the queue time at each
+resource visited by an order, and the time at each resource could be summed to predict the ﬂowtime. However, the
+queue times are only the steady state averages, and thus only half of the orders (on average) would complete within
+the calculated ﬂowtime, whereas a service level of 90% or higher typically is desired. In response to these issues, a
+number of researchers have developed analytical models explicitly for due-date assignment [3–9]. Some authors have
+considered the combined problem of due-date setting and job sequencing using deterministic optimization [10,12–15].
+However, most of these results are for single machine systems, and ﬂowtime prediction for multi-resource systems
+requires techniques with much better scalability if they are to be used in real-time. Simulation-based models [16,17] can
+accurately predict order ﬂowtimes in multi-resource systems, but they require maintenance of a detailed data model.
+Also, as the system size increases they cannot be executed in real-time.
+Flowtimes in production systems exhibit high positive correlation, and therefore actual ﬂowtimes of recently completed orders can be used in a time series model to predict the ﬂowtime of a newly arriving order in real-time [18].
+However, although the historical data about ﬂowtimes of orders that already have completed does provide useful information, the ﬂowtime of a new order also is strongly affected by the current status of resources in the production
+Unfortunately, the relationship between system status and ﬂowtime is unknown. Since support vector regression
+(SVR) has been successful in learning from data, it would appear that it also could learn the relationship between the
+status of the production system and ﬂowtime. This paper is an investigation of this issue.
+The foundation of SVR was developed by Vapnik [19], and it became more popular due to the generalization
+capabilities it demonstrated. Recently, several studies [20–23] have successfully applied SVR for function estimation.
+The applications of SVR for time series prediction [24], such as travel time prediction [22] and forecasting of ﬁnancial
+markets [20] [25,26], have shown signiﬁcant reduction in prediction errors. Recently, Yang et al. [21] applied different
+margin settings in SVR for the stock market prediction to improve the accuracy of prediction. From the structural risk
+minimization principle, Vapnik [19] has shown that SVR has good generalization properties.
+In this paper we develop a SVR model for real-time ﬂowtime prediction in multi-resource, multi-product systems.
+The independent variables are the status of each resource in the production system and the targets are the ﬂowtimes. In
+our experiments, the variability of processing times at each resource, the variability of the sequence in which orders visit
+resources for processing, and the variability of time between order arrivals all create a challenging ﬂowtime prediction
+The remainder of this paper is organized as follows. Section 2 describes linear and nonlinear SVR models. It reviews
+the most common loss functions and kernel functions and describes a practical method for selecting SVR parameters.
+Section 3 describes the SVR model for ﬂowtime prediction and the experiments performed to select the model with the
+best generalization performance. Three kernel functions and two loss functions are examined during selection of the
+model. Section 4 compares the prediction accuracy of the SVR model to that of classic time series models (exponential
+smoothing and moving average) and to a feedforward artiﬁcial neural network (ANN) that, like the SVR model, can
+learn the relationship between the status of the production system and ﬂowtime. It presents empirical results for three
+different multi-resource systems of varying complexity. Finally, Section 5 concludes the paper and provides suggestions
+SVR models can be classiﬁed into linear models and nonlinear models. This section introduces the solution for
+the linear model by reviewing the -insensitive and quadratic loss functions. The solution for the nonlinear model is
+obtained by modifying the solution for the linear model by applying the kernel function approach [24].
+The generalization performance of SVR depends on the setting of parameters. This section describes a practical
+method introduced by Cherkassky and Ma [27] for selecting the value of  and the value of regularization parameter
+C for SVR directly from the training data. Also, they suggest using the -insensitive loss function for a linear SVR
+A. Alenezi et al. / Computers & Operations Research 35 (2008) 3489 – 3503
+For regression problems we are given training data (xi , yi ), (i = 1, . . . , l), where x is a d-dimensional input with
+x ∈ Rd and the output isy ∈ R. The linear regression model can be written as follows [30]:
+where f (x) is an unknown target function and ·, · denotes the dot product in Rd .
+In order to measure the empirical risk [19], we should specify a loss function. Several alternatives are available.
+The most common loss functions are the -insensitive loss function and the quadratic loss function [28,29].
+The -insensitive loss function proposed by Vapnik [19] and shown in Fig. 1 is deﬁned by the following function:
+and the optimal parameters  and b in Eq. (1) are found by solving the primal optimization problem [29]:
+where C is a pre-speciﬁed value that determines the trade off between the ﬂatness of f (x) and the amount up to which
+deviations larger than the precision  are tolerated. The slack variables − and + represent the deviations from the
+A. Alenezi et al. / Computers & Operations Research 35 (2008) 3489 – 3503
+Usually the dual problem is solved. The corresponding dual optimization problem is deﬁned as
+Solving the optimization problem deﬁned by Eqs. (5) and (6) gives the optimal Lagrange multipliers  and ∗ , while
+where xr and xs are support vectors [29].
+The values of  and b can be used to compute f (x) in Eq. (1). Therefore, for each nonzero Lagrange multiplier
+there is a support vector. In the case of  = 0, the loss function and the optimization problem are simpliﬁed [29]:
+A. Alenezi et al. / Computers & Operations Research 35 (2008) 3489 – 3503
+where i = ∗i − i and  and b for the regression given by Eq. (7) are
+Parameter C and the value of  shown in Eqs. (3) and (4) are user-speciﬁed. Therefore, optimal values for both
+parameters lead to an optimal support vector machine (SVM) regression solution. Recently, Cherkassky and Ma [27]
+proposed a practical method for selecting the value of  and the value of regularization parameter C for SVM regression
+directly from the training data. Speciﬁcally, the value of C is chosen as
+where y is the mean of the training outputs and y is the standard deviation of the training outputs. Eq. (11) handles
+outliers in the training data. In practice, the output values of training data are often scaled so that y = 0. Then the value
+where  is the standard deviation of additive noise, l is the number of training samples, and  is an empirically determined
+constant. Cherkassky and Ma [27] suggest  = 3 for setting the value of -insensitive zone. Hence, Eq. (12) with  = 3
+Note that using Eq. (13) requires estimation of noise level . This can be accomplished using standard noise estimation
+where (yi − ŷi ) is the ith ﬁtting error of the training data, d is the dimensionality of the input space and l is the number
+of training samples. Using the k-nearest neighbors method [11], the model complexity will be
+where k is the number of data points near the local estimated points. Combining Eqs. (14) and (15), we obtain the
+following prescription for noise variance estimation via the k-nearest neighbors method [27]:
+In general, the value of k varies between 2 and 6. Also, Cherkassky and Ma [27] suggested setting k = 3 and they tested
+it for different sample sizes and different noise levels. With k = 3, Eq. (16) becomes
+Furthermore, the value of  affects the prediction more than the selection of C since the parameter C is larger than the
+A. Alenezi et al. / Computers & Operations Research 35 (2008) 3489 – 3503
+The quadratic loss function shown in Fig. 3 corresponds to the conventional least-squares error criterion. The
+formulation of the quadratic loss function is given by
+and the primal formulation of the quadratic support vector optimization problem is given by
+The corresponding dual formulation is given by [29]
+and the values of  and b can be used to compute f (x) in Eq. (1).
+A. Alenezi et al. / Computers & Operations Research 35 (2008) 3489 – 3503
+For nonlinear regression problems, a nonlinear mapping of the input space onto a higher dimension feature space
+can be used, and then linear regression can be performed in this space [24]. The nonlinear model is written as
+(i − ∗i )( (xi ), (xr ) +  (xi ), (xs )) = −
+where xr and xs are support vectors. Note that we express dot products through a kernel function K that satisﬁes
+Eq. (24) can be written as follows if the term b is accommodated within the kernel function:
+An inner product in feature space has an equivalent kernel function K in input space [24]
+Any symmetric positive semi-deﬁnite function [28] that satisﬁes Mercer’s Conditions can be used as a kernel function.
+A discussion of Mercer’s Conditions can be found in [24].
+Several kernel functions have appeared in the literature. A polynomial kernel function is a popular kernel for nonlinear
+The radial basis function (RBF) also has received signiﬁcant attention, most commonly with a Gaussian of the form:
+is the width of the RBF kernel. Other kernel functions that are used include ANOVA, sigmoid, and B-spline
+3. Methodology for real-time ﬂowtime prediction using SVR
+Classic time series models for ﬂowtime prediction would use only historical data about the ﬂowtime of orders that
+already have completed. However, while historical data does provide useful information, the ﬂowtime of a new order
+also is affected by the current status of the production system. Considering data on the current status of the production
+system at the time an order arrives can improve ﬂowtime prediction, since historical ﬂowtime is a lagging indicator,
+and the status of the system when an order arrives is a leading indicator.
+A. Alenezi et al. / Computers & Operations Research 35 (2008) 3489 – 3503
+For the purpose of ﬂowtime prediction, we deﬁne the status of a resource in the production system as the number
+of orders in process and in queue at the resource including the newly arriving order. Speciﬁcally, the status of a
+The value of X for each resource required by an order is used to predict its ﬂowtime. These data are selected as a leading
+indicator of ﬂowtime because a large portion of ﬂowtime can be attributed to queuing for resources. Motivation also is
+given by Little’s Law [31], which afﬁrms that average ﬂowtime is proportional to work-in-process over the long term
+To train and test the SVR model, data on the actual ﬂowtime of each order are obtained from a detailed discrete-event
+simulation model. The training data matrix contains data on the status of the production system at the time the order
+arrived, which are the inputs, and the actual ﬂowtime of the order, which is the output:
+where l is the size of the training data set, r is the number of resources in the production system, and F is the actual
+Experiments to train and test the SVR model are performed using data for three different multi-resource, multiproduct systems of varying complexity. Table 1 lists the number of product types and the number of resources in each
+system, which are referred to as the Small system, Medium system and Large system.
+Orders for varying product types are generated with exponentially distributed time between arrivals. The mean
+interarrival times differ for each product type. All orders visit each resource exactly once. To realistically model a
+make-to-order environment, both the sequence in which the resources are visited and the mean processing time on a
+resource differs for each product type (see Appendix A).
+Prediction error equals the actual ﬂowtime Fi obtained from simulation minus the predicted ﬂowtime F̂i . When
+selecting an error metric, it is important to capture both positive and negative error in ﬂowtime prediction of each
+individual order and to not let positive and negative errors offset one another. Thus, the following two error metrics are
+used to evaluate prediction accuracy: mean absolute percent ﬂowtime prediction error (MAPE) and root mean square
+where n is the number of data points used for testing.
+A. Alenezi et al. / Computers & Operations Research 35 (2008) 3489 – 3503
+During selection of the SVR model for ﬂowtime prediction, the following kernel functions are considered: linear,
+second-degree polynomial, and RBF (Eqs. (1), ((28) with p=2) and (29), respectively). We chose the optimal =7.07 for
+the RBF by using cross validation. Two loss functions are examined: the -insensitive loss function and the quadratic loss
+function. For the -insensitive loss function, we use the mean and standard deviation of the training outputs (predicted
+ﬂowtime) in Eq. (11) to calculate the regularization parameter C and we use Eq. (13) to calculate . The standard
+deviation of additive noise  is estimated directly from the training data using Eq. (17). For the quadratic loss function,
+the value of C is set to the same value used by the -insensitive loss function.
+Thus, two loss functions and three kernel functions are examined for three different multi-resource systems, which
+results in 18 sets of factors. Five independent replications were performed for each of the 18 sets of factors, giving a
+grand total of 90 experiments. For each replication, 600 data points were used for training and 1400 data points were
+used for testing. The Small system has three product types and three resources, so the dimension of the input space is
+three. The Medium system has three product types and 10 resources, so the dimension of the input space increases from
+three to 10. The Large system has 10 product types and 20 resources, so the dimension of the input space increases
+Tables 2, 3, and 4 contain empirical results for the Small, Medium, and Large production systems, respectively, and
+Table 5 shows the average results for all production systems. These tables show the mean absolute percent ﬂowtime
+prediction error MAPE, the root mean square ﬂowtime prediction error RMSE, and the percent of training data that
+are support vectors SV for each combination of kernel function and loss function. Values shown are the average of ﬁve
+replications. Results for the Small production system show that the -insensitive loss function combined with either the
+linear or polynomial kernel function performs best. Results for the Medium and Large production systems show that
+the -insensitive loss function combined with either the linear or the RBF kernel performs best. The -insensitive loss
+function performs better than the Quadratic loss function in all of the experiments. Thus, we conclude that the SVR
+model that has the best overall generalization performance is the -insensitive loss function combined with the linear
+kernel function. This combination will be used as the SVR model for ﬂowtime prediction.
+A. Alenezi et al. / Computers & Operations Research 35 (2008) 3489 – 3503
+This section compares the ﬂowtime prediction accuracy of the SVR model determined in the previous section to
+that of exponential smoothing, moving average, and ANN models. Empirical results are obtained for three different
+multi-resource systems of varying complexity. For the sake of brevity, results are shown for a single product type.
+The SVR model for ﬂowtime prediction uses the combination of loss function and kernel function that has the best
+overall generalization ability for all three production systems, as determined in the previous section. Using training
+data, SVR learns to predict the ﬂowtime of a new order given the status of resources in the production system when
+the order arrives. The prediction function is
+where Xt is the current queue length and processing status of resource j at time t when order i arrives. Note that the
+predicted ﬂowtime can be expressed as a linear combination of kernel functions evaluated at speciﬁc training data
+4.2. Exponential smoothing model for ﬂowtime prediction
+Time series models predict the ﬂowtime of a newly arriving order using only data on the ﬂowtime of previously
+completed orders. The prediction function has the form
+In particular, with exponential smoothing the predicted ﬂowtime F̂i of order i is computed from the smoothed ﬂowtime
+A. Alenezi et al. / Computers & Operations Research 35 (2008) 3489 – 3503
+where j is the index of completed orders and the value of the smoothing constant  varies between 0 and 1. Lawrence
+[18] evaluated six ﬂowtime estimators and found exponential smoothing to be one of the two most effective estimators
+for the largest system studied (10 resources).
+Experiments using the exponential smoothing model were performed for each production system using various
+values of the smoothing constant . For each system, the best results are achieved when  equals 0.1.
+4.3. Moving average model for ﬂowtime prediction
+Like the exponential smoothing model, the moving average model predicts future ﬂowtimes using only historical
+data. The moving average is computed from a ﬁxed number of observations of the ﬂowtime of previously completed
+orders. The predicted ﬂowtime F̂ is computed using
+where j is the index of completed orders and w is the width of the moving average. Experiments using the moving
+average model were performed for each production system using various values of the moving average width w.
+Performance is very insensitive to the value of w, although large values performed better. Results for each system are
+The type of ANN used to predict ﬂowtime is a feedforward ANN, which is composed of an input layer, one or more
+hidden layers, and an output layer of neurons. See Haykin [32] for details on the formulation of a feedforward ANN.
+The input data to the ANN model is the same as for the SVR model and thus the prediction function is deﬁned by
+Experiments using ANNs were conducted for each production system. We trained several feedforward ANNs with
+different numbers of hidden nodes using the scaled conjugate gradient backpropagation network training function.
+Training stopped when 500 epochs was reached. For all three systems, the best results on the testing data were achieved
+when the number of hidden nodes was eight.
+This section compares the ﬂowtime prediction performance of SVR, exponential smoothing, moving average, and
+ANN models for ﬂowtime prediction in the three multi-resource systems described in Table 1. Since routings vary
+based on product type and the product type is speciﬁed when an order arrives, all models predict ﬂowtime separately
+for each product type to improve accuracy. The prediction accuracy of each model is evaluated using the mean absolute percent ﬂowtime prediction error MAPE and the root mean square ﬂowtime prediction error RMSE deﬁned by
+Fig. 4 shows the absolute percent error for each model for 100 observations in the Medium system. This ﬁgure is
+given as an illustration to provide insight into the performance differences of the models. The ﬂowtime of orders in
+a production system is highly variable. Since the exponential smoothing and moving average models predict future
+ﬂowtimes based on previous ﬂowtimes, they are relying on older data and struggle to make predictions for such a highly
+variable time series. On the other hand, the SVR and ANN models predict the ﬂowtime for a new order by learning the
+relationship between the status of the production system when the order arrives and its resulting ﬂowtime.
+Table 6 compares the performance of the SVR model to the performance of the other three models. It shows the
+average of mean absolute percent ﬂowtime prediction error MAPE and root mean square ﬂowtime prediction error
+RMSE based on ﬁve replications. For each replication, 1400 observations were collected.
+Two types of comparisons can be made in Table 6. The ﬁrst comparison is between ANN and SVR versus moving
+average and exponential smoothing. The latter models are important to examine because they are the traditional
+approaches used for this problem. Clearly, the SVR model as well as the ANN model perform signiﬁcantly better than
+the exponential smoothing and moving average models for each production system, even though the time series models
+are using the best performing values of  and w (which in practice normally would not be the case).
+A. Alenezi et al. / Computers & Operations Research 35 (2008) 3489 – 3503
+Fig. 4. Absolute percent error for each model.
+The second comparison is between ANN and SVR. Both of these techniques are able to use an expanded set of input
+data (status of the production system) since they are able to learn the relationship between the status of the production
+system when the order arrives and its resulting ﬂowtime. The performance of the SVR model is slightly better than the
+ANN for the Small and Medium production system, and signiﬁcantly better for the Large production system.
+Furthermore, the relatively small standard deviation of performance for the SVR model indicates that it is quite
+robust. The ANN model also is rather robust, but less so than the SVR model. Not only do the traditional techniques
+have a higher standard deviation, they also have a higher coefﬁcient of variation than the SVR and ANN models.
+As the size of the production system increases, the accuracy of prediction tends to increase. This is an interesting
+effect, but it is believed to be data dependent, and in other cases the prediction error might increase as the system size
+increases. The main conclusion is that the SVR model has lower prediction error and higher robustness than the other
+Assigning a due date to new orders that arrive dynamically to a make-to-order production system requires that
+order ﬂowtime be predicted in real-time. Flowtime prediction is a difﬁcult but commercially important problem.
+A. Alenezi et al. / Computers & Operations Research 35 (2008) 3489 – 3503
+The contribution of this paper is a new SVR model for real-time ﬂowtime prediction in multi-resource, multi-product
+systems that has lower ﬂowtime prediction error than existing models.
+Traditional time series models utilize historical ﬂowtime data, which are lagging indicators. In a dynamic environment
+like a production system, these data are of limited value since it has a lag. Utilizing data from a leading indicator such
+as the current status of the system when the order arrives can increase prediction accuracy. However, a relationship
+between the status of the system when an order arrives and the resulting ﬂowtime of the order is not known. To the
+extent that a technique such as ANN or SVR can learn this relationship, it can increase prediction accuracy.
+In our experiments, the SVR model that has the best overall generalization performance combines the -insensitive
+loss function with the linear kernel function. The input variables are the number of orders in queue at each resource in the
+system and the output is the order ﬂowtime. Values for the precision  and the regularization parameter C are set using
+results of recent research by Cherkassky and Ma [27]. Results of experiments performed on three different systems
+of varying complexity show that SVR model has signiﬁcantly lower ﬂowtime prediction error and higher robustness
+than classic time series models such as exponential smoothing and a moving average and also is more accurate than a
+Future research can be performed in a number of areas. In reality, the relationship between input variables and
+ﬂowtime changes over time. Thus, one area of research is adaptive models for SVR. These would ingest online data
+as they are received and dynamically adapt the kernel functions. A second area would be feature extraction on input
+variables. In this case, the critical attributes that best predict ﬂowtime can be selected from a candidate set of attributes
+This material is based upon work supported by the National Science Foundation under Grant nos. DMI-0122082
+and EIA-0205628. The authors wish to thank the anonymous referees for careful, speciﬁc, insightful and constructive
+comments that signiﬁcantly improved the paper. The authors express their appreciation to Indra Adrianto for his help
+A. Alenezi et al. / Computers & Operations Research 35 (2008) 3489 – 3503
+A. Alenezi et al. / Computers & Operations Research 35 (2008) 3489 – 3503
+[1] Moses S, Grant H, Gruenwald L, Pulat S. Real-time due-date promising by build-to-order environments. International Journal of Production
+[2] Conway RW. Priority dispatching and job lateness in a job shop. Journal of Industrial Engineering 1965;16:228–37.
+[3] Shanthikumar JG, Sumita U. Approximations for the time spent in a dynamic job shop with applications to due-date assignment. International
+Journal of Production Research 1988;26:1329–52.
+[4] Wein LM. Due-date setting and priority sequencing in a multiclass M/G/1 queue. Management Science 1991;37:834–50.
+[5] Duenyas I. Single facility due date setting with multiple customer classes. Management Science 1995;41:608–19.
+[6] Duenyas I, Hopp WJ. Quoting customer lead times. Management Science 1995;41:43–57.
+[7] Spearman ML, Zhang RQ. Optimal lead time policies. Management Science 1999;45:290–5.
+[8] Weng ZK. Strategies for integrating lead time and customer-order decisions. IIE Transactions 1999;31:161–71.
+[9] Hopp WJ, Sturgis MR. A simple, robust leadtime-quoting policy. Manufacturing & Service Operations Management 2001;3:321–36.
+[10] Gordon V, Proth J, Chu C. A survey of the state-of-the-art of common due date assignment and scheduling research. European Journal of
+[11] Hastie T, Tibshirani R, Friedman JH. The elements of statistical learning: data mining, inference, and prediction. New York, NY: Springer;
+[12] Heard EL. Due-dates and instantaneous load in the one-machine shop. Management Science 1976;23:444–50.
+[13] Seidmann A, Smith ML. Due date assignment for production systems. Management Science 1981;27:571–81.
+[14] Cheng TCE. Optimal TWK-power due-date determination and sequencing. International Journal of Systems Sciences 1987;18:1–7.
+[15] De P, Ghosh JB, Wells CE. Optimal due-date assignment and sequencing. European Journal of Operational Research 1992;57:323–31.
+[16] Roman DB, del Valle AG. Dynamic assignation of due-dates in an assembly shop based in simulation. International Journal of Production
+[17] Grant H, Goldsman D, Moses S. Using simulation to evaluate buffer adjustment methods in order promising. In: Proceedings of the 2002 winter
+simulation conference. San Diego, CA, 2002.
+[18] Lawrence SR. Estimating ﬂowtimes and setting due-dates in complex production systems. IIE Transactions 1995;27:657–68.
+[19] Vapnik VN. The nature of statistical learning theory. 2nd ed, New York: Springer; 2000.
+[20] Yang H, Chan L, King I. Support vector machine regression for volatile stock market prediction. In: Yin H, et al., editors. IDEAL 2002, Lecture
+notes in Computer Science, vol. 2412. Berlin: Springer; 2002. p. 391–6.
+[21] Yang H, King I, Chan L. Non-ﬁxed and asymmetrical margin approach to stock market prediction using support vector regression. In: Proceedings
+of the international conference on neural information processing (ICONIP2002), Singapore, 2002.
+[22] Wu CH, Ho JM, Lee DT. Travel time prediction with support vector regression. IEEE Transactions on Intelligent Transportation Systems
+[23] Cherkassky V, Ma Y. Comparison of loss functions for linear regression. Proceedings of the 2004 IEEE International Joint Conference on
+Neural Networks, vol. 1, 25–29 July 2004. pp. 400–405.
+[24] Schölkopf B, Smola AJ. Learning with kernels: support vector machines, regularization, optimization, and beyond. Cambridge, MA: MIT
+[25] Trafalis TB, Ince H, Mishina T. Support vector regression in option pricing. In: Workshop in soft computing for ﬁnancial analysis, CJFER’03,
+[26] Trafalis TB, Ince H. Support vector machine for regression and applications to ﬁnancial forecasting. In: IEEE-INNS-ENNS international joint
+conference on neural networks, Como, Italy, 2000.
+[27] Cherkassky V, Ma Y. Practical selection of SVM parameters and noise estimation for SVM regression. Neural Networks 2004;17:113–26.
+[28] Smola A, Schölkopf B. A tutorial on support vector regression. NeuroCOLT Technical Report NC-TR-98-030, Royal Holloway College,
+[29] Gunn SR. Support vector machines for classiﬁcation and regression. Technical Report, Department of Electronics and Computer Science,
+[30] Cristianini N, Shawe-Taylor J. An introduction to support vector machines and other kernel-based learning methods. Cambridge, UK: Cambridge
+[31] Little JD. A proof for the queueing formula L = W. Operations Research 1961;9:383–7.
+[32] Haykin S. Neural networks: a comprehensive foundation. 2nd ed, New Jersey: Prentice-Hall; 1999.

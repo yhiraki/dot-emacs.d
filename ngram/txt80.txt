@@ -1,0 +1,559 @@
+International Journal of Production Research
+A heuristic for adaptive production scheduling and
+Wei Lia, Xinggang Luob, Deyi Xuea and Yiliu Tua*
+Department of Mechanical and Manufacturing Engineering, University of Calgary,
+Calgary, T2N 1N4, Canada; bSchool of Information Science and Engineering,
+Northeastern University (NEU), Shenyang, 110004, PR China
+(Received 9 February 2009; final version received 12 December 2009)
+Although research in flow shop production scheduling has been carried out for
+many decades, there is still a gap between theoretical research and industrial
+applications – especially in some manufacturing paradigms in which adaptive
+production control is necessary, such as in one-of-a-kind production (OKP). This
+paper presents an average processing time and lever (APT-LVR) heuristic,
+integrated with a closed-loop feedback control scheme, to achieve adaptive
+production scheduling and control in flow shop production. Having been
+implemented in a local OKP company, our APT-LVR based production
+scheduling and control system demonstrates a significant potential to improve
+the company’s production efficiency and competitiveness.
+Keywords: scheduling; adaptive production control; coloured Petri nets; flow
+Adaptive production control is necessary for some manufacturing paradigms in which
+dynamics/disturbances frequently happen to production in terms of changes of customer
+requirements, unexpected operator absence or machine breakdown, urgent job insertion/
+cancellation, and so on. These dynamics make some scheduling heuristics unsuitable for
+production control, especially those for mass production. Because there are assumingly no
+dynamics/disturbances in mass production, in which production is carried out in batches
+of products and all products in a batch are the same. When no dynamics/disturbances are
+taken into consideration in production scheduling, optimality is the only criterion to
+evaluate heuristics. In that case, production scheduling may be carried out offline before
+the production, through extensive computation to achieve a good production schedule.
+However, adaptive production control requires that a heuristic should obtain a solution
+online to deal with the dynamics/disturbances to the production. Therefore, not only
+the optimality, but also the computation time of a heuristic is important for adaptive
+production control. Moreover, flow shop production scheduling problems are strongly
+NP-hard. Consequently, there is inevitably a trade-off between the optimality and
+*Corresponding author. Email: paultu@ucalgary.ca
+ISSN 0020–7543 print/ISSN 1366–588X online
+Different from mass production, one-of-a-kind production (OKP) is intensely
+customer focused such that every product is highly customised based on specific customer
+requirements, and products differ on matters of colours, shapes, dimensions, functionalities, materials, processing times, and so on. Consequently, production of a product is
+rarely repeated in OKP (Wortmann et al. 1997), and disturbances happen dynamically to
+daily production. Thus, OKP companies use mixed-product production in a flow line to
+improve the production efficiency (Dean et al. 2008, 2009), and continuously seek new
+methods to adaptively control the production online.
+Currently, in those manufacturing companies that provide highly customised products,
+especially in OKP companies, managerial staff use priority dispatching rules (PDRs) to
+deal with disturbances. PDRs are fast and simple for online production control, but they
+depend heavily on the configuration of shop floors, characteristics of jobs, and scheduling
+objectives (Goyal et al. 1995), and there is no specific PDR that clearly dominates the
+others (Park et al. 1997). Moreover, the performance of PDRs is not good on some
+scheduling objectives (Ruiz and Maroto 2005), especially not consistent when a processing
+constraint changes (King and Spachis 1980). Consequently, there is a considerable
+difference between the scheduled and actual production progress (Ovacik and Uzsoy
+1997): when unexpected changes occur and PDRs are used to adaptively control the
+production, the production often runs in a chaotic or an ‘ad hoc fire fighting’ manner
+Due to high customisation and dynamics, production has to be adaptively scheduled
+and controlled (Tu 1996b, Wortmann et al. 1997). When adaptive production control is
+taken into consideration, a closed-loop control structure is necessary and an efficient
+heuristic is critical. We propose an average processing time and lever (APT-LVR) heuristic
+to support a computer-aided production scheduling and control system. We compare the
+optimality of our APT-LVR heuristic in terms of makespan minimisation, to the CDS
+heuristic (Campbell et al. 1970) and to the NIS (no intermediate storage) heuristic
+(Thornton and Hunsucker 2004) using case studies based on well-accepted benchmarks,
+for both traditional flow shop (TFS) and hybrid flow shop (HFS) problems under no
+pre-emption or no waiting processing constraints.
+We find that across our different case studies the APT-LVR heuristic outperforms
+the CDS and NIS heuristics, although all these heuristics use Johnson’s algorithm
+(Johnson 1954) as their core. In addition, in a real industrial application at an OKP
+company, Gienow Windows and Doors, Calgary, Alberta, Canada, our production
+scheduling and control system, based on the APT-LVR heuristic, reduced the company’s
+original scheduling period using PDRs by an order of magnitude from three days to two
+hours, providing significant flexibility and competitiveness to the company.
+The rest of this paper is organised as follows. Section 2 gives a brief literature review.
+Section 3 introduces the APT-LVR heuristic. Section 4 presents the scheduling scheme and
+a closed-loop control structure to achieve adaptive control in flow shop production.
+Section 5 gives the results from case studies on TFS and HFS problems with no
+pre-emption and no waiting constraints, and on an industrial case. Finally, Section 6
+Research in production scheduling has been carried out for many decades, and there are
+numerous scheduling methods developed in the literature. In this section, we briefly review
+International Journal of Production Research
+flow shop production scheduling methods, and discuss the requirements of heuristics
+Scheduling is a decision making process of allocating resources to jobs over time to
+optimise one or more objectives. According to Pinedo (2002), one type of flow shop
+consists of m machines in series, and each job has to be processed on each of m machines
+in a single direction, which means first on machine 1, then on machine 2, and so on. This is
+typically called a traditional flow shop (TFS). Another type of flow shop, where there are
+S stages in series with a number of machines/operators in parallel in each stage, is called a
+flexible flow shop or hybrid flow shop (HFS). In addition to the difference in flow shop
+configurations, processing constraints are also different for TFS and HFS. For TFS, if the
+first in first out (FIFO) discipline is applied to jobs in work-in-process (WIP) inventories, it
+becomes a no pre-emption flow shop problem. It is also called a permutation (prmu) flow
+shop problem, because the processing sequence of jobs on each machine is the same.
+For HFS, because there are multiple machines/operators in a stage, the first job coming
+into a stage might not be the first job coming out of the stage. Therefore, the first come
+first served (FCFS) discipline may be applied (Pinedo 2002). Consequently, it is still a no
+pre-emption flow shop problem, but the output sequence of a stage may be different from
+the input one. Another processing constraint could be no waiting (nwt), that is, jobs are
+not allowed to wait between two machines or stages, which also means there is no
+intermediate storage or WIP inventories. The most common objective of flow shop
+scheduling is to minimise the maximum completion time or makespan, that is, min (Cmax).
+Following the popular three parameter notation, // (Graham et al. 1979), the above
+problems can be notated as Fm/prmu/Cmax for m machine TFS problems with no
+pre-emption constraint to minimise makespan, Fm/nwt/Cmax for m machine TFS problems
+with no waiting constraint to minimise makespan, FFs/FCFS/Cmax, for S stage HFS
+problems with FCFS constraint to minimise makespan, and FFs/nwt/Cmax for S stage HFS
+problems with no waiting constraint to minimise makespan.
+Gupta and Stafford (2006) chronologically reviewed flow shop scheduling research in
+the past five decades since the classic Johnson’s algorithm in 1954. They found that the
+emergence of NP-completeness theory in the third decade (1975–1984) profoundly
+influenced the direction of research in flow shop scheduling. That is why heuristics
+are required to solve large problems. HFS problems emerged in the fourth decade
+(1985–1994), and various artificial intelligence based heuristics were developed then.
+The fifth decade (1995–2004) witnessed the proliferation of various flow shop problems,
+objective functions, and solution approaches. Although flow shop scheduling has been
+researched for more than 50 years, there remains a large gap between theoretical research
+and industrial applications (Gupta and Stafford 2006).
+Framinan et al. (2004) proposed a general framework for the development of
+heuristics, which consists of three phases: index development, solution construction, and
+solution improvement. Phase 1, index development, means that a heuristic arranges jobs
+into a sequence according to a certain property based on processing times. For example,
+Campbell et al. (1970) extended Johnson’s algorithm and proposed the CDS heuristic
+for an n-job m-machine TFS problem to min (Cmax). The procedure of the CDS heuristic
+using Johnson’s algorithm to arrange jobs is as follows. If there is a counter (Ctr) pointing
+to a machine j, then for each job i (i ¼ 1, . . . , n) the sum of processing times on the first Ctr
+machines is regarded as its processing time on virtual machine 1, and the sum of processing
+times on the rest m  Ctr machines as its processing time on virtual machine 2. Then apply
+Johnson’s algorithm to this virtual 2-machine flow shop problem to obtain a sequence.
+As Ctr changes from machine 1 to machine m  1, m  1 sequences are generated, and the
+one with the minimum makespan is the final solution. In phase 2, solution construction, a
+heuristic constructs a job sequence by a recursive procedure, trying to insert one or more
+unscheduled jobs into a specific position of a partial sequence until the final schedule
+is completed. The NEH heuristic (Nawaz et al. 1983) is a typical heuristic in phase 2, for an
+n-job m-machine TFS problem to min (Cmax). The procedure of the NEH heuristic is as
+follows. The NEH heuristic first calculates the sums of processing times on all of m
+machines for each of the n jobs, and then arranges these sums in a non-ascending order.
+Second, the NEH heuristic schedules the first two jobs in the non-ascending order to
+obtain a partial sequence, and then inserts the third job into three possible positions to
+obtain another partial sequence, and so on. Finally, the NEH heuristic inserts the last job
+into n possible positions, and then determines the final sequence. In phase 3, solution
+improvement, heuristics have two main characteristics. The first is that there must be an
+initial sequence, which may be the outcome of another heuristic in phase 1, and the second
+is, after using artificial intelligence techniques, the performance of the final sequence is
+better than that of the initial one. For the future development of heuristics, Framinan et al.
+(2004) stated that the importance of heuristic development in phase 1 should not be
+underestimated, as it is required for the heuristic development in the other two phases.
+Ruiz and Maroto (2005) compared 19 heuristics for Fm/prmu/Cmax problems, and
+concluded that the NEH heuristic is the best, the CDS heuristic is the eighth, and two
+PDRs (LPT (longest processing time) and SPT (shortest processing time) rules) are the
+worst. However, the CDS heuristic has the simplest computational complexity among the
+first eight heuristics, O(m2n þ mnlogn), compared with the NEH heuristic’s O(mn2) that is
+not the highest among the first eight heuristics. Moreover, King and Spachis (1980)
+compared five PDRs and the CDS heuristic for two different TFS problems, Fm/prmu/
+Cmax and Fm/nwt/Cmax. They concluded that the CDS heuristic and LWBJD (least
+weighted between jobs delay) rule work best for Fm/prmu/Cmax problems and MLSS
+(maximum left shift savings) rule works best for Fm/nwt/Cmax problems, but no single
+method works best for both Fm/prmu/Cmax and Fm/nwt/Cmax problems.
+Compared with TFS, the literature on HFS is still scarce (Linn and Zhang 1999, Wang
+2005). According to Botta-Genoulaz (2000), the CDS heuristic is the best of six heuristics,
+including the NEH heuristic, for HFS problems. The problem that Botta-Genoulaz solved
+is an n-job S-stage HFS problem to minimise the maximum lateness, min (Lmax), which
+was cleverly converted to an n-job S þ 1-stage HFS problem to min (Cmax). The processing
+time of job i in stage S þ 1 is calculated by tiSþ1 ¼ Dmax  di, i ¼ 1, . . . , n, where Dmax ¼ max
+[dk], and dk is the due date for job k, k ¼ 1, . . . , n. Although the CDS heuristic was
+constructed for TFS problems to min (Cmax), when applying the CDS heuristic to HFS
+problems, Botta-Genoulaz also converted the processing times, t0ij ¼ tij =OPTRj ,
+j ¼ 1, . . . , S þ 1, where tij is the original processing time of job i in stage j, and OPTRj is
+the number of operators/machines assigned to stage j. It is reasonable to compare our
+APT-LVR heuristic to the CDS heuristic for FFs/FCFS/Cmax problems, because first the
+basis of Botta-Genoulaz’s conclusion is to min (Cmax) for n-job S þ 1-stage HFS problems,
+and second both the CDS and APT-LVR heuristics are based on Johnson’s algorithm.
+International Journal of Production Research
+For HFS problems with identical parallel machines and with a no waiting constraint,
+FFs/nwt/Cmax, Thornton and Hunsucker (2004) proposed a no intermediate storage (NIS)
+heuristic, which works best among the CDS heuristic, LPT and SPT rules, and a heuristic
+of random sequence generation. Different from the CDS heuristic, the NIS heuristic uses a
+filter concept to convert an FFs/nwt/Cmax problem to a 2-machine problem, and then
+applies Johnson’s algorithm to obtain a job sequence. The stages before the filter are
+regarded as virtual machine 1, the stages after the filter are regarded as virtual machine 2,
+and the stages that are covered by the filter are ignored. The filter goes from stage 2 to
+stage S  1, and the width of filter changes from 1 to S  2, which means filtering
+out processing times in one stage or S  2 stages at a time. In total, there are
+1 þ (S  1)  (S  2)/2 sequences generated by the NIS heuristic and the one with the
+minimum makespan is the final schedule, from which we can see that the NIS heuristic is
+not very computationally efficient compared with the CDS heuristic. Again, comparing
+our APT-LVR heuristic to the NIS heuristic is reasonable, because both heuristics are
+based on Johnson’s algorithm, but use different concepts to convert a problem.
+2.2 The requirements for adaptive production control
+From our point of view, there are three main criteria on which to evaluate heuristics:
+optimality, computational complexity (or computation time), and flexibility. Usually
+optimality is used to evaluate the performance of a heuristic for offline production
+scheduling. However, when adaptive production control is taken into consideration, the
+computational complexity (or computation time) becomes critical. That is why some
+artificial intelligence based heuristics, which are normally time consuming, are not suitable
+for adaptive control, although they can obtain better solutions. Another criterion is the
+flexibility of a heuristic, that is, whether a heuristic can deal with different kinds of
+disturbances. Generally, different situations have different requirements on optimality,
+computational complexity (or computation time), and flexibility of a heuristic. There is
+inevitably a trade-off among those three criteria, and the selection of a heuristic for
+adaptive production control depends heavily on specific production scheduling problems
+For example, given two heuristics, A and B, two types of disturbances, D1 and D2,
+and a production cycle time c that actually is the maximum response time for online
+rescheduling, some characteristics of heuristics are shown in Table 1 for a given number
+When disturbance D1 happens to the production, the selection of a heuristic between
+A and B depends on the optimality and the computation time (or computational
+Table 1. Characteristics of heuristics A and B for disturbances D1
+complexity), because both heuristics are flexible to deal with D1. If TA1  c and TB1  c,
+the selection of a heuristic depends only on optimality. Otherwise, the selection depends on
+the computation time. When disturbance D2 happens, we can only choose heuristic B if
+TB2  c. However, if TB2 4 c, and the production cycle time or the maximum response time
+c cannot be relaxed, neither heuristic B nor heuristic A can be selected.
+In general, the flexibility of a heuristic must meet the requirement of specific scheduling
+problems. After that, the computational complexity (or computation time) is a critical
+selection criterion for online rescheduling (i.e., adaptive production control), whereas the
+optimality is a dominant selection criterion for offline scheduling.
+3. The average processing time and lever (APT-LVR) heuristic
+Basically, the APT-LVR and CDS heuristics cluster m machines into two virtual machines
+several times, and then apply Johnson’s algorithm to obtain the several sequences
+accordingly. The sequence with the best performance is the final schedule; but there are
+two main differences between the two heuristics. The CDS heuristic operates processing
+times only, whereas, the APT-LVR heuristic applies two concepts, the average processing
+time (APT ) and lever (LVR), and operates the differences (dij) between processing times
+and APT. There are three ways to calculate the average processing times, and the level
+concept is applied to three out of five sub-heuristics of APT-LVR. Generally, the
+APT-LVR heuristic consists of five sub-heuristics, APT-1, APT-2, APT-3, APT-4, and
+APT-5, and generates 5m  3 sequences in total.
+In this subsection, general steps for sub-heuristics of APT-LVR to construct sequences are
+Step 1: To read processing times tij into an n  m matrix, M.
+Step 2: To calculate the average processing time, APT.
+Step 3: To calculate the difference dij between tij and APT to form a matrix Diff, where
+for i ¼ 1, . . . , n ðas processing times on virtual machine 1Þ
+for i ¼ 1, . . . , n ðas processing times on virtual machine 2Þ:
+Apply Johnson’s algorithm to Sum_1 and Sum_2 to obtain a job sequence.
+To select a sequence with the best performance as the output of a sub-heuristic.
+International Journal of Production Research
+Finally, select the best sequence out of five outputs as the final schedule of APT-LVR
+There are some slight differences of steps for each sub-heuristic, which will be clarified
+common average processing time of all n jobs on
+j¼1 tij =ðn  mÞ, and there are m  1 sequences
+generated by APT-1. For example, the processing times of an instance with five jobs on
+four machines are listed in Table 2. APT equals 58 for this instance, then the differences
+(dij) between processing times and APT are listed in Table 3, where dij ¼ tij  APT.
+. When Ctr ¼ 1, the processing times on virtual machine 1 are Sum_1 ¼ [26, 
+41, 39, 13, 24]T, and on virtual machine 2 are Sum_2 ¼ [52, 6, 1, 74, 50]T.
+By applying Johnson’s algorithm to such a virtual 2-machine problem, a sequence
+[Job 2, 4, 3, 5, 1] is generated, which has a Cmax ¼ 502.
+. When Ctr ¼ 2, Sum_1 ¼ [1, 0, 61, 8, 8]T, Sum_2 ¼ [25, 47, 23, 53, 18]T,
+and a sequence [Job 4, 5, 3, 1, 2] is generated accordingly with Cmax ¼ 514.
+. When Ctr ¼ 3, Sum_1 ¼ [0, 5, 85, 22, 12]T, Sum_2 ¼ [26, 52, 47, 39, 14]T, a
+sequence [Job 4, 5, 1, 3, 2] is generated accordingly with Cmax ¼ 556.
+The sequence [Job 2, 4, 3, 5, 1] with Cmax ¼ 502 is the output of APT-1 sub-heuristic.
+Table 2. Processing times of a 5  4 instance.
+Table 3. Differences between processing times and APT.
+In APT-2 sub-heuristic, two average processing times are calculated, APT1 for virtual
+machine 1 and APT2 for virtual machine 2. Consequently, as Ctr changes from 1 to m  1:
+There are m  1 sequences generated by APT-2.
+. When Ctr ¼ 1, APT1 ¼ 65 is an average processing time of processing times in
+column M1 in Table 2, and the APT2 ¼ 55.67 is for processing times in columns
+M2, M3 and M4 in Table 2. Accordingly, Sum_1 ¼ [19, 48, 32, 20, 17]T,
+Sum_2 ¼ [45, 1, 6, 81, 43]T, and a sequence [Job 2, 4, 3, 5, 1] is generated with
+. When Ctr ¼ 2, APT1 ¼ 64 is for processing times in columns M1 and M2 in
+Table 2, APT2 ¼ 52 is for processing times in columns M3 and M4 in Table 2.
+Accordingly, Sum_1 ¼ [13, 12, 49, 4, 20]T, Sum_2 ¼ [13, 35, 11,
+65, 6]T, and a sequence [Job 5, 1, 4, 3, 2] is generated with Cmax ¼ 556.
+. When Ctr ¼ 3, APT1 ¼ 64.67 is for processing times in columns M1, M2 and M3
+in Table 2, APT2 ¼ 38 is for processing times in column M4 in Table 2.
+Accordingly, Sum_1 ¼ [20, 15, 65, 2, 32]T and Sum_2 ¼ [6, 32, 27, 59, 6]T,
+and a sequence [Job 5, 1, 4, 3, 2] is generated with Cmax ¼ 556.
+The sequence [Job 2, 4, 3, 5, 1] with Cmax ¼ 502 is the output of APT-2 sub-heuristic.
+Figure 1 shows a flow line with m machines modelled as a lever. On this lever, the counter,
+Ctr, is regarded as a fulcrum. Each machine acts as a force point with magnitude of dij at
+the point. The distance between two neighbour machines is one. When Ctr changes to
+machine j, the length of the arm of force (LVR_1j or LVR_2j) equals the number of
+machines between Ctr and the current machine including the current one, that is, for each
+Figure 1. A lever concept for an m-machine flow line.
+International Journal of Production Research
+machine on the left side of Ctr, LVR_1j ¼ Ctr þ 1  j (j ¼ 1, . . . , Ctr), and for each machine
+on the right side of Ctr, LVR_2j ¼ j  Ctr ( j ¼ Ctrþ1, . . . , m). Therefore the left part of a
+lever is regarded as virtual machine 1, while the right part as virtual machine 2.
+could be regarded as the sum of torques of a job on the left part of a lever, and:
+as the sum of torques of a job on the right part of a lever.
+The APT-3 sub-heuristic is an integration of the lever concept and APT-1. The APT is a
+common average processing time as in APT-1, but the fulcrum, Ctr, changes from 0 to m;
+so there are m þ 1 sequences generated by the APT-3 sub-heuristic. When Ctr points to 0
+(see Figure 2), the processing times on virtual machine 1 is APT, and the LVR_10 ¼ 1.
+When Ctr points to m (see Figure 3), the processing times on virtual machine 2 is APT,
+Using the above instance, the common APT is still 58 and dij is the same as entries in
+. When Ctr ¼ 0, torques (T0) of virtual machine 1 is [58, 58, 58, 58, 58]T,
+and T1 ¼ [di1]T  1 ¼ [26, 41, 39, 13, 24]T, T2 ¼ [di2]T  2 ¼ [54, 82, 44,42, 64]T,
+T3 ¼ [di3]T  3 ¼ [3, 15, 72, 42, 12]T, T4 ¼ [di4]T  4 ¼ [104, 208, 188, 156, 56]T.
+Sum_1 is the sum of torques on the left part of a lever, equal to
+[58, 58, 58, 58, 58]T, and Sum_2 is the sum of torques on the right part of
+a lever, equal to [129, 152, 33, 227, 108]T. Applying Johnson’s algorithm to
+Sum_1 and Sum_2, a sequence [Job 3, 4, 5, 1, 2]T is generated with Cmax ¼ 513.
+When Ctr ¼ 1, T1 ¼ [di1]T  1 ¼ [26, 41, 39, 13, 24]T, T2 ¼ [di2]T  1 ¼[27, 41,
+22, 21, 32]T, T3 ¼ [di3]T  2 ¼ [2, 10, 48, 28, 8]T, T4 ¼ [di4]T  3 ¼[78, 156,
+141, 117, 42]T. Therefore, Sum_1 ¼ [26, 41, 39, 13, 24]T and Sum_2 ¼
+[103, 105, 71, 166, 82]T, and a sequence [Job 4, 3, 5, 1, 2] is generated with
+When Ctr ¼ 2, T1 ¼ [di1]T  2 ¼ [52, 82, 78, 26, 48]T, T2 ¼ [di2]T  1 ¼[27, 41,
+22, 21, 32]T, T3 ¼ [di3]T  1 ¼ [1, 5, 24, 14, 4]T, T4 ¼ [di4]T  2 ¼[52, 104, 
+94, 78, 28]T. Therefore, Sum_1 ¼ [25, 41, 100, 5, 16]T and Sum_2 ¼ [51, 
+99, 70, 92, 32]T, and a sequence [Job 4, 5, 1, 3, 2] is generated with Cmax ¼ 556.
+T1 ¼ [di1]T  3 ¼ [78, 123, 117, 39, 72]T,
+Sum_2 ¼ [26, 52, 47, 39, 14] , and a sequence [Job 4, 5, 1, 3, 2] is generated
+When Ctr ¼ 4, T1 ¼ [di1]T  4 ¼ [104, 164, 156, 52, 96]T, T2 ¼ [di2]T  3 ¼
+[26, 52, 47, 39, 14] , T5 ¼ [58, 58, 58, 58, 58] . Therefore, Sum_1 ¼
+[1, 83, 223, 78, 22]T and Sum_2 ¼ [58, 58, 58, 58, 58]T, and a sequence
+[Job 2, 5, 4, 3, 1] is generated with Cmax ¼ 494.
+The sequence [Job 2, 5, 4, 3, 1] with Cmax ¼ 494 is the output of APT-3 sub-heuristic.
+The APT-4 sub-heuristic is an integration of the lever concept and APT-2. The calculation
+of the average processing times in APT-4 is the same as in APT-2, and Ctr changes from 1
+to m  1 too. There are m  1 sequences generated by the APT-4 sub-heuristic. We only list
+the output sequences in this subsection, and leave the detailed calculation of APT-4 to
+. When Ctr ¼ 1, the output sequence is [Job 4, 3, 5, 1, 2] with Cmax ¼ 507.
+. When Ctr ¼ 2, the output sequence is [Job 4, 5, 1, 3, 2] with Cmax ¼ 556.
+. When Ctr ¼ 3, the output sequence is [Job 2, 5, 4, 1, 3] with Cmax ¼ 498.
+The sequence [Job 2, 5, 4, 1, 3] with Cmax ¼ 498 is the output of the APT-4 sub-heuristic.
+P sub-heuristic, the average processing time is for each of m machines, that is,
+APTj ¼ ð ni¼1 tij Þ=n, for j ¼ 1, . . ., m. dij ¼ tij  APTj, for i ¼ 1, . . ., n, Ctr changes from 1 to
+m  1, and the lever concept is applied to dij. Therefore there are m  1 sequences generated
+Using the above instance, for each of four machines, APT1 ¼ 65, APT2 ¼ 63,
+APT3 ¼ 66, and APT4 ¼ 38. Consequently, the related dij are listed in Table 4.
+International Journal of Production Research
+Table 4. Differences between processing times and APTj.
+T1 ¼ [di1]T  1 ¼ [19, 48, 32, 20, 17]T,
+[32, 36, 17, 16, 37] , T3 ¼ [di3]  2 ¼ [14, 6, 32, 12, 24] , T4 ¼ [di4]T  3 ¼
+Sum_2 ¼ [64, 66, 32, 205, 43] , and a sequence [Job 4, 3, 5, 1, 2] is generated
+T1 ¼ [di1]T  2 ¼ [38, 96, 64, 40, 34]T,
+[32, 36, 17, 16, 37] , T3 ¼ [di3]  1 ¼ [7, 3, 16, 6, 12] , T4 ¼ [di4]T  2 ¼
+Sum_2 ¼ [19, 67, 38, 124, 0] , and a sequence [Job 4, 5, 1, 3, 2] is generated
+T1 ¼ [di1]T  3 ¼ [57, 144, 96, 60, 51]T,
+[64, 72, 34, 32, 74] , T3 ¼ [di3]  1 ¼ [7, 3, 16, 6, 12] , T4 ¼ [di4]T  1 ¼
+[6, 32, 27, 59, 6]T. Therefore, Sum_1 ¼ [14, 75, 146, 22, 35]T and
+Sum_2 ¼ [6, 32, 27, 59, 6]T, and a sequence [Job 2, 5, 4, 1, 3] is generated
+The sequence [Job 2, 5, 4, 1, 3] with Cmax ¼ 498 is the output of APT-5 sub-heuristic.
+The final schedule generated by APT-LVR heuristic is [Job 2, 5, 4, 3, 1] with Cmax ¼ 494.
+Overall, the APT-LVR heuristic has the same computational complexity as the CDS
+4. A computer-aided production scheduling and control system
+Our proposed production scheduling and control system is based on a closed-loop
+control scheme, which is common in adaptive control theory. The system, as illustrated in
+Figure 4, consists of the APT-LVR heuristic and a simulation model that is called a
+temporised hierarchical object-oriented coloured Petri nets with changeable structure
+(THOCPN-CS) (Li 2006). Steps to achieve adaptive production scheduling and control in
+flow shop production are summarised as follows.
+Step 1: Manually assign possible manufacturing resources (e.g., operators/machines) to
+each stage, and hence form a task-resource matrix (TRM) with jobs.
+Step 2: Schedule the jobs by the APT-LVR heuristic.
+Step 3: The THOCPN-CS model will simulate the production, and the bottleneck
+stage(s) will be identified. Human schedulers may reallocate operators/machines in stages
+accordingly, to smooth the production flow.
+Figure 4. A computer-aided production scheduling and control system.
+Step 4: Reschedule the jobs by the APT-LVR heuristic.
+Step 5: Repeat Steps 3 and 4 in the offline production scheduling phase until a
+satisfactory production schedule is obtained. This production schedule contains a job
+sequence and a number of operators/machines in each stage. In the adaptive production
+control phase, this step may be omitted, depending on specific production requirements.
+Step 6: Deliver the production schedule to the shop floor and switch the control loop
+from the simulation model to the shop floor.
+Step 7: If any disturbance occurs on a shop floor, switch the control loop back to the
+simulation model, and go back to Step 3 if operators/machines reallocation is necessary, or
+Through iteratively repeating the above-mentioned steps, the production of a flow line
+can be adaptively scheduled and controlled to cope with unexpected changes. However,
+the selection of a heuristic for adaptive production control depends on the specifics of
+Gienow Windows and Doors is a typical OKP company, producing highly customised
+products. Formerly, in the offline production scheduling phase and without computer
+assistance, the experienced production schedulers in Gienow spent a long time planning
+the production for the next three days. Because changing a production schedule was time
+consuming, Gienow employed a fixed three-day production scheduling policy, which
+means customers could not place or change their orders within the three days. This rigid
+scheduling policy buffered changes of customer requirements to some extent, but reduced
+customer satisfaction and the company’s flexibility to respond to market demands.
+Moreover, in the adaptive production control phase, when a disturbance happened to
+production, the shop floor manager manually adjusted the job sequence and operators in
+each stage according to his/her experience, often leading production into chaos. However,
+having been implemented in Gienow, our computer-aided production scheduling and
+control system, based on the APT-LVR heuristic, helps the company plan and schedule
+the production in no more than 60 seconds, allowing the company to change the original
+production scheduling policy from three days to two hours. This change not only improves
+the company’s flexibility and responsiveness to market demands, but also smoothes the
+International Journal of Production Research
+To test the performance of our APT-LVR heuristic, we carry out two kinds of case studies:
+APT-LVR performance as compared to other heuristics, and an industrial case study.
+For the performance of APT-LVR compared to other heuristics, we carry out four
+separate studies on different flow shop configurations: Fm/prmu/Cmax, Fm/nwt/Cmax, FFs/
+FCFS/Cmax, and FFs/nwt/Cmax. Although all these case studies are carried out based on
+benchmarks, the result of Fm/prmu/Cmax is a comparison with the best known upper
+bounds. For the remaining case studies on APT-LVR performance, the results are mutual
+comparisons, that is, the improvement of one heuristic over another.
+For the industrial case study, we measure the improvement due to the APT-LVR
+For traditional permutation flow shop scheduling problems, the deviation (DEV ) from the
+best known upper bound is used to evaluate the performance of a heuristic, where:
+DEV ¼ ðCmax of a heuristic  The upper bound Þ  ðThe upper bound Þ
+in percentage. A comparison between the CDS and APT-LVR heuristics is presented
+in Table 5 first, based on Carlier’s benchmarks, Heller’s benchmarks, and Reeves’
+benchmarks, and then the CDS, NIS, and APT-LVR heuristics’ deviations on Taillard’s
+benchmarks (Taillard 1993) are shown in Table 6. All data of instances of benchmarks is
+Table 5. Average deviations from benchmarks for Fm/prmu/Cmax (%).
+Table 6. Average deviations from Taillard’s benchmarks for Fm/prmu/Cmax (%).
+In Table 5, the column ‘Instance’ represents the number of instances in a benchmark
+data set, and the rest of the columns are the average deviations of relevant heuristics
+respectively. For each benchmark, the APT-LVR heuristic has a smaller deviation than the
+CDS heuristic, and the best of the five sub-heuristics of APT-LVR is APT-5.
+In Table 6, the column ‘Scale’ represents the size of an instance in Taillard’s
+benchmarks, for example, 20*5 means 20 jobs on 5 machines, and the scale ranges from
+20-job 5-machine to 500-job 20-machine. There are 10 instances for each of 12 scales, so
+there are totally 120 instances in Taillard’s benchmarks.
+Using the concept of average processing time, APT-1 and APT-2 sub-heuristics slightly
+improve the performance on min (Cmax) over the CDS heuristic. The CDS heuristic’s
+overall average deviation is 11.28%, APT-1’s 11.12%, and APT-2’s 11.17% for Taillard’s
+benchmarks, but integrating the average processing time concept with the lever concept,
+each of the APT-3, APT-4 and APT-5 sub-heuristics definitely outperforms the CDS
+heuristic, with 9.47%, 8.87% and 8.75% deviations, respectively. Having the same
+computational complexity as the CDS heuristic, the APT-LVR heuristic shows a
+significant improvement over the CDS heuristic. The NIS heuristic outperforms the
+CDS heuristic too for Fm/prmu/Cmax problems on Taillard’s benchmarks, with an overall
+average deviation of 9.01%, but its computational complexity is much higher than CDS
+For traditional no waiting flow shop scheduling problems, an improvement (IMPR) over
+the NIS heuristic is used to evaluate the performance of CDS and APT-LVR heuristics
+IMPR ¼ ðCmax of NIS  Cmax of CDS or APT  LVRÞ  ðCmax of NISÞ
+It is clear that, for Fm/nwt/Cmax problems, the CDS heuristic performs 1.04% worse
+than the NIS heuristic; whereas, the APT-LVR heuristic outperforms the NIS heuristic
+with a 0.66% improvement on average. However, for hybrid flow shop problems, it is
+logical to draw a conclusion that such improvement will shrink to zero as the number of
+operators/machines in each stage increases to a specific number. For example, if the
+in each stage is the same as the number of jobs, the Cmax is
+. . . , n, no matter whether for no pre-emption or no waiting
+For hybrid no waiting flow shop problems with identical parallel operators/machines in
+each stage, case studies are carried out based on Taillard’s benchmarks with three different
+settings. There are two, three, or four operators in each stage, respectively. The results are
+shown in Tables 8, 9, and 10 accordingly.
+From Tables 8, 9, and 10, we can see that the APT-LVR heuristic still outperforms the
+NIS heuristic, although the improvement is in a decreasing trend.
+International Journal of Production Research
+Table 7. Improvement over NIS heuristic for Talliard’s benchmarks for Fm/nwt/Cmax (%).
+Table 8. Improvement over NIS heuristic for FFs/nwt/Cmax problems with two operators in each
+For hybrid flow shop problems with first come first served (FCFS) discipline applied, two
+variables are assigned values. One is a cycle time c ¼ 31, used to calculate the number of
+operators in each stage, where OPTRj ¼ roundup (APTj =c). The average processing time
+of each stage ranges from 30.75 to 64.40 for all of 120 instances in Taillard’s benchmarks,
+therefore, OPTRj varies from 1 to 3 for each stage. Another variable is the capacity of WIP
+inventories. For the ease of the case study, we set WIPj ¼ 5 for each WIP inventory, which
+could be set differently according to real situations. The calculation of processing times in
+the CDS and APT-LVR heuristics follows tij0 ¼ tij =OPTRj (Botta-Genoulaz 2000). The
+improvement (IMPR) over the CDS heuristic is used to evaluate the performance of the
+IMPR ¼ ðCmax of CDS  Cmax of APT-LVRÞ  ðCmax of CDSÞ
+Table 9. Improvement over NIS heuristic for FFs/nwt/Cmax problems with three operators in each
+Table 10. Improvement over NIS heuristic for FFs/nwt/Cmax problems with four operators in each
+in percentage. The result is shown in Table 11.
+It is clear that the APT-LVR heuristic outperforms the CDS heuristic for FFs/FCFS/
+Cmax problems, with an improvement of 3.02% on average.
+For all the above case studies, the APT-LVR heuristic outperforms the NIS or CDS
+heuristics on min (Cmax) for both traditional and hybrid flow shop problems no matter
+whether with no pre-emption or no waiting constraint.
+Although all the CDS, NIS, and APT-LVR heuristics use Johnson’s algorithm as a core,
+the main differences among them are as follows. The CDS heuristic uses a sum concept to
+model a flow shop problem; the NIS heuristic uses a filter concept, resulting in a higher
+International Journal of Production Research
+Table 11. Improvement over CDS heuristic for FFs/FCFS/Cmax problems (%).
+computational complexity than the CDS heuristic’s; but the APT-LVR heuristic operates
+the differences between processing times and average processing times, and uses a lever
+concept to linearly model the flow shop problems, without increasing the computational
+Based on case studies on benchmarks, the APT-LVR heuristic was shown to perform
+better than the CDS and NIS heuristics in terms of optimality, no matter whether for
+traditional or hybrid flow shop scheduling problems, under no pre-emption or no waiting
+To validate our APT-LVR heuristic in a real setting, an industrial case study has been
+carried out in Gienow Windows and Doors. This case consists of 1396 jobs on a flow line
+with five stages for one-day production. These jobs are delivered to customers in 28
+batches. Each batch of products is for customers in a geographic area. Based on data
+provided by Gienow, and using the APT-LVR heuristic to schedule these jobs once
+and only once without any more adjustment, our heuristic produces results as shown in
+As shown in the table, Gienow used 42,300 time units to finish 1396 jobs, and our
+APT-LVR heuristic reduces it to 41,771, a 1.49% improvement in productivity. Such an
+improvement on daily production can be regarded as 20 additional products daily, or more
+than $6000 of revenue per day. In this case study, adjustment of production schedule for
+adaptive control is not taken into consideration, since the data provided by Gienow did
+not include any instance of disturbances.
+The APT-LVR heuristic was programmed in the Cþþ language, and run on an Intel
+Pentium IV personal computer with a 3.20 GHz CPU and 1.00 GB RAM. The
+computation time of the APT-LVR heuristic to schedule these 1396 jobs on five stages is
+only 782 milliseconds which is much less than the production cycle time (or the maximum
+response time) in Gienow, fast enough to respond to a disturbance on the shop floor.
+According to the characteristics of production in Gienow, the production scheduling
+and control system should respond to a disturbance in no more than 60 seconds.
+This requirement is from the production control perspective. The adaptive production
+control consists of not only the job rescheduling function, but also the functions of
+generation of bill of materials (BOM), bill of operations (BOO), data communication in
+the intranet, and so on (Dean et al. 2008, 2009). Therefore, the computation time of a
+heuristic for job rescheduling should be as short as possible. Such a 60 second requirement
+makes it difficult to apply the NEH heuristic for adaptive production control in Gienow,
+although its optimality is the best among the 19 heuristics (Ruiz and Maroto 2005), but its
+computation time is too long for this industrial case in Gienow, 70.67 seconds.
+For traditional flow shop scheduling problems under the no pre-emption constraint, the
+NEH heuristic is the best among the 19 heuristics in terms of optimality, and the CDS
+International Journal of Production Research
+heuristic is the eighth, but the computational complexity of the CDS heuristic is the
+simplest among the first eight heuristics (Ruiz and Maroto 2005). For hybrid flow shop
+scheduling problems under the no waiting constraint, the NIS heuristic is the best among
+five heuristics in terms of optimality, including the CDS heuristic, but has a higher
+computational complexity than the CDS heuristic (Thornton and Hunsucker 2004).
+For hybrid flow shop scheduling problems under the no pre-emption constraint, the CDS
+heuristic is the best of six heuristics in terms of optimality, including the NEH heuristic
+(Botta-Genoulaz 2000). Based on case studies on benchmarks, our APT-LVR heuristic
+was shown to perform better than the CDS and NIS heuristics in terms of optimality, no
+matter whether under no pre-emption or no waiting constraint. From the computational
+complexity perspective, the APT-LVR heuristic has the same computational complexity as
+the CDS heuristic, which is much simpler than that of the NIS heuristic or NEH heuristic.
+Moreover, according to the framework of heuristic development proposed by Framinan
+et al. (2004), the APT-LVR heuristic is in the phase of index development, the first of three
+phases, which is good for the heuristic development in the other two phases, i.e., a
+recursive procedure or artificial intelligence techniques may be applied to the APT-LVR
+heuristic to achieve a better performance.
+From the discussion made in this paper, we can conclude that, taking the optimality,
+computational complexity and flexibility into consideration, the APT-LVR heuristic is the
+most suitable heuristic for adaptive production control in flow shop production in OKP
+companies in which the production is under frequent disturbances.
+This research project has been funded by the Natural Sciences and Engineering Research Council
+(NSERC) of Canada through its Strategic Project programme and Gienow Windows and Doors LP,
+Calgary, Alberta, Canada. We highly appreciate those anonymous reviewers’ comments, which were
+valuable to improve the quality of this paper.
+Botta-Genoulaz, V., 2000. Hybrid flow shop scheduling with precedence constraints and time lags to
+minimize maximum lateness. International Journal of Production Economics, 64 (1), 101–111.
+Campbell, H.G., Dudek, R.A., and Smith, M.L., 1970. A heuristic algorithm for the n-job,
+m-machine scheduling problem. Management Science, 16 (10), 630–637.
+Dean, P.R., Tu, Y.L., and Xue, D., 2008. A framework for generating product production
+information for mass customization. International Journal of Advanced Manufacturing
+Dean, P.R., Tu, Y.L., and Xue, D., 2009. An information system for one-of-a-kind production.
+International Journal of Production Research, 47 (4), 1071–1087.
+Framinan, J.M., Gupta, J.N.D., and Leisten, R., 2004. A review and classification of heuristics for
+permutation flow-shop scheduling with makespan objective. Journal of the Operational
+Goyal, S.K., et al., 1995. Simulation for analysis of scheduling rules for a flexible manufacturing
+system. Integrated Manufacturing Systems, 6 (5), 21–26.
+Graham, R., et al., 1979. Optimization and approximation in deterministic sequencing and
+scheduling: a survey. Annals of Discrete Mathematics, 5, 287–326.
+Gupta, J.N.D. and Stafford Jr, E.F., 2006. Flowshop research after five decades. European Journal
+of Operational Research, 169 (3), 699–711.
+Johnson, D.S., 1954. Optimal two- and three-stage production schedules with set-up times included.
+Naval Research Logistics Quarterly, 1, 61–68.
+King, J.R. and Spachis, A.S., 1980. Heuristics for flow-shop scheduling. International Journal of
+Li, W., 2006. Adaptive production scheduling and control in one-of-a-kind production. Thesis (MSc).
+Linn, R. and Zhang, W., 1999. Hybrid flow shop scheduling: a survey. Computers & Industrial
+Nawaz, M., Enscore Jr, E.E., and Ham, I., 1983. A heuristic algorithm for the m-machine, n-job
+flow-shop sequencing problem. OMEGA The International Journal of Management Science,
+OR, 2008. Available from: http//people.brunel.ac.uk/mastjjb/jeb/orlib/flowshopinfo.html
+Ovacik, I.M. and Uzsoy, R., 1997. Decomposition methods for complex factory scheduling problems.
+Park, S.C., Raman, N., and Shaw, M.J., 1997. Adaptive scheduling in dynamic flexible
+manufacturing systems: a dynamic rule selection approach. IEEE Transactions on Robotics
+Pinedo, M., 2002. Scheduling theory, algorithms, and systems. Englewood Cliffs, NJ: Prentice Hall.
+Ruiz, R. and Maroto, C., 2005. A comprehensive review and evaluation of permutation flowshop
+heuristics. European Journal of Operational Research, 165 (2), 479–494.
+Taillard, E., 1993. Benchmarks for basic scheduling problems. European Journal of Operational
+Thornton, H.W. and Hunsucker, J.L., 2004. A new heuristic for minimal makespan in flow shops
+with multiple processors and no intermediate storage. European Journal of Operational
+Tu, Y.L., 1996a. A framework for production planning and control in a virtual OKP company.
+Transactions of the North American Manufacturing Research Institute of SME. Vol. 24,
+Dearborn, MI: Society of Manufacturing Engineers, 121–126.
+Tu, Y.L., 1996b. Automatic scheduling and control of a ship welding assembly line. Computers in
+Wang, H., 2005. Flexible flow shop scheduling: optimum, heuristic and artificial intelligence
+solutions. Expert Systems, 22 (2), 78–85.
+Wortmann, J.C., Muntslag, D.R., and Timmermans, P.J.M., 1997. Customer-driven manufacturing.
+Copyright of International Journal of Production Research is the property of Taylor & Francis Ltd and its
+content may not be copied or emailed to multiple sites or posted to a listserv without the copyright holder's
+express written permission. However, users may print, download, or email articles for individual use.

@@ -1,0 +1,427 @@
+Single machine scheduling with unequal release date
+Received: 24 November 2008 / Accepted: 17 August 2009 / Published online: 4 September 2009
+© Springer Science+Business Media, LLC 2009
+Abstract A neuro-dominance rule (NDR) for single
+machine total weighted tardiness problem with unequal
+release date is presented by the author. To obtain the NDR,
+backpropagation artificial neural network (BPANN) has been
+trained using 10,000 data and also tested using 10,000
+another data. Inputs of the trained BPANN are starting date
+of the first job (t), processing times (pi and pj ), due dates
+(di and dj ), weights of the jobs (wi and wj ) and ri and rj
+release dates of the jobs. Output of the BPANN is a decision
+of which job should precede. Training set and test set have
+been obtained using Adjusted Pairwise Interchange method.
+The proposed NDR provides a sufficient condition for local
+optimality. It has been proved that if any sequence violates
+the NDR then violating jobs are switched according to the
+total weighted tardiness criterion. The proposed NDR is compared to a number of competing heuristics (ATC, COVERT,
+EDD, SPT, LPT, WDD, WSPT, WPD, CR, FCFS) and meta
+heuristics (simulated annealing and genetic algorithms) for
+a set of randomly generated problems. The problem sizes
+have been taken as 50, 70, 100. NDR is applied 270,000 randomly generated problems. Computational results indicate
+that the NDR dominates the heuristics and meta heuristics
+in all runs. Therefore, the NDR can improve the upper and
+Keywords Single machine scheduling · Unequal release
+date · Neuro-dominance rule · Total weighted tardiness
+Department of Industrial Engineering, Sakarya University Engineering
+A new neuro-dominance rule (NDR) which provides a sufficient condition for local optimality for a single machine
+total weighted tardiness (TWT) problem with unequal release
+dates is presented 1|ri | wi Ti . Despite the fact that costumer
+orders can not reach simultaneously in daily life problems,
+according to the literature and the best of our knowledge
+we know that there is only one exact approach on the 1|ri |
+wi Ti problem. Recently, Akturk and Ozdemir (2001) pro
+can be used in reducing the number of alternatives in any
+exact approach. They used a interchange function, ij (t), is
+used to specify the new dominance properties, which gives
+the cost of interchanging adjacent jobs i and j whose processing starts at time t. They found seven breakpoints using the
+cost functions and obtained a number of rules by using the
+breakpoints. The problem may be described in the following form: There are n jobs independent. Each of them has
+an integer processing time pj , a release date rj , a due date
+dj and a positive weight wj . Chu and Portman (1992) has
+stated in their paper that this problem could be simplified
+using corrected due dates, i.e. if rj + pj > dj then dj takes the
+value rj + pj . Jobs will be processed without interrupting on
+a single machine which can process only one job at a time.
+If job j is completed after due date dj, a tardiness penalty
+is incurred for each time unit, thus Tj = max{0, (Cj − dj )},
+where Cj and Tj are the completion time and the tardiness
+of the job j, respectively. The aim is to find a schedule minimizing the TWT of all jobs given that any jobs cannot start
+processing before its release date. It is stated that the
+tardiness problem with unequal release dates, 1|rj |
+is NP-hard by Rinnooy Kan (1976). Cakar (2006) proposed
+a NDR for single machine tardiness problem with unequal
+release dates, applied for n = 70 problem size and six different heuristics. Sabuncuoglu and Gurgun (1996) proposed
+a new neural network approach to solve the single machine
+mean tardiness scheduling problem and the minimum makespan job shop scheduling problem. The proposed network
+by Sabuncuoglu and Gurgun combines the characteristics of
+neural networks and algorithmic approaches.
+Branch and bound (B&B) algorithms has been presented
+ and Deogun (1981) to minimize total flow time, 1|rj | Fi , whereas Bianco and Ricciardelli (1982) and Hariri and Potts (1983) take into
+consideration the total weighted completion time problem,
+wi Ci . Potts and Van Wassenhove (1985) has pro1|rj |
+posed a B&B algorithm for the minimization of the weighted
+number of late jobs. Erschler et al. (1983) have proved a
+ relationship in the set of possible sequences for
+1|rj | Ti problem independent of the optimality criterion
+to find a restricted set of schedules. Chu (1992) has presented a paper based on the proof of
+some dominance properties and a lower bound for 1|rj | Ti problem. Then, a
+B&B algorithm is formed by using the previous results of
+Chu and Portman (1992) and problems with up to 30 jobs
+can be solved for certain problem samples, even though this
+approach is limited for larger problems due to the computational requirements. Vepsalainen and Morton (1987) has
+developed and tested efficient dispatching rules. An adequate condition for local optimality is provided by their
+proposed superior rule and it generated schedules, which
+cannot be developed by adjacent job interchanges. In this
+paper, a trained backpropagation artificial neural network
+(BPANN) to show how the proposed superior rule can be
+used to develop a sequence given by a dispatching rule.
+The author also gave the proof of that if any sequence disturbs the proposed superior rule and then switching the disturbing jobs either lowers the TWT or leaves it unchanged.
+Because of the comprehensive computational requirements,
+according to the literature the weighted tardiness problem
+is NP-hard and the lower bounds do not have practical
+In a paper of Lawler (1977), the TWT problem, 1|| wi Ti ,
+has been shown strongly NP-hard, therefore the researchers
+know that unequal release date problems are already strongly
+NP-hard. Solution methods based on enumeration have been
+proposed for both weighted and unweighted situations when
+all jobs are initially present. Several dominance rules for
+1|| wi Tj , problem that limit the search for an optimal solution has been derived byEmmons (1969). These results have
+been improved for 1|| wi Tj , by Rachamadugu and Rinnooy Kan et al. (1975). Szwarc and Liu (1993) have 
+demonstrated a two-stage decomposition mechanism to 1|| wi Tj
+problem when there is a proportion between tardiness penalties and the processing times. Akturk and Yidirim (1998)
+proposed more practical application about weighted tardiness
+problem without release date and computing lower bound.
+Cakar (2005) also proposed a NDR for single machine tardiness problem without release dates.
+Potts and Van Wassenhove (1987) based on the linear
+lower bound is rather a weak lower bound, however the most
+promising one was presented by Abdul-Razaq et al. (1990).
+His study is in contradiction with the conjecture about this
+subject that one should limit the search tree as much as possible with using the sharpest possible bounds. The linear lower
+bound computations are based on an initial sequence. In this
+paper, a solution that has a better upper bound value, which
+is near to optimal solution, is presented. Our solution also
+improves the lower bound value obtained from the linear
+Weckman et al. (2008) proposed a neural network
+scheduler for job shop scheduling. Dudek-Dyduch (2000)
+presented a conception of intelligent learning based algorithms for scheduling. Laguna et al. (1991) discussed the use
+of three local search strategies within a tabu search method
+for the approximate solution of a single machine scheduling
+problem. Yim and Lee (1999) proposed a new method for
+scheduling cluster tools in semiconductor fabrication. Chan
+et al. (2003) proposed a real time fuzzy expert system to
+scheduling parts for a flexible manufacturing system.
+In this study, instead of extracting rules finding break
+point using cost functions, an artificial neural network was
+trained using sufficient number of data different from Akturk
+and Ozdemir (2001). When the necessary inputs were given,
+according to the TWT problem criterion, it is decided that
+which job will come firstly among the adjacent jobs. This
+paper organized as follows; In the section “problem definition”, used parameters, modeling of the problem and how the
+proposed NDR works are discussed. In the section “example problem”, an example problem is given about NDR.
+In the section “linear lower bound”, used lower and upper
+bound schemes are explained. In the section “stimulated
+annealing and genetic algorithm”, Simulated Annealing and
+Genetic Algorithms are explained, In the section “computational results”, all of computational results and analysis are
+The single machine problem may be explained as follows.
+Each job, which is numbered from 1 to n, should be processed
+with no interruption on a single machine, which can use only
+one job at a time. If a job is presented with i, it has parameters
+as pi , di , wi , ri which refer to an integer processing time, a due
+date, a positive weights and release date, respectively. The
+problem can be defined as finding a schedule S, which mini
+i=1 wi Ti function. The dominance rule may
+be introduced by considering two schedules S1 = Q1 ijQ2
+and S2 = Q1 jiQ2 , where Q1 and Q2 are two disjoint subsequences of n − 2 remaining jobs that are separated by i and j.
+Note that the completion time of Q1 is C = k∈Q1 (rk + pk ).
+In this study, it is decided which job will be done firstly
+among two adjacent jobs according to the TWT criterion
+using a trained BPANN. The first job is taken as i and the
+second one is taken as j in these two adjacent jobs without
+taking care of due date or processing time. The used neural
+network has 9 inputs and 1 output and there are 30 neurons
+in the hidden layer. The starting time of job i(t), the processing time of job i(pi ) due date of job i(di ), the weight of
+job i(wi ), the processing time of job j(pj ), the due date of
+job j(dj ), the weight of job j(wj ), release date of job i (ri ),
+release date of job j(rj ) were given as inputs to the BPANN.
+“0”and “1” values were used to determine the precedence of
+the jobs. If output value of the BPANN is “0” then i should
+precede j (i → j). If output value of the BPANN is “1” then j
+should precede i (j → i). Structure of the used BPANN can be
+seen in Fig. 1. The parameters related to the training and test
+of neural network were given in Table 1. It can be seen that
+how the NDR works in Fig. 2. The data used for training and
+testing artificial neural network has been obtained by using
+adjusted pairwise interchange (API) method.
+In Table 2, the data belonging sample problem is given.
+The TWT computations in Table 3 are done to verify that
+Fig. 2 An example: how the proposed NDR works
+Table 2 pi , di , wi , ri for example problem
+Fig. 1 Structure of the used BPANN. There are 9 input and 1 output
+the replacements by using NDR in Fig. 1 are correctly done.
+Computational results have been shown in section “computational results” to approve that the proposed NDR provides
+a sufficient condition for local optimality. Steps of the proposed study can be seen in Fig. 3.
+Table 1 Training and test parameters of the used BPANN
+Sample size and learned sample in training set
+Number of test data to test trained network
+In Table 4, processing time, due date, release date, weights
+were given belonging 10 different jobs. These jobs will be
+firstly set in order according to the EDD rule, after that the
+NDR will be applied to these jobs, which were ordered based
+on EDD heuristic. As seen in Table 5, NDR decreased the
+Total weighted tardiness for 1-2-3 job sequence
+Total weighted tardiness for 2-1-3 job sequence
+Total weighted tardiness for 2-3-1 job sequence
+TWT of ordered jobs based on EDD by the way of interchanging the necessary jobs.
+Potts and Van Wassenhove (1985) have originally obtained
+the linear lower bound based on using the Lagrangian Relaxation approach with subproblems, which are total weighted
+completion time problems. Abdul-Razaq et al. (1990) have
+presented additional derivation of it based on reducing the
+TWT criterion to a linear function, i.e. total weighted completion time problem. For the job i, i = 1 to n, wi ≥ vi ≥ 0
+and Ci is the completion time of job i, the author has;
+wi Ti = wi max{Ci − di , 0} ≥ vi max{Ci − di , 0}
+Simulated annealing and genetic algorithm
+Suppose that v = (v1 , . . ., vn ) is a vector of linear weights,
+i.e. weights for the linear function Ci − di , chosen so that
+0 ≤ vi ≤ wi . If so a lower bound can be expressed by given
+This situation shows that the total weighted completion time
+problem solution gets a lower bound on the TWT problem. For any given v value, the optimal solution of the total
+weighted completion problem may be realized by the WSPT
+rule in which the jobs are sequenced in non-increasing order
+of vi /vp . An initial sequence is needed in the determination of
+the job completion time Ci to obtain the linear lower bound.
+Afterwards, v, refers to the vector of linear weights, is chosen
+to maximize LBlin (v) with the condition of that vi ≤ wi for
+each job i. In study Abdul-Razaq et al. (1990), several lower
+bounding approaches have been compared and according to
+the their computational results the linear lower bound is found
+superior to others, which were given in the literature, because
+of the its quick computability and low memory requirement.
+In this paper, the impact of an initial sequence on the linear
+lower bound value will be tested and tried to present having
+a better, i.e. near optimal, upper bound value will improve
+the lower bound value. This linear bound scheme also was
+In order to apply SA to practical problems, there are several factors to be decided initially. Firstly, the definition of
+a procedure to generate neighborhood solutions from a current solution is necessary. To generate these solutions efficiently, some parameters should be decided appropriately.
+Some examples to these parameters can be given as an initial temperature, the number of repetitions, conditions for
+completion and the ratio of temperature change. The combination of these parameters should be adjusted according to
+the problem to obtain a good solution. SA has some weak
+points such as long running time and difficulty in selecting
+cooling parameter when the problem size becomes larger.
+SA begins with an initial solution (A) and initial temperature (B) and an iteration number (F). The duty of tem-
+Fig. 3 Steps of the study from obtaining random data to comparison
+perature (X) is controlling the possibility of the acceptance
+of a disturbing solution and an iteration number (F) is used
+in the decision of the number of repetitions until a solution
+has a stable state under the temperature. The X may have
+the following implicit meaning of flexibility index. At high
+temperature situation, namely, early in the search, there is
+some flexibility to move to a worse solution situations, on
+the other hand, at lower temperature, in other words later in
+the search, less of this flexibility exists. A new neighborhood
+solution (N) is generated based on these B, F through a heuristic perturbation on the existing solutions. If the change of
+an objective function is improved, the neighborhood solution
+(N) becomes a good solution. Even though it is not improved,
+the neighborhood solution will be a new solution with a convenient probability which is based on e−D/X . This situation
+leaves the possibility of finding a global optimal solution out
+Table 5 Decreasing total weighted tardiness according to NDR
+Job sequence for EDD heuristic: 3-6-4-2-5-9-7-8-10-1 TWT = 584
+Job sequence for EDD+NDR: 3-4-6-5-2-9-7-10-8-1 TWT = 553
+of a local optimum. The algorithm will be stopped when there
+is no change after F iterations. Otherwise, the algorithm will
+be continuing with a new temperature value (X). Simulated
+N = PERTURB (A); {generate new neighborhood
+If((C(N)<=C(A) or (exp(−D/X) > RANDOM(0,1))
+GA and SA are not much different algorithms; theoretically,
+both of them are quite relative algorithms. However, their
+formulations are done using very different terminology. In a
+problem solution with SA, the costs, neighbors and moves of
+the solutions are talked (discussed), however, in a problem
+solution with GA, one discusses about chromosomes, their
+crossover, fitness and mutation. Another difference; a chromosome is considered as a genotype, which only indicates
+a solution. This is a traditional feature of GA and there is
+not any reason about that why a resembling approach could
+not be used in SA in the same way. Fundamentally, for the
+situation of that the population size is only one, SA can be
+considered as GA. Because there is only chromosome and
+there is not any crossover, but only mutation. Indeed, this the
+most important difference between GA and SA. SA generates
+a new solution by modifying only one solution with a local
+move; however, GA generates solutions by using the different solutions in a combination. It is not exactly known that if
+this actually makes the algorithm better or worse, however, it
+is clear that it depends on the problem and the representation.
+The principles of these two algorithms are based on the same
+basic supposition that convenient solutions are more probably found “near” already known convenient solutions than
+by randomly selecting from the whole solution space. The
+difference in the action of the GA is treating combinations of
+two existing solutions as being “near”, supposing that such
+combinations (children) significantly share the properties of
+their parents, so that a child of two suitable solutions is more
+probably good solution than a random one.
+In this study, each lower bounding scheme was tested on a
+set of randomly generated problems. The author has tested
+the lower bounding scheme on problems with 50, 70 and
+100 jobs, which were generated as: for each job i, pi and
+wi were generated from three uniform distributions, [1, 10],
+[1, 50] and [1, 100] to create low, medium or high variation, respectively. Here as stated early, pi and wi refers to an
+integer processing time and an integer weight, respectively.
+The proportional range of due dates (RDD) and average tardiness factor (TF) were selected from the set {0.1, 0.3, 0.5, 0.7,
+0.9}. di , an integer due date from the distribution [P(1-TFRDD/2), P(1-TF+RDD/2)] was produced for each job i, here,
+P refers to total processing time, ni=1 pi . Release dates
+generated from a uniform distribution between 0 and µ pj .
+As summarized in Table 6, the author considered and evaluated 2,700 example sets and took 100 replications for each
+combination resulting among 270,000 randomly generated
+To find an initial sequence for the linear lower bound, a
+number of heuristics were selected and their priority indexes
+were given as a summary in Table 7. The WSPT, WDD, WPD,
+EDD, LPT, SPT, CR, FCFS can be given as examples of static
+dispatching rules, where as ATC and COVERT are dynamics ones. Vepsalainen and Morton (1987) have mentioned in
+their paper as: the ATC rule is superior to other sequencing heuristics and they defined it close to the optimal for the
+In addition to heuristics, two different meta heuristic, simulated annealing (SA) and genetic algorithms (GA), were
+used in this study. The parameters and operators used in SA
+to generate new solution were given. A new solution is a
+new job sequence. In this study, two different operators have
+been used to generate new neighborhood solution. Operators
+are swap and inverse operator. Total weighted tardiness was
+taken as a fitness function. In SA, the best value, obtained
+from heuristics, was taken as a starting solution.
+A geometric ratio was used in SA as Xk+1 = aXk , where
+Xk and Xk+1 are the temperature values for k and k + 1
+steps, respectively. Geometric ratio is used more commonly
+in practice. In this study, the initial temperature was taken
+10,000 and 0.95 was used for cooling ratio (a). Used first
+operator does the same operation with the mutation operation in GA.
+In principle, genetic algorithms firstly needs the coding of the problem with the condition that it should be
+fitting with the GA. After coding process, GA operators
+are applied on chromosomes. The modeling of the defined
+problem using genetic algorithm has been presented below
+with its details. In this study, when preparing, initial populations in genetic algorithm, for any given problem, the
+solutions obtained from ATC, COVERT, EDD, SPT, LPT,
+WDD, WSPT, WPD, CR, FCFS; and SA methods, were also
+used. Others were randomly generated. Total weighted tardiness was taken as a fitness function. The parameters used
+in genetic algorithm were as given below. Each chromosome
+Linear Order Crossover (LOX) method has been applied
+to each chromosome independently. LOX works as follows:
+1. Select the sublist from chromosomes randomly;
+2. Remove the sublist 2 from chromosome #1;
+3. Remove the sublist 1 from chromosome #2;
+4. Insert sublist into holes to form offspring;
+Mutation operator works as follows : Select the randomly
+a chromosome and select the randomly two genes and swap
+Selected genes: Selected chromosome 376541298
+If any sequence violates the dominance rule, then the
+proposed algorithm either lowers the weighted tardiness or
+leaves it unchanged. Firstly, to find an initial sequence the
+author used one of the dispatching rules, afterwards the algorithm was applied to get the sequence indicated as Heuristic+NDR. The average lower bound value was calculated for
+each heuristic before and after implementing the algorithm
+along with the average improvement (impr ) and this situation is summarized in Tables 8, 9 and 10. ATC, COVERT
+and WSPT seem to execute better than other heuristics in the
+literature when the dominance rule is applied to get the local
+optimal sequence. But, SA and GA meta heuristics perform
+better than the other heuristics. The best values obtained from
+other heuristics are given into the initial population of genetic
+algorithm. Because of the fact that GA starts to search on the
+best values obtained by other heuristics, it is normal to obtain
+Table 10 Computational results for n = 100
+better results in GA than the others. On the other hand, SA
+starts to search process with the best values obtained from
+the other heuristics. Each heuristic and meta heuristic over
+90,000 runs for 50, 70 and 100 job states were tested by the
+author and given in Tables 11,12 and 13. As stated above,
+(>) denotes number of runs in which sequence gotten from
+Heuristic+NDR gives a higher linear lower bound value than
+the sequence gotten from the heuristic, where as (=) denotes
+number of runs in which Heuristic+NDR executes as well
+as heuristic and (<) denotes number of runs in which Heuristic+NDR executes worse. For instance, in Table 11, the
+combination of EDD+NDR executed 30982 times better (>)
+than EDD rule. According to the large t-test values on the
+average improvement, the proposed dominance rule provides
+an important improvement on all rules and the amount of
+improvement is noteworthy at 99.5% confidence level for all
+If NDR is not used, classic API method can be used. In
+this method, before the works are interchanged TWT is computed, after that the works are again interchanged and TWT
+is re-computed. If there is a decrease in TWT, the works are
+interchanged otherwise interchange operation is not done.
+But, during the situation that NDR is used when the decided
+inputs are given to BPANN, BPANN responses quickly for
+the works to be interchanged or not. From the viewpoint of
+evaluating CPU time, the obtained result with NDR is better
+then API. If we think about a single machine for an industrial
+process, NDR will decrease TWT by the way of setting up
+Table 13 Comparison of the linear lower bound (for n = 100)
+Table 11 Comparison of the linear lower bound (for n = 50)
+Table 12 Comparison of the linear lower bound (for n = 70)
+time lose if there are lots of jobs. The method proposed in
+this study is a method, which has an aim of arranging the
+jobs in order quicker than API. This method provides time
+advantage in the environments where there are thousands
+jobs being processed. The proposed NDR provides a sufficient condition for local optimality. Therefore, a sequence
+obtained by the proposed NDR cannot be improved by adjacent job interchanges. Computational results over 270,000
+randomly generated problems indicate that the amount of
+improvement is significant. For the future research, single
+machine TWT problem with double due date can be modeled by using artificial neural networks.
+the works in order quickly. The time consumed by NDR is
+7.2 centiseconds for n = 500 job. All algorithms were coded
+in C++ and implemented on a Pentium IV 2.4 GHz computer.
+Even though the training and test success of the study
+done in Cakar (2006) is 100%, BPANN had made wrong
+decisions in several cases. In this study by including those
+cases to the training set, wrong decisions are corrected. As
+a result, approximately 1% improvement is made on results
+In this study, the author presents a new NDR for single
+machine TWT problem. Generally, the method to reduce the
+TWT of a job, which is randomly or arranged in order based
+on a heuristic, is API method. As a method API contains
+2 computations and a comparison, the meaning of this is
+Abdul-Razaq, T. S., Potts, C. N., & Van Wassenhove, L. N. (1990). A
+survey of algorithms for the single machine total weighted tardiness scheduling problem. Discrete Applied Mathematics, 26, 235–
+Akturk, M. S., & Ozdemir, D. (2001). A new dominance rule to minimize total weighted tardiness with unequal release date. European
+Journal of Operational Research, 135, 394–412.
+Akturk, M. S., & Yidirim, M. B. (1998). A new lower bounding
+scheme for the total weighted tardiness problem. Computers and
+Bianco, L., & Ricciardelli, S. (1982). Sceheduling of a single machine
+to minimize total weighted completion time subject to release
+dates. Naval Research Logistics, 29(1), 151–167.
+Cakar, T. (2005). A new neuro-dominance rule for single machine tardiness problem. Lecture Notes in Computer Science, 3483, 1241–
+Cakar, T. (2006). A new neuro-dominance rule for single machine
+tardiness problem with unequal release date. Lecture Notes in
+Chan, F. T. S., Chan, H. K., & Kazerooni, A. (2003). Real time
+fuzzy scheduling rules in FMS. Journal of Intelligent Manufacturing, 14(3–4), 341–350.
+Chu, C. (1992). A Branch-and-bound algorithm to minimize total
+tardiness with unequal release dates. Naval Research Logistics, 39, 265–283.
+M. C. (1992). Some new efficient methods to
+solve the n|1|r j | wi Ti scheduling problem. European Journal
+Dessouky, M. I., & Deogun, J. S. (1981). Sequencing jobs with
+unequal ready times to minimize mean flow time. SIAM Journal
+Dudek-Dyduch, E. (2000). Learning based algorithms in scheduling. Journal of Intelligent Manufacturing, 11(2), 135–143.
+Emmons, H. (1969). One machine sequencing to minimize certain
+functions of job tardiness. Operations Research, 17, 701–715.
+Erschler, J., Fontan, G., Merce, C., & Roubellat, F. (1983). A new
+dominance concept in sceheduling n jobs on a single machine with
+ready times and due dates. Operations Research, 31, 114–127.
+Hariri, A. M. A., & Potts, C. N. (1983). An algorithm for single
+machine sequencing with release dates to minimize total weighted
+completion time. Discrete Applied Mathematics, 5, 99–109.
+Laguna, L., Barnes, J. W., & Glover, F. W. (1991). Tabu search
+methods for a single machine scheduling problem. Journal of
+Lawler, E. L. (1977). A “pseudopolynomial” algorithm for sequencing
+jobs to minimize total tardiness. Annals of Discrete Mathematics, 1, 331–342.
+Potts, C. N., & Van Wassenhove, L. N. (1985). A Branch and
+bound algorithm for total weighted tardiness problem. Operation
+Potts, C. N., & Van Wassenhove, L. N. (1987). Dynamic programming
+and decomposition approaches for the single machine total tardiness problem. European Journal of Operation Research, 32, 405–
+Rachamadugu, R. M. V. (1987). A note on weighted tardiness problem. Operations Research, 975(23), 908–927.
+Rinnooy Kan, A. H. G., Lageweg, B. J., & Lenstra, J. K. (1975). Minimizing total costs in one machine scheduling. Operations
+Rinnooy Kan, A. H. G. (1976). Machine scheduling problems: Classification complexity and computations. The Hague: Nijhoff.
+Sabuncuoglu, I., & Gurgun, B. (1996). A neural network model
+for scheduling problems. European Journal of Operational
+Szwarc, W., & Liu, J. J. (1993). Weighted Tardiness single
+machine scheduling with proportional weights. Management Science, 39, 626–632.
+Vepsalainen, A. P. J., & Morton, T. E. (1987). Priority rules for job shops
+with weighted tardiness cost. Management Science, 33, 1035–
+Weckman, G. R., Ganduri, C. V., & Koonce, D. A. (2008). A Neural
+network job shop scheduler. Journal of Intelligent Manufacturing, 19(2), 191–201.
+Yim, S. J., & Lee, D. Y. (1999). Scheduling cluster tools in wafer
+fabrication using candidate list and simulated annealing. Journal
+of Intelligent Manufacturing, 10(6), 531–540.

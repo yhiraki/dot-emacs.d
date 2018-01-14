@@ -1,0 +1,226 @@
+Upper processing stages of the perception – action
+Laboratory of Cognitive Neuroscience, UCLA Neuropsychiatric Institute, 750 Westwood Plaza, Los Angeles, CA, 90095-1759, USA
+The neural substrate for behavioral, cognitive and
+linguistic actions is hierarchically organized in the cortex of the frontal lobe. In their methodologically impeccable study, Koechlin et al. reveal the neural dynamics
+of the frontal hierarchy in behavioral action. Progressively higher areas control the performance of actions
+requiring the integration of progressively more complex
+and temporally dispersed information. The study substantiates the crucial role of the prefrontal cortex in the
+In 1874, the Russian neuroanatomist W. Betz [1] was the
+first to note a major functional dichotomy of structures
+along the nerve axis. Posterior structures are largely
+devoted to sensory functions, anterior structures to motor
+functions. This division of labor is most obvious in the
+spinal cord. We can also discern it in the cerebral cortex,
+however, if we expand sensory functions to include
+representations acquired through the senses and motor
+functions to include executive representations. A wealth of
+physiological and neuropsychological evidence points to a
+hierarchy of executive areas in the lateral cortex of the
+frontal lobe [2]. The primary motor and premotor areas
+constitute the lowest levels of that hierarchy. Above them
+in the hierarchy lie a series of progressively higher,
+anatomically more anterior areas of association cortex
+that are designated ‘prefrontal’. Using fMRI on human
+subjects performing visuomotor tasks, Koechlin et al. [3]
+expose for the first time the cascading neurodynamics of
+the executive frontal hierarchy in motor action. Motor
+processing and control proceed from anterior prefrontal,
+through caudal prefrontal, to premotor cortex. At each
+level, the processing is informed by the processing at
+higher levels and by controlling sensory information
+which, as it moves down the hierarchy, is progressively
+simpler, more demanding of immediate action and less of
+The tasks of Koechlin et al. consisted of sequences of
+manual reactions to visual stimuli of varying complexity.
+The reaction to each stimulus depended on its visual
+features (e.g. color with or without a pattern ‘context’) and
+an instructional cue that preceded the sequence to which
+that stimulus belonged. All motor reactions and the
+significance of each instructional cue were part of a set
+of rules that the subject had learned before the experiment. The key measurement was the degree of activation
+in anterior (rostral) and posterior (caudal) prefrontal
+Corresponding author: Joaquı́n M. Fuster (joaquinf@ucla.edu).
+cortex, and in premotor cortex. The authors used a
+computational model based on Shannon’s information
+theory [4] and a hierarchical model of frontal organization
+and processing [2]. By factor analysis of the fMRI data,
+they determined that rostral prefrontal cortex controls
+behavior mainly in accordance with the instructional cue
+(‘temporal episode’), caudal prefrontal cortex with the
+context of the stimulus, and premotor cortex with the
+The hierarchical, cascading model of Koechlin et al. can be
+best understood by considering the functional position of
+frontal areas in the representational map of the cerebral
+cortex and in the perception– action cycle. The map
+delineates the cortical distribution of neuronal networks
+of knowledge and long-term memory acquired by experience. The perception – action cycle is the circular flow of
+information from the environment to sensory structures,
+to motor structures, back again to the environment, to
+sensory structures, and so on, during the processing of
+Memory is formed in the cortex from the bottom up,
+along ontogenetic gradients, from primary areas to
+progressively higher areas of association. Primary sensory
+areas constitute the bottom stage of the perceptual
+hierarchy. The cellular structure of these areas constitutes
+a kind of innate ‘memory’ (phyletic memory), acquired by
+evolution and available to ‘instant recall’ – that is, sensation. Moving away from that bottom layer of primordial
+sensory memory, networks of memories pertaining to that
+individual expand into association cortex. Memory networks are formed by modulation of synapses by Hebbian
+principles [5,6]. By mechanisms still poorly understood,
+the hippocampus and the amygdala play important roles
+in that neocortical process of memory formation [7]. As the
+individual acquires new memories and items of knowledge, these are added to the established ones, such that the
+hierarchically higher cortices of temporal and parietal
+regions become the stores for the more complex and
+abstract aspects of knowledge (see Figure 1).
+Whereas perceptual memory accumulates in posterior
+cortex, executive memory does so in frontal cortex, also
+following the ontogenetic gradient from primary to association cortex. Here the lowest hierarchical level is the
+primary motor cortex (motor phyletic memory): this
+cortex represents – and integrates – movements defined
+by muscles and muscle groups, including those of the
+phonetic apparatus (i.e. speech). At a higher level is the
+Figure 1. Representational map of the human lateral cortex. (a) Schema of the hierarchical organization of memory and knowledge. (b) Approximate topographic distribution of memory networks, using the same color code as in (a). (Abbreviation:
+RF, Rolandic fissure). Red dashed lines demarcate the three frontal areas probed in
+the experiment by Koechlin et al. [3]. Modified from [9].
+premotor cortex, which represents and integrates movements defined by the current trajectory and immediate goal.
+At the highest levels are a number of areas of prefrontal
+cortex, whose hierarchical rank is not well understood,
+representing the more complex schemas or plans of goaldirected action. Because the execution of these schemas or
+plans requires the mediation of cross-temporal contingencies, the prefrontal cortex is essential for the temporal
+integration and organization of behavior [8,9].
+All forms of adaptive behavior require the processing of
+streams of sensory information and their transduction into
+series of goal-directed actions. In all but the most primitive
+animal species the entire process is regulated by external
+(environmental) and internal feedback [10,11]. At all levels
+of the central nervous system, the processing of sensoryguided sequential actions flows from posterior (sensory) to
+anterior (motor) structures, with feedback at every level.
+Thus, at cortical levels, information flows in circular
+fashion through a series of hierarchically organized areas
+and connections that constitute the perception –action
+cycle (Figure 2). Automatic and well-rehearsed actions in
+response to simple stimuli are integrated at low levels of
+the cycle, in sensory areas of the posterior (perceptual)
+hierarchy and in motor areas of the frontal (executive)
+hierarchy. More complex behavior, guided by more complex and temporally remote stimuli, requires integration
+at higher cortical levels of both perceptual and executive
+hierarchies, namely areas of higher sensory association
+Figure 2. The cortical substrate of the perception–action cycle. Blue represents the
+perception side of the cycle, and red the action side. Unlabeled rectangles represent intermediate areas or subareas of labeled cortex. (Abbreviation: prefr., prefrontal). Arrows represent pathways anatomically identified in the monkey. The
+inset with the human brain highlights the reciprocal connectivity between posterior and frontal cortices. Modified from [9].
+To support interactions between the two cortical
+hierarchies, long corticocortical fibers (green arrows in
+Figure 1) connect, both reciprocally and topologically,
+areas in the perceptual hierarchy with areas of equivalent
+rank in the executive one. Thus, premotor areas connect
+with relatively low areas of sensory association, whereas
+prefrontal areas connect with higher associative areas of
+posterior cortex [13– 15]. Furthermore, there is anatomical evidence of an orderly descent of connections from
+prefrontal to premotor to motor cortex [16 –18]. With their
+fMRI-analysis of ‘path coefficients’, Keochlin et al. essentially substantiate this descending frontal connectivity
+At each stage of the cascading process in the frontal
+executive hierarchy, the precise next action in a sequence
+is determined by two kinds of influences: (i) the processing
+of the global aspects of the sequence in upper frontal
+areas and (ii) the sensory signals occurring at the time.
+Accordingly, as Koechlin et al. also show, the activation of
+progressively lower frontal areas that process the action is
+cumulative. At the same time, the associative sensory
+inputs from posterior cortex are progressively more
+concrete and more dependent on immediate temporal
+and spatial context. Signals that have to be processed in a
+wider temporal context (‘episodic’) require actions that
+depend on higher degrees of temporal integration. These
+signals are processed in posterior cortex and concomitantly in the higher (rostral) areas of prefrontal cortex. In
+both cortices simultaneously, the signals are integrated
+with previous information (the rules of the task and the
+‘instructional cue’ in their study) before they inform the
+processing in lower stages of the frontal hierarchy. Hence,
+the prefrontal cortex integrates the most elaborate and
+time-spanning associations of sensory information that
+are stored in networks of perceptual and executive cortex.
+Prefrontal integration works not only across time, but
+also across different sensory modalities such as audition
+and vision [19]. Contrary to a common misconception,
+nowhere in an ascending or descending cortical hierarchy
+does processing need to be exclusively serial. In part
+because of its dependence on feedback throughout, the
+processing in the perception– action cycle takes place not
+only in series but also in parallel. Koechlin et al. provide us
+with clear evidence that the cascading serial and parallel
+processing of action entails the orderly downward activation of the executive frontal hierarchy.
+In cognitive neuroscience, the methodology of human
+studies is inextricably related to that of non-human
+primate studies. As the research of Koechlin et al. so
+beautifully exemplifies, modern neuroimaging in humans
+can test and substantiate hypotheses of cognitive function
+that derive from monkey studies. Conversely, imaging
+data on the cognitive activation of the human cortex lead
+to hypotheses of mechanism at the cellular level that can
+best be tested in the non-human primate. An urgent item
+in the neuroscientist’s agenda, which will benefit both
+human and non-human methodologies, is to elucidate at
+the cellular level the neural– hemodynamic coupling
+underlying functional imaging methods such as fMRI.
+1 Betz, W. (1874) Anatomischer Nachweis zweier Gehirncentra. Centralblatt für die medizinische Wissenschaften. 12, 578 – 580.595 – 599
+2 Fuster, J.M. (1997) The Prefrontal Cortex – Anatomy Physiology, and
+Neuropsychology of the Frontal Lobe, Lippincott-Raven
+3 Koechlin, E. et al. (2003) The architecture of cognitive control in the
+human prefrontal cortex. Science 302, 1181 – 1185
+4 Berlyne, D. (1957) Uncertainty and conflict: a point of contact between
+information theory and behavior theory concepts. Psychol. Rev. 64,
+5 Hebb, D.O. (1949) The Organization of Behavior, John Wiley and Sons
+6 Kandel, E.R. (1991) Cellular mechanisms of learning and the biological
+basis of individuality. In Principles of Neural Science (Kandel, E.R.
+et al., eds), pp. 1009– 1031, Appleton & Lange
+7 Squire, L.R. and Kandel, E.R. (1999) Memory, Scientific American
+8 Luria, A.R. (1966) Higher Cortical Functions in Man, Basic Books
+9 Fuster, J.M. (2001) The prefrontal cortex – an update: time is of the
+10 Uexküll, J.V. (1926) Theoretical Biology, Harcourt, Brace
+11 Fuster, J.M. (2003) Cortex and Mind: Unifying Cognition, Oxford
+12 Passingham, R.E. (1993) The Frontal Lobes and Voluntary Action,
+13 Jones, E.G. and Powell, T.P.S. (1970) An anatomical study of
+converging sensory pathways within the cerebral cortex of the monkey.
+14 Pandya, D.N. and Yeterian, E.H. (1985) Architecture and connections
+of cortical association areas. In Cerebral Cortex (Vol. 4) (Peters, A. and
+Jones, E.G., eds), pp. 3 – 61, Plenum Press
+15 Cavada, C. and Goldman-Rakic, P.S. (1989) Posterior parietal cortex in
+rhesus monkey: II. Evidence for segregated corticocortical networks
+linking sensory and limbic areas with the frontal lobe. J. Comp.
+16 Bates, J.F. and Goldman-Rakic, P.S. (1993) Prefrontal connections of
+medial motor areas in the rhesus monkey. J. Comp. Neurol. 336,
+17 Luppino, G. et al. (1993) Corticocortical connections of area F3 (SMAproper) and area F6 (Pre-SMA) in the macaque monkey. J. Comp.
+18 Morecraft, R.J. and Van Hoesen, G.W. (1993) Frontal granular cortex
+input to the cingulate (M3), supplementary (M2) and primary (M1)
+motor cortices in the rhesus monkey. J. Comp. Neurol. 337, 669 – 689
+19 Fuster, J.M. et al. (2000) Cross-modal and cross-temporal association
+in neurons of frontal cortex. Nature 405, 347– 351
+1364-6613/$ - see front matter q 2004 Elsevier Ltd. All rights reserved.
+Department of Psychology, University of Oregon, Eugene, OR 97403, USA
+To what degree is executive conflict resolution dependent on conflict awareness? A recent study by Dehaene
+et al. compared neural responses to conflict elicited
+through either visible or subliminal primes. Despite
+behavioral conflict effects for both prime types, neural
+activity in a control network including the anterior cingulate cortex (ACC) was present only for visible primes.
+Along with other recent results, these findings have
+important implications for theories on the relationship
+between ACC, consciousness, and cognitive control.
+What is consciousness for? An important step towards
+an empirical answer to this question would be the
+Corresponding author: Ulrich Mayr (mayr@darkwing.uoregon.edu).
+establishment of precise boundaries between neurocognitive functions that can run outside of awareness, and
+functions that require consciousness as a necessary
+condition. The search for such boundaries should be
+particularly promising at the lines that delineate those
+operations that monitor and regulate ongoing processing
+in a goal-directed manner (often subsumed under the label
+‘executive control’) from those domain-specific and often
+routine activities that execute the actual, task-specific
+computations. If has been often noted that we usually
+become aware of those aspects in the internal or external
+world that interfere or interrupt routine action – which
+are very same events that typically elicit executive control
+operations [1]. Interestingly, in recent biologically
+plausible network simulations, both consciousness and
+All in-text references underlined in blue are linked to publications on ResearchGate, letting you access and read them immediately.

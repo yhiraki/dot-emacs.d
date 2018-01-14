@@ -1,0 +1,1407 @@
+Journal of Arti cial Intelligence Research 4 (1996) 237-285
+Computer Science Department, Box 1910, Brown University
+Smith Hall 221, Carnegie Mellon University, 5000 Forbes Avenue
+This paper surveys the eld of reinforcement learning from a computer-science perspective. It is written to be accessible to researchers familiar with machine learning. Both
+the historical basis of the eld and a broad selection of current work are summarized.
+Reinforcement learning is the problem faced by an agent that learns behavior through
+trial-and-error interactions with a dynamic environment. The work described here has a
+resemblance to work in psychology, but di ers considerably in the details and in the use
+of the word \reinforcement." The paper discusses central issues of reinforcement learning,
+including trading o exploration and exploitation, establishing the foundations of the eld
+via Markov decision theory, learning from delayed reinforcement, constructing empirical
+models to accelerate learning, making use of generalization and hierarchy, and coping with
+hidden state. It concludes with a survey of some implemented systems and an assessment
+of the practical utility of current methods for reinforcement learning.
+Reinforcement learning dates back to the early days of cybernetics and work in statistics,
+psychology, neuroscience, and computer science. In the last ve to ten years, it has attracted
+rapidly increasing interest in the machine learning and arti cial intelligence communities.
+Its promise is beguiling|a way of programming agents by reward and punishment without
+needing to specify how the task is to be achieved. But there are formidable computational
+This paper surveys the historical basis of reinforcement learning and some of the current
+work from a computer science perspective. We give a high-level overview of the eld and a
+taste of some speci c approaches. It is, of course, impossible to mention all of the important
+work in the eld; this should not be taken to be an exhaustive account.
+Reinforcement learning is the problem faced by an agent that must learn behavior
+through trial-and-error interactions with a dynamic environment. The work described here
+has a strong family resemblance to eponymous work in psychology, but di ers considerably
+in the details and in the use of the word \reinforcement." It is appropriately thought of as
+a class of problems, rather than as a set of techniques.
+There are two main strategies for solving reinforcement-learning problems. The rst is to
+search in the space of behaviors in order to nd one that performs well in the environment.
+This approach has been taken by work in genetic algorithms and genetic programming,
+c 1996 AI Access Foundation and Morgan Kaufmann Publishers. All rights reserved.
+Figure 1: The standard reinforcement-learning model.
+as well as some more novel search techniques (Schmidhuber, 1996). The second is to use
+statistical techniques and dynamic programming methods to estimate the utility of taking
+actions in states of the world. This paper is devoted almost entirely to the second set of
+techniques because they take advantage of the special structure of reinforcement-learning
+problems that is not available in optimization problems in general. It is not yet clear which
+set of approaches is best in which circumstances.
+The rest of this section is devoted to establishing notation and describing the basic
+reinforcement-learning model. Section 2 explains the trade-o between exploration and
+exploitation and presents some solutions to the most basic case of reinforcement-learning
+problems, in which we want to maximize the immediate reward. Section 3 considers the more
+general problem in which rewards can be delayed in time from the actions that were crucial
+to gaining them. Section 4 considers some classic model-free algorithms for reinforcement
+learning from delayed reward: adaptive heuristic critic, TD() and Q-learning. Section 5
+demonstrates a continuum of algorithms that are sensitive to the amount of computation an
+agent can perform between actual steps of action in the environment. Generalization|the
+cornerstone of mainstream machine learning research|has the potential of considerably
+aiding reinforcement learning, as described in Section 6. Section 7 considers the problems
+that arise when the agent does not have complete perceptual access to the state of the
+environment. Section 8 catalogs some of reinforcement learning's successful applications.
+Finally, Section 9 concludes with some speculations about important open problems and
+In the standard reinforcement-learning model, an agent is connected to its environment
+via perception and action, as depicted in Figure 1. On each step of interaction the agent
+receives as input, i, some indication of the current state, s, of the environment; the agent
+then chooses an action, a, to generate as output. The action changes the state of the
+environment, and the value of this state transition is communicated to the agent through
+a scalar reinforcement signal, r. The agent's behavior, B , should choose actions that tend
+to increase the long-run sum of values of the reinforcement signal. It can learn to do this
+over time by systematic trial and error, guided by a wide variety of algorithms that are the
+ a discrete set of environment states, S ;
+ a discrete set of agent actions, A; and
+ a set of scalar reinforcement signals; typically f0; 1g, or the real numbers.
+The gure also includes an input function I , which determines how the agent views the
+environment state; we will assume that it is the identity function (that is, the agent perceives
+the exact state of the environment) until we consider partial observability in Section 7.
+An intuitive way to understand the relation between the agent and its environment is
+Environment: You are in state 65. You have 4 possible actions.
+Environment: You received a reinforcement of 7 units. You are now in state
+Environment: You received a reinforcement of -4 units. You are now in state
+Environment: You received a reinforcement of 5 units. You are now in state
+The agent's job is to nd a policy  , mapping states to actions, that maximizes some
+long-run measure of reinforcement. We expect, in general, that the environment will be
+non-deterministic; that is, that taking the same action in the same state on two di erent
+occasions may result in di erent next states and/or di erent reinforcement values. This
+happens in our example above: from state 65, applying action 2 produces di ering reinforcements and di ering states on two occasions. However, we assume the environment is
+stationary; that is, that the probabilities of making state transitions or receiving speci c
+reinforcement signals do not change over time.1
+Reinforcement learning di ers from the more widely studied problem of supervised learning in several ways. The most important di erence is that there is no presentation of input/output pairs. Instead, after choosing an action the agent is told the immediate reward
+and the subsequent state, but is not told which action would have been in its best long-term
+interests. It is necessary for the agent to gather useful experience about the possible system
+states, actions, transitions and rewards actively to act optimally. Another di erence from
+supervised learning is that on-line performance is important: the evaluation of the system
+1. This assumption may be disappointing; after all, operation in non-stationary environments is one of the
+motivations for building learning systems. In fact, many of the algorithms described in later sections
+are e ective in slowly-varying non-stationary environments, but there is very little theoretical analysis
+Some aspects of reinforcement learning are closely related to search and planning issues
+in arti cial intelligence. AI search algorithms generate a satisfactory trajectory through a
+graph of states. Planning operates in a similar manner, but typically within a construct
+with more complexity than a graph, in which states are represented by compositions of
+logical expressions instead of atomic symbols. These AI algorithms are less general than the
+reinforcement-learning methods, in that they require a prede ned model of state transitions,
+and with a few exceptions assume determinism. On the other hand, reinforcement learning,
+at least in the kind of discrete cases for which theory has been developed, assumes that
+the entire state space can be enumerated and stored in memory|an assumption to which
+conventional search algorithms are not tied.
+Before we can start thinking about algorithms for learning to behave optimally, we have
+to decide what our model of optimality will be. In particular, we have to specify how the
+agent should take the future into account in the decisions it makes about how to behave
+now. There are three models that have been the subject of the majority of work in this
+The nite-horizon model is the easiest to think about; at a given moment in time, the
+agent should optimize its expected reward for the next h steps:
+it need not worry about what will happen after that. In this and subsequent expressions,
+rt represents the scalar reward received t steps into the future. This model can be used in
+two ways. In the rst, the agent will have a non-stationary policy; that is, one that changes
+over time. On its rst step it will take what is termed a h-step optimal action. This is
+de ned to be the best action available given that it has h steps remaining in which to act
+and gain reinforcement. On the next step it will take a (h , 1)-step optimal action, and so
+on, until it nally takes a 1-step optimal action and terminates. In the second, the agent
+does receding-horizon control, in which it always takes the h-step optimal action. The agent
+always acts according to the same policy, but the value of h limits how far ahead it looks
+in choosing its actions. The nite-horizon model is not always appropriate. In many cases
+we may not know the precise length of the agent's life in advance.
+The in nite-horizon discounted model takes the long-run reward of the agent into account, but rewards that are received in the future are geometrically discounted according
+We can interpret in several ways. It can be seen as an interest rate, a probability of living
+another step, or as a mathematical trick to bound the in nite sum. The model is conceptually similar to receding-horizon control, but the discounted model is more mathematically
+tractable than the nite-horizon model. This is a dominant reason for the wide attention
+Another optimality criterion is the average-reward model, in which the agent is supposed
+to take actions that optimize its long-run average reward:
+Such a policy is referred to as a gain optimal policy; it can be seen as the limiting case of
+the in nite-horizon discounted model as the discount factor approaches 1 (Bertsekas, 1995).
+One problem with this criterion is that there is no way to distinguish between two policies,
+one of which gains a large amount of reward in the initial phases and the other of which
+does not. Reward gained on any initial pre x of the agent's life is overshadowed by the
+long-run average performance. It is possible to generalize this model so that it takes into
+account both the long run average and the amount of initial reward than can be gained.
+In the generalized, bias optimal model, a policy is preferred if it maximizes the long-run
+average and ties are broken by the initial extra reward.
+Figure 2 contrasts these models of optimality by providing an environment in which
+changing the model of optimality changes the optimal policy. In this example, circles
+represent the states of the environment and arrows are state transitions. There is only
+a single action choice from every state except the start state, which is in the upper left
+and marked with an incoming arrow. All rewards are zero except where marked. Under a
+nite-horizon model with h = 5, the three actions yield rewards of +6:0, +0:0, and +0:0, so
+the rst action should be chosen; under an in nite-horizon discounted model with = 0:9,
+the three choices yield +16:2, +59:0, and +58:5 so the second action should be chosen;
+and under the average reward model, the third action should be chosen since it leads to
+an average reward of +11. If we change h to 1000 and to 0.2, then the second action is
+optimal for the nite-horizon model and the rst for the in nite-horizon discounted model;
+however, the average reward model will always prefer the best long-term average. Since the
+choice of optimality model and parameters matters so much, it is important to choose it
+The nite-horizon model is appropriate when the agent's lifetime is known; one important aspect of this model is that as the length of the remaining lifetime decreases, the
+agent's policy may change. A system with a hard deadline would be appropriately modeled
+this way. The relative usefulness of in nite-horizon discounted and bias-optimal models is
+still under debate. Bias-optimality has the advantage of not requiring a discount parameter;
+however, algorithms for nding bias-optimal policies are not yet as well-understood as those
+for nding optimal in nite-horizon discounted policies.
+The criteria given in the previous section can be used to assess the policies learned by a
+given algorithm. We would also like to be able to evaluate the quality of learning itself.
+There are several incompatible measures in use.
+ Eventual convergence to optimal. Many algorithms come with a provable guar-
+antee of asymptotic convergence to optimal behavior (Watkins & Dayan, 1992). This
+is reassuring, but useless in practical terms. An agent that quickly reaches a plateau
+Figure 2: Comparing models of optimality. All unlabeled arrows produce a reward of zero.
+at 99% of optimality may, in many applications, be preferable to an agent that has a
+guarantee of eventual optimality but a sluggish early learning rate.
+ Speed of convergence to optimality. Optimality is usually an asymptotic result,
+and so convergence speed is an ill-de ned measure. More practical is the speed of
+convergence to near-optimality. This measure begs the de nition of how near to
+optimality is sucient. A related measure is level of performance after a given time,
+which similarly requires that someone de ne the given time.
+It should be noted that here we have another di erence between reinforcement learning
+and conventional supervised learning. In the latter, expected future predictive accuracy or statistical eciency are the prime concerns. For example, in the well-known
+PAC framework (Valiant, 1984), there is a learning period during which mistakes do
+not count, then a performance period during which they do. The framework provides
+bounds on the necessary length of the learning period in order to have a probabilistic
+guarantee on the subsequent performance. That is usually an inappropriate view for
+an agent with a long existence in a complex environment.
+In spite of the mismatch between embedded reinforcement learning and the train/test
+perspective, Fiechter (1994) provides a PAC analysis for Q-learning (described in
+Section 4.2) that sheds some light on the connection between the two views.
+Measures related to speed of learning have an additional weakness. An algorithm
+that merely tries to achieve optimality as fast as possible may incur unnecessarily
+large penalties during the learning period. A less aggressive strategy taking longer to
+achieve optimality, but gaining greater total reinforcement during its learning might
+ Regret. A more appropriate measure, then, is the expected decrease in reward gained
+due to executing the learning algorithm instead of behaving optimally from the very
+beginning. This measure is known as regret (Berry & Fristedt, 1985). It penalizes
+mistakes wherever they occur during the run. Unfortunately, results concerning the
+regret of algorithms are quite hard to obtain.
+1.4 Reinforcement Learning and Adaptive Control
+Adaptive control (Burghes & Graham, 1980; Stengel, 1986) is also concerned with algorithms for improving a sequence of decisions from experience. Adaptive control is a much
+more mature discipline that concerns itself with dynamic systems in which states and actions are vectors and system dynamics are smooth: linear or locally linearizable around a
+desired trajectory. A very common formulation of cost functions in adaptive control are
+quadratic penalties on deviation from desired state and action vectors. Most importantly,
+although the dynamic model of the system is not known in advance, and must be estimated from data, the structure of the dynamic model is xed, leaving model estimation
+as a parameter estimation problem. These assumptions permit deep, elegant and powerful
+mathematical analysis, which in turn lead to robust, practical, and widely deployed adaptive
+2. Exploitation versus Exploration: The Single-State Case
+One major di erence between reinforcement learning and supervised learning is that a
+reinforcement-learner must explicitly explore its environment. In order to highlight the
+problems of exploration, we treat a very simple case in this section. The fundamental issues
+and approaches described here will, in many cases, transfer to the more complex instances
+of reinforcement learning discussed later in the paper.
+The simplest possible reinforcement-learning problem is known as the k-armed bandit
+problem, which has been the subject of a great deal of study in the statistics and applied
+mathematics literature (Berry & Fristedt, 1985). The agent is in a room with a collection of
+k gambling machines (each called a \one-armed bandit" in colloquial English). The agent is
+permitted a xed number of pulls, h. Any arm may be pulled on each turn. The machines
+do not require a deposit to play; the only cost is in wasting a pull playing a suboptimal
+machine. When arm i is pulled, machine i pays o 1 or 0, according to some underlying
+probability parameter pi , where payo s are independent events and the pi s are unknown.
+This problem illustrates the fundamental tradeo between exploitation and exploration.
+The agent might believe that a particular arm has a fairly high payo probability; should
+it choose that arm all the time, or should it choose another one that it has less information
+about, but seems to be worse? Answers to these questions depend on how long the agent
+is expected to play the game; the longer the game lasts, the worse the consequences of
+prematurely converging on a sub-optimal arm, and the more the agent should explore.
+There is a wide variety of solutions to this problem. We will consider a representative
+selection of them, but for a deeper discussion and a number of important theoretical results,
+see the book by Berry and Fristedt (1985). We use the term \action" to indicate the
+agent's choice of arm to pull. This eases the transition into delayed reinforcement models
+in Section 3. It is very important to note that bandit problems t our de nition of a
+reinforcement-learning environment with a single state with only self transitions.
+Section 2.1 discusses three solutions to the basic one-state bandit problem that have
+formal correctness results. Although they can be extended to problems with real-valued
+rewards, they do not apply directly to the general multi-state delayed-reinforcement case.
+Section 2.2 presents three techniques that are not formally justi ed, but that have had wide
+use in practice, and can be applied (with similar lack of guarantee) to the general case.
+There is a fairly well-developed formal theory of exploration for very simple problems.
+Although it is instructive, the methods it provides do not scale well to more complex
+If the agent is going to be acting for a total of h steps, it can use basic Bayesian reasoning
+to solve for an optimal strategy (Berry & Fristedt, 1985). This requires an assumed prior
+joint distribution for the parameters fpig, the most natural of which is that each pi is
+independently uniformly distributed between 0 and 1. We compute a mapping from belief
+states (summaries of the agent's experiences during this run) to actions. Here, a belief state
+can be represented as a tabulation of action choices and payo s: fn1; w1; n2; w2; : : :; nk ; wk g
+denotes a state of play in which each arm i has been pulled ni times with wi payo s. We
+write V  (n1; w1; : : :; nk ; wk ) as the expected payo remaining, given that a total of h pulls
+and we use the remaining pulls optimally.
+If i ni = h, then there are no remaining pulls, and V (n1 ; w1; : : :; nk ; wk ) = 0. This is
+the basis of a recursive de nition. If we know the V  value for all belief states with t pulls
+remaining, we can compute the V  value of any belief state with t + 1 pulls remaining:
+then acts optimally for remaining pulls !
+iV (n1; wi; : : :; ni + 1; wi + 1; : : :; nk ; wk)+
+(1 , i)V (n1 ; wi; : : :; ni + 1; wi; : : :; nk ; wk )
+where i is the posterior subjective probability of action i paying o given ni , wi and
+our prior probability. For the uniform priors, which result in a beta distribution, i =
+The expense of lling in the table of V  values in this way for all attainable belief states
+is linear in the number of belief states times actions, and thus exponential in the horizon.
+Gittins gives an \allocation index" method for nding the optimal choice of action at each
+step in k-armed bandit problems (Gittins, 1989). The technique only applies under the
+discounted expected reward criterion. For each action, consider the number of times it has
+been chosen, n, versus the number of times it has paid o , w. For certain discount factors,
+there are published tables of \index values," I (n; w) for each pair of n and w. Look up
+the index value for each action i, I (ni ; wi). It represents a comparative measure of the
+combined value of the expected payo of action i (given its history of payo s) and the value
+of the information that we would get by choosing it. Gittins has shown that choosing the
+action with the largest index value guarantees the optimal balance between exploration and
+Figure 3: A Tsetlin automaton with 2N states. The top row shows the state transitions
+that are made when the previous action resulted in a reward of 1; the bottom
+row shows transitions after a reward of 0. In states in the left half of the gure,
+action 0 is taken; in those on the right, action 1 is taken.
+Because of the guarantee of optimal exploration and the simplicity of the technique
+(given the table of index values), this approach holds a great deal of promise for use in more
+complex applications. This method proved useful in an application to robotic manipulation
+with immediate reward (Salganico & Ungar, 1995). Unfortunately, no one has yet been
+able to nd an analog of index values for delayed reinforcement problems.
+A branch of the theory of adaptive control is devoted to learning automata, surveyed by
+Narendra and Thathachar (1989), which were originally described explicitly as nite state
+automata. The Tsetlin automaton shown in Figure 3 provides an example that solves a
+2-armed bandit arbitrarily near optimally as N approaches in nity.
+It is inconvenient to describe algorithms as nite-state automata, so a move was made
+to describe the internal state of the agent as a probability distribution according to which
+actions would be chosen. The probabilities of taking di erent actions would be adjusted
+according to their previous successes and failures.
+An example, which stands among a set of algorithms independently developed in the
+mathematical psychology literature (Hilgard & Bower, 1975), is the linear reward-inaction
+algorithm. Let pi be the agent's probability of taking action i.
+ When action ai fails, pj remains unchanged (for all j ).
+This algorithm converges with probability 1 to a vector containing a single 1 and the
+rest 0's (choosing a particular action with probability 1). Unfortunately, it does not always
+converge to the correct action; but the probability that it converges to the wrong one can
+be made arbitrarily small by making small (Narendra & Thathachar, 1974). There is no
+literature on the regret of this algorithm.
+In reinforcement-learning practice, some simple, ad hoc strategies have been popular. They
+are rarely, if ever, the best choice for the models of optimality we have used, but they may
+be viewed as reasonable, computationally tractable, heuristics. Thrun (1992) has surveyed
+The rst strategy that comes to mind is to always choose the action with the highest estimated payo . The aw is that early unlucky sampling might indicate that the best action's
+reward is less than the reward obtained from a suboptimal action. The suboptimal action
+will always be picked, leaving the true optimal action starved of data and its superiority
+never discovered. An agent must explore to ameliorate this outcome.
+A useful heuristic is optimism in the face of uncertainty in which actions are selected
+greedily, but strongly optimistic prior beliefs are put on their payo s so that strong negative
+evidence is needed to eliminate an action from consideration. This still has a measurable
+danger of starving an optimal but unlucky action, but the risk of this can be made arbitrarily small. Techniques like this have been used in several reinforcement learning algorithms
+including the interval exploration method (Kaelbling, 1993b) (described shortly), the exploration bonus in Dyna (Sutton, 1990), curiosity-driven exploration (Schmidhuber, 1991a),
+and the exploration mechanism in prioritized sweeping (Moore & Atkeson, 1993).
+Another simple exploration strategy is to take the action with the best estimated expected
+reward by default, but with probability p, choose an action at random. Some versions of
+this strategy start with a large value of p to encourage initial exploration, which is slowly
+An objection to the simple strategy is that when it experiments with a non-greedy action
+it is no more likely to try a promising alternative than a clearly hopeless alternative. A
+slightly more sophisticated strategy is Boltzmann exploration. In this case, the expected
+reward for taking action a, ER(a) is used to choose an action probabilistically according to
+The temperature parameter T can be decreased over time to decrease exploration. This
+method works well if the best action is well separated from the others, but su ers somewhat
+when the values of the actions are close. It may also converge unnecessarily slowly unless
+the temperature schedule is manually tuned with great care.
+Exploration is often more ecient when it is based on second-order information about the
+certainty or variance of the estimated values of actions. Kaelbling's interval estimation
+algorithm (1993b) stores statistics for each action ai : wi is the number of successes and ni
+the number of trials. An action is chosen by computing the upper bound of a 100  (1 , )%
+con dence interval on the success probability of each action and choosing the action with
+the highest upper bound. Smaller values of the parameter encourage greater exploration.
+When payo s are boolean, the normal approximation to the binomial distribution can be
+used to construct the con dence interval (though the binomial should be used for small
+n). Other payo distributions can be handled using their associated statistics or with
+nonparametric methods. The method works very well in empirical trials. It is also related
+to a certain class of statistical techniques known as experiment design methods (Box &
+Draper, 1987), which are used for comparing multiple treatments (for example, fertilizers
+or drugs) to determine which treatment (if any) is best in as small a set of experiments as
+When there are multiple states, but reinforcement is still immediate, then any of the above
+solutions can be replicated, once for each state. However, when generalization is required,
+these solutions must be integrated with generalization methods (see section 6); this is
+straightforward for the simple ad-hoc methods, but it is not understood how to maintain
+Many of these techniques focus on converging to some regime in which exploratory
+actions are taken rarely or never; this is appropriate when the environment is stationary.
+However, when the environment is non-stationary, exploration must continue to take place,
+in order to notice changes in the world. Again, the more ad-hoc techniques can be modi ed
+to deal with this in a plausible manner (keep temperature parameters from going to 0; decay
+the statistics in interval estimation), but none of the theoretically guaranteed methods can
+In the general case of the reinforcement learning problem, the agent's actions determine
+not only its immediate reward, but also (at least probabilistically) the next state of the
+environment. Such environments can be thought of as networks of bandit problems, but
+the agent must take into account the next state as well as the immediate reward when it
+decides which action to take. The model of long-run optimality the agent is using determines
+exactly how it should take the value of the future into account. The agent will have to be
+able to learn from delayed reinforcement: it may take a long sequence of actions, receiving
+insigni cant reinforcement, then nally arrive at a state with high reinforcement. The agent
+must be able to learn which of its actions are desirable based on reward that can take place
+Problems with delayed reinforcement are well modeled as Markov decision processes (MDPs).
+ a state transition function T : SA ! (S ), where a member of (S ) is a probability
+distribution over the set S (i.e. it maps states to probabilities). We write T (s; a; s0)
+for the probability of making a transition from state s to state s0 using action a.
+The state transition function probabilistically speci es the next state of the environment as
+a function of its current state and the agent's action. The reward function speci es expected
+instantaneous reward as a function of the current state and action. The model is Markov if
+the state transitions are independent of any previous environment states or agent actions.
+There are many good references to MDP models (Bellman, 1957; Bertsekas, 1987; Howard,
+Although general MDPs may have in nite (even uncountable) state and action spaces,
+we will only discuss methods for solving nite-state and nite-action problems. In section 6,
+we discuss methods for solving problems with continuous input and output spaces.
+Before we consider algorithms for learning to behave in MDP environments, we will explore techniques for determining the optimal policy given a correct model. These dynamic
+programming techniques will serve as the foundation and inspiration for the learning algorithms to follow. We restrict our attention mainly to nding optimal policies for the
+in nite-horizon discounted model, but most of these algorithms have analogs for the nitehorizon and average-case models as well. We rely on the result that, for the in nite-horizon
+discounted model, there exists an optimal deterministic stationary policy (Bellman, 1957).
+We will speak of the optimal value of a state|it is the expected in nite discounted sum
+of reward that the agent will gain if it starts in that state and executes the optimal policy.
+Using  as a complete decision policy, it is written
+This optimal value function is unique and can be de ned as the solution to the simultaneous
+which assert that the value of a state s is the expected instantaneous reward plus the
+expected discounted value of the next state, using the best available action. Given the
+optimal value function, we can specify the optimal policy as
+One way, then, to nd an optimal policy is to nd the optimal value function. It can
+be determined by a simple iterative algorithm called value iteration that can be shown to
+converge to the correct V  values (Bellman, 1957; Bertsekas, 1987).
+Q(s; a) := R(s; a) + Ps 2S T (s; a; s0)V (s0)
+It is not obvious when to stop the value iteration algorithm. One important result
+bounds the performance of the current greedy policy as a function of the Bellman residual of
+the current value function (Williams & Baird, 1993b). It says that if the maximum di erence
+between two successive value functions is less than , then the value of the greedy policy,
+(the policy obtained by choosing, in every state, the action that maximizes the estimated
+discounted reward, using the current estimate of the value function) di ers from the value
+function of the optimal policy by no more than 2 =(1 , ) at any state. This provides an
+e ective stopping criterion for the algorithm. Puterman (1994) discusses another stopping
+criterion, based on the span semi-norm, which may result in earlier termination. Another
+important result is that the greedy policy is guaranteed to be optimal in some nite number
+of steps even though the value function may not have converged (Bertsekas, 1987). And in
+practice, the greedy policy is often optimal long before the value function has converged.
+Value iteration is very exible. The assignments to V need not be done in strict order
+as shown above, but instead can occur asynchronously in parallel provided that the value
+of every state gets updated in nitely often on an in nite run. These issues are treated
+extensively by Bertsekas (1989), who also proves convergence results.
+Updates based on Equation 1 are known as full backups since they make use of information from all possible successor states. It can be shown that updates of the form
+can also be used as long as each pairing of a and s is updated in nitely often, s0 is sampled
+from the distribution T (s; a; s0), r is sampled with mean R(s; a) and bounded variance, and
+the learning rate is decreased slowly. This type of sample backup (Singh, 1993) is critical
+to the operation of the model-free methods discussed in the next section.
+The computational complexity of the value-iteration algorithm with full backups, per
+iteration, is quadratic in the number of states and linear in the number of actions. Commonly, the transition probabilities T (s; a; s0) are sparse. If there are on average a constant
+number of next states with non-zero probability then the cost per iteration is linear in the
+number of states and linear in the number of actions. The number of iterations required to
+reach the optimal value function is polynomial in the number of states and the magnitude
+of the largest reward if the discount factor is held constant. However, in the worst case
+the number of iterations grows polynomially in 1=(1 , ), so the convergence rate slows
+considerably as the discount factor approaches 1 (Littman, Dean, & Kaelbling, 1995b).
+The policy iteration algorithm manipulates the policy directly, rather than nding it indirectly via the optimal value function. It operates as follows:
+V (s) = R(s; (s)) + Ps 2S T (s; (s); s0)V (s0)
+0(s) := arg maxa (R(s; a) + Ps 2S T (s; a; s0)V(s0))
+The value function of a policy is just the expected in nite discounted reward that will
+be gained, at each state, by executing that policy. It can be determined by solving a set
+of linear equations. Once we know the value of each state under the current policy, we
+consider whether the value could be improved by changing the rst action taken. If it can,
+we change the policy to take the new action whenever it is in that situation. This step is
+guaranteed to strictly improve the performance of the policy. When no improvements are
+possible, then the policy is guaranteed to be optimal.
+Since there are at most jAjjSj distinct policies, and the sequence of policies improves at
+each step, this algorithm terminates in at most an exponential number of iterations (Puterman, 1994). However, it is an important open question how many iterations policy iteration
+takes in the worst case. It is known that the running time is pseudopolynomial and that for
+any xed discount factor, there is a polynomial bound in the total size of the MDP (Littman
+3.2.3 Enhancement to Value Iteration and Policy Iteration
+In practice, value iteration is much faster per iteration, but policy iteration takes fewer
+iterations. Arguments have been put forth to the e ect that each approach is better for
+large problems. Puterman's modi ed policy iteration algorithm (Puterman & Shin, 1978)
+provides a method for trading iteration time for iteration improvement in a smoother way.
+The basic idea is that the expensive part of policy iteration is solving for the exact value
+of V . Instead of nding an exact value for V , we can perform a few steps of a modi ed
+value-iteration step where the policy is held xed over successive iterations. This can be
+shown to produce an approximation to V that converges linearly in . In practice, this can
+Several standard numerical-analysis techniques that speed the convergence of dynamic
+programming can be used to accelerate value and policy iteration. Multigrid methods can
+be used to quickly seed a good initial approximation to a high resolution value function
+by initially performing value iteration at a coarser resolution (Rude, 1993). State aggregation works by collapsing groups of states to a single meta-state solving the abstracted
+Value iteration works by producing successive approximations of the optimal value function.
+Each iteration can be performed in O(jAjjS j2) steps, or faster if there is sparsity in the
+transition function. However, the number of iterations required can grow exponentially in
+the discount factor (Condon, 1992); as the discount factor approaches 1, the decisions must
+be based on results that happen farther and farther into the future. In practice, policy
+iteration converges in fewer iterations than value iteration, although the per-iteration costs
+of O(jAjjS j2 + jS j3) can be prohibitive. There is no known tight worst-case bound available
+for policy iteration (Littman et al., 1995b). Modi ed policy iteration (Puterman & Shin,
+1978) seeks a trade-o between cheap and e ective iterations and is preferred by some
+Linear programming (Schrijver, 1986) is an extremely general problem, and MDPs can
+be solved by general-purpose linear-programming packages (Derman, 1970; D'Epenoux,
+1963; Ho man & Karp, 1966). An advantage of this approach is that commercial-quality
+linear-programming packages are available, although the time and space requirements can
+still be quite high. From a theoretic perspective, linear programming is the only known
+algorithm that can solve MDPs in polynomial time, although the theoretically ecient
+algorithms have not been shown to be ecient in practice.
+4. Learning an Optimal Policy: Model-free Methods
+In the previous section we reviewed methods for obtaining an optimal policy for an MDP
+assuming that we already had a model. The model consists of knowledge of the state transition probability function T (s; a; s0) and the reinforcement function R(s; a). Reinforcement
+learning is primarily concerned with how to obtain the optimal policy when such a model
+is not known in advance. The agent must interact with its environment directly to obtain
+information which, by means of an appropriate algorithm, can be processed to produce an
+At this point, there are two ways to proceed.
+ Model-free: Learn a controller without learning a model.
+ Model-based: Learn a model, and use it to derive a controller.
+Which approach is better? This is a matter of some debate in the reinforcement-learning
+community. A number of algorithms have been proposed on both sides. This question also
+appears in other elds, such as adaptive control, where the dichotomy is between direct and
+This section examines model-free learning, and Section 5 examines model-based methods.
+The biggest problem facing a reinforcement-learning agent is temporal credit assignment.
+How do we know whether the action just taken is a good one, when it might have farreaching e ects? One strategy is to wait until the \end" and reward the actions taken if
+the result was good and punish them if the result was bad. In ongoing tasks, it is dicult
+to know what the \end" is, and this might require a great deal of memory. Instead, we
+will use insights from value iteration to adjust the estimated value of a state based on
+Figure 4: Architecture for the adaptive heuristic critic.
+the immediate reward and the estimated value of the next state. This class of algorithms
+is known as temporal di erence methods (Sutton, 1988). We will consider two di erent
+temporal-di erence learning strategies for the discounted in nite-horizon model.
+The adaptive heuristic critic algorithm is an adaptive version of policy iteration (Barto,
+Sutton, & Anderson, 1983) in which the value-function computation is no longer implemented by solving a set of linear equations, but is instead computed by an algorithm called
+TD(0). A block diagram for this approach is given in Figure 4. It consists of two components: a critic (labeled AHC), and a reinforcement-learning component (labeled RL). The
+reinforcement-learning component can be an instance of any of the k-armed bandit algorithms, modi ed to deal with multiple states and non-stationary rewards. But instead of
+acting to maximize instantaneous reward, it will be acting to maximize the heuristic value,
+v, that is computed by the critic. The critic uses the real external reinforcement signal to
+learn to map states to their expected discounted values given that the policy being executed
+is the one currently instantiated in the RL component.
+We can see the analogy with modi ed policy iteration if we imagine these components
+working in alternation. The policy  implemented by RL is xed and the critic learns the
+value function V for that policy. Now we x the critic and let the RL component learn a
+new policy  0 that maximizes the new value function, and so on. In most implementations,
+however, both components operate simultaneously. Only the alternating implementation
+can be guaranteed to converge to the optimal policy, under appropriate conditions. Williams
+and Baird explored the convergence properties of a class of AHC-related algorithms they
+call \incremental variants of policy iteration" (Williams & Baird, 1993a).
+It remains to explain how the critic can learn the value of a policy. We de ne hs; a; r; s0i
+to be an experience tuple summarizing a single transition in the environment. Here s is the
+agent's state before the transition, a is its choice of action, r the instantaneous reward it
+receives, and s0 its resulting state. The value of a policy is learned using Sutton's TD(0)
+algorithm (Sutton, 1988) which uses the update rule
+Whenever a state s is visited, its estimated value is updated to be closer to r + V (s0 ),
+since r is the instantaneous reward received and V (s0) is the estimated value of the actually
+occurring next state. This is analogous to the sample-backup rule from value iteration|the
+only di erence is that the sample is drawn from the real world rather than by simulating
+a known model. The key idea is that r + V (s0 ) is a sample of the value of V (s), and it is
+more likely to be correct because it incorporates the real r. If the learning rate is adjusted
+properly (it must be slowly decreased) and the policy is held xed, TD(0) is guaranteed to
+The TD(0) rule as presented above is really an instance of a more general class of
+algorithms called TD(), with  = 0. TD(0) looks only one step ahead when adjusting
+value estimates; although it will eventually arrive at the correct answer, it can take quite a
+while to do so. The general TD() rule is similar to the TD(0) rule given above,
+V (u) := V (u) + (r + V (s0) , V (s))e(u) ;
+but it is applied to every state according to its eligibility e(u), rather than just to the
+immediately previous state, s. One version of the eligibility trace is de ned to be
+The eligibility of a state s is the degree to which it has been visited in the recent past;
+when a reinforcement is received, it is used to update all the states that have been recently
+visited, according to their eligibility. When  = 0 this is equivalent to TD(0). When  = 1,
+it is roughly equivalent to updating all the states according to the number of times they
+were visited by the end of a run. Note that we can update the eligibility online as follows:
+It is computationally more expensive to execute the general TD(), though it often
+converges considerably faster for large  (Dayan, 1992; Dayan & Sejnowski, 1994). There
+has been some recent work on making the updates more ecient (Cichosz & Mulawka, 1995)
+and on changing the de nition to make TD() more consistent with the certainty-equivalent
+method (Singh & Sutton, 1996), which is discussed in Section 5.1.
+The work of the two components of AHC can be accomplished in a uni ed manner by
+Watkins' Q-learning algorithm (Watkins, 1989; Watkins & Dayan, 1992). Q-learning is
+typically easier to implement. In order to understand Q-learning, we have to develop some
+additional notation. Let Q(s; a) be the expected discounted reinforcement of taking action
+a in state s, then continuing by choosing actions optimally. Note that V (s) is the value
+of s assuming the best action is taken initially, and so V  (s) = maxa Q (s; a). Q (s; a) can
+Note also that, since V  (s) = maxa Q (s; a), we have   (s) = arg maxa Q (s; a) as an
+Because the Q function makes the action explicit, we can estimate the Q values online using a method essentially the same as TD(0), but also use them to de ne the policy,
+because an action can be chosen just by taking the one with the maximum Q value for the
+where hs; a; r; s0i is an experience tuple as described earlier. If each action is executed in
+each state an in nite number of times on an in nite run and is decayed appropriately, the
+Q values will converge with probability 1 to Q (Watkins, 1989; Tsitsiklis, 1994; Jaakkola,
+Jordan, & Singh, 1994). Q-learning can also be extended to update states that occurred
+more than one step previously, as in TD() (Peng & Williams, 1994).
+When the Q values are nearly converged to their optimal values, it is appropriate for
+the agent to act greedily, taking, in each situation, the action with the highest Q value.
+During learning, however, there is a dicult exploitation versus exploration trade-o to be
+made. There are no good, formally justi ed approaches to this problem in the general case;
+standard practice is to adopt one of the ad hoc methods discussed in section 2.2.
+AHC architectures seem to be more dicult to work with than Q-learning on a practical
+level. It can be hard to get the relative learning rates right in AHC so that the two
+components converge together. In addition, Q-learning is exploration insensitive: that
+is, that the Q values will converge to the optimal values, independent of how the agent
+behaves while the data is being collected (as long as all state-action pairs are tried often
+enough). This means that, although the exploration-exploitation issue must be addressed
+in Q-learning, the details of the exploration strategy will not a ect the convergence of the
+learning algorithm. For these reasons, Q-learning is the most popular and seems to be the
+most e ective model-free algorithm for learning from delayed reinforcement. It does not,
+however, address any of the issues involved in generalizing over large state and/or action
+spaces. In addition, it may converge quite slowly to a good policy.
+4.3 Model-free Learning With Average Reward
+As described, Q-learning can be applied to discounted in nite-horizon MDPs. It can also
+be applied to undiscounted problems as long as the optimal policy is guaranteed to reach a
+reward-free absorbing state and the state is periodically reset.
+Schwartz (1993) examined the problem of adapting Q-learning to an average-reward
+framework. Although his R-learning algorithm seems to exhibit convergence problems for
+some MDPs, several researchers have found the average-reward criterion closer to the true
+problem they wish to solve than a discounted criterion and therefore prefer R-learning to
+With that in mind, researchers have studied the problem of learning optimal averagereward policies. Mahadevan (1996) surveyed model-based average-reward algorithms from
+a reinforcement-learning perspective and found several diculties with existing algorithms.
+In particular, he showed that existing reinforcement-learning algorithms for average reward
+(and some dynamic programming algorithms) do not always produce bias-optimal policies. Jaakkola, Jordan and Singh (1995) described an average-reward learning algorithm
+with guaranteed convergence properties. It uses a Monte-Carlo component to estimate the
+expected future reward for each state as the agent moves through the environment. In
+addition, Bertsekas presents a Q-learning-like algorithm for average-case reward in his new
+textbook (1995). Although this recent work provides a much needed theoretical foundation
+to this area of reinforcement learning, many important problems remain unsolved.
+5. Computing Optimal Policies by Learning Models
+The previous section showed how it is possible to learn an optimal policy without knowing
+the models T (s; a; s0) or R(s; a) and without even learning those models en route. Although
+many of these methods are guaranteed to nd optimal policies eventually and use very
+little computation time per experience, they make extremely inecient use of the data they
+gather and therefore often require a great deal of experience to achieve good performance.
+In this section we still begin by assuming that we don't know the models in advance, but
+we examine algorithms that do operate by learning these models. These algorithms are
+especially important in applications in which computation is considered to be cheap and
+We begin with the most conceptually straightforward method: rst, learn the T and R
+functions by exploring the environment and keeping statistics about the results of each
+action; next, compute an optimal policy using one of the methods of Section 3. This
+method is known as certainty equivlance (Kumar & Varaiya, 1986).
+There are some serious objections to this method:
+ It makes an arbitrary division between the learning phase and the acting phase.
+ How should it gather data about the environment initially? Random exploration
+might be dangerous, and in some environments is an immensely inecient method of
+gathering data, requiring exponentially more data (Whitehead, 1991) than a system
+that interleaves experience gathering with policy-building more tightly (Koenig &
+Simmons, 1993). See Figure 5 for an example.
+ The possibility of changes in the environment is also problematic. Breaking up an
+agent's life into a pure learning and a pure acting phase has a considerable risk that
+the optimal controller based on early life becomes, without detection, a suboptimal
+A variation on this idea is certainty equivalence, in which the model is learned continually
+through the agent's lifetime and, at each step, the current model is used to compute an
+optimal policy and value function. This method makes very e ective use of available data,
+but still ignores the question of exploration and is extremely computationally demanding,
+even for fairly small state spaces. Fortunately, there are a number of other model-based
+Sutton's Dyna architecture (1990, 1991) exploits a middle ground, yielding strategies that
+are both more e ective than model-free learning and more computationally ecient than
+Figure 5: In this environment, due to Whitehead (1991), random exploration would take
+take O(2n ) steps to reach the goal even once, whereas a more intelligent exploration strategy (e.g. \assume any untried action leads directly to goal") would
+the certainty-equivalence approach. It simultaneously uses experience to build a model (T^
+and R^ ), uses experience to adjust the policy, and uses the model to adjust the policy.
+Dyna operates in a loop of interaction with the environment. Given an experience tuple
+ Update the model, incrementing statistics for the transition from s to s0 on action a
+and for receiving reward r for taking action a in state s. The updated models are T^
+ Update the policy at state s based on the newly updated model using the rule
+which is a version of the value-iteration update for Q values.
+ Perform k additional updates: choose k state-action pairs at random and update them
+ Choose an action a0 to perform in state s0, based on the Q values but perhaps modi ed
+The Dyna algorithm requires about k times the computation of Q-learning per instance,
+but this is typically vastly less than for the naive model-based method. A reasonable value
+of k can be determined based on the relative speeds of computation and of taking action.
+Figure 6 shows a grid world in which in each cell the agent has four actions (N, S, E,
+W) and transitions are made deterministically to an adjacent cell, unless there is a block,
+in which case no movement occurs. As we will see in Table 1, Dyna requires an order of
+magnitude fewer steps of experience than does Q-learning to arrive at an optimal policy.
+Dyna requires about six times more computational e ort, however.
+Figure 6: A 3277-state grid world. This was formulated as a shortest-path reinforcementlearning problem, which yields the same result as if a reward of 1 is given at the
+goal, a reward of zero elsewhere and a discount factor is used.
+Table 1: The performance of three algorithms described in the text. All methods used
+the exploration heuristic of \optimism in the face of uncertainty": any state not
+previously visited was assumed by default to be a goal state. Q-learning used
+its optimal learning rate parameter for a deterministic maze: = 1. Dyna and
+prioritized sweeping were permitted to take k = 200 backups per transition. For
+prioritized sweeping, the priority queue often emptied before all backups were
+Although Dyna is a great improvement on previous methods, it su ers from being relatively
+undirected. It is particularly unhelpful when the goal has just been reached or when the
+agent is stuck in a dead end; it continues to update random state-action pairs, rather than
+concentrating on the \interesting" parts of the state space. These problems are addressed
+by prioritized sweeping (Moore & Atkeson, 1993) and Queue-Dyna (Peng & Williams,
+1993), which are two independently-developed but very similar techniques. We will describe
+The algorithm is similar to Dyna, except that updates are no longer chosen at random
+and values are now associated with states (as in value iteration) instead of state-action pairs
+(as in Q-learning). To make appropriate choices, we must store additional information in
+the model. Each state remembers its predecessors: the states that have a non-zero transition
+probability to it under some action. In addition, each state has a priority, initially set to
+Instead of updating k random state-action pairs, prioritized sweeping updates k states
+with the highest priority. For each high-priority state s, it works as follows:
+ Remember the current value of the state: Vold = V (s).
+ Compute the value change  = jVold , V (s)j.
+ Use  to modify the priorities of the predecessors of s.
+If we have updated the V value for state s0 and it has changed by amount , then the
+immediate predecessors of s0 are informed of this event. Any state s for which there exists
+an action a such that T^(s; a; s0) 6= 0 has its priority promoted to   T^(s; a; s0), unless its
+The global behavior of this algorithm is that when a real-world transition is \surprising"
+(the agent happens upon a goal state, for instance), then lots of computation is directed
+to propagate this new information back to relevant predecessor states. When the realworld transition is \boring" (the actual result is very similar to the predicted result), then
+computation continues in the most deserving part of the space.
+Running prioritized sweeping on the problem in Figure 6, we see a large improvement
+over Dyna. The optimal policy is reached in about half the number of steps of experience
+and one-third the computation as Dyna required (and therefore about 20 times fewer steps
+and twice the computational e ort of Q-learning).
+Methods proposed for solving MDPs given a model can be used in the context of modelbased methods as well.
+RTDP (real-time dynamic programming) (Barto, Bradtke, & Singh, 1995) is another
+model-based method that uses Q-learning to concentrate computational e ort on the areas
+of the state-space that the agent is most likely to occupy. It is speci c to problems in which
+the agent is trying to achieve a particular goal state and the reward everywhere else is 0.
+By taking into account the start state, it can nd a short path from the start to the goal,
+without necessarily visiting the rest of the state space.
+The Plexus planning system (Dean, Kaelbling, Kirman, & Nicholson, 1993; Kirman,
+1994) exploits a similar intuition. It starts by making an approximate version of the MDP
+which is much smaller than the original one. The approximate MDP contains a set of states,
+called the envelope, that includes the agent's current state and the goal state, if there is one.
+States that are not in the envelope are summarized by a single \out" state. The planning
+process is an alternation between nding an optimal policy on the approximate MDP and
+adding useful states to the envelope. Action may take place in parallel with planning, in
+which case irrelevant states are also pruned out of the envelope.
+All of the previous discussion has tacitly assumed that it is possible to enumerate the state
+and action spaces and store tables of values over them. Except in very small environments,
+this means impractical memory requirements. It also makes inecient use of experience. In
+a large, smooth state space we generally expect similar states to have similar values and similar optimal actions. Surely, therefore, there should be some more compact representation
+than a table. Most problems will have continuous or large discrete state spaces; some will
+have large or continuous action spaces. The problem of learning in large spaces is addressed
+through generalization techniques, which allow compact storage of learned information and
+transfer of knowledge between \similar" states and actions.
+The large literature of generalization techniques from inductive concept learning can be
+applied to reinforcement learning. However, techniques often need to be tailored to speci c
+details of the problem. In the following sections, we explore the application of standard
+function-approximation techniques, adaptive resolution models, and hierarchical methods
+to the problem of reinforcement learning.
+The reinforcement-learning architectures and algorithms discussed above have included
+the storage of a variety of mappings, including S ! A (policies), S ! < (value functions),
+S  A ! < (Q functions and rewards), S  A ! S (deterministic transitions), and S 
+A  S ! [0; 1] (transition probabilities). Some of these mappings, such as transitions and
+immediate rewards, can be learned using straightforward supervised learning, and can be
+handled using any of the wide variety of function-approximation techniques for supervised
+learning that support noisy training examples. Popular techniques include various neuralnetwork methods (Rumelhart & McClelland, 1986), fuzzy logic (Berenji, 1991; Lee, 1991).
+CMAC (Albus, 1981), and local memory-based methods (Moore, Atkeson, & Schaal, 1995),
+such as generalizations of nearest neighbor methods. Other mappings, especially the policy
+mapping, typically need specialized algorithms because training sets of input-output pairs
+A reinforcement-learning agent's current state plays a central role in its selection of rewardmaximizing actions. Viewing the agent as a state-free black box, a description of the
+current state is its input. Depending on the agent architecture, its output is either an
+action selection, or an evaluation of the current state that can be used to select an action.
+The problem of deciding how the di erent aspects of an input a ect the value of the output
+is sometimes called the \structural credit-assignment" problem. This section examines
+approaches to generating actions or evaluations as a function of a description of the agent's
+The rst group of techniques covered here is specialized to the case when reward is not
+delayed; the second group is more generally applicable.
+When the agent's actions do not in uence state transitions, the resulting problem becomes
+one of choosing actions to maximize immediate reward as a function of the agent's current
+state. These problems bear a resemblance to the bandit problems discussed in Section 2
+except that the agent should condition its action selection on the current state. For this
+reason, this class of problems has been described as associative reinforcement learning.
+The algorithms in this section address the problem of learning from immediate boolean
+reinforcement where the state is vector valued and the action is a boolean vector. Such
+algorithms can and have been used in the context of a delayed reinforcement, for instance,
+as the RL component in the AHC architecture described in Section 4.1. They can also be
+generalized to real-valued reward through reward comparison methods (Sutton, 1984).
+CRBP The complementary reinforcement backpropagation algorithm (Ackley & Littman,
+1990) (crbp) consists of a feed-forward network mapping an encoding of the state to an
+encoding of the action. The action is determined probabilistically from the activation of
+the output units: if output unit i has activation yi , then bit i of the action vector has value
+1 with probability yi , and 0 otherwise. Any neural-network supervised training procedure
+can be used to adapt the network as follows. If the result of generating action a is r = 1,
+then the network is trained with input-output pair hs; ai. If the result is r = 0, then the
+network is trained with input-output pair hs; ai, where a = (1 , a1; : : :; 1 , an ).
+The idea behind this training rule is that whenever an action fails to generate reward,
+crbp will try to generate an action that is di erent from the current choice. Although it
+seems like the algorithm might oscillate between an action and its complement, that does
+not happen. One step of training a network will only change the action slightly and since
+the output probabilities will tend to move toward 0.5, this makes action selection more
+random and increases search. The hope is that the random distribution will generate an
+action that works better, and then that action will be reinforced.
+ARC The associative reinforcement comparison (arc) algorithm (Sutton, 1984) is an
+instance of the ahc architecture for the case of boolean actions, consisting of two feed260
+forward networks. One learns the value of situations, the other learns a policy. These can
+be simple linear networks or can have hidden units.
+In the simplest case, the entire system learns only to optimize immediate reward. First,
+let us consider the behavior of the network that learns the policy, a mapping from a vector
+describing s to a 0 or 1. If the output unit has activation yi , then a, the action generated,
+will be 1 if y +  > 0, where  is normal noise, and 0 otherwise.
+The adjustment for the output unit is, in the simplest case,
+where the rst factor is the reward received for taking the most recent action and the second
+encodes which action was taken. The actions are encoded as 0 and 1, so a , 1=2 always has
+the same magnitude; if the reward and the action have the same sign, then action 1 will be
+made more likely, otherwise action 0 will be.
+As described, the network will tend to seek actions that given positive reward. To extend
+this approach to maximize reward, we can compare the reward to some baseline, b. This
+where b is the output of the second network. The second network is trained in a standard
+supervised mode to estimate r as a function of the input state s.
+Variations of this approach have been used in a variety of applications (Anderson, 1986;
+Barto et al., 1983; Lin, 1993b; Sutton, 1984).
+REINFORCE Algorithms Williams (1987, 1992) studied the problem of choosing actions to maximize immedate reward. He identi ed a broad class of update rules that perform gradient descent on the expected reward and showed how to integrate these rules with
+backpropagation. This class, called reinforce algorithms, includes linear reward-inaction
+The generic reinforce update for a parameter wij can be written
+where ij is a non-negative factor, r the current reinforcement, bij a reinforcement baseline,
+and gi is the probability density function used to randomly generate actions based on unit
+activations. Both ij and bij can take on di erent values for each wij , however, when ij
+is constant throughout the system, the expected update is exactly in the direction of the
+expected reward gradient. Otherwise, the update is in the same half space as the gradient
+but not necessarily in the direction of steepest increase.
+Williams points out that the choice of baseline, bij , can have a profound e ect on the
+Logic-Based Methods Another strategy for generalization in reinforcement learning is
+to reduce the learning problem to an associative problem of learning boolean functions.
+A boolean function has a vector of boolean inputs and a single boolean output. Taking
+inspiration from mainstream machine learning work, Kaelbling developed two algorithms
+for learning boolean functions from reinforcement: one uses the bias of k-DNF to drive
+the generalization process (Kaelbling, 1994b); the other searches the space of syntactic
+descriptions of functions using a simple generate-and-test method (Kaelbling, 1994a).
+The restriction to a single boolean output makes these techniques dicult to apply. In
+very benign learning situations, it is possible to extend this approach to use a collection
+of learners to independently learn the individual bits that make up a complex output. In
+general, however, that approach su ers from the problem of very unreliable reinforcement:
+if a single learner generates an inappropriate output bit, all of the learners receive a low
+reinforcement value. The cascade method (Kaelbling, 1993b) allows a collection of learners
+to be trained collectively to generate appropriate joint outputs; it is considerably more
+reliable, but can require additional computational e ort.
+Another method to allow reinforcement-learning techniques to be applied in large state
+spaces is modeled on value iteration and Q-learning. Here, a function approximator is used
+to represent the value function by mapping a state description to a value.
+Many reseachers have experimented with this approach: Boyan and Moore (1995) used
+local memory-based methods in conjunction with value iteration; Lin (1991) used backpropagation networks for Q-learning; Watkins (1989) used CMAC for Q-learning; Tesauro (1992,
+1995) used backpropagation for learning the value function in backgammon (described in
+Section 8.1); Zhang and Dietterich (1995) used backpropagation and TD() to learn good
+Although there have been some positive examples, in general there are unfortunate interactions between function approximation and the learning rules. In discrete environments
+there is a guarantee that any operation that updates the value function (according to the
+Bellman equations) can only reduce the error between the current value function and the
+optimal value function. This guarantee no longer holds when generalization is used. These
+issues are discussed by Boyan and Moore (1995), who give some simple examples of value
+function errors growing arbitrarily large when generalization is used with value iteration.
+Their solution to this, applicable only to certain classes of problems, discourages such divergence by only permitting updates whose estimated values can be shown to be near-optimal
+via a battery of Monte-Carlo experiments.
+Thrun and Schwartz (1993) theorize that function approximation of value functions
+is also dangerous because the errors in value functions due to generalization can become
+compounded by the \max" operator in the de nition of the value function.
+Several recent results (Gordon, 1995; Tsitsiklis & Van Roy, 1996) show how the appropriate choice of function approximator can guarantee convergence, though not necessarily to
+the optimal values. Baird's residual gradient technique (Baird, 1995) provides guaranteed
+convergence to locally optimal solutions.
+Perhaps the gloominess of these counter-examples is misplaced. Boyan and Moore (1995)
+report that their counter-examples can be made to work with problem-speci c hand-tuning
+despite the unreliability of untuned algorithms that provably converge in discrete domains.
+Sutton (1996) shows how modi ed versions of Boyan and Moore's examples can converge
+successfully. An open question is whether general principles, ideally supported by theory,
+can help us understand when value function approximation will succeed. In Sutton's com262
+parative experiments with Boyan and Moore's counter-examples, he changes four aspects
+1. Small changes to the task speci cations.
+2. A very di erent kind of function approximator (CMAC (Albus, 1975)) that has weak
+3. A di erent learning algorithm: SARSA (Rummery & Niranjan, 1994) instead of value
+4. A di erent training regime. Boyan and Moore sampled states uniformly in state space,
+whereas Sutton's method sampled along empirical trajectories.
+There are intuitive reasons to believe that the fourth factor is particularly important, but
+Adaptive Resolution Models In many cases, what we would like to do is partition
+the environment into regions of states that can be considered the same for the purposes of
+learning and generating actions. Without detailed prior knowledge of the environment, it
+is very dicult to know what granularity or placement of partitions is appropriate. This
+problem is overcome in methods that use adaptive resolution; during the course of learning,
+a partition is constructed that is appropriate to the environment.
+Decision Trees In environments that are characterized by a set of boolean or discretevalued variables, it is possible to learn compact decision trees for representing Q values. The
+G-learning algorithm (Chapman & Kaelbling, 1991), works as follows. It starts by assuming
+that no partitioning is necessary and tries to learn Q values for the entire environment as
+if it were one state. In parallel with this process, it gathers statistics based on individual
+input bits; it asks the question whether there is some bit b in the state description such
+that the Q values for states in which b = 1 are signi cantly di erent from Q values for
+states in which b = 0. If such a bit is found, it is used to split the decision tree. Then,
+the process is repeated in each of the leaves. This method was able to learn very small
+representations of the Q function in the presence of an overwhelming number of irrelevant,
+noisy state attributes. It outperformed Q-learning with backpropagation in a simple videogame environment and was used by McCallum (1995) (in conjunction with other techniques
+for dealing with partial observability) to learn behaviors in a complex driving-simulator. It
+cannot, however, acquire partitions in which attributes are only signi cant in combination
+(such as those needed to solve parity problems).
+Variable Resolution Dynamic Programming The VRDP algorithm (Moore, 1991)
+enables conventional dynamic programming to be performed in real-valued multivariate
+state-spaces where straightforward discretization would fall prey to the curse of dimensionality. A kd-tree (similar to a decision tree) is used to partition state space into coarse
+regions. The coarse regions are re ned into detailed regions, but only in parts of the state
+space which are predicted to be important. This notion of importance is obtained by running \mental trajectories" through state space. This algorithm proved e ective on a number
+of problems for which full high-resolution arrays would have been impractical. It has the
+disadvantage of requiring a guess at an initially valid trajectory through state-space.
+Figure 7: (a) A two-dimensional maze problem. The point robot must nd a path from
+start to goal without crossing any of the barrier lines. (b) The path taken by
+PartiGame during the entire rst trial. It begins with intense exploration to nd a
+route out of the almost entirely enclosed start region. Having eventually reached
+a suciently high resolution, it discovers the gap and proceeds greedily towards
+the goal, only to be temporarily blocked by the goal's barrier region. (c) The
+PartiGame Algorithm Moore's PartiGame algorithm (Moore, 1994) is another solution
+to the problem of learning to achieve goal con gurations in deterministic high-dimensional
+continuous spaces by learning an adaptive-resolution model. It also divides the environment
+into cells; but in each cell, the actions available consist of aiming at the neighboring cells
+(this aiming is accomplished by a local controller, which must be provided as part of the
+problem statement). The graph of cell transitions is solved for shortest paths in an online
+incremental manner, but a minimax criterion is used to detect when a group of cells is
+too coarse to prevent movement between obstacles or to avoid limit cycles. The o ending
+cells are split to higher resolution. Eventually, the environment is divided up just enough to
+choose appropriate actions for achieving the goal, but no unnecessary distinctions are made.
+An important feature is that, as well as reducing memory and computational requirements,
+it also structures exploration of state space in a multi-resolution manner. Given a failure,
+the agent will initially try something very di erent to rectify the failure, and only resort to
+small local changes when all the qualitatively di erent strategies have been exhausted.
+Figure 7a shows a two-dimensional continuous maze. Figure 7b shows the performance
+of a robot using the PartiGame algorithm during the very rst trial. Figure 7c shows the
+second trial, started from a slightly di erent position.
+This is a very fast algorithm, learning policies in spaces of up to nine dimensions in less
+than a minute. The restriction of the current implementation to deterministic environments
+limits its applicability, however. McCallum (1995) suggests some related tree-structured
+The networks described in Section 6.1.1 generalize over state descriptions presented as
+inputs. They also produce outputs in a discrete, factored representation and thus could be
+seen as generalizing over actions as well.
+In cases such as this when actions are described combinatorially, it is important to
+generalize over actions to avoid keeping separate statistics for the huge number of actions
+that can be chosen. In continuous action spaces, the need for generalization is even more
+When estimating Q values using a neural network, it is possible to use either a distinct
+network for each action, or a network with a distinct output for each action. When the
+action space is continuous, neither approach is possible. An alternative strategy is to use a
+single network with both the state and action as input and Q value as the output. Training
+such a network is not conceptually dicult, but using the network to nd the optimal action
+can be a challenge. One method is to do a local gradient-ascent search on the action in
+order to nd one with high value (Baird & Klopf, 1993).
+Gullapalli (1990, 1992) has developed a \neural" reinforcement-learning unit for use in
+continuous action spaces. The unit generates actions with a normal distribution; it adjusts
+the mean and variance based on previous experience. When the chosen actions are not
+performing well, the variance is high, resulting in exploration of the range of choices. When
+an action performs well, the mean is moved in that direction and the variance decreased,
+resulting in a tendency to generate more action values near the successful one. This method
+was successfully employed to learn to control a robot arm with many continuous degrees of
+Another strategy for dealing with large state spaces is to treat them as a hierarchy of
+learning problems. In many cases, hierarchical solutions introduce slight sub-optimality in
+performance, but potentially gain a good deal of eciency in execution time, learning time,
+Hierarchical learners are commonly structured as gated behaviors, as shown in Figure 8.
+There is a collection of behaviors that map environment states into low-level actions and
+a gating function that decides, based on the state of the environment, which behavior's
+actions should be switched through and actually executed. Maes and Brooks (1990) used
+a version of this architecture in which the individual behaviors were xed a priori and the
+gating function was learned from reinforcement. Mahadevan and Connell (1991b) used the
+dual approach: they xed the gating function, and supplied reinforcement functions for the
+individual behaviors, which were learned. Lin (1993a) and Dorigo and Colombetti (1995,
+1994) both used this approach, rst training the behaviors and then training the gating
+function. Many of the other hierarchical learning methods can be cast in this framework.
+Feudal Q-learning (Dayan & Hinton, 1993; Watkins, 1989) involves a hierarchy of learning
+modules. In the simplest case, there is a high-level master and a low-level slave. The master
+receives reinforcement from the external environment. Its actions consist of commands that
+Figure 8: A structure of gated behaviors.
+it can give to the low-level learner. When the master generates a particular command to
+the slave, it must reward the slave for taking actions that satisfy the command, even if they
+do not result in external reinforcement. The master, then, learns a mapping from states to
+commands. The slave learns a mapping from commands and states to external actions. The
+set of \commands" and their associated reinforcement functions are established in advance
+This is really an instance of the general \gated behaviors" approach, in which the slave
+can execute any of the behaviors depending on its command. The reinforcement functions
+for the individual behaviors (commands) are given, but learning takes place simultaneously
+Singh's compositional Q-learning (1992b, 1992a) (C-QL) consists of a hierarchy based on
+the temporal sequencing of subgoals. The elemental tasks are behaviors that achieve some
+recognizable condition. The high-level goal of the system is to achieve some set of conditions in sequential order. The achievement of the conditions provides reinforcement for the
+elemental tasks, which are trained rst to achieve individual subgoals. Then, the gating
+function learns to switch the elemental tasks in order to achieve the appropriate high-level
+sequential goal. This method was used by Tham and Prager (1994) to learn to control a
+Especially if we consider reinforcement learning modules to be part of larger agent architectures, it is important to consider problems in which goals are dynamically input to the
+learner. Kaelbling's HDG algorithm (1993a) uses a hierarchical approach to solving problems when goals of achievement (the agent should get to a particular state as quickly as
+possible) are given to an agent dynamically.
+The HDG algorithm works by analogy with navigation in a harbor. The environment
+is partitioned (a priori, but more recent work (Ashar, 1994) addresses the case of learning
+the partition) into a set of regions whose centers are known as \landmarks." If the agent is
+Figure 9: An example of a partially observable environment.
+currently in the same region as the goal, then it uses low-level actions to move to the goal.
+If not, then high-level information is used to determine the next landmark on the shortest
+path from the agent's closest landmark to the goal's closest landmark. Then, the agent uses
+low-level information to aim toward that next landmark. If errors in action cause deviations
+in the path, there is no problem; the best aiming point is recomputed on every step.
+In many real-world environments, it will not be possible for the agent to have perfect and
+complete perception of the state of the environment. Unfortunately, complete observability
+is necessary for learning methods based on MDPs. In this section, we consider the case in
+which the agent makes observations of the state of the environment, but these observations
+may be noisy and provide incomplete information. In the case of a robot, for instance,
+it might observe whether it is in a corridor, an open room, a T-junction, etc., and those
+observations might be error-prone. This problem is also referred to as the problem of
+\incomplete perception," \perceptual aliasing," or \hidden state."
+In this section, we will consider extensions to the basic MDP framework for solving
+partially observable problems. The resulting formal model is called a partially observable
+The most naive strategy for dealing with partial observability is to ignore it. That is, to
+treat the observations as if they were the states of the environment and try to learn to
+behave. Figure 9 shows a simple environment in which the agent is attempting to get to
+the printer from an oce. If it moves from the oce, there is a good chance that the agent
+will end up in one of two places that look like \hall", but that require di erent actions for
+getting to the printer. If we consider these states to be the same, then the agent cannot
+possibly behave optimally. But how well can it do?
+The resulting problem is not Markovian, and Q-learning cannot be guaranteed to converge. Small breaches of the Markov requirement are well handled by Q-learning, but it is
+possible to construct simple environments that cause Q-learning to oscillate (Chrisman &
+Littman, 1993). It is possible to use a model-based approach, however; act according to
+some policy and gather statistics about the transitions between observations, then solve for
+the optimal policy based on those observations. Unfortunately, when the environment is not
+Markovian, the transition probabilities depend on the policy being executed, so this new
+policy will induce a new set of transition probabilities. This approach may yield plausible
+results in some cases, but again, there are no guarantees.
+It is reasonable, though, to ask what the optimal policy (mapping from observations to
+actions, in this case) is. It is NP-hard (Littman, 1994b) to nd this mapping, and even the
+best mapping can have very poor performance. In the case of our agent trying to get to the
+printer, for instance, any deterministic state-free policy takes an in nite number of steps to
+Some improvement can be gained by considering stochastic policies; these are mappings
+from observations to probability distributions over actions. If there is randomness in the
+agent's actions, it will not get stuck in the hall forever. Jaakkola, Singh, and Jordan (1995)
+have developed an algorithm for nding locally-optimal stochastic policies, but nding a
+globally optimal policy is still NP hard.
+In our example, it turns out that the optimal stochastic policy
+probability 2 , 1  0:4. This policy can be found by solving a simple (in this case)
+quadratic program. The fact that such a simple example can produce irrational numbers
+gives some indication that it is a dicult problem to solve exactly.
+The only way to behave truly e ectively in a wide-range of environments is to use memory
+of previous actions and observations to disambiguate the current state. There are a variety
+of approaches to learning policies with internal state.
+Recurrent Q-learning One intuitively simple approach is to use a recurrent neural network to learn Q values. The network can be trained using backpropagation through time (or
+some other suitable technique) and learns to retain \history features" to predict value. This
+approach has been used by a number of researchers (Meeden, McGraw, & Blank, 1993; Lin
+& Mitchell, 1992; Schmidhuber, 1991b). It seems to work e ectively on simple problems,
+but can su er from convergence to local optima on more complex problems.
+Classi er Systems Classi er systems (Holland, 1975; Goldberg, 1989) were explicitly
+developed to solve problems with delayed reward, including those requiring short-term
+memory. The internal mechanism typically used to pass reward back through chains of
+decisions, called the bucket brigade algorithm, bears a close resemblance to Q-learning. In
+spite of some early successes, the original design does not appear to handle partially observed environments robustly.
+Recently, this approach has been reexamined using insights from the reinforcementlearning literature, with some success. Dorigo did a comparative study of Q-learning and
+classi er systems (Dorigo & Bersini, 1994). Cli and Ross (1994) start with Wilson's zeroth268
+level classi er system (Wilson, 1995) and add one and two-bit memory registers. They nd
+that, although their system can learn to use short-term memory registers e ectively, the
+approach is unlikely to scale to more complex environments.
+Dorigo and Colombetti applied classi er systems to a moderately complex problem of
+learning robot behavior from immediate reinforcement (Dorigo, 1995; Dorigo & Colombetti,
+Finite-history-window Approach One way to restore the Markov property is to allow
+decisions to be based on the history of recent observations and perhaps actions. Lin and
+Mitchell (1992) used a xed-width nite history window to learn a pole balancing task.
+McCallum (1995) describes the \utile sux memory" which learns a variable-width window
+that serves simultaneously as a model of the environment and a nite-memory policy. This
+system has had excellent results in a very complex driving-simulation domain (McCallum,
+1995). Ring (1994) has a neural-network approach that uses a variable history window,
+adding history when necessary to disambiguate situations.
+POMDP Approach Another strategy consists of using hidden Markov model (HMM)
+techniques to learn a model of the environment, including the hidden state, then to use that
+model to construct a perfect memory controller (Cassandra, Kaelbling, & Littman, 1994;
+Chrisman (1992) showed how the forward-backward algorithm for learning HMMs could
+be adapted to learning POMDPs. He, and later McCallum (1993), also gave heuristic statesplitting rules to attempt to learn the smallest possible model for a given environment. The
+resulting model can then be used to integrate information from the agent's observations in
+Figure 10 illustrates the basic structure for a perfect-memory controller. The component
+on the left is the state estimator, which computes the agent's belief state, b as a function of
+the old belief state, the last action a, and the current observation i. In this context, a belief
+state is a probability distribution over states of the environment, indicating the likelihood,
+given the agent's past experience, that the environment is actually in each of those states.
+The state estimator can be constructed straightforwardly using the estimated world model
+Now we are left with the problem of nding a policy mapping belief states into action.
+This problem can be formulated as an MDP, but it is dicult to solve using the techniques
+described earlier, because the input space is continuous. Chrisman's approach (1992) does
+not take into account future uncertainty, but yields a policy after a small amount of computation. A standard approach from the operations-research literature is to solve for the
+optimal policy (or a close approximation thereof) based on its representation as a piecewiselinear and convex function over the belief space. This method is computationally intractable,
+but may serve as inspiration for methods that make further approximations (Cassandra
+et al., 1994; Littman, Cassandra, & Kaelbling, 1995a).
+One reason that reinforcement learning is popular is that is serves as a theoretical tool for
+studying the principles of agents learning to act. But it is unsurprising that it has also
+been used by a number of researchers as a practical computational tool for constructing
+autonomous systems that improve themselves with experience. These applications have
+ranged from robotics, to industrial manufacturing, to combinatorial search problems such
+Practical applications provide a test of the ecacy and usefulness of learning algorithms.
+They are also an inspiration for deciding which components of the reinforcement learning
+framework are of practical importance. For example, a researcher with a real robotic task
+can provide a data point to questions such as:
+ How important is optimal exploration? Can we break the learning period into exploration phases and exploitation phases?
+ What is the most useful model of long-term reward: Finite horizon? Discounted?
+ How much computation is available between agent decisions and how should it be
+ What prior knowledge can we build into the system, and which algorithms are capable
+Let us examine a set of practical applications of reinforcement learning, while bearing these
+Game playing has dominated the Arti cial Intelligence world as a problem domain ever since
+the eld was born. Two-player games do not t into the established reinforcement-learning
+framework since the optimality criterion for games is not one of maximizing reward in the
+face of a xed environment, but one of maximizing reward against an optimal adversary
+(minimax). Nonetheless, reinforcement-learning algorithms can be adapted to work for a
+very general class of games (Littman, 1994a) and many researchers have used reinforcement
+learning in these environments. One application, spectacularly far ahead of its time, was
+Samuel's checkers playing system (Samuel, 1959). This learned a value function represented
+by a linear function approximator, and employed a training scheme similar to the updates
+used in value iteration, temporal di erences and Q-learning.
+More recently, Tesauro (1992, 1994, 1995) applied the temporal di erence algorithm
+to backgammon. Backgammon has approximately 1020 states, making table-based reinforcement learning impossible. Instead, Tesauro used a backpropagation-based three-layer
+Table 2: TD-Gammon's performance in games against the top human professional players.
+A backgammon tournament involves playing a series of games for points until one
+player reaches a set target. TD-Gammon won none of these tournaments but came
+suciently close that it is now considered one of the best few players in the world.
+neural network as a function approximator for the value function
+Board Position ! Probability of victory for current player:
+Two versions of the learning algorithm were used. The rst, which we will call Basic TDGammon, used very little prede ned knowledge of the game, and the representation of a
+board position was virtually a raw encoding, suciently powerful only to permit the neural
+network to distinguish between conceptually di erent positions. The second, TD-Gammon,
+was provided with the same raw state information supplemented by a number of handcrafted features of backgammon board positions. Providing hand-crafted features in this
+manner is a good example of how inductive biases from human knowledge of the task can
+The training of both learning algorithms required several months of computer time, and
+was achieved by constant self-play. No exploration strategy was used|the system always
+greedily chose the move with the largest expected probability of victory. This naive exploration strategy proved entirely adequate for this environment, which is perhaps surprising
+given the considerable work in the reinforcement-learning literature which has produced
+numerous counter-examples to show that greedy exploration can lead to poor learning performance. Backgammon, however, has two important properties. Firstly, whatever policy
+is followed, every game is guaranteed to end in nite time, meaning that useful reward
+information is obtained fairly frequently. Secondly, the state transitions are suciently
+stochastic that independent of the policy, all states will occasionally be visited|a wrong
+initial value function has little danger of starving us from visiting a critical part of state
+space from which important information could be obtained.
+The results (Table 2) of TD-Gammon are impressive. It has competed at the very top
+level of international human play. Basic TD-Gammon played respectably, but not at a
+Figure 11: Schaal and Atkeson's devil-sticking robot. The tapered stick is hit alternately
+by each of the two hand sticks. The task is to keep the devil stick from falling
+for as many hits as possible. The robot has three motors indicated by torque
+Although experiments with other games have in some cases produced interesting learning
+behavior, no success close to that of TD-Gammon has been repeated. Other games that
+have been studied include Go (Schraudolph, Dayan, & Sejnowski, 1994) and Chess (Thrun,
+1995). It is still an open question as to if and how the success of TD-Gammon can be
+In recent years there have been many robotics and control applications that have used
+reinforcement learning. Here we will concentrate on the following four examples, although
+many other interesting ongoing robotics investigations are underway.
+1. Schaal and Atkeson (1994) constructed a two-armed robot, shown in Figure 11, that
+learns to juggle a device known as a devil-stick. This is a complex non-linear control
+task involving a six-dimensional state space and less than 200 msecs per control decision. After about 40 initial attempts the robot learns to keep juggling for hundreds of
+hits. A typical human learning the task requires an order of magnitude more practice
+to achieve pro ciency at mere tens of hits.
+The juggling robot learned a world model from experience, which was generalized
+to unvisited states by a function approximation scheme known as locally weighted
+regression (Cleveland & Delvin, 1988; Moore & Atkeson, 1992). Between each trial,
+a form of dynamic programming speci c to linear control policies and locally linear
+transitions was used to improve the policy. The form of dynamic programming is
+known as linear-quadratic-regulator design (Sage & White, 1977).
+2. Mahadevan and Connell (1991a) discuss a task in which a mobile robot pushes large
+boxes for extended periods of time. Box-pushing is a well-known dicult robotics
+problem, characterized by immense uncertainty in the results of actions. Q-learning
+was used in conjunction with some novel clustering techniques designed to enable a
+higher-dimensional input than a tabular approach would have permitted. The robot
+learned to perform competitively with the performance of a human-programmed solution. Another aspect of this work, mentioned in Section 6.3, was a pre-programmed
+breakdown of the monolithic task description into a set of lower level tasks to be
+3. Mataric (1994) describes a robotics experiment with, from the viewpoint of theoretical reinforcement learning, an unthinkably high dimensional state space, containing
+many dozens of degrees of freedom. Four mobile robots traveled within an enclosure collecting small disks and transporting them to a destination region. There were
+three enhancements to the basic Q-learning algorithm. Firstly, pre-programmed signals called progress estimators were used to break the monolithic task into subtasks.
+This was achieved in a robust manner in which the robots were not forced to use
+the estimators, but had the freedom to pro t from the inductive bias they provided.
+Secondly, control was decentralized. Each robot learned its own policy independently
+without explicit communication with the others. Thirdly, state space was brutally
+quantized into a small number of discrete states according to values of a small number of pre-programmed boolean features of the underlying sensors. The performance
+of the Q-learned policies were almost as good as a simple hand-crafted controller for
+4. Q-learning has been used in an elevator dispatching task (Crites & Barto, 1996). The
+problem, which has been implemented in simulation only at this stage, involved four
+elevators servicing ten oors. The objective was to minimize the average squared
+wait time for passengers, discounted into future time. The problem can be posed as a
+discrete Markov system, but there are 1022 states even in the most simpli ed version of
+the problem. Crites and Barto used neural networks for function approximation and
+provided an excellent comparison study of their Q-learning approach against the most
+popular and the most sophisticated elevator dispatching algorithms. The squared wait
+time of their controller was approximately 7% less than the best alternative algorithm
+(\Empty the System" heuristic with a receding horizon controller) and less than half
+the squared wait time of the controller most frequently used in real elevator systems.
+5. The nal example concerns an application of reinforcement learning by one of the
+authors of this survey to a packaging task from a food processing industry. The
+problem involves lling containers with variable numbers of non-identical products.
+The product characteristics also vary with time, but can be sensed. Depending on
+the task, various constraints are placed on the container- lling procedure. Here are
+ The mean weight of all containers produced by a shift must not be below the
+ The number of containers below the declared weight must be less than P %.
+ No containers may be produced below weight W 0.
+Such tasks are controlled by machinery which operates according to various setpoints.
+Conventional practice is that setpoints are chosen by human operators, but this choice
+is not easy as it is dependent on the current product characteristics and the current
+task constraints. The dependency is often dicult to model and highly non-linear.
+The task was posed as a nite-horizon Markov decision task in which the state of the
+system is a function of the product characteristics, the amount of time remaining in
+the production shift and the mean wastage and percent below declared in the shift
+so far. The system was discretized into 200,000 discrete states and local weighted
+regression was used to learn and generalize a transition model. Prioritized sweeping was used to maintain an optimal value function as each new piece of transition
+information was obtained. In simulated experiments the savings were considerable,
+typically with wastage reduced by a factor of ten. Since then the system has been
+deployed successfully in several factories within the United States.
+Some interesting aspects of practical reinforcement learning come to light from these
+examples. The most striking is that in all cases, to make a real system work it proved
+necessary to supplement the fundamental algorithm with extra pre-programmed knowledge.
+Supplying extra knowledge comes at a price: more human e ort and insight is required and
+the system is subsequently less autonomous. But it is also clear that for tasks such as
+these, a knowledge-free approach would not have achieved worthwhile performance within
+What forms did this pre-programmed knowledge take? It included an assumption of
+linearity for the juggling robot's policy, a manual breaking up of the task into subtasks for
+the two mobile-robot examples, while the box-pusher also used a clustering technique for
+the Q values which assumed locally consistent Q values. The four disk-collecting robots
+additionally used a manually discretized state space. The packaging example had far fewer
+dimensions and so required correspondingly weaker assumptions, but there, too, the assumption of local piecewise continuity in the transition model enabled massive reductions
+The exploration strategies are interesting too. The juggler used careful statistical analysis to judge where to pro tably experiment. However, both mobile robot applications
+were able to learn well with greedy exploration|always exploiting without deliberate exploration. The packaging task used optimism in the face of uncertainty. None of these
+strategies mirrors theoretically optimal (but computationally intractable) exploration, and
+Finally, it is also worth considering the computational regimes of these experiments.
+They were all very di erent, which indicates that the di ering computational demands of
+various reinforcement learning algorithms do indeed have an array of di ering applications.
+The juggler needed to make very fast decisions with low latency between each hit, but
+had long periods (30 seconds and more) between each trial to consolidate the experiences
+collected on the previous trial and to perform the more aggressive computation necessary
+to produce a new reactive controller on the next trial. The box-pushing robot was meant to
+operate autonomously for hours and so had to make decisions with a uniform length control
+cycle. The cycle was suciently long for quite substantial computations beyond simple Qlearning backups. The four disk-collecting robots were particularly interesting. Each robot
+had a short life of less than 20 minutes (due to battery constraints) meaning that substantial
+number crunching was impractical, and any signi cant combinatorial search would have
+used a signi cant fraction of the robot's learning lifetime. The packaging task had easy
+constraints. One decision was needed every few minutes. This provided opportunities for
+fully computing the optimal value function for the 200,000-state system between every
+control cycle, in addition to performing massive cross-validation-based optimization of the
+A great deal of further work is currently in progress on practical implementations of
+reinforcement learning. The insights and task constraints that they produce will have an
+important e ect on shaping the kind of algorithms that are developed in future.
+There are a variety of reinforcement-learning techniques that work e ectively on a variety
+of small problems. But very few of these techniques scale well to larger problems. This is
+not because researchers have done a bad job of inventing learning techniques, but because
+it is very dicult to solve arbitrary problems in the general case. In order to solve highly
+complex problems, we must give up tabula rasa learning techniques and begin to incorporate
+bias that will give leverage to the learning process.
+The necessary bias can come in a variety of forms, including the following:
+shaping: The technique of shaping is used in training animals (Hilgard & Bower, 1975); a
+teacher presents very simple problems to solve rst, then gradually exposes the learner
+to more complex problems. Shaping has been used in supervised-learning systems,
+and can be used to train hierarchical reinforcement-learning systems from the bottom
+up (Lin, 1991), and to alleviate problems of delayed reinforcement by decreasing the
+delay until the problem is well understood (Dorigo & Colombetti, 1994; Dorigo, 1995).
+local reinforcement signals: Whenever possible, agents should be given reinforcement
+signals that are local. In applications in which it is possible to compute a gradient,
+rewarding the agent for taking steps up the gradient, rather than just for achieving
+the nal goal, can speed learning signi cantly (Mataric, 1994).
+imitation: An agent can learn by \watching" another agent perform the task (Lin, 1991).
+For real robots, this requires perceptual abilities that are not yet available. But
+another strategy is to have a human supply appropriate motor commands to a robot
+through a joystick or steering wheel (Pomerleau, 1993).
+problem decomposition: Decomposing a huge learning problem into a collection of smaller
+ones, and providing useful reinforcement signals for the subproblems is a very powerful technique for biasing learning. Most interesting examples of robotic reinforcement
+learning employ this technique to some extent (Connell & Mahadevan, 1993).
+re exes: One thing that keeps agents that know nothing from learning anything is that
+they have a hard time even nding the interesting parts of the space; they wander
+around at random never getting near the goal, or they are always \killed" immediately.
+These problems can be ameliorated by programming a set of \re exes" that cause the
+agent to act initially in some way that is reasonable (Mataric, 1994; Singh, Barto,
+Grupen, & Connolly, 1994). These re exes can eventually be overridden by more
+detailed and accurate learned knowledge, but they at least keep the agent alive and
+pointed in the right direction while it is trying to learn. Recent work by Millan (1996)
+explores the use of re exes to make robot learning safer and more ecient.
+With appropriate biases, supplied by human programmers or teachers, complex reinforcementlearning problems will eventually be solvable. There is still much work to be done and many
+interesting questions remaining for learning techniques and especially regarding methods for
+approximating, decomposing, and incorporating bias into problems.
+Thanks to Marco Dorigo and three anonymous reviewers for comments that have helped
+to improve this paper. Also thanks to our many colleagues in the reinforcement-learning
+community who have done this work and explained it to us.
+Leslie Pack Kaelbling was supported in part by NSF grants IRI-9453383 and IRI9312395. Michael Littman was supported in part by Bellcore. Andrew Moore was supported
+in part by an NSF Research Initiation Award and by 3M Corporation.
+Ackley, D. H., & Littman, M. L. (1990). Generalization and scaling in reinforcement learning. In Touretzky, D. S. (Ed.), Advances in Neural Information Processing Systems
+2, pp. 550{557 San Mateo, CA. Morgan Kaufmann.
+Albus, J. S. (1975). A new approach to manipulator control: Cerebellar model articulation
+controller (cmac). Journal of Dynamic Systems, Measurement and Control, 97, 220{
+Albus, J. S. (1981). Brains, Behavior, and Robotics. BYTE Books, Subsidiary of McGrawHill, Peterborough, New Hampshire.
+Anderson, C. W. (1986). Learning and Problem Solving with Multilayer Connectionist
+Systems. Ph.D. thesis, University of Massachusetts, Amherst, MA.
+Ashar, R. R. (1994). Hierarchical learning in stochastic domains. Master's thesis, Brown
+Baird, L. (1995). Residual algorithms: Reinforcement learning with function approximation. In Prieditis, A., & Russell, S. (Eds.), Proceedings of the Twelfth International
+Conference on Machine Learning, pp. 30{37 San Francisco, CA. Morgan Kaufmann.
+Baird, L. C., & Klopf, A. H. (1993). Reinforcement learning with high-dimensional, continuous actions. Tech. rep. WL-TR-93-1147, Wright-Patterson Air Force Base Ohio:
+Barto, A. G., Bradtke, S. J., & Singh, S. P. (1995). Learning to act using real-time dynamic
+programming. Arti cial Intelligence, 72 (1), 81{138.
+Barto, A. G., Sutton, R. S., & Anderson, C. W. (1983). Neuronlike adaptive elements that
+can solve dicult learning control problems. IEEE Transactions on Systems, Man,
+Bellman, R. (1957). Dynamic Programming. Princeton University Press, Princeton, NJ.
+Berenji, H. R. (1991). Arti cial neural networks and approximate reasoning for intelligent
+control in space. In American Control Conference, pp. 1075{1080.
+Berry, D. A., & Fristedt, B. (1985). Bandit Problems: Sequential Allocation of Experiments.
+Bertsekas, D. P. (1987). Dynamic Programming: Deterministic and Stochastic Models.
+Bertsekas, D. P. (1995). Dynamic Programming and Optimal Control. Athena Scienti c,
+Bertsekas, D. P., & Casta~non, D. A. (1989). Adaptive aggregation for in nite horizon
+dynamic programming. IEEE Transactions on Automatic Control, 34 (6), 589{598.
+Bertsekas, D. P., & Tsitsiklis, J. N. (1989). Parallel and Distributed Computation: Numerical Methods. Prentice-Hall, Englewood Cli s, NJ.
+Box, G. E. P., & Draper, N. R. (1987). Empirical Model-Building and Response Surfaces.
+Boyan, J. A., & Moore, A. W. (1995). Generalization in reinforcement learning: Safely
+approximating the value function. In Tesauro, G., Touretzky, D. S., & Leen, T. K.
+(Eds.), Advances in Neural Information Processing Systems 7 Cambridge, MA. The
+Burghes, D., & Graham, A. (1980). Introduction to Control Theory including Optimal
+Cassandra, A. R., Kaelbling, L. P., & Littman, M. L. (1994). Acting optimally in partially
+observable stochastic domains. In Proceedings of the Twelfth National Conference on
+Chapman, D., & Kaelbling, L. P. (1991). Input generalization in delayed reinforcement
+learning: An algorithm and performance comparisons. In Proceedings of the International Joint Conference on Arti cial Intelligence Sydney, Australia.
+Chrisman, L. (1992). Reinforcement learning with perceptual aliasing: The perceptual
+distinctions approach. In Proceedings of the Tenth National Conference on Arti cial
+Intelligence, pp. 183{188 San Jose, CA. AAAI Press.
+Chrisman, L., & Littman, M. (1993). Hidden state and short-term memory.. Presentation
+at Reinforcement Learning Workshop, Machine Learning Conference.
+Cichosz, P., & Mulawka, J. J. (1995). Fast and ecient reinforcement learning with truncated temporal di erences. In Prieditis, A., & Russell, S. (Eds.), Proceedings of the
+Twelfth International Conference on Machine Learning, pp. 99{107 San Francisco,
+Cleveland, W. S., & Delvin, S. J. (1988). Locally weighted regression: An approach to
+regression analysis by local tting. Journal of the American Statistical Association,
+Cli , D., & Ross, S. (1994). Adding temporary memory to ZCS. Adaptive Behavior, 3 (2),
+Condon, A. (1992). The complexity of stochastic games. Information and Computation,
+Connell, J., & Mahadevan, S. (1993). Rapid task learning for real robots. In Robot Learning.
+Crites, R. H., & Barto, A. G. (1996). Improving elevator performance using reinforcement
+learning. In Touretzky, D., Mozer, M., & Hasselmo, M. (Eds.), Neural Information
+Dayan, P. (1992). The convergence of TD() for general . Machine Learning, 8 (3), 341{
+Dayan, P., & Hinton, G. E. (1993). Feudal reinforcement learning. In Hanson, S. J., Cowan,
+J. D., & Giles, C. L. (Eds.), Advances in Neural Information Processing Systems 5
+Dayan, P., & Sejnowski, T. J. (1994). TD() converges with probability 1. Machine Learning, 14 (3).
+Dean, T., Kaelbling, L. P., Kirman, J., & Nicholson, A. (1993). Planning with deadlines in
+stochastic domains. In Proceedings of the Eleventh National Conference on Arti cial
+D'Epenoux, F. (1963). A probabilistic production and inventory problem. Management
+Derman, C. (1970). Finite State Markovian Decision Processes. Academic Press, New York.
+Dorigo, M., & Bersini, H. (1994). A comparison of q-learning and classi er systems. In
+From Animals to Animats: Proceedings of the Third International Conference on the
+Simulation of Adaptive Behavior Brighton, UK.
+Dorigo, M., & Colombetti, M. (1994). Robot shaping: Developing autonomous agents
+through learning. Arti cial Intelligence, 71 (2), 321{370.
+Dorigo, M. (1995). Alecsys and the AutonoMouse: Learning to control a real robot by
+distributed classi er systems. Machine Learning, 19.
+Fiechter, C.-N. (1994). Ecient reinforcement learning. In Proceedings of the Seventh
+Annual ACM Conference on Computational Learning Theory, pp. 88{97. Association
+Gittins, J. C. (1989). Multi-armed Bandit Allocation Indices. Wiley-Interscience series in
+systems and optimization. Wiley, Chichester, NY.
+Goldberg, D. (1989). Genetic algorithms in search, optimization, and machine learning.
+Gordon, G. J. (1995). Stable function approximation in dynamic programming. In Prieditis, A., & Russell, S. (Eds.), Proceedings of the Twelfth International Conference on
+Machine Learning, pp. 261{268 San Francisco, CA. Morgan Kaufmann.
+Gullapalli, V. (1990). A stochastic reinforcement learning algorithm for learning real-valued
+Gullapalli, V. (1992). Reinforcement learning and its application to control. Ph.D. thesis,
+University of Massachusetts, Amherst, MA.
+Hilgard, E. R., & Bower, G. H. (1975). Theories of Learning (fourth edition). Prentice-Hall,
+Ho man, A. J., & Karp, R. M. (1966). On nonterminating stochastic games. Management
+Holland, J. H. (1975). Adaptation in Natural and Arti cial Systems. University of Michigan
+Howard, R. A. (1960). Dynamic Programming and Markov Processes. The MIT Press,
+Jaakkola, T., Jordan, M. I., & Singh, S. P. (1994). On the convergence of stochastic iterative
+dynamic programming algorithms. Neural Computation, 6 (6).
+Jaakkola, T., Singh, S. P., & Jordan, M. I. (1995). Monte-carlo reinforcement learning in
+non-Markovian decision problems. In Tesauro, G., Touretzky, D. S., & Leen, T. K.
+(Eds.), Advances in Neural Information Processing Systems 7 Cambridge, MA. The
+Kaelbling, L. P. (1993a). Hierarchical learning in stochastic domains: Preliminary results.
+In Proceedings of the Tenth International Conference on Machine Learning Amherst,
+Kaelbling, L. P. (1993b). Learning in Embedded Systems. The MIT Press, Cambridge, MA.
+Kaelbling, L. P. (1994a). Associative reinforcement learning: A generate and test algorithm.
+Kaelbling, L. P. (1994b). Associative reinforcement learning: Functions in k-DNF. Machine
+Kirman, J. (1994). Predicting Real-Time Planner Performance by Domain Characterization.
+Ph.D. thesis, Department of Computer Science, Brown University.
+Koenig, S., & Simmons, R. G. (1993). Complexity analysis of real-time reinforcement
+learning. In Proceedings of the Eleventh National Conference on Arti cial Intelligence,
+pp. 99{105 Menlo Park, California. AAAI Press/MIT Press.
+Kumar, P. R., & Varaiya, P. P. (1986). Stochastic Systems: Estimation, Identi cation, and
+Adaptive Control. Prentice Hall, Englewood Cli s, New Jersey.
+Lee, C. C. (1991). A self learning rule-based controller employing approximate reasoning
+and neural net concepts. International Journal of Intelligent Systems, 6 (1), 71{93.
+Lin, L.-J. (1991). Programming robots using reinforcement learning and teaching. In
+Proceedings of the Ninth National Conference on Arti cial Intelligence.
+Lin, L.-J. (1993a). Hierachical learning of robot skills by reinforcement. In Proceedings of
+the International Conference on Neural Networks.
+Lin, L.-J. (1993b). Reinforcement Learning for Robots Using Neural Networks. Ph.D. thesis,
+Carnegie Mellon University, Pittsburgh, PA.
+Lin, L.-J., & Mitchell, T. M. (1992). Memory approaches to reinforcement learning in nonMarkovian domains. Tech. rep. CMU-CS-92-138, Carnegie Mellon University, School
+Littman, M. L. (1994a). Markov games as a framework for multi-agent reinforcement learning. In Proceedings of the Eleventh International Conference on Machine Learning,
+pp. 157{163 San Francisco, CA. Morgan Kaufmann.
+Littman, M. L. (1994b). Memoryless policies: Theoretical limitations and practical results.
+In Cli , D., Husbands, P., Meyer, J.-A., & Wilson, S. W. (Eds.), From Animals
+to Animats 3: Proceedings of the Third International Conference on Simulation of
+Adaptive Behavior Cambridge, MA. The MIT Press.
+Littman, M. L., Cassandra, A., & Kaelbling, L. P. (1995a). Learning policies for partially
+observable environments: Scaling up. In Prieditis, A., & Russell, S. (Eds.), Proceedings of the Twelfth International Conference on Machine Learning, pp. 362{370 San
+Littman, M. L., Dean, T. L., & Kaelbling, L. P. (1995b). On the complexity of solving
+Markov decision problems. In Proceedings of the Eleventh Annual Conference on
+Uncertainty in Arti cial Intelligence (UAI{95) Montreal, Quebec, Canada.
+Lovejoy, W. S. (1991). A survey of algorithmic methods for partially observable Markov
+decision processes. Annals of Operations Research, 28, 47{66.
+Maes, P., & Brooks, R. A. (1990). Learning to coordinate behaviors. In Proceedings Eighth
+National Conference on Arti cial Intelligence, pp. 796{802. Morgan Kaufmann.
+Mahadevan, S. (1994). To discount or not to discount in reinforcement learning: A case
+study comparing R learning and Q learning. In Proceedings of the Eleventh International Conference on Machine Learning, pp. 164{172 San Francisco, CA. Morgan
+Mahadevan, S. (1996). Average reward reinforcement learning: Foundations, algorithms,
+and empirical results. Machine Learning, 22 (1).
+Mahadevan, S., & Connell, J. (1991a). Automatic programming of behavior-based robots
+using reinforcement learning. In Proceedings of the Ninth National Conference on
+Mahadevan, S., & Connell, J. (1991b). Scaling reinforcement learning to robotics by exploiting the subsumption architecture. In Proceedings of the Eighth International
+Workshop on Machine Learning, pp. 328{332.
+Mataric, M. J. (1994). Reward functions for accelerated learning. In Cohen, W. W., &
+Hirsh, H. (Eds.), Proceedings of the Eleventh International Conference on Machine
+McCallum, A. K. (1995). Reinforcement Learning with Selective Perception and Hidden
+State. Ph.D. thesis, Department of Computer Science, University of Rochester.
+McCallum, R. A. (1993). Overcoming incomplete perception with utile distinction memory.
+In Proceedings of the Tenth International Conference on Machine Learning, pp. 190{
+196 Amherst, Massachusetts. Morgan Kaufmann.
+McCallum, R. A. (1995). Instance-based utile distinctions for reinforcement learning with
+hidden state. In Proceedings of the Twelfth International Conference Machine Learning, pp. 387{395 San Francisco, CA. Morgan Kaufmann.
+Meeden, L., McGraw, G., & Blank, D. (1993). Emergent control and planning in an autonomous vehicle. In Touretsky, D. (Ed.), Proceedings of the Fifteenth Annual Meeting
+of the Cognitive Science Society, pp. 735{740. Lawerence Erlbaum Associates, Hillsdale, NJ.
+Millan, J. d. R. (1996). Rapid, safe, and incremental learning of navigation strategies. IEEE
+Transactions on Systems, Man, and Cybernetics, 26 (3).
+Monahan, G. E. (1982). A survey of partially observable Markov decision processes: Theory,
+models, and algorithms. Management Science, 28, 1{16.
+Moore, A. W. (1991). Variable resolution dynamic programming: Eciently learning action maps in multivariate real-valued spaces. In Proc. Eighth International Machine
+Moore, A. W. (1994). The parti-game algorithm for variable resolution reinforcement learning in multidimensional state-spaces. In Cowan, J. D., Tesauro, G., & Alspector, J.
+(Eds.), Advances in Neural Information Processing Systems 6, pp. 711{718 San Mateo,
+Moore, A. W., & Atkeson, C. G. (1992). An investigation of memory-based function approximators for learning control. Tech. rep., MIT Arti cal Intelligence Laboratory,
+Moore, A. W., & Atkeson, C. G. (1993). Prioritized sweeping: Reinforcement learning with
+less data and less real time. Machine Learning, 13.
+Moore, A. W., Atkeson, C. G., & Schaal, S. (1995). Memory-based learning for control.
+Tech. rep. CMU-RI-TR-95-18, CMU Robotics Institute.
+Narendra, K., & Thathachar, M. A. L. (1989). Learning Automata: An Introduction.
+Narendra, K. S., & Thathachar, M. A. L. (1974). Learning automata|a survey. IEEE
+Transactions on Systems, Man, and Cybernetics, 4 (4), 323{334.
+Peng, J., & Williams, R. J. (1993). Ecient learning and planning within the Dyna framework. Adaptive Behavior, 1 (4), 437{454.
+Peng, J., & Williams, R. J. (1994). Incremental multi-step Q-learning. In Proceedings of the
+Eleventh International Conference on Machine Learning, pp. 226{232 San Francisco,
+Pomerleau, D. A. (1993). Neural network perception for mobile robot guidance. Kluwer
+Puterman, M. L. (1994). Markov Decision Processes|Discrete Stochastic Dynamic Programming. John Wiley & Sons, Inc., New York, NY.
+Puterman, M. L., & Shin, M. C. (1978). Modi ed policy iteration algorithms for discounted
+Markov decision processes. Management Science, 24, 1127{1137.
+Ring, M. B. (1994). Continual Learning in Reinforcement Environments. Ph.D. thesis,
+University of Texas at Austin, Austin, Texas.
+Rude, U. (1993). Mathematical and computational techniques for multilevel adaptive methods. Society for Industrial and Applied Mathematics, Philadelphia, Pennsylvania.
+Rumelhart, D. E., & McClelland, J. L. (Eds.). (1986). Parallel Distributed Processing:
+Explorations in the microstructures of cognition. Volume 1: Foundations. The MIT
+Rummery, G. A., & Niranjan, M. (1994). On-line Q-learning using connectionist systems.
+Tech. rep. CUED/F-INFENG/TR166, Cambridge University.
+Rust, J. (1996). Numerical dynamic programming in economics. In Handbook of Computational Economics. Elsevier, North Holland.
+Sage, A. P., & White, C. C. (1977). Optimum Systems Control. Prentice Hall.
+Salganico , M., & Ungar, L. H. (1995). Active exploration and learning in real-valued
+spaces using multi-armed bandit allocation indices. In Prieditis, A., & Russell, S.
+(Eds.), Proceedings of the Twelfth International Conference on Machine Learning,
+pp. 480{487 San Francisco, CA. Morgan Kaufmann.
+Samuel, A. L. (1959). Some studies in machine learning using the game of checkers. IBM
+Journal of Research and Development, 3, 211{229. Reprinted in E. A. Feigenbaum
+and J. Feldman, editors, Computers and Thought, McGraw-Hill, New York 1963.
+Schaal, S., & Atkeson, C. (1994). Robot juggling: An implementation of memory-based
+Schmidhuber, J. (1996). A general method for multi-agent learning and incremental selfimprovement in unrestricted environments. In Yao, X. (Ed.), Evolutionary Computation: Theory and Applications. Scienti c Publ. Co., Singapore.
+Schmidhuber, J. H. (1991a). Curious model-building control systems. In Proc. International
+Joint Conference on Neural Networks, Singapore, Vol. 2, pp. 1458{1463. IEEE.
+Schmidhuber, J. H. (1991b). Reinforcement learning in Markovian and non-Markovian
+environments. In Lippman, D. S., Moody, J. E., & Touretzky, D. S. (Eds.), Advances
+in Neural Information Processing Systems 3, pp. 500{506 San Mateo, CA. Morgan
+Schraudolph, N. N., Dayan, P., & Sejnowski, T. J. (1994). Temporal di erence learning of
+position evaluation in the game of Go. In Cowan, J. D., Tesauro, G., & Alspector,
+J. (Eds.), Advances in Neural Information Processing Systems 6, pp. 817{824 San
+Schrijver, A. (1986). Theory of Linear and Integer Programming. Wiley-Interscience, New
+Schwartz, A. (1993). A reinforcement learning method for maximizing undiscounted rewards. In Proceedings of the Tenth International Conference on Machine Learning,
+pp. 298{305 Amherst, Massachusetts. Morgan Kaufmann.
+Singh, S. P., Barto, A. G., Grupen, R., & Connolly, C. (1994). Robust reinforcement
+learning in motion planning. In Cowan, J. D., Tesauro, G., & Alspector, J. (Eds.),
+Advances in Neural Information Processing Systems 6, pp. 655{662 San Mateo, CA.
+Singh, S. P., & Sutton, R. S. (1996). Reinforcement learning with replacing eligibility traces.
+Singh, S. P. (1992a). Reinforcement learning with a hierarchy of abstract models. In
+Proceedings of the Tenth National Conference on Arti cial Intelligence, pp. 202{207
+Singh, S. P. (1992b). Transfer of learning by composing solutions of elemental sequential
+Singh, S. P. (1993). Learning to Solve Markovian Decision Processes. Ph.D. thesis, Department of Computer Science, University of Massachusetts. Also, CMPSCI Technical
+Stengel, R. F. (1986). Stochastic Optimal Control. John Wiley and Sons.
+Sutton, R. S. (1996). Generalization in Reinforcement Learning: Successful Examples Using
+Sparse Coarse Coding. In Touretzky, D., Mozer, M., & Hasselmo, M. (Eds.), Neural
+Sutton, R. S. (1984). Temporal Credit Assignment in Reinforcement Learning. Ph.D. thesis,
+University of Massachusetts, Amherst, MA.
+Sutton, R. S. (1988). Learning to predict by the method of temporal di erences. Machine
+Sutton, R. S. (1990). Integrated architectures for learning, planning, and reacting based
+on approximating dynamic programming. In Proceedings of the Seventh International
+Conference on Machine Learning Austin, TX. Morgan Kaufmann.
+Sutton, R. S. (1991). Planning by incremental dynamic programming. In Proceedings
+of the Eighth International Workshop on Machine Learning, pp. 353{357. Morgan
+Tesauro, G. (1992). Practical issues in temporal di erence learning. Machine Learning, 8,
+Tesauro, G. (1994). TD-Gammon, a self-teaching backgammon program, achieves masterlevel play. Neural Computation, 6 (2), 215{219.
+Tesauro, G. (1995). Temporal di erence learning and TD-Gammon. Communications of
+Tham, C.-K., & Prager, R. W. (1994). A modular q-learning architecture for manipulator task decomposition. In Proceedings of the Eleventh International Conference on
+Machine Learning San Francisco, CA. Morgan Kaufmann.
+Thrun, S. (1995). Learning to play the game of chess. In Tesauro, G., Touretzky, D. S., &
+Leen, T. K. (Eds.), Advances in Neural Information Processing Systems 7 Cambridge,
+Thrun, S., & Schwartz, A. (1993). Issues in using function approximation for reinforcement
+learning. In Mozer, M., Smolensky, P., Touretzky, D., Elman, J., & Weigend, A.
+(Eds.), Proceedings of the 1993 Connectionist Models Summer School Hillsdale, NJ.
+Thrun, S. B. (1992). The role of exploration in learning control. In White, D. A., &
+Sofge, D. A. (Eds.), Handbook of Intelligent Control: Neural, Fuzzy, and Adaptive
+Approaches. Van Nostrand Reinhold, New York, NY.
+Tsitsiklis, J. N. (1994). Asynchronous stochastic approximation and Q-learning. Machine
+Tsitsiklis, J. N., & Van Roy, B. (1996). Feature-based methods for large scale dynamic
+Valiant, L. G. (1984). A theory of the learnable. Communications of the ACM, 27 (11),
+Watkins, C. J. C. H. (1989). Learning from Delayed Rewards. Ph.D. thesis, King's College,
+Watkins, C. J. C. H., & Dayan, P. (1992). Q-learning. Machine Learning, 8 (3), 279{292.
+Whitehead, S. D. (1991). Complexity and cooperation in Q-learning. In Proceedings of the
+Eighth International Workshop on Machine Learning Evanston, IL. Morgan Kaufmann.
+Williams, R. J. (1987). A class of gradient-estimating algorithms for reinforcement learning
+in neural networks. In Proceedings of the IEEE First International Conference on
+Williams, R. J. (1992). Simple statistical gradient-following algorithms for connectionist
+reinforcement learning. Machine Learning, 8 (3), 229{256.
+Williams, R. J., & Baird, III, L. C. (1993a). Analysis of some incremental variants of policy
+iteration: First steps toward understanding actor-critic learning systems. Tech. rep.
+NU-CCS-93-11, Northeastern University, College of Computer Science, Boston, MA.
+Williams, R. J., & Baird, III, L. C. (1993b). Tight performance bounds on greedy policies
+based on imperfect value functions. Tech. rep. NU-CCS-93-14, Northeastern University, College of Computer Science, Boston, MA.
+Wilson, S. (1995). Classi er tness based on accuracy. Evolutionary Computation, 3 (2),
+Zhang, W., & Dietterich, T. G. (1995). A reinforcement learning approach to job-shop
+scheduling. In Proceedings of the International Joint Conference on Arti cial Intellience.

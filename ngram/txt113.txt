@@ -1,0 +1,166 @@
+Production planning using dynamic planned
+Artificial intelligence (AI) is the intelligence exhibited by machines or software
+and thus defined as "the study of the design of intelligent agents" [5] 1 . Its purpose is to understand how intelligent behavior is possible and the methodology
+is to design, build, and experiment with computational systems that perform
+tasks commonly viewed as intelligent. AI stands for multiple research branches
+including deduction, knowledge representation, learning, planning, and natural
+Therefore, one major behavior robots need to be able to mimic in order
+to be called "intelligent" is learning, which almost always builds on past experiences. The field of machine learning got increasingly popular over the last
+decades mainly for two reasons. First, it can be applied in many areas often
+yielding astonishing results. And secondly, thanks to Moore’s Law [3] the computing power increased to a point where many of these algorithms can be run
+on devices owned by people all over the world, e.g. mobile devices. It is the
+field of study that tries to mimic human learning capabilities using computer
+algorithms. This is done by mathematically modeling the ability of learning a
+task by repeating or simulating its outcome according to a given input. Thus,
+machine learning algorithms try to map input data to some specific output. One
+common application of machine learning is known as data mining, which aroused
+of machine learning. Whole economic sectors depend on data mining, like risk
+assessment of banks and insurances, recommender systems of online-shops or
+Machine learning itself can be divided into three categories: supervised learning, unsupervised learning and reinforcement learning. The most important applications are regression, clustering, classification, anomaly detection, feature
+learning, and reinforcement learning. However, we do not claim completeness
+of this list, as there are many problems which can be solved by modern machine
+is a quite stretchable term, which is often interpreted differently by different people.
+Figure 1: Under-fitting (left) and overfitting (right) of regression graphs. The
+red dots are the input data points and the blue line is the output of the regression
+The main application of supervised learning techniques are classification
+and clustering. In supervised learning the algorithms are trained on labeled
+data sets, which link some input data to the desired output. The algorithm,
+when run in the training phase learns how to map the data from input to output. A commonly known example of a supervised machine learning algorithm
+is regression. The regression algorithm finds according to the given training
+data a function that minimizes the sum of all errors (calculated with the actual
+function value and given training data output value) while trying to find the
+right degree for the polynomial in order to prevent under- and overfitting (cf.
+Figure 1). Decision trees work similar, just that they do not use a polynomial
+to distinguish between the classes, but separate the data using hyperplanes,
+cf. Figure 2. However, the list of supervised machine learning algorithms is
+quite long. Important algorithms are: decision trees, k-nn (k-nearest neighbors), naive Bayes, neural networks, regression, (support) vector machines or
+Unsupervised learning concentrates on clustering and models learning latent variables (used in graphical models which represent random variables or
+probabilities known from Bayesian networks or Markov random fields). In unsupervised learning the algorithms do not have the according output data given.
+Thus, they map the input data according to it’s structure to some output. For
+instance clustering algorithms try to label similar data instances according to
+their input data (e.g., location in the solution space). A well-known and simple
+algorithm is k-means, which classifies the data by finding positions for the k
+means with the property of having the smallest sum (local minimum) of distances between data points and the closest mean to that data point. Figure 3
+shows an example of a k-means algorithm run with k = 3. The different colors represent the border of the classification, the squares are the training data
+points and the circles symbolize the means. Other important algorithms are:
+hierarchical clustering, expectation–maximization (EM), and principal component analysis.
+Reinforcement Learning is somewhat a supervised learning technique, where
+Figure 2: Visualization of a decision tree. It separates the data with hyperplanes parallel to the all axes except for the one being compared to.
+it differs in the way that input/output pairs are actually never presented to the
+algorithm, but a function rewards the outcome of the taken actions (reward
+function) to some later point. It is most often applied to control problems,
+games and other sequential decision making tasks. The idea behind these algorithms is easily explained by an example. For instance an agent playing a game
+gets rewarded when the game ends according to the output. The agent then will
+learn the game by itself randomly choosing actions. When the learning phase
+is over it has developed a tactic (value function) on how to play the game
+and (almost) always (according to specified policy) chooses the action which
+had the highest rewards in the past. Thus, the algorithm learns interactively by
+repeatedly trying out different available actions to be able to gain information
+about the solution space. In general it tries to maximize the sum of all rewards.
+More precisely one can compare the idea of how the algorithms learns to how
+humans learn. No wonder that behaviorist psychology has inspired the field of
+reinforcement learning. Just think of how a child tries to learn walking. It tries
+to stand up and walk (action), observes the outcome, e.g. falling down immediately (receiving a reward and thus updating of value function), and changes
+its balance (different action according to policy function) until it succeeds. [10]
+In the area of production and logistics management, a completely different
+research branch, one is confronted with the so called job shop problem. In a job
+shop jobs are assigned to resources (hereinafter called machines) at particular
+times. The goal is to find an optimal assignment according to a given objective
+function, e.g., the minimization of all costs. However, to be able to calculate
+the perfect release time for each job one has to estimate the time between the
+release of an order and its completion in advance. This estimated time span is
+called planned lead-time and obviously will differ from the actual time an order
+needs for completion, the so called flow-time. Flow-times consist of processing,
+setup, control, transport, and waiting times. There are two alternative research
+Figure 3: The output of a k-means algorithm run.
+Reactive lead-time management consider lead-times as exogenous variables, meaning that the variables are independent from the model. Thus, they
+affect the model, but are not affected by the model. Figure 4 illustrates the
+ideas of exogenous variables, where rest of the model is displayed as a cloud.
+The Figure 4 and Figure 5 can be read as Bayesian networks. Thus, variables
+are displayed as circles and if they are known then the background of the circle is grayed out. Furthermore, arrows are used to show the influence of the
+variable on other variables. Rectangles are used to combine multiple instances
+of one variable, e.g. (p. lead-time)1 . . . (p. lead-time)N . Therefore, in Figure 4
+the planned lead-times of all N jobs are known variables (as they are planning
+parameters) and affect the rest of the model.
+The second approach is pro-active lead-time management. There the
+planned lead-time is integrated into the model and therefore affects the model,
+but is also affected by the model. The idea is to control the actual flow-times
+to match pre-determined norms (workload control concept). Figure 5 illustrates
+the model as a cloud in which one can see the integration of the planned leadtimes.
+This master thesis will focus on the reactive lead-time management approach
+in which planned lead-times are planning parameters and affect the model. To
+the best of our knowledge only a few studies exist on that topic ([9, 8, 1, 7]) and
+none of these incorporates the problem with a machine learning approach. The
+idea behind this thesis is to create or adapt a machine learning algorithm (if
+applicable a reinforcement learning algorithm) and evaluate its performance for
+scheduling job shop value chains. Scheduling should however, only be done by
+changing the appropriate planned lead-time of each job, such that a consecutive
+scheduler (e.g. based on FCFS) will actually handle the scheduling. As machine
+learning was not considered for reactive lead-time management in research yet
+this is an interesting combination of two research branches. However, it has to
+be clear that the outcome could also be that combining these two concepts is not
+Figure 4: Exogenous variables are not affected by the model, but they affect the
+model. This Figure represents the correlation of the planned lead-time and the
+rest of the model as it is used in the reactive lead-time management approach.
+The illustration uses the commonly used representation of Bayesian networks,
+Figure 5: Endogenous variables are affected by the model and also affect the
+model. This Figure represents the correlation of the planned lead-time and the
+rest of the model as it is used in the pro-active lead-time management approach.
+The illustration uses the commonly used representation of Bayesian networks,
+in which latent variables are represented as circles with white background.
+possible and the developed algorithm may perform poorly. Thus one research
+question of this thesis is: Does machine learning help to improve scheduling for
+The rest of this concept is structured as follows. The next section will
+motivate the thesis idea. Then the planned way of proceeding is introduced in
+Section 3. Section 4 presents a schedule to give an overview of the workload.
+The author is currently involved in two different studies at the University of
+Innsbruck. Obviously, he studies Information Systems for which this thesis
+will be written. However, he also studies Computer Science and just finished
+courses on machine learning (Introduction to Machine Learning and the lecture
+Advanced Machine Learning which also included a lecture called Probabilistic
+Models and Inference). The idea is to combine the knowledge of both studies
+in this thesis to evaluate the possibilities of machine learning in the area of
+production and logistics management and in case of success come up with an
+algorithm that efficiently schedules job-shop problems for real-world scenarios.
+Furthermore, he is interested in production logistic problems, and would be glad
+if he could contribute to research in that field with this master thesis. Adding to
+this, as he likes production logistic management, he would like to get a deeper
+view into that field by writing a master thesis in that area.
+The research will be started by a literature review. Multiple machine learning algorithms will be considered and compared to the reinforcement learning
+concept. In case another algorithm may have significant advantages to the reinforcement learning algorithms the author of the thesis may decide to implement
+this particular algorithm. Anyway, a model of the problem which fits to the
+the selected algorithm will be created and analytically analyzed and on behalf
+of the analysis improved. To further improve and evaluate the model the algorithms will be implemented and evaluated using data from either a simulation
+or real-word problem. Thus a simulation scenario might be created to gather
+Table 1 shows the planned schedule for this thesis. The most right column
+(EWL) displays the estimated workload for each given task. The schedule is
+split up quarterly as more precise beginning and end date of phases are not easily
+be predicted. This is due to the fact that there are multiple other deadlines to
+be full-filled by the author of the thesis. These deadlines come from multiple
+Thesis concept and specification improvement
+Literature review: reinforcement learning
+Table 1: This table illustrates the planned schedule for the thesis.
+– 3 during winter semester 2015 (Q4/2015 and partly Q1/2016)
+– 1-2 during summer semester 2016 (Q2 + Q3/2016)
+– 3 exams at the beginning of February 2016
+Thus it can be expected that the author can invest about 10-15 hours per
+week while lectures are hold, and 25-35 hours per week otherwise. The granularity of the schedule is kept rough as it is often unclear at this point how the
+phases will evolve while working on the project.
+[1] ST Enns and Pattita Suwanruji. Work load responsive adjustment of
+planned lead times. Journal of Manufacturing Technology Management,
+[2] George Luger. Artificial intelligence : structures and strategies for complex
+problem solving. Benjamin/Cummings Pub. Co, Redwood City, Calif, 1993.
+[3] Gordon Moore. Cramming more components onto integrated circuits. Electronics Magazine, 1965.
+[4] Nils Nilsson. Artificial Intelligence : a new synthesis. Morgan Kaufmann
+[5] David Poole. Computational intelligence : a logical approach. Oxford University Press, New York, 1998.
+[6] Stuart Russell. Artificial intelligence : a modern approach.
+Hall/Pearson Education, Upper Saddle River, N.J, 2003.
+[7] Barış Selçuk. Adaptive lead time quotation in a pull production system
+with lead time responsive demand. Journal of Manufacturing Systems,
+[8] Bariş Selçuk, Ivo JBF Adan, Ton G De Kok, and Jan C Fransoo. An explicit
+analysis of the lead time syndrome: stability condition and performance
+evaluation. International journal of production Research, 47(9):2507–2529,
+[9] Baris Selcuk, Jan C Fransoo, and AG De Kok. The effect of updating lead
+times on the performance of hierarchical planning systems. International
+Journal of Production Economics, 104(2):427–440, 2006.
+[10] Richard S Sutton and Andrew G Barto. Reinforcement learning: An introduction, volume 1. MIT press Cambridge, 1998.

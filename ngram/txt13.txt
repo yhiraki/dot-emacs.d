@@ -1,0 +1,14 @@
+but possibly flawed schedule and iteratively
+In this paper we explore the tradeoff between the
+a system and result in degraded performance.
+states that the resource must not be overallocated.
+of which are beyond the scope of this paper. In [17], we demonstrate
+in rescheduling problems. We have also demonstrated
+ability to reduce the number of weekends in a schedule resulting in lower overtime labor
+2The persistence of the effect is a function of the attribute in question. For example,
+when the power onboard the orbiter is turned on, it remains on for an entire 8 hour shift
+because it is costly to repeatedly cycle the power.
+Figure 4 presentsdata for the entire experimental suite (averagedover
+Miller et al. [31],Currie andTare [32],and Drummond
+÷_+++-+ ÷+-++ +-+_+-++_+++_++ +_+++_+÷ +_++_
+_× x × x x x _ x x_ x × × × × x × _ x x _ _ _ _ _.x._..x..x.×.

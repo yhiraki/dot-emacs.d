@@ -1,0 +1,972 @@
+European Journal of Operational Research 244 (2015) 624–636
+Contents lists available at ScienceDirect
+journal homepage: www.elsevier.com/locate/ejor
+Modeling the dynamics of a multi-product manufacturing system:
+Juliana Keiko Sagawa a,∗, Marcelo Seido Nagano b
+Federal University of São Carlos, São Carlos, Brazil, Rodovia Washington Luís - Km 235, 13565-905, São Carlos – SP, Brazil
+School of Engineering of São Carlos, University of São Paulo, Brazil, Av. Trabalhador Sãocarlense, 400 Centro, 13566-590, São Carlos – SP, Brazil
+In this paper, a continuous multi-product model is developed to represent the shop ﬂoor dynamics of a
+job shop, based on dynamic modeling and on analogies to electrical components. This approach allows the
+mathematical formulation of the model (state representation) and the analysis of its dynamic response via
+simulation. A real case application in the textile industry is presented. Thus, this research contributes in
+the following ways: ﬁrst, proposing a model that is suitable for multi-product systems with intricate job
+shop conﬁguration and that is generalizable to various manufacturing systems; second, presenting a real
+case application of the proposed model. As practical implications, it provides production managers and
+practitioners with a prescriptive decision model that considers the dynamics of the production systems and
+the interdependencies of the decisions made in the shop ﬂoor. From the academic perspective, it contributes
+to the existing literature by presenting the application of an alternative modeling methodology, and by
+extending this methodology to manufacturing systems with multiple products, instead of single-product
+systems. Continuous models such as the one proposed can beneﬁt from a wide range of tools for system
+analysis and control design, come from control theory. Although these tools have been extensively applied
+to model the supply chain, applications devoted to the plant level seem to be neglected over the past years.
+This model also aims to contribute in this direction.
+© 2015 Elsevier B.V. All rights reserved.
+Customers of this era usually expect innovative and differentiated products that are suitable to their individual needs (Jitapaiboon,
+Dobrzykowski, Ragu-Nathan, & Vonderembse, 2013; Piller, Moeslein,
+& Stotko, 2004). This trend requests customer-oriented systems that
+can produce customized products at low costs, aligned to the concept
+of mass-customization (Liu, Shah, & Schroeder, 2012). Furthermore,
+in several manufacturing environments, the production systems are
+subjected to disturbances of many sources, such as changes on product demand and customer requirements, machine breakdowns, urgent jobs, absenteeism, ﬁnancial ﬂuctuations, and so on. All these
+factors demand agility. Agile companies distinguish themselves by
+means of their speed in the planning and execution process, as well
+as their adaptability to changing conditions in the production environment (Wiendahl & Breithaupt, 2000).
+Despite the depicted context, most of the available models to analyze production-inventory systems are based on average performance
+Corresponding author. Tel.: +55 16 3351 9511/ 55 16 3351 8237;
+E-mail addresses: juliana@dep.ufscar.br, j.ksag@yahoo.com.br (J. K. Sagawa),
+http://dx.doi.org/10.1016/j.ejor.2015.01.017
+0377-2217/© 2015 Elsevier B.V. All rights reserved.
+or steady-state conditions (Ortega & Lin, 2004; Suri & Desiraju, 1997).
+The same applies to the models for production scheduling. Lately,
+a reasonable amount of models for dynamic scheduling have been
+developed (Barrena, Canca, Coelho, & Laporte, 2014; Chiang, Cheng,
+& Fu, 2010; Jang, 2002; Weng & Fujimura, 2012); however, the vast
+majority of the scheduling theory considers a static rather than a dynamic situation, as highlighted by Wang and Uzsoy (2002) and Weng,
+The manufacturing and supply chain management areas can certainly beneﬁt from the application of dynamic modeling and control theory. One contribution refers to possibility of interpreting the
+planning and execution processes not as isolated domains but as an
+adaptive process. In addition, the perspective of dynamics allows to
+capture and cope with the changes in supply chain and the environment, and to optimize performance indicators that are diﬃcult
+to express in the static and discrete time models. Yet, the utilization
+of control theory gives way to important kinds of analysis, such as
+stability, robustness and adaptability analysis of a supply chain or
+manufacturing system (Ivanov, Dolgui, & Sokolov, 2012).
+In spite of these potential beneﬁts, different authors argue that
+the domain of dynamics in the supply chain area should receive
+more attention (Ivanov, et al., 2012; Proth, 2007; Sarimveis, Patrinos,
+Tarantilis, & Kiranoudis, 2008). The literature lacks systematic
+J. K. Sagawa, M. S. Nagano / European Journal of Operational Research 244 (2015) 624–636
+analyses and documentation of the impact of dynamics on supply
+chain proﬁtability, both at the planning level—concerning uncertainties and robustness to dynamic events, and at the execution control
+level—considering adaptive (re)planning and (re)scheduling (Ivanov
+et al., 2012). Thus, further research on the dynamics and control of
+manufacturing systems and supply chain is paramount to fulﬁll these
+gaps. System Dynamics and Control Theory provide a range of tools
+for modeling and analyzing dynamic systems that can be suitably applied to production planning and control of manufacturing systems
+In this paper, a multi-product model to represent the shop ﬂoor
+dynamics of a job shop is proposed. The model is based on analogies between production entities, such as machines and stocks, and
+electrical components, such as capacitors and resistors. The equations
+that represent the system behavior are derived from the properties of
+these components. The proposed model is applied to depict a manufacturing system of polypropylene woven bags, using real data from
+a package company. Emphasis is set on the modeling of the system
+and on the mathematical development of the state equations.
+From the academic perspective, this paper aims to present the
+application of an alternative modeling approach and to evaluate its
+potential of generalization to different multi-product manufacturing systems. The proposed model is based to some extent on basic
+manufacturing entities proposed by Ferney (2000), which were only
+applied to a theoretical single-product production system. Therefore,
+this paper also contributes to extend the existing approach so that it
+can be applied to manufacturing systems with multiple products. The
+case presented illustrates the applicability of the model in a practical
+situation, using ﬁeld data and parameters of an actual manufacturing
+system. As practical implications, this research provides production
+managers and practitioners with a prescriptive decision model that
+considers the dynamics of the production systems and show the interdependencies of the decisions made in the shop ﬂoor.
+Most of the extant control theory research applied to manufacturing concerns production inventory-systems in the context of supply
+chain, as it can be seen in Ortega and Lin (2004) and Sarimveis et al.
+(2008). As mentioned, the speciﬁc literature lacks a larger variety of
+models devoted to scheduling and shop ﬂoor (short-term) production
+control. The proposed model also attempts to lessen this gap.
+According to Sarimveis et al. (2008) some assumptions on which
+the dynamic models of supply chain stand upon are not valid in reality. In some models, the stocks are not bounded below by zero neither
+bounded above due to limited storage capacities. Moreover, the models usually represent single stage systems, considering the production
+of a single product or the total aggregate production. The proposed
+model presents limitations, as any other model. The shop ﬂoor behavior is not analyzed at the level of individual products, i.e., the model
+does not consider the scheduling of individual jobs. In addition, differences in the processing times of products belonging to different families are also not taken into account. Nonetheless, the proposed model
+overcomes one of the usual limitations of the production-inventory
+and supply chain models by considering the production of several
+products grouped into different families. The intermediate stocks are
+also bounded below by zero. If a given intermediate stock reaches
+this condition, the downstream machine gets idle, which accurately
+In the next section, a literature review of control theory applications to production systems and supply chains is presented. The
+Section 2.1 speciﬁcally addresses the mathematical formulation of
+the basic production entities used in the model. Section 3 presents
+the development of this model, encompassing the description of the
+production process and of the product families, the formulation of the
+state equations and the simulation of the model, based on the state
+equations. The preliminary results of the simulation are presented
+and discussed in section 4. Finally, the conclusions and suggestions
+for future research are presented in section 5.
+2. Control theory applied to manufacturing systems
+Some major research efforts for applying control theoretic methods to production-inventory systems are reviewed by Ortega and Lin
+(2004) and Sarimveis et al. (2008). The ﬁrst models date from 1950s,
+with Simon (1952) and Vassian (1955), followed by Forrester (1961),
+with the book “Industrial Dynamics” and Axsäter (1976). Later on, the
+inventory and order based production control system (IOBPCS) was
+presented by Towill (1982). This model was developed with more analytical support from control theory tools. Its fundamental parameters
+were the production delay time (i.e. production lead time), the timeto-adjust inventory, and the demand averaging time (Towill, 1982).
+In Wikner, Naim, and Towill (1992), likewise, three main elements
+were considered: manufacturing lead times, replenishment rules (or
+order policies) and forecasting. The lead times and replenishment
+rules were represented by expressions in the frequency domains.
+In these production-inventory systems, the inventory and work-inprocess levels are usually transmitted as feedback information, while
+demand forecast is used as feedforward data.
+In Ortega and Lin (2004), the production and inventory models
+are further subdivided into two groups. The ﬁrst group comprises the
+“horizontal extensions” of the basic deterministic models, and refers
+to the models that depict the supply chain dynamics (Arda & Hennet,
+2006; Dejonckheere, Disney, Lambrecht, & Towill, 2002, 2003, 2004;
+Disney, Naim, & Towill, 2000; Evans, Naim, & Towill, 1998; Nabais,
+Negenborn, Carmona Benitez, & Botto, 2013; Wang, Liu, Zheng, & Wu,
+2008; Zhou, Disney, & Towill, 2010). Most of these models aim at
+ﬁnding an optimum order policy to reduce the bullwhip effect, i.e.,
+The second group encompasses multi-echelon models for lot size
+optimization, i.e., for determining optimum batch sizes and release
+dates for the production orders (Bogataj & Horvat, 1996; Grubbström,
+2005; Grubbström, Bogataj, & Bogataj, 2010; Grubbström &
+Molinder, 1996; Grubbström & Ovrin, 1992; Grubbström & Tang,
+2000). These models are based on the input–output analysis and
+make use of the bill of materials (BOM) as an input matrix for the
+production-inventory system. Since the BOM is a hierarchical representation of the assemblies and components that form a ﬁnal product,
+these models were categorized by Ortega and Lin (2004) as “hierarchical approaches” or “vertical extensions” of the basic productioninventory systems. Multi-echelon models are also used to represent
+distribution inventory systems with a central warehouse and a number of retailers, as in Axsäter (2001, 2003) and Axsater, Olsson and
+As mentioned, many of the studies on the single-echelon or multiechelon production-inventory models focus on lot sizing optimization, i.e. the deﬁnition of optimal ordering policies. From the perspective of dynamics, it is interesting to consider how the information
+delays affect these models, such as in Bensoussan, Çakanyıldırım,
+and Sethi (2007). They introduced dynamic information delays as
+a Markov process into the standard multiperiod stochastic inventory problem with backorders. With these delays, the most recent
+inventory information is not available to the manager, that is, only
+an inventory level of some periods ago and related delay statistics
+can be observed. The authors introduce three statistics/concepts: the
+reference inventory position, which is the sum of the latest observed
+inventory level and all the orders placed since that observation; the
+magnitude of the latest observed delay; the age of this observation,
+i.e. the number of periods elapsed since the observation. With these
+statistics, a state reduction was achieved and an optimal policy of
+state-dependent base-stock type was found.
+The classiﬁcation of the production-inventory and supply chain
+models into “horizontal” or “vertical” extensions is inspired in Axsäter
+(1985). This author discusses two approaches two simplify models
+and deal with non-linear conﬁgurations and uncertainties. The ﬁrst
+one refers to the assumption of the certainty-equivalence principle;
+J. K. Sagawa, M. S. Nagano / European Journal of Operational Research 244 (2015) 624–636
+in this case, models with uncertainties are approximated by deterministic models based on averages. The second option is the use of
+a hierarchical approach. Planning at a higher aggregate level usually leads to fewer (aggregate) variables to deal with. In addition,
+non-linear effects that occur at lower levels may be disregarded. The
+classiﬁcation presented by Ortega and Lin (2004) is based on these
+In Hennet (2009), a model that could be considered as both a “horizontal” and a “vertical” extension of the production-inventory system
+is presented. In this work, a network of autonomous enterprises with
+distributed decisional structure is represented as a multistage manufacturing model. The product structure (BOM) dictates the organization of the network. Thus, producers of primary products play the role
+of suppliers, while producers of intermediate products play both roles
+of suppliers and producers; similarly, producers of end products are
+both producers and retailers. In the multistage model considered, it is
+assumed that the information available at each stage is mainly local.
+It is also supposed that each stage adopts a base-stock policy applied
+to the inventory positions. As main results, it was found that under
+some traditional assumptions, such as ﬁxed lead times and common
+order periodicity, the local base stock policies are equivalent to an
+integrated policy. In other words, the local ordering and production
+policies may perform as well as an optimal global policy under some
+assumptions. As mentioned, this approach considers both the “horizontal” and “vertical” dimensions, since the supply chain behavior is
+modeled using the hierarchical product structure as a link between
+The review presented by Ortega and Lin (2004) was complemented
+by Sarimveis et al. (2008), Ivanov et al. (2012) and Sagawa and Nagano
+(2013). In Sarimveis et al. (2008), besides the classical control methodologies reviewed in Ortega and Lin (2004), applications of advanced
+control methodologies for supply chain modeling are presented. In
+the applications of classical control, most of the analysis concerns
+continuous or discrete linear systems, whose dynamics is modeled
+using Laplace transfer functions and z transfer functions. Standard
+analysis tools, such as Bode and Nyquist plots are used to evaluate
+the alternative designs. The advanced control methodologies, according to Sarimveis et al. (2008), are basically optimal control methods
+aiming at the optimization of an objective function that measures the
+performance of the system. As known, the basis of optimal control theory stands on dynamic programming and Hamilton–Jacobi–Bellman
+equations (Bertsekas, 2000). In addition to the classical control and the
+dynamic programming approaches to supply chain modeling, three
+additional categories of papers are reviewed in Sarimveis et al. (2008).
+The ﬁrst one concerns model predictive control (MPC) techniques
+that have been recently used in supply chain management problems.
+These techniques are applied when the models based on dynamic
+programming and optimal control cannot be solved analytically, due
+to its large dimension (the curse of dimensionality). The second additional category comprises applications of robust control theory. In
+this case, the disturbances that affect the supply chain are modeled as
+deterministic uncertain-but-bounded quantities. Finally, the last category refers to the alternative methods that have been developed to
+cope with the curse of dimensionality in dynamic programming and
+with the lack of an accurate model to represent the stochastic system
+under study. These methods usually make use of artiﬁcial intelligence
+tools, and are referred to as reinforcement learning techniques, neurodynamic programming or approximate dynamic programming.
+In the review presented by Ivanov et al. (2012), the control theoretic approaches to supply chain are classiﬁed into ﬁve problem
+areas: dynamic inventory control policies, optimal multi-stage and
+multi-period production planning, analysis of disturbances and ﬂuctuations, integrated marketing-production decisions, and adaptation and real-time control. The ﬁrst area of classiﬁcation encompasses all the production-inventory and the multi-echelon systems
+developed with the aid of Classic Control Theory. In this sense, this
+category is equivalent to the one proposed by Sarimveis et al. (2008),
+and includes both the horizontal and vertical extensions proposed
+by Ortega and Lin (2004). The second area refers to the applications
+of production planning mainly based on Optimal Control and Dynamic Programming. The third area includes the studies on stability
+and the bullwhip effect, such as the ones developed by Burns and
+Sivazlian (1978), Daganzo (2004), Dejonckheere et al. (2002, 2003,
+2004), among others. The application of control approaches to
+production-marketing decisions concerns advertising models and optimal pricing and production models (He, Prasad, & Sethi, 2009; Kogan
+& Herbon, 2008), constituting the fourth category in the classiﬁcation proposed by Ivanov et al. (2012). Finally, in the area of adaptation and real-time control, the aforementioned authors group the
+models based on model predictive control devoted to multi-echelon
+When speciﬁcally considering the second category of classiﬁcation, the optimal control approach, Ivanov et al. (2012) highlight an
+important aspect of many models for supply chain optimization: besides being based on information sharing and coordination, they assume full information availability. In most of the times, however, it
+is not possible to have all the information on the supply chain dynamics at the initial planning time, and the chain is subjected to dynamic changes and coordination problems. These facts reiterate the
+importance of models for adaptive planning and scheduling. Also, for
+these cases, the mentioned authors highlight the great applicability
+of the maximum principle (Pontryagin, Boltyanskii, Gamkrelidze, &
+Mishchenko, 1964). As known, this principle allows decomposing an
+optimal control problem into sub-problems, assuring that the optimal solutions of the instantaneous sub-problems lead to the optimal
+Khmelnitsky, Kogan, and Maimon (1997) developed maximum principle-based methods to cope with production scheduling problems in complex manufacturing systems. They employed a
+continuous-time optimal control approach and presented a general
+numerical method for partially sequence-dependent setup scheduling based on the properties of optimality derived from the maximum
+principle analysis. The computational complexity of the presented algorithm depends on its initialization, i.e. on the proper guess of the initial values for the variables. They showed that the use of an adequate
+shooting method for seeking these initial values may improve the
+performance of the algorithm. In addition, the computational complexity is related to the number of machine setups required to meet a
+given demand proﬁle. The search space of admissible setups is quite
+large and the scheduling problem has many local optima that satisfy the optimality conditions, due to its combinatorial nature. Thus,
+the aforementioned authors proposed a maximum principle-based
+heuristic for reducing the setup alternatives, which speeded up the
+algorithm. As a result, the proposed algorithm outperformed a traditional algorithm based on a two level hierarchical approach.
+A more speciﬁc framework to classify the control theory applications in supply chain was proposed by Ivanov and Sokolov (2013)
+considering the impact of uncertainty on supply chain performance
+in the dynamic domain. The authors presented a systematic representation of the supply chain dynamics taxonomy, aiming to approximate the terminology used in control theory to the practical problems in supply chains. In addition, they analyzed the existing control
+tools for synthesis and analysis of performance that can be used in
+the supply chain domain, concerning the uncertainty-performance
+relationship. Based on this relationship, the problems were divided
+into seven classes: stability, robustness, resilience, security, ﬂexibility, disruption-tolerance and complexity.
+According to Ivanov and Sokolov (2013), the ﬁrst class encompasses the problems that investigate the supply chain’s ability to continue the planned execution after being subjected to perturbations,
+such as demand ﬂuctuations. In terms of control theory, this analysis
+considers the supply chain current state and current performance.
+J. K. Sagawa, M. S. Nagano / European Journal of Operational Research 244 (2015) 624–636
+The studies found in the literature about this topic usually considered
+Lyapunov’s stability or the BIBO (bounded-input-bounded-output)
+stability for control systems (Ivanov & Sokolov, 2013; Liao, Wang, &
+Besides being stable, the supply chain should also bring proﬁts.
+Thus, the analyses must also include the achievement of performance
+targets. In the second class of problems deﬁned, the ability to remain
+stable and achieve the planned performance in the presence of perturbations is investigated. According to the control perspective, this
+ability is named robustness, and its analysis considers not only the
+current state of the supply chain, but also a comparison between the
+planned and the current performance, based on a matrix of performance measures. The robustness is related, among other factors, to
+the existence of redundancies and reserves, such as safety stocks, time
+buffers, additional facilities and capacity reserves. The studies in this
+class usually employ robust and stochastic optimization methods.
+The resilience, which is the property analyzed in the third class
+of studies, refers to the ability to maintain, execute and adapt the
+planned execution along with the achievement of the planned (or
+adapted) performance (Ivanov & Sokolov, 2013). During execution,
+when the supply chain is affected by perturbations and the redundancies are not enough to cope with them, the perturbations lead
+to disturbance and it becomes necessary to correct the plans by adjustable control actions. Thus, the analysis of resilience should also
+take into account the updated decision-making space and the disturbance (in addition to the factors considered in the previous classes of
+problems). According to Ivanov and Sokolov (2013), model predictive
+control is one methodology often used in the research on supply chain
+Security, the fourth class of studies presented by the aforementioned authors, is very similar to problem class 2, with the difference
+that it considers intentional perturbations instead of casual ones.
+The ﬁfth problem class investigates the ﬂexibility, which is the
+ability to avoid disturbance by quickly changing the supply chain
+structurally and functionally. Disturbances may be compensated and
+ﬂexibility may be increased by means of: ﬁnancial asset reserves;
+product ﬂexibility and modularity; supply chain coordination; monitoring and event management, etc. (Ivanov & Sokolov, 2013). The
+aforementioned authors highlight the need for further systematic research on the problems of this class.
+A disruption occurs when a disturbance in the planned execution
+of the supply chain cannot be compensated by an adaptive control
+action to achieve the planned performance outputs. In this case, the
+replanning of output performance and the generation of new plans
+are necessary. The sixth class of problems thus investigates the tolerance to disruptions or the adaptability of the supply chain, which is
+related to the “creation of an adaptation system for the prevention,
+improvement or acquisition of new characteristics for the achievement of planned performance in existing or updated decision making
+Finally, the last problem class pointed out by the mentioned authors concerns to the investigation of complexity in the light of robustness, ﬂexibility and economic performance. Attempts to increase
+robustness, ﬂexibility or economic performance usually lead to an increased complexity. Nonetheless, if the complexity becomes too high,
+the system may become too sensitive to perturbations and may even
+Besides the different schemes presented so far to classify the control theoretic models applied to supply chain, there is still an alternative classiﬁcation, presented by Sagawa and Nagano (2013). They
+adopt the same criterion used by Ortega and Lin (2004) to classify
+the control theoretic approaches for production and supply chain
+systems, i.e., the models are classiﬁed according to the area of application. Besides the “horizontal” (supply chain systems) and “vertical”
+dimensions (multi-echelon systems), an additional category is proposed, encompassing the applications of control theory to Operations
+Multi-echelon productioninventory systems
+Fig. 1. Proposed areas for classifying the models of Production Planning and Control
+Scheduling and short-term shop ﬂoor control (Fig. 1). In the previous
+review presented by Ortega and Lin (2004), only a couple works related to this application were found. Lately, few more models have
+been developed. A comparative table and discussion of these models
+is presented in Sagawa and Nagano (2013).
+During the period between 1980 and 1990, the concepts of supply chain and supply chain integration were widely spread. Sipper
+and Bulﬁn (1997) highlight an important feature of the "new" market driven production systems: the extension of the scope of the
+business to encompass the relationships of the focal company with
+its suppliers and customers. From this perspective, manufacturing
+systems started to be viewed not as isolated systems, but as part
+of a whole supply chain. Thus, the set of control theoretic applications for supply chain may also include manufacturing applications.
+In this paper, however, the category “programming and control systems” (Fig. 1) was detached from the category “horizontal/supply
+chain systems” for the sake of emphasizing the models speciﬁcally
+developed for the plant level of a focal company (and for short term
+The Automatic Production Control (APC) system presented by
+Wiendahl and Breithaupt (1999, 2000) can be classiﬁed in this third
+group of application, i.e., among the models developed for scheduling
+and shop ﬂoor control. The model stands on an analogy with ﬂuid
+mechanics and depicts the behavior of a stochastic job shop system.
+The work-in-process (WIP) of a work center is represented as a ﬂow
+network in continuous time. Thus, the work-in-process of a given
+work center k is obtained by adding the initial inventory of center k to
+the actual cumulative input of the upstream work centers ﬂowing to
+k and to the external input of jobs. From this summation, the cumulative output of center k until time t must be subtracted. Simplifying,
+these operations represent the difference between the different input
+ﬂows coming to the center and its output ﬂow. In order to derive the
+equations of the model, the theory of the logistic operating curves
+and the funnel formula area also applied. For more details Sagawa
+and Nagano (2013), Wiendahl (1995), and Wiendahl and Breithaupt
+The job shop conﬁguration is represented in the APC system using transition probabilities, which can be derived from a material ﬂow
+matrix (MFM). This matrix contains real data from the job shop, showing the amount of material or the number of orders that ﬂow from a
+work center to another. The transition probabilities are obtained with
+the normalization of the material ﬂow matrix.
+In the APC system (Wiendahl & Breithaupt, 2000), two controllers
+were applied: a backlog controller and a WIP controller. The backlog
+of a system may be deﬁned as the difference between the planned
+J. K. Sagawa, M. S. Nagano / European Journal of Operational Research 244 (2015) 624–636
+sum of work and the actual output. Thus, the backlog controller adds
+capacity to the system when the actual output is below the planned
+output. In this case, the capacity is the correcting variable whereas
+the planned output is the reference variable of the system. The WIP
+controller, on its turn, adjusts the input rate of the system in such a
+way that there is enough work to be processed but without too long
+queues. In other words, this controller sets the system to an adequate
+operating point, maximizing the output rate while at the same time
+keeping the production lead times at reasonable values.
+Kim and Duﬃe (2006) proposed a coupled closed-loop model for
+short term capacity control that has similarities with the APC system previously discussed. Likewise in the APC model, the input rate
+is the sum of the output rates from all preceding workstations and
+any external input, and the actual WIP is given by the accumulated
+difference between the input and output rates of the kth workstation, plus any work disturbances such as rush orders. The MFM is
+also employed to compile the different amounts of orders sent to
+each workstation. The actual work in process level of a given kth
+workstation is compared to the planned level and, based on this WIP
+error, the workstation is controlled by a local capacity control policy,
+taking into account its planned capacity. The initial model proposed
+(Kim & Duﬃe, 2005) did not include any coupling between the capacity control of a given station and the capacity decisions made in
+the upstream stations. In a subsequent model (Kim & Duﬃe, 2006),
+these capacity decisions of upstream stations were added as inputs for
+the capacity control loop of a given downstream station. This model
+was applied to a manufacturing system with ﬁve workstations, using production data from a forging company that supplies components to the automotive industry. The system was simulated based
+on a characteristic transfer equation and the results showed that
+the coupling between workstations prevented the propagation of the
+WIP error to downstream workstations, thus improving the system
+An integral controller is used by Cho and Erkoc (2009) and Prabhu
+and Duﬃe (1999) for scheduling jobs in a ﬂow shop system. Each job to
+be scheduled has an embedded controller, named Distributed Arrival
+Time Controller (DATC), that determines its arrival time (i.e., starting
+time) in order to minimize lateness. In other words, in each iteration,
+the controller adjusts the starting time of a given job i so that it may
+be completed as close as possible to its due date. The completion time
+of the parts is then calculated by a shop ﬂoor simulator based on the
+current starting times and the processing times of the jobs.
+It is important to highlight that, in the aforementioned system, the
+principles of feedback control are applied to generate the scheduling algorithm, rather than to represent the dynamics of the scheduling system or the dynamics of a manufacturing system. The algorithm that uses the expression of an integral controller is applied
+to scheduling problems of static nature. The integral controller of
+DATC works as a search engine that replaces the traditional heuristics
+used in scheduling problems, but is not directly applied to dynamic
+Another model for operations scheduling with a feedback loop
+is presented by Li (2011). In this model, the jobs are scheduled ofﬂine using an extension of Johnson’s algorithm. After that, the execution of the proposed schedule is simulated using Petri nets. The
+jobs are rescheduled based on the simulation and reapplication of the
+heuristics, until a satisfactory scheduled is attained. At this point, the
+scheduled is delivered to the shop ﬂoor. If any disturbance occurs on
+the shop ﬂoor, this information is fed back to the system, and the
+jobs are rescheduled and simulated again, according to the updated
+boundary conditions of the problem. Although presenting a feedback
+loop, the system proposed by Li (2011) is not a dynamic model, in the
+strict sense, since the scheduling is performed oﬄine and the schedule is optimized for a speciﬁc set of boundary conditions. When these
+conditions change, the process is repeated oﬄine for the new set of
+A relevant future direction in the application of control theory to
+supply chain may be the closer approximation of this theory to the
+Operations Research area (Ivanov et al., 2012). In this sense, Ivanov,
+Sokolov, and Kaeschel (2010) propose the concept of structure dynamics control, which is based on the combined application of Optimal Control and Mathematical Programming. The structure dynamics
+considers different execution scenarios according to different structural states of the supply chain. From one time interval to another,
+for example, the transportation and processing rates and the demand
+of the regional distribution centers may change. In the proposed approach, the structure dynamics, inventory dynamics and transitions
+between intervals are modeled in a dynamic optimal control model.
+On the other hand, a discrete optimization problem of smaller dimensionality is formulated for each interval of structural constancy, being
+solved by using Mathematical Programming methods. In this way, the
+stationary parameters (such as warehouse capacities) are described
+in the static model, and the non-stationary parameters (e.g., changing order quantities) are considered in the dynamic control model
+The application depicted shows the importance of integrating different areas of knowledge and developing multidisciplinary applications of control theory for the supply chain and manufacturing domains. The model presented in the next sections also point to this
+2.1. Representing the dynamics of the shop ﬂoor by analogy with
+An analogy with the ideal properties of electrical components is
+established by Ferney (2000) to represent the dynamics of the shop
+ﬂoor. In order to develop that, the following basic production entities
+are deﬁned: machines, intermediate stocks, convergent and divergent
+junctions, sources of work and stocks of ﬁnal products. The mathematical formulation of these entities will be detailed in this subsection,
+since the model presented in this paper uses them.
+By analogy, the machines are represented as resistors, while the
+intermediate stocks are modeled as capacitors. The main variables
+that have a physical meaning in the model are the production ﬂow
+f and the production volume q. The production ﬂow variable represents the evolution of the material ﬂow over a given section of the
+manufacturing system, and is measured in material units per time.
+Depending on the nature of the studied system, these material units
+may represent a discrete or continuous amount of material, or even
+a volume or a surface. The production volume is given by the timerelated integration of the production ﬂow, as shown in Eq. (1) (Ferney,
+where q0 is a constant value that represents the initial production
+volume, f(t) and q(t) are the ﬂow and production volume mentioned
+in the previous paragraph and τ is the integration variable (time).
+In an ideal resistor, there is a linear relationship between the electrical current f and the voltage e:
+where R is the electrical resistance. Since the machines are modeled
+as resistors, the following relationship applies to them:
+where Ui is the processing frequency of machine i (which is the inverse
+of Ri ), fi (t) is the production ﬂow through machine i at time t, and ei
+is an effort variable, measured in material units (m.u). According to
+Ferney (2000), the effort variable ei does not have a direct physical
+meaning, but it reﬂects the dynamic coupling phenomenon in relation
+J. K. Sagawa, M. S. Nagano / European Journal of Operational Research 244 (2015) 624–636
+to the material availability in the production entity located upstream.
+In other words, this variable is important to couple a given machine
+to its precedent production entity. All the equations of the model are
+expressed in relation to the variables of ﬂow and effort.
+The intermediate stocks of the manufacturing system, as mentioned, are modeled as capacitors. Thus, their behavior is mathematically represented by the expression of an ideal capacitor:
+where qi is the amount of stored material at time t, Ci is a parameter
+related to the storage capacity and ei is the effort variable (as known,
+for an ideal capacitor, ei is the voltage, Ci is the capacitance and qi is
+The behavior of a stock involves three elementary ﬂows, as in
+Eq. (5): an input ﬂow fei (t), an output ﬂow fsi (t), and the difference between them, fi (t), which corresponds to the ﬂow of stored
+The amount of material accumulated in the stock, as a function
+of the ﬂow fi (t), is given by Eq. (1) previously presented. The amount
+of stored material must be non-negative (Eq. (6)), which means that
+the material output is controlled in relation to the volume of material
+In the model under discussion, it is assumed that the stocks have
+inﬁnite capacity, i.e., Ci → . Since qi (t)  0, then from Eq. (4) it follows
+that ei (t) → 0. According to Ferney (2000), the stock is a passive
+element, i.e., it has no proper dynamics: the incoming material ﬂow
+is imposed upon it by the entity connected upstream and the output
+ﬂow is withdrawn at the request of the entity located downstream.
+Each machine of the manufacturing system is preceded by a correspondent stock; these two entities are connected by means of a
+coupling structure to constitute a production station. As the output
+effort of the stock tends to zero, as discussed in the previous paragraph, a source of effort is added to establish the coupling interface
+between the stock and the machine. This source activates the machine when there is any amount of material in the precedent stock.
+The amount of effort added by the source is shown in Eq. (7). This expression guarantees a continuous transition when there is less than
+one unit of material in the precedent stock, i.e., it allows the approximation of discrete systems to continuous systems. For more details,
+Ferney (2000) should be consulted. When there is at least one unit
+of material in stock, then ei (t) = 1 material unit, and the machine
+processes the incoming ﬂow with its full processing frequency Ui ,
+generating an output ﬂow fsi (t) = Ui material units per time (Eq. (3)).
+A schematic of a production station is shown in Fig. 2.
+From Eqs. (3), (4) and (7), it is possible to derive the equations for
+the stock, the machine and the coupling interface in relation to the
+effort and ﬂow variables shown in the schematic. These equations
+Fig. 2 shows that a station has two internal junctions. The ﬁrst
+one links the stock element into the main ﬂow while the second one
+integrates the machine and the source of effort into this main ﬂow.
+In the ﬁrst junction, the ﬂow is conserved, as expressed in Eq. (11).
+The stock only stores part of the incoming ﬂow, but it cannot create ﬂow. To keep the compatibility of the model, the efforts around
+this junction must be equal (Eq. (12)). For the second junction, the
+opposite situation applies: the ﬂows around the junction are equal,
+and dictated by the machine, while the total effort is conserved, as
+expressed in Eqs. (13) and (14). These compatibility equations are
+derived from the Bond Graph methodology, which is used by Ferney
+(2000) to deﬁne the basic production entities of the shop ﬂoor.
+The manipulation of Eqs. (8)–(14) leads to Eq. (15), which expresses the output ﬂow of a station. Supposing that this ith station
+is linked to a kth station downstream supplying a kth stock, then the
+effort esi is a linear function of the ratio qk /Ck . As both Ci and Ck → 
+by deﬁnition, then it is possible to simplify Eq. (15) into Eq. (16).
+Finally, the basic state equation for a production station is obtained
+by substituting Eqs. (16) and (13) into Eq. (11), as follows:
+Besides the station, the junctions, the sources and the wells complete the shop ﬂoor model presented by Ferney (2000). The convergent and divergent junctions enable the representation of the topology of the manufacturing system. The convergent junctions merge the
+ﬂows coming from different stations or entities, while the divergent
+junctions distribute the material ﬂow into the different stations of the
+system. The sources provide the material input ﬂow to the system,
+while the wells are similar to stocks with inﬁnite capacity, used to
+represent the system outputs, i.e., the stocks of ﬁnal products. The
+expressions for a convergent and divergent junctions are presented
+According to Eqs. (1) and (5), the ﬂow of stored materials given by
+the difference between the input and the output ﬂows, that is:
+Fig. 2. Representation of a production station.
+J. K. Sagawa, M. S. Nagano / European Journal of Operational Research 244 (2015) 624–636
+Machinery available in the plant that manufactures polypropylene woven bags.
+fsi and fek represent, respectively, the single output ﬂow and the
+different input ﬂows of a convergent junction;
+fsj represents each of the output ﬂows of a divergent junction and
+fei express the single input ﬂow of this junction;
+wj are normalized weights applied to a given output branch of a
+This set of production entities is used by Ferney (2000) to model
+and simulate a ﬁctitious system with four stations for manufacturing a single product. The control objective of the model is to adjust
+the level of the output ﬂow of the system to attend the demand of
+the considered product, while, at the same time, keeping the work in
+process (WIP) at the desired levels. This objective is achieved by controlling the production frequencies of the machines and the sources,
+represented by the variable Ui in Fig. 2. The simulations carried out
+showed that the model was able to automatically respond to unexpected events, such as a machine breakdown. In addition, the reference levels set for the intermediate stocks were attained.
+The review of the models based on control theory for scheduling and shop ﬂoor control demonstrated that this body of knowledge
+is still incipient, fact that encourages further research. In the next
+section, a dynamic model for manufacturing multiple products is
+Companies that offer customized products in medium scale usually fabricate them in job shops, in an MTO basis. To attend the masscustomization concept mentioned in the introduction of this paper, it
+is necessary to associate the ﬂexibility of a job shop with the eﬃciency
+of a ﬂow shop. The model presented in this section is applied to the
+production of multiple families of customized products in a job shop
+conﬁguration. Job shops were also chosen as the target of application because they usually have a complex ﬂow; from the perspective
+of the dynamics, this would yield a more interesting analysis. A real
+production system of polypropylene bags was modeled. The basic
+steps of this speciﬁc production process will be described in the next
+paragraphs, before the development of the model.
+The process of manufacturing polypropylene woven bags involves
+the following operations: extrusion, weaving, lamination, printing,
+cutting and stitching. In the extrusion, the polypropylene pellets, additives and pigment are mixed, melted and extruded as a ﬂat ﬁlm.
+This ﬁlm is cooled down and slit into the form of tapes, which are
+then stretched under heat at a predetermined ratio.
+The tapes produced by extrusion are wound on a bobbin that will
+feed a circular loom. In the looms, the tapes are woven into tubular
+fabric. After that, the fabric goes through different ﬁnishing operations, depending on the customers’ requirements. Some woven bags
+are laminated, that is, are coated with a polymer ﬁlm while passing through lamination rolls. Also, the bags (laminated or not) may
+require different printings. After printed, the fabric is cut into the desired size and sent for stitching. In the company under analysis, the
+stitching operation could be automatically or manually performed. At
+the end of the process, the bags that do not go through lamination
+may receive a plastic liner in order to avoid leakage of the packed content. This is done in an additional manual operation. Table 1 shows the
+number of machines available in the company for each manufacturing
+The company under study works in a make-to-order basis, and
+its main competitive priorities are on-time delivery (i.e. dependability), product quality, and ﬂexibility to manufacture customized products. The polypropylene bags may present differences regarding linear mass density (denier), resistance and ﬁnishing. About 80 different
+products are manufactured in the company, in a job shop conﬁguration. These products can be grouped based on different criteria, such as
+type of product, geographical market, process routings, volume range
+and others, as highlighted by Hyer and Wemmerlöv (2002). The original classiﬁcation adopted by the company’s managers is based on the
+type of product, i.e., the product application. This criterion results in
+3. Modeling the dynamics of a real multi-product manufacturing
+Class R—Conventional polypropylene bags for animal feed.
+Class A—Heavy polypropylene bags for sugar.
+This classiﬁcation, however, is not interesting from the perspective
+of the dynamics. For the development of the model, the products must
+be grouped according to their process routings. Based on that, nine
+families of products were identiﬁed, as shown in Table 2.
+The historical demand for each product family also constitutes
+relevant data for the model. The absolute values of demand were set
+as the target values for the outputs of the system, and were also used
+to compute the product mix. Table 3 shows these data, for each family
+of products. From the mix data, it is possible to derive the relative
+amounts of material or work that ﬂow from and to each station. The
+process routings determine the topology of the system, while the
+mix determines the transition probabilities, which were also used by
+Wiendahl and Breithaupt (2000) to model a job shop. The schematic
+for the multi-product manufacturing system of propylene bags with
+In the schematic, the variables Ui represent the processing frequencies of the machines and the variable U01 refers to frequency of
+the source of material ﬂow. Each machine is preceded by an intermediate stock. The ﬂow variables are highlighted in bold. As it can be
+seen, the weaving, printing and automatic cutting and stitching departments have multiple machines, in accordance to the data shown
+in Table 1. The 12 looms of the weaving department are identical,
+therefore, they were considered as one single machine, named machine 2. This approach does not compromise the power of the model
+to depict the dynamics of the system. The breakdown of one loom, for
+example, may be simulated by imposing a decrement of 1/12 in the
+capacity of machine 2. On the other hand, this simpliﬁcation is convenient since it reduces the number of variables, and, therefore, the
+complexity of mathematical solution. The two printers and the multiple cutting and stitching machines are not identical; they present
+signiﬁcantly different capacities, production speed and speciﬁcations.
+The machine 4, for example, is faster than machine 5 and may print in
+six different colors, while machine 5 may only print in four different
+colors. The cutting and stitching machines also have different features.
+For these reasons, these machines were represented separately.
+It can be seen that the production ﬂow is somewhat intricate due
+to the number of distinct possible routings. In order to represent these
+possibilities, one divergent junction and three divergent-convergent
+junctions were used, as it can be seen in the schematics.
+J. K. Sagawa, M. S. Nagano / European Journal of Operational Research 244 (2015) 624–636
+Fig. 3. Schematic of the production system of polypropylene woven bags.
+Process routings for each product family.
+Historical demand and mix relative to each family of products.
+Eqs. (16) and (17) may be applied to each station shown in the
+schematics. They are complemented by the expressions for the convergent and divergent junctions, which express the conservation of
+ﬂow. The mathematical formulation for the ﬁrst three production
+departments and for the junctions 1 and 2 (Fig. 3) is presented as
+First, Eq. (20) shows that an initial material ﬂow f01 is imposed to
+the system with a frequency U01 , which can be controlled. In order to
+establish continuity and compatibility, the input ﬂow of the weaving
+station (fe2 ) has to be equivalent to the output ﬂow of the extrusion
+(fs1 ), as shown in Eq. (21). Also, the application of Eq. (16) to the ﬁrst
+station yields the expression shown in the right side of Eq. (21). The
+rate of material stored in the ﬁrst station (Eq. (22)) is given by the
+difference between its input and output ﬂows, as previously stated in
+The equations employed to model the weaving and lamination
+stations are analogous to Eqs. (21) and (22).
+f01 = U01 1 meter square per day (primary source of ﬂow)
+q1 = f01 − U1 min(1, q1 ) = U01 − U1 min(1, q1 )
+J. K. Sagawa, M. S. Nagano / European Journal of Operational Research 244 (2015) 624–636
+and the control variables Ui . The matrix form of the state equation is
+= 0.8258U3 min(1, q3 ) + 0.4042U2 min(1, q2 )
+= 0.0071U3 min(1, q3 ) − 0.00348U2 min(1, q2 )
+At the initial moment, if the manufacturing system is empty, the
+control matrix is reduced to the part related to the supply source U01 .
+As soon as at least one unit of material is stored in each intermediate
+stock, the machines become autonomous, i.e., not dependent on the
+stock-machine coupling dynamics. Thus, the ﬂow of stored material
+q starts to depend just on the processing frequencies Ui . In this case,
+the control problem consists of adjusting the processing frequencies
+In the permanent regime (i.e. steady state), all the stocks must
+contain more than one unit and the level of stored material should
+not vary, i.e., q i = 0 for all i. With this deﬁnition, the state equation
+= 0.0063U3 min(1, q3 ) + 0.0031U2 min(1, q2 )
+= 0.1262U3 min(1, q3 ) + 0.0618U2 min(1, q2 )
+= 0.0347(U3 min(1, q3 ) + 0.4900U2 min(1, q2 ))
+In the divergent junction between weaving and lamination (junction 1, Fig. 3), part of the ﬂow that leaves the weaving station (fs2 )
+goes to lamination (fe3 ), part of it goes to junction 2 (fep ), part leaves
+the system in the form of ﬁnal products of family 6 (fsf6 ), and part of
+the ﬂow skips the lamination and printing stations, going directly
+to the automatic cutting and stitching operations (fec1 ). Thus, Eq.
+(19) of a divergent junction is applied to this point, resulting in the
+Eq. (19) is also applied to the divergent portion of junction 2, yielding ﬁve distinct output ﬂows: fsf1 , fsf5 , fe6 , f345 and fec2 . Junction 2 has
+a convergent portion too; therefore, the weights wj are applied to
+the sum of input ﬂows, fs3 + fep . Summarizing, Eqs. (31)–(35) derive
+from the application of both Eqs. (18) and (19) to junction 2. Ordinary algebraic manipulation using Eqs. (24), (27), and (29) is also
+carried out, resulting in the expressions shown in the right side of
+Finally, Eq. (36) represents the output ﬂow that leaves the manual
+stitching station and Eq. (37) corresponds to the amount of material
+stored in the intermediate stock of this station.
+The remaining equations of the model are analogous to the ones
+presented. Simple algebraic manipulation of the whole set of equations yields the state equation of the model, in which the ﬂow of stored
+material q is a function of the current amount of stored material q
+The steady state solution provides the average processing frequency of the machines and sources in the medium term. It signals
+which would be the adequate processing frequencies if the system
+was not subjected to any kind of disturbances. The linear system
+presented in Eq. (39), however, is underdetermined, since it has 11
+equations and 12 variables (U1 –U11 plus U01 ). Hence, the deﬁnition
+of the adequate frequencies depends on boundary conditions.
+One of the most relevant goals of a manufacturing system is to attend the required demands on time. As it can be seen in the schematics, the system being modeled has nine different outputs, each one
+corresponding to a product family. In the medium term, the ﬂow in
+these outputs must correspond to the respective demands of each
+product family, presented in Table 3. This condition generates nine
+J. K. Sagawa, M. S. Nagano / European Journal of Operational Research 244 (2015) 624–636
+Steady state solution: Processing frequencies of the machines in permanent regime (Uip ).
+additional equations analogous to the following equation (see also
+fsf 1 = 0.1262U3 min(1, q3 ) + 0.0618U2 min(1, q2 )
+With the additional equations, the system becomes overdetermined. Thus, nine different steady state solutions were calculated by
+combining Eq. (39) to each one of the additional equations. The solutions found were identical except for small rounding errors. It shows
+that the mathematical formulation is consistent, and that some equations of the overdetermined system are linear dependent. Table 4
+shows the steady state solution of the system, considering the demands presented in Table 3.
+The state equation (Eq. (38)) was implemented in Matlab
+the proposed model was simulated using Simulink . The control was
+applied to the processing frequency of the machines and of the source
+of ﬂow in order to achieve the desired levels of work-in-process (i.e.
+intermediate stocks) in the plant. For an exploratory understanding of
+the behavior of the system, a proportional controller was applied. The
+machines are adjusted to operate with frequencies that are close to
+the frequencies of permanent regime shown in Table 4. The controller
+increases or decreases these frequencies by amounts that are proportional to the relative error of the stock that immediately succeeds
+the machine. If a given machine i is followed by only one subsequent
+stock, then the proposed control law is given by:
+where Ui is the controlled processing frequency of machine i, Uip is
+the processing frequency of machine i in permanent regime, k is the
+proportional gain, j is the index of the station downstream of i; e j is
+the compensation of the error of stock j (which has the opposite sign
+of the error ej ); qj is the current level of stock j and qjc is the reference
+For the case where a machine is succeeded by parallel stations,
+all the compensations are computed and the minimum of them is
+Ui = Uip [1 + min(ke j , ke j+1 , . . . , ke j+m )]
+where m + 1 is the number of parallel stations downstream of i.
+The remaining variables and parameters are deﬁned as in Eqs. (41)
+An exploratory simulation was performed with the controller deﬁned by Eqs. (41)–(43). The results are shown in the next section. The
+simulation was carried out in a personal computer with the following
+processor CoreTM i7-3620M CPU @ 2.90 gigaspeciﬁcations: Intel
+hertz, 6 gigabytes of RAM and operational system of 64 bits. Matlab
+release 2012b and Simulink version 8.0 (R2012b) were used.
+Fig. 4 shows the results of the simulation performed with the
+proportional controller deﬁned in Section 3.2, with gain k = 0,1. The
+reference levels for the intermediate stocks were deﬁned as a hundred
+Fig. 4. Results of the simulation of the proposed model with a proportional controller.
+times the values observed for the open loop system. The transient
+regime response of the system starting with null initial stocks was
+It can be seen that a surplus of material is manufactured at the
+beginning of the simulation, when the machines are operating with
+a frequency above the frequency of permanent regime. However, the
+proportional controller compensates this surplus, so that the intermediate stocks could reach the desired level with relative low error.
+This result showed that the behavior of the system was automatically
+adjusted during the transient regime in order to achieve the predetermined levels of work in process. Therefore, the proposed model
+could successfully represent the system dynamics, and this dynamics
+Fig. 4 shows that the system needs approximately 240 days to
+reach stability, which may be considered a too long time from the
+management perspective. Nonetheless, it must be highlighted that
+the average aggregate demands are being attended during the transient regime, since the products of the different families are continuously manufactured at frequencies that are close to the frequency
+of the machines in permanent regime. These latter frequencies, on
+their turn, were set to simultaneously attend the demands for the
+Additionally, it is possible to observe that the implemented feedback control loop is equivalent to a pulled system, such as the kanban
+system, for instance. In this case, the information ﬂow is opposite to
+the material ﬂow, i.e. the information ﬂows upstream. Fig. 4 shows
+that the stocks that are closer to the outputs of the system, i.e. stocks
+6 to 11, tend to reach stability before the remaining ones. They are
+followed by stocks 4 and 5, then by stocks 3, 2 and 1, respectively.
+Stock 1 is the last one to reach the reference value. Thus, it is possible
+to see that the system has an intrinsic inertia, i.e., there is a delay in
+the transmission of information, from the time it is sent to the machines of the end of the system until the time it reaches the machines
+One advantage of the developed model resides in the possibility of
+representing the process routings of all the different product families
+in a uniﬁed map. In this sense, it differs from other methods, such as
+the Value Stream Mapping (VSM), where one different map has to be
+generated for each process routing. This uniﬁed model enables the
+direct computation of the workload of the stations to manufacture
+J. K. Sagawa, M. S. Nagano / European Journal of Operational Research 244 (2015) 624–636
+all the range of products in the job shop. The processing frequencies
+of the machines in permanent regime are well-grounded estimates
+of this workload. As known, the Workload Control (WLC) is an inﬂuential factor in the performance of MTO companies with job shop
+The proposed model also requires a set of data that is relatively
+easy to collect, in comparison to more complex models, such as the
+one proposed by Wiendahl and Breithaupt (1999, 2000), which require a large amount and variety of data. Another interesting point is
+that the modeling approach chosen is able to represent the interdependencies among the stations. The dynamic coupling between two
+consecutive stations is stated by the compatibility equations that express the conservation of ﬂow in the junctions. These equations play
+the same role as the capacity control couplings added as inputs to the
+local control loop in the model proposed by Kim and Duﬃe (2006).
+The information about the demand of the products is an explicit
+parameter of the proposed state model, used to deﬁne the steady state
+processing frequency of the machines. In other models developed for
+a similar application (Kim & Duﬃe, 2006; Wiendahl & Breithaupt,
+2000), this demand information is implicit in the amount of input
+orders that arrive at each workstation. The proposed model with explicit demand information might be able to cope with seasonal patterns, provided that the average demand for each family of products
+As seen in the proposed model, the control of the manufacturing
+system is performed by adjusting the processing frequencies of the
+machines. However, for the production of different products, speciﬁc
+operating times are required, i.e., the processing frequency of the
+machine cannot be set to any desired value. Thus, the intent is not
+to use the results of simulation to physically control the production
+frequencies of the machines. Based on these results, however, the
+managers may adjust the downtimes of the machines to reach a reference production frequency, on average, in order to keep the levels
+of work in process under control. In fact, the proposed mathematical
+formulation allows performing two managerial analyses: a static and
+a dynamic capacity analysis. The steady state processing frequencies
+of the machines express the average load of the machines, for the
+production mix considered in the model. Thus, managers may compare these loads to the availability of the machines in order to identify
+static bottlenecks in the system. On the other hand, the system can be
+simulated in the presence of disturbances and changes in the average
+demands in order to observe how the capacity requirements change,
+i.e., to observe the bottlenecks in a dynamical context. A similar analysis can be carried out with the introduction of machine breakdowns.
+In this case, it is possible to ﬁnd good policies to adjust the processing
+frequency of the other machines and to adjust the source of ﬂow (i.e.
+the release of jobs in the shop ﬂoor) in order to avoid deregulated WIP
+and to attend at least part of the demand. Summarizing, the simulations of the proposed model may provide managerial recommendations on how to dynamically operate the shop ﬂoor, depending on its
+current state and on the events that occur. Different automatic control
+strategies may be implemented, therefore, a relevant practical deliver
+of this research is allowing a dynamic analysis of a manufacturing system that does not exclusively depend on the previous knowledge and
+The presented model may be applied to manufacturing systems
+with different conﬁgurations, such as parallel machines or ﬂow shops,
+since these systems are composed of the same basic entities used in
+the presented example: machines, intermediate stocks, ﬁnal stocks
+(wells), sources of ﬂow and junctions. For instance, in a ﬂow shop
+without parallel machines, the ﬂow will be unidirectional, i.e., there
+will not exist any divergent or convergent junction in any section
+of the system, except in its end, where a divergent junction will
+deﬁne the product mix, i.e. the percentages of ﬂow that are needed to
+attend the demand of each product family. In a ﬂow shop with parallel
+machines, divergent and convergent junctions will exist before and
+after the parallel stations, respectively, but none of the products will
+It is worth mentioning that the mathematical representation of
+different models does not depend on the formulation of a different
+transfer function for each particular workstation or for each particular
+system. The mathematical model of the entity “station” is generic and
+the approach is modular, i.e. the representation of different systems
+only requires different combinations of the basic entities to form
+different topologies. The approach may also be applied to MTO or MTS
+manufacturing systems. In both cases, the average demand data for a
+given period is needed, not mattering whether this data corresponds
+One limitation for the generalization of the model is the selection
+of the controller type and the tuning of its parameters, since for each
+particular manufacturing system, a different type of controller with
+speciﬁc values of parameters would provide the best results. Thus,
+the control synthesis for different manufacturing systems is still an
+In the presented example, the demands for the products were expressed in units of area per time instead of in a discrete unit. However,
+the use of a continuous measuring unit is not a requirement for the
+application of the model, because the term min(1,qi ) allows the approximation of discrete systems by a continuous systems, as stated by
+Ferney (2000). This term expresses the transient coupling between a
+given machine and its precedent stock when less than one unit of material is stored in this stock, assuring a smooth transition. Conversely,
+when the stock located upstream a given machine is not supplied any
+longer, the volume of material stored tends asymptotically to zero
+according to the processing frequency of the downstream machine.
+Thus, the expression allows the asymptotic convergence (Alla & David,
+1988; Ferney, 2000). In practical terms, it means that discrete units,
+such as material units or orders may be employed in this approach,
+and they do not constitute an obstacle for the model generalization.
+The main limitation of the proposed model regards the level of
+analysis it is suitable for. Instead of dealing with individual orders,
+it employs average variables, such as mean work in process, average
+product mix and average demand rates for different product families.
+In this sense, the model focus on the “planning level” of Production
+Planning and Control (PPC), likewise the ﬂow models presented by
+Wiendahl and Breithaupt (1999, 2000) and Kim and Duﬃe (2006). It
+would be of interest that this kind of model could deal more directly
+with the operational/scheduling level, considering individual orders
+This paper presented the development of a model that depicts the
+dynamics of a multi-product manufacturing system. The model was
+based on analogies between the production entities of the shop ﬂoor
+and ideal properties of electrical components. The state equation of
+the system was derived from these analogies and from the application
+of the dynamic modeling methodology. The state representation enables the implementation of a feedback control loop to automatically
+In the proposed model, the control objective was to achieve the desired levels of work in process while simultaneously attending the aggregate demand of each product family manufactured in the plant. An
+exploratory simulation of the system with a proportional controller
+results showed that each intermediate stock presented an initial overshoot but, after that, stabilized around the deﬁned reference levels.
+It demonstrates that the system can be successfully controlled when
+starting from the initial condition set. Also, the results of simulation
+reveal that the system has an inherent inertia, that is, the control information ﬂows upstream with a certain delay, from a given station
+J. K. Sagawa, M. S. Nagano / European Journal of Operational Research 244 (2015) 624–636
+Most of the ordinary tools applied in the manufacturing area presume stationary conditions. Some exceptions are the queuing theory
+and the discrete events simulation. The proposed methodology has
+an advantage over these tools since it allows not only to study the
+response of the system in a dynamic sense, but also to control it over
+time to reach a desired condition or state. In the conventional simulation (i.e., Discrete Events Simulation), this automatic feedback does
+not exist. In addition, this modeling methodology provides the opportunity to exploit the conventional tools of control theory to, in future
+research, tackle the problems of control synthesis for the speciﬁc case
+of manufacturing systems. In this sense, this research has a multidisciplinary perspective, since the ﬁeld of manufacturing management
+can beneﬁt from the tools and techniques that come from control
+theory and dynamic systems modeling, which are originally applied
+to physical systems (mechanical, electrical, hydraulic and thermal).
+Actually, some recent reviews showed that control theory has been
+largely applied to model supply chain systems over the past 40 years.
+However, the extant dynamic models devoted to depict the shop ﬂoor
+dynamics, in the plant level, seem to be much less numerous than the
+dynamic models for supply chain representation or lot size optimization. The proposed model intends to be a contribution to this speciﬁc
+As presented in Section 2, a dynamic model of a manufacturing
+system based on analogies with electrical components had previously
+been developed for the case of a single product system. Thus, this research contributes with the extension of this modeling methodology
+to multi-product systems and with the report of a practical application. It overcomes one usual limitation of the dynamic productioninventory models and supply chain models, which is the assumption
+of a single product. The importance of overcoming this limitation is
+highlighted in the literature of the ﬁeld, as discussed in the introduction of this paper. The modeling approach presented is an alternative
+to the approaches used to develop the few existing models devoted
+This paper focused on the development of the dynamic model
+itself, i.e., on the details of the modeling process. The simulation performed was exploratory/preliminary, and aimed to validate the capability of the model to represent the dynamics of the manufacturing
+system. The development of this model gives room to future research
+concerning the modeling and simulation of diverse manufacturing
+systems in a variety of scenarios considering unexpected events, such
+as machine breakdowns, lack of materials, urgent orders, among others. The methodology allows modeling several conﬁgurations of manufacturing systems, such as single machine, parallel machines, ﬂow
+shop, job shop, batch shop and open shop. This generalization capability is provided mainly by the modularity of the presented approach.
+The basic manufacturing entities, each one associated to its respective constitutive equation, may be arranged to represent different
+shop ﬂoor conﬁgurations. Then, the resulting state model will be a
+combination of the expressions that represent the involved entities.
+This modeling approach may be also applied to variables and parameters measured by continuous and discrete units, which confers more
+Besides the exploration of different scenarios, the design and tuning of effective controllers for the manufacturing systems constitutes
+another relevant opportunity for future research.
+The main limitation of the presented model concerns the considered level of analysis. The model deals with average variables, providing managers with prescriptive actions to control the manufacturing
+system in a higher level of the PPC hierarchy, not in the operational
+level. The model is not able to dynamically come up with the scheduling of individual jobs, however, it could be extended to contemplate
+a higher level of detail, by incorporating parameters such as ﬁxed
+machine utilization rates, machine setup times and blocking times,
+waiting times between operations etc. Moreover, the application of
+the proposed methodology to scheduling problems, where the main
+variables are individual jobs, processing times and due dates, seem to
+be a challenging opportunity for future work.
+The authors would like to thank the three anonymous referees for
+their valuable comments and suggestions. The second author would
+also like to thank CNPq (Brazilian National Council for Scientiﬁc and
+Technological Development) for partially supporting this research
+(grants 476753/2011-2 and 303000/2010-4).
+Alla, H., & David, R. (1988). Modelling of production systems by continuous Petri nets.
+In 3rd international conference on CAD/CAM, CARS & FOF88 (pp. 344–348). Detroit,
+Arda, Y., & Hennet, J. C. (2006). Inventory control in a multi-supplier system. International Journal of Production Economics, 104, 249–259.
+Axsäter, S. (1976). Coordinating control of production-inventory systems. International
+Journal of Production Research, 14, 669–688.
+Axsäter, S. (1985). Control theory concepts in production and inventory control. International Journal of Systems Science, 16, 161–169.
+Axsäter, S. (2001). Scaling down multi-echelon inventory problems. International Journal of Production Economics, 71, 255–261.
+Axsäter, S. (2003). Approximate optimization of a two-level distribution inventory
+system. International Journal of Production Economics, 81-82, 545–553.
+Axsater, S., Olsson, F., & Tydesjo, P. (2007). Heuristics for handling direct upstream
+demand in two-echelon distribution inventory systems. International Journal of
+Barrena, E., Canca, D., Coelho, L. C., & Laporte, G. (2014). Exact formulations and algorithm for the train timetabling problem with dynamic demand. Computers and
+Bensoussan, A., Çakanyıldırım, M., & Sethi, S. P. (2007). Optimal ordering policies for
+inventory problems with dynamic information delays. Production & Operations
+Bertsekas, D. P. (2000). Dynamic programming and optimal control. Belmont, MA:
+Bogataj, L., & Horvat, L. (1996). Stochastic considerations of Grubbström-Molinder
+model of MRP, input-output and multi-echelon inventory systems. International
+Journal of Production Economics, 45, 329–336.
+Burns, J. F., & Sivazlian, B. D. (1978). Dynamic analysis of multi-echelon supply systems.
+Computers and Industrial Engineering, 2, 181–193.
+Chiang, T. -C., Cheng, H. -C., & Fu, L. -C. (2010). A memetic algorithm for minimizing
+total weighted tardiness on parallel batch machines with incompatible job families
+and dynamic job arrival. Computers and Operations Research, 37, 2257–2269.
+Cho, S., & Erkoc, M. (2009). Design of predictable production scheduling model using
+control theoretic approach. International Journal of Production Research, 47, 2975–
+Dejonckheere, J., Disney, S. M., Lambrecht, M. R., & Towill, D. R. (2002). Transfer function
+analysis of forecasting induced bullwhip in supply chains. International Journal of
+Daganzo, C. F. (2004). On the stability of supply chains. Operations Research, 52,
+Dejonckheere, J., Disney, S. M., Lambrecht, M. R., & Towill, D. R. (2003). Measuring
+and avoiding the bullwhip effect: A control theoretic approach. European Journal of
+Dejonckheere, J., Disney, S. M., Lambrecht, M. R., & Towill, D. R. (2004). The impact of
+information enrichment on the Bullwhip effect in supply chains: A control engineering perspective. European Journal of Operational Research, 153, 727–750.
+Disney, S. M., Naim, M. M., & Towill, D. R. (2000). Genetic algorithm optimization of
+a class of inventory control systems. International Journal of Production Economics,
+Evans, G. N., Naim, M. M., & Towill, D. R. (1998). Application of a simulation methodology
+to the redesign of a logistical control system. International Journal of Production
+Ferney, M. (2000). Modelling and Controlling product manufacturing systems using
+bond-graphs and state equations: Continuous systems and discrete systems which
+can be represented by continuous models. Production Planning & Control, 11, 7–19.
+Forrester, J. (1961). Industrial dynamics. Cambridge, MA: MIT Press.
+Grubbström, R. W. (2005). Algorithms for optimal dynamic lotsizing in discrete and
+continuous time. International Journal of Agile Manufacturing, 8, 85–96.
+Grubbström, R. W., Bogataj, M., & Bogataj, L. (2010). Optimal lotsizing within MRP
+theory. Annual Reviews in Control, 34, 89–100.
+Grubbström, R. W., & Molinder, A. (1996). Safety production plans in MRP-systems
+using transform methodology. International Journal of Production Economics, 46-47,
+Grubbström, R. W., & Ovrin, P. (1992). Intertemporal generalization of the relationship
+between material requirements planning and input–output analysis. International
+Journal of Production Economics, 26, 311–318.
+Grubbström, R. W., & Tang, O. (2000). An overview of input–output analysis applied to
+production-inventory systems. Economic Systems Review, 12, 3–25.
+J. K. Sagawa, M. S. Nagano / European Journal of Operational Research 244 (2015) 624–636
+He, X., Prasad, A., & Sethi, S. P. (2009). Cooperative advertising and pricing in a dynamic
+stochastic supply chain: Feedback stackelberg strategies. Production & Operations
+Hennet, J. C. (2009). A globally optimal local inventory control policy for multistage
+supply chains. International Journal of Production Research Special Issue “Cutting
+Edge of the French Community in Production Research”, 47, 435–453.
+Hyer, N., & Wemmerlöv, U. (2002). Reorganizing the factory. New York: Productivity
+Ivanov, D., Dolgui, A., & Sokolov, B. (2012). Applicability of optimal control theory
+to adaptive supply chain planning and scheduling. Annual Reviews in Control, 36,
+Ivanov, D., & Sokolov, B. (2013). Control and system-theoretic identiﬁcation of the supply chain dynamics domain for planning, analysis and adaptation of performance
+under uncertainty. European Journal of Operational Research, 224, 313–323.
+Ivanov, D., Sokolov, B., & Kaeschel, J. (2010). A multi-structural framework for adaptive
+supply chain planning and operations control with structure dynamics considerations. European Journal of Operational Research, 200, 409–420.
+Jang, W. (2002). Dynamic scheduling of stochastic jobs on a single machine. European
+Journal of Operational Research, 138, 518–530.
+Jitapaiboon, T., Dobrzykowski, D. D., Ragu-Nathan, T. S., & Vonderembse, M. A. (2013).
+Unpacking IT use and integration for mass customisation: A service-dominant logic
+view. International Journal of Production Research, 51, 2527–2547.
+Khmelnitsky, E., Kogan, K., & Maimon, O. (1997). Maximum principle-based methods
+for production scheduling with partially sequence-dependent setups. International
+Journal of Production Research, 35, 2701–2712.
+Kim, J. H., & Duﬃe, N. A. (2005). Design and analysis of closed-loop capacity control for a
+multi-workstation production system. CIRP Annals—Manufacturing Technology, 54,
+Kim, J. H., & Duﬃe, N. A. (2006). Performance of coupled closed-loop capacity controls
+in a multi-workstation production system. CIRP Annals—Manufacturing Technology,
+Kogan, K., & Herbon, A. (2008). A supply chain under limited-time promotion: The effect
+of customer sensitivity. European Journal of Operational Research, 188, 273–292.
+Li, W. e. a. (2011). A heuristic for adaptive production scheduling and control in ﬂow
+shop production. International Journal of Production Research, 49, 3151–3170.
+Liao, X., Wang, L. Q., & Yu, P. (2007). Stability of dynamical systems. Amsterdam:
+Liu, G., Shah, R., & Schroeder, R. G. (2012). The relationships among functional integration, mass customisation, and ﬁrm performance. International Journal of Production
+Nabais, J. L., Negenborn, R., Carmona Benitez, R. B., & Botto, M. A. (2013). A Multi-Agent
+MPC scheme for vertically integrated manufacturing supply chains. In 6th IFAC
+conference on management and control of production and logistics: vol. 6 (pp. 56–
+Ortega, M., & Lin, L. (2004). Control theory applications to the production-inventory
+problem: A review. International Journal of Production Research, 42, 2303–2322.
+Piller, T. F., Moeslein, K., & Stotko, C. M. (2004). Does mass customization pay? An economic approach to evaluate customer integration. Production Planning and Control,
+Pontryagin, L. S., Boltyanskii, V. G., Gamkrelidze, R. V., & Mishchenko, E. F. (1964). The
+Mathematical theory of optimal processes. London: Pergamon Press.
+Prabhu, V. V., & Duﬃe, N. A. (1999). Nonlinear dynamics in distributed arrival time control of heterarchical manufacturing systems. IEEE Transactions on Control Systems
+Proth, J. -M. (2007). Scheduling: New trends in industrial environment. Annual Reviews
+Sagawa, J. K., & Nagano, M. S. (2013). Dynamic models for production control and
+scheduling: A brief review. In 12th Mexican international conference on artiﬁcial
+intelligence (MICAI) (pp. 38–44). Mexico City, Mexico: IEEE.
+Sarimveis, H., Patrinos, P., Tarantilis, C., & Kiranoudis, C. T. (2008). Dynamic modeling
+and control of supply chain systems: A review. Computers and Operations Research,
+Simon, H. A. (1952). On the application of servomechanism theory in the study of
+production control. Econometrica, 20, 247–268.
+Sipper, D., & Bulﬁn, R. L. (1997). Production: Planning, control and integration. New
+Suri, R., & Desiraju, R. (1997). Performance analysis of ﬂexible manufacturing systems
+with a single discrete material-handling device. International Journal of Flexible
+Towill, D. R. (1982). Dynamic analysis of an inventory and order based production
+control system. International Journal of Production Research, 20, 671–687.
+Vassian, J. H. (1955). Application of discrete variable servo theory to inventory control.
+Wang, C. -S., & Uzsoy, R. (2002). A genetic algorithm to minimize maximum lateness on
+a batch processing machine. Computers and Operations Research, 29, 1621–1640.
+Wang, X., Liu, Z., Zheng, C., & Wu, J. (2008). Analysis and design of a production and
+inventory control system for ramp demand. In WiCOM ’08—4th international conference on wireless communications, networking and mobile computing (pp. 1–5).
+Weng, W., & Fujimura, S. (2012). Control methods for dynamic time-based manufacturing under customized product lead times. European Journal of Operational Research,
+Weng, W., Wei, X., & Fujimura, S. (2012). Dynamic routing strategies for JIT production
+in hybrid ﬂow shops. Computers and Operations Research, 39, 3316–3324.
+Wiendahl, H. -P. (1995). Load-orientated manufacturing control. New York: Springer.
+Wiendahl, H. -P., & Breithaupt, J. -W. (1997). Production planning and control on the
+basis of control theory. In N. Okino, H. Tamura, & S. Fujii (Eds.), Advances in
+production management systems—Perspectives and future challenges (pp. 351–362).
+Wiendahl, H. -P., & Breithaupt, J. -W. (1999). Modelling and controlling the dynamics
+of production systems. Production Planning and Control, 10, 389–401.
+Wiendahl, H. -P., & Breithaupt, J. -W. (2000). Automatic production control applying
+control theory. International Journal of Production Economics, 63, 33–46.
+Wikner, J., Naim, M. M., & Towill, D. R. (1992). The system simpliﬁcation approach in
+understanding the dynamic behaviour of a manufacturing supply chain. Journal of
+Zhou, L., Disney, S., & Towill, D. R. (2010). A pragmatic approach to the design of
+bullwhip controllers. International Journal of Production Economics, 128, 556–568.

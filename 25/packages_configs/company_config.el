@@ -34,7 +34,7 @@
 ;; ngram
 (with-eval-after-load 'company-ngram
   ; ~/data/ngram/*.txt are used as data
-  (setq company-ngram-data-dir "~/data/ngram")
+  (setq company-ngram-data-dir "~/.emacs.d/ngram")
   ; company-ngram supports python 3 or newer
   (setq company-ngram-python "python3")
   (company-ngram-init)

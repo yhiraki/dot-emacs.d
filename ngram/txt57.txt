@@ -1,0 +1,359 @@
+Sustainability 2013, 5, 4637-4652; doi:10.3390/su5114637
+A Systematic Cycle Time Reduction Procedure for
+Enhancing the Competitiveness and Sustainability of
+Department of Industrial Engineering and Systems Management, Feng Chia University, 100, Wenhwa
+Road, Seatwen, Taichung City 407, Taiwan; E-mail: tolychen@ms37.hinet.net;
+Tel.: +886-424-517-250 (ext. 3645); Fax: +886-424-510-240
+Received: 14 October 2013; in revised form: 28 October 2013 / Accepted: 29 October 2013/
+Abstract: Cycle time reduction plays an important role in improving the competitiveness
+and sustainability of a semiconductor manufacturer. However, in the past, cycle time
+reduction was usually unplanned owing to the lack of a systematic and quantitative
+procedure. To tackle this problem, a systematic procedure was established in this study for
+planning cycle time reduction actions to enhance the competitiveness and sustainability of
+a semiconductor manufacturer. First, some controllable factors that are influential to the
+job cycle time are identified. Subsequently, the relationship between the controllable factors
+and the job cycle time is fitted with a back propagation network. Based on this relationship,
+actions to shorten the job cycle time can be planned. The feasibility and effectiveness of an
+action have to be assessed before it can be taken in practice. An example containing the
+real data of hundreds of jobs has been used to illustrate the applicability of the proposed
+methodology. In addition, the financial benefits of the cycle time reduction action were
+analyzed, which provided the evidence that the proposed methodology enabled the
+sustainable development of the semiconductor manufacturer, since capital adequacy is very
+important in the semiconductor manufacturing industry.
+Keywords: competitiveness; sustainability; cycle time reduction; semiconductor;
+The cycle time (flow time, or manufacturing lead time) of a job is the time required for the job to go
+through the factory. Shortening the job cycle time is very important for a factory, at least for the
+(1) Each job represents an opportunity cost for the factory. A long cycle time means it is difficult
+to convert the opportunity cost into profits in the short term.
+(2) Long job cycle times result in the accumulation of work-in-progress (WIP), which makes the
+shop floor management a challenging task.
+(3) In a semiconductor manufacturing factory, the risk that a wafer is contaminated increases if the
+These issues are related with cycle time, cost, and yield (i.e., product quality). In fact, the three
+factors are not only the keys to the competitiveness of a semiconductor manufacturer [1–3], but also
+decisive factors for the sustainability of the semiconductor manufacturer. The conclusions of some
+relevant studies on the competitiveness and sustainability of a semiconductor manufacturer were
+summarized in Table 1. In the past, support from the government enabled the continued growth of
+semiconductor manufacturers in some regions, such as Taiwan and South Korea. After such support
+disappears, how to continue to maintain competitiveness and sustainability becomes a big problem.
+For example, not being able to push costs down further has forced many dynamic random access
+memory (DRAM) manufacturers to exit the market. The survived continue to reduce the job cycle
+time, so as to respond more quickly to changes in customer demand, and thus gain a competitive
+advantage [4]. A shorter job cycle time also means it is possible to commit an attractive due date to the
+customer. That helps to expand the market share and to ensure sustainability.
+Table 1. Conclusions of some relevant studies on the competitiveness and sustainability of
+Four principles for competitive semiconductor manufacturing were proposed.
+Quality should be designed into products and processes.
+The accuracy of forecasting technology trends and emerging markets is important to
+the competitiveness of a semiconductor manufacturer.
+Factors that influence competitive semiconductor manufacturing (CSM) were identified.
+Shortening cycle time, producing high-quality products, on-time delivery of orders,
+continual cost reductions, and improving efficiency were considered as the most
+direct and effective ways to create value for customers.
+The competitiveness and sustainability of a semiconductor manufacturer are closely
+Knowledge management is a decisive factor for a semiconductor manufacturer to
+develop and maintain its competitive advantage.
+Allocating more factory capacity to a product can change the yield learning process
+A semiconductor manufacturer has to constantly develop and employ the latest
+technology to maintain a competitive advantage.
+Distributors can create good cooperation and collaboration by mediates between
+semiconductor manufacturers and user companies.
+Cost competitiveness is a subjective concept that can be modeled with a fuzzy value.
+The long-term competitiveness can be assessed by observing the trend in the midterm competitiveness.
+Productivity is crucial to the competitiveness of a semiconductor manufacturer.
+The long-term competitiveness is the key to the sustainability of a factory.
+However, in the past, cycle time reduction was usually unplanned owing to the lack of a systematic
+and quantitative procedure. To tackle this problem, this study aims to establish a systematic procedure
+for planning cycle time reduction actions to enhance the competitiveness and sustainability of a
+semiconductor manufacturer (see Figure 1). To this end, a four-step procedure is followed:
+(1) Identify factors that are influential to the job cycle time and are controllable: The cycle time of a
+job is subject to capacity constraints, the factory congestion level, the quality of job scheduling,
+and many other factors [14]. However, these factors must be operable to be useful, and this step
+is to adjust such operable factors so that the job cycle time can be shortened.
+(2) Fit the relationship between the controllable factors and the job cycle time: The existing
+methods for fitting the relationship between the controllable factors and the job cycle time can
+be divided into several categories: probability-based statistical methods, case-based reasoning
+(CBR), artificial neural networks (ANNs), simulation, and hybrid approaches. A recent
+literature review on these methods can be seen in Chen and Wang [15]. In this study, an ANN is
+used. A number of studies have shown that linear methods are incapable of estimating the job
+cycle time [4]. Nonlinear method, such as ANNs, are more appropriate to estimate the job cycle
+(3) Plan actions to shorten the job cycle time: We can take actions to change the attributes and
+processing order of a job, or the size of the storage area to adjust the values of the controllable
+factors, which shortens the job cycle time according to the mechanism fitted in (2). In addition,
+adopting a more effective scheduling rule has also been shown to shorten the cycle time [16];
+however, it requires extensive and time-consuming evaluation, usually after a series of
+(4) Assess the feasibility and effectiveness of an action: We can compare the new values of the
+controllable factors to those that have been used in the past to assess the feasibility and
+effectiveness of an action. To this end, two indexes, based on the mean absolute percentage
+deviation (MAPD) between the target values and the historical/original values, have been proposed.
+The remainder of this paper is organized as follows. Section 2 is divided into four parts; each of
+them details a step of the proposed methodology. To illustrate the applicability of the proposed
+methodology, a real case from a semiconductor manufacturing factory is used. Based on the
+application results, the advantages and/or disadvantages of the proposed methodology are discussed.
+Based on them, some points are concluded. At last, some directions for future exploration are also
+Figure 1. The motive for the proposed methodology.
+The proposed methodology includes the following steps, as illustrated in Figure 2.
+Figure 2. The procedure of the proposed methodology.
+2.1. Identify Controllable Factors Influential to the Job Cycle Time
+The first step of model building often consists of selecting a parsimonious set of independent
+variables from a pool of candidate independent variables. There are a number of factors that are
+influential to the job cycle time. These factors can be divided into the following categories [14,17]:
+WIP in the factory: As the monthly capacity of a semiconductor manufacturing factory is
+normally fixed, the WIP in the factory is usually determined by the release plan. However,
+after receiving an order, a foundry has to release the corresponding jobs into the factory as
+soon as possible. For this reason, the release plan and WIP are not under the control of a foundry.
+The workload of a factory, which can be measured in terms of the utilization of the
+The queue lengths before machines, especially bottleneck machines, which is one of the main
+factors leading to a long cycle time. The queue length before a machine depends on the good,
+or bad, of the scheduling performance, and can be controlled by adjusting the buffer size
+Job attributes: The size, priority, and total processing time of a job directly affects the job’s
+cycle time. In addition, the number of re-entrances to machines is proportional to the number
+of times that a job is queued, and therefore is also a decisive factor to the job’s cycle time.
+Lateness information: The lateness of some recently completed jobs is information of great
+reference value for estimating the job cycle time.
+Worker productivity, which usually follows a learning process. Despite the short-term
+productivity can be enhanced through incentives or rewards, the long-term trend is very
+difficult to change. A detailed discussion on this can be seen in Chen and Wang [13].
+To select from these candidate independent variables, stepwise and backward elimination are two
+common statistical techniques in regression analysis. However, Li [18] has shown that backward
+elimination is slightly better than stepwise elimination. For this reason, backward elimination is
+applied in this study to filter out the decisive factors to estimate the job cycle time:
+Test the deletion of each variable to optimize a fitness indicator, e.g., F-test, t-test, adjusted R2,
+Akaike information criterion, Bayesian information criterion, Mallows’s Cp, and false
+Delete the variable that can improve the fitness most.
+Repeat this process until no further improvement can be achieved.
+2.2. Fit the Relationship between the Controllable Variables and the Job Cycle Time
+In a wafer fabrication factory, the relationship between the controllable factors and the job cycle
+time is undoubtedly nonlinear [4]. BPN is a well-known tool for fitting nonlinear relationships, so is a
+very good choice to fit the relationship.
+In the proposed methodology, a BPN is established to fit the relationship between the controllable
+variables and the job cycle time. The configuration of the BPN is as follows (see Figure 3):
+Network inputs: Inputs to the BPN are the values of the K controllable factors, indicated with
+x jk , k = 1–K. However, the values of these attributes have to be normalized to be within 0.1–0.9
+to facilitate the following computation [19].
+Hidden layers: Only a single hidden layer is used. The number of nodes in the hidden layer is 2K.
+Activation/transformation function: For the input layer, the linear activation function keeping
+while for the other layers, the hyperbolic tangent sigmoid function is used, and the output
+Network output ( o j ): the estimated cycle time of job j.
+Training method: There are several methods for training a BPN, such as the gradient descent
+algorithm, the conjugate gradient algorithm, the Levenberg-Marquardt algorithm, and others.
+The gradient descent algorithm is slow, while the Levenberg-Marquardt algorithm may over-fit
+for the testing data [20]. In this study, the gradient descent algorithm is applied.
+Convergence criteria: The BPN training stops if mean squared error (MSE) falls below 10−5
+where a j is the cycle time of job j. N() is the normalization function.
+Inputs to the BPN are directly passed to the inputs nodes. After being weighted, they are passed to
+each hidden-layer node, summed, compared with the threshold on the node, and transformed. Finally,
+the output from the hidden-layer node is generated as
+where hl is the output from hidden-layer node l; lh is the threshold on this node; wklh is the weight
+of the connection between input node k and hidden-layer node l. hl is passed to the output node in the
+same way, and finally the network output, i.e., the cycle time estimate of job j, is generated as
+where  o is the threshold on the output node; wlo is the weight of the connection between hidden-layer
+After comparing the network output with the actual cycle time, the estimation error can be derived.
+The gradient descent algorithm passes the estimation error backward to adjust the thresholds and
+connection weights in an iterative manner:
+where wlo , wklh ,  o , and lh indicate the adjustments that should be made to the
+corresponding parameters.  is the learning rate.
+2.3. Plan Actions to Shorten the Job Cycle Time
+There are many references to provide evidence that various actions can be taken to shorten the job
+cycle time. Ng et al. [21] identified factors in the purchasing and transportation processes that
+influence a firm’s ability to reduce the cycle time. Browning [22] discussed some of the challenges
+that impede efforts to reduce the job cycle time, including inefficient distribution of personnel and
+resources, unstable product requirements, the existence of long and various activity pipelines, lack of
+activity coordination, highly interdependent or coupled activities, and overly ambitious initial
+schedules. Seth and Gupta [23] proved that value stream mapping (VSM) is effective in identifying
+and eliminating wastes in a factory with similar or identical product routings, which also helps to
+shorten the job cycle time. Better scheduling rules have been shown to reduce the job cycle time in
+simulation experiments [16,24]; however, a long period of evaluation and system adjustments needs to
+be gone through before the new scheduling rule to be fully online. Nazzal et al. [25] tried to quantify
+the economic impact of reducing the job cycle time. First, the bottleneck machines in a semiconductor
+manufacturing factory that have a significant impact on the job cycle time were identified. Then, the
+production capacities of the bottleneck machines were increased. However, capacity expansion is a
+time-consuming task, and requires the cooperation of equipment suppliers.
+In short, the following actions may reduce the job cycle time, and are relatively easy to take:
+(1) Lower the WIP level in the factory: The most effective way to lower the WIP level in a factory
+is through capacity expansion; however, that is not easy except for a new factory. Another
+solution is to slow down the pace at which new jobs are released into the factory. However,
+that is difficult sometimes, especially in a foundry. An alternative is to accelerate the
+(2) Shorten the queue lengths, especially before bottleneck machines: The performance of a
+manufacturing system is usually determined by bottleneck machines. For this reason,
+bottleneck machines are usually the targets of improvement. However, bottlenecks may shift,
+and therefore should be detected continuously. The queue lengths before bottleneck machines
+can be shortened by controlling the outputs from the upstream machines. However, a
+semiconductor manufacturing factory is a reentrant production system, in which downstream
+machines may become upstream machines, and vice versa. In addition, narrowing the buffer
+space can achieve a similar effect. Scheduling using some fluctuation smoothing rules was also
+shown to be helpful for this purpose [26].
+(3) Control the delay of jobs: A delayed job means it spent more time than expected in the
+semiconductor manufacturing factory. Within this extra time, the job continues to compete for
+the capacities, and to join the queues before machines, thus lengthening the cycle times of the
+other jobs. For this reason, controlling the delay of jobs is a critical task. To this end, one
+approach is to accelerate the progresses of jobs that are almost late. In addition, the job size is
+inversely proportional to the required setups, and is also influential to the cycle time and delay [27].
+Therefore, changing the job size may help to control the delay [28–30].
+The corresponding actions in these categories were summarized in Table 2.
+However, Browning [22] warned that many seemingly feasible cycle time reduction solutions have
+adverse side effects. Therefore, any cycle time reduction action must pass the feasibility assessment, as
+Table 2. Some possible actions for reducing the job cycle time.
+Control the outputs from the upstream machines
+Schedule using fluctuation smoothing rules
+2.4. Assess the Feasibility and Effectiveness of An Action
+A cycle time reduction action is feasible if
+(1) The target values of the controllable variables have been used in the past, or at least are close to
+those used in the past. To guarantee this, the mean absolute percentage deviation (MAPD)
+between the target values and the historical values has to be less than a threshold 1 :
+(2) Setting the controllable variables to the target values can indeed reduce the job cycle time,
+(3) The realizability of the cycle time reduction action has been approved by the relevant
+In addition, a feasible cycle time reduction action is effective if it minimizes the MAPD between
+the target values and the original values of the controllable variables:
+To illustrate the application of the proposed methodology, the data of 120 jobs from a
+semiconductor manufacturing factory have been collected, including the attributes and cycle time of
+each job, the factory conditions when each job was released into the factory, and delay-related
+information (see Table 3). Except the cycle time, which is the dependent variable, all the other
+variables were filtered to remove uncontrollable ones.
+Factory utilization of the day before a job is released
+Queue length before bottleneck machines when a job is released
+Queue length on the processing route of a job when the job is released
+After backward elimination of regression analysis, six controllable variables that were the most
+influential for the job cycle time were determined as: xj1–the job size, xj2–factory WIP, xj3–the queue
+length before the bottleneck, xj4–the queue length on the route, xj5–the average waiting time, and
+xj6–factory utilization, as shown in Table 4. The fitted regression equation is aj = −373 + 5.273xj1 +
+1.834xj2 + 1.220xj3 – 1.853xj4 +0.080xj5 + 286xj6. R2 = 0.73 and adjusted R2 = 0.72. The analysis of
+variance (ANOVA) results are shown in Table 5.
+Subsequently, the values of the six controllable variables were normalized to 0.1–0.9 (see Table 6).
+Then, a BPN was established to fit the relationship between the job cycle time and the six controllable
+variables. The BPN has a single hidden layer with 12 nodes, and was trained with 3/4 of the collected data
+using the gradient descent algorithm. The remaining 1/4 were reserved for evaluating the performance
+of the BPN. BPN training stopped if the MSE was less than 10−5 or 15000 epochs have been run. To
+visualize the relationship, it was projected down to the three-dimensional space, as shown in Figure 4
+Table 6. The normalized values of the six controllable variables.
+Figure 4. The relationship projected down to the three-dimensional space.
+Finally, the BPN can be used to estimate the cycle time with any setting of the six controllable variables.
+If the job size = 25 pieces, factory WIP = 1246 jobs, the queue length before the bottleneck = 170 jobs,
+the queue length on the route = 726 jobs, the average waiting time = 243 h, and factory utilization = 89%,
+In addition, we can assess the effectiveness of a cycle time reduction action.
+In the previous example, if factory WIP, the queue length before the bottleneck, and the queue
+length on the route can all be reduced by 5%, i.e.,
+the queue length before the bottleneck = 161 jobs;
+the queue length on the route = 690 jobs;
+then the estimated cycle time can be shortened from 1665 hours to 1586 hours, with a reduction of 4.75%.
+Further, it is also possible to develop an action to achieve the cycle time improvement target.
+In the previous example, if the cycle time is to be improved by 7%, by lowering the WIP level in
+the factory, then the factory WIP should be reduced from 1246 jobs to 1208 jobs, which is equal to a
+There are a number of possible actions that may achieve the cycle time reduction target. For
+example, in the previous example, five such actions are listed in Table 7. However, not all of them are
+feasible, or even effective. To assess the feasibility of each action, the mean absolute percentage
+deviation between the target values and the historical values, MAPDh, has to be less than a threshold
+1 that was set to 4%. The assessment results were summarized in Table 8. Among the five actions,
+only three of them were feasible. Subsequently, the most effective cycle time reduction action is the
+feasible one that minimizes the mean absolute percentage deviation between the target values and the
+original values of the controllable variables, i.e., MAPDo. The results are shown in Table 9. Obviously,
+the most effective action is action #2 in this example. Subsequently, the conclusion was handed over to
+a production control engineer to be confirmed. The confirmation results were shown in Table 10. The
+expert believed that the proposed action was basically feasible.
+The financial benefits of the cycle time reduction action can be described by the following analysis.
+The factory releases about 30,000 pieces of wafers per month. The unit cost of each finished wafer is about
+$17000. Therefore, the opportunity cost of a wafer in progress can be approximated as 17000/2 = 8500
+dollars per day, assuming it is half-finished. A reduction of 7% in the cycle time is about five days.
+In total, the annual savings of the opportunity costs by the cycle time reduction action is about
+8500 × 30,000 × 12 × 5 = 15.3 billion dollars. As capital adequacy is very important for a
+semiconductor manufacturer, we believe such benefits can improve the sustainable development of the
+Table 7. Five possible actions to achieve a cycle time reduction of 7%.
+Reduce the queue length before the bottleneck by 3%
+Reduce the queue length on the route by 3%
+Reduce the queue length before the bottleneck by 8%
+Reduce the queue length before the bottleneck by 4%
+Reduce the queue length on the route by 9%,
+Reduce the queue length before the bottleneck by 4%
+Reduce the queue length on the route by 6%
+Table 8. The feasibility assessment results.
+Table 9. The effectiveness evaluation results.
+Reduce the queue length before the bottleneck by 3%
+Reduce the queue length on the route by 3%
+It can be taken, but will it lead to a reduction in the
+It can be taken by controlling the inputs to the route.
+It is a good direction, but unsure how to take.
+4. Conclusions and Future Research Directions
+Enhancing the competitiveness and sustainability has been pursued by every semiconductor
+manufacturer. A key to this is the production cycle time. Shortening the production cycle time
+improves the responsiveness to customer demands, and leads to significant profits from yield
+improvement and cost reduction. However, in the past, cycle time reduction is usually unplanned
+owing to the lack of a systematic and quantitative procedure. To tackle this problem, a systematic
+procedure was established in this study for planning cycle time reduction actions to enhance the
+competitiveness and sustainability of a semiconductor manufacturer. First, some controllable factors
+that are influential to the job cycle time are identified. Subsequently, the relationship between the
+controllable factors and the job cycle time is fitted with a BPN. Based on this relationship, actions to
+shorten the job cycle time can be planned. The feasibility and effectiveness of an action have to be
+assessed before it is taken in the practice.
+An example containing the real data of hundreds of jobs has been used to illustrate the applicability
+of the proposed methodology. The results showed that the proposed methodology is indeed an easy-to-use
+and efficient procedure. It guided the planning of cycle time reduction step by step, and was also able
+to list a number of possible solutions to choose from. That provides much flexibility in practice.
+Further, from the financial analysis, the value of the cycle time reduction action to the sustainable
+development of the semiconductor manufacturer is even more obvious, since semiconductor
+manufacturing is a burning-money industry. However, any conclusion from the proposed procedure
+has to be confirmed by the production control engineer.
+This work was supported by National Science Council of Taiwan.
+The authors declare no conflict of interest.
+Peng, C.Y.; Chien, C.F. Data value development to enhance competitive advantage: A
+retrospective study of EDA systems for semiconductor fabrication. Int. J. Serv. Tech. Manag. 2003,
+Chen, T. Establishing the optimal and efficient capacity re-allocation plans for enhancing the
+long-term competitiveness of a semiconductor product–a long-term trend viewpoint. Proc. IME B.
+Chen, T. A flexible way of modelling the long-term cost competitiveness of a semiconductor
+product. Robot. Comput. Integrated Manuf. 2013, 29, 31–40.
+Chien, C.F.; Hsu, C.Y.; Hsiao, C.W. Manufacturing intelligence to forecast and reduce
+semiconductor cycle time. J. Intell. Manuf. 2012, 22, 2281–2294.
+Armstrong, E. Principles for Competitive Semiconductor Manufacturing. In Proceedings of IEEE
+SEMI International Semiconductor Manufacturing Science Symposium, Burlingame, CA, USA,
+Jenkins, T.; Phail, F.; Sackman, S. Semiconductor Competitiveness in the 1990s. SAE Tech. Paper
+Fulcher, J. Consensus forecasting improves competitiveness, forecast accuracy at Babson
+Brothers, Cypress Semiconductor. Manuf. Syst. 1998, 16, 4.
+Leachman, R.C. Competitive Semiconductor Manufacturing: Final Report on Findings from
+Benchmarking Eight-Inch, Sub-350nm Wafer Fabrication Lines. Available onlie:
+http://andros.eecs.berkeley.edu/~hodges/CSM_final_rept.pdf (accessed on 1 November 2013).
+Walsh, S.T.; Boylan, R.L.; McDermott, C.; Paulson, A. The semiconductor silicon industry
+roadmap: epochs driven by the dynamics between disruptive technologies and core competencies.
+Technol. Forecast. Soc. Change 2007, 72, 213–236.
+Liao, S.H.; Hu, T.C. Knowledge transfer and competitive advantage on environmental
+uncertainty: An empirical study of the Taiwan semiconductor industry. Technovation 2007, 27,
+Chien, C.-F.; Zheng, J.-N. Mini-max regret strategy for robust capacity expansion decisions in
+semiconductor manufacturing. J. Intell. Manuf. 2012, 23, 2151–2159.
+Nakagawa, H.; Nagai, A.; Ito, T. A middle-agent framework focused on the role of distributors.
+Int. J. Inform. Process. 2012, 20, 614–621.
+Chen, T.; Wang, Y.-C. Evaluating sustainable advantages in productivity with a systematic
+procedure. Int. J. Adv. Manuf. Tech. 2013, in press.
+Chen, T. A fuzzy back propagation network for output time prediction in a wafer fab. Appl. Soft
+Chen, T.; Wang, Y.C. An iterative procedure for optimizing the performance of the fuzzy-neural
+job cycle time estimation approach in a wafer fabrication factory. Math. Probl. Eng. 2012,
+Chen, T. Fuzzy-neural-network-based fluctuation smoothing rule for reducing the cycle times of
+jobs with various priorities in a wafer fabrication factory - a simulation study. Proc. IME B. J.
+Chang, P.-C.; Hsieh, J.-C. A neural networks approach for due-date assignment in a wafer
+fabrication factory. IJIE 2003, 10, 55–61.
+Li, X. A Simulation Evaluation of Backward Elimination and Stepwise Variable Selection in
+Regression Analysis. Master Thesis, Kansas State University, Manhattan, KS, USA, 2012.
+Chen, T.; Wang, Y.-C.; Tsai, H.-R. Lot cycle time prediction in a ramping-up semiconductor
+manufacturing factory with a SOM-FBPN-ensemble approach with multiple buckets and partial
+normalization. Int. J. Adv. Manuf. Tech. 2009, 42, 1206–1216.
+Rahman, R.M.; Firoze, A.; Arifin, M.S. A comparative study of Bangla user adaptive word
+speech recognition. IJFMS 2013, in press.
+Ng, B.; Ferrin, B.G.; Pearson, J.N. The role of purchasing/transportation in cycle time reduction.
+Int. J. Oper. Prod. Manag. 1997, 17, 574–591.
+22. Browning, T.R. Use of Dependency Structure Matrices for Product Development Cycle Time
+Reduction. In Proceedings of Fifth ISPE International Conference on Concurrent Engineering:
+Research and Applications, Tokyo, Japan, 15–17 July 1998.
+23. Seth, D.; Gupta, V. Application of value stream mapping for lean operations and cycle time
+reduction: an Indian case study. Prod. Plann. Contr.2005, 16, 44–59.
+24. Wein, L.M. On the relationship between yield and cycle time in semiconductor wafer fabrication.
+IEEE Trans. Semicond. Manu.1992, 5, 156–158.
+25. Nazzal, D.; Mollaghasemi, M.; Anderson, D. A simulation-based evaluation of the cost of cycle
+time reduction in Agere Systems wafer fabrication facility-a case study. Int. J. Prod. Econ. 2006,
+26. Lu, S.C.H.; Ramaswamy, D.; Kumar, P.R. Efficient scheduling policies to reduce mean and
+variation of cycle time in semiconductor manufacturing plant. IEEE Trans. Semicond. Manu.
+27. McCormick, S.T.; Pinedo, M.L.; Shenker, S.; Wolf, B. Sequencing in an assembly line with
+blocking to minimize cycle time. Oper. Res.1989, 37, 925–935.
+28. Chen, T.; Wang, Y.C.; Wu, H.C. A fuzzy-neural approach for remaining cycle time estimation in
+a semiconductor manufacturing factory–a simulation study. IJICIC 2009, 5, 2125–2139.
+29. Chen, T. A hybrid SOM-BPN approach to lot output time prediction in a wafer fab. Neural
+30. Chen, T. An optimized tailored nonlinear fluctuation smoothing rule for scheduling a
+semiconductor manufacturing factory. Comput. Ind. Eng. 2010, 58, 317–325.
+© 2013 by the authors; licensee MDPI, Basel, Switzerland. This article is an open access article
+distributed under the terms and conditions of the Creative Commons Attribution license
+(http://creativecommons.org/licenses/by/3.0/).

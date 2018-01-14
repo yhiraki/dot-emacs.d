@@ -1,0 +1,341 @@
+A neural reinforcement learning approach to learn local dispatching
+policies i n p r o d u c t i o n scheduling
+C o m p u t e r Science D e p a r t m e n t
+Finding optimal solutions for j o b shop scheduling problems requires high computational effort, especially under consideration of uncertainty and frequent replanning. In contrast to
+computational solutions, domain experts are
+often able to derive good local dispatching
+heuristics by looking at typical problem i n stances. They can be efficiently applied by
+these rules are usually not optimal, especially in
+complex decision situations. Here we describe
+an approach that tries to combine both worlds.
+A neural network based agent autonomously
+optimizes its local dispatching policy w i t h respect to a global optimization goal, defined for
+the overall plant. On two benchmark scheduling problems, we show both learning and generalization abilities of the proposed approach.
+Production scheduling is the allocation of limited resources to tasks over time, while one or
+more objectives have to be optimized. Many
+variants of the basic problem formulation exist, and most of them are NP-hard to solve
+[Pinedo, 1994], meaning that exact solution algorithms suffer from a non-polynomial increase
+of computation time. This constitutes a problem not only if the problem to solve surmounts
+a certain size, but also in moderately complex
+domains, where the occurrence of new or unexpected events - the arrival of new jobs or
+the breakdown of machines - makes frequent
+replanning necessary. Even more, technological changes like semiconductor fabrication or
+thin film production are posing additional challenges, since new problem structures - like conditional loops in the production process - occur,
+for which conventional optimization techniques
+An alternative and far less time-consuming way
+is the application of simple heuristic dispatch-
+ing rules that select the j o b to process next on
+an idle resource depending on the current situation. However, these dispatching rules only reflect heuristic knowledge and do not guarantee
+to lead to the optimal behaviour of the overall
+system. Even for experienced human experts it
+may become arbitrarily difficult to decide which
+dispatching rule to apply and how to time it
+in a certain scenario, since the effects on the
+dynamics of the overall system can hardly be
+Here we propose an alternative way that allows
+to combine the desire for (nearly) optimal solutions w i t h a time-efficient computation, provided by resource-coupled dispatching rules.
+The idea is to have learning agents, that are associated to each resource and determine the local dispatching policy. This policy is not fixed,
+but instead is autonomously learned by getting
+feedback of the overall dynamic behaviour of
+the production system. In contrast to common
+dispatching rules which typically only consider
+few characteristic features of the current situation to make the decision, a learning agent can
+deal w i t h more state information and therefore
+figure out more sophisticated policies, which
+are better tailored to the process. The appearance of the proposed training method does not
+depend on the optimization goal or constraints
+posed by the production process. Therefore,
+it is applicable to a wide range of problem i n stances. As an example, in this article we focus
+on job shop scheduling problems w i t h the goal
+to reduce the summed tardiness. The following summarizes the main characteristics of the
+(approximately) optimal dispatching policies (including the adaptation to the plant
+structure and the inherent consideration of
+• fast situation dependent decision making,
+Recently, several reinforcement learning approaches have been proposed to solve certain
+aspects of scheduling problems. They vary in
+the type and their view of the scheduling problem and - as a consequence - the type of control decisions. Zhang and Dietterich [Dietterich
+and Zhang, 1995] propose an RL approach that
+learns a neural value-function to guide a repairbased scheduler. An action in this approach
+is the decision for a certain repair operation.
+Schneider, Boyan and Moore [Schneider et al.,
+1998] present a value-function-based approach
+for the problem of demand based scheduling.
+The learning scheduler decides over a set of
+possible factory configurations to maximize expected production profit in the presence of
+varying demand curves. In contrast to these
+global approaches, a local multi-agent view of
+a production scheduling problem is taken in
+[Brauer and Weiss, 1998]. Each machine does
+make a local decision which job to process next
+based on the estimated completion time of the
+candidate jobs. The learning rule is based on
+the propagation of these estimates along the
+production line of a j o b , similar to the QRouting algorithm [Boyan and L i t t m a n , 1994].
+An application of average-reward RL is presented by Mahadevan and Theocharous [Mahadevan and Theocharous, 1998] for the control
+Our approach follows the idea of local decision
+making. The neural network based agent considers the current situation, represented by a
+set of relevant (local) features, to make its decision which job to process next. It learns a
+local decision policy (similar to heuristic dispatching rules) w i t h the ability to adapt to the
+user-defined optimization goal. This is done
+autonomously, meaning that the policy is selfimproved by repeating a certain number of typical training cases.
+The task considered in the following is to process a set of m jobs on the n resources of a factory. Each j o b j
+basic operation must be performed on a certain
+1... .n and has a certain processing time. A job is finished after completion of
+its last operation. If the completion time
+job j is larger than a certain due-date , then
+the j o b is said to be tardy. The tardiness
+a job is zero, if it is finished before or at its duedate; otherwise it is
+scheduling objectives to be optimized all relate
+to the completion time of the jobs. Various
+variants of the basic optimization problem exist which can be classified within a complexity
+hierarchy [Pinedo, 1994]. In the following, we
+look at the problem of minimizing the summed
+deterministic problem subsumizes also the total
+completion time problem as well as the maximum lateness or maximum makespan problems. Being NP-hard, it is not possible to solve
+this problem with a polynomial time algorithm.
+D e s c r i p t i o n of t h e s o l u t i o n
+2.1 O p t i m i z a t i o n p r o b l e m a n d
+The global production scheduling problem can
+be described as a Markov Decision Process
+(MDP): the system's state s(t) is described by
+the current situation of the n resources and the
+processing state of the TO jobs, a decision a(t)
+describes which job is processed next on a waiting resource. The goal of scheduling is to find
+R(s, a, t) accumulated over time are minimized
+job is finished. Costs R(s,a,t) may depend
+both on the current situation and on the selected decision and express the desired optimization goal. For example, costs may arise
+due to the tardiness of a job, due to a resource
+waiting idle, or due to costs caused by the need
+to change a tool before continuing processing,
+In our approach, the global decision a(t) is a
+made by distributed agents each associated with one of the
+n resources. If a resource is ready to process a
+new operation, then its agent chooses one job
+out of a set Ak of jobs, where Ak is the set
+of jobs for which the next operation Oji must
+be processed on resource k. The resource is
+then occupied for the duration of Oji. After
+Each agent makes its decision based on a local
+of the global plant situation at time t. s k represents the local view
+of the agent. It can be thought of compressing the huge amount of global state information into features that are relevant for making
+the local decision at resource k. Learning here
+means iteratively improving the decision policy
+w i t h respect to the optimization of the global
+costs (1). This is done by a Q-learning related
+learning-rule adapted to the local decision process:
+The learning rule relates the local decision process as experienced by agent k to the global optimization goal by considering the global direct
+costs R(.). Since the time between the decisions
+varies depending on the duration of the currently processed operation, the 'reinforcement
+converges, then the optimal local value function
+predicts the estimated accumulated global costs, if in situation
+will choose that j o b next, that will lead to an
+optimization of the performance of the overall
+plant. The policy of the agent is determined by
+Since it is our objective to minimize the
+summed tardiness of all jobs, we have to choose
+R(,) such, that the minimization of (1) is equivalent to the minimization of the tardiness T.
+is to compute the tardiness after the j o b is finished
+The second possibility is to have costs in each
+time step during processing, if the job is currently too late but not ready yet:
+Although both formulations are equivalent w i t h
+respect to the general problem formulation, the
+latter choice has the advantage, that the cost
+function directly reflects the tardiness when it
+actually occurs, which may help the learning
+system. Therefore it is used in the experiments
+During learning, a random exploration strategy
+is performed that deviates from time to time
+The agent's learning rule varies from the Qlearning assumptions in two important issues:
+a) no central global decision is made, but i n stead, the global decision is composed by individual decisions of time-varying policies. Unless all policies are stable, this makes the process seen by the local agent non-stationary (in
+contrast, a single Q-learning agent assumes to
+experience a stationary environment), b) an
+agent does only use compressed information
+of the complete state. W i t h an agent's local state information, the observed system behaviour may become stochastic or even unpredictable. However, there is empirical evidence
+that Q-learning works in this scenario [Barto
+and Crites, 1996]. In the experiments in section 3 the problems mentioned in a) are circumvented, since in this paper only situations
+w i t h a single local learning agent are examined.
+We choose a multilayer-perceptron neural network for representing the value function Q(.)
+for two reasons: a) the state space is continuous
+and therefore no finite scheme (like a lookuptable) can represent all states, b) we want to
+exploit the generalization ability of the neural
+network to find general policies, i.e. the Q function should generalize to unknown situations.
+Input for the function approximator is an adequate description of the current decision situation by a feature vector. The features have to
+comply w i t h the following requirements: They
+should relate to the future expected costs and
+should be characteristic for the present situation. Features should represent characteristics
+of typical problem classes rather than of individual instances, such that the acquired knowledge can be generalized to new problem i n stances. For this reason, few attributes are
+considered, mainly describing the local situation at the machine. W i t h respect to practical applicability, features should be computable
+out of data available from common commercial
+PPC-systems. In order to keep the network
+input small, redundant information should be
+avoided. Dealing w i t h a time-dependent problem, besides static properties dynamic features
+should be concerned. They are not only dependent on the job or resource properties (e.g.
+processing time) but also on time progress (e.g.
+slack). Input to the neural network are local state features Sk(t) plus features coding the
+• describing general characteristics of the
+problem: 'tightness' r (1) and 'distribut i o n ' R (2) of the jobs w i t h respect to their
+• describing the current situation: estimated
+tardiness, estimated makespan C (3), average slack
+decision f e a t u r e s / j o b characteristics:
+• describing characteristics of job j with respect to the present situation in Ak'. e.g.
+due date index (EDD) (4), relative slack,
+slack index (MS) (5), relative waiting time
+(FIFO) (6), relative processing time, processing time index (SPT, L P T )
+i.e. the properties of the remaining operations if job j was selected: e.g. average
+• describing the relationship j o b / operation,
+i.e. the significance of operation o ij for job
+j: e.g. relative work in process, relative
+The following experiments show the behaviour
+of the proposed learning approach in comparison to heuristic dispatching rules. In detail, we
+• how does the choice of input features influence the optimality of the policy found
+• is the learned policy general, i.e. does the
+policy show good performance when applied to untrained situations?
+• does the proposed learning scheme work,
+i.e. is it possible to improve the decision
+policy of the local learning agent with respect to the global goal autonomously?
+• how does the learned policy perform compared to heuristic dispatching rules?
+We examine two cases: a single resource case,
+as a demonstration for the principle working
+and performance capabilities, and a multi resource case, to show the capability of the agent
+to work within a multi-agent scenario. In both
+cases, 10 different production scenarios are used
+during the training phase. Each production
+scenario has a random number of jobs (5 to
+8) with different processing times and different due-dates. Experiments were based on a
+random generation of problems with different
+problem characteristics (number of jobs, loads,
+tightness of jobs, due-date-range, ...). In the
+single resource case, each job has one operation,
+whereas in the multi-resource case, each job has
+a random number of basic operations. Each
+operation has a random duration and must be
+processed on a certain resource. In the multiresource case we also allow circles - i.e. a job
+may have to visit one resource multiple times
+- which constitutes an additional difficulty for
+conventional solution algorithms. The mean
+process duration and the mean due-date were
+chosen such that 'interesting' scenarios are created, i.e. that arbitrary policies are not likely
+to produce acceptable solutions. As mentioned
+above, the production objective considered here
+is to reduce the overall tardiness of all the jobs.
+To test the generalization ability, 10 test scenarios were generated, which vary from the
+For learning, we used a multi-layer perceptron
+with up to 6 inputs, 10 hidden neurons and one
+output neuron. The learning rate was set to 0.1
+(since it was not our goal to optimize the learning speed, not much effort was done to find an
+optimal parameter here). During learning, the
+jobs are selected randomly (exploration factor
+= 1). The performance is reported in terms
+of the average tardiness of the jobs when acting greedily with respect to the current value
+Table 1 shows the performance of some typical heuristic dispatching rules. The LPT-policy
+chooses the job w i t h the longest processing time
+first, the minimum-slack (MS)-policy chooses
+the job with the minimum time between the expected termination and the due-date, and the
+EDD-policy chooses the job with the most urgent due-date. The average tardiness per job
+varies considerably on the 10 training scenarios. L P T performs worst with an average tardiness of 18.9, even worse than a random policy
+(12.9). MS works considerably better showing
+an average tardiness of 7.5, and E D D perfoms
+Table 1: Average tardiness on the training set for different heuristic dispatching policies
+To test the learning capability of the neural
+dispatching agent, several combinations of input features were tested (the feature numbers
+in table 2 correspond to the numbering in section 2.4). In general, with a sensitive choice of
+input features the performance of the learning
+system did improve considerably with the number of production runs (remember that the average tardiness of a random policy is 12.9). Not
+surprisingly, the final performance depends crucially on the provided input information. We
+observed that the performance of the system
+with features that are also considered by the
+EDD-rule has the same final performance as the
+EDD-rule (column 1). This means, that the
+learning system was able to extract this rule
+automatically out of the experience it made.
+Analogously, the same was true for the MSrule (column 2). When we gave the combination of both features to the learning system, it
+was able to find a new policy, that is better
+than both EDD and MS (column 3). Actually,
+this is the effect we are expecting the learning
+agent to exploit: considering a combination of
+features that are of different importance in different situations and acquiring a new (probably
+very complicated) policy based on the input.
+However, adding more features not always improves the performance here (column 4).
+Table 2: Learning agent: Average tardiness on the training set for different input feature combinations
+Figure 1 gives an impression of the learning process. The bold line shows the performance on
+the training set. After about 500 production
+runs, the system has a performance of 5.3 and
+thus already beats the EDD-policy (5.7). In
+course of learning, the performance is further
+Besides the principle learning and optimization
+capabilities, one major effect we expect to observe is the generalization ability of the learning
+system. To test it, the trained neural agent is
+applied to situations not included in the training set. The results are shown in table 3.
+Figure 1: Improvement of the performance of the
+learning system with an increasing number of production runs. The average performance of a random policy was 12.9, and the best heuristic policy,
+EDD, achieved an average tardiness of 5.5. The
+learning agent beats E D D after only 500 production runs (bold line).
+Table 3: Average tardiness for different dispatching policies on the test set (test for generalization)
+Again, the neural agent shows the best performance 5.2 and beats the best heuristic rule considerably, which is the SPT-rule here with 6.5.
+This shows, that the learning agent is not only
+able to optimize its performance on a certain
+set of training cases, but also is able to generalize this knowledge to new, previously unknown cases without retraining. It may also be
+derived, that the selected features fulfill the requirement of problem independency.
+In the multi-resource benchmark we consider a
+plant consisting of 3 resources. Here we examine the ability of one learning agent to adapt
+to the behaviour of a complex process. This
+behaviour is determined by the job profile and
+the structure of the plant, but in contrast to
+the previous scenario, also dispatching policies
+for the other resources play an important role.
+While we are examining the case of one learning agent and the other policies being fixed, in
+future experiments we will examine situations
+of multiple agents learning simultaneously.
+In the training scenario, for example, when two
+fixed agents are acting according to the FIFO
+(First-in-First-Out) rule, than the performance
+of the third agent can be improved from 12.2
+(the case of also acting according to the FIFO
+Table 4: Average tardiness for different dispatching policies in the multi-resource case. The horizontal row denotes the fixed policies of resource 1 and 2, the vertical
+row compares the policy of resource 3 for a fixed policy
+A major part of this work was carried out during a research visit at the Robotics Institute
+at Carnegie Mellon University, Pittsburgh, PA.
+The authors gratefully thank Stephen Smith,
+Andrew Moore and Jeff Schneider for valuable
+discussions. Special thanks to Dieter Spath,
+Hartmut Weule, Juergen Schmidt and Wolfram
+Menzel for giving us the opportunity and the
+principle) to 7.5 (when a learning policy is applied). In order to get an optimal behaviour,
+the learning agent has to consider the future
+processing policy of a candidate job, too. As
+an additional difficulty, since circles may occur
+during the lifetime of a job, the current decision
+now also determines the future development of
+the candidate set. As can be seen in table 4,
+the learning agent is capable to deal with the
+described difficulties. In all training cases (left
+side) and all test cases (right side) the learning policy outperformed the fixed policy. The
+agent has autonomously acquired a local policy
+based on few relevant decision features, that is
+able to perform well in a complex environment
+The paper describes a neural network based local learning approach to job shop scheduling
+problems. It is based on local learning agents,
+associated to a resource. The agent has a restricted view on the complete factory's state,
+representing the most important features that
+are needed for the local decision. The learning
+rule relates a local value function with costs
+depending on the overall performance of the
+global plant. Doing so, the acquired local decision policy is coordinated with the global optimization goal. The experiments on a oneresource and a three-resource production plant
+show the capability to learn local policies to optimize global behaviour from experience. Furthermore, the agent's policy can be generalized to unknown situations without retraining. Therefore, the learned policies are more
+tailored to the actual task than comparable
+heuristic dispatching rules, but still are general
+enough to be valid in a wide range of untrained
+situations. In case of major changes in the organizational structure the proposed learning architecture allows an easy reconfiguration of the
+R. H. Crites. Improving elevator performance using reinforcement learning.
+C. Mozer, editor, Advances in Neural Information Processing Systems 8. M I T Press,
+[Boyan and Littman, 1994] Justin Boyan and
+Michael Littman. Packet routing in dynamically changing networks - a reinforcement
+learning approach. In J. Cowan, G. Tesauro,
+and J. Alspector, editors, Advances in Neural Information Processing Systems 6, 1994.
+[Brauer and Weiss, 1998] Wilfried Brauer and
+Gerhard Weiss. Multi-machine scheduling a multi-agent learning approach. In Proceedings of the 3rd International Conference on
+and W. Zhang. A reinforcement-learning approach to job-shop scheduling. In Proceedings of the 14th International Joint Coference on Artificial Intelligence, 1995.
+S. Mahadevan and G. Theocharous. Optimization production manufacturing using reinforcement learning. In Proceedings of the
+Eleventh International FLAIRS Conference,
+[Schneider et al., 1998] Jeff Schneider, Justin
+Boyan, and Andrew Moore. Value function based production scheduling. In International Conference on Machine Learning,

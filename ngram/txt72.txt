@@ -1,0 +1,333 @@
+Available online at www.sciencedirect.com
+Martin Ringsquandl ∗ Steffen Lamparter ∗∗
+∗ Ludwig-Maximilians-Universität, Munich, Germany (e-mail:
+Corporate Technology, Munich, Germany (e-mail:
+∗∗∗ Siemens AG,steffen.lamparter@siemens.com).
+∗∗∗ Siemens AG, raffaello.lepratti@siemens.com)
+Digital Factory, Nuremberg, Germany, (e-mail:
+Siemens AG,raffaello.lepratti@siemens.com)
+Digital Factory, Nuremberg, Germany, (e-mail:
+Abstract: Due to high volatility and dynamics in today’s markets, manufacturers are required
+Abstract: Due to high volatility and dynamics in today’s markets, manufacturers are required
+accuracy. plans, and furthermore, context also reveals variables that influence estimation
+accuracy. plans, and furthermore, context also reveals variables that influence estimation
+© 2015, IFAC (International Federation of Automatic Control) Hosting by Elsevier Ltd. All rights reserved.
+Keywords: Knowledge representation, machine learning, production planning
+Keywords: Knowledge representation, machine learning, production planning
+Keywords: Knowledge representation, machine learning, production planning
+Keywords: Knowledge representation, machine learning, production planning
+process, otherwise production plans and schedules become
+process, otherwise production plans and schedules become
+otherwise production plans and schedules become
+The ever increasing volatility and dynamics in today’s inefficient.
+The ever increasing volatility and dynamics in today’s With
+an increasingly important task, see Mucientes and OPC
+to analytical approaches or simulation models, for
+estimates of processing times in frequently
+estimates of processing times in frequently
+dependencies (context) that span across the entire manufacturing changing environments.
+cies (context) that span across the entire manufacturing
+IFAC (International Federation of Automatic Control)
+2083Hosting by Elsevier Ltd. All rights reserved.
+Martin Ringsquandl et al. / IFAC-PapersOnLine 48-3 (2015) 2009–2014
+There are well-known machine learning approaches that
+deal with the problems of dynamic environments, i.e.
+adaptive learning, where the underlying data generation
+processes are prone to so-called concept drifts. See Dries
+and Rückert (2009) for a general overview of the field.
+Closely related to our problem definition, Kiseleva (2013)
+discuss the need for context-awareness in predictive models
+for user actions on websites. However, there have been no
+proposals made so far, which focus on the integration of
+context information in manufacturing systems.
+Related to the use case in this paper, the problem of
+stochastic processing times for shop-floor scheduling and
+control (cf. Beck and Wilson (2007)), has been tackled by
+incorporating time estimation models for manufacturing
+systems using simulation models or queuing theory, as
+discussed in Herrmann and Chincholkar (2001). Mucientes
+and Vidal (2008) show the importance of incorporating
+domain expert knowledge into regression models for processing time estimation. Common downsides of most of
+these approaches are that they are meant for offline analysis and require pre-defined simulation models or they
+neglect the presence of concept drifts in the underlying
+data generation process (e.g. non-stationary distributions
+of machine’s processing times) that depend on the current
+This section briefly introduces the general ideas of interconnected instances, data and processes and their value
+for data analytics, i.e. context-awareness of analytics in
+manufacturing operations management. Subsequently, an
+exemplary use case in a production planning scenario
+Our interpretation of context-aware analytics in manufacturing relates to the context definition of Dey (2001), i.e.
+information that can be used to characterize the situation
+of an entity. Here, the entities are components of manufacturing systems that affect data analysis. For example,
+the temperature monitoring of a welding machine could be
+affected by situational characteristics like current product
+type, the currently used welding rod, etc. If temperature
+monitoring behaves significantly different for two product
+types, it should be aware of its context.
+Technically, we introduce such context as unified semantic
+data model, more precisely, as a (Description Logic-based)
+knowledge base comprising terminological and assertional
+knowledge, denoted as O = T , A. This data model serves
+as a semantic integration of all systems and data sources
+at MOM layer, e.g. common master data semantics in
+MES and PLM. Here, the TBox T defines a common
+terminology and holds for example knowledge about plant
+topologies: Robot  Equipment, which means that every
+component of type Robot is also of type Equipment.
+This can be more conveniently expressed –relating to
+the W3C Resource Description Framework (RDF) 1 –
+in semantic triple form: Robot, subclassOf, Equipment,
+where Robot is the subject, subclassOf is a property and
+The ABox A specifies assertions about concrete instances
+of the types defined in T . For example, device type information: Robo-1, type, Robot,
+Robo-1, observedProperty, Temperature. The last triple
+relates a concrete individual Robo-1 with an observation
+named Temperature via the property observedProperty.
+See Figure 1 for an exemplary manufacturing context
+model. Context types (classes) are annotated with a yellow
+circle, concrete individuals with purple diamonds. Moving
+from the model on the left hand side to the right indicates a
+context change, switching production from P1 to P2. Such
+model changes can be obtained, for example, via an OPC
+UA client-sever architecture that distributes information
+In formal language, given a set of analytic models A =
+{M1 , M2 , ..., Mk } that can be employed for the same task,
+where each model is assigned a local context, denoted
+OM1 , OM2 , ..., OMk , our goal is to find a mapping F from
+every possible context to analytic model.
+As the data stream evolves, this function is necessary to
+find the best fitting analytic model for a given situation, for
+example, we want to pick the best temperature monitoring
+model M for a given context O. Equations 2 show this
+where M is the optimal analytic model with respect
+to some performance criterion, O is the current global
+For a detailed description of the problem setting of
+context-aware analytic models in MOM see Ringsquandl
+To make things more transparent, consider a manufacturing system like the one in Figure 1, where an MES
+controls several machines in a job shop production environment. Since the machine’s processing times are not fixed,
+the MES uses simple estimates of the machine’s average
+processing times for job shop scheduling and dispatching. However, due to frequent changeovers, maintenance
+events, and high variance of materials for different product types, these average estimates are imprecise, which
+ultimately leads to inefficient and non-optimal scheduling
+To overcome this shortcoming, the processing time estimator (analytic model ) should become aware of changeovers,
+Looking at the left data model in Figure 1, the ABox
+Robo-1, observedProperty, Temperature , ...
+From this context, we know that Robo-1 exhibits the
+properties Temperature, Workload, and ProcessingTime
+Martin Ringsquandl et al. / IFAC-PapersOnLine 48-3 (2015) 2009–2014
+Fig. 1. Use case context model - left to right: production changes from product P1 to P2
+and currently produces product P1. The model on the right
+hand side shows a different context, in which product P2
+is produced – the remaining context stays unchanged.
+connections on schema level. This section describes the
+proposed context-aware analytic framework within MOM
+Restricted © Siemens AG 2015. All rights reserved
+Although it seems straightforward to monitor process
+variables such as machine’s processing times and ask
+engineers to manually specify the kind of events that need
+cautious treatment, there are several pitfalls to consider:
+The framework’s architecture is depicted in Figure 2 and
+• Context-aware Analytics: These are analytic models (e.g. simple monitoring rules, regression models,
+etc.) that are deployed using the semantic data model
+• Context Broker: This component is responsible
+for the distribution of context information. It holds
+the current global context knowledge base and also
+propagates context changes (e.g. production switch
+• Context Knowledge Base: This knowledge base is
+a unified semantic data model that integrates data
+from different systems across the manufacturing process. We denote such data in the form of semantic triples s, p, o (subject, predicate, object, e.g.
+• Concept Drift Verification: On-line data analysis
+in manufacturing requires detection of abnormalities,
+so called concept drifts. For example, an abruptly
+increasing error in the processing time estimator of
+section 3.3. This component is used to verify that a
+particular context change caused a concept drift.
+• Data Sources: Context information is obtained from
+several types of systems including PLM, MES, and
+ERP. Their data needs to be integrated via standardized information models, like AutomationML,
+B2MML, and OPC UA. This data is then mapped
+• Unpredictable Events: Events that influence analytics, but cannot be foreseen even by domain experts,
+might corrupt decision making. Hence, such events
+have to be learned bottom-up (from causing situation
+• Dynamic/Flexible Manufacturing: In frequently
+changing environments (varying orders, changed suppliers, exchanged devices) manual reconfiguration of
+analytics becomes inefficient, just like manual reconfiguration of production (cf. Plug ’n’ Produce)
+• Recurring Situations: Some situational changes
+might re-occur over and over, e.g. switching production back and forth between two product variants.
+Therefore, knowledge (lessons learned) about previous event occurrences should be available as soon as
+In all of the previous scenarios, knowledge about context,
+i.e. interconnected data across the entire manufacturing
+process, can help to improve analytic applications. Therefore, we propose a framework that automatically integrates
+semantic context information into the deployment of analytic models and their dynamic adaption to changing
+Context-awareness does not simply mean use more data, it
+rather stresses the importance of meta-data – the semantic
+In subsequent section, it is assumed that a unified context
+knowledge base exists and data sources have already
+been integrated and semantically aligned. Clearly, this is
+still a challenging task, but since this mainly depends
+Martin Ringsquandl et al. / IFAC-PapersOnLine 48-3 (2015) 2009–2014
+Fig. 2. Context broker architecture for semantic manufacturing data integration and distribution
+on proprietary system architectures and landscapes of
+manufacturing systems, we will deliberately skip it.
+As defined in section 3.1, every analytic model M keeps
+track of a specific subset of the global context. The notion
+behind this is that M holds references to the context
+information of its input features. This way, changing
+context triples can be added dynamically as new input
+features by following connections in the context knowledge
+Tracking of such evolving context information mainly
+(1) detection of recurring situations, where it is known
+that a particular analytic model performs well,
+(2) adapt analytics to changing environments and explain
+drifting concepts and their dependencies.
+In general, our proposed context-aware analytics follow
+the high-level decision tree-like procedure as depicted in
+In the starting decision node, continuous concept drift test
+notifies about abnormalities. In case of a detected drift,
+Example: Suppose our processing time estimator model
+M1 for Robo-1 is specified as a linear regression problem:
+ŷ = Xβ, where M1 keeps track of the context of its input
+features X, in this case the observations Temperature
+and Workload like in the left hand side model of Figure
+1. Now, after a switch from product P1 to P2 the error
+made by M1 increases significantly. Therefore, its tracking context should be extended with the changed triple:
+{Robo-1, produces, P1}. Furthermore M1 is updated to
+a new model M2 that encodes the changed context as
+Fig. 3. General context-aware analytics procedure
+the tracking context is checked for changes. If no context
+changes happened, the analytic model needs to extend its
+tracking context. Otherwise, a new model is trained that
+integrates the changed context. As long as no drifts are
+detected, the existing analytic model remains untouched.
+Concept drift detection uses Page-Hinkley test (see Page
+(1954)), also known as cumulative sum control chart
+(CUSUM) in statistical quality control, presented in (3).
+where  is the current error of a controlled variable (in our
+case the error of the analytic model), errors below α are
+ignored and λ is the threshold for the cumulative errors.
+Page-Hinkley test only requires to keep the errors of our
+models in memory, so it does not need large amounts of
+historic data detect concept drifts. In order to extend the
+initial context of an analytic model, its tracked context
+Martin Ringsquandl et al. / IFAC-PapersOnLine 48-3 (2015) 2009–2014
+is extended with adjacent triples of the global context
+knowledge base. An adjacent triple is a triple s, p, o in the
+global context knowledge base, where s or o are tracked
+in the model’s context. More vividly, extending context
+means a walk through the global context knowledge graph
+starting from the currently tracked context nodes. This
+way, an analytic model tries to look for context that
+justifies previously unexplained concept drifts. The idea
+behind these walks through the context knowledge graph
+is that semantically connected entities are assumed to be
+Similar to the processing time estimation in section 3.3,
+we consider a probabilistic job shop scheduling problem as
+simulation scenario, where job activities have probabilistic
+processing times. The simulation generates data that is
+used to predict processing times of machines. For the
+purpose of context-aware time estimation, it is sufficient
+to cover only one activity that is executed by a particular
+machine. Thus, the following data is generated:
+• temperature measurement of machine (x1 )
+and a binary variable that will simulate changing context:
+Here, x1 and x2 , are sampled from an uncorrelated multivariate normal distribution
+(40, 10) and Σ = 0 2 . The simulated processing time
+variable y then follows a simple formula:
+where ω1 and ω2 are random weights in [0, 1] and ω3 =
+2(ω1 + ω1 ), specified at the beginning of data generation.
+This makes sure that changing the product will have a
+significant influence on the processing time.
+Suppose a domain expert proposes to use a simple linear regression model to estimate processing time y. The
+result is a least-squares linear regression model Mlr that
+estimates time ŷ based on machine temperature x1 and
+The domain expert does not regard that the product type
+could also influence the processing time. So the variable
+x3 will later cause a concept drift. Note that this is not
+intended to be a realistic prediction example – things are
+kept simple to show the application of context-awareness.
+The initially tracked context OM is set to the input feature
+Robo-1, observedProperty, Temperature ,
+The global context knowledge base O looks like the graph
+Simulating Concept Drifts An abrupt concept drift means
+that, as soon as context changes, it immediately influences
+estimates of processing times, therefore such changes have
+to be detected to ensure optimal scheduling solutions. In
+our setting, this means a changeover to a different product.
+In order to simulate this, we switch the hidden product
+variable x3 right after the context broker informs about
+As simulation switches x3 = 0 to x3 = 1, a corresponding
+concept drift can be seen in Figure 4, at sample 250. The
+root mean squared error (RMSE) of model Mlr (contextaware linear regression CA-LR) significantly increases and
+indicates a concept drift – Page-Hinkley tests positive.
+However, since currently product changes are not tracked
+by any model, it should be extended accordingly. A walk
+through the context knowledge graph starting at the
+TemperatureSensor, measures, Temperature
+The model now also tracks all changes to the context of
+the individuals P2 and TemperatureSensor. As soon as
+that includes this information as categorical input feature
+production is switched again. The new model is now
+trained on every sample, as long as concept drift detection
+and is therefore used for prediction from that moment.
+Performance As recurring product changeovers happen,
+time estimation respects these different situations. Note
+the RMSE curve in Figure 4 of the context-aware linear regression variant CA-LR outperforms the standard
+not context-aware model LR, as soon as context dependencies are known (after the third product switch).
+Furthermore, for comparison, we show the performance
+of a state-of-the-art adaptive rule-based regressor called
+AM RulesRegressor (cf. Almeida et al. (2013), implemented in the MOA software package 2 ), which also uses
+Page-Hinkley test to adapt to changes in the data stream.
+It can be seen that this adaptive learner has difficulties
+to continuously adapt to recurring situations. Although it
+exhibits best performance after the second product switch,
+i.e. first recurring situation, it is not reminiscent to subsequent re-occurrences and eventually is outperformed by
+CA-LR. As it only adapts once, CA-LR is more stable
+in processing time estimation, which means more reliable
+and efficient production plans can be implemented. Another important advantage of context-awareness is that
+the adaptation is not a black box, it rather explains
+situational dependencies, like in this case: the product
+context information is explicitly encoded in the new model.
+Domain experts can use insights of such context changes
+when implementing future production plans or machine
+Martin Ringsquandl et al. / IFAC-PapersOnLine 48-3 (2015) 2009–2014
+Fig. 4. Estimation model performance comparison based on root mean squared error
+Stability of the proposed framework is evaluated with
+respect to Page-Hinkley parameters α and λ. Table 1
+shows performance for different combinations. Since the
+relative standard deviation (RSD) of the RMSE across
+these parameter combinations is only about 1% (RSD =
+1.14%), we conclude that concept drift detection is stable
+In this paper we proposed and showcased a framework
+for context-aware analytics within manufacturing systems,
+motivated by the need for accurate processing time estimates. We evaluated the proposal in a simulation setting that predicts processing times of machines that are
+exposed to frequent changeovers. Evaluation shows that
+the framework can be successfully applied and commits
+less prediction errors compared to state-of-the-art adaptive learning models in the long run. More accurate estimates of processing times directly influence reliability of
+the manufacturing system’s throughput and cycle times,
+which are the basis for optimized production planning and
+Almeida, E., Ferreira, C., and Gama, J. (2013). Adaptive
+model rules from data streams. In Machine Learning
+and Know ledge Discovery in Databases, 480–492.
+Bauernhansl, T. (2014). Industrie 4.0 in Produktion,
+Automatisierung und Logistik. Springer, Wiesbaden.
+Beck, J. and Wilson, N. (2007). Proactive Algorithms
+for Job Shop Scheduling with Probabilistic Durations.
+Journal Artificial Intelligence Research (JAIR), 28,
+Dey, A.K. (2001). Understanding and using context.
+Personal and ubiquitous computing, 5, 4–7.
+Dries, A. and Rückert, U. (2009). Adaptive concept drift
+detection. In Statistical Analysis and Data Mining,
+Herrmann, J.W. and Chincholkar, M.M. (2001). Reducing
+throughput time during product design. Journal of
+Jovane, F., Westkämper, E., and Williams, D. (2009). The
+ManuFuture road: Towards competitive and sustainable
+high-adding-value manufacturing. Springer.
+Kiseleva, J. (2013). Context mining and integration into
+Predictive Web Analytics. Proceedings of the 22nd international conference on World Wide Web companion,
+Mucientes, M. and Vidal, J. (2008). Processing times
+estimation in a manufacturing industry through genetic
+programming. 3rd International Workshop on Genetic
+and Evolving Fuzzy Systems, (March), 95–100.
+Ringsquandl, M., Lamparter, S., and Lepratti, R. (2014).
+Context-aware Analytics in MOM Applications. In 6th
+International Workshop on Acquisition, Representation

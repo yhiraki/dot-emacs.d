@@ -1,0 +1,925 @@
+European Journal of Operational Research 145 (2003) 14–30
+Makespan estimation in batch process industries:
+A comparison between regression analysis and neural networks
+Department of Technology Management, Eindhoven University of Technology, P.O. Box 513, NL-5600 MB Eindhoven, Netherlands
+Received 29 May 2000; accepted 11 January 2002
+Batch processing is becoming more important in the process industries, because of the increasing product variety and
+the decreasing demand volumes for individual products. In batch process industries it is diﬃcult to estimate the
+completion time, or makespan, of a set of jobs, because jobs interact at the shop ﬂoor. We assume a situation with
+hierarchical production control consisting of a planning level and a scheduling level. In this paper we focus on the
+planning level. We use two diﬀerent techniques for estimating the makespan of job sets in batch process industries. The
+ﬁrst technique estimates the makespan of a job set by developing regression models, the second technique by training
+neural networks. Both techniques use aggregate information. By using aggregate information the presented techniques
+are less time consuming in assessing the makespan of a job set compared with methods based on detailed information.
+Tests on newly generated job sets showed that both techniques are robust for changes in the number of jobs, the
+average processing time, a more unbalanced workload and for diﬀerent resource conﬁgurations. Finally, the estimation
+quality of the neural network models appears signiﬁcantly better than the quality of regression models.
+ 2002 Published by Elsevier Science B.V.
+Keywords: Scheduling theory; Regression; Neural networks
+Batch processing is frequently found in food,
+specialty chemicals and pharmaceutical industries,
+where production volumes of individual products
+do not justify continuous production and dedicated production lines. Nowadays, batch process
+industries have become more important because of
+Corresponding author. Tel.: +31-40-247-3857; fax: +31-40243-2612.
+E-mail address: a.j.m.m.weijters@tm.tue.nl (A.J.M.M.
+the increasing product variety and decreasing demand volumes for individual products. Two basic
+types of batch process industries are distinguished.
+If products all follow the same routing, this is
+called multiproduct. If products follow diﬀerent
+routings, like in a traditional job shop, it is called
+multipurpose. In this paper, we concentrate on
+Multipurpose batch process industries are inherently the most ﬂexible and complex: products
+may diﬀer in the number, type, and duration of
+processing steps. Intermediate products are often
+unstable, which means that after processing some
+steps, a product needs to be processed further
+0377-2217/03/$ - see front matter  2002 Published by Elsevier Science B.V.
+PII: S 0 3 7 7 - 2 2 1 7 ( 0 2 ) 0 0 1 7 3 - X
+W.H.M. Raaymakers, A.J.M.M. Weijters / European Journal of Operational Research 145 (2003) 14–30
+without any delay. These no-wait restrictions and
+the large variety of products cause complex
+scheduling problems. Consequently, the capacity
+utilization realized by multipurpose batch process industries is generally low. Furthermore, the
+amount and mix of production orders may diﬀer
+considerably from period to period due to variability and dynamics of demand. Consequently,
+One of the main diﬃculties for this type of industries is to estimate the workload that can be
+completed during a speciﬁc period (Raaymakers
+et al., 2000). The capacity utilization that can be
+realized strongly depends on the mix of production
+orders (jobs). In order to set reliable due dates, it is
+important for planners to accurately estimate what
+workload and mix of jobs can be completed in a
+speciﬁc period. If planners can accurately estimate
+the workload and mix that can be completed, they
+can obtain achievable production plans. In this
+paper we consider a situation in which planners
+periodically release a set of jobs to the shop ﬂoor.
+The makespan estimate of a job set is used to
+assess whether a job set can be completed within a
+given period. A job set is achievable if a schedule
+can be constructed in which all jobs are completed
+before the end of the period. This means that the
+makespan of the schedule is smaller or equal to
+the period length. The makespan of a schedule is
+the time at which the last job in the job set is
+In this paper, we use two techniques for estimating the makespan of job sets based on aggregate characteristics. The ﬁrst technique estimates
+the makespan by using a regression model. The
+second technique uses neural network models to
+estimate the makespan. The main advantage of the
+regression models is that these provide insight into
+the relation between job set characteristics and
+the makespan. However, the possible relations between them have to be speciﬁed prior to performing
+the regression analysis. The main advantage of
+artiﬁcial neural networks is that these can automatically detect complex non-linear relations between the job set characteristics and the makespan.
+Therefore, artiﬁcial neural networks may provide
+more accurate estimates. On the other hand, interpretation of models induced by neural networks
+is often extremely diﬃcult or impossible due to the
+non-linear and non-symbolic nature of the models.
+The structure of this paper is as follows. In
+Section 2, we present our problem deﬁnition. In
+Section 3, we present the data set used for comparison of the techniques. Section 4 starts with an
+overview of related research (Section 4.1). Then,
+two diﬀerent techniques for makespan estimation
+are presented: regression models (Section 4.2) and
+neural network models (Section 4.3). In Section 5,
+the estimation quality of both types of models is
+evaluated and compared. Finally, Section 6 summarizes our conclusions.
+We assume a situation with hierarchical production control consisting of a planning level and
+a scheduling level. At the planning level, the
+planner is responsible for order acceptance and
+assigning the accepted orders to time periods (e.g.
+weeks). The set of orders assigned to each time
+period should be achievable, which means that a
+schedule can be constructed that completes all
+assigned production orders ( ¼ jobs) within that
+period. At the scheduling level, the scheduler
+constructs a detailed schedule for the job set that
+is assigned to the current period. This schedule is
+then executed at the shop ﬂoor. The planning
+horizon of the scheduler is much shorter than the
+Scheduling industrial job sets showed that the
+workload that can be completed in a speciﬁc planning period depends on the current mix of jobs
+(Raaymakers and Hoogeveen, 2000). This complicates the work of the planner, who has to determine
+which jobs are assigned to a speciﬁc period. He has
+to consider both workload and job mix characteristics in order to determine achievable job sets.
+The planner may evaluate the achievability of
+a job set for a planning period by constructing a
+schedule. This would result in constructing a detailed schedule over a medium term horizon. The
+main disadvantage of this approach is that it is
+time consuming because a new schedule has to be
+W.H.M. Raaymakers, A.J.M.M. Weijters / European Journal of Operational Research 145 (2003) 14–30
+constructed every time a change in the plan occurs,
+for example when a new customer order arrives.
+Furthermore, the constructed schedule is of little
+value, because disturbances at the shop ﬂoor or
+changes in the job sets are likely to occur. Assigning jobs to periods can be part of order acceptance and due date setting. These decisions
+generally need to be made a number of periods
+before the actual execution of the jobs at the shop
+ﬂoor. In the meantime changes in production and
+demand are likely to occur. Therefore, we prefer
+methods that assess the achievability of job sets
+based on simple characteristics of the jobs and the
+2.2. Deﬁnition of production characteristics
+The job sets and resource sets considered in this
+paper originate from multipurpose batch process
+industries. Typical for this type of industries is that
+jobs diﬀer in the number of processing steps, the
+resource types required, the sequence of processing
+steps and the processing times. In that sense, these
+industries are similar to discrete job shops. However, there are two main diﬀerences: (1) several
+resources may be needed at the same time, and (2)
+no-wait restrictions exist. For example, a chemical
+reaction needs to be followed immediately by a
+ﬁltration and then by a step in which the ﬁltrated
+intermediate is dried, because the intermediate is
+unstable. The total of the reaction, the ﬁltration
+and the drying is then considered as one job. For
+this job a number of resources is required: a reaction vessel, a ﬁlter, a vessel to keep the ﬂuid that
+goes through the ﬁlter and a drying resource.
+These resources are required partly in parallel. An
+illustration of a job is given in Fig. 1: resource type
+I is a (reaction) vessel, resource type II a ﬁlter, and
+resource type III drying equipment. In our study
+we have modeled processing steps in such a way
+that each processing step requires exactly one resource and that processing steps may need to be
+performed in parallel. The ﬁxed time delay then
+For a period a job set consisting of J jobs has to
+be completed on a given set of resources. Jobs are
+deﬁned as follows. Each job (j) consists of a speciﬁc number of processing steps (sj ). These processing steps may have an overlap in time. The
+start time of each processing step is given by the
+time delay (dij ) and ﬁxed. Also, processing times
+(pij ) are given for each step. The jobs have to be
+completed on N resources of M diﬀerent types. To
+complete the job given in Fig. 1, four resources of
+The following assumptions regarding jobs and
+• All jobs are available at the start of the period.
+• Resources are available from the start of the
+• Resources of the same type are assumed to be
+• No precedence relations exist between jobs.
+• Each processing step has to be performed without pre-emption on exactly one resource of a
+• More than one processing step of a job may require the same resource type. These processing
+steps have to be performed on diﬀerent resources of that type if they overlap.
+• Set up times are included in the processing times
+• Processing times are given (deterministic).
+2.3. Relation between planning and scheduling
+In our study we compare two techniques that
+can be used by the planner to predict the time required to complete a speciﬁc job set ( ¼ makespan)
+based on aggregate characteristics of the job set.
+With these techniques, the planner can predict the
+achievability of a speciﬁc job set, i.e. whether the
+predicted makespan is not longer than the planning period.
+The number of jobs that can be assigned to a
+given planning period by the planner depends on
+W.H.M. Raaymakers, A.J.M.M. Weijters / European Journal of Operational Research 145 (2003) 14–30
+the ability of the scheduler to construct a good
+schedule. If the scheduler is able to construct
+schedules that result in a high utilization of the
+resources, then the planner can assign a higher
+workload to a planning period. Consequently, the
+prediction techniques that we studied depend on
+The scheduling situation considered in this
+study can be characterised as a no-wait job shop.
+For larger values of J, we cannot expect to ﬁnd an
+optimal solution in reasonable time because nowait job shop scheduling problems are NP-hard
+(Lenstra et al., 1977). Therefore, we have chosen
+simulated annealing to obtain solutions to the
+scheduling problems. A simulated annealing procedure that aims at minimization of the makespan
+and that obtains near-optimal solutions has been
+implemented and tested for industrial instances
+(Raaymakers and Hoogeveen, 2000). Minimum
+makespan corresponds to minimum idle time on
+the resources and hence, maximum overall capacity utilization. In our speciﬁc case, it is diﬃcult to
+determine the quality of the simulated annealing
+results, since there are no tight lower bounds
+available for this speciﬁc scheduling problem.
+2.4. Job interaction at the scheduling level
+The workload that can be completed in a period
+depends on the mix of jobs that are assigned to
+that period. We argue that this is caused by job
+interactions at the scheduling level. Job interactions occur because each job requires one or more
+resources at the same time or consecutively without delay. Due to no-wait restrictions, idle time on
+the resources can generally not be avoided. Consequently, job interactions result in idle time on the
+resources and hence to an increase in the makespan of a job set. The amount of job interaction
+depends on the job mix and the resource set of a
+production department. Therefore, we use aggregate characteristics of the jobs and the resources to
+estimate the amount of job interaction. This estimate is then used to estimate the makespan of a
+The amount of interaction is measured by the
+interaction margin (I). The interaction margin
+is deﬁned as the relative diﬀerence between the
+makespan realized while meeting all no-wait restrictions and a lower bound on the makespan:
+where I is the interaction margin; Cmax is the
+makespan or completion time of the job set; and lb
+The lower bound used in this paper is equal to
+the amount of time required to complete all jobs if
+the total processing time can be distributed evenly
+over the resources of the bottleneck resource type,
+and if these resources can all process without interruption. If a feasible schedule is found which
+has no idle time on any resource of the bottleneck
+resource type, then the makespan is equal to this
+lower bound. The interaction margin is, by deﬁnition, equal to zero in that situation. In all other
+situations, where the makespan is higher than the
+lower bound, idle time exists on the bottleneck
+For a speciﬁc job set the total workload on each
+resource type is obtained by summing the processing times of all processing steps that require
+that resource type. The bottleneck resource is the
+resource type with the maximum of the workload
+divided by the number of resources of that type. A
+lower bound (lb) on the makespan is obtained by
+dividing the workload on the bottleneck resource
+by the number of resources of that resource. We
+may round this up because all processing times are
+integer values and no pre-emption is allowed:
+lb ¼ dmaxfL1 =n1 ; L2 =n2 ; . . . ; LM =nM ge;
+where M is the number of resource types, nm is
+the number of resources of resource type m; m ¼
+1; . . . ; M, and Lm is the workload on resource type
+In this paper, we focus on makespan estimation using ﬁve variables that inﬂuence the amount
+of interaction. Previous work (Raaymakers and
+Fransoo, 2000) showed that these variables explain
+a large part of the variation in the amount of interaction. These variables are:
+• average number of parallel resources ðla Þ,
+• average number of processing steps per job ðls Þ,
+• average overlap of processing steps ðlg Þ,
+W.H.M. Raaymakers, A.J.M.M. Weijters / European Journal of Operational Research 145 (2003) 14–30
+• standard deviation in the processing time ðrp Þ.
+The workload balance ðqmax Þ is the average
+utilization of the resources that is realized if the
+job set is being processed without any idle time on
+the bottleneck. This means that when qmax is close
+to 1, all resource types are equally loaded. A lower
+qmax means that (considerable) idle time on some
+resource types cannot be avoided, because they
+have a lower load than the bottleneck resource.
+As mentioned in Section 2.3, the processing times for each processing step are given and
+deterministic. The standard deviation in the processing time ðrp Þ thus gives the variation in processing times within the total job set. A small rp
+indicates that the duration of the processing steps
+in a job set are more or less the same. A large rp
+indicates that there is a mix of shorter and longer
+To compare both techniques for makespan estimation, we need to have a data set of job sets
+with their characteristics and the makespan of the
+schedule constructed. To obtain such data set, we
+have randomly generated a number of job sets that
+resemble realistic job sets from industry. There are
+two reasons for using randomly generated job sets
+instead of industrial job sets. The ﬁrst reason is
+that only a very limited number of job sets could
+be obtained from industry. The second reason is
+that by generating job sets we can inﬂuence the
+characteristics of these job sets by setting the levels
+as shown in Table 1. These parameters are set such
+that we can better observe the eﬀect of the interaction variables and their eﬀect on each other. An
+overview of the levels of the interaction variables
+that are used in generating the job sets is given in
+The values of the interaction variables are varied on three levels for the processing time, four
+levels for the number of parallel resources, and ﬁve
+levels for the number of processing steps and the
+overlap of processing steps. The workload balance
+ðqmax Þ is not varied in the experiments because it
+is a random factor. In each experiment a job set
+containing 50 jobs is generated that have to be
+completed on 10 resources. To test the inﬂuence of
+the average number of parallel machines, we consider four diﬀerent resource sets (A, B, C and D).
+For each job, the number of processing steps is
+given. The number of processing steps per job
+cannot exceed the number of resources because
+each processing step of a job has to be performed
+on a diﬀerent machine if the processing steps are
+overlapping in time. To each processing step a
+resource type is allocated at random. The probability of a resource type being allocated is equal to
+the number of resources of that type available related to the total number of resources available.
+The number of processing steps of a speciﬁc job
+that are allocated to the same resource type cannot
+exceed the number of resources of that speciﬁc
+type. In this way each resource type has equal
+probability to become a bottleneck resource. As a
+result the workload balance of the resource types is
+A processing time is then allocated to each
+processing step. In the experiments the average
+Levels used in the computer experiments to generate the data set for building the makespan estimation models
+All jobs in a job set 1, 3, 5, 7, 10 steps
+All jobs in a job set overlap of 0, 1=4, 1=2, 3=4, 1
+W.H.M. Raaymakers, A.J.M.M. Weijters / European Journal of Operational Research 145 (2003) 14–30
+processing time is kept constant at 25. Finally, the
+time delay of each processing step is determined.
+The time delay of the ﬁrst processing step is zero
+for each job. The second and following processing
+steps start when a given overlap of the previous
+processing step has been processed. An overlap of
+0 means that all processing steps are executed
+consecutively; whereas an overlap of 1 means that
+all processing steps start at the same time.
+A full factorial experimental design is constructed. As noticed above, the workload balance
+cannot be varied on distinct levels because it is the
+result of the random allocation of processing times
+and resource types to processing steps. Therefore,
+this predictor variable is not included in the experimental design. For each combination ﬁve
+replications have been carried out. A near-optimal
+schedule with respect to makespan is obtained
+by using Simulated Annealing (Raaymakers and
+In total, 1176 job sets have been generated and
+scheduled. The average and standard deviation of
+the interaction margin are given in Table 2. On the
+ﬁrst row the results for all resource conﬁgurations
+together are given. The other rows give the results
+for the four resource conﬁgurations separately.
+The average and standard deviation of the interaction margin are largest for conﬁguration A and
+smallest for conﬁguration D. This suggests that an
+increase in the number of identical resources
+results in a decreasing interaction margin. Intuitively, this can be explained as follows. An in-
+Interaction margin per resource conﬁguration
+crease in the number of identical resources results
+in more scheduling ﬂexibility, and hence to a decreasing job interaction.
+The inﬂuence of the average number of processing steps, the average overlap and the variation
+in processing times on the interaction margin is
+given in Figs. 2–5. In these ﬁgures the results are
+given separately for each of the resource conﬁgurations. The interpretation of these ﬁgures should
+be done with care, because they give the aggregated results of the 1176 experiments. Interaction
+between diﬀerent variables cannot be concluded
+Fig. 2 shows that the average interaction margin
+increases with an increase in the average number of
+processing steps. This increase is strongest for resource conﬁguration A and weakest for resource
+Fig. 3 shows the inﬂuence of the average overlap on the interaction margin. The average interaction margin decreases with an increase in the
+overlap of processing steps. An increasing overlap
+results in a decrease in the time between start and
+completion of a job, if all other job parameters
+remain unchanged. Therefore, it is not surprising
+that an increasing overlap results in a decreasing
+Fig. 2. Inﬂuence of average number of processing steps on the interaction margin.
+W.H.M. Raaymakers, A.J.M.M. Weijters / European Journal of Operational Research 145 (2003) 14–30
+Fig. 3. Inﬂuence of average overlap on the interaction margin.
+Fig. 4. Inﬂuence of processing time distribution on the interaction margin.
+the interaction margin. Fig. 4 shows that an increase in the standard deviation of the processing
+time results in an increase in the average interaction margin.
+Fig. 5 shows the inﬂuence of the workload
+balance on the interaction margin. As mentioned
+earlier, the workload balance is the result of random allocations of processing times and resource
+types to processing steps. Consequently, the value
+of the workload balance cannot be varied on distinct levels. In the experiments, the value of the
+In this section, only an indication of the relations between the diﬀerent interaction variables
+and the interaction margin is given. However, to
+use these relations for estimating the interaction
+margin for job sets we need to quantify the relations.
+Fig. 5. Inﬂuence of workload balance on the interaction margin.
+makespan for the job set, and hence to a decreasing interaction margin. Here a diﬀerence also
+exists between the resource conﬁgurations. For an
+overlap of 0 resource conﬁguration A has the
+highest average interaction margin, whereas for an
+overlap of 1 the diﬀerence between resource conﬁgurations is small.
+The inﬂuence of the standard deviation of the
+processing time seems to have a smaller impact on
+In this section, we build models that can be
+used to estimate the interaction margin of a job
+set based on the ﬁve interaction variables: average number of identical resources ðla Þ, the average
+number of processing steps ðls Þ, the average overlap ðlg Þ, the standard deviation of the processing
+times ðrp Þ, and the workload balance ðqmax Þ. The
+job sets discussed in the previous section are used
+for building the models. The section starts with an
+overview of related research (Section 4.1). Then,
+two diﬀerent techniques for makespan estimation are presented: regression models (Section 4.2)
+and neural network models (Section 4.3). The
+W.H.M. Raaymakers, A.J.M.M. Weijters / European Journal of Operational Research 145 (2003) 14–30
+estimation quality of both types of models is
+evaluated and compared in the next section (Section 5).
+Makespan estimation is related to ﬂowtime estimation, which has received considerable attention in the literature on due date assignment. For
+an overview, we refer to Cheng and Gupta (1989).
+The ﬂow time is the total throughput time of a job
+in a production system, which consists of processing time and waiting time. Flowtime estimation is generally used in the determination of
+achievable due dates for customer orders. Upon
+arrival of a customer order the ﬂow time is estimated for the jobs related to that customer order.
+The due date of the job is set to the arrival date
+plus a ﬂow allowance, which is the estimated ﬂow
+time. Several rules for determining ﬂow time allowances are proposed in the literature. A distinction can be made between rules that use job
+characteristics only, and rules that also use shop
+information. A simple and popular rule that uses
+job characteristics only is the total work-rule.
+According to this rule, the ﬂow time allowance is
+proportional to the total processing time of the job
+(Eilon and Chowdhury, 1976; Weeks, 1979; Baker
+and Bertrand, 1981a,b). Bertrand (1983) introduced a rule that uses both the total processing
+time of a job and the number of processing steps
+to determine the ﬂow time allowance. Other rules
+also use information on the current shop status,
+which is generally viewed as a queuing network.
+Some rules use the expected waiting time per job
+or per operation as a basis for ﬂow time estimation
+(Eilon and Chowdhury, 1976; Weeks, 1979). Also,
+the number of jobs in the queues can be used for
+ﬂow time estimation. Some of these rules use information on the total workload or total number
+of jobs in the shop, while others use only information of the resources on the jobÕs routing. Bertrand (1983) introduced the use of time-phased
+workload to estimate the ﬂow time of a job. Vig
+and Dooley (1991) introduced the use of the average ﬂow time per operation of three recently
+completed jobs to estimate the ﬂow time of a new
+job. The diﬀerent job characteristics and shop
+congestion characteristics may also be used in
+combination to determine the ﬂow time allowance.
+Ragatz and Mabert (1984) and Vig and Dooley
+(1991, 1993) use regression analysis to determine
+the weighting of coeﬃcients for the diﬀerent job
+and shop characteristics included in the ﬂowtime
+estimations. The characteristics included, and
+the corresponding coeﬃcients, depend on the dispatching rule that is used for the execution of the
+jobs on the resources in the shop. Vig and Dooley
+(1993) showed that using combined static and
+dynamic ﬂowtime estimation methods yield ﬂowtime estimates that are more accurate and more
+robust to variable shop condition, than realized
+by dynamic ﬂowtime estimation methods. Enns
+(1993, 1995, 1998) evaluates a number of dispatching rules and due date settings in a simulation study. Appealing to his approach is that he
+distinguishes between internal and external due
+dates. Internal due dates are based on the estimated ﬂow time and are used for dispatching.
+External due dates include the estimated ﬂow time
+and the estimation error on this ﬂow time in order
+to realize a speciﬁc delivery reliability to the customer. A similar approach is chosen by Lawrence
+A comparison of diﬀerent rules shows that using information on the shop status improves the
+ﬂow time estimation (Eilon and Chowdhury, 1976;
+Weeks, 1979). Furthermore, using information on
+the number of jobs or the workload in the queues
+along the jobÕs routing performs better than using
+general shop congestion information (Ragatz and
+Mabert, 1984; Vig and Dooley, 1991). The performance of the ﬂow time estimation rules is inﬂuenced by the dispatching rule used in the shop.
+A number of authors use neural networks for
+ﬂow-time estimation (Arizono et al., 1992) or job
+(shop) scheduling (Hill and Remus, 1994; Lee
+and Kim, 1993; Statake et al., 1994). Sabuncuoglu
+(1998) presents a review of the literature and new
+research directions of scheduling approaches with
+neural networks. Job-shop scheduling problems
+are considered as combinatorial optimization
+problems and appropriate neural network architectures (e.g. a Hopﬁeld network or the Gaussian
+machine model) are used for minimizing the total
+actual ﬂow time. Although the neural network
+W.H.M. Raaymakers, A.J.M.M. Weijters / European Journal of Operational Research 145 (2003) 14–30
+approach has the possibility of solving various
+kinds of scheduling problems, how to specify the
+values of many parameters and weights of these
+Sabuncuoglu and Gurgun (1996) combine algorithmic and neural net approaches to solve the
+single machine mean tardiness scheduling problem
+and the minimum makespan job-shop scheduling
+problem. Chen and Muraki (1997) use a standard
+back-propagation neural network for on-line rescheduling on the basis of preprocessed information about the plant status. Finally, Philipoom
+et al. (1994) compare non-linear regression models
+and neural networks for due-date assignments for
+job scheduling. An important diﬀerence between
+the mentioned neural network approaches and our
+approach is that our study focuses on the makespan of job sets as the basis of information aggregation. In this sense there is a certain analogy
+between our approach and the neural network
+based approach of Huang et al. (1999); they present a successful neural network production performance model based on only two careful selected
+4.2. Makespan estimation using regression models
+In this section we use regression models to build
+makespan estimation models. The motivation to
+use regression models is that they provide insight
+into the relations between the interaction margin
+and the interaction variables. Before performing
+the regression analysis we have to specify the possible relations between the interaction variables and
+the interaction margin. Raaymakers and Fransoo
+(2000) and Raaymakers et al. (2001) showed that
+both main eﬀects and two-way interactions of the
+deﬁned interaction variables inﬂuence the interac-
+tion margin signiﬁcantly. Therefore, both main
+eﬀects and two-way interactions are considered
+in developing the estimation models. Alternative
+estimation models are generated by means of
+regression analysis, based on these ﬁve interaction
+variables. The variables used in the regression
+analysis are called the predictor variables, whereas
+the interaction margin is called the response variable. Before performing the regression analysis this
+data was checked on outliers and orthogonality
+of the predictor variables. These results show that
+there exists a considerable correlation between qmax
+on the one hand, and la and ls on the other hand.
+Therefore, we have to be aware of multicollinearity,
+which occurs when there is a correlation between
+the predictor variables. Multicollinearity can be
+detected by using variance inﬂation factors (VIFs)
+(Montgomery and Peck, 1992). In building alternative estimation models we only consider those
+models for further evaluation that do not have high
+First, an estimation model (RM1) is constructed that only contains the main eﬀects of the
+interaction variables. Backward regression is used
+to eliminate variables that do not have a signiﬁcant
+contribution. Second, estimation models are constructed that include two-way interactions by
+using stepwise regression. If a variable in the estimation model looses its signiﬁcance, due to the
+inclusion of another variable, then the non-significant variable is removed from the model. The
+resulting estimation models are presented in Table
+3. Given are the number of the model, the number
+of predictor variables, the predictor variables, the
+adjusted R2 , and the standard deviation of the estimate. The adjusted R2 indicates the part of the
+variation in the interaction margin that is explained by the model. An F-test is used for each
+W.H.M. Raaymakers, A.J.M.M. Weijters / European Journal of Operational Research 145 (2003) 14–30
+estimation model, which showed that all models
+are signiﬁcant. The signiﬁcance of the individual
+predictor variables is tested using a t-test. All
+variables in the models presented are signiﬁcant.
+Details on the procedure followed can be found in
+4.3. Makespan estimation using artiﬁcial neural
+In this section, we use neural networks (NNs) to
+build makespan estimation models. NNs are universal function approximators and are therefore
+attractive for automatically learning of the (nonlinear) functional relation between the ﬁve interaction variables and the interaction margin. As
+learning material for the NNs we use the same
+material, as described in the previous section, i.e.
+learning instances of ﬁve interaction variables (the
+input of the NN) and the corresponding interaction margin (the output of the NN). To model the
+functional relation between them we use multilayered feedforward networks (MFNs) trained with
+the on-line error back-propagation (BP) learning
+rule (Rumelhart et al., 1986). Normally, many
+training epochs are required before a set of weights
+is found that accurately ﬁt the training material.
+However, if we use to many training epochs, a NN
+tend to overﬁt the learning material (i.e. the accuracy on the training material is very high whereas
+the accuracy on new instances is much lower). In
+the next section we will concentrate on a sound
+In this section, we concentrate on the so-called
+pilot experiments: the goal of these experiments is
+to determine an optimal number of hidden units.
+In the next section we will concentrate on building our ﬁnal NN-based makespan estimation
+learning material (i.e. the accuracy on the training
+material is very high whereas the accuracy on
+new instances is much lower). Commonly used
+heuristics to avoid overﬁtting are (i) early stopping
+(Prechelt, 1994), and (ii) minimizing the number of
+Early stopping is a common method to prevent
+neural networks from overﬁtting the learning
+material based on cross validation. The available
+material is split into three partitions. One partition, called the learning partition, is used to
+perform the training of the network. A second
+partition, called the validation partition, is used to
+evaluate the quality of a network during training.
+Finally, a third partition called the test partition is
+used to estimate the performance of the trained
+network on new material. To avoid overﬁtting,
+training does not proceed until a minimum of the
+error on the training partition is reached, but only
+until a minimum of the error on the validation
+partition is reached. It is however possible that this
+low performance on the validation material is a
+matter of luck and that the performance of the
+trained NN on other new material is much lower.
+To indicate if this is possible the case, the third
+partition, the test partition, is used. The estimation
+of the performance of the trained network is based
+on the accuracy of the network on the test partition. The early stopping heuristic (i.e. a validation
+partition) is used in all our experiments.
+If the number of hidden units is too small, the
+modeling capacity of the network is too low, and it
+is impossible for the learning rule to ﬁnd an adequate model. If, on the other hand, the number of
+hidden units is too large, the modeling capacity
+of the network is too substantial, resulting in a
+strong inclination towards overﬁtting. The optimal
+number of hidden units for our makespan estimation models is determined by performing a 10fold-cross-validation (10-fold-cv) pilot experiment.
+During the performing of a 10-fold-cv experiment,
+the 1176 available learning instances are split into
+10 subsets with about 10% of the instances. During
+each of the 10 pilot experiments one subset is
+used as validation partition, another subset as test
+partition, and the remaining eight subsets as training partition for the NN. In each experiment a
+diﬀerent random initialization of the weights of the
+network is used (the random initialization determinates the starting point in the weight search
+The accuracy of a trained network is measured
+by calculating the mean square error (MSE) on
+the test partition. In all our experiments, the BP
+W.H.M. Raaymakers, A.J.M.M. Weijters / European Journal of Operational Research 145 (2003) 14–30
+learning rate was set to 0.15 and the momentum
+term to 0.4. The learning rate determines the size
+of the steps in the search space to ﬁnd the minimal
+training error. A small learning rate results in long
+learning times. A relatively large learning rate results in faster learning but can also result in a
+chaotically learning behavior during training of
+the network. The function of the momentum term
+is to increase the size of the optimization steps
+when the direction in the weight update is the same
+as the direction in the previous step. As with the
+learning rate, if the momentum term is too large
+the network will display a chaotic learning behavior. Because learning time is not the issue in
+our approach, we choose both learning parameters
+relatively small. The networks were trained for a
+ﬁxed number of cycles (m ¼ 10,000). The minimal
+MSE was always reached well within the limit m.
+Table 4 displays the mean square error (MSE)
+on the test partition of the total 80 pilot experiments; for each number of hidden units (5, 10, 15,
+20, 25, 30, 40, and 50) of the 10 experiments. The
+two bottom lines display the average and the
+standard deviation (S.D.) of the MSE. The average
+MSE of the NNs with 25 units at the hidden layer
+is minimal (0.0018). A MSE of 0.0018 means that
+the estimation performance of the NN models on
+the pilot test material appears to be near to perfect
+(R2 is about 0.98). Accordingly, in the next section
+in which we concentrate on our truly NNs based
+makespan estimation models, we also use MFNs
+with a hidden layer of 25 units. After all, the pilot
+results indicate that NNs with less then 25 hidden
+units have not enough modeling capacity for the
+modeling task at hand. On the other hand, NNs
+with 30 hidden units or more tend towards overﬁtting.
+No further search was made for a potentially
+more optimal architecture or learning parameter
+setting. It should be noted that these architecture
+and learning parameter setting are determined
+without any use of the ultimate test material.
+4.3.2. Training the neural network based makespan
+models we use the MFN-architecture as determined in the previous section (ﬁve input units, one
+hidden layer with 25 units and one output unit)
+and the same learning parameters. However, the
+resulting NN-model depends on the random initialization of the network weights: to get insight
+into estimation performance of trained NNs we
+again use a 10-fold-cv experimental setup. We use
+Results of the 80 pilot experiments; for each numbers of hidden units (5, 10, 15, 20, 25, 30, 40, and 50 units) the mean square error
+The bottom lines display the average and the standard deviation (S.D.) of the MSE. The average MSE of the NN with 25 units at the
+W.H.M. Raaymakers, A.J.M.M. Weijters / European Journal of Operational Research 145 (2003) 14–30
+Mean square estimation errors of the 10 trained NNs
+The two bottom lines display the average mean square error and the standard deviation (S.D.).
+all the 1176 training instances to build our estimation models. The learning material is partitioned in 10 sets of 10% of the material. Ten
+learning experiments are performed in which one
+of the 10 partitions is used as validation material
+(when to stop learning); the remaining 90% of the
+material is used as training material. In each experiment a diﬀerent random weight initialization is
+used. This results in 10 diﬀerent NN-based makespan estimation models (model 1–10).
+Table 5 reports the mean square estimation errors (MSEs) of the 10 trained NNs on the learning
+material, the validation material and the union of
+learning and validation material. The standard
+deviation of the MSE on validation material is
+relatively high (0.0007); the standard deviation on
+learning material and the union of learning and
+validation material are relatively low (about zero).
+Our main interest, however, is the performance of
+the NN-models on new material. In the next section we evaluate the estimation quality of the regression models and the NN-models for a number
+The quality of a makespan estimation model
+depends on its estimation on new job sets (not used
+during the development of the model). In Section
+5.1 we describe the newly generated material (the
+test material), in Section 5.2 we describe the performance indicators used for comparing the estimation quality of our models. In Section 5.3 we
+use these performance indicators to compare the
+estimation results of our models on the newly
+To get insight into the performance of our estimation models on new material we generated
+eight test sets with diﬀerent characteristics:
+IIIII similar characteristics as the original data set,
+IIIII variations in the interaction variables,
+IIIII variations in the number of jobs in the job
+IIIV variations in the average processing time,
+IIVI a combination of the variations in the previous test sets,
+IVII diﬀerent resource conﬁgurations consisting
+VIII variations in the total number of resources.
+Test set I contains job sets that are obtained by
+using similar input parameters as for the job sets
+on which the models are based. Only variations in
+the variables in the model were allowed, and these
+variations are kept within the bounds set by the
+original data. To build the estimation models, the
+W.H.M. Raaymakers, A.J.M.M. Weijters / European Journal of Operational Research 145 (2003) 14–30
+variables were varied on distinct levels. In the ﬁrst
+test set, intermediate levels are chosen for these
+In test set I all jobs in a job set had the same
+number of processing steps. Also, all jobs in a job
+set had the same overlap. In test set II variations in
+the number of processing steps and the overlap are
+allowed. The resource conﬁgurations and consequently the standard deviation in the number of
+identical resources is kept constant, throughout
+the ﬁrst six sets. This will be varied in test sets VII
+and VIII. If the decision not to include these
+variables in the estimation models was justiﬁed,
+then it is expected that varying these variables does
+not inﬂuence the estimation quality of the models.
+In test set III the assumption that the number of
+jobs does not inﬂuence the interaction margin is
+evaluated. For one half of the test set, the number
+of jobs was reduced to 25, for the other half the
+number of jobs was increased to 100. The other
+jobs set characteristics are identical to the characteristics of test set I.
+In test set IV the assumption that the average
+processing time is not of inﬂuence to the interaction margin is evaluated. The average processing
+time is kept constant at 25 time units for all job
+sets in the original data set. For one half of the job
+sets in test set IV the average processing time was
+reduced to 12.5, for the other half of the job sets
+the average processing time was increased to 50.
+The other job set characteristics are identical to
+In test set V, the basic constraint that each resource type has equal probability of becoming the
+bottleneck resource type is relaxed. This means
+that in creating jobs, processing steps have a
+higher probability to be allocated to some resource
+types than to others. Consequently, the workload
+will be less balanced over the resource types than
+in the original data. This means that we extrapolate qmax . To generate such job sets we use diﬀerent
+allocation probabilities for diﬀerent resource types.
+Obviously, this cannot be done for resource conﬁguration D, because there is only one resource
+type in that situation. The allocation probabilities
+for the original data set and this test set are given
+in Table 6. Recall that the resource conﬁgurations
+A, B, and C have 10, 5, and 2 resource types, respectively. The number of resources per resource
+type is the same for all resource types within the
+same conﬁguration. Furthermore, the processing
+time distribution is also the same for each resource
+type. Hence, the allocation probabilities used for
+the original data set results in equal expected workload for each resource type.
+Test set VI contains a combination of all aspects evaluated in the previous test sets. Variations
+in the number of processing steps and variation in
+the overlap are allowed. Furthermore, the number
+of jobs in the test set and the average processing
+time is varied. Also, the workload may be more
+unbalanced than in the original data set.
+Two additional test sets are constructed to evaluate whether the models are applicable to diﬀerent
+resource conﬁgurations. In test set VII, the number of resources remains 10. However, the distribution of the resources over resource types is
+diﬀerent from the original job sets. In test set VIII
+also the total number of resources is altered. One
+half of the job sets have ﬁve resources, and the
+W.H.M. Raaymakers, A.J.M.M. Weijters / European Journal of Operational Research 145 (2003) 14–30
+other half of the job sets has 20 resources. Furthermore, in test sets VII and VIII all variations
+5.2. Performance indicators of estimation quality
+The estimation error (ei ), which is the diﬀerence
+between the estimated and the realized value of the
+interaction margin, can be used to evaluate the
+estimation quality of the models. The estimation
+indicates how well the estimations ﬁt the
+realized data, and is calculated as follows:
+5.3.1. Interaction margin estimation quality of the
+Table 7 displays the interaction margin estimation quality expressed in the estimation R2 of
+the ﬁve regression models (Table 3) at the eight
+5.3.2. Interaction margin estimation quality of the
+Table 8 displays the interaction margin estimation quality of the 10 NN-models on the eight
+diﬀerent test sets expressed in R2est . The two most
+right columns display, for each test set, the average estimation quality and the standard deviation
+(S.D.) over the 10 models. Apart from test set
+eight, the estimation quality of the 10 diﬀerent
+NN-models are robust for diﬀerences in random
+initializations and diﬀerent learning-validation
+partitions (resulting in low standard deviations).
+5.3.3. Comparing the estimation quality of the
+To compare the interaction margin estimation
+quality of the regression model and the artiﬁcial
+neural networks Table 9 displays the estimation
+quality of the regression model and the average estimation quality over the 10 NNs. The last column
+contains the 95% conﬁdence interval based on the
+one-sample t-test; an asterisk indicates a signiﬁcantly better estimation result ðp < 0:05Þ of the NNmodels compared with the best regression model.
+So far we have addressed the estimation of the
+interaction margin ðI^Þ. To support planners in the
+batch process industries to determine achievable
+job sets we use the estimate of the makespan
+For test set VI we have estimated the makespan
+with regression model RM5 and the NNs. This test
+set has been chosen because it allows for many
+variations in job set characteristics. The average
+makespan of test set VI is 1250, with a standard
+deviation of 762. The makespan estimation results
+of both techniques are given in Table 10.
+Interaction margin estimation quality of the regression models
+W.H.M. Raaymakers, A.J.M.M. Weijters / European Journal of Operational Research 145 (2003) 14–30
+Estimation quality of the 10 NN-models on the eight diﬀerent test sets expressed in R2est
+The two most right columns display the average estimation quality and the standard deviation (S.D.) over the 10 models.
+Comparison interaction margin estimation quality of the regression models and the artiﬁcial neural networks
+Comparison of the quality of the makespan estimate for test set
+VI of the regression model and the average over 10 neural
+The results indicate that both, the regression
+model and the neural network models, have a
+good makespan estimation quality (all R2est are very
+close to 1.0). The average estimation result of the
+NN-models is slightly but signiﬁcant (p ¼ 0:05)
+better. Finally, the average standard deviation of
+the error (SDE) of the NN-models is signiﬁcantly
+(p ¼ 0:05) lower than the standard deviation of the
+In this paper, we investigated whether it is
+possible to accurately estimate the makespan or
+interaction margin of a job set in multipurpose
+batch process industries. We focus on methods
+that estimate the makespan on simple characteristics of the jobs and the available resources. Five
+interaction variables are deﬁned and an indication
+of their inﬂuence on the makespan is experimentally investigated. Two diﬀerent techniques (i.e.
+regression analysis and neural network modelling)
+are examined to express a quantitative relationship
+between the ﬁve interaction variables of a job set
+and the amount of interaction for the regarding
+Using regression analysis we ﬁrst developed
+simple models, which only include main eﬀects,
+W.H.M. Raaymakers, A.J.M.M. Weijters / European Journal of Operational Research 145 (2003) 14–30
+and secondly more complex regression models,
+which include main eﬀects and two-way interactions between variables. As a second modeling
+technique we used neural network models, which
+can handle complex non-linear relations. The advantage of the simple regression models is that
+they are easy to understand and the interaction
+between job set characteristics and job interaction
+becomes clear. Interpretation of models induced
+by neural networks is diﬃcult: the trained neural
+networks do not provide any insight in the relation
+between the job set characteristics and the job interaction. Research is carried out that seeks for
+techniques to understand the knowledge stored in
+a trained neural network (Andrews et al., 1995;
+On the basis of the presented experimental results we conclude that both regression models
+and neural network models give estimates of high
+quality. However, more complex regression models, and in an increasing degree, neural network
+models results in a higher estimation quality. The
+estimation quality of the neural network models
+appears signiﬁcantly better than estimation quality
+of regression models. Tests showed that both types
+of estimation models are robust for changes in the
+job set characteristics. Only if there is a strong
+variation in total number of resources, the estimation quality of all estimation models decreases.
+Especially the neural network models appear sensitive for big variations in the total number of
+resources (estimation results on test set VIII). A
+more general explanation is the strong dependency
+of neural networks for similarity between training
+The practical relevance of this research is that it
+is not necessary to construct a complete schedule
+for a given planning period to evaluate the achievability of a job set. Given some simple characteristics of the jobs and the available recourses we
+showed that both regression models and neural
+networks could realize good makespan estimates.
+Therefore, these models can support planners
+during capacity planning and order acceptance
+decisions. The estimation quality of both techniques is relatively robust, unless large changes in
+the resource conﬁguration occur. In an industrial
+situation, the resource conﬁguration generally re-
+mains unchanged for a relatively long period
+due to the high investments. Regression models
+with two-way interactions provide good estimation quality at the expense of insight into the relations. If planners in the multipurpose batch
+process industry prefer simple models that provide
+insight into the relation between job set characteristics and the achievability of a job set, then
+simple regression models are preferred. If insight
+into the relations is less important than the prediction quality, then neural network models are
+For both, regression models and neural network
+models, historical data of job sets and the corresponding resulting makespan can be used for model
+induction. For both types of models the data set
+should be suﬃciently large. If not enough historical
+data is available simulation can be used to generate
+data sets. This can be time consuming, but needs
+to be done only once. Given a suﬃcient amount of
+learning material the building of the estimation
+models is relatively simple and straightforward.
+Updating the models is only necessary when large
+changes occur in the resource conﬁguration, because we have seen that in that case the estimation
+quality deteriorates considerably. If there is a strong
+dissimilarity between resource conﬁguration characteristics of the training material and the actual job
+sets simple regression models deserve preference.
+Andrews, R., Diederich, J., Tickle, A.B., 1995. A survey and
+critique of techniques for extracting rules from trained
+artiﬁcial neural networks. Knowledge Based System 8, 373–
+Arizono, I., Yamamoto, A., Ohta, H., 1992. Scheduling for
+minimizing total actual ﬂow time by neural networks.
+International Journal of Production Research 30, 503–511.
+Baker, K.R., Bertrand, J.W.M., 1981a. An investigation of duedate assignment rules with constrained tightness. Journal of
+Baker, K.R., Bertrand, J.W.M., 1981b. A comparison of duedate selection rules. IIE Transactions 13, 123–131.
+Bertrand, J.W.M., 1983. The eﬀects of workload dependent
+due-dates on job shop performance. Management Science
+Chen, W., Muraki, M., 1997. An action strategy generation
+framework for on-line scheduling and control system in
+batch processing with neural networks. International Journal of Production Research 35, 3483–3506.
+W.H.M. Raaymakers, A.J.M.M. Weijters / European Journal of Operational Research 145 (2003) 14–30
+Cheng, T.C.E., Gupta, M.C., 1989. Survey of scheduling
+research involving due date determination decisions. European Journal of Operational Research 38, 156–166.
+Eilon, S., Chowdhury, I.G., 1976. Due dates in job shop
+scheduling. International Journal of Production Research
+Enns, S.T., 1993. Job shop ﬂowtime prediction and tardiness
+control using queueing analysis. International Journal of
+Enns, S.T., 1995. A dynamic forecasting model for job shop
+ﬂowtime prediction and tardiness control. International
+Journal of Production Research 33, 1295–1312.
+Enns, S.T., 1998. Lead time selection and behaviour of work ﬂow
+in job shops. European Journal of Operational Research
+Hill, T., Remus, W., 1994. Neural network models for
+intelligent support of managerial decision making. Decision
+Huang, C.L., Huang, Y.H., Chang, T.Y., Chang, S.H., Chung,
+C.H., Huang, D.T., Li, R.K., 1999. The construction of
+production performance prediction system for semiconductor manufacturing with artiﬁcial neural networks.
+International Journal of Production Research 37, 1387–
+Lawrence, S.R., 1995. Estimating ﬂowtimes and setting due
+dates in complex production systems. IIE Transactions 27,
+Lee, Y.H., Kim, S., 1993. Neural network applications for
+scheduling jobs on parallel machines. Computer and Industrial Engineering 25, 227–230.
+Lenstra, J.K., Rinnooy Kan, A.H.G., Brucker, P., 1977.
+Complexity of machine scheduling problems. Annals of
+Montgomery, D.C., Peck, E.A., 1992. Introduction to Linear
+Philipoom, P.R., Rees, L.P., Wiegemann, L., 1994. Using
+neural networks to determine internally-set due-date assignments for shop scheduling. Decision Sciences 25, 825–
+Prechelt, L., 1994. Proben1: A set of neural network benchmark problems and benchmarking rules. Technical Report
+Raaymakers, W.H.M., 1999. Order acceptance and capacity
+loading in batch process industries. Ph.D. Thesis, Eindhoven University of Technology.
+Raaymakers, W.H.M., Bertrand, J.W.M., Fransoo, J.C., 2000.
+The performance of workload rules for order acceptance
+in batch chemical manufacturing. Journal of Intelligent
+Raaymakers, W.H.M., Hoogeveen, J.A., 2000. Scheduling
+multipurpose batch process industries with no-wait restrictions by simulated annealing. European Journal of Operational Research 126, 131–151.
+Raaymakers, W.H.M., Fransoo, J.C., 2000. Identiﬁcation of
+aggregate resource and job set characteristics for predicting
+job set makespan in batch process industries. International
+Journal of Production Economics 68, 137–149.
+Raaymakers, W.H.M., Bertrand, J.W.M., Fransoo, J.C., 2001.
+Makespan estimation in batch process industries using
+aggregate resource and job set characteristics. International
+Journal of Production Economics 70, 145–161.
+Ragatz, G.L., Mabert, V.A., 1984. A simulation analysis of due
+date assignment rules. Journal of Operations Management
+Rumelhart, D.E., Hinton, G.E., Williams, R.J., 1986. Learning
+internal representations by error propagation. In: Rumelhart, D.E., McClelland, J.L. (Eds.), Parallel Distributed
+Processing Explorations in the Microstructure of Cognition:
+Foundations, vol 1. MIT Press, Cambridge, MA, pp. 318–
+Sabuncuoglu, I., Gurgun, B., 1996. A neural network model
+for scheduling problems. European Journal of Operational
+Sabuncuoglu, I., 1998. Scheduling with neural networks – a
+review of the literature and new research directions.
+Production Planning and Control 9 (1), 2–12.
+Statake, T., Katsumi, M., Nakamura, N., 1994. Neural
+network approach for minimizing the makespan of the
+general job–shop. International Journal of Production
+Vig, M.M., Dooley, K.J., 1991. Dynamic rules for due-date
+assignment. International Journal of Production Research
+Vig, M.M., Dooley, K.J., 1993. Mixing static and dynamic
+ﬂowtime estimates for due-date assignment. Journal of
+Weeks, J.K., 1979. A simulation study of predictable due-dates.
+Weijters, A.J.M.M., van den Bosch, A.P.J., 1999. Interpreting
+knowledge representations in BP-SOM. Behaviormetrika

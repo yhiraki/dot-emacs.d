@@ -1,0 +1,626 @@
+IEEE TRANSACTIONS ON COMPONENTS, PACKAGING, AND MANUFACTURING TECHNOLOGY—PART C, VOL. 20, NO. 4, OCTOBER 1997
+and the Determination of Flow Time Control
+Parameters for the Wafer Fabrication Factories
+Shu-Hsing Chung, Ming-Hsien Yang, and Cho-Ming Cheng
+Abstract— High work-in-process (WIP) level, long manufacturing lead time, high lead time variation, and poor due date
+performance are the major problems for wafer fabrication factories. An order’s due date relates to its releasing time and flow
+time. Due date performance will not be improved if WIP level
+is high and material flow is unstable. Too high WIP level cannot
+increase throughput but lengthen lead time. Find a suitable WIP
+level and then control the material release by fixed-WIP policy
+is the idea of solving the above embarrassment. In this paper,
+we construct a due date assignment model (DDAM) by using
+the simulation method and queuing theory. Observing the results
+of simulations, the lowest system WIP level corresponding to
+the desired up-time machine utilization rate of the bottleneck
+resource or the capacity constraint resource (CCR) and the
+shortest mean flow time can be found. To make the material
+flow be stable, we also propose the methodology of determining
+wafer’s WIP level, daily moves, and flow time for each product
+type and for each circuitry layer; all of these can be used as
+the parameters for controlling flow time. Demonstration of the
+DDAM is provided with actual data. Comparing the performance
+of our DDAM with other four ones, the results reveal that DDAM
+performs well in each performance criterion.
+Index Terms— Capacity constraint resource, circuitry layer,
+due date assignment, flow time, manufacturing lead time, wafer
+AFER fabrication factories usually suffer from such
+problems as: high work-in-process (WIP) level, long
+manufacturing lead time, high lead time variation, and poor
+due date performance. High WIP level in the shop floor
+causes longer manufacturing lead time. Inappropriate WIP
+controlling and machine failure lead to high variation of lead
+time. Consequently, the estimation of flow time is difficult and
+the delivery of goods is not consistent with the due date.
+Exactly assigning order’s due date and timely delivering
+the goods to customer will enhance customer service. One
+cannot assign accurate due date unless manufacturing lead
+time can be accurately estimated. Traditionally, the estimating
+of manufacturing lead time is based on the total processing
+time of a process plan or past data; but the estimating error is
+enormous. To avoid lately delivering, one tends to release shop
+orders much earlier than necessary; the lead-time-syndrome
+Manuscript received October 10, 1998. This paper was supported in part
+by the National Science Council, Taiwan, R.O.C., under NSC 86-2213-E-009038.
+The authors are with the Industrial Engineering and Management Department, National Chiao Tung University, Hsinchu, Taiwan, R.O.C.
+Publisher Item Identifier S 1083-4400(97)09333-9.
+happens. Lead-time-syndrome [4] points out that uncontrolled
+release of missed parts and too early releasing of materials
+will increase the WIP. The effects of high level of WIP are
+slowing down the material flow and lengthening lead time.
+In a wafer fabrication factory, photolithography exposure
+machine (wafer stepper) usually is recognized as the bottleneck resource or the capacity constraint resource (CCR). To
+maximize the throughput of system, maintaining enough WIP
+to raise the utilization rates of bottleneck is necessary; but
+too high level of WIP will lengthen lead time. Thus, it is
+important to determine the proper WIP level such that the
+bottleneck is fully utilized. It is also necessary to keep the
+WIP at a fixed level by the control of material releasing
+and dispatching to avoid lengthening lead time. Fixed WIP
+helps the stability of material flow in manufacturing system.
+The stability of material flow will make the manufacturing
+lead time be predictable and be less variant; the due date
+Wafer’s fabrication process possesses reentry characteristics. The fabrication of wafer is layer by layer. It may be the
+situation that only the former layers of each product type are
+fabricated at the first half of a planning period. When the time
+is elapsing and the throughput of finished goods do not meet
+the requirements, most of the capacities then are allocated to
+fabricate the later parts of layers of products so as to increase
+system throughput. Consequently, the system throughput is
+unstable, the lead time is long and variant and the WIP level
+is high. Thus, it is necessary to control the daily moves for each
+layer of each product type; such controlling will be useful for
+maintaining the stability of system throughput and material
+In this paper, we intend to study the due date assignment
+problem for wafer fabrication factories. As the above analysis,
+order’s due date directly relates to its releasing time and
+flow time. We will plan the flow time of each product type
+by considering the relationship among WIP level, capacity
+utilization rate and average flow time, mentioned earlier. Using
+this relationship, we can estimate the flow time of each order.
+To determine the releasing time of order, the fixed total WIP
+policy will be adopted. It is the time for next order being
+released when some wafer lots finish their processes and leave
+After assigning the due date of an order, it is also important
+to control flow time to guarantee that the delivery time is
+consistent with the due date. We thus propose the methodology
+CHUNG et al.: DESIGN OF DUE DATE ASSIGNMENT MODEL AND THE DETERMINATION OF FLOW TIME CONTROL PARAMETERS
+of determining wafer’s WIP level and daily moves for each
+circuitry layer; all of these can be used as the parameters for
+This paper is organized as follows: Section II reviews relevant researches on due date assignment problem. Section III
+describes the due date assignment model and shows how
+to calculate the flow time controlling parameters. Section IV
+demonstrates the operation of due date assignment model using
+actual data. Section V compares the performance of our due
+date assignment model with other models. Finally, Section VI
+makes conclusion and provides future research direction.
+Manufacturing lead time is related to product’s process and
+the results of production planning. This section thus briefly
+describes the characteristics of wafer’s process and compares
+the efficiency of different methods of the production planning.
+This section also reviews a few different approaches of due
+Wafer fabrication is a complex process. The number of
+operation steps depends on the number of circuitry layers
+required to complete the building of an integrated circuit
+(IC). Generally, an IC product has 9 to 22 circuitry layers.
+Each product’s circuit layer always requires the processing
+on wafer stepper. Wafer stepper machine (photolithography
+equipment) allows the transfer of patterns from masks to the
+polymeric layer via exposure to ultra-violet light. The number
+of photolithography steps is one measure of the difficulty of
+Wafer stepper machine is the most expensive machine
+in wafer fabrication factories. Due to the investment cost
+consideration, the capacity extension of wafer stepper machine
+will be carefully evaluated and is limited. With the concern of
+resource efficiency and throughput, at the production planning
+stage, the capacity of wafer stepper shall be fully utilized.
+Therefore, wafer stepper is regarded as the bottleneck at the
+Because each product will pass wafer stepper many times,
+the delay occurring in one circuit layer’s processing on wafer
+stepper machine will cause the delay of completion time of the
+product. CCR is the resource which ,if not properly scheduled
+and managed, is likely to cause the actual flow of product
+through the plant to derive from the planned product flow [2].
+Hence, the wafer stepper machine is a CCR and the occurrence
+Manufacturing resources planning (MRP II) extends the
+traditional concept of production planning and control (PPC).
+However, lots of research pointed out the weakness and
+deficiency of MRP II [1], [2]. Lozinski and Glassey [3] even
+suggested that MRP II is not suitable for wafer fabrication.
+Without considering workload on shop floor in the estimation of lead time, traditional concept of PPC results in
+such problems as long lead time and high WIP. In the past
+few years, the workload control (WC) concept for PPC was
+proposed [4]. The WC concept employs certain rules for the
+decisions of the upper production planning level concerning
+WIP level to be maintained, size of work orders, etc., and in
+turn leads to a pre-determined state of the manufacturing system (WIP, mean flow time, capacity utilization). The workload
+concept can be separated as three decision models:
+1) model for determining the optimal level of work-inprocess;
+2) model for determining the released times (release periods) for the work orders to keep the work-in-process at
+3) model for determining the optimal size of the work
+orders, taking into account the impact on work-inprocess and flow times.
+As to the due date assigning issues, there are two kinds
+of due dates: the external due date and the internal due
+date [10]. Because the determination of external due date,
+assigned by the sales department, usually ignores the shop
+conditions, the external due date tends to be latter than actual
+delivery. Constant flow time (CON) and random assignment
+[10] are usually adopted to assign external due date. With the
+considering of shop conditions, internal due date, assigned by
+scheduler, is more closer to actual delivery date than external
+The methods of due date assignment used in the related
+researches can be classified into four categories:
+Direct procedures assign due date using such information as
+job characteristics, shop condition and dynamic shop condition
+[5]. This kind of methods is convenient and easily computing,
+but some parameters have to be pre-determined by other ways.
+As the computer technologies advancing continuously, simulation tends to be one of the methods for due date assignment
+research. Vig and Dooley [6], Weeks [7], Kaplan and Unal
+[8] adopted simulation in their research. Simulation benefits
+in evaluating the effects of different polices without actual
+Weeks [7], with the combination of different dispatching
+rules and shop structures, evaluated the due date performance
+of different due date assignment methods. Weeks employed
+the pilot simulation to estimate mean flowing time, mean delay
+time, and job numbers in shop. These parameters were used
+With the considering of three factors: the operation numbers
+of each job (one to nine), shop load status (balanced/
+unbalanced), and pattern of processing time (deterministic/exponential), Kaplan and Unal [8] collected flowing
+time data from the results of simulation. They evaluated
+the relationship of a lots of variables and flowing time by
+correlation analysis. Eventually, they choose mean workload
+and maximum jobs in queue as the variables to estimate
+Analytical method, based on queuing theory, estimates the
+mean and standard deviation of flow time of orders [9]. Since
+the assumptions of analytical method usually conflict with the
+needs of real world, the applications of the result of analytical
+IEEE TRANSACTIONS ON COMPONENTS, PACKAGING, AND MANUFACTURING TECHNOLOGY—PART C, VOL. 20, NO. 4, OCTOBER 1997
+Operation set of the circuitry layer means all the operations
+. “Moves” defines as that a wafer finishing the operation
+set of any circuit layer. “Moves ” represents the completion
+of critical operation. “Moves final” means that a wafer has
+completed all operations, thus the value of “moves final”
+represents the quantity of finished product.
+Fig. 1. Critical operation and the operation set of circuitry layer j .
+Statistical analysis uses the regression method [15] or the
+relation analysis [8] to find the relations between flow time of
+orders and other variables. The deficiency of statistical analysis
+is that past trend may not exist in the future.
+Because different research approaches possess their own
+merits, some research begins to combine two or more approaches to intensify their methodology. Enns [9] combined
+analytical method and simulation method. Besides that, Kaplan
+and Unal [8] adopted both simulation method and statistical
+analysis to estimate flow time. They proposed the due date
+is standard deviation of estimating error.
+Due date assignment model of this paper uses both simulation method and queuing theory to estimate flow time and
+establish control parameters for flow time. We will adopt the
+idea of (1) in our due date assignment model.
+This section firstly introduces the concept of circuit layer
+segmentation for the purpose of WIP controlling. Secondly,
+we describe the assumption of this paper. Thirdly, we take an
+overview of the three stages of due date assignment model
+(DDAM) and then sequentially describe the detailed thoughts
+and procedures of each stage of DDAM. Finally, we point out
+The characteristic of reentry in wafer’s fabrication process
+complicates the material flow in the shop floor and makes the
+scheduling work be challenging. The reentry characteristics
+cause that the starting date of wafers’ flowing to some circuitry
+layers depends on the departing date of wafers at previous
+circuitry layers. Here, we simplify the schedule planning
+by exploiting the reentry characteristics and regarding the
+circuitry layer as the element for WIP level controlling.
+We divide wafer’s process into many subsets according to
+the positions of stepper machine operation in wafer’s process
+(Fig. 1). Critical operation is the operation being processed
+on stepper machine, the additional one is the end operation,
+without passing by stepper machine, of the entire process.
+Assume that the wafer fabrication factory produces different
+kinds of products and the product mix ratio is given before the
+planning of master production schedule. Since each product
+type has its distinct process plan and processing time, the initial
+WIP status or the product mix ratio will affect the workload
+of each workstation and the flow time of each products. The
+DDAM must be executed for each planning period due to the
+change of system WIP level or the product mix ratio.
+To be consistent with the processing batch size of thermal
+oxidation process so as to raise the utilization rates of equipment, the batch size of material releasing is six lots (one lot
+Machine breakdown interferes the flowing of product. The
+mean time between failure (MTBF) and mean time to repair (MTTR) in the DDAM are assume to be exponentially
+Compared with other dispatching rules, “first in first out”
+(FIFO) rule does not help to enhance the due date performance
+[6], [9]. To achieve better due date performance at shop floor
+execution stage, the FIFO rule is adopted as the dispatching
+rule for each workstation in DDAM. Such adoption also
+facilitates us to use the Little’s law [13] of queueing theory to
+C. Three Stages of Due Date Assignment Model (DDAM)
+The due date assignment model can be separated into three
+1) the use of simulation results as the base for production
+2) the estimating of release date for each order;
+Firstly, using the simulation results of ManSim (product
+of TYECIN System, Inc.), we will establish the relationship
+between system WIP, mean system throughput and mean
+flow time. Observing this relationship, the lowest system
+WIP level corresponding to the desired throughput level can
+be determined. To more precisely control the flow time of
+products, we suggest to transform the system WIP and mean
+system throughput into the corresponding values for each
+product type, and then for each layer of each product type.
+These values can be use as the parameters for the flow time
+Before running simulation model, collecting input data
+is necessary, including: product mix ratio, material release
+sequence in a release cycle, process plans, and initial WIP
+status. “Cyclic” material release policy is adopted so that the
+system WIP is dispersed to each product type according the
+CHUNG et al.: DESIGN OF DUE DATE ASSIGNMENT MODEL AND THE DETERMINATION OF FLOW TIME CONTROL PARAMETERS
+Fig. 2. Three stages of the due date assignment model.
+Secondly, given the system WIP level, the fixed WIP policy
+is adopted to control the releasing of material. Lot releasing
+relates two matters: deciding when to release material and
+choosing product type for lot release. Fixed WIP control policy
+is the mechanism for deciding when to release material. At
+the releasing time, the product type with the highest priority
+calculated by an equation is chosen for lot releasing.
+Finally, referring the idea of (1), the due date of an order can
+be set by the planned releasing date and the flowing time of the
+product type of this order. These values have been determined
+or collected from the first two parts of DDAM.
+The analysis of capacity availability is necessary at the
+production planning stage. In this paper, we adopt simulation
+as the tool for capacity planning and for estimating the
+throughput of system. The production planning horizon for
+assigning orders’ due dates shall be long enough to cover the
+accumulated lead time of all product types that belong to a
+Weindahl [16] discussed the effects of time limits parameters (length of planning horizon) in simulation and practice.
+He concluded that three time periods are a reasonable starting
+value. Our DDAM adopted three time periods as the planning
+horizon. A time period equals to four weeks, so that the
+1) The Determination of Suitable System WIP Level The
+system performance is different under different system WIP
+level. Therefore, we run simulation many times with different
+WIP levels to observe the corresponding system performances.
+To get a steady state environment so as to observe the
+system performance at a specified WIP level, we run a
+simulation model twice. The simulation parameters for the first
+and the second run are the same. The results of simulation are
+gathered only from the second run. Using the “from prior run”
+option of ManSim, the WIP data at the end of first simulation
+run will be the initial WIP data for the second simulation.
+The planning horizon (12 weeks) is long enough to make
+the system be steady state. Hence, the data collected from
+the second simulation run is a presentation of steady state
+At each simulation run, the results of system throughput
+and mean system flow time can be derived. If we use ManSim’s Kanban option and specify one kind of kanban for the
+operation set of a layer, then the number of system moves
+( ) can also be derived. The system throughput states the
+number of end products being produced, while the daily moves
+represents the number of layers being completed. Observing
+and comparing the simulation results of different WIP levels,
+we can find the lowest system WIP level ( ) corresponding to
+the desired throughput level. Fixing at this lowest WIP level,
+the corresponding flow time for each product type ( ) and
+the utilization rate for each machine type can also be found
+Under the objective of maximizing throughput, we shall
+raise the up-time utilization rate of bottleneck to be near
+100%. When the utilization rate of bottleneck is below 100%,
+the increasing of system WIP level will raise the utilization
+rate of bottleneck and extend the throughput level. After the
+utilization rate of bottleneck reaches 100%, the increasing of
+system WIP level can’t extend throughput but lengthen lead
+time. Hence, the suitable system WIP level is the lowest WIP
+level that has the maximal throughput level.
+When the system reached the steady state, Little’s law
+can be applied to examine the correctness of the relationship
+between system throughput, system WIP level, and system
+mean flow time. Equations (9) and (10) in Section IV shows
+the validation of the simulation results.
+2) Planning from the Viewpoint of a Product Type and
+Product Type’s Layer We concern not only the length of
+the mean flow time but also the stability of flow time.
+Material flow will be stable if that the system WIP is properly
+distributed to all layers of each product type and that the
+fabrication of wafer is not concentrated on some specific
+layers. Therefore, it needs to plan the WIP level and daily
+moves in the viewpoint of a product type and product type’s
+layer. The following paragraphs will show how to derive the
+planned WIP level and planned daily moves for each product
+If one product type has high ratio in the product mix, its WIP
+shall be high. On the other hand, if one product type needs
+longer flow time, its WIP shall be high too. From the above
+two viewpoints, the determination of each product’s WIP is
+IEEE TRANSACTIONS ON COMPONENTS, PACKAGING, AND MANUFACTURING TECHNOLOGY—PART C, VOL. 20, NO. 4, OCTOBER 1997
+based on its product mix ratio and flow time
+is ratio of product mix for product type ,
+Referring to the definition of “move,” the higher product
+mix ratio and the more layers of a process plan stand for the
+more moves of that product type. Basing on the above reason,
+the moves of each product type will be proportional to each
+product type’s mix ratio and its numbers of layers
+circuitry layers for product type that need to pass through
+of a product type. The WIP distribution at each layer of a
+product will relate to its flow time passing by each circuitry
+layer. In other words, if the flow time for a layer is longer
+than others, for one specific product type, there are more WIP
+is planned WIP level for layer of product type
+is mean flow time for layer of product type
+To make the material flow stable and smoothing, the release
+of material is controlled by the fixed system WIP policy
+and is arranged to maintain the predetermined product mix.
+Conceptually, for a product type, one operation of a layer
+cannot be started before the finishing of the operation set of
+the previous layer. Thus, the planned daily moves of each
+product type shall be equally distributed into each circuitry
+layer. In this way, the daily move for each layer of a product
+type is stable and harmonized with its product mix ratio
+is planned daily moves for layer of product type .
+2) Choosing Product Type for Lot Releasing: Making the
+WIP distribution of all product types be close to the ratio
+of the product mix will help the leveling of throughput. A
+planning material release cycle can be designed based on such
+idea. However, unexpected or random events may interrupt or
+delay the throughput sequencing or timing. Thus, before the
+releasing of a batch, the priority check is necessary to prevent
+the WIP distribution deviating from the product mix ratio. The
+choosing of next releasing batch is determined by the weight
+calculation. Equation (6) is applied for each product type under
+the condition that the fixed system total WIP constraint must
+be satisfied. Only when the weight of a product type is less or
+equal to one, the batch of this product type is allowed to be
+released. The lowest weight means the highest priority
+“The release batch size” means the number of lots released
+at the same time and is fixed at six lots. “The accumulated
+unreleased numbers of lots” for each product type is calculated
+based on the planned daily final moves, defined in (5). If a
+product type is not allowed for releasing, its planned daily
+final moves will be accumulated to the next day. On the other
+hand, if a product type is chosen for releasing, then six lots is
+deduced from the accumulated unreleased number of lots.
+For example, the planned daily final moves for product
+and are 4, 3, 6, 5, 2 and 1 lots individually.
+Thus, on the first day, the weight of each product type is
+1.5, 2, 1, 1.2, 3, and 6 individually. Suppose that product is
+allowed to be released. Then, on the next day, the accumulated
+unreleased numbers of lots for each product type are 8, 6, 6,
+10, 4 and 2. And the weight of each product type is changed
+to be 0.75, 1, 1, 0.6, 1.5, and 3. Product
+The release batch size is fixed at six lots. If the lot size of an
+order for some product type is greater than six, this order will
+be divided into more than one batch. The release date of the
+latest batch of an order is used as the release date of this order.
+Applying the results of previous sections, the completion
+time of an order is equal to the release time of the order plus
+the flow time of the corresponding product type
+Since the lot release time is related to the level of WIP, this
+section will discuss the major two works of lot releasing:
+1) Deciding When to Release Material: Since we adopt
+fixed WIP as the WIP control policy, a new batch will allow
+to be released into system when one batch completes all the
+operations of the corresponding process plan. Because the
+timing and frequency that unexpected events occur usually
+differ from what the simulation presents, the material release
+time shown in a simulation run can just be a reference.
+circuitry layers of product type that is specified by the latest
+Because there are some physical environment factors not
+considering in the simulation model, safety allowance shall be
+CHUNG et al.: DESIGN OF DUE DATE ASSIGNMENT MODEL AND THE DETERMINATION OF FLOW TIME CONTROL PARAMETERS
+SIMULATION RESULTS OF THE SYSTEM FOR DIFFERENT
+WIP LEVELS. * THE UTILIZATION RATE OF BOTTLENECK
+RESOURCE IS CALCULATED BASED ON THE MACHINE UP TIME
+Fig. 3. Relationship between system WIP level, system throughput and mean
+Based on the concept of WIP control and the layer planning results of DDAM, May [14] modifies the method of
+two boundary (TB) [11] to control the lot release and to
+dispatch the parts to the bottleneck machine. For nonbottleneck
+machines, May considered both the operation characteristics
+of primary machines (stepper, furnace, etcher, implanter and
+sputter) and the WIP level of each layer for each product type
+to design the dispatching rules. May pointed that the modified
+two boundary method can effectively control the lot release
+quantity and timing, as well as the WIP level. The modified
+TB method can increase the system throughput and shorten
+mean system flow time. Thus, the planned due date of orders
+This section demonstrates the process of due date assignment model described in Section III with actual data.
+The data of workstations, and process plans of the example
+are collected from a wafer fabrication factory in Taiwan. The
+wafer fabrication factory in this example produces six product
+1) Length of planning horizon: The planning horizon of this
+example is set as 12 weeks, and the planning time period
+2) Setting the product mix ratio: The times of each product
+type passing by bottleneck (wafer stepper machine) is
+14, 13, 12, 11, 10, 9. Since the demand of each product
+in the planning horizon has been investigated and judged
+by the authority, the product mix ratio for each product
+3) Data of workstation: There are 39 kinds of workstations of the wafer fabrication factories in this example.
+Wafer stepper workstation (numbering 27) is defined
+as bottleneck resource. The mean time between failure
+(MTBF) and the mean time to repair (MTTR) of such
+workstations are exponentially distributed.
+4) The batch size and policy for material releasing: The
+batch size of material releasing for each product type
+is 6 lots. Only when the total system WIP is below the
+pre-specified level, new batch is allowed to be released.
+5) Cyclic material releasing sequence: The cyclic material
+releasing sequence for all product types in each
+simulation run shall be designed with the consideration of due date urgency for each product type.
+kind of releasing sequence for our example. This cyclic
+sequence is consistent with the product mix ratio.
+6) Dispatching rule: In the simulation model, the dispatching rule for every workstation is “first in first out”
+B. The Determination of Suitable System WIP Level
+Table I summaries the system performance values under
+different WIP levels. Fig. 3 presents the trends of throughput
+Observing the relations in Fig. 3, we can determine the
+suitable WIP level to be 240 lots. This is the lowest WIP level
+without wasting the up-time capacity of bottleneck resource.
+It also corresponds to the shortest average cycle time with
+Referring to the data of Table I, the system throughput is
+572 wafers/per product type per week when the WIP level is
+To validate the results of simulation, we apply Little’s
+formula to examine the correctness of the relationship between
+system throughput, system WIP level, and system mean flow
+time. By transforming the unit of system throughput into lots
+(one lot contains 24 piece wafers), 572 wafers/per product
+type per week is equal to 143 lots/per week (
+system throughput 143.885 [the derivation is shown in (9) and
+(10)] is very close to the transformed throughput (143 lots per
+IEEE TRANSACTIONS ON COMPONENTS, PACKAGING, AND MANUFACTURING TECHNOLOGY—PART C, VOL. 20, NO. 4, OCTOBER 1997
+EACH LAYER OF EACH PRODUCT TYPE (UNIT: LOT)
+MEAN FLOWING TIME FOR EACH LAYER OF EACH PRODUCT TYPE (UNIT: HR: MM)
+PLANNED DAILY MOVES FOR EACH LAYER OF EACH PRODUCT TYPE (UNIT: LOT)
+C. Planning from the Viewpoint of a Product
+The simulation reports also provide the mean flow time
+After applying the data of Tables I and II to (2) and (3), we
+can derive the planned WIP level and planned daily moves for
+each product type. These data are displayed in Table IV.
+To derive the planned WIP level and planned daily moves
+for each layer of each product type, we then apply the data
+of Tables III and IV to (4) and (5). Tables V and VI display
+the results. The daily final moves of product – is 3.9, 2.93,
+5.85, 4.88, 1.95, 0.98 (lots) individually, and is harmonized
+to the product mix ratio. The summation of each product’s
+daily final moves is equivalent to daily throughput (20.49 lots).
+The weekly throughput can then be derived from the daily
+the system throughput (143.885 lots) deriving previously from
+To estimate lot releasing date, we transformed the idea of
+lot release planning of this paper into a C language program.
+By the aid of this program, the estimated lot releasing date
+Using the lot releasing date shown in Table VII and the
+mean flowing time of each product shown in Table II, the
+completion time of an order can be calculated by applying (7).
+Adding safety allowance (safety factor is 0.05), the order’s due
+date can be determined (8). Table VIII shows the due date for
+This section compares the performance of DDAM of this
+paper with other models, such as the constant flow time (CON)
+[10] and the total work content (TWK) [10].
+As described in the literature review, CON belongs to
+external due date assignment method. CON is applied to
+CON(1) and CON(2) model with different lot releasing factor.
+CHUNG et al.: DESIGN OF DUE DATE ASSIGNMENT MODEL AND THE DETERMINATION OF FLOW TIME CONTROL PARAMETERS
+BATCH RELEASING DATE. * BRD: BATCH RELEASING DAY
+determined by means of trial and error to make the system
+mean lateness be close to zero. The results show: when the
+flow time is 44 days, the system mean lateness (0.46) is the
+closest to zero. Contrarily, CON(2) considers the dynamic
+release time of each batch of an order. CON(2) records
+the releasing date for each batch of each order in the first
+simulation run as the releasing time in the second simulation
+run. The results show: when the flow time is 13 days, the
+system mean lateness ( 0.33) is the closest to zero
+is the releasing date for the latest batch of order .
+The estimation of flow time for TWK bases on the total
+processing time (total work content). TWK is also applied
+into TWK(1) and TWK(2), just as the two lot releasing factors
+considered in CON(1) and CON(2). By trial and error, when
+the flow time is set as 7.1 times of total processing time of
+each product batch, the system mean lateness ( 0.22) is the
+THE DUE DATE OF EACH ORDER. * RDLB: RELEASING DAY
+OF LATEST BATCH. ** ECT: ESTIMATED COMPLETION TIME (DAY)
+is the total time for processing one batch of the
+The parameter of TWK(2) is between 1.0 to 3.0. The results
+of trial and error testing show: when the parameter is 2.0, the
+system mean lateness (0.08) is the closest to zero. Similarly
+to CON(2), TWK(2) adopts the actual order releasing date as
+CON(1), without considering the WIP status of shop floor,
+adopts the static planned release time. To make the due
+date assignment be reasonable, the length of flow time is
+To compare the performance of our DDAM with the other
+four ones, we use six different kinds of performance measures:
+mean lateness, lateness variance, number of tardy job, percentage of tardy job, mean square error, and mean absolute error.
+The summary of comparison is displayed in Table IX.
+From Table IX, we can draw some observations.
+1) Compared with other models, DDAM of this paper
+brings the best performance in mean lateness and the
+lowest percentage of tardy job. We try to analyze the
+reason why the completion date of orders is 0.98 days
+earlier than due date. We find that the actual order
+releasing date is 1.94 days earlier, in average, than
+planning order releasing date and that the actual flow
+time for each order is 0.96 days longer, in average,
+than the planned flow time. Table X shows the related
+information about due date deviation. These deviations
+show that the planning result cannot be 100% accurate
+because of random events and statistical fluctuations
+IEEE TRANSACTIONS ON COMPONENTS, PACKAGING, AND MANUFACTURING TECHNOLOGY—PART C, VOL. 20, NO. 4, OCTOBER 1997
+THE PERFORMANCE COMPARISON SUMMARY OF FIVE
+DDAM. * TOTAL NUMBER OF DELIVERED BATCHES IS 210
+we determine such parameters as the planned WIP level and
+planned daily moves for each layer of each product. These
+parameters can be exploited to control the progress of orders
+to fulfill due date. These parameters can also be used when
+adopting the rigorous material releasing/dispatching rules, such
+As for the future research direction, there is a need to
+study the deviations between actual order releasing dates and
+planning order releasing dates (Table X). Moreover, the setting
+of safety factor to absorb the variance of the system to enhance
+due date performance is another future research topic.
+SOURCES OF LATENESS OF DDAM IN THIS PAPER.
+2) CON(1) and TWK(1) adopt the static material release
+method. When the mean lateness is set around zero,
+the percentage of tardy jobs is around 50%. However,
+both models are poor performed in tardiness, mean
+square error, and mean absolute error. This observation
+is consistent with our opinion that material releasing
+control policy will affect material flow time and due
+3) The DDAM uses the layer flow time to estimate the
+material release time. Although it is not always better
+than CON(2) and TWK(2) in each criterion, the departure, in some criteria, is small. Moreover, the order
+releasing dates for CON(2) and TWK(2) are the actual
+order releasing dates. In the real environment, actual
+order releasing date is difficult or impossible to get.
+From realistic consideration, our DDAM will perform
+[1] P. Higgins, K. Tierney, and J. Browne, “From MRPII to MRP,” Prod.
+Plan Contr., vol. 3, no. 3, pp. 227–238, 1992.
+[2] G. Reimer, “Material requirements planning and theory of constraints:
+Can they coexist? A case study,” Prod. Inventory Manage J., Fourth
+[3] C. Lozinski and C. R. Glassey, “Bottleneck starvation indicators for
+shop floor control,” IEEE Trans. Semiconduct. Manufact., vol. 1, pp.
+[4] G. Zapfel and H. Missbauer, “New concept for production planning and
+control,” Euro. J. Operat. Res., vol. 67, pp. 297–320, 1993.
+[5] M. L. Smith and A. Seidman, “Due date selection procedure for job-shop
+simulation,” Comput. Ind. Eng., vol. 7, no. 3, pp. 199–207, 1983.
+[6] M. M. Vig and K. J. Dooley, “Dynamic rules for due-date assignment,”
+Int. J. Prod. Res., vol. 29, no. 7, pp. 1361–1377, 1991.
+[7] J. K. Weeks, “A simulation study of predictable due-dates,” Manage
+[8] A. C. Kaplan and A. T. Urnal, “A probabilistic cost-based due date
+assignment model for job shops,” Int. J. Prod. Res., vol. 31, no. 12, pp.
+[9] S. T. Enns, “Job shop flow time prediction and tardiness control using
+queueing analysis,” Int. J. Prod. Res., vol. 31, no. 9, pp. 2045–2057,
+[10] T. C. E. Chen and M. C. Gupta, “Survey of scheduling research
+involving due date determining decisions,” Eur. J. Oper. Res., vol. 38,
+[11] H. Yan, S. Lou, S. Sethi, A. Gardel, and P. Deosthali, “Testing the
+robustness of two-boundary control policies in semiconductor manufacturing,” IEEE Trans. Semiconduct. Manufact., vol. 9, pp. 1–24, Feb.
+[12] M. M. Umble and M. L. Srikanth, Synchronous Manufacturing.
+[13] J. H. Dshalalow, Advances in Queueing: Theory, Methods, and Open
+[14] J. R. May and S. H. Chung, “The design of dispatching rule for the
+primary machines of wafer fabrication factories,” M.S. thesis, Inst.
+Industr. Eng., National Chiao Tung Univ., Hsinchu, Taiwan, R.O.C.,
+[15] C. H. Smith, E. D. Minor, and H. J. Wen, “Regression-based due date
+assignment rules for improved assembly shop performance,” Int. J. Prod.
+Res., vol. 33, no. 9, pp. 2375–2385, 1995.
+[16] H.-P. Wiendahl, Load-Oriented Manufacturing Control. New York:
+[17] L. F. Atherton and R. W. Atherton, Wafer Fabrication: Factory Performance and Analysis. Boston, MA: Kluwer, 1995.
+In this paper, we propose a due date assignment model
+to assign an achievable due date to an order. Also, we
+construct a hierarchical planning structure to establish flow
+time controlling parameters. In the planning structure, we
+firstly determine the proper system WIP level, mean system
+throughput and mean system flow time. Secondly, referring the
+mean flow time of each product type, the planned WIP level
+and planned daily moves for each product can be calculated.
+Finally, using each circuitry layer as the planning object,
+Shu-Hsing Chung received the Ph.D. degree in
+industrial engineering from Texas A&M University,
+She is Professor with the Industrial Engineering
+and Management Department, National Chiao-Tung
+University, Hsinchu, Taiwan, R.O.C. Her research
+interests include production planning, scheduling,
+system simulation, and production planning of IC
+manufacturing. She has published and presented research papers in the areas of flexible manufacturing
+system planning, scheduling, and cell formation.
+CHUNG et al.: DESIGN OF DUE DATE ASSIGNMENT MODEL AND THE DETERMINATION OF FLOW TIME CONTROL PARAMETERS
+Ming-Hsien Yang received the M.S. degree in industrial engineering and management from National
+Chiao-Tung University, Hsinchu, Taiwan, R.O.C.
+He is a Graduate Student with the Industrial
+Engineering and Management Department, National
+Chiao-Tung University. He is also a Lecturer of Industrial Engineering and Management Department,
+National Lien Ho College of Technology and Commerce, Taiwan. His research interests include production planning and system simulation.
+Cho-Ming Cheng received the M.S. degree in industrial engineering and management from National
+Chiao-Tung University, Hsinchu, Taiwan, R.O.C.
+His research interests include production planning

@@ -1,0 +1,712 @@
+Int. J. Production Economics 178 (2016) 109–119
+Contents lists available at ScienceDirect
+journal homepage: www.elsevier.com/locate/ijpe
+Comparison of Machine Learning methods applied to the estimation of
+manufacturing cost of jet engine components
+Jean-Loup Loyer a,n, Elsa Henriques b, Mihail Fontul b, Steve Wiseall c
+Instituto Superior Técnico, Universidade de Lisboa, Avenida Rovisco Pais, 1-1049-001, Lisbon, Portugal
+IDMEC, Instituto Superior Técnico, Universidade de Lisboa, Avenida Rovisco Pais, 1-1049-001, Lisbon, Portugal
+Rolls-Royce plc, PO Box 31, Derby DE24 8BJ, United Kingdom
+This paper compares the performance of ﬁve statistical models on the estimation of manufacturing cost
+of jet engine components, during the early design phase and using real industrial data. The analysis
+shows that recent techniques such as Gradient Boosted Trees and Support Vector Regression are up to
+two times more efﬁcient than the ones typically encountered in the literature (Multiple Linear Regression
+and Artiﬁcial Neural Networks). If goodness-of-ﬁt and predictive accuracy remain crucial to assess the
+performance of a model, other criteria such as computational cost, easiness to train or interpretability
+should be considered when selecting a statistical method for estimating the manufacturing cost of
+mechanical parts. Ideally, cost estimators should rely on several statistical models concurrently, as their
+distinct characteristics yield complementary views on the drivers of manufacturing cost. Finally, some
+engineering insights revealed by the statistical analysis are presented. They include the ranking and
+quantiﬁcation of the most important cost drivers, the approximation of the economic production function of component cost according to accumulated production volume and a different view on the traditional breakdown of manufacturing cost of some jet engine components. As a conclusion, Machine
+Learning appears to be an effective, affordable, accurate and scalable technique to cost mechanical parts
+in the early stage of the design process.
+Competitive pressure, challenging customer requirements,
+stakeholders expectations or regulations put a strain on every
+phase of the development process of industrial products. Companies must develop quality products matching demanding and
+competitive markets while ensuring a signiﬁcant level of proﬁtability over shortened timeframes. Within the product development process, the preliminary design phase is particularly crucial
+on the economics of the project as a major part of the programme
+cost is committed during this phase (Barton et al., 2001).
+Manufacturing cost is one of the critical parameters to assess
+the proﬁtability—and hence feasibility—of a novel jet engine
+programme, along with performance and weight. During the earliest phase of the design, the jet engine manufacturer evaluates
+many engine concepts concurrently according to discussions with
+customers interested in developing a novel type of aircraft. However, during such a quickly evolving iterative phase, it is usually
+E-mail address: jean-loup.loyer@tecnico.ulisboa.pt (J.-L. Loyer).
+http://dx.doi.org/10.1016/j.ijpe.2016.05.006
+0925-5273/& 2016 Published by Elsevier B.V.
+not possible to manually cost each engine concept and there is a
+need to develop a method that quickly provides a relatively accurate estimate of the expected manufacturing cost of a new engine. Given the low level of design details available at this stage,
+such a preliminary cost model can only accept a few key parameters, should they be technical (simple geometries, material
+characteristics) or economical (production volume, manufacturing
+process). In this context, a statistics-based approach is more
+adapted than detailed analytical methods, which usually require
+more data, are time-consuming and often fail at capturing nontechnical cost drivers related to commercial or strategic issues.
+The main objective of this article is to compare methods estimating the manufacturing cost of civil jet engine components
+during the earliest phase of the design process. We adopted a
+statistical approach to model the manufacturing cost, thanks to
+(1) the large amount of manufacturing-related data acquired over
+the last two decades by the manufacturer and (2) recent advances
+in computational statistics. We notably intend to complement the
+existing literature on early manufacturing cost estimation by using
+some of the most recent advanced statistical methods from the
+ﬁelds of Data Mining and Machine Learning, namely Generalized
+J.-L. Loyer et al. / Int. J. Production Economics 178 (2016) 109–119
+the goodness-of-ﬁt of the model (ratio of the residual
+sum of square SSRy over the total sum of square SSTy of y)
+number of observations (i.e. data points) in the dataset
+number of input variables (aka covariates, predictors,
+n × 1 cost vector in the model, to be explained by the
+n × p matrix of predictors of cost in the dataset
+ith observation of the jth predictor in the dataset
+ith statistical estimation of the jth predictor in the
+ϵ ∼ N (0, σ 2) model residuals (centred normal distribution with
+Additive Models (GAMs), Support Vector Regression (SVR) and
+Gradient Boosted Trees (GBTs). The performance of these modern
+statistical cost models will be compared with the more usual
+Multiple Linear Regression and Artiﬁcial Neural Networks in a case
+study involving actual manufacturing costs of large civil jet engine
+parts. The statistical analysis also yielded by-products in the form
+of engineering insights about the drivers of manufacturing cost
+(relative inﬂuence of each predictor, impact of the production
+Section 2 of this paper will draw a short literature review of
+statistical methods most often used in cost modelling and their
+applications to various ﬁelds of engineering. Section 3 details the
+case study—namely compressor aerofoils of large civil jet engines
+—and the structure of the dataset. Section 4 is the core of the
+paper, as it presents the characteristics and related engineering
+insights of the ﬁve statistical models of manufacturing cost:
+Multiple Linear Regression, Generalized Additive Models, Artiﬁcial
+Neural Networks, Support Vector Regression and Gradient Boosted
+Trees. In particular, they are compared through their performance
+and interpretability. Section 5 discusses the results obtained in
+Section 4 before new perspectives and future work are presented
+accumulated quantity of parts manufactured
+jth level of machinability index of the aerofoil's material (categorical variable)
+kth level of aerofoil category (categorical variable)
+to a “bottom-up” approach based on sound engineering and economic reasoning; the total cost is usually computed as a sum of
+terms calculated as rates (labour, material, machine-related)
+multiplied by the time or effort required to perform manufacturing tasks. The statistical models presented in this article belong to
+the family of parametric models, although the simplest of them
+share elements with analogous methods and the most sophisticated ones can rival in complexity with analytical methods.
+Statistical modelling has been used for decades to estimate cost
+at various stages of product lifecycle. Parametric models based on
+linear regression were the ﬁrst to be developed (Cochran, 1976)
+and remained very popular ever since amongst cost estimators
+(Mason et al., 1994). As the performance of computers dramatically increased and more computationally intensive methods
+emerged, more complex techniques such as Artiﬁcial Neural Networks (ANNs) started to be applied to cost engineering as well,
+allowing the consideration of nonlinear CERs. ANNs became popular in the academic literature (de la Garza and Rouhana, 1995),
+notably to establish a benchmark with older regression methods
+(Smith and Mason, 1997; Stockton et al., 2013). Meanwhile,
+whereas dozens of new modern statistical methods were developed by the Data Mining and Machine Learning community
+(Hastie et al., 2011) and successfully adopted by other ﬁelds such
+as ﬁnance, quantitative marketing, biology and medicine, the cost
+engineering community continued to rely mainly on linear regression techniques and ANNs.
+2.1. Deﬁnition and short history of statistical modelling applied to
+2.2. Applications of statistical methods to cost estimation
+Cost estimation methods are usually divided into three major
+categories: analogous, parametric and analytical methods (Asiedu
+and Besant, 2000; Niazi et al., 2005). Analogous costing consists in
+scaling down or up the cost of the most similar known item according to a relevant key design feature (e.g. length, surface, volume, part complexity, etc.). Parametric costing relates the cost of a
+part or product to a set of simple design features (simple geometries, material type, performance, weight, production volume,
+etc.) via the so-called Cost Estimation Relationships (CERs) obtained by regression techniques (Farineau et al., 2001). Analytical
+cost methods provide a detailed decomposition of costs, according
+Statistical cost models can be applied at several stages of the
+design process and become more detailed and accurate as the
+design is reﬁned over time (Corbett and Crookall, 1986). For example, Fagade and Kazmer (2000) developed a parametric cost
+model at the earliest design phase of injection mouldings while
+Castagne et al. (2008) devised a hierarchical regression-based
+method for estimating manufacturing cost of aircraft fuselage
+Statistics-based estimations of costs have been applied to many
+sectors and products at the system, module or part levels. Trappey
+et al. (2013) developed hierarchical-based cost learning methods
+J.-L. Loyer et al. / Int. J. Production Economics 178 (2016) 109–119
+for the wind power sector. In the electronics industry, Chou and
+Tsai (2012) applied models inspired from artiﬁcial intelligence to
+cost thin-ﬁlm transistor liquid-crystal display. Hegazy and Ayed
+(1998) and Zhang and Fuh (1998) used neural network models for
+an early parametric estimation of cost of highway projects and
+Cost models have also been extensively applied to mechanical
+and aerospace engineering, which are the two topics of interest for
+this article. Mechanical engineering-based-products have proved
+to be a particularly productive domain of application of manufacturing cost models, for which Layer et al. (2002) and Xu et al.
+(2012) present a recent overview. Other instances include the
+work of Ben-Arieh (2000), who proposed a hybrid method based
+on analytical and parametric approaches for estimating the manufacturing costs of rotational parts. Cavalieri et al. (2004) compared Multiple Linear Regression to Artiﬁcial Neural Network on
+automotive brakes, followed by Stockton et al. (2013) on automated spray painting and turning processes. Farineau et al. (2001)
+developed parametric cost methods to mass-produced components of gear boxes manufactured by various machining processes.
+Regarding manufacturing cost models applied to aerospace engineering, Langmaak et al. (2013) combined a parametric cost
+model with an activity-based cost model of bladed discs for large
+civil jet engines. de Cos et al. (2008) compared ANNs and local
+polynomial techniques to estimate the cost of ring-shaped parts of
+aerospace turbines. Finally, Deng and Yeh (2011) used least squares
+support vector machines to estimate the manufacturing cost of
+Thus, if many algorithms and statistical methods have already
+been applied in cost engineering, we intend to complement the
+existing literature by adding more recent methods like Generalized Additive Models, Support Vector Regression or Gradient
+Boosted Trees. We will also systematically compare not only their
+performance but also the type of engineering insights they might
+3. Case study and overview of the dataset
+colder front end of the IPC, (2) high performance steel or titanium
+for a few blades in the middle stages and (3) nickel or titanium for
+the hotter back end of the HPC (Rolls-Royce, 2015). They are
+manufactured according to two consecutive processes: (1) the
+basic aerofoil shape is obtained by hot forging of cylindrical rods of
+well-speciﬁed diameters and materials and (2) a set of machining
+steps to deburr and ﬁnish the forged aerofoil so as to obtain the
+The compressor blades constitute a relevant case study as there
+are many such components in jet engines: thus, many data points
+are available, which is a key requirement for the accuracy of statistical models. Moreover, as the design of these parts only evolves
+marginally from engine to engine, they share the same elementary
+characteristics (basic geometrical features, alloy type, manufacturing processes), meaning that they can enter a single statistical model.
+Although the problem analysed in this case study may seem
+relatively simple at ﬁrst sight, modelling it accurately and realistically is in fact challenging. First, detailed engineering-based
+analytical models will generate a reasonably satisfactory solution
+on technical and economic drivers of manufacturing costs (effects
+of parts' geometry, production volume, cost rates of material or
+manufacturing process) but will often fail at capturing commercial, operational and strategic issues embedded in ﬁnal manufacturing cost (negotiations with suppliers over discount and future orders, public subsidies to production activities, order sizes,
+cost reduction activities, evolution of raw material cost rates, etc.).
+Second, even though statistical modelling based on actual costs is
+more likely to capture such commercial aspects, it will have to deal
+not only with data of imperfect quality containing high variance
+but also, with three distinct types of correlation structures within
+1. Within-subject correlation of some predictors, such as relationships between geometrical dimensions due to design
+rules (e.g. span and chord of a given aerofoil)
+2. Cross-subject, within-engine correlation (e.g. relationships between geometries of aerofoils in adjacent stages)
+3. Cross-subject, cross-engine correlation (e.g. production volumes
+of previous and new versions of similar parts)
+The statistical models we selected to estimate the manufacturing costs in the early design stage will be validated on a
+family of components found in large civil jet engines. The dataset
+contains 254 data points, 6 covariates and manufacturing cost for
+the year of 2012 as the output variable of the model to be
+Such effects cannot be accounted for simultaneously by the
+traditional statistical methods. More recent computation-intensive
+Data Mining methods might therefore be more suited to take into
+account such complex correlation structures and nonlinearities.
+The research focuses on intermediate-pressure (IPC) and highpressure compressor (HPC) disc-mounted blades of ﬁve large civil
+jet engines of one of the top ﬁve manufacturers worldwide. IPC
+and HPC are made of 6–8 successive stages constituted of discs and
+blades. Located along the engine gas path, the blades are subject to
+very different physical constraints and thus are made of alloys
+containing different metals: (1) titanium for rotating blades in the
+In order to respect conﬁdentiality requirements from the industrial partner, only a simple description of the dataset structure
+is provided. Overall, the dataset can be considered of intermediate
+level in terms of complexity. It contains 254 observations (i.e.
+unique compressor aerofoils identiﬁed by a unique part number),
+divided unevenly among 5 different types of large engines and
+2 part categories: IPC blades and HPC blades (Table 2). The sample
+Fig. 1. Example of a compressor blade: from a cylindrical rod of raw materials to ﬁnished part (left to right).
+J.-L. Loyer et al. / Int. J. Production Economics 178 (2016) 109–119
+Geometrical and material characteristics of the compressor blades, by part category
+Repartition of the blades by part category and engine type.
+the analysis, along with associated engineering insights. At the end
+of the section, the relative performance of the statistical models
+4.1. Characteristics and results of the statistical models
+is thus not perfectly balanced, which will have only a marginal
+negative effect on the signiﬁcance of the models' results. There are
+indeed at least 118 observations per part category, a sufﬁcient
+number for statistical models including only 6 predictors. There
+are more than 27 observations per engine, also a sufﬁcient number
+of observations as the cross-engine correlation is of lower importance. The marginal effect of sample imbalance has been further conﬁrmed by detailed descriptive analysis and visualizations.
+The dataset contains 6 primary covariates: the ﬁrst one is the
+part category, two are related to geometry (span, chord), two to
+material properties (machinability, cost rate) and one to the economics of the product (accumulated production volume). The
+geometrical dimensions are expected to inﬂuence manufacturing
+cost through (1) the amount of raw material necessary to make the
+part and (2) by determining the dimension of the equipment and
+tools involved in the manufacturing processes. The material cost
+rate inﬂuences the cost of raw materials from suppliers while the
+machinability will affect the amount of tools, energy, consumables,
+labour and time spent during machining operations (Ezugwu et al.,
+2003; Kalpakjian and Schmid, 2008). Finally, a higher accumulated
+production volume will reduce the inﬂuence of the ﬁxed costs
+(land, building, equipment and tooling costs) and lead to cost reduction initiatives, decreasing the total manufacturing cost per part.
+From this set of 6 primary variables, it might be possible to
+generate a high number of secondary variables, deﬁned as combinations of primary variables, to be used as inputs in the statistical models. However, we will only focus on the 6 primary variables, so as to simplify the interpretability of the models. In addition, detailed exploratory analyses not presented in the article
+indicate that the interactions of covariates do not have an important impact on the manufacturing cost. For instance, the geometrical and material-related variables are cost drivers of prime
+importance. They differ from one part category to the other but
+much less from engine to engine (Table 1 1). This fact indicates that
+it might be necessary to distinguish several submodels by part
+category, or directly consider the part category as an input variable. We opted for the second solution, given the relatively small
+4. Results and comparison of the statistical models
+This section covers the main characteristics, including elementary mathematical aspects, of each statistical method used in
+Meaning of the abbreviations in Table 1: Ti, titanium alloy; Fe, special corrosion resistant steel; NiCo, nickel–cobalt alloy.
+As previously mentioned, the main purpose of this article is to
+compare ﬁve statistical models applied to the estimation of manufacturing cost of mechanical components. Multiple Linear Regression and Artiﬁcial Neural Networks are the two methods most
+often encountered in the literature. Nonetheless, their performance
+appears lower than more recent statistical methods such as Generalized Additive Models, Support Vector Regression and Gradient
+Boosted Trees. This Section 4.1 will review the relative characteristics of the models and present some of the engineering insights
+obtained from each of them. The Multiple Linear Regression model
+is covered in more details in order to present the general methodology followed to identify the optimal set of predictors; this
+methodology is common to each one of the 5 statistical models.
+Multiple Linear Regression is one of the simplest statistical
+models, in which the output variable is the sum of linear functions
+of the input variables (Hastie et al., 2011). In our case study, the
+output variable is the manufacturing cost, explained by a number
+of predictors that can be either continuous (geometrical dimensions, production volume) or categorical variables (part category,
+A succession of Multiple Linear Models has been ﬁtted by
+progressively eliminating or adding input variables, both manually
+and automatically (backward, forward and bi-directional stepwise
+selection). From the set of all potential models, the best covariate
+subset has been identiﬁed by currently used econometric criteria:
+F-tests, t-tests and p-values2 related to each predictor and then to
+the whole model, coefﬁcient of determination R2, visual diagnosis
+of model's residuals, Mallow's Cp statistics, Akaike Information
+Criterion (AIC) and Bayesian Information Criterion (BIC) (Wasserman, 2006). For all these criteria, the MLR model with the best ﬁt
+with the data involves only 4 covariates—part span, accumulated
+production volume, material machinability and the part category
+The goodness-of-ﬁt of the model is mediocre (R2 ¼0.62) while
+the prediction error is average (MAPE ¼18.1%, NRMSE ¼ 16.0%).
+Such values are satisfactory for a ﬁrst approach of a complex industrial dataset but can surely be improved. To respect industrial
+conﬁdentiality, the coefﬁcients βi and the effects of Mj and Pk, the
+related statistical tests and signiﬁcance levels are not provided in
+this paper. However, some engineering insights can be derived
+The p-value for the statistical tests is taken at the usual risk level
+J.-L. Loyer et al. / Int. J. Production Economics 178 (2016) 109–119
+ Multiple scatterplots showed that the span and chord are suf-
+ﬁciently correlated (coefﬁcient of correlation 0.94) to be considered as redundant input variables, hence the presence of
+span as the only geometry-related input variable in the model.
+As a consequence, the geometrical volume of the part is not a
+The cost rate of the material is not a signiﬁcant predictor of
+manufacturing cost, a result which is at odds with the theory of
+production economics. In fact, it appears that materials account
+only for a small percentage of the total manufacturing cost,
+which greatly varies from part to part, according to a proﬁle
+closer to an exponential function than to a linear function
+(Fig. 2). In fact, the bigger the part, the higher the percentage of
+material cost in the total manufacturing cost. The percentage
+due to material cost is especially low for small parts, regardless
+of very high material cost rates found in HPC blades; it can be
+hypothesized that the cost of the manufacturing processes
+becomes predominant for such small and complex parts.
+Although material cost rate or total material cost (computed as
+the material cost rate multiplied by the part's volume) are not
+direct inputs to the model, they appear indirectly via the predictor P (i.e. the part category, namely HPC or IPC blade). The
+part category indeed implicitly “embeds” categorical variables
+such as the alloy and the material family, variables to which it is
+strongly dependent according to χ2 tests of independence.
+Despite its merits, the Multiple Linear Regression model fails at
+capturing the full complexity of the dataset, notably the nonlinearities present in some of the input variables. Moreover, the
+hypothesis of additivity of individual input variables behind MLR
+limits the number of potential interactions between variables in
+the model. As a consequence, it appears necessary to use more
+sophisticated statistical methods, especially ones taking into account nonlinearities.
+4.1.2. Generalized additive models (GAMs)
+Generalized Additive Models represent an extension of the
+Multiple Linear Model, but they model the output variable as a
+sum of non-linear transformations of the input variables rather
+than a sum of linear terms. Thus, if an MLR model is to be written
+E (Y ) = β0 + ∑ j = 1 βj × Xj , its GAM equivalent will be expressed as
+g (E (Y )) = β0 + ∑j = 1 f j (X . , X .) where g ( . ) is a smooth monotonic
+“link function” (e.g. logarithm) and the f j ( . ) are complex nonlinear
+functions—also called “smooth terms”—accepting up to two
+predictors X . as arguments. As such, GAMs combine the simplicity
+of linear regression with the ﬂexibility of nonlinear models (Simon, 2006). They appear particularly relevant to model manufacturing cost, which is often expressed as the sum of monotonic
+nonlinear functions: raw material cost as the product of geometries by material cost rate, equipment cost as function of geometrical dimensions and production volume…
+According to their characteristics, GAMs belong to the family of
+nonparametric models, in the sense that the smooth terms f j ( . )
+are highly nonlinear functions that are not pertaining to any predetermined family of functions (e.g. trigonometric, polynomials,
+Gaussian, etc.). The smooth terms are usually expressed as a superposition of functions extracted from a common basis of functions: local polynomials, splines, Gaussian, trigonometric functions, wavelets, etc. For our case study, we selected a basis of
+spline functions s ( . )—a particular type of piecewise polynomials
+known for their stability in the margins of the function's support
+(Wasserman, 2006). After model ﬁtting and selection of relevant
+predictors according to the criteria already retained for MLR, the
+optimal Generalized Additive Model to predict the cost of compressor aerofoils can be written:
+Thus, the best Generalized Additive Model is a semiparametric
+model made of a linear term β0 + ∑j β1, j × Mj + ∑k β2, k × Pk and a
+nonlinear term s1, k (S, C ) + s2 (Q ). The goodness of ﬁt of the model
+improves by 30% compared to the MLR with R2 ¼0.82 while the
+predictive accuracy of the model increases by 20–25% with
+MAPE¼13.0% and NRMSE = 12.2% . The coefﬁcients of the linear
+term of the semiparametric model are coherent with the results
+from the Multiple Linear Model and show the strong inﬂuence of
+machinability on manufacturing cost. The 5 smooth terms are all
+very signiﬁcant and exhibit noticeable shapes:
+ the 2 bivariate smooth term s1, k (S, C ) are nonlinear and unique
+to each of the kth part category (IPC blades and HPC blades).
+Their shapes are very close to bilinear functions of span and
+chord, albeit to a lower extent for IPC blades whose geometries
+vary too greatly from one compressor stage to another (Table 1)
+the univariate smooth term s2 (Q ) is expressed as a spline
+function of the accumulated production volume and is
+common to every part category. It can be approximated by
+a function pertaining to the logarithm family, namely
+Fig. 2. Boxplot of material cost as percentage of total manufacturing cost for each compressor blade.
+J.-L. Loyer et al. / Int. J. Production Economics 178 (2016) 109–119
+s2 (Q ) = α − β × log (Q + γ ) where α ≃ 90 can be considered as
+the cost of set-up and equipment preparations, β ≃ 10 a scaling,
+damping or “amortization” factor related to the accumulated
+production volume and γ ≃ 1000 a constant corresponding to
+the initial running cost of equipment (Fig. 3 3). This curve's
+shape is similar to many learning rates encountered in aerospace manufacturing (productivity gains, cost reduction initiatives, etc.; Badiru, 2012; Yelle, 1979; Gallant, 1968; Nadler and
+Artiﬁcial Neural Networks are complex nonlinear techniques
+that generate new features as linear combinations of the initial
+predictors and model the output variable as a nonlinear function
+of these newly-generated features. The building block of ANNs are
+so-called “perceptrons” expressed as yp = fp ( ∑i ∈ inputs wp, i × xp, i )
+where yp is the output variable, the xp, i are the input variables with
+associated weights wp, i and fp is a so-called “activation function”—
+Fig. 3. Smooth term s2 (Q ) representing the impact of accumulated production
+the sigmoid function σs (x ) = 1 +1e−sx is often used in practice
+(Rosenblatt, 1962). ANNs are structured as a “net” since the output
+of a perceptron becomes the input of another perceptron located
+downstream in the network; such intermediate perceptrons form
+so-called “layers” of hidden perceptrons. A complete neural
+network model with ﬁnal output Y, p predictors xi ∈[1, p], the sigmoid ss as activation function and M hidden perceptrons
+Zk ∈[1, M ] = σs (wk,0 + ∑i = 1 wk, i × xi ), can thus be written as
+Y = β0 + ∑k = 1 βk × Zk which is a highly nonlinear function. The
+M (p + 2) + 1 unknown parameters of the neural network model
+are the M (p + 1) weights wk, i and the M + 1 coefﬁcients βk. After a
+random initialization of the algorithm, the weights are estimated
+on the training dataset. A parameter λ called “learning rate” or
+“decay” controls the rate of convergence of the algorithm, from
+iteration to iteration. Goodness-of-ﬁt is measured by the sum-ofsquare error SSRy, usually minimized by a gradient descent
+method, called back-propagation (Hastie et al., 2011).
+After scaling the initial dataset and testing many combinations
+of predictors, the optimal ANN consists in a function of span,
+chord, accumulated production volume, material cost of the part
+(calculated as the material cost rate multiplied by the volume of
+the part envelope) and the interaction (i.e. product) of span and
+chord. The optimal ANN has a single hidden layer made of 20
+hidden perceptrons and a decay parameter λ ¼0.1. Its mathematical expression is not provided for the sake of conciseness and
+because it does not contribute to a better understanding of the
+model, contrary to a visual representation of its structure (Fig. 4).
+The goodness-of-ﬁt is signiﬁcantly higher than previous methods
+with R2 ¼0.88 while the prediction accuracy is good with
+The performance of ANNs applied to our manufacturing cost
+dataset appears acceptable; yet, the improvement in performance
+compared to MLR and GAM is lower to what is usually found in the
+Machine Learning literature. Moreover, it is impossible to infer
+engineering insights from the results of the model. The mediocre
+performance can be explained by the presence of different categories of parts in the dataset, which are particularly difﬁcult to
+take into account in the ANN as categorical variables. Nonetheless,
+neural networks have one strong advantage: they are more reliable at predicting the most extreme values of manufacturing cost
+Fig. 4. Structure of the optimal neural network (20 hidden perceptrons and decay
+in our dataset. For instance, the cost of bigger, costlier parts such
+as ﬁrst stage IPC blades is better predicted by neural networks.
+Support Vector Machines (SVM) became popular two decades
+ago after the research on statistical learning theory (Vapnik, 1995).
+It is a nonlinear and non-parametric method based on transforming, via a complex transform function ϕ, the initial—often
+non separable—dataset into a new space of much higher—and
+potentially inﬁnite-dimension. In this new space, the likelihood of
+having a separable dataset is much higher and it becomes possible
+to obtain a linear decision boundary, in lieu of a nonlinear decision
+boundary in the initial space. We used a particular type of SVM in
+a regression setting called “ ϵ − SVR ” which can be formulated
+mathematically as an optimization problem under constraints
+The accumulated production volume Q (in units) is present on the horizontal
+axis while the impact on cost is located in the vertical axis (values not displayed to
+respect conﬁdentiality). The black line corresponds to the average impact of Q on
+cost while the shaded area corresponds to the 95% conﬁdence interval. The shaded
+area increases with Q because the number of observations decreases when Q increases, leading to a lower conﬁdence level in the estimates.
+where TC is the tuning cost upper bound, ϵ is a regularization
+parameter called the “insensitive-loss function”, Q is an l × l positive
+K (xi , xj ) = ϕ (xi )T ϕ (xj ) is the Radial Basis Function kernel (RBF)
+Support Vector Machines are notoriously difﬁcult to train, notably because they require normalized inputs and challenging ﬁne
+tuning of several parameters. The ﬁrst step is the identiﬁcation of
+the optimal subset of covariates amongst the full set of input
+variables, via both manual and automatic stepwise procedures; it
+J.-L. Loyer et al. / Int. J. Production Economics 178 (2016) 109–119
+was found to comprise the span S, the chord C, the accumulated
+quantity produced Q and the material cost rate CR (year 2012). The
+second step was a search over a grid of hyperparameters (tuning
+cost TC and kernel parameter γ), with optimal values being
+Support Vector Regression does not provide descriptive insights into the results of the model. Indeed, the transformation of
+the initial input space to a high-dimensional space via the kernel
+leads to a change in the structure of the dataset and a loss of direct
+relationship between the output variables and the covariates. As
+such, it can be considered a “black-box” model similar to neural
+networks. Nonetheless, the goodness-of-ﬁt improves by 5.7%
+compared to neural networks with R2 ¼ 0.93. The predictive accuracy increased by approximately 20% with MAPE¼ 9.1% and
+NRMSE ¼9.7%. Moreover, SVR takes 25% and 40% less time than
+GAMs and ANNs respectively to be trained, with an average
+number T of trees to be weighted, (2) a shrinkage coefﬁcient
+λ—equivalent to a learning rate or decay in ANNs—controlling the
+slope of the gradient descent used to compute the parameters and
+(3) the number of interactions between the predictors that determines the “depth” and level of complexity of the trees.
+The procedure of optimal subset of features led span S, chord C,
+accumulated production volume Q, machinability M and the part
+category P. The model can therefore be expressed as:
+The presence of M and P as categorical input variables should
+be emphasized, as it was not featured in most of the previous
+statistical models. Indeed, Machine Learning models derived from
+decision trees can naturally incorporate any kind of covariates,
+including numeric, discrete and categorical ones. After identifying
+the optimal subset of predictors, the next step consisted in estimating the best hyperparameters, namely 1000 simulated trees, a
+high shrinkage parameter of λ ¼0.1 and interactions between up to
+If individual regression trees are easy to interpret visually, it is
+not the case for a combination of trees: other criteria such as
+variable inﬂuence and partial dependence plots are useful to understand the individual impact of each predictor on the output
+variable (Fig. 5). The aerofoil span has the strongest inﬂuence
+(35.9%), followed by the accumulated production quantity (27.0%),
+the machinability (20.0%), the chord (16.6%) while the inﬂuence of
+the part category appears negligible (0.4%). The low inﬂuence of
+the part category might be explained by its direct dependence
+towards span, machinability and chord, as well as interactions
+Gradient Boosted Trees are built on one of the most powerful
+concepts introduced in statistical modelling in the last decades,
+called “boosting”, that consists in combining many “weak” models
+into a more meaningful “aggregated model” (Hastie et al., 2011). A
+Gradient Boosted Tree thus combines T regression trees, whose
+importances are weighted according to their individual prediction
+accuracy. The predicted value of manufacturing cost Y can be expressed as a weighted sum of single regression decision trees.
+GBTs partly derive their names from the estimation of the individual regression trees' parameters, which are obtained by a
+numerical optimization algorithm called “stochastic gradient
+boosting”. There are three tuning parameters in the model: (1) the
+Fig. 5. Average partial dependence (blue curve) of manufacturing cost on 4 out of the 5 predictors.
+J.-L. Loyer et al. / Int. J. Production Economics 178 (2016) 109–119
+with some of the other four predictors. The inﬂuence of each input
+variable on the total manufacturing cost is further quantiﬁed by
+ the accumulated production volume follows a production
+function similar to the logarithm-like function already encountered in Generalized Additive Models, with a declining cost
+up to circa 30000 units produced followed by a plateau, corresponding to the marginal production cost
+span has a strongly nonlinear inﬂuence similar to a square
+function. It corresponds to the divide between bigger, costly
+front IPC blades and short blades in rear HPC stages made of
+expensive nickel alloys materials; in between are smaller titanium IPC and HPC blades
+the chord has a smoother quasi-linear effect, except for a
+“bump” around 60 mm corresponding to a few bigger, costlier
+machinability exhibits a constant or slightly increasing linear
+effect except for materials with a high machinability index
+(above 16 corresponding to titanium and nickel alloys more
+costly to machine), which adds an extra partial unit cost close to
+50% compared to metals with lower machinability ratings
+Regarding descriptive and predictive performance, the goodness-of-ﬁt improves by 5% compared to the second best model
+(SVR) with R2 ¼0.96 and a correlation of 0.95 between predicted
+and actual values. The predictive accuracy increases by 25–30%
+compared to SVR, with MAPE¼6.4% and NRMSE ¼ 6.9%. These ﬁgures show a signiﬁcant improvement of over the second best
+4.2. Comparison of the performance of statistical methods
+According to the Machine Learning literature, the performance
+of statistical models can be assessed by their goodness-of-ﬁt and
+by their predictive accuracy (Greene, 2012). The goodness-of-ﬁt
+assesses the extent to which data match the actual values (Fig. 6).
+It is quantiﬁed by the usual coefﬁcient of determination R2, that
+measures the proportion of the total variation in the cost Y that is
+explained by the variation of the predictors Xi ∈[1, p] of the cost
+The predictive accuracy on the other hand is the ability of the
+model to generalize to new data points, not used during the
+training phase of the model. As such, it might mitigate a too-high
+goodness-of-ﬁt that could be due to overﬁtting. Predictive accuracy is quantiﬁed by two metrics: the Mean Absolute Prediction
+used to evaluate the error of the trained model. The MAPE quantiﬁes the total error of prediction by averaging percentages of
+absolute errors compared to initial values while the NRMSE
+computes a normalization of the squared errors. As such, the
+NRMSE is less robust to variations while reducing at the same time
+the inﬂuence of very large deviations in the prediction.
+Following the theory of Machine Learning, the predictive performance of a statistical model must be assessed on data points
+that have not participated to the estimation of the model's parameters (Hastie et al., 2011). This approach corresponds to the real
+situation encountered by cost engineers when they have to estimate the cost of a new component. Hence, the MAPE and the
+NRMSE have been computed using the technique of 10-fold crossvalidation. First, the full initial dataset with the 254 observations is
+randomly split into 10 subdatasets of equal sizes. Then, the
+training is performed 10 times on 9 partitions while the single
+partition left is used to test the predictive power of the ﬁtted
+model. The values of MAPE and NRMSE are averaged to obtain the
+predictive accuracy of the model (Kuhn, 2008). Moreover, in order
+to mitigate the instability due to the random dataset splitting, we
+simulated 100 model ﬁts with 10-fold cross-validation and computed the associated distributions of R2, MAPE and NRMSE (Fig. 7).
+Computing time for each model has also been added, as low
+computing resources might be a requirement for a future corporate use, such as deployment of the model at the whole engine
+level or the inclusion of cost into a design optimization loop.4
+Thanks to these three criteria, the performance of the models
+ Multiple Linear Models appear as very robust—the distributions
+Fig. 6. Comparison of the goodness-of-ﬁt of the statistical models on the full
+of R2 and MAPE are thin—but the ﬁt with the data is average
+and its prediction accuracy is the lowest.
+By capturing nonlinearities via its smooth terms, Generalized
+Additive Models do slightly better ﬁt (þ 30% in R2) and predict
+the data (þ20-30% in accuracy) at the cost of decreased robustness (more dispersed distribution).
+Artiﬁcial Neural Networks present an interesting case. They
+offer a good ﬁt with the data and a good predictive accuracy,
+around 40% and 10% better than MLR and GAMs respectively,
+but not very robust, with bimodal distributions corresponding
+to the two part types (i.e. IPC and HPC blades). Moreover, ANNs
+handle particularly well the extreme values in the dataset
+(Fig. 6) while predicting less accurately the cost of the majority
+of the observations with “average” characteristics; in this regard,
+they nicely complement the other statistical methods. However,
+of all the models, ANNs require the largest amount of computing resources.
+Support Vector Regression presents a signiﬁcant improvement
+over MLR and ANNs, both in goodness-of-ﬁt and prediction
+accuracy (respectively 50% and 5% higher R2 and an average
+improvement of 45% and 15% in MAPE and NRMSE). For twice
+less computing resources, they offer a very good ﬁt with extreme values (more costly IPC blades), comparable to ANNs. The
+distribution of the MAPE is wider, meaning that SVR is more
+sensitive to variations between the training and test sets.
+Gradient Boosted Trees present a dramatic improvement over
+Multiple Linear Regression and Support Vector Regression, in
+prediction accuracy (respectively þ 60% and þ30% in MAPE and
+NRMSE) and goodness-of-ﬁt (þ 55% and þ3% respectively). The
+goodness-of-ﬁt is particularly robust, contrary to the MAPE that
+The computations have been done on an Intel Core i7-4500 at 1.8 GHz with
+16GB of RAM, with Ubuntu 12 64-bit as operating system and R as programming
+J.-L. Loyer et al. / Int. J. Production Economics 178 (2016) 109–119
+Fig. 7. Comparison of models performance via goodness-of-ﬁt, predictive accuracy and computational time.
+is more sensitive to differences during the random split of the
+full initial dataset. The computing resources are also two to
+three times lower than SVR and neural networks (yet still much
+higher than resources needed to train Multiple Linear
+The distributions in Fig. 7, summarized in Table 4, show the
+gradual increase in performance of the models, as their sophistication grows. Moreover, except computing time, all metrics evolve
+in the same direction, albeit some differences in magnitude.
+5.1. Actions to improve the performance of the statistical models
+A very sophisticated computational-intensive method such as
+Gradient Boosted Trees explains “only” 96% of the variability encountered in the dataset and predicts new values of manufacturing cost with an average precision of 6.4% (MAPE). Such a discrepancy between actual and predicted values can be explained by
+ First of all, apart from the six predictors included in the analysis,
+there are probably many other predictors relevant to explain
+the manufacturing cost: cost rates of manufacturing processes,
+time to produce the parts, differences in labour rates, commercial discounts, etc. In addition, adding more years to the
+model will increase the size of the dataset and would probably
+be beneﬁcial, especially towards economics-related predictors
+like accumulated production volume and time ﬂuctuations of
+Second, some predictors might not have been measured with
+the adequate level of quality. For instance, the accumulated
+production volume has been indirectly computed by the authors from the total number of engine produced until 2012,
+neglecting important economic aspects like production for the
+aftermarket or reuse of similar production equipment from
+Third, more difﬁcult-to-measure effects such as cost reduction
+initiatives done during an engine programme, technical progress and “learning curve” between the ﬁve jet engines, all belonging to the same family, might have to be modelled in order
+to obtain a more relevant picture of manufacturing cost over
+As a consequence, it might be possible to increase further the
+performance of the statistical models by adding more predictors
+and observations to the dataset, improving the quality of the data
+and considering more subtle inﬂuences on manufacturing cost.
+5.2. Comparison of the general characteristics of the statistical
+Regarding the practical use of statistical approaches to costing,
+we advise cost estimators to rely on several techniques in order to
+obtain complementary engineering insights; indeed, the goodness-of-ﬁt and the predictive power are only a few of all the relevant aspects of a cost model (Table 3). First of all, ANNs should be
+avoided as they are complex to ﬁt and interpret while generating
+J.-L. Loyer et al. / Int. J. Production Economics 178 (2016) 109–119
+Comparison of the general characteristics of the models.
+Comparison of the performance of the manufacturing cost models.
+unstable results. Multiple Linear Regression can be viewed as an
+imprecise yet robust method whose main interest lies in its interpretability, thanks to regression coefﬁcients and conﬁdence
+intervals that help quantify the relationship between predictors
+and the manufacturing cost. MLR are also extremely fast to compute, by at least two order of magnitudes compared to the other
+techniques. GAMs can be classiﬁed in the same (broad) category of
+models as MLR (i.e. additive models), over which they provide a
+reasonable improvement, thanks to their ability to capture more
+nonlinearities in the predictors. Support Vector Regression and
+GBTs belong to a distinct family of nonlinearity-prone statistical
+models that provide a substantial improvement over traditional
+statistical techniques, should it be in terms of goodness-of-ﬁt or
+prediction accuracy. This added accuracy comes at the expense of
+Complementarity between the models indicates that ensemble
+techniques might be investigated to combine the results of several
+models in the most efﬁcient way. The results obtained on manufacturing cost correspond to the statistical theory on comparative
+model performance. Last but not least, our results on a particular
+case study illustrate one of the epistemological debates about Data
+Mining and Machine Learning: is it possible to predict a phenomenon without understanding its physical foundations or underlying logic (Saporta, 2011)? If our analysis seems to point towards a positive answer, cost estimators should nonetheless rely
+on physics-based models as well as simple statistical models such
+as MLR to understand the main drivers of manufacturing cost.
+On the methodological aspect, the case study established that
+the statistical models usually encountered in the literature related
+to statistical cost modelling—namely MLR and ANNs—are superseded in terms of performance by more recent techniques from
+the ﬁelds of Data Mining and Machine Learning, notably Support
+Vector Regression and Gradient Boosted Trees. It also appears that
+the various statistical techniques yield complementary perspectives on the cost data and should thus be used concurrently.
+Moreover, ensemble methods may be a worthwhile solution to
+optimally average the cost estimates from several models. The
+analysis also generated valuable engineering insights. First of all,
+MLR showed that the cost of material accounts for a small portion
+of total manufacturing cost. Moreover, the bigger the part, the
+higher the cost of material represents as a percentage of total
+manufacturing cost. Semiparametric GAM and assessment of
+variable inﬂuence in GBTs demonstrated that the manufacturing
+cost seems to follow a logarithm function α − β log (Q + γ ) of the
+accumulated production volume with α being related to the set-up
+and equipment preparation operations, β as a scaling or damping
+effect related to production volume and γ related to the initial
+running cost of the equipment. Finally, Gradient Boosted Trees
+indicate that the accumulated production volume exerts the biggest inﬂuence on manufacturing cost, followed by span, machinability, chord and ﬁnally the part category.
+Some perspectives and future work can be identiﬁed after this
+initial investigation. First of all, it might be worthwhile to apply
+the same statistical analyses to other jet engine parts, or even to
+the whole engine, to verify whether the conclusions remain valid
+in other situations. It might also be particularly interesting to
+compare the results of the statistical models to the manufacturing
+costs estimated by cost engineers manually, based on their experience and different methods (analytical and analogous cost
+models). On the medium term, the cost estimations could be part
+of a decision system used by production engineers and programme managers to identify outlier components in term of unit
+cost and launch cost reduction initiatives; a cost prediction system
+could also be used by supply chain experts to identify the best
+price amongst manufacturers. On the longer term, the statistical
+estimation of manufacturing cost could be generalized during the
+design phase, embedded in CAD/CAM tools and eventually become
+an optimization parameter used during parts' and products' design
+by the mechanical engineers. It would be a further step towards an
+integration to more holistic approach of aeroengine lifecycle such
+as Integrated Computational Materials Engineering (ICME).
+Asiedu, Y., Besant, R., 2000. Simulation-based cost estimation under economic
+uncertainty using kernel estimators. Int. J. Prod. Res. 38, 2023–2035. http://dx.
+Badiru, A.B., 2012. Half-life learning curves in the defense acquisition life cycle. Def.
+Acquis. Res. J.: A Publ. Def. Acquis. Univ. 19, 283–308.
+Barton, J.A., Love, D.M., Taylor, G.D., 2001. Design determines 70% of cost? a review
+of implications for design evaluation. J. Eng. Des. 12, 47–58. http://dx.doi.org/
+Ben-Arieh, D., 2000. Cost estimation system for machined parts. Int. J. Prod. Res. 38,
+4481–4494. http://dx.doi.org/10.1080/00207540050205244.
+Castagne, S., Curran, R., Rothwell, A., Price, M., Benard, E., Raghunathan, S., 2008. A
+generic tool for cost estimating in aircraft design. Res. Eng. Des. 18, 149–162.
+http://dx.doi.org/10.1007/s00163-007-0042-x.
+Cavalieri, S., Maccarrone, P., Pinto, R., 2004. Parametric vs. neural network models
+for the estimation of production costs: a case study in the automotive industry.
+Int. J. Prod. Econ. 91, 165–177, http://dx.doi.org/10.1016/j.ijpe.2003.08.005.
+Chang, C.C., Lin, C.J., 2011. Libsvm: a library for support vector machines. ACM
+Trans. Intell. Syst. Technol. 2 27:1–27:27.
+Chou, J.S., Tsai, C.F., 2012. Preliminary cost estimates for thin-ﬁlm transistor liquidcrystal display inspection and repair equipment: a hybrid hierarchical approach. Comput. Ind. Eng. 62, 661–669.
+Cochran, E.B., 1976. Using regression techniques in cost analysis part ii †. Int. J..
+Prod. Res. 14, 489–511. http://dx.doi.org/10.1080/00207547608956620.
+J.-L. Loyer et al. / Int. J. Production Economics 178 (2016) 109–119
+Corbett, J., Crookall, J., 1986. Design for economic manufacture. {CIRP} Ann. Manuf.
+Technol. 35, 93–97, http://dx.doi.org/10.1016/S0007-8506(07)61846-0.
+de Cos, J., Sanchez, F., Ortega, F., Montequin, V., 2008. Rapid cost estimation of
+metallic components for the aerospace industry. Int. J. Prod. Econ. 112, 470–482
+http://dx.doi.org/10.1016/j.ijpe.2007.05.016.
+Deng, S., Yeh, T.H., 2011. Using least squares support vector machines for the airframe structures manufacturing cost estimation. Int. J. Prod. Econ. 131,
+Ezugwu, E., Bonney, J., Yamane, Y., 2003. An overview of the machinability of
+aeroengine alloys. J. Mater. Process. Technol. 134, 233–253, http://dx.doi.org/10.
+Fagade, A., Kazmer, D., 2000. Early cost estimation of injection molded components.
+Farineau, T., Rabenasolo, B., Castelain, J., Meyer, Y., Duverlie, P., 2001. Use of parametric models in an economic evaluation step during the design phase. Int. J.
+Adv. Manuf. Technol. 17, 79–86. http://dx.doi.org/10.1007/s001700170195.
+Gallant, A.R., 1968. A note on the measurement of cost/quantity relationships in the
+aircraft industry. J. Am. Stat. Assoc. 63, 1247–1252, URL 〈http://www.jstor.org/
+de la Garza, J.M., Rouhana, K., 1995. Neural networks versus parameter-based applications in cost estimating. Cost Engineering URL 〈http://www.osti.gov/sci
+Greene, W.H., 2012. Econometric Analysis, 7th ed. Prentice-Hall, Upper Saddle
+Hastie, T., Tibshirani, R., Friedman, J., 2011. The Elements of Statistical Learning:
+Data Mining, Inference, and Prediction. Springer series in statistics. SpringerVerlag New York, Inc., New York, NY, USA.
+Hegazy, T., Ayed, A., 1998. Neural network model for parametric cost estimation of
+highway projects. J. Constr. Eng. Manag. 124, 210–218, 10.1061/(ASCE)07339364(1998)124:3(210).
+Kalpakjian, S., Schmid, S., 2008. Manufacturing Processes for Engineering Materials,
+5/E. Prentice Hall; Upper Saddle River, N.J.
+Kuhn, M., 2008. Building predictive models in R using the caret package. Journal.
+Stat. Softw. 28, 1–26, URL 〈http://www.jstatsoft.org/v28/i05〉.
+Langmaak, S., Wiseall, S., Bru, C., Adkins, R., Scanlan, J., Sóbester, A., 2013. An activity-based-parametric hybrid cost model to estimate the unit cost of a novel
+gas turbine component. Int. J. Prod. Econ. 142, 74–88.
+Layer, A., Brinke, E.T., Houten, F.V., Kals, H., Haasis, S., 2002. Recent and future
+trends in cost estimation. Int. J. Comput. Integr. Manuf. 15, 499–510. http://dx.
+Mason, A.K., Gunadharkma, A., D., L., 1994. Results of regression analysis survey.
+Newsletter of the Society of Cost and Estimating Analysts. Alexandria, VA.
+Nadler, G., Smith, W.D., 1963. Manufacturing progress functions for types of processes. Int. J. Prod. Res. 2, 115–135. http://dx.doi.org/10.1080/
+Niazi, A., Dai, J.S., B.S., 2005. Product cost estimation: Technique classiﬁcation and
+methodology review. J. Manuf. Sci. Eng. 128, 563–575. http://dx.doi.org/10.1214/
+Rolls-Royce, 2015. The Jet Engine. 5th revised ed., John Wiley & Sons Inc.
+Rosenblatt, F., 1962. Principles of Neurodynamics: Perceptrons and the Theory of
+Brain Mechanisms. Technical Report No. VG 1196 G 8. Cornell Aeronautical Lab
+Saporta, G., 2011. Probabilites, analyse des donnees et statistique, 3rd ed. Editions
+Simon, W., 2006. Generalized Additive Models: An Introduction with R. Chapman
+Smith, A.E., Mason, A.K., 1997. Cost estimation predictive modeling: regression
+versus neural network. Eng. Econ. 42, 137–161. http://dx.doi.org/10.1080/
+Stockton, D.J., Khalil, R.A., Mukhongo, L.M., 2013. Cost model development using
+virtual manufacturing and data mining: part ii—comparison of data mining
+algorithms. Int. J. Adv. Manuf. Technol. 66, 1389–1396. http://dx.doi.org/
+Trappey, A.J., Trappey, C.V., Liu, P.H., Lin, L.C., Ou, J.J., 2013. A hierarchical cost
+learning model for developing wind energy infrastructures. Int. J. Prod. Econ.
+146, 386–391, http://dx.doi.org/10.1016/j.ijpe.2013.03.017.
+Vapnik, V.N., 1995. The Nature of Statistical Learning Theory. Springer-Verlag New
+Wasserman, L., 2006. All of Nonparametric Statistics (Springer Texts in Statistics).
+Springer-Verlag New York, Inc., Secaucus, NJ, USA.
+Xu, Y., Elgh, F., Erkoyuncu, J.A., Bankole, O., Goh, Y., Cheung, W.M., Baguley, P., Wang,
+Q., Arundachawat, P., Shehab, E., Newnes, L., Roy, R., 2012. Cost engineering for
+manufacturing: current and future research. Int. J. Comput. Integr. Manuf. 25,
+300–314. http://dx.doi.org/10.1080/0951192X.2010.542183.
+Yelle, L.E., 1979. The learning curve: historical review and comprehensive survey.
+Decis. Sci. 10, 302–328. http://dx.doi.org/10.1111/j.1540-5915.1979.tb00026.x.
+Zhang, Y.R., Fuh, J.Y.H., 1998. A neural network approach for early cost estimation of
+packaging products. Comput. Ind. Eng. 34, 433–450.

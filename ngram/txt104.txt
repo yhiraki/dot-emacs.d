@@ -1,0 +1,701 @@
+INT. J. PROD. RES., 1997, VOL. 35, NO. 4, 1171-1191
+Job shop scheduling with a genetic algorithm and machine learning
+C.-Y. LEFt*, S. PIRAMUTHUJ and Y.-K. TSAI§
+Dynamic job shop scheduling has been proven to be an intractable problem for
+analytical procedures. Recent advances in computing technology, especially in
+artificial intelligence, have alleviated this problem by intelligently restricting the
+search space considered, thus opening the possibility of obtaining better results.
+Researchers have used various techniques that were developed under the general
+rubric of artificial intelligence to solve job shop scheduling problems. The most
+common of these have been expert systems, genetic algorithms and machine
+learning. Of these, we identify machine learning and genetic algorithms to be
+promising for scheduling applications in a job shop. In this paper, we propose to
+combine complementarity the strengths of genetic algorithms and induced decision
+trees, a machine learning technique, to develop a job shop scheduling system.
+Empirical results, using machine learning for releasing jobs into the shop floor and
+a genetic algorithm to dispatch jobs at each machine, are promising.
+Product deliverabihty is becoming more important in today's competitive
+markets. While it used to suffice to manufacture products of high quality and low
+price, today's manufacturing practices necessitate on-time product deliveries for
+customer satisfaction. Thus scheduling plays a crucial role not only in the efficiency
+of operating the system but also in customer satisfaction.
+Scheduling jobs in manufacturing shop fioors is known to be hard, and belongs to
+the class of NP-complete problems (Morton and Pentico 1993, Pinedo 1995). This is
+true even while dealing with a system where everything is static and deterministic. The
+complications of combinatorial explosions in these static problems are exacerbated in
+real world environments, making these problems more complex. Scheduling problems
+that occur in real world situations are dynamic and are fraught with various
+uncertainties (machine breakdown, for example). Hence, these problems cannot be
+solved deterministically using currently available techniques.
+Since these problems are very common in most real world situations, there is a
+need to be able to solve these to obtain at least a good solution, if not the optimal
+solution. The simplest approach is through using dispatching rules, Panwalkar and
+Iskander (1977) present a list of over 100 rules. A drawback with such dispatching
+rules is that there is no single rule, including the commonly used rules such as 'shortest
+processing time' (SPT) and 'earhest due date' (EDD), that outperform or dominate
+other rules under varying conditions. Techniques such as the shifting bottleneck
+tDepartment of Industrial Engineering, Texas A&M University, College Station, TX
+^Department of Decision and Information Sciences, University of Florida, Gainesville,
+§Department of Industrial and Systems Engineering, University of Florida, Gainesville, FL
+*To whom correspondence should be addressed.
+0020-7543/97 S12 00 it'! 1997 Taylor & Francis Ltd.
+algorithm (Adams et al. 1988, Ovacik and Uzsoy 1992) and bottleneck dynamics
+(Morton and Pentico 1993) are used for solving the general job shop scheduling
+problem while concentrating on solving one machine at a time.
+Recent advances in computing technology have led to the development of local
+search heuristics for job shop scheduling. Common local search heuristics include
+simulated annealing, tabu search, and genetic algorithms. Simulated annealing was
+developed independently by Kirkpatrick et al. (1983) and Cerny (1985), Matsuo et al.
+(1988), Van Laarhoven et al. (1992) and Aarts et al. (1994) have applied the technique
+to solve the job shop scheduling problem. Tabu search can be traced to a paper
+by Glover (1977) and has been used in job shop scheduling by Taillard (1994),
+and Barnes and Chambers (1991), Holland (1975) developed the idea of genetic
+algorithms. Some examples of the application of genetic algorithms to job shop
+scheduling are Davis (1985), Whitley et al. (1989), Storer et al. (1992), Fox and
+McMahon (1990), Lawton (1992), Delia Croce et al. (1992), Nakano and Yamada
+(1993), Gupta et al. (1993) and Bean (1994), Storer et al. (1992) present a general
+overview of the search space for scheduling problems. Recent books on genetic
+algorithms include Davis (1991), Goldberg (1989) and Michalewicz (1992),
+Herrmann, Lee and Hinchman (1995) have apphed genetic algorithm to a job shop
+environment for semiconductor test operations with significant performance
+improvement. These common searches have been called 'smart-and-lucky searches'
+by Herrmann and Lee (1993), since they must be smart enough to escape from most
+local optima; they still must be lucky, however, in order to find the global optimum.
+Another stream of research in this area involves the development of expert systems
+hke ISIS (Fox and Smith 1984), OPIS (Smith et al. 1986 and Ow and Smith 1988),
+MICRO-BOSS (Sadeh 1991) and OPAL (Bensana et al. 1988), In this study, we
+propose and evaluate a framework for job shop scheduling, using machine learning
+The remainder of this paper is organized as follows. In §2 we discuss the
+motivation for combining artificial intelligence and operations research techniques
+to automate releasing and dispatching jobs in a shop floor. We also briefly review
+genetic algorithms and machine learning. The proposed integrated framework for job
+shop scheduling using both machine learning and a genetic algorithm and the
+characteristics of this proposed framework are discussed in § 3, Using the proposed
+framework, the system configurations and experimental results from two different job
+shop cases that are studied are provided in § 4, Section 5 concludes this paper with a
+brief discussion of the results obtained,
+2.1, Artificial intelligence and operations research: a nexus
+Optimization models form the basis for solving problems in operations research
+(OR), whereas search techniques are used in artificial intelligence (AI), The problem
+of scheduling jobs on manufacturing shop floors has been an important area of study
+in operations research. Although there have been numerous suggestions in attempting
+to solve these problems, the nature of the problem precludes any such deterministic
+attempts to solve the problem optimally. Needless to say, no currently available
+technique can be used to solve a dynamic job shop scheduling problem optimally.
+When there is a lack of analytical methods, as in the case of scheduling a dynamic
+job shop, a natural means to follow would be to use scheduling rules. In the
+manufacturing scheduling area, researchers have proposed a plethora of scheduhng
+Job shop scheduling with a genetic algorithm
+rules which have been shown to perform well under specific sets of conditions.
+Consequently, a drawback with such rules is that they do not perform as well under
+disparate circumstances and performance criteria. In other words, there is no one rule
+which can outperform other rules under varying conditions. Nevertheless, most
+researchers have resorted to using a given rule for a given system even though it is
+impossible for a rule to dominate other rules throughout the life of a system,
+especially in dynamic manufacturing environments.
+Ideally, one should be able to use the most appropriate rules dynamically
+according to the instantaneous requirements on a manufacturing shop fioor. The
+major problems with implementing this are (1) the set of scheduling rules currently
+available are not complete; (2) it is impossible to capture all the dynamics that occur
+in a system in real-time. The former is obvious from scheduling literature being
+replete with various rules, which keep increasing with time. The latter is because all
+the parameters affecting a dynamic system are not known and data about unknown
+parameters cannot be captured. Given these limitations, the best we can do is to select
+a set of promising scheduling rules and try to apply the right rules appropriately at the
+Scheduling in a job shop primarily involves both releasing jobs into the system
+as well as dispatching jobs that are at individual machines. Both these decisions
+involve knowing when to schedule the next job as well as which job to schedule next.
+The decision of which job to schedule next is answered by the policy being used to
+schedule these jobs. The decision of when to schedule the next job is determined by
+the characteristics of the modelled system as well as the performance criteria
+Most literature in job shop scheduling deals only with the problem of dispatching
+jobs at each machine in the shop floor. Results from the literature (see for example,
+Glassey and Resende 1988, Wein 1988, Azrak and Lee 1993) suggest that in a shop
+fioor, scheduling at job release level is more effective in improving the performance of
+the system than dispatching considered at individual machines. Several authors
+have addressed the job release problem in a manufacturing system. Mahmoodi
+et al. {1990) address part release in a cellular manufacturing environment. Irastorza
+and Deane (1974) and Shimoyashiro et al. (1984) study loading and balancing in a
+job shop. Baker (1984), Melnyk et al. (1991) and Ragatz and Mabert (1988) studied
+order release and concluded that order release does make a significant impact on
+dispatching performance. CONWIP and kanban pull systems are commonly used for
+job release policy in high volume, low variety, repetitive fiow shop systems (Spearman
+et al. 1990). Machine learning has also been used for job release policy (see for
+example, Aytug et al. 1994), however most hterature using machine learning deals
+with flow shop scheduling. In the general job shop, the starvation rule (Glassey and
+Resende 1988) and the queueing network approach (Wein 1988) have been shown to
+In this paper, we provide an approach to automate the job shop scheduling system
+by combining both job release pohcy (when to release and which job to be released
+into the shop fioor) and a dispatching rule (for each machine in the shop floor). We
+believe that this is a promising approach. Before discussing the details ofthe proposed
+system, we briefly outline the essentials of machine learning and genetic algorithm and
+2.3. Genetic algorithm in manufacturing scheduling
+The genetic algorithm (GA) is a procedure that mimics the adaptation that nature
+uses to find an optimal state. Genetic algorithms use past information to direct the
+search with expected improved performance and achieve fairly consistent and reliable
+results (Whitley et al. 1989). They have proven to be an effective and flexible
+optimization tool that can produce optimal or near-optimal solutions. Also, they
+do not make strong assumptions about the form of the objective functions as do many
+other optimization techniques (Michaelwicz 1992). Most optimization methods use a
+single solution and possibly a single objective function, and improve on it to attain
+better solutions. GA maintains many solutions, a population, which are manipulated
+to search for better solutions. In genetic algorithms, each solution or individual in the
+population is described by a vector of variables (chromosomes), and the search
+performs operations on the population of solutions. Individuals' potential to
+reproduce and pass their genes on to the next generation is determined by their
+fitness functions, which are evaluated with respect to the objective function of the
+In general, the first step of GA procedures is to initialize the population either
+randomly or by using seeds. Once the initial population is generated, three common
+operations are used to generate ofl"springs or children to form the next generation: (1)
+reproduction, the selection of good individuals according to their fitness, (2) crossover, an exchange of a portion of each individual and (3) mutation, a random
+modification of each individual. After a period of time, good individuals dominate the
+population, providing an optimal (or near-optimal) solution.
+An important issue in genetic algorithms is the representation of each individual
+in the population, since permutations resulting from standard crossovers may lead
+to infeasibility of representing the corresponding offspring. For example, consider a
+5-job one-machine sequencing problem. Let (1,2,3,4,5) and (4,2,3,5,1) represent two
+solution individuals (two sequences) in a population. Using a crossover operation
+between the third and fourth positions results in (1,2,3,5,1) and (4,2,3,4,5), which are
+two infeasible sequences. This has inspired several researchers to develop different
+approaches to solve this problem. Storer et al. (1992) develop the ideas of problemspace and heuristic-space to represent each individual; Bean (1994) used the random
+keys approach to avoid the infeasibihty problem.
+For the 5-job one-machine sequencing problem, if we use the problem-space
+approach, we may fix a rule such as 'shortest processing time' (SPT) and 'manipulate'
+the processing time using crossover or mutation operations. For example, let
+(5,8,12,4,6) and (9,4,13,7,10) represent two individuals (processing time sets for five
+jobs). If we crossover between the second and third positions, we will get two new
+individual sets of'processing times' (5,8,13,7,10) and (9,4,12,4,6). In order to calculate
+the fitness we apply SPT to the above two processing time sets to get two job
+sequences (J1,J4,J2,J5,J3) and (J2,J4,J5,J1,J3). We then apply these two sequences to
+the problem parameter (including the 'original' processing time) to evaluate the
+fitness performance. In this approach, we manipulate over processing times to avoid
+infeasibility, where each processing time set can map into a sequence through a fixed
+rule such as SPT. In this vein, Herrmann and Lee (1993) have applied a problemspace genetic algorithm to solve a single machine scheduling problem with class setup
+The heuristic-space idea is suitable for multiple machine job shop scheduling
+problems. We may use a vector of dispatching rules, where each dispatching rule
+Job shop scheduling with a genetic algorithm
+corresponds to each machine in the shop floor, to represent each individual of the
+population. For example, we may use (EDD,SPT,FCFS) to represent an individual of
+population in a three machine scheduling problem, where EDD, SPT and FCFS are
+the dispatching rules for machines 1, 2 and 3 respectively, Herrmann et al. (1995)
+obtain significant performance improvement implementing the genetic algorithm in a
+semiconductor test operations facility where there are more than 15 machines in the
+shop floor. They use the heuristic-space idea to represent dispatching rules in each
+machine in the shop floor. Each individual of the population is a vector of dispatching
+rules and the ith element of the vector represents the dispatching rule for the /th
+machine in the shop floor, A genetic operation is then used to generate the best
+combination of dispatching rules found. Those rules are then used to create the
+schedule for each shift. The dispatching rule in each machine is fixed for a shift and
+different machines are allowed to use different dispatching rules. The heuristic-space
+approach has been shown to be appropriate in a general job shop environment where
+many machines operate in the shop floor. Hence, we use it in our proposed approach,
+Machine learning in manufacturing scheduUng
+Learning is an important characteristic of any intelhgent system (Fischler and
+Firschein 1987), The abihty to improve on prior performance utilizing successes and
+failures from past experience is the essence of learning. In artificial intelligence,
+machine learning has a similar objective and has evolved to approach this purpose
+through varied means, depending on the type of learning involved. Inductive learning
+is one of the most commonly used machine learning algorithms.
+Inductive learning is defined as the task or process of constructing class definitions
+(Rich and Knight 1991), This process occurs through either generalization or
+specialization or both from a representative set of (training) examples of the concept
+of interest. The process of inductive learning occurs by generating hyperplanes which
+separate examples belonging to various classes. The resulting learned class definitions
+form a compact representation relative to those of the training examples used to
+construct these class definitions. The learned class definitions using most commonly
+used inductive learning algorithms have been shown to have excellent generalization
+capabihties—the ability of the learned class definitions to classify heretofore unseen
+Suppose we are given a set of examples in the form: {x^ = a[ and X2 = ^2 ^nd ,,,
+and x^ = «„, Cj), where x, (/' = 1,,«) are the independent variables with a, (/ = \..n)
+being their corresponding values and Cj is the class (dependent variable) for a given
+example, an inductive learning algorithm can be used to construct natural language
+rules in the form: IF («/, ^ x, ^ a^,,) and {a/j ^ X2 ^ a/,2) and ,,, and («/„ sJ x« ^ a;,„)
+THEN Q , where / and h are the lower and higher values in the ranges the variables
+take and Q is the corresponding (appropriate) class,
+A well-known inductive learning algorithm is C4,5 (Quinlan 1990), a decision tree
+algorithm which uses information-theoretic (Shannon 1948) measures to learn the
+partitions which separate examples belonging to various categories. The C4,5
+algorithm uses exatnples in the form of vectors of attribute values and their
+corresponding class values and generates a decision tree. Rules in the form IFTHEN can be compiled from a given decision tree to form a knowledgebase. The
+rules thus created can then be applied by following the conclusions from a rule
+(THEN part) when the corresponding pre-conditions (IF part) are satisfied. Thus, the
+rules in the knowledgebase can be adaptively instantiated, in real-time, whenever
+the pre-conditions of a rule are satisfied. We utilize this property advantageously in
+Machine learning has been used in the context of scheduling a dynamic manufacturing system. Shaw et al. (1992), Nakasuka and Yoshida (1992) and Piramuthu
+et al. (1994) provide examples of successful integration of machine learning in
+Shaw et al. (1992) develop a 'Pattern-Directed Scheduler' incorporating machine
+learning to generate the knowledgebase for dispatching jobs in job shops. They also
+generate a decision tree to decide when to change the dispatching rule that is being
+used. Using mean tardiness as the performance criterion, they compared the
+performance of their system with that of the best dispatching rule under similar
+conditions. Overall, their proposed system performed better than the best rule for
+lower contention factor values, smaller number of machines in the job shop and also
+when the switching frequency of rules was from medium to reasonably high.
+Nakasuka and Yoshida propose a new learning algorithm for generating binary
+decision trees and develop a iearning-aided dynamic scheduler' (LADS) to schedule a
+three-machine flow shop. LADS was used to dispatch jobs using rules at each of the
+three machines. The performance criteria used in this study are makespan and
+tardiness. LADS was shown to perform better under these two performance criteria.
+Piramuthu et al. (1994) study a flow shop and develop a framework incorporating
+machine learning, both for dispatching at individual machines as well as for releasing
+jobs into the system, with mean flow time as the performance measure. The proposed
+system was found to perform better when the system was more dynamic, as measured
+by the coeflScient of variation of processing times at the bottleneck machines. The
+proposed system also performed better when the frequency of switching policies was
+lower, since the system became overly nervous when the frequency was high.
+Scheduling decisions in a job shop takes place at individual machine levels as well
+as at the stage where jobs are released into the job shop. Although scheduling at these
+two stages are similar, the information requirements for making these decisions difl"er.
+Typically, scheduhng jobs at individual machines requires more local information
+(e.g. whether the machine of interest is idle or busy), specific to the machine of
+interest, whereas global information about the whole job shop is required for
+At a given moment, the parameters affecting the job shop at a global level may not
+vary significantly although the effects felt at individual machines may be significant
+enough to affect the scheduling decisions at individual machines and vice versa. This
+necessitates approaching the problem of global scheduhng of job shops at both
+overall and individual machine levels separately.
+The benefits of this approach are that the current system information is utilized in
+making the job-release decision, which has been shown in previous studies to be of
+more importance than decisions involving dispatching at individual machines. The
+various system parameters include average processing times, average overall queue
+lengths, average utilizations of all the machines in the system, lot information
+(product class, due dates, lot quantity). The job-release pohcies which perform the
+best under various scenarios of the system are learned using a machine learning
+technique, induced decision tree (C4.5, for example), and the policy used to release
+jobs into the system is adaptively utilized as per the current state of the system.
+Job shop scheduling with a genetic algorithm
+It is extremely difficult to measure the characteristics of system parameters at the
+individual-machine level, and hence to generate training examples for machine
+learning corresponding to individual machines. Piramuthu et al. (1994) faced similar
+difficulties while attempting to utilize machine learning for dispatching at individual
+machine levels. They were unable to extract useful information to develop customized
+dispatching knowledgebases for each individual machines in the flow shop. This led
+us not to attempt machine learning for dispatching. Fortunately, we can circumvent
+this problem by taking advantage of the performance characteristics of genetic
+algorithms for dispatching jobs at individual machines. Genetic algorithms have
+been shown to perform well for dispatching in Herrmann et al. (1995). In their
+framework, there is no need to measure the characteristics of the various parameters
+at individual machine levels. It should also be noted that learning the system
+parameters and their effect on a performance criterion in a job shop is more effective
+at a global level than at individual machine levels. Hence, we utilize machine learning
+for job release and genetic algorithm for dispatching at individual machines. We did
+not try the genetic algorithm for job release, since with machine learning we utilize
+information about the current state of the system dynamically in real-time, which is
+not the case while using a genetic algorithm.
+The proposed job shop scheduler (JSS) framework (Fig. 1) consists of three
+components: inductive learning for job release, a genetic algorithm for dispatching at
+machines and the current state of the system, which provides inputs to both inductive
+learning as well as genetic algorithm components. The inductive learning component
+consists of the inductive learning module to learn the job release decision rules for the
+The rules in the job release knowledgebase are evaluated and refined whenever
+deficiencies in the job shop scheduler, resulting in poor performance compared to
+those using individual policies, are detected. The genetic algorithm stage uses job
+release information from the previous stage to create dispatching schedules. The JSS
+also facilitates feedback from the genetic algorithm stage to the inductive learning
+This methodology fits naturally to our application area of scheduling in a shop
+floor, with relevant parameters and their ranges comprising the IF part and the
+scheduling rules the THEN part of the job release rules in IF-THEN form. The steps
+involved in the implementation of the proposed framework (Fig, 1) are as follows:
+(1) Select a triggering mechanism for job release,
+(2) Generate training examples for job release:
+(a) Initialize dispatching rules at individual machines,§
+(b) Repeat for each job release policy: select a job release pohcy; run the
+system simulation until all (1200, in this study) jobs are processed; note the
+(c) Select the job release policy corresponding to the best performance value,
+(d) Generate a training example: a vector of (average) system parameter
+values, obtained from the simulation runs in 2(b), with corresponding best
+(e) Go to (2b) until a representative sample is obtained for the system,
+(3) Develop knowledgebase for job release:
+(a) Feed the training examples into C4,5 to generate a job release decision
+(b) Compile rules in the form IF-THEN, from the job release decision tree, to
+(5) Using a genetic algorithm, generate the best combination of rules for
+(6) Until all (1200) jobs are processed, DO:
+(a) Appropriately release jobs into system using the job release knowledgebase,
+(b) Dispatch jobs at individual machines using results from genetic algorithm,
+(c) Run simulation and note performance of the system,
+(7) Evaluate performance with respect to those using the best single job release/
+dispatching policy combination. If improvement is necessary, go to (2),
+Consider a job release knowledgebase, constructed by following the above steps,
+for a job shop of interest. Given a set of jobs (say, 50) that need to be processed in this
+system, we use the job release knowledgebase developed as above and simply follow
+steps 4, 5 and 6 to release/dispatch jobs in the system.
+§Dispatching rules can be selected according to the objective function. For instance, if
+minimizing total tardiness is taken as the criterion, EDD could be a suitable candidate for
+Job shop scheduling with a genetic algorithm
+The triggering mechanism for job release in step 1 is necessary to decide when to
+release jobs into the system. The amount of WIP in the system is an example of
+triggering mechanism. This mechanism, for example, is triggered when the WIP level
+decreases below a predetermined threshold value.
+Training examples are the source of data from which information for generating
+rules in the job release knowledgebase is obtained. This necessitates that the training
+examples cover the entire range of the parameter-space of interest. The parameterspace is huge, even for very small problems involving real-valued parameters. Hence,
+the best we could do is to obtain 'representative' samples from this parameter-space
+and let the generalizability property of the machine learning algorithm take care of
+the rest. The purpose of generating training examples is thus to provide the machine
+learning algorithm with enough data to be able to generalize. In order to achieve this,
+the system is initialized using various job release/dispatching policies as well as the
+We use 1200 jobs per simulation run in this study. This is a large number of jobs
+for the system being modelled—a semiconductor 'test operation' facility, where less
+than 50 jobs are processed in a shift. By using the average performance using 1200
+jobs, we essentially efiminate any bias that could be caused while reaching steady state
+during simulation of the system being modelled. We intend to investigate the relative
+performance of different rules with similar starting conditions, for all 1200 jobs. We
+initialized all simulations with the same set of parameter values and we are interested
+only in studying the relative performance of several job release/dispatching rules.
+For similar system parameter values, we ran simulations (of 1200 jobs) individually using each job release rule. We then selected the job release rule corresponding to
+the best performance (least total tardiness). A training example is represented as an
+attribute value-class pair. The parameter values are paired with corresponding best
+performing job release rule to form a training example. This process is repeated for
+several combinations of system parameter values until a representative sample is
+Once the training examples are generated, the next step is to develop the knowledgebase for job release. The decision tree and finally the rules compiled in the
+knowledgebase are only as good as the data used as input (i.e. training examples).
+Since the rules in the knowledgebase are in simple English, it is very easy to add
+additional knowledge either automatically using machine learning or manually
+through input from 'experts' in the area of shop floor scheduling.
+The job release knowledgebase is now ready. Next, we use this knowledgebase to
+release jobs into the system while experimenting with the dispatching rules at
+individual machines using the genetic algorithm. The genetic algorithm is thus used
+to identify the best set of dispatching rules across all machines in the system.
+As we noted before, machine learning can be used naturally for job release since
+we are dealing with a parameter-space (corresponding to the system parameters); the
+parameter values and relevant policies can be captured easily for use in the machine
+learning module. Once this information is captured to be used as input, the resulting
+knowledgebase has all the beneficial properties that are associated with machine
+learning. We discuss some of these in the next subsection.
+In the proposed framework, in addition to heuristic-space search and problemspace search (Storer et al. 1992), we also utilize parameter-space, through machine
+learning. Approaching the adaptive job shop scheduling problem with these search
+spaces allows us to explore the problem from various perspectives, resulting in
+improved performance using the proposed framework. We identify, with a brief
+discussion, some of the characteristics of incorporating machine learning and genetic
+algorithm in the framework for job shop scheduling.
+• Incorporation of learning results in an intelligent scheduling system. The system
+learns from past experience incrementally as and when deemed necessary. This
+ability to learn over time is one of the important characteristics of an intelligent
+• Rules in the knowledgebase are instantiated dynamically/adaptively as per
+the current state of the system observed by the various parameter values.
+The current state of the system is polled periodically to identify the values of
+the system parameters. These values are used as input to the knowledgebase, resulting in the instantiation of the appropriate rule whose pre-conditions
+are satisfied by these values. Thus, the proposed framework has the
+capability to react to the current state of the modelled system, adaptively, in
+• Ability to generate a good combination of dispatching rules for multiple
+machine shop floor scheduling. It is extremely diflicult to measure the characteristics of system parameters at the individual machine level, and hence it may
+not be appropriate to apply machine learning to each machine in the shop fioor.
+In this JSS, we can circumvent this problem by taking advantage of the
+performance characteristics of the genetic algorithm for dispatching jobs at
+• Transfer of generalizabihty properties from machine learning. Since we are
+dealing with a huge parameter-space corresponding to the values that the
+various control parameters can take, an exhaustive sampling of all these values
+to generate training examples for machine learning is impossible. This necessitates a means to design the experiment to obtain a representative sample from
+the parameter-space and their performance values as per the performance
+criterion. Given that this is the case, there is a need for the knowledgebase in
+the system to be generalizable to know how to react to unforeseen situations.
+Fortunately, the machine learning algorithm used in this framework is
+known to have excellent generalizabihty properties, thus resulting in good
+performance of the knowledgebase in heretofore unseen cases, which are
+commonly encountered in a dynamic job shop scheduhng context.
+• Ease of adding knowledge—either manually from an expert or otherwise
+—when new pohcies and/or parameters are available to be added to the
+knowledgebase or when new external knowledge becomes available. The
+knowledgebase, once developed, is not static. New knowledge in the form of
+rules can be added to the knowledgebase as and when appropriate. This is
+done easily since the rules in the knowledgebase are independent of one
+• Utilize policies appropriately when they are at their (or close to) best performance, given the current state ofthe system. By utilizing both machine learning
+and genetic algorithms in situations where they perform better, the proposed
+framework is able to capture the characteristics of the modelled system and
+Job shop scheduling with a genetic algorithm
+We use computer simulation experiments to implement and analyse the proposed
+method. We consider two different system configurations to illustrate the proposed
+framework. The parameters were chosen to refiect the dynamics in a semiconductor
+Processing time for workstation 1: Uniform [10,150]
+Processing time for workstation 2: Uniform [40,120]
+Processing time for workstation 3: Uniform [20,140]
+There are three workstations in this simulated job shop. Each workstation has one
+machine and each machine can only process one job at a time. No preemption was
+permitted in the simulation. The processing time for each workstation is uniformly
+distributed with the same expected value but different variances. The due date for
+each job is determined by the total processing time for each job plus an integer
+value, which is uniformly distributed between the allowance value (300) and the
+approximate makespan for this model (71 000). Each job has random routeings
+without re-entrance. At time unit zero, there are 1200 jobs in the release pool waiting
+to be released. A release is triggered when the overall work-in-process decreases below
+a predetermined level, which is uniformly distributed between 6 and 12. This
+triggering mechanism is also called CONWIP (Spearman et al. 1990), which can be
+referred as a shop-based trigger (Melnyk and Ragatz 1989). The value of the objective
+function is measured when the processing of all the 1200 jobs is complete. The goal is
+to find the sequence of job orders for release, as well as the sequence for dispatching at
+each individual machine, such that the total tardiness is minimized.
+Four release policies are used for job release:
+Minimum slack time per operation (S/OPN).
+Eour dispatching rules are selected for job dispatching:
+One of the significant differences of this method from those in the literature is that
+machine learning (ML) is utilized only for job release in our study. Since ML
+considers the system from the outside, at the job release stage, the parameters with
+respect to lot information (e.g. remaining processing time, due date, etc.) may also be
+important. Therefore, for machine learning we select the control parameters which
+include shop floor information (e.g. system utihzation) and lot information as follows:
+(2) Maximum relative machine workload (MRMW), which is expressed as the
+ratio of the maximum workload to system utilization;
+(4) Average remaining jobs' processing time (ARP),
+where TWIP, MRMW and ASU are shop floor information and ARP is related to lot
+The simulation model is written in C and SIMAN. C4.5, a well-known inductive
+learning algorithm, is used to generate the decision tree. Since the objective is to
+minimize total tardiness, in the learning stage we use EDD to initialize the dispatching
+rule for each machine. Using this process, 120 training examples were generated, and
+the resulting decision tree is depicted in Fig. 2. The corresponding decision rules
+Job shop scheduling with a genetic algorithm
+I F ( 1 5 9 1 9 < A R P < 159-58) A (MRMW ^ 0-34) THEN EDD.
+IF (159-19 < ARP) A (MRMW > 0-34) A (ASU > 0-927) THEN EDD.
+IF (159-19 < ARP) A (MRMW > 0-34) A (0-92 < ASU < 0-927) THEN EDD.
+IF (159-19 < ARP) A (MRMW > 0-34) A (0-91 <ASU < 0-92) THEN EDD.
+IF (159-19 < ARP) A (MRMW > 0-34) A (0-904 < ASU < 0-91) THEN MST.
+IF (159-19 < ARP) A (MRMW > 0-345) A (ASU < 0-904) THEN MST.
+IF (159-19<ARP)A(0-34<MRMW ^ 0-345)A(ASU « 0-904) THEN EDD.
+IF (ARP > 159-58) A (MRMW < 0-34) A (ASU s: 0-835) THEN EDD.
+IF (ARP > 159-58) A (MRMW «: 0-34) A (ASU > 0-835) A (TWIP ^ 10) THEN MST.
+IF (ARP > 167-38) A (MRMW ^ 0-34) A (ASU > 0-835) A (TWIP > 10) THEN EDD.
+IF (159-58 < ARP < 167-38) A (MRMW ^ 0-336) A (ASU > 0-835) A (TWIP > 10) THEN MST.
+IF (164-35 < ARP < 167-38) A (0-336 < MRMW ^ 0-34) A (ASU > 0-835) A (TWIP > 10) THEN EDD.
+IF (159-58 < ARP < 164-35) A (0-336 < MRMW ^ 0-34) A (ASU > 0-919) A (TWIP > 10) THEN EDD.
+IF(159-58<ARP < 164-35) A(0-336<MRMW ^0-34) A(O-835< ASU ^0-919) A(TWIP> 10)THENMST.
+Figure 3. Decision rules derived from the decision tree in Figure 2.
+which form the job release knowledgebase are given in Fig. 3. In this decision tree, if
+the value of the parameter (ARP) is between 15818 and 15919, the rule EDD will
+be selected; otherwise we check the parameter MRMW and continue until a leaf node
+(i.e. a policy) is reached in the decision tree. As mentioned above, we see that the
+parameter (ARP) relating to lot information takes the most important position in
+the decision tree to determine the release rule in this model.
+With the knowledgebase for job release, the genetic algorithm (GA) search is then
+utilized for the shop floor. The initial population used for GA search is 10 and the size
+of the population for each generation is also 10. The probability of mutation is 0-02.
+After generating 4 generations, we select the best result for dispatching at machines.
+From the knowledgebase, we note that EDD and MST policies dominate the set
+of release policies. Therefore, we compare our (ML, GA) approach with eight other
+policies—various combinations of two release policies (EDD and MST) and four
+dispatching rtiles (FCFS,SPT,EDD and MST), to evaluate the system performance.
+Table 1 shows the simulation results using different policies. Six replications were
+done for each job release and dispatching combination, and each column in Table 1
+represents a replication. For each replication, the seeds used for the random number
+generator in the simulation experiments are the same for dilferent combinations of job
+release and dispatching rules. Note that, in Table 1, the policy (EDD,FCFS) means
+using the policy EDD for job release and rule FCFS for dispatching at each individual
+Table 1. Total tardiness results for the three workstation case (R: release, D: dispatching).
+Table 2. Final set of dispatching rules obtained for each machine from GA.
+machine, across all the jobs during a given simulation run. In the (ML,GA) case, we
+use ML for job release where the system parameter values are polled every 1000 time
+units to identify the most appropriate release policy at that given moment and use
+GA for machine dispatching (different machines may have different dispatching
+rules). The final set of dispatching rules obtained for each machine using GA for
+the 6 replications are given in Table 2. Note that Table 2 corresponds only to the
+(ML, GA) case in Table 1. From Table 2, we see that the dispatching rules selected
+using GA search for replication 1 are SPT, FCFS and MST at machines 1, 2 and 3
+On the average, the results corresponding to the job release pohcy FDD are lower
+than those using MST. Similarly, the results corresponding to the job dispatching rule
+SPT are lower than those using FCFS, EDD and MST for dispatching. We see that, in
+this model, the (ML,GA) approach leads to a improvement of 25 28% over the
+best policy (EDD,SPT) in terms of minimizing total tardiness {p < 030 using the
+two-tailed r-test). The (ML,GA) results were significantly better {p < 005 using
+the two-tailed f-test) compared to the six different results using each of eight
+combinations of (R,D) as given in Table 1. This example shows the potentially
+significant impact of this methodology such that it warrants further investigation.
+To further evaluate the system performance, we consider a more complicated
+system which includes a bottleneck workstation and unreliable machines. The system
+Job shop scheduling with a genetic algorithm
+In this model, there are seven workstations. Each workstation has one machine
+except for workstation 4, which contains four identical machines. If a job goes to
+workstation 4, it can select any one of four machines that are available for processing.
+Each machine in the system has the same failure and repair rates. Clearly, we see that
+workstation 4 is a bottleneck workstation.
+Since each job has random routeings with no re-entrance, it may or may not visit
+the bottleneck workstation. To cope with this situation, we use two kinds of triggers
+to determine when a release should take place: (1) for jobs that are not scheduled to
+visit the bottleneck workstation, we determine when to release a job by using the
+CONWIP release rule with a work-in-process level of 20; that is, if the level of workin-process is below 20, we release the next job with the highest priority among those
+which are not scheduled to visit the bottleneck workstation. (2) For jobs that are
+scheduled to visit the bottleneck workstation, we adapt a starvation avoidance job
+release rule; that is, we release the job with the highest priority among those jobs
+which are scheduled to visit the bottleneck workstation if I^ < ALPHA * L, where W
+is virtual inventory at bottleneck {W = (total bottleneck processing time of the next
+operation on all jobs in the shop floor + the expected time to repair all bottleneck
+machines that are currently failed)/the number of machines at the bottleneck workstation), L is the sum of processing times of all operations preceding the bottleneck
+workstation for the highest priority job and ALPHA is the safety factor (Glassey and
+Resende 1988). The safety factor is examined at a level uniformly distributed between
+We select the following control parameters of the system for machine learning.
+(1) Contention factor at bottleneck workstation (CF), which is the average
+number of alternative machines available for processing an operation at the
+(2) Relative workload at bottleneck workstation (RW), which is the ratio of
+utilization of bottleneck workstation to system utilization;
+(4) Average remaining jobs' processing time (ARP);
+(5) Safety factor (ALPHA), as described above.
+Again, 120 training examples are generated at the learning stage. The decision
+tree, generated using C4.5, for determining the sequence of job release orders is
+depicted in Fig. 4. The corresponding set of rules is given in Fig. 5. We observe that
+parameters (CF and RW) relating to the bottleneck workstation become more
+significant in this model. This may imply one phenomenon: if a system includes
+an apparent bottleneck workstation, the information relating to the bottleneck
+workstation provides valuable references for the shop floor.
+For GA search, we use 50 as the initial population, 50 as the population for each
+generation, and 002 as the probability of mutation. The appropriate dispatching
+rules are selected from 8 generations. Table 4 shows dispatching rules for seven
+machines obtained using GA search for 6 replications. Following the procedure in
+§4.1, we compare our method with the best individual policies. The results in Table 3
+show that the (ML,GA) approach results in a 20-34% improvement over the best
+policy (EDD,MST) in terms of minimizing total tardiness {p < 0-05 using the twotailed t-test). The (ML,GA) results were significantly better {p < 0-001 using the
+two-tailed r-test) compared to the six different results using each of eight
+combinations of (R,D) as given in Table 3.
+Table 5 gives the run times for each replication in Tables 1 and 3. As we expected,
+the run time for (ML,GA) is longer. However, note that we used 1200 jobs in our
+models, whereas in most real world applications (for example, in the semiconductor
+'test operation' facility that is being modelled in this study) we usually have less than
+50 jobs in each shift (Herrmann et al. 1995). Hence, the run time using our proposed
+framework in real world apphcations may not be of concern.
+Job shop scheduling with a genetic algorithm
+IF(CF< l-477)A(RW>0-487)A(ARP< 161-017) THEN MST.
+IF (CF ^ l-477)A(RW>0-487)A(ARP> 161-071)A(ASU>0-511) THEN MST.
+IF (CF ^ 1-291) A(RW > 0-487)A(ARP > 161-071) A (ASU < 0-511) THEN EDD.
+IF (1-291 < CF ^ 1 -307) A (RW > 0-487) A (ARP > 161-071) A (ASU ^ 0-511) THEN MST.
+IF (1-3O7<CF< 1-477)A(RW>0-487)A(ARP> 161-071) A(ASU<0-511)A(ALPHA>1-85)THEN EDD.
+IF(1-3O7<CF^ 1-477) A(RW>0-487)A(ARP> 169-814) A(ASU< 0-511)A(ALPHA^1-85)THEN EDD.
+IF (1-307<CF « 1-477) A(RW>0-487)A(168-982< ARP « 169-B14)A(ASU $ 0-5ir»A(ALPHA^ 1-85)
+IF(1-46<CF< l-477)A(RW>0-487)A(ARP« 168-982)A(ASU $0-473)A(ALPHA< 1-85)THEN MST.
+IF(1-46<CF« l-477)A(RW>0-487)A(ARP< 168-982)A(0-473<ASU $0-511)A(.\LPHA^ 1-85)
+IF (1-3O7<CF ^ l-46)A(RW>0-492)A(168-982<ARP ^ 169-814)A(ASU ^ 0-511)A
+IF (1-3O7<CF< l-46)A(0-487<RW<0-492)A(168-982<ARP< 169-814)A(ASUs:0-511)A
+IF(1-3O7<CF< l-46)A(0-487<RW)A(168-982<ARP^ 169-814)A(ASU <0-511)A
+IF (1-3O7<CF < l-46)A(0-487<RW)A(168-982<ARP s: I69-8I4)A(ASU <O-511)A(ALPHA < 1-33)
+Eigure 5. Decision rules derived from the decision tree in Fig. 4.
+Table 3. Total tardiness results for the seven workstation case (R: release, D:dispatching).
+Table 4. Final set of dispatching rules obtained for each machine from GA.
+Table 5. Run times on a Sun Sparcstation 20 (minute : second).
+In this paper, we proposed and implemented the job shop scheduler (JSS)
+framework for scheduling jobs in a job shop, incorporating a genetic algorithm
+and machine learning. We utilized parameter-space and developed knowledgebases for job release using machine learning. Genetic algorithm search using
+heuristic-space was used for dispatching jobs at individual machines. By searching
+parameter-space and heuristic-space, we determine the sequence of job release order
+as well as the sequence for dispatching at each individual machine to meet the
+We observe from the simulation models we studied using machine learning, lot
+information plays a significant role when a shop floor is relatively stable. When a shop
+floor is relatively dynamic and has an apparent bottleneck workstation, the information relating to the bottleneck workstation turns out to be a valuable reference. This
+scale of importance agrees with our intuition.
+By comparing the proposed method with a conventional single release and
+dispatching approach, experimental results show that the proposed approach
+utilizing recent advances in artiflcial intelligence techniques appropriately leads to
+significant improvements. We believe that successful implementation of this integrated approach would result in an even greater impact on the performance of
+Some of the issues that need to be addressed while implementing the proposed
+(1) The system parameters. These are of paramount importance since they are the
+source of information for machine learning. In the proposed framework, since
+we utilize ML only for job release, the system parameters must be determined
+so that they are directed against this case. Further, proper system parameters
+have to be identified from the system to reflect the complexities of scheduling a
+(2) When to release jobs. In addition to deciding which job to release, determining
+when (e.g. the WIP level, the queue length at bottleneck machine, etc.) is
+essential since it aflects the system performance. In this study, we used
+CONWIP to limit the size of total work-in-process in the system. However,
+the level of WIP needs to be examined to fit the real system.
+(3) Dispatching rule space for GA. Since GA is domain dependent, the dispatching rule space for GA search must be determined such that it satisfies the
+performance criteria of interest in the manufacturing system. Both the number
+as well as the quality of rules used play a key role. If too many rules are
+selected, they may enable GA to search for a better solution corresponding
+to the performance criteria, while they may also fall into the curse of
+dimensionality and impede the search speed, resulting in the system becoming
+impractical. Practically, manufacturers do not like too many rules. Hence,
+there has to be a compromise in selecting the set of dispatching rules.
+(4) The frequency of switching the release rules. After generating the knowledgebase for releasing jobs, the frequency for checking system variables to decide
+whether or not to switch the job release rule is an important issue. This is true
+especially for practitioners, since changing job release policies too frequently
+may render the system overly nervous as well as cause more resources to be
+spent on switching the rules too frequently.
+Job shop scheduling with a genetic algorithm
+(5) The reliability of this method. In this study, the techniques of ML and GA are
+utilized separately, solving the sequencing of job release and job dispatching
+at each machine in sequence. In addition, it is also necessary for us to know
+the system performance when job release (using ML) and dispatching at
+machines (using GA) are solved simultaneously. Since little is known on this
+issue, further investigation is to be carried out. The outcomes will be used to
+observe the reliability of this approach.
+This paper was supported in part by NSF Grant DDM-9201627 and Harris
+AARTS, E . H . L., VAN LAARHOVEN, P. J. M., LENSTRA, J. K., and ULDER, N . L. J., 1994, A
+computational study of local search algorithm for job shop scheduling. ORSA Journal of
+ADAMS, J., BALAS, E., and ZAWACK, D . , 1988, The shifting bottleneck procedure for job shop
+scheduling. Management Science, 34, 391-401.
+AYTUG, H . , BHATTACHARYYA, S., KOEHLER, G . J., and SNOWDON, J. L., 1994, A review of
+machine learning in scheduling. IEEE Transactions on Engineering Management, 41(2),
+AZRAK, M . , and LEE, C.-Y., 1993, Analysis of dispatching policies in semiconductor post-test
+operations. Journal of Electronic Manufacturing, 3, 145-157.
+BAKER, K . R . , 1984, The effects of input control on the performance of a simple scheduling
+model. Journal of Operations Management, 4(2), 99-112.
+BARNES, J. W., and CHAMBERS, J. B., 1991, Solving the job shop scheduling problem using tabu
+search. Technical Report OPR91-06, Graduate Program in Operations Research,
+BEAN, J. C, 1994, Genetics and random keys for sequencing and optimization. ORSA Journal
+BENSANA, E., BEL, G . , and DUBOIS, D . , 1988, OPAL: a multi-knowledge-based system for
+industrial job-shop scheduling. International Journal of Production Research, 26(5), 795819.
+CERNY, V., 1985, Thermodynamical approach to the traveling salesman problem: an efficient
+simulation algorithm. Journal of Optimization Theory and Applications, 45. 41.
+DAVIS, L., 1985, Job shop scheduling with genetic algorithms. In Proceedings of the International Conference on Genetic Algorithms and their Applications, J. Grefenstette (ed.).
+DAVIS, L., ed., 1991, Handbook of Genetic Algorithms (New York: Van Nostrand Reinhold).
+DELLA CROCE, E., TADEI, R . , and VOLTA, G . , 1992, A genetic algorithm for the job shop
+problem. DAI, Politecnico di Torino, Italy.
+EiscHLER, M. A., and FIRSCHEIN, O., 1987, Intelligence: The Eye, the Brain and the Computer,
+Fox, B. R., and MCMAHON, M . B., 1990, Genetic operators for sequencing problems. Planning
+and Scheduling Group, McDonnell Douglas Space Systems, Houston, Texas.
+Fox, M. S., and SMITH, S. F . , 1984, ISIS—a knowledge-based system for factory scheduling.
+GLASSEY, C . R . , and RESENDE, M . G . C , 1988, Closed-loop job release control for vlsi circuit
+manufacturing. IEEE Transactions on Semiconductor Manufacturing, 1, 36-46.
+GLOVER, F . , 1977, Heuristics for integer programming using surrogate constraints. Decision
+GOLDBERG, D . E., 1989, Genetic Algorithms in Search, Optimization, and Machine Learning
+GUPTA, M . C , GUPTA, Y . P., and KUMAR, A., 1993, Minimizing flow time variance in a single
+machine system using genetic algorithm, 70, 289-303.
+HERRMANN, J. W., and LEE, C.-Y., 1995. Solving a class scheduling problem with a genetic
+algorithm. ORSA Journal of Computing, 7, 443-452.
+HERRMANN, J. W., LEE, C.-Y., and HINCHMAN, J., 1995, Global job shop scheduling with a
+genetic algorithm. Production and Operations Management, 4, 30-44.
+HOLLAND, J. H., 1975, Adaptation in Natural and Artificial Systems (Detroit, MI: University of
+IRASTORZA, J. C , and DEANE, R . H . , 1974, A loading and balancing methodology fot job shop
+control. ARE Transactions, 6(4), 302-307.
+KIRKPATRICK, S., GELATT, C . D . , and VECCHI, M . P., 1983, Optimization by simulated
+LAWTON, G . , 1992, Genetic algorithm for schedule optimization. AI Expert, May, Ti-ll.
+MAHMOODI, ¥., DooLEY, K. J., and STARR, P. J., 1990, An evaluation of otdet releasing and due
+date assignment heuristics in a cellulat manufacturing system. Journal of Operations
+MATSUO, H . , SUH, C . J., and SULLIVAN, R. S., 1988, Controlled search simulated annealing for
+general job shop scheduling problem. Working paper 03-44-88, Graduate School of
+MELNYK, S. A., and RAGATZ, G . L., 1989, Otdet review/release: teseatch issues and
+perspectives. International Journai of Production Research, 11(1), 1081-1096.
+MELNYK, S. A., RAGATZ, G . L., and FREDENDALL, L., 1991, Load smoothing by the planning
+and otdet review/release systems: a simulation experiment. Journal of Operations
+MiCHALEWicz, G., 1992, Genetic Algorithm + Data Structures = Evolution Programs (New
+MORTON, T. E., and PENTrco, D. W., 1993, Heuristic Scheduling Systems (New York: Wiley).
+NAKANO, R , , and YAMADA, T., 1993, Conventional genetic algorithms fot job shop problems. In
+Proceedings of the Fourth International Conference on Genetic Algorithms (New Yotk:
+NAKASUKA, S., and YOSHIDA, T., 1992, Dynamic scheduling system utilizing machine learning as
+a knowledge acquisition tool. International Journal of Production Research, 30(2), 4 1 1 431.
+OvAciK, I. M., and UZSOY, R . , 1992, A shifting bottleneck algorithm fot scheduling semiconductor testing operations. Journal of Electronics Manufacturing, 199-134.
+Ow, P. S., and SMITH, S. F . , 1988, Viewing scheduling as an opportunistic ptoblem-solving
+process. Annals of Operations Research, 12, 85-108.
+PANWALKER, S. S., and ISKANDER, W . , 1977, A survey of scheduling rules. Operations Research,
+PiNEDo, M., 1995, Scheduling: Theory, Algorithms, and Systems (Fnglewood Cliffs, NJ:
+PrRAMUTHU, S., RAMAN, N . , and SHAW, M . J., 1994, Learning-based scheduling in a flexible
+manufacturing flow line. IEEE Transactions on Engineering Management, 41(2), 172-182.
+QuiNLAN, J. R., 1990, Decision trees and decision making. IEEE Transactions on Systems, Man
+RAGATZ, G . L., and MABERT, V. A., 1988, An evaluation of order release mechanism in a jobshop environment. Decision Sciences, 19, 167-189.
+RICH, E., and KNIGHT, K . , 1991, Artificial Intelligence (New Yotk: McGtaw-Hill).
+SADEH, N . , 1991, MICRO-BOSS: a micto-oppottunistic factory scheduler. Center fot
+Integrated Manufacturing Decision Systems, The Robotics Institute, Catnegie Mellon
+SHANNON, C . E., 1948, A mathematical theory of communication. Bell Systems Technological
+SHAW. M . J., PARK, S. C , and RAMAN, N . , 1992, Intelligent scheduling with machine learning
+capabilities: the induction of scheduling knowledge. HE Transactions, 24(2), 156-168.
+SHIMOYASHIRO, S., ISODA, K . , and AWANE, H . , 1984, Input scheduling and load balance control
+for a job shop. International Journal of Production Research, 22(4), 597-605.
+SMITH, S. F . , FOX, M . S., and Ow, P. S., 1986, Constructing and maintaining detailed
+production plans: investigations into the development of knowledge-based factory
+scheduling systems. AI Magazine, 7(4), 45-61,
+SPEARMAN, M . L., WOODRUFE, D . L., and HOPP, W . J., 1990, CONWIP: A pull alternative to
+kanban. International Journal of Production Research, 28, 879.
+Job shop scheduling with a genetic algorithm
+STORER, R, H , , WU, S, D,, and VACCARI, R , , 1992, New search spaces for sequencing problems
+with application to job shop scheduling. Management Science, 38(10), 1495-1509,
+TAILLARD, E,, 1994, Parallel taboo search techniques for the job shop scheduling problems,
+VAN LAARHOVEN, P , J, M,, AARTS, E , H , L,, and LENSTRA, J, K,, 1992, Job shop scheduling by
+simulated annealing. Operations Research, 40, 113-126,
+WEIN, L, M , , 1988, Scheduling semiconductor wafer fabrication, IEEE Transactions on
+WHITLEY, D , , STARKWEATHER, T , , and FUQUAY, D , , 1989, Scheduhng problems and the
+traveling salesman: the genetic edge recombination operators. Proceedings of the Third
+International Conference on Genetic Algorithms, 133-140,

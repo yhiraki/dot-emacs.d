@@ -1,0 +1,780 @@
+International Journal of Computer Integrated Manufacturing, 2014
+Vol. 27, No. 1, 48–59, http://dx.doi.org/10.1080/0951192X.2013.800231
+Using artiﬁcial neural networks to forecast operation times in metal industry
+Department of Industrial Engineering, Dogus University, Istanbul, Turkey; bDepartment of Industrial Engineering, Kocaeli University,
+(Received 18 April 2012; ﬁnal version received 23 April 2013)
+This study was conducted in an auto spare parts production plant where the biggest bottleneck in managing the enterprise is
+the lack of fulﬁlling the requisitions of the customers on time. The main reason for the delay is the absence of operation
+time data valid for the required parts ordered with different speciﬁcations. For preparing effective schedules and for
+eliminating the bottleneck, the factory needs to use reliable operation time data for each part produced. An artiﬁcial neural
+network (ANN) approach was used for this purpose, and its forecasting performance was compared with that of multiple
+linear and nonlinear regression models. Based on the statistical analyses, the ANN approach outperformed the regression
+models and is found to be more reliable in forecasting the operation times.
+Keywords: forecasting; forecasting methods; artiﬁcial neural networks; multiple regression
+Increasing competition is forcing business enterprises to
+pay more attention to customer satisfaction. High quality,
+low cost and on-time delivered products and services are
+deemed necessary to compete in today’s global economy.
+How efﬁcient you produce your product or service affects
+the cost and quality of what you produce. It is crucial for
+enterprises to deliver products with desired features punctually. Products not delivered on time have a demoting
+Integrating key applications into business operations is
+essential to attain customer satisfaction. That is why contemporary managers are trying to utilise various kinds of
+technology and decision-making tools in their establishments. These techniques/tools are made operative in both
+areas of business and manufacturing. For manufacturing
+companies, planning and control plays an important role,
+which entails the acquisition and allocation of limited
+resources to production activities so as to satisfy customer
+demand over a speciﬁed time horizon. Organising and
+operating a demand-driven manufacturing model requires
+the capability to capture and manage massive amounts of
+real-time information, which needs to be quickly elaborated to provide the right transparency to production and
+materials ﬂow within the plant. Sometimes predicted
+information becomes necessary for these models, where
+using the past the future is predicted by identifying trends,
+patterns and business drives within the data.
+Companies striving for operational excellence and a
+competitive advantage realise the impact forecasting has
+upon the ability of a company to satisfy its customers
+and to simultaneously manage its resources. Forecasting
+*Corresponding author. Email: mkumru@dogus.edu.tr
+provides the input for planning production: process
+design, capacity planning, aggregate planning, scheduling
+and inventory management. Forecasting in a factory plays
+the hardest role of knowing what to produce now to
+supply the demand in the future and containing the
+resources available on hand to do this. The challenge is
+not only to come up with the future demand and the
+efﬁcient manufacturing design, but also to beat the lead
+times in between the chains in the systems. Therefore,
+forecasting has been used considerably in manufacturing
+and technology along with other areas of management.
+Various forecasting methods/techniques have been
+employed in this area for different purposes. A comparison of these methods is given below, and the artiﬁcial
+neural networks (ANNs) deserve a special part therein.
+The aim of this study was to use ANN approach in
+forecasting the operation times of manufacturing parts and
+to test its performance against those of regression models.
+In this respect, the article describes a signiﬁcant advancement in the particular ﬁeld of applied research. It presents
+ﬁrst in the proceeding sections an ANN application to
+forecast operation times of a lathe machine for speciﬁc
+orders of products in a manufacturing plant. Further, the
+forecasting performance of the proposed model is checked
+against that of multiple linear and nonlinear regression
+2. Forecasting methods in manufacturing and
+Several forecasting methods have been used in manufacturing and technology from simplest to the complicated
+International Journal of Computer Integrated Manufacturing
+ones. Nine forecasting methods were described and discussed in three groups by Meade (2000). The ﬁrst three
+methods assume a minimal time series structure (long-run
+average (an average of previous observations is used as a
+forecast), no change (the last known observation is used as
+a forecast) and deterministic trend (an average of previous
+differences is used to estimate a global linear trend)). The
+second group of methods (single exponential smoothing
+(stochastic level, no trend), Holt’s linear trend (stochastic
+level, stochastic linear trend) and Holt’s damped trend
+(trend tamped by a geometric factor)) use exponential
+smoothing. Robust trend method (non-parametric version
+of Holt’s linear trend method – median-based estimate of
+trend) is also included in this group. The author declares
+that exponential smoothing methods are sensitive to the
+estimation procedure and to the values used to initialise
+the procedure. The third group comprises the autoregressive moving average (ARMA)-based methods (ARMA,
+ARARMA): These are the sophisticated methods and
+describe stationary time series. One major difference
+between the two methods is the means by which the series
+Alfares and Nazeeruddin (2002) arranged in roughly
+chronological order and discussed the nine categories of
+forecasting techniques, which are multiple regression,
+exponential smoothing, iterative reweighted least squares,
+adaptive forecasting, stochastic time series, ARMAX
+model (ARMA with exogenous inputs) based on genetic
+algorithms, fuzzy logic, neural networks and knowledgebased expert systems. The authors also added the
+expanded forms of these models into their study. They
+asserted that the time series approach is still widely used,
+but because of their limited success, a number of old
+approaches seem to be out of favour, and there is considerably less emphasis on methods such as iterative reweighted
+least-squares and adaptive forecasting. After surveying all
+these approaches, they observed a clear trend towards new,
+stochastic and dynamic forecasting techniques (fuzzy
+logic, expert systems and particularly neural networks).
+There is also a clear move towards hybrid methods,
+which combine two or more of the forecasting techniques.
+Rapach and Strauss (2008) examined different approaches
+(individual and combining/hybrid) to forecasting and
+found that combining methods based on principal components exhibit the best overall performance, while methods
+based on simple averaging, clusters and discount mean
+squared forecast error also perform well. They also warn
+that some combining methods, such as those based on
+ordinary least squares, often perform quite poorly.
+A few other comparative studies in forecasting methods are introduced shortly below. Paliwal and Kumar
+(2009) found that though multiple regression, discriminant
+analysis and logistic regression are some of the commonly
+used traditional statistical techniques applied for prediction and classiﬁcation and are being widely used in
+various applications because of their established methodology, ANNs are being used as an alternative to these
+traditional techniques and gaining popularity in recent
+years. Finnie, Wittig, and Desharnais (1997) compared
+three estimation techniques (regression analysis, ANNs
+and case-based reasoning) and stated that regression models performed poorly on the data, but both ANNs and
+case-based reasoning appeared to have value for estimation models. Similarly, Kim, An, and Kang (2004) applied
+the same techniques namely multiple regression analysis,
+ANNs and case-based reasoning and concluded that
+although the best ANN model performed better than the
+other models for accuracy of estimation, the procedure to
+train the best ANN model was slow because of the trial
+and error process. Setyawati, Sahirman, and Creese (2002)
+concluded that ANNs outperformed linear regression
+models, given the same training data and the same variables. However, according to Feng and Wang (2002),
+there are no statistically signiﬁcant differences between
+the performances of the two methods (nonlinear regression
+analysis and computational ANNs). Yesilnacar and Topal
+(2005) found that the ANNs method predicts better than
+the logistic regression method. Dvir et al. (2006) showed
+that ANNs have signiﬁcantly better explanatory and prediction power, and it enables the exploration of relationships among the data that are difﬁcult to arrive at by
+traditional statistical methods. Pendharkar (2006) conﬁrmed the superior performance of ANN over the linear
+In forecasting problems, in general, the most widely
+used technique has been the regression model. Through
+the use of linear regression techniques, Rossetti and Clark
+(2003) developed a methodology for using bar code scanner timing information from an automated shop ﬂoor data
+collection system to estimate mean operation times for
+multiple product types within a ﬂexible manufacturing
+system environment. Vainio et al. (2010) achieved good
+results with multivariate linear regression model in estimating the printed circuit board assembly times and proposed to consider the nonlinearity case for better results.
+However, they also suggested by comparison that the
+nonlinear ANN has the potential to improve the estimation
+The above review clearly points out the potential of
+ANNs being used as a tool for classiﬁcation and prediction problems. ANNs have outperformed in most of the
+cases or at least performed as well as other methods.
+Validity of assumptions for statistical techniques is critical
+to the performance and brings limitation to use these
+techniques optimally. It has also been suggested in many
+studies to combine the features of both techniques to
+enhance the overall prediction or classiﬁcation performance. In this regard, these two techniques become complementary methods for model building rather than
+competing methods (Paliwal and Kumar 2009).
+Based on the foregoing discussions, it may be said that
+in most of the manufacturing and technology problems
+with a nonlinear relation and complexity among the variables, ANNs perform better than the other forecasting
+methods. Because of its inherent ability to capture nonlinearity and the complexity of the changeable environment of each project, ANNs model may improve the
+estimation of any kind in technical ﬁelds. Forecasting the
+operation times in manufacturing is also a typical problem
+to which the ANNs approach can be performed effectively. This featured approach is to be explained brieﬂy
+An ANN is a mathematical or computational model based
+on biological neural networks. It consists of an interconnected group of artiﬁcial neurons and processes information using a connectionist approach to computation. In
+most cases, an ANN is an adaptive system that changes
+its structure based on external or internal information that
+ﬂows through the network during the learning phase. In
+more practical terms, ANNs are nonlinear statistical data
+modelling tools. They can be used to model complex
+relationships between inputs and outputs or to ﬁnd
+patterns in data (http://en.wikipedia.org/wiki/Artiﬁcial_
+ANNs are highly interconnected simple processing
+units designed in a way to model how the human brain
+performs a particular task (Catalao et al. 2007). Each of
+those units, also called neurons, forms a weighted sum of
+its inputs to which a constant term called bias is added.
+This sum is then passed through a transfer function: linear,
+sigmoid or hyperbolic tangent. The units are organised in
+a way that deﬁnes the network architecture. Networks with
+interconnections that do not form any loops are called feed
+forward. Recurrent or non-feed forward networks in which
+An example of a simple feed forward network.
+there are one or more loops of interconnections are used
+for some kinds of applications (Almeida 1997). In feed
+forward networks, units are often arranged in layers: an
+input layer, one or more hidden layers and an output layer
+(Figure 1). The units in each layer may share the same
+inputs, but are not connected to each other. Typically, the
+units in the input layer serve only for transferring the input
+pattern to rest of the network, without any processing.
+ANN models can be used to infer a function from
+observations. This is particularly useful in applications
+where the complexity of the data or task makes the design
+of such a function by hand impractical. The tasks to which
+ANNs are applied tend to fall within the broad categories
+of functional approximation, classiﬁcation and data processing. Imitating the functioning of human brain, ANN is
+a tool of great importance in forecasting as well. Most
+widely used ANN type forecasting is multi-layer perception (MLP). In an MLP designed forecasting, determining
+the variables, such as number of inputs, hidden and output
+neurons, is highly important (Hamzaçebi 2007).
+Forecasting with ANNs involves two steps: training
+and learning. Training of feed forward networks is normally performed in a supervised manner. One assumes
+that a training set is available, given by the historical
+data, containing both inputs and the corresponding desired
+outputs, which is presented to the network. The adequate
+selection of inputs for neural network training is highly
+inﬂuential to the success of training. In the learning process, a neural network constructs an input–output mapping, adjusting the weights and biases at each iteration
+based on the minimisation of some error measure between
+the output produced and the desired output. Thus, learning
+entails an optimisation process. The error minimisation
+process is repeated until an acceptable criterion for convergence is reached.
+ANNs are being widely used in many ﬁelds of study
+including the areas of prediction and classiﬁcation, the
+International Journal of Computer Integrated Manufacturing
+areas where statistical methods have traditionally been
+used. This could be attributed to the fact that these networks are attempts to model the capabilities of human
+brains. Since the last decade, ANNs are being used as a
+theoretically sound alternative to traditional statistical
+models. Both the traditional statistical methods and
+ANNs are looked upon as competing model-building techniques in literature. A number of researchers have illustrated the connection of ANNs to traditional statistical
+methods (Paliwal and Kumar 2009). Smith and Mason
+(1997) showed in their study that ANNs have advantages
+when dealing with data that does not adhere to the generally chosen low order polynomial forms or data for
+which there is little a priori knowledge of the appropriate
+regression model to be selected. The ANN produces
+improved performance over conventional regression analysis in terms of mean absolute percentage error. Error rate
+predicted by the ANN is smaller than that predicted by the
+regression analysis (Lee and Um 2000; Heiat 2002).
+The advantages that ANNs offer are numerous and
+achievable only by developing an ANN model of high
+performance. Unfortunately, determining suitable training and architectural parameters of an ANN still remains
+a difﬁcult task. Finding out the optimal number of hidden layers and hidden neurons is usually cumbersome, as
+no general methodology is available for their ascertainment. These parameters are typically determined in
+trial and error procedure, where a large number of
+ANN models are developed and compared to one
+another. This process is repeated until the error rate is
+minimised or reaches to an acceptable level or until a
+speciﬁed number of iterations have been accomplished.
+However, analyses and experiments have shown that the
+optimal ANN training and architectural parameters can
+also be determined in a systematic way to avoid the
+lengthy trial and error procedures. Several methods
+have been used for this purpose, such as design of
+experiment (Laosiritaworn and Chotchaithanakorn
+2009), genetic algorithm (Leung et al. 2003; Ahmed
+et al. 2009), evolutionary algorithm (Davoian, Reichel,
+and Lippe 2006; Au, Choi, and Yu 2008), optimality
+factor (Khela and Sandhu 2011), pattern search algorithm (Ihme, Marsden, and Pitsch 2008), Taguchi
+One of the important advantages of ANNs cited in the
+literature is its ability to approximate automatically any
+nonlinear mathematical function. This aspect is particularly useful when the relationship between the variables is
+not known or is complex, and hence it is difﬁcult to
+handle statistically. ANNs has also been criticised in
+most of the articles because of its lack of interpretability
+of the weights obtained during the model building process
+and time consuming course of action to ﬁnd the optimal
+ANNs have proven to be effective mapping tools for a
+wide variety of problems, and consequently they have
+been used extensively by practitioners in almost every
+application domain ranging from agriculture to zoology.
+Since ANNs are best at identifying patterns or trends in
+data, they are well suited for prediction or forecasting
+applications (Jha 2007). Along with numerous forecasting
+applications in other than manufacturing areas (Kalogirou
+2001; Kermanshahi and Iwamiya 2002; Doganis et al.
+2006; Pendharkar 2006; Pao 2006; Pao 2007; Cadenasa
+and Rivera 2007; Jha 2007; Wang 2007; Pino et al. 2008),
+there is, however, a considerable number and variety of
+these works in manufacturing ﬁeld. A small sample of
+manufacturing focused ANN applications are indicated
+Most of the ANN applications have been made in
+production scheduling. A comprehensive overview on
+ANN approaches for solution of production scheduling
+problems was given in the paper of Akyol and Bayhan
+(2007), where they discussed both theoretical developments and practical experiences and identiﬁed research
+trends. Within this scope, it is worth to mention the study
+of Feng et al. (2003), who applied the ANNs (multilayered perceptron networks) to the problem of job
+shop scheduling under a deterministic time-varying
+demand pattern over a ﬁxed planning horizon. Doganis,
+Aggelogiannaki, and Sarimveis (2008) proposed a complete management framework for production-inventory
+systems based on model predictive control and on a
+neural network time series forecasting model and showed
+that the proposed scheme can improve signiﬁcantly the
+performance of the production-inventory system because
+of more accurate predictions. Johnston, Maguire, and
+McGinnity (2009) dealt with manufacturing performance
+improvement and used by this purpose the ANNs to
+identify downstream performance in manufacturing
+environment and highlighted how the six-sigma approach
+is employed to guide the deployment of the intelligent
+systems approaches to obtain improved performance in
+these environments. Al-Ahmari (2008) used ANNs for
+turning operations to develop empirical models for tool
+life, surface roughness and cutting force to attain minimum production cost. There is a couple of recent
+researches that use ANN focused on predicting the physical shapes and quality of manufacturing products, such
+as predicting the work piece geometry (Martin, Dantan,
+and D’Acunto 2011), predicting the build-up edge formation in machining (Fang, Srinivasa Pai, and Edwards
+2010), predicting the weld-quality (Pal, Pal, and
+Samantaray 2010), predicting the surface roughness
+(Quintana, Bustillo, and Ciurana 2012) and predicting
+the surface roughness and vibration (Asiltürk et al.
+In estimating the process parameters, the following
+studies are worth to mention. Yarlagadda and Khong
+(2001) worked on an ANN system to predict injection
+moulding process parameters such as injection time and
+injection pressure. By integrating the different aspects of
+metal injection moulding process, Yarlagadda (2002)
+further studied neural network system for the same purpose. Chang, Wang, and Ting (2008) discussed a neuralfuzzy model for the ﬂow time estimation using simulated
+data generated from a foundry service company. Their
+neural-fuzzy model applied inﬂuential factors identiﬁed
+from the shop ﬂoor, that is order processing time, total
+work-in-process and total jobs in system and utilisation of
+bottleneck machines, to estimate the ﬂow time of a new
+order. Identifying the process parameters (cutting speed,
+feed rate, depth of cut and tool nose radius) as inputs,
+Vainio et al. (2010) trained multilayer ANNs to approximate the assembly times of two different types of assembly machines based on several parameter combinations
+(component types, component shapes, component dimensions, etc.) in electronic assembly industry and used
+Bayesian regularisation to achieve efﬁcient learning and
+good accuracy. In their study, Shafaei, Rabiee, and
+Mirzaeyan (2011) applied an adaptive neuro fuzzy inference system using six heuristic scheduling algorithms to
+estimate the makespan in multiprocessor no-wait twostage ﬂexible ﬂow shop.
+As a result, ANNs have been applied successfully in
+many manufacturing and engineering areas, but to our
+knowledge no study has been encountered in the literature
+on the estimation of operation times in metal industry by
+ANN method as was given in this work. This inference
+conﬁrms the originality of this article. The research is
+presented as a new contribution to existing knowledge in
+The implementation was conducted in an auto spare
+parts manufacturing plant. The biggest bottleneck in
+managing the enterprise was the inability to fulﬁl the
+requisitions of the customers on time. The delay in
+delivery time was up to 47 days for the enterprise (company records). The main reason for the delay was the
+lack of information regarding the operation times of
+lathing (surface ﬁnishing by turning operation) for the
+required parts with different speciﬁcations. For those
+types of products, it was difﬁcult to estimate the operation times intuitively. Since ANN is an appropriate tool
+in prediction of nonlinear and complex systems, it was
+investigated in this study whether the ANN is a convenient modelling approach for estimating the operation
+The application part of the study was composed of four
+stages. In the ﬁrst stage, the factors and their levels affecting the duration of lathing operations of specially required
+parts were determined. The necessary data were searched
+from historical production records and exemplary ﬁgures
+were derived. In case of any lack of appropriate data, time
+study measurements were carried out. Even so, limited
+amount of data could be gathered because of production
+constraints. The data on hand were classiﬁed as of training
+and prediction data. Correlation analyses were investigated to understand the level of relationship between the
+In the second stage, after determining its conﬁguration,
+ANN was applied to the training data by using NeuroXL
+Predictor software. Consistency between the actual and the
+ANN predicted data were evaluated by hypothesis testing.
+Several error measures were derived to make comparisons.
+In the third stage, alternative forecasting methods,
+namely multi-variable linear and nonlinear regression,
+were applied to the same set of data. Consistencies
+between the actual and the regression predicted data
+were evaluated again by hypothesis testing. Several error
+measures were also derived to make comparisons.
+In the ﬁnal stage of application, the prediction performances of ANN and regression methods were compared.
+The ﬂowchart of the methodology is given in Figure 2.
+5.3. Factors affecting the operation time
+For the inputs of the ANN, the factors affecting the duration of surface ﬁnishing operation were decided by
+domain experts. Three levels were determined for each
+type of input. It was assumed that the operation parameters of cutting speed and feed value are adjusted to
+the most appropriate values according to cutting tool and
+Hardness or softness of material is to affect the operation
+times. Brass, iron and steel are three different groups of
+materials used in the factory. They have different impacts
+on the amounts of operation times. Since brass is the
+softest and steel is the hardest one among these material
+groups, operation times are to increase for the same process from brass to steel. Thus, the level of operation times
+for brass, iron and steel were grouped respectively as 0.30,
+0.40 and 1.0 minute for a standard operation.
+The total surface area to be ﬁnished affects the length of
+operation time. Three levels of total surface area to be
+International Journal of Computer Integrated Manufacturing
+ﬁnished were derived from statistical data ,which are
+area 1 (≤9 cm²), area 2 (≥10 cm² and ≤19 cm²) and
+Amount of chips to be removed is also another factor that
+affects the length of operation time. As a resultant of
+number of surfaces multiplied by the depth of lathing
+operations, load of ﬁnishing was grouped into three levels,
+such as low volume (1), average volume (2) and high
+Number of operations is also effective on the length of
+operation times. As number of operations increase, the
+operation times increase as well. At most, three different
+operations have been performed on the products. So, the
+levels were determined as single operation, double operation and triple operation.
+There are various types of lathing operations that differ
+from each other in complexity. The complexity of the
+shapes being machined on the lathe is related to intricacies
+of work piece cross-sections along the axis of revolution.
+As the level of complexity increases, it gets difﬁcult and
+time consuming to perform the job. Therefore, the level of
+complexity of the jobs was categorised into three groups:
+simple (1), common (2) and complicated (3).
+The input factors and their levels are summarised in
+This factor is affected by dimensional quality to some
+extent as an outcome. Small tolerances also need longer
+operation times. Because, for high precision operations,
+cutting (turning velocities) are to be lowered. For smoothness, low (1), average (2) and high (3) levels were deﬁned.
+With respect to the above factors and their levels, historical production records were searched and exemplary ﬁgures were derived. In case of any lack of appropriate data,
+time study measurements were carried out. These ﬁgures
+constituted the ANN input values. Thirty-nine sets of data
+were selected for training the ANN. The inputs are shown
+Before going further, correlation analyses were conducted
+on the training data by using DataFit software to understand the level of relationship between the factors and the
+operation times. The results are given in Table 3. Here, Xs
+represent the input factors, while Y represents the operation
+time. X1 corresponds to the factor ‘Type of Material’, X2
+corresponds to the factor ‘Surface Area Finished’, and so
+on. The table values show that the amount of X–Y correlation changes is between 0.4711 (X6–Y) and 0.7016 (X3–Y),
+which imply quite strong positive linear relationship
+between the independent and the dependent variables.
+When the correlation ﬁgures among independent variables
+are concerned, however, it is seen that the correlation
+changes in between 0.0958 (X2–X3) and 0.5154 (X1–X4),
+which imply a varying amount of positive relationship.
+These results ensure the validity of the selected variables.
+When the ANN conﬁguration for the problem is considered, it is speciﬁed that in this network, the information
+moves in only one direction, forward, from the input
+nodes, through the hidden nodes, and to the output
+nodes. There are no cycles or loops in the network. It
+needs a single-layer organisation, in which all units are
+connected to one another, constitute the most general case.
+Training and architectural parameters in the study were
+determined by trial and error procedure. Various ANN
+conﬁgurations with different transfer functions and varying number of hidden neurons (from 0 to 6) were tested by
+use of the training data to ﬁnd the most suitable conﬁguration. The standard error of prediction ﬁgures derived
+It is seen from the table that the ANN conﬁguration
+using the log-sigmoid transfer function with three hidden
+neurons gives the minimum standard error of prediction
+(0.153404). In this conﬁguration, which is the most suitable one, the units are of log-sigmoid character where the
+output varies continuously but not linearly as the input
+changes. Therefore, NeuroXL Predictor software with
+conﬁguration of feed-forward network, six inputs, one
+hidden layer with three neurons, one output and nonlinear
+log-sigmoid transfer function was used in solving the
+problem. The ANN parameter values were set to 0.3 for
+initial weights and learning rate and 0.6 for momentum.
+Training was completed with 167 epochs and 0.001
+The ANN model was also run on 10 sets of data determined for predictions. The model outputs are given together
+with the actual data for comparison purpose in Table 5.
+To evaluate the consistency between the actual and the
+ANN predicted data, a hypothesis testing was applied to
+test the equality of population means of these two data
+sets. T-test was used with the assumption of unknown and
+unequal population variances. The test parameters are
+given below. Subscript 1 refers to actual data, while subscript 2 refers to prediction data.
+International Journal of Computer Integrated Manufacturing
+Table 4. Standard error of prediction ﬁgures for different transfer functions.
+Notes: *Hyperbolic tangent function is not applicable. It gives repeated and meaningless results. **Threshold function with 0 neuron gives negative
+H0: μ1 ¼ μ2 ; H1: μ1 Þμ2 ; X1 : 2:3050; X2 : 2:4172;
+s21 : 0:3269; s22 : 0:5304, t-value: –0.3832, degrees of freedom: 18, p-value: 0.7061, sig. level: 0.2939. This result
+indicates that there is not a statistically signiﬁcant difference between the two sets of prediction data. Therefore,
+Regarding the standard error measures (accuracy measures), the values are as follows: mean forecast error
+(MFE): –0.1122, mean absolute deviation (MAD):
+0.1763 and mean absolute percent error (MAPE):
+0.0961. This means that the prediction model has considerable over-forecast (0.1122) with an average absolute
+error of 0.1763 units. This corresponds to a 9.61%
+amount of mean absolute error (90.39% forecasting
+However, to better understand the conformity level of the
+present model in predicting the operation times, a commonly used alternative forecasting method was also
+applied for the problem. A multi-variable regression analysis was conducted on the same set of training data. A
+linear model with coefﬁcients of –1.4524, 0.2929, 0.3773,
+0.4752, 0.2617, 0.2383 and 0.1846 was built up. The
+regression model was tested on the same prediction data.
+H0: μ1 ¼ μ2 ; H1: μ1 Þμ2 ; X1 : 2:3050; X2 : 2:3145;
+s21 : 0:3269; s22 : 0:4882: t-value: –0.0333, degrees of freedom: 18, p-value: 0.9738, sig. level: 0.0262. H0 is
+Regarding the standard error measures, the values are
+such that MFE: –0.0095, MAD: 0.2453 and MAPE:
+0.1078. This implies that the prediction model tends to
+have ignorable over-forecast (0.0095) with an average
+absolute error of 0.2453 units, which corresponds to a
+10.78% amount of mean absolute error (89.22% forecasting accuracy).
+Table 6. Prediction data (linear regression).
+Since ANNs are nonlinear statistical data modelling tools,
+a multi-variable nonlinear regression analysis was also
+conducted on the same set of training data for benchmarking purpose. A six-parameter nonlinear polynomial model
+with coefﬁcients of 0.1759, 0.2668, 0.3607, 0.1861,
+0.0890 and 0.0020 was built up. The regression model
+was tested on the same prediction data. The output is
+H0 : μ1 ¼ μ2 ; H1 : μ1 Þμ2 ; X1 : 2:3050; X2 : 2:2252;
+s21 : 0:3269; s22 : 0:2542, t-value: 0.3310, degrees of
+freedom: 18, p-value: 0.7445, sig. level: 0.2555. H0 is
+Regarding the standard error measures, the values are
+such that MFE: 0.0798, MAD: 0.2229 and MAPE:
+0.1081. This implies that the prediction model has considerable under-forecast (0.0798) with an average absolute
+error of 0.2229 units, which corresponds to a 10.81%
+amount of mean absolute error (89.19% forecasting
+When the statistical values of the ANN and the regression
+methods were compared, it is seen that the ANN model
+has performed slightly better than the other two models for
+accuracy of estimation. The forecasting accuracy of the
+ANN was 90.39%, while the regression models had
+almost the same accuracy; it was 89.22% for the linear
+regression and 89.19% for the nonlinear regression.
+Regarding the mean absolute deviation, the ANN model
+still owned the minimum ﬁgure (0.1763) among the models. The linear regression model had the maximum ﬁgure
+(0.2453) and the nonlinear model took place in between
+(0.2229). Mean forecast error ﬁgures, however, point out
+the superiority of the linear regression method over the
+other two. The linear regression had negligible over-forecast value (0.0095), while the nonlinear model had considerable under-forecast value (0.0798) and the ANN had
+quite considerable over-forecast value (0.1122). The pvalues conﬁrm the interpretation similar with that of the
+mean forecast errors. Here again, the linear regression
+model showed much better performance (0.9738) than
+the other two models (nonlinear regression: 0.7445,
+ANN: 0.7061). Although the p-value and the MFE statistics brought results in favour of the linear regression
+model, the other two statistics (MAD, MAPE) come
+forth as more reliable instruments in comparing the methods. Since the MFE statistic measures the tendency of a
+forecasting model to consistently over-forecast or underforecast, where positive and negative errors tend to cancel,
+the MAD statistic, however, removes this drawback and
+does not let positive and negative errors do cancel each
+other out. Consequently, the test and comparison results
+indicate relatively the higher performance of ANN over
+the linear and nonlinear multiple regression models given
+the same training data and the same variables. It is conﬁrmed that the ANN method predicts better than the
+regression methods in forecasting operation times in manufacturing. Its prediction is quite good with ignorable
+amount of standard error. This level of prediction performance strengthens our conviction in favour of the ANN
+method, so that it is more accurate and sound to be used in
+International Journal of Computer Integrated Manufacturing
+forecasting operation times in manufacturing. Though statistical values were in favour of the ANN, when comparing the results, the cost of using ANN should be taken into
+consideration as well. A tradeoff should be determined
+between better forecast accuracy with application limitations of ANN and lower forecast accuracy with ease of use
+of regression methods. For the case studied, forecast accuracy was important and that is why, in spite of its disadvantage of higher cost, the ANN was preferred against
+regression methods. The comparative test results are given
+The prediction data of the methods are graphically
+displayed together with the observed data in Figure 3.
+ANNs are being used increasingly in business applications
+and in certain ﬁelds, such as ﬁnance management, production, operations and business forecasting. This study is a
+unique one about to use ANN for manufacturing needs.
+The model was tailored to estimate the operation times for
+speciﬁc jobs for a bottleneck machine in an auto spare
+parts manufacturing plant. The accuracy of results was
+checked against the test data. As was given in the article,
+even with limited data used for training, it was found that
+the ANN predictions were quite good. It was also concluded that the ANN produces improved performance
+over conventional regression analysis in terms of mean
+absolute percentage error. Error rate predicted by the ANN
+is smaller than that predicted by the regression analysis.
+Since ANNs can automatically approximate any nonlinear mathematical function, this aspect of neural networks
+is particularly useful when the relationship between the
+variables is not known or is complex, and hence it is
+difﬁcult to handle statistically. However, using it is not so
+straightforward and a relatively good understanding of the
+underlying theory is essential. A neural network-based
+modelling approach requires setting up several user-deﬁned
+parameters like learning rate, momentum, optimal number
+of nodes in the hidden layer and the number of hidden
+layers. The determination of these parameters is important,
+and ﬁnding the optimal conﬁguration of neural networks is
+a very time consuming process. The other feature of neural
+networks is the lack of interpretability of the weights
+obtained during the model building process, whereas the
+statistical model clearly stands out as it allows interpretation
+of coefﬁcients of the individual variables.
+It is clear that a neural network depends more on
+training data and the learning algorithm, while regression
+requires an explicit function to be deﬁned before the least
+squares parameter estimates. Increasing the number of
+training examples is likely to improve the performance
+of neural networks. However, overtraining arises as a
+problem when too many training examples are provided,
+and the system becomes incapable of useful generalisation. This can also occur when too many neurons exist in
+the network and the capacity for computation exceeds the
+dimensionality of the input space. To avoid overtraining
+problem, various methods (early stopping, weight decay,
+Bayesian regularisation, noise injection, test data, etc.)
+have been developed to determine when to stop training.
+That is why, during training, care must be taken not to
+provide too many input examples, and it should be
+remembered that different numbers of training examples
+could produce very different results in the quality and
+robustness of the network. Creating a well-founded set
+of observations has to be done with care. In our case, we
+did not encounter such a problem because the number of
+training examples was limited, the number of epochs and
+the weight delta were quite low and the prediction accuracy was very high in the test set. With the correct implementation, ANNs can be used naturally in online learning
+The outcome of this study encourages the application
+of ANN for operation time estimation, but the results
+obtained are parameter speciﬁc and data sensitive. Using
+additional layers of hidden neurons enables greater processing power and system ﬂexibility at the cost of additional complexity in the training algorithm. Having too
+many hidden neurons makes the system over speciﬁed and
+incapable of generalisation. Having too few hidden neurons, conversely, can prevent the system from properly
+ﬁtting the input data and reduces the robustness of the
+system Since the quality of ANN models depends on a
+proper setting of ANN architecture and ANN meta-
+parameters, the main issue for practitioners trying to apply
+ANN regression is how to set these parameter values to
+ensure good generalisation performance for a given data
+set. This is a technical problem in nature and takes several
+Using the network in an application is fast as the
+application of the ready network can be written as a
+function. Without compromising its accuracy, robustness
+and implementation feasibility, it is possible to adapt the
+network in an easy manner to new observations for different kinds of applications. As forecasting provides the
+input for production planning – process design, capacity
+planning, aggregate planning, scheduling and inventory
+management – the potential users of ANN systems are
+the departments (production management, engineering,
+scheduling, etc.) responsible for those operations.
+A quick glance of the tables given in previous sections
+would reveal that neural networks outperform or at least
+performs as well as regression methods. It might be useful
+to combine the features of both the techniques to enhance
+the overall prediction performance. In this regard, these two
+groups of techniques become complementary methods for
+model building rather than competing methods. Therefore,
+a tradeoff should be determined between better forecast
+accuracy with application limitations of ANN and lower
+forecast accuracy with ease of use of regression methods.
+Though ANN is found to be an appropriate and effective method to forecast the operation times in this different
+area of application, its performance depends on the type of
+problem and the quality of training data. Therefore, the
+data collection phase, which is one of the time consuming
+events for an enterprise, should be carried out effectively.
+With clearly deﬁned problem inputs, sufﬁcient amount of
+data and proper conﬁguration of the model, similar results
+could be achieved. Further research can be extended on
+using ANN predictions for chain of operations with several hidden layers and outputs.
+Ahmed, O., M. Nordin, S. Sulaiman, and W. Fatimah. 2009. “Study
+of Genetic Algorithm to Fully-Automate the Design and
+Training of Artiﬁcial Neural Network.” International Journal
+of Computer Science and Network Security 9 (1): 217–226.
+Akyol, D. E., and M. Bayhan. 2007. “A Review on Evolution of
+Production Scheduling with Neural Networks.” Computers
+and Industrial Engineering 53 (1): 95–122.
+Al-Ahmari, A. M. A. 2008. “Prediction and Optimization
+Models for Turning Operations.” International Journal of
+Alfares, H. K., and M. Nazeeruddin. 2002. “Electric Load
+Forecasting Literature Survey and Classiﬁcation of Methods.”
+International Journal of Systems Science 33 (1): 23–34.
+Almeida, L. B. 1997. “Multilayer Perceptrons.” In Handbook of
+Neural Computation, edited by E. Fiesler, and R. Beale,
+Asiltürk, İ., M. Tinkir, H. El Monuayri, and L. Çelik. 2012. “An
+Intelligent System Approach for Surface Roughness and
+Au, K. F., T. M. Choi, and Y. Yu. 2008. “Fashion Retail Forecasting
+by Evolutionary Neural Networks.” International Journal of
+Cadenasa, E., and D. Rivera. 2007. “Wind Speed Forecasting in
+the South Coast of Oaxaca, Mexico.” Renewable Energy 32
+Catalao, J. P. S., S. J. P. S. Mariano, V. M. F. Mendes, and L. A. F. M.
+Ferreira. 2007. “Short – Term Electricity Prices Forecasting in a
+Competitive Market: A Neural Network Approach.” Electric
+Power Systems Research 77 (10): 1297–1304.
+Chang, P.-C., Y.-W. Wang, and C.-J. Ting. 2008. “A Fuzzy
+Neural Network for the Flow Time Estimation in a
+Semiconductor Manufacturing Factory.” International
+Journal of Production Research 46 (4): 1017–1029.
+Davoian, K., A. Reichel, and W.-M. Lippe. 2006. “Comparison
+and Analysis of Mutation-Based Evolutionary Algorithms
+for ANN Parameters Optimization.” In Proceedings of the
+International Conference on Data Mining (DMIN'06),
+Doganis, P., E. Aggelogiannaki, and H. Sarimveis. 2008. “A
+Combined Model Predictive Control and Time Series
+Forecasting Framework for Production-Inventory Systems.”
+International Journal of Production Research 46 (24):
+Doganis, P., A. Alexandridis, P. Patrinos, and H. Sarimveis.
+2006. “Time Series Sales Forecasting for Short Shelf- Life
+Food Products Based on Artiﬁcial Neural Networks and
+Evolutionary Computing.” Journal of Food Engineering 75
+Dvir, D., A. Ben-Davidb, A. Sadehb, and A. J. Shenhar. 2006.
+“Critical Managerial Factors Affecting Defense Projects
+Success: A Comparison Between Neural Network and
+Regression Analysis.” Engineering Applications of
+Fang, N., P. Srinivasa Pai, and N. Edwards. 2010. “Prediction of
+Built-up Edge Formation in Machining with Round Edge
+and Sharp Tools Using a Neural Network Approach.”
+Feng, C.-X., and V. Wang. 2002. “Surface Roughness Predictive
+Modelling: Neural Networks Versus Regression.” IIE
+Transactions on Design and Manufacturing 40 (3): 683–697.
+Feng, S., L. Li, L. Cen, and J. Huang. 2003. “Using MLP
+Networks to Design a Production Scheduling System.”
+Computers and Operations Research 30 (6): 821–832.
+Finnie, G. R., G. E. Wittig, and J-M. Desharnais. 1997. “A
+Comparison of Software Effort Estimation Techniques:
+Using Function Points with Neural Networks, Case-Based
+Reasoning and Regression Models.” Journal of Systems and
+Hamzaçebi, C. 2007. “Forecasting of Turkey's Net Electricity
+Energy Consumption on Sectoral Bases.” Energy Policy 35
+Heiat, A. 2002. “Comparison of Artiﬁcial Neural Network and
+Regression Models for Estimating Software Development
+Effort.” Information and Software Technology 44 (15):
+911–922. Accessed January 15, 2009. http://en.wikipedia.
+Ihme, M., A. L. Marsden, and H. Pitsch. 2008. “Generation of
+Optimal Artiﬁcial Neural Networks Using a Pattern Search
+Algorithm: Application to Approximation of Chemical
+Systems.” Neural Computation 20 (2): 573–601.
+International Journal of Computer Integrated Manufacturing
+Jha, G. K. 2007. “Artiﬁcial Neural Networks and Its
+Applications.” Accessed January 20, 2009. http://www.iasri.
+res.in/ebook/EBADAT/5-Modeling%20and%20Forecasting%
+20Techniques%20in%20Agriculture/5-ANN_GKJHA_2007.
+Johnston, A. B., L. P. Maguire, and T. M. McGinnity. 2009.
+“Downstream Performance Prediction for a Manufacturing
+System Using Neural Networks and Six- Sigma
+Improvement Techniques.” Robotics and ComputerIntegrated Manufacturing 25 (3): 513–521.
+Kalogirou, S. A. 2001. “Artiﬁcial Neural Networks In
+Renewable Energy Systems Applications: A Review.”
+Renewable and Sustainable Energy Reviews 5 (4): 373–401.
+Kermanshahi, B., and H. Iwamiya. 2002. “Up to Year 2020 Load
+Forecasting Using Neural Nets.” Electrical Power and
+Khela, R. S., and K. S. Sandhu. 2011. “Identiﬁcation of Optimal
+ANN Structure for Analysis of Self-Excited Induction
+Generator.” International Journal of Electrical and
+Kim, G-H., S-H. An, and K-I. Kang. 2004. “Comparison of
+Construction Cost Estimating Models Based on Regression
+Analysis, Neural Networks, and Case-Based Reasoning.”
+Building and Environment 39 (10): 1235–1242.
+Laosiritaworn, W., and N. Chotchaithanakorn. (2009). “Artiﬁcial
+Neural Networks Parameters Optimization with Design of
+Experiments: An Application in Ferromagnetic Materials
+Modeling.” Chiang Mai Journal of Science 36 (1): 83–91.
+Lee, J., and K. Um. 2000. “A Comparison in a Back-Bead
+Prediction of Gas Metal Arc Welding Using Multiple
+Regression Analysis and Artiﬁcial Neural Network.” Optics
+and Lasers in Engineering 34 (3): 149–158.
+Leung, F. H. F., H. K. Lam, S. H. Ling, and P. K. S. Tam. 2003.
+“Tuning of the Structure and Parameters of a Neural
+Network Using an Improved Genetic Algorithm.” IEEE
+Transactions on Neural Networks 14 (1): 79–88.
+Madić, M. J., and M. R. Radovanović. 2011. “Optimal Selection of
+ANN Training and Architectural Parameters Using Taguchi
+Method: A Case Study.” FME Transactions 39 (2): 79–86.
+Martin, P., J-Y. Dantan, and A. D’Acunto. 2011. “Virtual
+Manufacturing: Prediction of Work Piece Geometric
+Quality by Considering Machine and Set-Up Accuracy.”
+Meade, N. 2000. “Evidence for the Selection of Forecasting
+Methods.” Journal of Forecasting 19 (6): 515–535.
+Pal, S., S. K. Pal, and A. K. Samantaray. 2010. “Prediction of the
+Quality of Pulsed Metal Inert Gas Welding Using Statistical
+Parameters of Arc Signals in Artiﬁcial Neural Network.”
+Paliwal, M., and U. A. Kumar. 2009. “Neural Networks and
+Statistical Techniques: A Review of Applications.” Expert
+Pao, H. T. 2006. “Comparing Linear and Nonlinear Forecasts
+for Taiwan's Electricity Consumption.” Energy 31 (12): 2129–2141.
+Pao, H. T. 2007. “Forecasting Electricity Market Pricing Using
+Artiﬁcial Neural Networks.” Energy Conversion and
+Pendharkar, P. C. 2006. “Scale Economies and Production
+Function Estimation for Object-Oriented Software
+Component.” European Journal of Operational Research
+Pino, R., J. Parreno, A. Gomez, and P. Priore. 2008. “Forecasting
+Next-Day Price of Electricity in the Spanish Energy Market
+Using ANNs.” Engineering Applications of Artiﬁcial
+Quintana, G., A. Bustillo, and J. Ciurana. 2012. “Prediction,
+Monitoring and Control of Surface Roughness in HighTorque Milling Machine Operations.” International Journal
+of Computer Integrated Manufacturing 25 (12): 1129–1138.
+Rapach, D. E., and J. K. Strauss. 2008. “Forecasting US
+Employment Growth Using Forecast Combining Methods.”
+Rossetti, M., and G. M. Clark. 2003. “Estimating Operation
+Times from Machine Center Arrival and Departure
+Events.” Computers and Industrial Engineering 44 (3):
+Setyawati, B. R., S. Sahirman, and R. C. Creese. 2002. “Neural
+Networks for Cost Estimation.” AACE International
+Shafaei, R., M. Rabiee, and M. Mirzaeyan. 2011. “An Adaptive
+Neuro Fuzzy Inference System for Makespan Estimation in
+Multiprocessor No-Wait Two Stage Flow Shop.”
+Smith, A. E., and A. K. Mason. 1997. “Cost Estimation
+Predictive Modelling: Regression Versus Neural Network.”
+The Engineering Economist 42 (2): 137–161.
+Vainio, F., M. Maier, T. Knuutila, E. Alhoniemi, M. Johnsson,
+and O. S. Nevalainen. 2010. “Estimating Printed Circuit
+Board Assembly Times Using Neural Networks.”
+International Journal of Production Research 48 (8):
+Wang, Q., 2007. “Artiﬁcial Neural Networks as Cost
+Engineering Methods in a Collaborative Manufacturing
+Environment.” International Journal of Production
+Yarlagadda, P. K. D. V. 2002. “Development of an Integrated
+Neural Network System for Prediction of Process Parameters
+in Metal Injection Moulding.” Journal of Materials
+Yarlagadda, P. K. D. V., and C. A. T. Khong. 2001.
+“Development of a Hybrid Neural Network System for
+Prediction of Process Parameters in Injection Moulding.”
+Journal of Materials Processing Technology 118 (1–3):
+Yesilnacar, E., and T. Topal. 2005. “Landslide Susceptibility
+Mapping: A Comparison of Logistic Regression and
+Neural Networks Methods in a Medium Scale Study,
+Hendek region (Turkey).” Engineering Geology 79 (3–4):
+Copyright of International Journal of Computer Integrated Manufacturing is the property of
+Taylor & Francis Ltd and its content may not be copied or emailed to multiple sites or posted
+to a listserv without the copyright holder's express written permission. However, users may
+print, download, or email articles for individual use.

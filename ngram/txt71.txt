@@ -1,0 +1,437 @@
+Robotics and Autonomous Systems 33 (2000) 169–178
+Dynamic job-shop scheduling using reinforcement learning agents
+Department of Industrial Engineering, Sakarya University, 54040-Esentepe Campus, Adapazari, Turkey
+b Tubitak-Marmara Research Center, BTAE, Artificial Intelligence Group, Gebze, Kocaeli, Turkey
+Received 1 January 1999; received in revised form 1 May 1999; accepted 1 December 1999
+Static and dynamic scheduling methods have attracted a lot of attention in recent years. Among these, dynamic scheduling
+techniques handle scheduling problems where the scheduler does not possess detailed information about the jobs, which may
+arrive at the shop at any time. In this paper, an intelligent agent based dynamic scheduling system is proposed. It consists
+of two independent components: the agent and the simulated environment. The agent selects the most appropriate priority
+rule according to the shop conditions in real time, while simulated environment performs scheduling activities using the rule
+selected by the agent. The agent is trained by an improved reinforcement learning algorithm through the learning stage and
+then it successively makes decisions to schedule the operations. © 2000 Elsevier Science B.V. All rights reserved.
+Keywords: Intelligent agents; Reinforcement learning; Q-III learning; Dynamic job-shop scheduling
+Scheduling, one of the key problems in manufacturing systems, has been a subject of interest for a long
+time. However, it is difficult to talk about a method
+that gives optimal solutions for every problem that
+emerges. The problem is to schedule a set of jobs subject to a set of constraints where each job consists of
+a set of operations. The aim is to get an appropriate
+schedule in terms of a certain criterion.
+Since previous studies have considered the set of
+jobs as having all required information at initial time,
+and hence most of the methods scheduled the jobs in a
+static manner. On the other hand, the relation between
+jobs and shop floor is not so static that the systems
+Corresponding author. Present address: Department of Industrial Engineering, Sakarya University, 54040-Esentepe Campus,
+E-mail address: eoman@mam.gov.tr (E. Öztemel).
+proposed in that manner are not suitable in real life.
+In fact, each job comes into shop over time and the
+required information is uncertain in most cases. Thus,
+a dynamic scheduling system is more suitable than a
+static one. Dynamic systems start with the jobs that
+come first, and assume that they come according to a
+In order to build dynamic scheduling systems, several methods have been proposed so far. Some studies
+have focused on dynamic scheduling for flexible
+manufacturing systems. Yih and Thesen [40] considered the real-time scheduling system for an FMS as
+a semi-Markovian decision process to be optimized.
+Ishii and Talavage [15] generate short-term schedules for an FMS, while Arzi [1] suggests a two-step
+dynamic scheduling algorithm for such systems. Similarly, Matsuura et al. [22] proposed a switching technique for dynamic scheduling allowing consideration
+of machine break-downs and other emergent events.
+Most of the studies were also performed for generic
+0921-8890/00/$ – see front matter © 2000 Elsevier Science B.V. All rights reserved.
+PII: S 0 9 2 1 - 8 8 9 0 ( 0 0 ) 0 0 0 8 7 - 7
+M.E. Aydin, E. Öztemel / Robotics and Autonomous Systems 33 (2000) 169–178
+systems. For example, Sun and Lin [34] viewed the
+scheduling system as an optimal control problem
+of discrete events and scheduled the jobs using a
+On the other hand, there are some approaches developed based on artificial intelligence techniques such as
+neural networks, expert systems, fuzzy logic and genetic algorithms. Chang [10] developed a rule-based
+system that proposes incremental dispatching rules.
+Sim et al. [30] combined ES and NN for generating the most appropriate schedule in the current state.
+Both Shaw et al. [29] and Nakasuka and Yoshida [23]
+used a second generation ES model that acquires its
+knowledge automatically. In all of these approaches,
+the most appropriate dispatching rule is proposed. Genetic algorithms (GAs) are also used extensively for
+JSS. Bierwirth et al. [7] and Lin et al. [17] adapted
+GA to the Giffler and Thompson algorithm and constructed dynamic schedules.
+The literature review indicates that there has been
+little work on creating intelligent autonomous scheduling systems with a learning ability based on trial and
+error. In this study, an intelligent agent based scheduling system is proposed aiming at the generation of a
+more autonomous scheduler where the agent is trained
+by a new improved reinforcement learning algorithm,
+In the following sections, first intelligent agents and
+then the Q-III learning algorithm are presented. Thereafter, details of the intelligent agent based scheduling
+system are discussed using the simulation results.
+Intelligent agents are autonomous systems which
+can perform appropriate intelligent actions using
+their own knowledge in dynamic environments
+[12,13,20,33]. They are mainly composed of three
+parts; perception, cognition and action. An intelligent
+agent receives messages from the environment via its
+perception mechanism. These messages are then evaluated by the cognition system and appropriate actions
+are produced and implemented by the action module.
+Since the aim of this paper is not to discuss these aspects of the agents in detail, the relevant information
+is omitted. The readers are referred to [28,39] which
+are extremely well organized for more information.
+Intelligent agent based JSS systems have been the
+subject of research for a number of years now. Most
+of the studies deal with static JSS using multiple
+agents. In this case the aim is to explore an applicable
+solution using various search and distributed computing techniques [9,11]. On the other hand, Zhang and
+Dietterich [41] proposed a reinforcement learning
+based search approach for specific scheduling problems that are also static. This paper presents a novel
+approach, which deals with dynamic scheduling using
+3. A reinforcement learning algorithm: Q -III
+Learning is one of the most important topics in
+research on intelligent agents [8]. In particular, reinforcement learning techniques are widely employed
+[6,14,19,35–37]. With these techniques, the agent has
+to take into account a reinforcement signal, which is
+produced against its actions. Well known reinforcement learning algorithms are TD(λ) and Q-learning.
+There are a lot of successful implementations of these
+algorithms in different domains [3,16,18,21,26,31].
+Among these, Q-learning algorithm works in such a
+way that the agent gains experience by trial and error
+throughout the execution of the actions. During this
+process, the agent figures out how to assign credit
+or blame to each of its actions in order to improve
+its behavior. This is called temporal credit assignment. Once the agent learns how to behave, it may
+generalize the knowledge it possesses and recall the
+knowledge when required. The ability of the agent to
+use its past experience (generalization) is called structural credit assignment. However, Q-learning is only
+able to handle temporal credit assignment. Furthermore, the Q-learning procedure suffers from several
+problems. For example, as discussed by Whitehead
+and Lin [38], traditional Q-learning was developed
+utilizing a Markovian decision process. Therefore, it
+may not be implemented as successfully as expected
+in non-Markovian domains. There may be two problems: the learning process may end up with a local
+optimum solution or may take too long to succeed.
+Some attempts have already been made to solve these
+problems. Öztemel and Aydin [24] developed an algorithm called Q-I to solve the “local optimum” problem. However, the learning time still remained too
+M.E. Aydin, E. Öztemel / Robotics and Autonomous Systems 33 (2000) 169–178
+long. They have also developed an improved version
+of Q-learning called Q-II which can learn faster [25].
+Although Q-I and Q-II were reported to perform better than traditional Q, these algorithms as well as the
+traditional Q still suffers from a lack of generalization.
+As explained earlier, intelligent agents do not
+manage to convert their temporal experiences into permanent nature (generalization) when Q-learning algorithm is employed. With this algorithm, the agent gains
+experiences in the learning cycle but (due to the generalization problem) cannot utilize such experiences for
+other examples of the same domain. In order to solve
+this problem, we developed the Q-III learning algorithm by embedding Hard c-Means [27] into Q-II [25].
+Q-II enables the agent to update temporal experiences
+for all related actions, while Hard c-Means allows it to
+convert temporal experiences into permanent nature.
+Since Q learning has been developed based on
+asynchronous dynamic programming, the utility function (Q) is updated depending on the maximum
+expected value of the next state and a reward value.
+This function is used to map the relation between
+perception–action pairs and as a criterion in action
+selection. As reported in [25], Q-II updates Q values
+considering the maximum expected value and reward
+(like many version of Q-learning) according to the
+← µij (Qo (x, ai ) + β(r + γ e(y) − Qo (x, ai ))),
+where Qo (x, a), Qn (x, a) represent the old and new
+Q values of action a in state x, µij is a coefficient
+representing the relationship between the ith and jth
+actions, β and γ are the learning rate and discounted
+coefficient, respectively, both change in the (0, 1) interval, r is the payoff of performing action a in state
+x, and e(y) is the expected value of state y.
+Note that, as can be shown in the rule above, since
+e(y) is one of the most effective factors in the calculation of Q values, it is necessary to get an effective
+predictor for e(y). Traditionally, e(y) is computed as
+the maximum expected value of the state y based on a
+stochastic function (such as [18]), or simulation (such
+as [24,25]). However, it might be difficult to build such
+a function or a simulation model for large domains.
+The main idea behind Q-III is to redefine e(y) enabling the learning procedure by a strong predictor that
+uses the past experiences of the agent. The proposed
+definition of e(y) is based on a distance function described in the Hard c-Means algorithm as explained
+where xkl is the kth state for the lth action and v il is
+ith dimension of data center for the lth action. Here,
+each action is represented by a data center, which is
+calculated within the Hard c-Means algorithm based
+on the data points matched with the action. Thus l
+varies up to the number of actions, say c, and i varies
+up to the number of features that each data point has,
+where χ ik is the membership of the kth state to the ith
+center and n is the maximum number of data matched
+with the action. χ ik is equal to either 1 or 0 depending on the reward value. If r is equal to −1 then χ ik
+becomes 1 otherwise it becomes 0. In other words,
+when χ ik is 0, vil is not updated. Note that, the vil is
+calculated within the algorithm simplifying to
+where Til is the cumulative data for the data center of
+ith action, and n is the number of accumulated data.
+Taking these into account, the utility function is redefined as
+Here, the utility function of performing action a in
+state x is calculated based on Euclidean distance of
+state x from the ith data center and the reward produced
+As shown in Fig. 1, Qi , vil , Til are first initialized
+to 0. Then, the current state (x) is perceived. The action that has the minimum utility (Q) value is selected.
+Unlike the many versions of Q learning, the action
+that has the minimum Q is selected rather than that
+which has the maximum Q, i.e. due to the Euclidean
+distance used to define Q values. The idea is to find
+M.E. Aydin, E. Öztemel / Robotics and Autonomous Systems 33 (2000) 169–178
+the data center closest to the current state. The action
+to be activated is randomly selected when the parameters (Qi , vil , Til ) have the same values for different
+actions. Once the action is selected and activated, a
+new state (y) is created. Meanwhile, the RM evaluates what has happened and produces a reward value
+accordingly, and then sends it to the agent. Whenever
+the agent applies the correct action, RM assigns −1 to
+r, otherwise r becomes 1. In the case of r being −1,
+the agent only recalculates the data center of the activated action, i.e. first to accumulate Til and then to
+calculate vil accordingly. After these, all utility values
+are updated using the rule as presented in Fig. 1. If r
+is equal to 1 then data centers are not changed.
+Another important fact about Q-III is the position of
+the relationship coefficient (µij ) in the updating rule.
+While µij is multiplied by the final value of the utility
+functions (after updating) in Q-II, it is multiplied by r
+in Q-III in order to force the reward value to change
+without spending any additional effort in updating the
+utility functions of non-activated actions. In fact, this is
+done by simulating those actions in Q-II. This removes
+the difficulty of simulating actions when their numbers
+are too high. Details of Q-III are presented in [2].
+4. An intelligent agent-based dynamic JSS system
+The scheduling system designed in this study consists of two main parts: the simulated environment
+(SE) and the intelligent agent. SE is responsible for
+simulating the scheduling process dynamically by
+communicating with the agent whenever it needs to
+select a job to assign to any machine. Fig. 2 represents the simulation process briefly. The simulation
+starts by generating the first job. Whenever a job
+has arrived, the SE determines its details and puts
+it into related queue for its first operation prior to
+identifying the inter-arrival time for the next job. If
+new assignment and/or departure events happen, SE
+carries out such duties; otherwise it improves the
+simulation time up to the next arrival and accepts the
+next job. The simulation carries on as long as the
+stopping criteria is unsatisfied. In this case, the simulation stops when the predefined number of jobs are
+Whenever any assignment event happens, SE communicates with the agent asking it to identify an appropriate priority rule. The agent perceives the current
+situation from the SE, evaluates it and suggests a dispatching rule based on the available information, selecting the appropriate one of the following three rules:
+SPT (Shortest Processing Time), COVERT (C over T),
+and CR (Critical Ratio) (for detailed information, see
+[4,32]). SE applies the rule to select one of the waiting
+jobs in the queue. Then it assigns the job to the machine for the current operation and calculates its finishing time on this machine as well as removing the job
+from the queue. This procedure is shown in Fig. 3(a).
+In the case of departure events, SE determines the
+operation that will finish in the earliest time, and then
+improves the simulation time up to the finishing time
+of that operation prior to releasing the machine. If the
+job is completed it sends its details to the data file,
+otherwise it puts it into the related queue for the next
+operation. This procedure is shown in Fig. 3(b).
+In this simulation system, the discrete event simulation methodology is applied [5]. There are nine
+different and non-parallel machines and five jobs
+with different routes within SE. Each job visits each
+machine once. The jobs arrive at machines, wait in
+the queue until the machine is available, are processed and sent to the next machine. The processing
+times are defined according to a uniform distribution
+varying between 2 and 9. Inter-arrival times are also
+M.E. Aydin, E. Öztemel / Robotics and Autonomous Systems 33 (2000) 169–178
+determined according to an exponential distribution
+where RN is the random number and t represents the
+inter-arrival time. Similarly, the due-dates are identified by the Total Work method with the following
+where DD, r, n, k and pi represent due date, arrival time, the number of operations, coefficient
+of tightness, and processing time of ith operation,
+Mean tardiness (T̄ ) is selected as the performance
+criterion for measuring the efficiency and effectiveness
+M.E. Aydin, E. Öztemel / Robotics and Autonomous Systems 33 (2000) 169–178
+Fig. 3. (a) Sub-procedure of assignment; (b) sub-procedure of departure.
+The agent consists of a simple perception module
+that receives the information from the SE about the
+current situation, a cognition module that is composed
+of a set of behavioral rules and a decision maker and
+an action module that generates messages (dispatching rule) and sends them back to SE. The interaction
+between the agent and the simulation module is presented in Fig. 4.
+presented in Fig. 5. As shown, the agent perceives the
+current state of the environment and then selects the
+most appropriate action to be performed. In this case,
+the state of the environment consists of the queue size
+The agent is trained by the Q-III learning algorithm
+defined above. RM is designed and utilized during the
+interaction of the agent with the SE. The aim of the
+RM is to produce rewards by monitoring the agent’s
+behavior. The interaction between agent, SE and RM is
+Fig. 4. The structure of the intelligent agent.
+M.E. Aydin, E. Öztemel / Robotics and Autonomous Systems 33 (2000) 169–178
+Fig. 5. The interaction between the agent–SE–RM.
+of the machine and the mean slack time of the queue.
+RM produces a reward for the agent’s decisions. The
+agent takes it into account in updating the knowledge
+for future actions. By repeating this process the agent
+gains experience and learns how to interpret the situation and offer a dispatching rule.
+The RM procedure is based on a composite rule,
+which is given in Fig. 6. This rule allows the agent
+to evaluate situation–action pairs with respect to the
+selected action taking both the size of related queue
+and its mean slack time into account. If the coupling
+of the current situation with selected action is right
+then the RM produces −1, otherwise 1. For example,
+if the size of related queue is 4 and the mean slack time
+takes a value between 0 and 40 (or less than −250)
+and selected action is SPT, then the RM produces −1,
+In the following paragraphs, an iteration of the
+learning process is explained. In the simulated shop,
+initially, Qi , vil , Til are assigned to 0. Here, i represents the dispatching rule taking values 0, 1, 2 for
+SPT, COVERT, and CR, respectively, and l represents
+the features of the SE state taking the values 0, 1 for
+the queue size (QS) and mean slack time (MST).
+Assume that initially, QS = 1, MST = 75, hence
+x = (1,75), γ = 0.3, β = 0.9 (here the value coefficients are selected randomly as usual) and µ0 = (1,
+−1, −1), µ1 = (−1, 1, −1), µ2 = (−1, −1, 1).
+It is also assumed that the agent selects COVERT
+using this data. The RM produces −1, as the selection is correct. Now, the agent updates T1l first, since
+the action selected is the second one. T10 = 1 and
+T11 = 75, while the others are still 0. Hence v 10 = 1
+and v 11 = 75. vil is the same as Til because the number of data considered is 1. Since Qo ’s are all 0, the
+M.E. Aydin, E. Öztemel / Robotics and Autonomous Systems 33 (2000) 169–178
+priate dispatching rule in real time. It was trained by
+Q-III learning algorithm. The results are encouraging
+and the performance of the agent will be improved by
+enriching the environment as well as the skills of the
+agent. This will be a good initiative to create fully automated intelligent manufacturing systems. The success of the agent in scheduling will also be a good
+example for other issues such as design, planning and
+control within the manufacturing systems to be taken
+If the agent made a wrong decision, the RM would
+have assigned 1 to r and vil , Til would not be updated,
+and the Qn values therefore would all be 20.709. In the
+next iteration, the agent would be involved in selecting
+an action randomly, since the agent could not gain any
+In order to measure the performance of the agent in
+scheduling, the SE has been run by various set of examples applying each particular priority rule throughout the whole simulation cycle. Then the agent was
+trained with these randomly generated examples under different parameter values. At the end of training,
+the agent gives better results than the traditional alternatives (SPT, COVERT, and CR rules). The performance of the agent was tested with respect to various
+values of k. Table 1 shows that the agent behaves better than others, except in one case in which SPT gives
+In this study, an intelligent agent based dynamic
+scheduling system is presented. The system is composed of the agent and the simulated environment
+(SE). The agent is able to perform dynamic scheduling based on the available information provided by the
+SE. It makes decision for selection of the most appro-
+[1] Y. Arzi, On-line scheduling in a multi-cell flexible
+manufacturing systems, International Journal of Production
+[2] M.E. Aydin, E. Öztemel, Q-III: Generalization of experiences
+for reinforcement learning, in: Proceedings of the Seventh
+Turkish Artificial Intelligence and Neural Networks
+Symposium, Ankara, June 24–26, 1998, pp. 11–17.
+[3] M. Asada, S. Noda, S. Tawaratsumida, K. Hosoda, Purposive
+behavior acquisition for a real robot by vision-based
+reinforcement learning, Machine Learning 23 (1996) 279–
+[4] R.K. Baker, Introduction to Sequencing and Scheduling,
+[5] J. Banks, J.S.II. Carson, B.L. Nelson, Discrete-event System
+Simulation, Prentice-Hall, Englewood Cliffs, NJ, 1996.
+[6] A.G. Barto, S.J. Bradtke, S.P. Singh, Learning to act using
+real-time dynamic programming, Artificial Intelligence 72
+[7] C. Bierwirth, H. Kopfer, D.C. Mattfeld, I. Rixen, Genetic
+algorithm based scheduling in a dynamic manufacturing
+system, in: Proceedings of the IEEE Conference on
+Evolutionary Computation, Perth, 1995, pp. 439–443.
+[8] R. Brooks, Intelligence without reason, in: Proceedings of the
+1991 International Joint Conference on Artificial Intelligence
+(IJCAI-91), Sydney, Australia, 1991, pp. 569–595.
+[9] P. Burke, P. Prosser, Distributed asynchronous scheduling, in:
+M. Zweben, M. Fox (Eds.), Intelligent Scheduling, Morgan
+[10] F.-C. Chang, A knowledge-based real-time decision support
+system for job shop scheduling at the shop floor level, Ph.D.
+Thesis, The Ohio State University, Columbus, OH, 1985.
+[11] S.K. Das, A. El-Kholy, C.A. Harrison, V. Liatsos, B.
+Richards, A multi-agent view of planning and scheduling,
+in: Proceedings of the 1995 Conference on Expert Systems,
+[12] M. Dorigo, M. Colombetti, Robot shaping: Developing
+autonomous agents through learning, Artificial Intelligence
+[13] B. Hayes-Roth, Architectural foundations for real-time
+performance in intelligent agents, The Real-Time Systems 2
+M.E. Aydin, E. Öztemel / Robotics and Autonomous Systems 33 (2000) 169–178
+[14] M. Heger, The loss from imperfect value functions
+in expectation-based and minimax-based tasks, Machine
+[15] N. Ishii, J.J. Talavage, A transient-based real-time scheduling
+algorithm in FMS, International Journal of Production
+[16] S. Koenig, R.G. Simmson, The effect of representation and
+knowledge on goal-directed exploration with reinforcement
+learning, Machine Learning 22 (1996) 227–250.
+[17] S.C. Lin, E.D. Goodman, W.F. Punch, A genetic algorithm
+approach to dynamic job shop scheduling problems,
+in: Proceedings of the Seventh Conference on Genetic
+Algorithms, Morgan Kaufmann, San Francisco, CA, 1997,
+[18] L.J. Lin, Self-improving reactive agents based on
+reinforcement learning, planning and teaching, Machine
+[19] R. Maclin, J.W. Shavlik, Creating advice-taking reinforcement
+learning, Machine Learning 22 (1996) 251–281.
+[20] P. Maes, R. Brooks, Learning to coordinate behaviors,
+in: Proceedings of the AAAI-82, Boston, MA, Morgan
+Kaufmann, Los Altos, CA, 1990, pp. 796–802.
+[21] S. Mahadevan, J. Connell, Automatic programming of
+behavior-based robots using reinforcement learning, Artificial
+[22] H. Matsuura, H. Tsubone, M. Kanezashi, Sequencing,
+dispatching and switching in a dynamic manufacturing
+environment, International Journal of Production Research
+[23] S. Nakasuka, T. Yoshida, Dynamic scheduling system
+utilizing machine learning as a knowledge acquisition tool,
+International Journal of Production Research 30 (2) (1992)
+[24] E. Öztemel, M.E. Aydin, Learning in intelligent agents: Q-I
+algorithm, in: New Trends in Artificial Intelligence and Neural
+Networks, EMO, Ankara, 1997, pp. 200–206.
+[25] E. Öztemel, M.E. Aydin, Q-II: An improved learning
+algorithm for intelligent agents, in: Proceedings of the 11th
+European Simulation Multi-Conference, Istanbul, June 1–4,
+[26] P. Piggott, A. Sattar, Reinforcement learning of iterative
+behavior with multiple sensors, Journal of Applied
+[27] T.J. Ross, Fuzzy Logic with Engineering Applications,
+[28] S.J. Russell, P. ve Norvig, Artificial Intelligence: A Modern
+Approach, Prentice-Hall, Englewood Cliffs, NJ, 1995.
+[29] M.J. Shaw, S. Park, N. Raman, Intelligent scheduling with
+machine learning capabilities: The induction of scheduling
+knowledge, IIE Transactions 24 (2) (1992) 156–168.
+[30] S.K. Sim, K.T. Yeo, W.H. Lee, An expert neural network
+system for dynamic job shop scheduling, International Journal
+of Production Research 32 (8) (1994) 1759–1773.
+[31] S.P. Singh, Transfer of learning by composing solution of
+elemental sequential tasks, Machine Learning 8 (1992) 323–
+[32] N. Singh, Systems Approach to Computer Integrated Design
+and Manufacturing, Wiley, New York, 1996.
+[33] L. Steels, The artificial life roots of artificial intelligence,
+[34] D. Sun, L. Lin, A dynamic job shop scheduling framework:
+A backward approach, International Journal of Production
+[35] R.S. Sutton, Learning to predict by the methods of temporal
+differences, Machine Learning 3 (1988) 9–44.
+[36] G. Tesauro, Practical issues in temporal difference learning,
+[37] C.J.C.H. Watkins, Learning from delayed rewards, Ph.D.
+Thesis, Cambridge University, Cambridge, 1989.
+[38] S.D. Whitehead, L.J. Lin, Reinforcement learning of
+non-Markov decision processes, Artificial Intelligence 73
+[39] M. Wooldridge, N.R. Jennings, Intelligent agent: theory and
+practice, The Knowledge Engineering Review 10 (2) (1995)
+[40] Y. Yih, A. Thesen, Semi-Markov decision models for
+real-time scheduling, International Journal of Production
+[41] W. Zhang, T. Dietterich, A reinforcement learning approach
+to job shop scheduling, in: Proceedings of the IJCAI-95,
+Turkey. He got his B.Sc. degree in Industrial Engineering from Istanbul Technical
+degree from Istanbul University on Quality Improvement by Experimental Design
+Sakarya University by a thesis on Training Intelligent Agents by Reinforcement
+Learning Methods in 1997. He has been in the Department of
+Computing Science, University of Aberdeen as a Research Fellow
+working on a project “An Empirical Investigation of A-Teams for
+Combinatorial Optimisation Problems” for one year.
+He is interested in reinforcement learning, intelligent agents,
+multi-agent systems, distributed and parallel computing, scheduling and local search methods.
+Elaziǧ, Turkey. He graduated from Istanbul Technical University in 1984 as Industrial Engineer. He received his M.Sc.
+1987 preparing a thesis on Simulation and
+Optimisation in petroleum refinery. He received his Ph.D. degree from the University of Wales, College of Cardiff, System
+neural networks and expert systems for manufacturing Quality
+Systems during his Ph.D. study. He published the results of his
+thesis in a book entitled Intelligent Quality Systems.
+M.E. Aydin, E. Öztemel / Robotics and Autonomous Systems 33 (2000) 169–178
+He has been teaching AI and related courses as well as Information Systems at Sakarya University since 1993. At the same
+time, he is also working at the Turkish Science & Engineering
+Research Council, Marmara Research Centre, Information Technologies Research Institute (ITRI). He carries out research on
+Simulation & AI for Military Training Systems. He mainly leads
+research projects launched in the Western European Armament
+Group Research Cell in Brussells. Especially, he is interested in
+CEPA II (Common European Priority Area) and CEPA G groups.
+He has already finished four international projects in this field
+and is currently leading an international project for embeddedsimulation systems on an on-board aircraft. He is a member of
+Decision Board at ITRI and steering committee member for CEPA
+II of the Western European Armament office which is responsible
+for the research on Simulation and Modelling Technologies.
+He is interested in AI, expert systems, neural networks, genetic
+algorithms, fuzzy logic, real-time simulation, synthetic environment, virtual reality and so on.
+All in-text references underlined in blue are linked to publications on ResearchGate, letting you access and read them immediately.

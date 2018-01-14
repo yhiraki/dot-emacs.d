@@ -1,0 +1,1145 @@
+A Framework for Standard Modular Simulation:
+Application to Semiconductor Wafer Fabrication
+Heshan Li1 , José A. Ramírez-Hernández1, Emmanuel Fernandez1, Charles R. McLean2 , and Swee Leong2
+Abstract— This paper presents the application of a framework,
+proposed by the National Institute of Standards and Technology
+(NIST), for standard modular simulation of semiconductor wafer
+fabrication facilities or fabs. The application of the proposed
+framework results in the identification and specification of four
+different elements in the context of semiconductor fabs: (1)
+market sector, (2) hierarchical modeling levels, (3) simulation
+case studies, and (4) models and data. Three examples of the application of the proposed simulation framework are presented by
+using three semiconductor fab models: the Mini-fab benchmark,
+Measurement and Improvement of Manufacturing Capacities
+(MIMAC) data set 1, and the Hewlett-Packard-Wein’s model.
+In these examples, three different case studies are presented,
+which consisted in the evaluation of production performance
+under different workforces, dispatching rules, and wafer lot
+release rates. The proposed simulation framework is by no means
+considered complete, and future additions and modifications are
+expected. Our current and future research is focused on the
+improvement of the proposed framework (e.g., design and testing
+of generic case studies) as well as the incorporation of the work
+being conducted by NIST, within the NIST’s System Integration
+of Manufacturing Applications (SIMA) program, towards the
+standardization of data formats for simulation in manufacturing
+Index Terms— Semiconductor wafer fabrication, standard
+modular simulation, simulation framework, semiconductor fabs,
+front-end process, simulation case studies.
+Simulation models for semiconductor wafer fabrication are
+considered important tools for supporting the decision-making
+processes in manufacturing operations. Although the importance of simulation models has been clearly stated [23], [31],
+currently there is no standardization for models and data
+or simulation case studies in the semiconductor industry. In
+general, each commercial simulation software vendor offers its
+own data formats for modeling and data representation. The
+non-existence of standards in this area increases the difficulties
+associated with the simulation process when a model of the
+semiconductor fabrication facility or fab does not exist, and
+simulation case studies need to be designed.
+The industry and academic communities have indicated in
+the past [15] the clear need for standardization of modeling
+1 José A. Ramírez-Hernández, Heshan Li, and Emmanuel Fernandez are
+with the Department of Electrical and Computer Engineering and Computer
+Science, The Systems Modeling and Information Technology Laboratory
+(SMITLab) at the University of Cincinnati, OH 45221, USA. The work of
+these authors was supported by a grant from NIST.
+Emails: ramirejs@ececs.uc.edu; lihs@ececs.uc.edu; emmanuel@ececs.uc.edu.
+2 Charles R. McLean and Swee Leong, are with the Manufacturing Systems
+Integration Division, National Institute of Standards and Technology (NIST),
+Emails: charles.mclean@nist.gov; leong@cme.nist.gov.
+data in semiconductor manufacturing. For instance, an attempt
+for obtaining a standard was presented by SEMATECH with
+the so-called Modeling Data Standards (MDS) [55], and
+another initiative, from Semiconductor Equipment & Materials
+International (SEMI), was mentioned in [15]; but both with little or no success at all. According to some experts [16], in this
+simulation field, it appears that these attempts have not been
+attractive for the commercial vendors of simulation software,
+basically for commercial reasons. Although these attempts
+have failed in the past, the importance for standardization
+of modeling data is still needed, and this could represent a
+valuable improvement in current simulation practices.
+In an attempt to narrow this gap, the National Institute of
+Standards and Technology (NIST) has identified the need for
+standards in simulation and modeling in different industries,
+including the semiconductor manufacturing industry. Work
+is being conducted by NIST, within the System Integration
+of Manufacturing Applications (SIMA) program, to provide
+standards in simulation of manufacturing systems that in the
+future can facilitate the work of simulation groups or analysts
+at different industries. Part of the efforts has been in the
+formulation of a Framework For Standard Modular Simulation
+[38], [39], and Standard Exchange Data Formats [32] that
+could facilitate the utilization of simulation models and case
+studies with different commercial simulation packages utilized
+The main objective of this paper is to provide a framework
+for modular simulation of semiconductor fabs. We propose this
+framework based on the approach presented in [38], [39] and
+by providing specific details of each element in the framework
+in the context of the semiconductor manufacturing industry.
+This paper is organized as follows: section II presents an
+overview of NIST’s SIMA program. In section III we present a
+brief review of the semiconductor manufacturing process at the
+fabrication level. A review of the utilization of simulation tools
+in the semiconductor industry is presented in section IV. The
+application of the framework for standard modular simulation
+for semiconductor wafer fabrication is presented in sections V,
+VI, and VII. Sections VIII, IX, and X describe three examples
+of the application of this framework, and section XI presents
+II. NIST S YSTEM I NTEGRATION OF M ANUFACTURING
+The High Performance Computing and Communication
+(HPCC) program was formally established by the High Performance Computing Act of 1991 (Public Law 102-194). The
+goal of this program is to accelerate the development of future
+generations of high performance computers and networks and
+the use of these resources in the government and throughout
+the U.S. economy. The SIMA program at NIST is the agency’s
+coordinating focus for its HPCC activities. SIMA is addressing
+the information interface needs of the U.S. manufacturing
+• Defining, testing, and promoting standards for interoperability solutions, and
+• Facilitating remote access to scientific and engineering
+The Manufacturing Systems Integration Division (MSID) was
+established to contribute to the research and development of
+data standards, generic interfaces and technologies leading to
+the implementation of virtual manufacturing enterprises and
+MSID has been working on the development of a generic
+manufacturing information model for representing and exchanging production simulation data. This document presents
+an information model that provides neutral data interfaces for
+integrating machine shop software applications with simulation. The model is presented by using the Unified Modeling
+Language (UML) [45] and the eXtensible Markup Language
+(XML) [66]. The initial emphasis of this data model is
+focusing on the machine job shop definitions. Plans are in
+place to extend the data structures to include other relevant
+areas such as supply chain, plant layout, and assembly.
+As a part of the standards development effort, NIST has
+organized a Product Development Group (PDG) titled, "Core
+Manufacturing Simulation Data (CMSD)" within the Simulation Interoperability Standards Organization (SISO). The
+model will be the strawman of the first product of the CMSD
+PDG. SISO is dedicated to the promotion and development
+of standards for Modeling and Simulation (M&S), system
+interoperability, and reuse for the benefit of diverse M&S
+communities, including developers, procurers, and users, in
+the world-wide simulation communities. For more details see
+MSID has partners in industry end-users, software vendors and government agencies with diverse interests such
+as: steel fabrication, electromechanical production, semiconductor, die casting, injection molding, machining, automotive
+and aerospace assembly, inspection, human operator modeling,
+ergonomics analysis, supply chain, discrete event models, and
+The fabrication of semiconductor devices or integrated
+circuits (IC), also known as semiconductor manufacturing,
+involves four basic steps [62], [2], [49]: wafer fabrication,
+The wafer probe and fabrication are considered as "frontend" processes, which are dedicated to building the ICs in
+the silicon wafer as well as performing preliminary tests. The
+assembly and final test are considered as "back-end" processes
+that are focused on testing functionality and performance, and
+In this paper we are focused on the modeling and simulation
+of the semiconductor wafer fabrication process that takes place
+in the semiconductor fab. In general, we refer to the simulation
+of the semiconductor fab when we talk about simulation of the
+Semiconductor wafer fabrication is probably one of the most
+intensive manufacturing processes, not only for its complexity
+but for the amount of capital invested. It usually involves
+several hundreds of processing steps. Moreover, since the
+number of operations that have to be carried out exceeds the
+number of available machines, several of these operations are
+done at the same work centers or tool stations. This means that
+wafer lots visit a tool station more than once. A manufacturing
+system having this feature is called a re-entrant line [27], [29],
+[28]. In addition, some wafers could need rework during the
+production, which makes the process more complicated.
+A semiconductor fab can be viewed as a job shop containing
+a number of single-tool or multi-tool stations with re-entrant
+manufacturing lines. Wafers are grouped in lots and each lot
+entering the fab has a specific process flow or route (e.g.,
+sequence to visit different stations). The wafers in the same
+lot will have the same process flow, however, different lots can
+have different process flows. That is, there could be several
+different products being produced (e.g., product mix) in the
+same production line. Also, the number of wafers in a lot is
+not fixed (e.g., it could be 24 or 48). The number of lots that
+can be loaded and processed simultaneously in a tool varies
+according to the operation and tool being utilized. Some tools
+will accept only one lot of wafers while others will allow
+batches of several lots. Similarly, the batch size will vary
+according to the process and tool. For example, several wafer
+lots will be batched in a furnace that can hold 200 wafers.
+The wafer fabrication process is composed of seven basic
+operations [2], [49], sequentially performed as follows: (1)
+Cleaning; (2) Oxidation, Deposition and Metalization; (3)
+Lithography; (4) Etching; (5) Ion implantation; (6) Photoresist strip; and (7) Inspection and measurement. In general,
+tool stations are integrated according to the operation to
+be performed. When these operations are performed in a
+re-entrant manufacturing line, several difficulties arise that
+convert the wafer fabrication as one of the most complex
+manufacturing processes. For instance, Uzsoy, Lee, & MartinVega [62], and Bai & Gershwin [4], discussed six factors
+that are identified as linked to the complexity of this type
+of manufacturing process: (1) Complex Product Flows; (2)
+Random Yields; (3) Diverse Equipment Characteristics; (4)
+Equipment Downtime; (5) Production and Development in
+Shared Facilities; and (6) Data Availability and Maintenance.
+These factors are characteristics that are continuously present
+Simulation models of semiconductor fabs are utilized to
+address these problems (e.g., to evaluate and analyze alternative strategies that support the decision-making process).
+This task is performed by defining simulation case studies
+that are used to answer questions (e.g., "what-if" questions)
+about specific problems. The conclusions derived from the
+simulation work can help to improve manufacturing operations
+by implementing alternative strategies that have been analyzed
+and validated through a simulation analysis procedure.
+In order to illustrate the importance of simulation tools in
+the current semiconductor industry, the next section provides
+a general review of the different areas where simulation is
+Simulation tools are an essential part in the complex process
+of semiconductor devices design and manufacturing. These
+tools are part of the so-called Technology of Computer-Aided
+Design (TCAD) [13], which encapsulates a wide variety of
+hardware and software tools currently utilized in the process
+of design, fabrication, process control, and management in the
+semiconductor industry. The wide spread acceptance of these
+tools is justified by the enormous benefit of TCAD in rapid
+prototyping and costs saving during design, manufacturing,
+planning, and even customer satisfaction. Current TCAD tools
+allow the industry the deployment of new technologies in a
+shorter time with the appropriate production volumes and ontime delivery, which are key elements to be competitive in the
+actual semiconductor market. Similarly, this has produced a
+positive effect in the creation of new TCAD tools, including
+As ICs have become more sophisticated, and critical features in the IC are continuously downscaled, the utilization of
+simulation tools has been expanded to different areas of the
+manufacturing and design processes. Figure 1 depicts current
+levels in the hierarchy of simulation for the semiconductor
+Simulation hierarchy in semiconductor manufacturing.
+The hierarchy of simulations presented in Figure 1 shows
+that the simulation of the supply chain represents the highest
+level and encloses all the other simulation levels. The second
+level corresponds to simulation in the front-end and back-end
+processes. The subsequent levels are focused on the simulation
+of the semiconductor device and materials [13], [56]. These
+levels are shared by the front-end and back-end processes.
+The simulation of semiconductor devices includes simulation
+of electrical, mechanical, and thermal behavior as well as
+logic simulation utilized for design and synthesis of digital
+circuits. The lowest level is represented by simulations at the
+“quantum” modeling level, also known as Ab-Initio.
+The following subsections provide a more detailed presentation of the different levels of simulation. We divided the
+hierarchy in four main simulation groups from the lowest to
+A. Simulation of Semiconductor Devices and Materials
+Simulation of semiconductor devices and materials includes
+different areas in the process of manufacturing and design.
+It is focused on modeling and the simulation of physical
+behavior of the devices and materials utilized in the fabrication
+of ICs. As presented in Figure 1, this level of simulation is
+a core component in the back-end and front-end processes.
+Moreover, different sub-levels are considered; from simulation
+of electrical behavior of the circuits to atomistic and quantum
+The impact of this type of simulation in the back-end and
+front-end processes can be defined as a two way process. In
+one direction, simulation of devices and materials is utilized
+to design and optimize the devices being fabricated and the
+corresponding fabrication tools. On the other hand, simulation
+of the manufacturing process (e.g., simulation of fabrication
+equipment functionality) is useful to determine how the fabrication process affects the final production of devices with
+respect to the expected design and performance [56].
+In a detailed review of perspectives of TCAD tools in the
+semiconductor industry presented in [13], Dutton & Strojwas
+indicated how circuit models and simulations are utilized to
+quantify details of behavioral models for ICs at the circuit
+and transistor levels with the objective to show physical
+limitations at the process and manufacturing levels. These
+authors reported how simulation tools have been utilized to improve diagnosis procedures to identify yield loss mechanisms,
+and provide an interface between design and manufacturing.
+Similarly, in circuit simulations, Enz et al. reported in [14] a
+basis for modeling of Metal Oxide Silicon (MOS) transistors
+for circuit simulation at Radio Frequency (RF) utilizing a
+Simulation Program for Integrated Circuit Emphasis (SPICE)
+models (a widely utilized circuit modeling language for simulation [56]). Simulation of circuits at RF operations have
+been identified by the International Technology Roadmap for
+Semiconductors (ITRS) [56] as one of the difficult challenges
+toward the development of new technology in the range of ≤
+45 nm in the feature size through the year 2010.
+Current modeling of circuits is very detailed; from electrical
+parameters to the modeling of thermal noises, and it is
+tightly related to the physical structure of the components
+(e.g., transistors). For instance, Rappitsch et. al. [53] proposed techniques for extracting the parameters necessary to
+implement accurate SPICE circuit models. These techniques
+include Monte Carlo methods and non-parametric statistical
+procedures. In design and synthesis of digital circuits, Agrawal
+et. al. in [1] and Bryant in [9] reported the utilization of logic
+simulation of Very Large Scale Integration circuits (VLSI) and
+utilization of Ordered Binary Decision Diagrams (OBDDs)
+for digital design purposes. In [19], Hamzaoglu et. al. discuss
+the utilization of compaction algorithms to obtain test sets
+for combinatorial circuits. These test sets can be employed,
+together with logical simulation, during the process of digital
+In addition, Choi et. al. [12] reported the impact of the
+manufacturing process in the final IC performance and the
+utilization of simulation tools. In this case simulation tools
+are utilized to model the timing effects in the IC performance
+as product of the imperfections produced by the lithography process (e.g., lens aberrations, flare). Similarly, Ikeda
+et. al. [20] utilized simulations to predict mechanical stress
+in semiconductor devices during the manufacturing process
+with the objective to optimize the fabrication process and
+IC reliability. In [6], Binder et. al. discussed the integration
+of device and manufacturing simulations, and presented a
+case of 3-dimensional simulation models of semiconductor
+device structures utilized in both the design and manufacturing
+At the level of atomistic simulations, La Magna et. al.
+reported in [30] how simulation tools, based on quantum
+modeling, were utilized to simulate in detail the evolution
+of nano-structures (e.g., defects, impurity aggregates) in the
+All the examples previously presented have common objectives: utilization of TCAD simulation tools to accelerate the
+design and prototyping of new devices as well as to optimize
+the performance of the final product and its fabrication process.
+B. Back-end: assembling, sorting, and testing processes simulation
+In the back-end process, simulations have been utilized to
+emulate the process of assembling, sorting, and testing of
+semiconductor devices. The main objectives of simulations
+in this stage are to design planning and control strategies
+that minimize the cycle time, and maximize throughput while
+accomplishing on-time deliveries of the final products.
+For instance, Sivakumar et. al. reported in [57], [58] the
+utilization of discrete-event simulations of real world back-end
+facilities in Singapore. A scheme of multiple objective optimization was presented, through Pareto solutions [67], which
+included cycle time and throughput. Their results provided an
+analysis of the impact of dispatching rules, and lot release
+control over the cycle time and throughput in an IC assembly
+and test facility. Also, in a more specific utilization of simulation tools for the back-end process, Chikamura et. al. in
+[11] and Nakamae et. al. in [43] reported how simulation was
+utilized to optimize the testing process for VLSI circuits: Dynamic Random Access Memories (RAMs), and Synchronous
+Dynamic Access Memories (DRAMs). The objective was to
+obtain the optimal number of testers according to the best
+trade-off between Turn Around Time (TAT) and cost per chip.
+Finally, Potodari et. al. [50] utilized simulation in the backend process, and focused on the bottleneck equipment with the
+objective of maximizing demand fulfillment subject to systems
+constraints. The optimization gave as a result the scheduling
+of operations and starts of material into the back-end facility.
+C. Front-end Processes: wafer fab simulation
+Simulation in the higher level of the front-end process is
+focused on the simulation of the manufacturing operations
+of wafer fabrication facilities. Simulation tools are utilized to
+support the decision-making process in control and planning
+As mentioned in section II, the wafer fab is one of the
+most complex systems in the process of manufacturing of
+semiconductor devices. Therefore, simulation in this level is
+a valuable tool that is utilized for analysis, decision-making,
+design, and optimization of control and planning strategies
+There are a wide variety of activities in the wafer fabs where
+simulation is utilized. For instance, Wein discussed in [65] the
+impact of scheduling in wafer fab operations in cycle time and
+throughput. The study was performed utilizing a simulation
+model and comparing the effect of different dispatching rules
+and input regulation strategies. Wein also compared the effect
+in process capability when testing alternative versions of the
+fab with different number of fabrication tools. Also, theoretical
+and simulation work in modeling and optimization of reentrant lines has been reported by Kumar and Kumar & Kumar
+in [28] and [29], respectively. Similarly, Mittler, Schöeming,
+and Gerlich presented in [41], [42] the results of simulations
+of large wafer fab models, based on industrial data, and the
+impact of different dispatching rules. The results demonstrated
+that the performance in the fab (e.g., cycle time, variance
+of cycle time) is dependent on the fab configuration, load,
+and type of products being produced. In addition, Bai et.
+al. reported in [4] the use of simulation models to compare
+scheduling strategies designed to reduce cycle times and
+Work-In-Process (WIP) inventories as well as to maintain the
+Another interesting application of simulation tools in the
+front-end process is presented by Narahari et. al. in [44]. Here
+the effect of the so-called hot lots, wafer lots with a very high
+priority in production, through simulation studies is discussed.
+Results from simulations studies in this body of work demonstrated the negative effect that hot lots have in the cycle time
+of standard lots. In addition, analysis and modeling procedures
+are proposed with the objective to design control strategies that
+are able to deal with hot lots. Also, in the area of material
+handling, Mackulak et. al. discussed in [36] the utilization
+of design of experiments and simulation of intrabay layouts
+for Automated Material Handling Systems (AHMS). In this
+study, simulations were performed to compare performance
+of alternative designs. Finally, the optimization of multiple
+objectives in wafer fabs by using simulation models is reported
+by Gupta & Sivakumar in [18]. In this research, Pareto
+solutions are utilized to deal with the problem of multiple
+objective optimization of cycle time, machine utilization, and
+due date accuracy. As a result, near optimal solutions for
+scheduling the wafer fab were obtained, and simulation studies
+demonstrated that these solutions worked effectively.
+The highest level in the simulation hierarchy corresponds
+to the supply chain, which is defined as "...a network consisting of nodes corresponding to facilities where products are
+acquired, transformed, stored and sold" [46].
+The simulation of supply chains is considered complex and
+involves the simulation of the product and information flow
+through the different links in the chain [46], [21], [61]: manufacturing facilities (front-end and back-end), transportation
+between the different stages in the chain, business processes
+(e.g., forecasting, production and inventory planning), and
+customer orders (e.g., modeling of actual consumption of
+products). Also, many of these components are generally
+distributed through different geographical locations that makes
+the modeling and simulation process even more difficult.
+Simulation tools are utilized as a part of the strategies
+for optimization of the supply chain. The main objectives
+of the optimization are focused on minimizing all costs incurred across the supply chain and maximizing throughput
+while maintaining high levels of customer satisfaction [46].
+In addition, a better management of the supply chain is a
+key component to improve competitiveness in the current
+semiconductor manufacturing market [21]. Simulation at this
+level is clearly justified by the high capital investment of the
+semiconductor industry that calls for higher levels of utilization in the equipment while having low levels of inventory.
+Utilization of simulations of supply chains in semiconductor
+manufacturing is recent and still under active research and
+development [33], [34]. The need for simulation models has
+been pushed by the current globalization of markets and
+the need of planning strategies that cover from manufacturing operations through final customer on-time delivery of
+products. At the same time, simulation of supply chains is
+a complex and computationally intensive task that requires
+different levels of abstraction and time granularity in the
+models being used [46]. One of the main problems in the
+simulation of supply chains is focused on the level of detail
+required to obtain accurate data from simulation runs. The
+accuracy of these simulation models is essential in decisionmaking for the supply chain management. For instance, in
+[21] Sanjay et. al. discussed this problem. The results reported
+showed that the level of accuracy in the supply chain model
+is essential, but at the same time the level of detail increases
+the complexity and computational costs associated with the
+simulation. Sanjay et. al. also reported in [22] an alternative
+to overcome the computational costs through the simulation of
+supply chains based on the bottleneck processes in the chain.
+Comparisons between detailed models and simplified versions
+based on modeling of bottleneck processes are presented and
+demonstrated that the latter version produced accurate results
+with a lower computational cost. In a more recent work,
+Lendermann et. al. reported in [33], [34] the utilization of
+distributed simulation of the supply chain under a Higher Level
+Architecture (HLA) scheme. This procedure consists of distributing the simulation models of each link in the supply chain
+through different locations, and hardware/software platforms.
+It has been demonstrated [33], [34] that this procedure allows
+the generation of ultra-fast simulations of the supply chain.
+For instance, a simulation model of the wafer fab corresponds
+to a link in the chain. A proper level of detail in modeling
+the wafer fab is required so that the supply chain simulation
+model can provide information that can be used in a reliable
+Every component in the supply chain needs to be modeled
+properly. In this paper we focus our attention in the modeling
+and simulation of the front-end process, specifically the wafer
+fab. As Sivakumar mentioned in [58], the semiconductor wafer
+fab is one of the most complex components in the chain,
+and its simulation is essential for decision-making in the
+manufacturing process. The importance of this component is
+reaffirmed by the need of accurate simulation models of wafer
+fabs in the simulation of the supply chain. Therefore, in the
+next sections we discuss in detail a proposed framework for
+modular simulation of semiconductor wafer fabs.
+In this section we describe a framework for modular simulation of semiconductor fabs, which is based on the general
+framework presented by McLean & Leong in [38].
+The main motivation of the framework presented in [38]
+was the non-existence of standards for simulation models and
+data in several industry sectors. A clear example is the current
+semiconductor industry where there is no standardization in
+the models and data utilized in the simulation of the fabs. The
+lack of standards usually increases the amount of work and
+costs involved in the modeling and simulation process.
+The primary objective of the framework proposed by
+McLean & Leong [38] was to provide a scheme for the
+identification of the modules and data required to address
+various types of simulation problems. In addition, they suggest
+that a standard framework could facilitate the exchange of
+data, models, and case studies between commercial simulation
+software, and therefore, accelerate and facilitate the overall
+simulation process. For instance, the development of standard
+templates or modules for different types of case studies would
+be a step to minimize duplication of simulation work, reducing
+the modeling process and costs. The framework proposed in
+[38] includes the following four general elements: (1) Market
+Sector, (2) Hierarchical Modeling Levels, (3) Simulation Case
+Figure 2 illustrates the standard framework as a triangle
+with different levels or layers corresponding to the four main
+elements. The top layer is represented by the Market Sector
+The market sector, hierarchical modeling levels, and simulation case studies layers can be utilized for identification
+purposes rather than for specification. For instance, we identify the semiconductor industry as the market sector in the
+framework. The hierarchical modeling levels of interest are
+the structure and elements utilized in the production process
+Before specifying the models and data that will be required
+to build the simulation model, it is possible to identify the
+Hierarchy in the Proposed Framework for Standard Modular
+simulation case studies that will provide valuable support for
+decision-making in the fabrication operations. The process of
+designing the case studies can be considered as a recurrent process. In other words, after building a simulation model future
+modifications or adjustments could be necessary according to
+the simulation objectives. The layer of simulation case studies
+will provide the level of detail that the simulation model needs
+to provide, and therefore, will determine the structure of the
+The last layer, corresponding to models and data, serves to
+identify and specify the items required to build the simulation
+model. For example, operations, resources, and production
+flows required in the production process can be specified in
+The following sections present details of the application of
+this framework for simulation of semiconductor fabs. In the
+first part we present the identification layers in the context
+of semiconductor wafer fabrication. The second part discusses
+and presents a preliminary structure of the elements that could
+be considered in the layer of models and data utilized for
+VI. I DENTIFICATION L AYERS : M ARKET S ECTOR ,
+H IERARCHICAL M ODELING L EVELS , AND S IMULATION
+The first element of the proposed framework in [38] is
+utilized to identify the market sector that corresponds in this
+case to the semiconductor manufacturing industry. The market
+sector identification is located on the highest layer of the
+framework, and it will determine the specification of the
+As mentioned in section III, in the semiconductor industry
+different simulation processes are conducted at different levels.
+We focus our interest in an important area of simulation
+in the front-end process, which is the simulation of the
+B. Hierarchical Modeling Levels: the semiconductor fab
+The second layer serves to specify the levels of detail
+required in the modeling and simulation of the semiconductor
+Production Line: Corresponds to the specification of the
+stations or tool families utilized in the production process
+and how the process flow is specified for each part
+Human Resources: Process operators and maintenance
+technicians are considered human resources that are generally included in the modeling of semiconductor fabs.
+Station: In a semiconductor fab, stations are composed
+by a group of tools assigned to a specific operation (e.g.,
+lithography, metal deposition) in the production process.
+Usually, these stations are integrated by tools that perform
+the same operation (e.g., tool families).
+Equipment: Machine tools or simply tools are the elements that integrate the stations. In semiconductor fabs,
+the tools are specialized equipment with different levels
+of complexity (e.g., from single to multiple chamber
+tools). Other equipment considered in this category are
+transporters (e.g., autonomous guided vehicles (AGV’s))
+Process: The lowest level in this hierarchical modeling
+specifies the operational parameters at the processing
+level in the fabrication tools (e.g., tool processing time,
+scheduling strategies, wafer starts per week, failure and
+repair statistics, probability distributions). These parameters are utilized to represent, in the simulation model, the
+physical semiconductor wafer fabrication process (e.g.,
+lithography, deposition, ion implantation).
+C. Simulation Case Studies in Semiconductor Wafer Fabrication: A Preliminary List
+Simulation case studies are utilized to answer questions
+about how certain modifications in the current fab simulation
+model can affect the production performance (e.g., throughput,
+cycle time) [39]. From the general framework in [38], we
+identified the following categories as potential components for
+a modular case study element in the simulation framework:
+• Scheduling: the study of the effect of using different
+strategies to schedule jobs (e.g., dispatching rules [47])
+at the tool stations is a common question that can be
+answered with these type of case studies. The scheduling
+also known as shop floor control has been and is still
+being widely studied. For instance, see [65], [28], [29],
+[63]. Other analyses that can be included in this type of
+case study are: hot lots [44] and input regulation (e.g.,
+• Plant Layout: The impact of physical distribution of
+stations into the fab can also be subject to simulation experiments. For instance, travel times of materials between
+the stations and material handling can be analyzed, and
+different configurations of fab layouts can be evaluated
+through simulation case studies. An example of this type
+• Capital Equipment: the effect of variation in capital
+equipment can be analyzed under simulation case studies.
+These experiments can be used to evaluate variations in
+production capacity as well as in costs related with the
+production process [17]. For instance, simulations can be
+performed to evaluate the economic impact of replacing
+tools with different failure probability distributions (e.g.,
+different Mean Time Between Failures (MTBF)).
+• Work Force: Operators and/or workers are usually modeled in semiconductor fab models. Therefore, the analysis
+of the impact of changes in workers schedules (e.g., availability), skill levels (e.g., providing training), contract
+workers, etc.; can provide useful scenarios for decisionmaking.
+• Product Mix: in many semiconductor fabs the production
+is diversified and several products are produced. Questions that can be answered by this case study can be:
+What release rate or input regulation strategy is utilized
+• Process Capability: evaluation of production capabilities
+is important in semiconductor fab operations to project
+workloads as well as to evaluate capacity expansion and
+• Material Handling: Advances in computer graphic animation and simulation tools have made possible the study
+of the effect of material handling (e.g., Automated Material Handling Systems (AMHS), Autonomous Guided
+Vehicles (AGV’s)) in simulation of semiconductor fabs.
+Improvements in how the materials are delivered, stored,
+retrieved from tools, etc. is also a commonly studied
+problem in this industry. For example see [10], [25].
+• Maintenance: One of the major sources of stochastic
+events in a semiconductor fab is tool down-time due
+to failures [62], [63]. Reliability of the tools can be
+increased by applying appropriate preventive maintenance
+(PM). Therefore, PM scheduling strategies can be evaluated through simulation case studies. Algorithms for
+optimal PM scheduling and simulation case studies in
+semiconductor manufacturing have been presented in
+Other case studies mentioned in [38] that can be included
+in this list are: Capacity Analysis, Line Balancing, Cost Estimation, Process Validation, Tolerance Analysis, Ergonomic
+Analysis, Tooling, and Inventory. The list presented above is
+by no means complete, but it represents a good preliminary
+selection of case studies commonly addressed in the semiconductor industry.
+The lowest layer in the proposed framework specifies the
+model and data required to implement the simulation case
+studies. One important objective towards the standardization
+of simulation procedures in the semiconductor industry will
+be the standardization in the format of model description in
+digital formats (e.g., data files). NIST is currently working on
+exchange formats for models and data utilized in simulation
+of manufacturing systems; for instance, see [32]. This effort
+is focused on generating exchange file formats using Unified
+Modeling Language (UML) and eXtensible Markup Language
+(XML). These efforts are part of the NIST’s SIMA program
+We follow the data structure proposed by McLean & Leong
+[38] from which we selected the data elements that are
+generally required to specify a semiconductor fab model. In
+addition, we proposed an additional component denominated
+Simulation Control Specifications. The following is the proposed structure for the models and data layer:
+The following subsections present details about each group
+according to the semiconductor fab modeling and simulation
+For modeling and simulation of semiconductor fabs this
+group of data provides information about:
+• Model Revisions: this segment of data is utilized to
+keep tracking of modifications and/or updated data in the
+• Data Set Summary: description or summary of the key
+• Modeler Comments: this section can be utilized by the
+modeler or analyst to include specific details about conditions for the simulation study (e.g., simulation length,
+replications, other specific conditions).
+• Units of Measurement: the units utilized throughout the
+model are specified in this segment. For instance, in
+simulation models of semiconductor fabs the following
+– Wafers and wafer lots to specify the units being
+– Seconds, minutes, and hours as time units.
+– Meters for distance units (e.g., fab layout specifications).
+– Combination of the above units can be utilized to
+specify other quantities; for instance the throughput
+rate in a tool could be specified in wafers/hour, or
+the meter/second to specify the speed of a transporter
+utilized to deliver material between stations.
+• Probability Distributions: this set of data is utilized to
+specify the type of probability distribution for the random
+events in the production process. For instance, the following events that are described by probability distributions
+are utilized in modeling and simulating semiconductor
+– Tool failures times (e.g., Mean Time Between Failures (MTBF) or Mean Time To Fail (MTTF))
+– Tool repair times (e.g., Mean Time To Repair
+Performance Metrics: these are indexes that are utilized
+to measure production performance through simulation
+case studies. The following are commonly used metrics
+in semiconductor manufacturing processes [29]:
+– throughput capacity, and throughput rate
+– WIP level (e.g., Work-In-Process inventory)
+Details about the resources required in the production
+process are identified in this structure. In the case of a
+semiconductor fab, the following could be a specification of
+∗ Mean Time Between Failure (MTBF) or Mean
+Time To Fail (MTTF) specifications per tool
+– Production operators and preventive maintenance
+– Transporters (e.g., autonomous guided vehicles, conveyors, human-based transporters)
+∗ Physical specifications (e.g., speed, distance covered)
+– Other material handling devices (e.g., robots)
+• Skill Definitions: maps the skill levels of operator or technicians with the corresponding process activities (e.g.,
+• Operations Definitions: Defines the operation type per
+tool station (e.g., lithography, etching).
+In general, product mix specifications are indicated in this
+level and could include the following structures:
+• Parts: define the type of products fabricated in the fab.
+– Product associated production sequence, route, or
+• Process Plans: specifies the work flow per product or
+routing, and other special operations in the production
+∗ Step identification (e.g., production step ID number)
+· Tool and processing time (e.g., probability distribution parameters)
+∗ Batch size if batching operations are required at
+the current processing step in the sequence
+∗ Rework percentage and rework re-routing specification
+∗ Travel times to the next station/step sequence
+The data structures in these levels provide details about
+calendars of operative activities and work operations in the
+• Calendars: identifies shift schedules for operators, and
+breaks that can be represented as worker’s availability
+• Work: this structure can be utilized to specify scheduling
+data or strategies followed for production control (e.g.,
+– Wafer starts per month (e.g., lot release rate, arrival time probability distribution) or input regulation
+strategies (e.g., Constant WIP (CONWIP) [65], [54]).
+– Dispatching rules or scheduling strategies per tool
+This section presents the physical distribution of the different elements that integrate the semiconductor fab (e.g.,
+tool stations, transporters, parts transportation paths). This
+structure "...defines the location of reference points within
+the site or facility, area boundaries, paths, and part objects.
+It contains reference pointers to external graphic files that
+may use appropriate graphic standards to further define these
+Definition of the fab layout and its utilization with graphic
+interfaces are mainly utilized for animation purposes. For
+instance, this can be directly applied to the study of Automated
+Material Handling Systems (AMHS) strategies and equipment
+allocation in the shop floor (e.g., evaluate the impact in
+production performances from different layout configurations).
+An important piece of information about the simulation
+model are the details for running the simulation. This section
+includes details about simulation length, warm-up periods,
+number of replications, and other details relevant to the control
+of the simulation runs. This information is valuable for future
+validation and verification of the model if it is implemented
+under different simulation engines. Validation and verification
+is a key step in the simulation process that is beyond the
+presentation of the proposed framework for simulation. Useful
+guidelines and procedures for verifying and validating simulation models are presented by Law & Kelton in [31].
+The next sections present three different examples to illustrate how the proposed simulation framework is utilized to
+present the necessary information required for modeling and
+simulating a semiconductor fab. In addition, simulation case
+studies were performed for each example and according to
+the generic case studies list presented in section V. All the
+examples presented in this paper correspond to a summary of
+the case studies reported by Li in [35]. We refer the reader to
+the latter reference for further and detailed versions of these
+– WIP level (e.g., Work-In-Process inventory).
+Tables I, II, and III show details about the resources utilized
+VIII. E XAMPLE 1: I NTEL F IVE -M ACHINE M INI - FAB
+In this section we present an example of the application of
+the proposed simulation framework discussed in sections IV,
+V, and VI. This example corresponds to a simple configuration
+of the Intel Five-Machine Six Step Mini-fab benchmark [24],
+In this example we depart from the Models and Data layer
+in the proposed framework. We assume that the other layers in
+the framework have been properly specified in section IV. In
+addition, a simple simulation case study about the impact of
+the work force in the fab production performance is presented
+in the last subsection. The objective of this simulation example
+is to illustrate a specific type of case study that can be
+performed according to the proposed simulation framework
+The following are the general specifications for the Minifab:
+– Neither maintenance technicians nor operator’s
+breaks are modeled in this model version.
+– Also, no buffer sizes are modeled for the tool stations.
+– Batch of lots can be mixed in any combination of
+– This is a five-machines six-step manufacturing process.
+– There are 3 different products in which one of them
+– This model does not include rework nor travel times.
+– An operator is always required for loading and
+unloading the tools. During the time that the machine
+is processing the operators are not required.
+– Wafer lots is the unit being processed by tools.
+– Tool failures times: uniform distribution.
+– Tool repair times: uniform distribution.
+T OOL S TATION FAILURES AND R EPAIR S TATISTICS FOR THE Mini-fab
+U(a,b): Uniform distribution in the interval [a,b].
+The Mini-fab model has the following specifications for
+– Number of parts (products): 2 standard products (Part
+– Product associated production sequence or route: 1
+unique sequence or process flow for every product.
+– Lot size per product: the basic unit is lots, therefore
+Process Plans: Table IV presents the process plan that
+consists of the tool stations, corresponding processing
+step, and processing time. In addition, Table V shows
+the setup, batching, load, and unload details per station.
+the values for the performance indexes resulting from the
+S IMULATION R ESULTS FOR THE W ORK F ORCE E XPERIMENT USING THE
+**The given processing time for Station 1 is per batch.
+S ETUP, L OAD , U NLOAD T IMES , AND B ATCHING S PECIFICATIONS FOR THE
+LC: Avg. Lots completed, CT: Avg. Cycle time (h), CT STD: Cycle time standard
+deviation (h), WIP: Work-In-Process (lots), C.I.: 95 % t-confidence interval half-length.
+S IMULATION R ESULTS FOR THE W ORK F ORCE E XPERIMENT USING THE
+SU: Setup time (min), LD: Load time (min),
+ULD: Unload time (min), BS: Batch size (lots)
+LC: Avg. Lots completed, CT: Avg. Cycle time (h), CT STD: Cycle time standard
+deviation (h), WIP: Work-In-Process (lots), C.I.: 95 % t-confidence interval half-length.
+Calendars: operations are 24 hours, 7 days. A day-work
+is divided in two shifts of 12 hours each
+– Wafer starts: Part 1: 51 lots per week; Part 2: 30 lots
+– Dispatching rules or scheduling strategies per stations: First-In-First-Out (FIFO).
+F. Simulation Case Studies: Impact of Work Force in Production Performance
+In this simple example, the Mini-fab model was utilized
+to compare the impact in production performance when an
+operator is added into the process. We consider the base model
+according to the definitions for this model previously presented
+in this section. The alternative system corresponds to a model
+including an extra operator. In other words we define the
+number of operators in the alternative systems as follows: 2
+The simulation engine utilized to implement the model
+and perform the simulation runs was AutoSched AP [7],
+[48], [8]. In addition, the simulation conditions are the same
+as those indicated in the subsection of Simulation Control
+Tables VI and VII present the simulation results for the base
+and alternative models, respectively. Also, Figure 3 depicts
+P1: Part 1 P2: Part 2 CT: Avg. Cycle Time (h)
+Fig. 3. Performance indexes for the Base and Alternative Models of the
+The results clearly indicated that an improvement in the
+cycle time and reduction in the average WIP levels are
+obtained by adding one more operator in the fab. The cycle
+time is decreased about 6 hours in average for both products,
+while the average WIP level is reduced in about two lots for
+product 1, and one lot for product 2. Also, the variation in
+the cycle time is reduced as it is indicated in the standard
+The second example corresponds to the denominated Measurement and Improvement of Manufacturing Capacities (MIMAC) data set 1 or simply MIMAC 1. This and other datasets
+of semiconductor fab models have been made available for
+research and academic purposes by the Modeling and Analysis
+of Semiconductor Manufacturing Laboratory (MASMLab) at
+Similarly to Example 1, we present the Models and Data
+layer for the MIMAC 1 model. The last subsection includes a
+simulation case study in scheduling, which consisted in the
+evaluation of three different dispatching rules for the tool
+General specifications for the MIMAC 1 model, as given
+in [37], are summarized below. However, some revisions were
+made to the model in [37] in order to perform the simulation
+– The lot release rates for the two products indicated
+in the original model in [37] caused instability in
+the wafer fab simulation model. Therefore, after a
+capacity analysis (for details see [35]) new release
+rates were calculated to obtain a stable behavior of
+the system. These rates were modified as follows:
+in the first product the rate changed from 3.02402
+to 3.22402 hours between a lot release, and for the
+second product the rate was increased from 6.04788
+– This manufacturing process includes 83 tool stations
+– From the original 83 tool stations and 265 tools, only
+68 stations and 212 tools are really utilized in this
+– There are 2 types of products (Part 1 and Part 2).
+– There are 210 processing steps to fabricate Part 1,
+– The average percentage of tool downtime is 10.2 %.
+– This fab model has 32 operator groups from which 5
+are not utilized, therefore, only 26 groups are really
+– An operator is only required for the setup operations
+– Units being processed can be either wafers or lots.
+Tool failures times: exponential distribution.
+Tool repair times: exponential distribution.
+– WIP level (e.g., Work-In-Process inventory).
+Tables VIII, IX, X, and XI present the details for the
+resources in the MIMAC 1 model. Given that the model
+includes 68 stations and 212 tools, only a partial presentation
+of resources is provided here as a manner of exemplifying the
+utilization of the proposed simulation framework.
+N UMBER OF T OOLS A SSIGNED PER S TATION FOR THE MIMAC 1
+O PERATORS A SSIGNATION PER T OOL S TATION FOR THE MIMAC 1
+T OOL S TATION FAILURES AND R EPAIR S TATISTICS FOR THE MIMAC 1
+L OAD , U NLOAD T IMES , AND B ATCHING S PECIFICATIONS FOR THE
+The MIMAC 1 model has the following specifications for
+– Number of parts (products): 2 (Part 1 and Part 2).
+– Product associated production sequence or route: 2
+routes for the corresponding parts being produced.
+Process Plans: Tables XII and XIII present the process
+plan that consists of the tool stations, corresponding
+processing step, processing time, and type of unit being
+processed. In addition, Table XIV shows the batching,
+LD: Load time (h), ULD: Unload time (h), Min. BS: Minimum batch size (wafers),
+Calendars: operations are 24 hours, 7 days. A day-work
+is divided in two shifts of 12 hours each.
+∗ Product 1: one lot every 3.22402 hours (2501
+∗ Product 2: one lot every 6.44788 hours (1250
+– Dispatching rules or scheduling strategies per stations: First-In-First-Out (FIFO.)
+PT: Processing time, UP: Unit being processed.
+F. Simulation Case Studies: Impact of Dispatching Rules in
+PT: Processing time, UP: Unit being processed.
+In this section we present a case study in the scheduling category. We evaluated the impact of three different
+dispatching rules on fab performance index measures. The
+three dispatching rules studied were: First-In-First-Out (FIFO),
+Shortest Processing Time (SPT), and Least Processing Time
+In the FIFO rule the first lot arriving to a tool station is the
+first lot in being served once a tool is available for processing.
+When the SPT is utilized, the next lot being processed is the
+lot with the minimum processing time. Finally, the LTR rule
+selects the lot with the minimum sum of processing times
+remaining from the subsequent operations. Additional details
+about these dispatching rules can be found in [47].
+The simulation conditions are those specified in the Simulation Control Specifications subsection. In addition, the
+simulation engine utilized was AutoSched AP.
+Tables XV, XVI, and XVII present the simulation results for
+each of the dispatching rules. Also, Figure 4 depicts the value
+of the performance indexes obtained from the simulation.
+S IMULATION R ESULTS U SING FIFO D ISPATCHING R ULE : MIMAC 1
+S IMULATION R ESULTS U SING LTR D ISPATCHING R ULE : MIMAC 1
+LC: Lots completed, CT: Cycle time (h), CT STD: Cycle time standard deviation (h),
+WIP: Work-In-Process (lots), B.I.%: Bottleneck station idle percentage,
+AVG: Average value, C.I.: 95 % t-confidence interval half-length.
+LC: Lots completed, CT: Cycle time (h), CT STD: Cycle time standard deviation (h),
+WIP: Work-In-Process (lots), B.I.%: Bottleneck idle percentage,
+AVG: Average value, C.I.: 95 % t-confidence interval half-length.
+S IMULATION R ESULTS U SING SPT D ISPATCHING R ULE : MIMAC 1
+LC: Lots completed, CT: Cycle time (h), CT STD: Cycle time standard deviation (h),
+WIP: Work-In-Process (lots), B.I.%: Bottleneck station idle percentage,
+AVG: Average value, C.I.: 95 % t-confidence interval half-length.
+P2 CT P1 WIP P2 WIP P1 CTSD P2 CTSD B.I.%
+P1: Part 1 P2: Part 2 CT: Avg. Cycle Time (h) WIP: Avg. Work-In-Process (lots)
+CTSD: Avg. Cycle Time Standard Deviation B.I.%: Bottleneck Idle Percentage
+Fig. 4. Performance indexes when utilizing FIFO, SPT, and LTR dispatching
+As observed in Tables XV, XVI, and XVII, as well as
+in Figure 4, the best performance in cycle time for Part 1
+is obtained under the LTR dispatching rule. For Part 2, the
+best performance in cycle time is given by the application of
+the SPT rule. The same pattern is obtained for the average
+WIP. The lowest variation in the cycle time over the two type
+of parts is obtained with the SPT rule, such as the standard
+The last example corresponds to the fab model of a R&D
+facility of Hewlett-Packard developed by L. W. Wein, see [65]
+for details. For short we denominated the model as HP-Wein
+model. In addition, the data set for this model is available from
+In this example we included a case study in scheduling,
+which consisted of the evaluation of different release rates. The
+corresponding presentation of this case study and its analysis
+The following are the general specifications for the HP-Wein
+– No modifications in the model are reported.
+– This is a manufacturing process that includes 24
+tool stations consisting of single or multiple identical
+– There are 172 processing steps to fabricate the product.
+– Operators and travel times are not modeled.
+– The fab model includes one bottleneck station corresponding to the lithography process. This tool station
+– Tool failures times: exponential distribution.
+– Tool repair times: exponential distribution.
+– WIP level (e.g., Work-In-Process inventory.)
+Tables XVIII, and XIX present the details for the resources
+The HP-Wein model has the following specifications for
+– Product associated production sequence or route: 1
+route for the corresponding part being produced.
+– Lot size per product: basic unit being processed is
+a wafer lot, there is no lot size specification. In
+Process Plans: Table XX presents the process plan that
+consists of the tool stations, corresponding processing
+step, and processing time. Given that a total of 172
+processing steps are required to fabricate a part, a partial
+presentation of the process plan is provided.
+Calendars: operations are 24 hours, 7 days. A day-work
+is divided in two shifts of 12 hours each.
+– Wafer starts: one lot every 42.3769 hours.
+– Dispatching rules or scheduling strategies per stations: First-In-First-Out (FIFO).
+N UMBER OF T OOLS A SSIGNED PER S TATION FOR THE HP-Wein
+T OOL S TATION FAILURES AND R EPAIR S TATISTICS FOR THE HP-Wein
+P ROCESS P LAN FOR P RODUCT 1 IN THE HP-Wein
+S IMULATION R ESULTS FOR THE I NPUT R EGULATION E XPERIMENT USING
+RR: Release rate (h/lot), CT: Avg. Cycle time (h), B.I. %: Bottleneck station idle
+F. Simulation Case Studies: Impact of Different Lot Release
+This case study is part of the generic category of scheduling,
+specifically input regulation using a deterministic release rate.
+It has been demonstrated in [65], [51] that a constant release
+rate produces better performance in cycle time mean and
+variance than release rates based on poisson or uniform distributions. In this experiment we performed simulations using the
+HP-Wein model varying the lot release rate from 36.3769 to
+46.3769 hours in increments of 1 hour. This generated a total
+of 11 different scenarios which corresponds to a variation of
+85 % to 100 % of the maximum production capacity of the fab.
+Our objective was to analyze the impact of these variations in
+The simulation engine utilized was AutoSched AP, and
+the simulation conditions are as indicated in the Simulation
+Table XXI lists the results from the simulation and indicates
+the average cycle time (CT), the percentage of idleness (BS
+% idle) in the bottleneck station (PHGCA_LITHOGRAPHY),
+standard deviation (STD) of cycle time, average number of
+lots completed (LC), and the average work-in-process (WIP)
+inventory. In addition, Table XXII lists the half-length of the
+confidence intervals at 95 % of confidence for the statistics
+From Table XXI, it can be observed that the maximum
+throughput is obtained with a release rate of 38.3769 hours
+per lot. Under these conditions the bottleneck station is utilized
+approximately 94 % of the time, but the cycle time is increased
+around 1000 hours. Moreover, the minimum WIP and cycle
+time is obtained for a release rate of 47.3769 hours per lot.
+The results presented in Table XXII also demonstrated that
+there was no statistical difference in the performance when the
+release rate being utilized is large. For instance, the release
+rates of 47.3769 and 46.3769 hours produced confidence
+intervals that are overlapping for the cycle time, showing no
+statistical difference. This fact can also be demonstrated by
+percentage, STD: Standard deviation, WIP: Work-In-Process (lots).
+S TATISTIC C ONFIDENCE I NTERVALS FROM THE I NPUT R EGULATION
+RR: Release rate (h/lot), CT: Avg. Cycle time (h), C.I.: 95 % t-confidence interval
+half-length, STD: Standard deviation, WIP: Work-In-Process (lots).
+An application of a framework for standard modular simulation (proposed by NIST) of semiconductor fabs has been
+presented. A preliminary list of elements that integrate this
+framework in the context of modeling of semiconductor fabs
+have been discussed. The list of elements presented is by no
+means considered complete and further additions are possible.
+The specific application of the proposed framework was
+illustrated by presenting three examples of different semiconductor fab models: the Mini-fab, MIMAC 1, and the HPWein model. In the Mini-fab model a case study in work
+force impact in production performance was presented. For
+the MIMAC 1, a scheduling case study where three different
+dispatching rules were compared in production performance
+was discussed. Finally, by utilizing the HP-Wein model, a
+simulation experiment comparing different release rates was
+Extension and improvement of the proposed framework
+is possible and necessary. For instance, an important factor
+to consider is how technological changes could affect the
+utilization of the standard. A preliminary answer for this
+question can be the application of an active updating process.
+Therefore, technological changes in the semiconductor manufacturing industry will be considered by updated versions of
+the standard. Similarly, other issues such as the levels of detail
+required in the modeling and simulation need to be reviewed
+Currently, our efforts are being conducted in the identification and development of generic case studies for simulation
+of semiconductor wafer fabrication. Our future research is
+focused on the improvement of the proposed framework as
+well as the incorporation of the work being conducted by NIST
+towards the standardization of data formats (e.g., use of UML
+The simulation case studies presented in this paper were
+conducted using AutoSched AP [7], [48], [8] as the simulation
+tool. This does not imply recommendation or endorsement by
+the authors or NIST, nor does it imply that this simulation tool
+is necessarily the best available for the purpose.
+[1] P. Agrawal and W. J. Dally, "A hardware logic simulation system,"
+IEEE Transactions on Computer-Aided Design of Integrated Circuits
+and Systems, vol. 9, no. 1, pp. 19-29, 1990.
+[2] F. L. Atherton and W. R. Atherton, Wafer Fabrication: Factory Performance and Analysis, Massachusetts: Kluwer Academic Publishers,
+[3] M. Aybar, K. Potti, and T. Lebaron, "Using simulation to understand
+capacity constraints and improve efficiency on process tools," in Proceedings of the 2002 Winter Simulation Conference, ed. E. Yücesan, C.H. Chen, J. L. Snowdon, and J. M. Charnes, Pistcataway, New Jersey:
+Institute of Electrical and Electronic Engineers, 2002, pp. 1431-1435.
+[4] S. X. Bai and S. B. Gershwin, "Scheduling manufacturing systems with
+work-in-process inventory control: Reentrant systems," OR Spektrum,
+[5] S. Bhatnagar, E. Fernandez-Gaucherand, M. C. Fu, Y. He, and S. I.
+Marcus, "A markov decision process model for capacity expansion and
+allocation," in Proc. 38th IEEE Conference on Decision and Control,
+Phoenix, AZ, December, 1999, pp. 121-125.
+[6] T. Binder, A. Hossinger, and S. Selberherr, "Rigorous integration of
+semiconductor process and device simulators," IEEE Transactions on
+Computer-Aided Design of Integrated Circuits and Systems, vol. 22, no.
+[7] Brooks Automation, AutoMod (AutoSched AP). [Online]. Available:
+http://www.autosched.com/products/automod/automod.asp
+[8] Brooks Automation, Corp. AutoSched AP. [Online]. Available:
+[9] R. E. Bryant, "Symbolic boolean manipulation with ordered binary
+decision diagrams," ACM Computing Surveys, vol. 24, no. 3, pp. 293318, 1992.
+[10] E. Campbell and J. Ammenheuser, "300 mm factory layout and material handling modeling: phase II report," Tech Transfer Document #
+[11] A. Chikamura, K. Nakamae, and H. Fujioka, "Verification of wafer test
+process simulation in VLSI manufacturing system and its application,"
+IEICE Trans. Electron., vol. E82C, no. 6, pp. 1013-1017, 1999.
+[12] M. Choi, L. Milor, and L. Capodieci, "Simulation of the circuit performance impact of lithography in nanoscale semiconductor manufacturing," in Proceedings of the International Conference on Simulation of
+Semiconductor Processes and Devices SISPAD, 2003, pp. 219-222.
+[13] R. W. Dutton and A. J. Strojwas, "Perspectives on technology and
+technology-driven CAD," IEEE Transactions on Computer Aided Design
+of Integrated Circuits and Systems, vol. 19, no. 12, pp. 1544-1560, 2000.
+[14] C. C. Enz and Y. Cheng, "MOS transistor modeling for RF IC design,"
+IEEE Transactions on Solid-State Circuits, vol. 35, no. 2, pp. 186-201,
+[15] J. W. Fowler, M. C. Fu, L. W. Schruben, S. Brown, F. Chance, S.
+Cunningham, C. Hilton, M. Janakiram, R. Stafford, and J. Hutchby,
+"Operational modeling & simulation in semiconductor manufacturing,"
+in Proceedings of the 1998 Winter Simulation Conference, ed. D.J.
+Medeiros, E.F. Watson, J.S. Carson and M.S. Manivannan, 1998, pp.
+[16] J. W. Fowler, 2004, private communication.
+[17] N. S. Grewal, A. C. Bruska, T. M. Wulf, and J. K. Robinson, "Integrating
+targeted cycle-time reduction into the capital planning process," in Proceedings of the 1998 Winter Simulation Conference, ed. D.J. Medeiros,
+E.F. Watson, J.S. Carson and M.S. Manivannan, 1998, pp. 1005-1010.
+[18] A. K. Gupta and A. I. Sivakumar, "Simulation based multiobjective
+schedule optimization in semiconductor manufacturing," in Proceedings
+of the 2002 Winter Simulation Conference, ed. E. Yücesan, C.-H. Chen,
+J. L. Snowdon, and J. M. Charnes, Pistcataway, New Jersey: Institute
+of Electrical and Electronic Engineers, 2002, vol. 2 , pp. 1862-1870.
+[19] I. Hamzaoglu and J. H. Patel, "Test set compaction algorithms for
+combinational circuits," IEEE Transactions on Computer-Aided Design
+of Integrated Circuits and Systems, vol. 10, no. 8, pp. 957-963, 2000.
+[20] S. Ikeda, H. Ohta, H. Miura, and Y. Hagiwara, "Mechanical stress
+control in a VLSI-fabrication process: a method for obtaining the relation
+between stress levels and stress-induced failures," IEEE Transactions on
+Semiconductor Manufacturing, vol. 16, no. 4, pp. 696-703, 2003.
+[21] S. Jain, Ch.-Ch. Lim, B.-P. Gan, and Y.-H. Low, "Criticality of detailed
+modeling in semiconductor supply chain simulations," in Proceedings
+of the 1999 Winter Simulation Conference, ed. P. A. Farrington, H. B.
+Nembhard, D. T. Sturrock, and G. W. Evans, 1999, pp. 888-896.
+[22] S. Jain, Ch.-Ch. Lim, B.-P. Gan, and Y.-H. Low, "Bottleneck based
+modeling of semiconductor supply chain," in Proceedings of the International Conference on Modeling and Analysis of Semiconductor
+[23] W. D. Kelton, R. P. Sadowski, and D. T. Sturrock, Simulation with Arena,
+[24] K. Kempf. Intel Five-Machine Six Step Mini-Fab Description. [Online].
+Available: http://www.eas.asu.edu/~research/intel/papers/fabspec.html
+[25] D. Kibira and C. McLean, "Virtual reality simulation of mechanical
+production assembly line," in Proceedings of the 2002 Winter Simulation
+Conference, ed. E. Yücesan, C.-H. Chen, J. L. Snowdon, and J. M.
+Charnes, Pistcataway, New Jersey: Institute of Electrical and Electronic
+[26] R. Kotcher and F. Chance, "Capacity planning in the face of product-mix
+uncertainty," in Proceedings of the 1999 IEEE International Symposium
+on Semiconductor Manufacturing Conference, Santa Clara, CA, 1999,
+[27] P. R. Kumar, "Re-entrant lines," Queueing Systems: Theory and Applications, vol. 13, pp. 87-110, 1993.
+[28] P. R. Kumar, "Scheduling semiconductor manufacturing plants," IEEE
+Control Systems Magazine, vol. 39, no. 11, pp. 33-40, 1994.
+[29] S. Kumar and P. R. Kumar, "Queueing Network Models in the Design
+and Analysis of Semiconductor Wafer Fabs," IEEE Transactions on
+Robotics and Automation, vol. 17, no. 5, pp. 548-561, 2001.
+[30] A. La Magna, S. Coffa, and S. Libertino, M. Strobel, and L. Colombo,
+"Atomistic simulations and the requirements of process simulator for
+novel semiconductor devices," Computational Materials Science, vol.
+[31] A. M. Law and W. D. Kelton, Simulation Modeling and Analysis, New
+[32] T. Lee and C. McLean, "A neutral information model for simulation
+machine shop operations," in Proceedings of the 2003 Winter Simulation
+Conference, ed. S. Chick, P. J. Sánchez, D. Ferrin, and D. J. Morrice,
+Pistcataway, New Jersey: Institute of Electrical and Electronic Engineers,
+[33] P. Lendermann, B. P. Gan, L. F. McGinnis, "Distributed simulation with
+incorporated APS procedures for high-fidelity supply chain optimization," in Proceedings of the 2001 Winter Simulation Conference, 2001,
+[34] P. Lendermann, N. Julka, B. P. Gan, D. Chen, L. F. McGinnis, and J.
+P. McGinnis, "Distributed supply chain simulation as a decision support
+tool for the semiconductor industry," Simulation-Transactions of The
+Society for Modeling and Simulation International, vol. 79, no. 3, pp.
+[35] H. Li, "Application of standard modular simulation to semiconductor
+wafer fabrication," Manuscript, University of Cincinnati, OH, June,
+[36] G. T. Mackulak and P. Savory, "A simulation-based experiment for
+comparing AMHS performance in a semiconductor fabrication facility,"
+IEEE Transactions on Semiconductor Manufacturing, vo. 14, no. 3, pp.
+[37] MASMLab. 2004. TestBed. [Online]. Maintained by Modeling and
+Analysis of Semiconductor Manufacturing Laboratory, Industrial and
+Management Systems Engineering department, Arizona State University,
+USA. Available: http://www.eas.asu.edu/~masmlab/ftp.htm
+[38] C. McLean and S. Leong, "A framework for standard modular simulation," in Proceedings of the 2002 Winter Simulation Conference, ed. E.
+Yücesan, C.-H. Chen, J. L. Snowdon, and J. M. Charnes, Pistcataway,
+New Jersey: Institute of Electrical and Electronic Engineers, 2002, pp.
+[39] C. McLean and G. Shao, "Generic case studies for manufacturing
+simulation applications," in Proceedings of the 2003 Winter Simulation
+Conference, ed. S. Chick, P. J. Sánchez, D. Ferrin, and D. J. Morrice,
+Pistcataway, New Jersey: Institute of Electrical and Electronic Engineers,
+[40] C. McLean, Y. T. Lee, G. Shao, and F. Riddick. Manufacturing
+Systems Integration Division, Manufacturing Systems Laboratory, National Institute of Standards and Technology. 2005. Shop data model
+and interface specification. Technical Report. [Online]. Available:
+http://www.sisostds.org/doclib/doclib.cfm?SISO_RID_1005843
+[41] M. Mittler, A. K. Schömig, and N. Gerlich. Reducing The Variance
+Of Cycle Times In Semiconductor Manufacturing Systems. Technical
+http://www3.informatik.uni-wuerzburg.de/TR/tr109.pdf
+[42] M. Mittler and A. K. Schömig, "Comparison of dispatching rules for
+semiconductor manufacturing using large facility models," in Proceedings of the 1999 Winter Simulation Conference, ed. P. A. Farrington,
+H. B. Nembhard, D. T. Sturrock, and G. W. Evans, vol. 1, 1999, pp.
+[43] K. Nakamae, H. Ikeda, and H. Fujioka, "Evaluation of final test
+process in 64-Mbit DRAM manufacturing system through simulation
+analysis," in Proceedings of the Advanced Semiconductor Manufacturing
+Conference and Workshop, 2003 IEEEI/SEMI, 2003, pp. 202-207.
+[44] Y. Narahari and L. M. Khan, "Modeling the effectof hot lots in semiconductor manufacturing systems," IEEE Transactions on Semiconductor
+Manufacturing, vol. 10, no. 1, pp. 185-188, 1997.
+[45] Object Managment Group (OMG). Unified Modeling Language (UML).
+[46] I. M. Ovacik and W. Weng, "A framework for supply chain management
+in semiconductor manufacturing industry," in Proceedings of the Seventeenth IEEE/CPMT International Electronics Manufacturing Technology
+Symposium: Manufacturing Technologies - Present and Future, October,
+[47] S. S. Panwalker and W. Iskander, "A survey of scheduling rules,"
+Operation Research, vol. 25, pp. 45-61, 1997.
+[48] T. Phillips, "AutoSched AP by AutoSimulations," in Proceeding of the
+1998 Winter Simulation Conference, 1998, pp. 219-222.
+[49] J. D. Plummer, M. D. Deal, and P. B. Griffin, Silicon VLSI Technology,
+Englenwood Cliffs, NJ: Prentice-Hall, 2000.
+[50] J. Potoradi, O. S. Boon, and S. J. Mason, "Using simulation-based
+scheduling to maximize demand fulfillment in a semiconductor assembly
+facility," in Proceedings of the 2002 Winter Simulation Conference, ed.
+E. Yücesan, C.-H. Chen, J. L. Snowdon, and J. M. Charnes, Pistcataway,
+New Jersey: Institute of Electrical and Electronic Engineer, vol. 2, 2002,
+[51] C. Qi and T. K. Tang, "Simulation based cause and effect analysis of
+cycle time and WIP in semiconductor safer fabrication," in Proceedings
+of the 2002 Winter Simulation Conference, ed. E. Yücesan, C.-H. Chen,
+J. L. Snowdon, and J. M. Charnes, Pistcataway, New Jersey: Institute
+of Electrical and Electronic Engineers, 2002, pp. 1130-1137.
+[52] J. A. Ramírez-Hernández and E. Fernandez-Gaucherand, "An algorithm
+to convert wafer to calendar-based preventive maintenance schedules for
+semiconductor manufacturing systems," in Proceedings of the 42 nd IEEE
+Conference on Decision and Control, Maui, HI, 2003, pp. 5926-5931.
+[53] G. Rappitsch, E. Seebacher, M. Kocher, and E. Stadlober, "SPICE
+modeling of process variation using location depth corner models," IEEE
+Transactions on Semiconductor Manufacturing, vol. 17, no. 2, pp. 201213, 2004.
+[54] O. Rose, "CONWIP-like lot release for a wafer fabrication facility with
+dynamic load changes," in Proceedings of the SMOMS ’01 (ASTC ’01),
+SEMATECH, "Modeling data standards, version 1.0," Technical Report,
+Semiconductor Industry Association (SIA), European Electronic Component Association (EECA), Japan Electronics & Information Technology Industries Association (JEITA), Korean Semiconductor Industry
+Association (KSIA), and Taiwan Semiconductor Industry Association
+(TSIA). International Technology Road Map for Semiconductors (ITRS)
+Update 2003. [Online]. Available: http://public.itrs.net
+A. I. Sivakumar and C. S. Chong, "A simulation based analysis of cycle
+time distribution, and throughput in semiconductor backend manufacturing," Computers in Industry, vol. 45, pp. 59-78, 2001.
+A. I. Sivakumar, "Multiobjective dynamic scheduling using discrete
+event simulation," International Journal of Computer Integrated Manufacturing, vol. 14, no. 2, pp. 154-167, 2001.
+T. E. Stanley, E. Campbell, K. Rust, J. Cheatham, J. Maia and R. Wright,
+"Linking an AutoSched AP process model with an AutoMod transport
+model using MCM in a 300mm fab," presented at the AutoSimulations
+K. S. Tsakalis, J. J. Flores Godoy, and A. A. Rodriguez, "Hierarchical
+modeling and control for re-entrant semiconductor fabrication lines:
+A mini-fab bechmark," in Proceedings of the ETFA’ 97, 6th IEEE
+International Conference on Emerging Technology Factory Automation,
+S. J. Turner, W. T. Cai, and B. P. Gan, "Distributed supply-chain
+simulation using high level architecture," Transactions of the Society
+for Computater Simulation, vol. 18, no. 2, pp. 98-109, 2001.
+R. Uzsoy, Ch. Lee, and L. A. Martin-Vega, "A review of production planning and scheduling models in the semiconductor industry part I: system
+characteristics, performance evaluation, and production planning," IIE
+R. Uzsoy, Ch. Lee, and L. A. Martin-Vega. 1994. "A review of production planning and scheduling models in the semiconductor industry part
+II: shop-floor control," IIE Transactions, vol. 26, no. 6, pp. 44-55, 1994.
+F. D. Vargas-Villamil, D. E. Rivera, and K. G. Kempf, "A hierarchical
+approach to production control of reentrant semiconductor manufacturing lines," IEEE Transactions on Control Systems Technology, vol. 11,
+L. M. Wein, "Scheduling semiconductor wafer fabrication," IEEE Transactions on Semiconductor Manufacturing, vol. 1, no. 3, pp. 115-130,
+World Wide Web Consortium (W3C). Extensible Markup
+Language (XML) 1.0 (third edition). [Online]. Available:
+J. Yang, and T. S. Chang, "Multiobjective scheduling for IC sort and
+test with a simulation testbed," IEEE Transactions in Semiconductor
+Manufacturing, vol. 11, no. 2, pp. 304-315, 1998.
+X. Yao, M. Fu, S.I. Marcus, and E. Fernandez-Gaucherand, "Optimization of preventive maintenance scheduling for semiconductor manufacturing systems: models and implementation," in Proceedings of the 2001
+IEEE International Conference on Control Applications, México City,
+X. Yao, M. Fu, S.I. Marcus, and E. Fernandez-Gaucherand, "Incorporating production planning into preventive maintenance scheduling in
+semiconductor fabs," in MASM 2002, Tempe, AZ, 2002, pp. 84-89.
+X. Yao, E. Fernandez-Gaucherand, M. Fu, and S.I. Marcus, "Optimal
+preventive maintenance scheduling in semiconductor manufacturing,"
+IEEE Transactions on Semiconductor Manufacturing, vol. 17, no. 23,

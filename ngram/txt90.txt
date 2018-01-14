@@ -1,0 +1,558 @@
+a GINTIC Instituteof ManufacturingTechnology,NanyangAvenue, Singapore2263, Singapore
+b Nanyang TechnologicalUniversity,NanyangAvenue, Singapore2263, Singapore
+Received 19 April 1993; accepted 24 January 1994
+In the last five years, many new learning algorithms have been designed and developed
+to train neural networks for solving complex problems in a wide variety of domains. One of
+the principal deficiencies with current neural network research is associated with the design
+of the neural networks. The design of a neural network involves the selection of an optimal
+set of design parameters to achieve fast convergence speed during training and the required
+accuracy during recall. These design parameters include both the micro-structural
+macro-structural aspects of a neural network. This paper describes an innovative application
+of the Taguchi method for the determination of these parameters to meet the training
+speed and accuracy requirements. Using the Taguchi method, both the micro-structural and
+aspects of the neural network design parameters can be considered
+concurrently. The feasibility of using this approach is demonstrated in this paper by
+optimizing the design parameters of a back-propagation neural network for determining
+operational policies for a manufacturing system. Results drawn from this research show that
+the Taguchi method provides an effective means to enhance the performance of the neural
+network in terms of the speed for learning and the accuracy for recall.
+Keywords: Taguchi method; Neural network design; Orthogonal
+ratios; Variance analysis; Robust neural network; Design factors
+feed-forward neural networks are highly suitable for many applications. These include domains such as pattern classification, optimization, forecast-
+0925-2312/95/$09.50 0 1995 Elsevier Science B.V. All rights reserved
+J.F. C. Thaw et al. / Neurocomputing 7 (1995) 225-245
+ing, signal filtering, complex mapping, and many other similar tasks. The main
+insufficiency with these applications is associated with the time needed for training
+purposes. In addition, the accuracy performance of these networks is also strongly
+affected by the configuration of the network structure, the level of preprocessing
+required, and the method for representing data used. Although many researchers
+[l-4] have explored ways to enhance the performance of these networks, currently
+there is still a lack of a rigorous and systematic technique to design optimum
+neural networks for complex applications.
+In essence there are two broad considerations to enhance the performance of
+feedforward neural networks. The first consideration involves the selection of
+micro-structural parameters of the neural networks. This level of network structure
+deals with the neurons which are at the lowest level of a neural network. Typically
+these considerations include the use of a new type of transfer function, the
+modification of learning rules, and the choice of input representation scheme. The
+second consideration involves the macro-structural issues of the neural network.
+At the macro level, the basic design issues involve the selection of an appropriate
+number of layers and neurons together with the method for connection. Whenever
+a new micro-structural feature is selected (e.g. use of a distributed input representation), this in turn will influence the choices available at the macro-structural level
+(e.g. how many neurons are needed in the input layer). An effective method to
+guide the design of neural networks must therefore address these two design issues
+Current research effort on optimization of neural network design can be
+broadly classified into two main categories. One category focuses mainly on the
+size of the network topology (i.e. how many layers and how many neurons are
+needed). Researchers in this category attempt to develop new methods that will
+minimize the topological size of a neural network. The other category concentrates
+mainly on the development of new learning algorithms that will increase the
+learning speed of the neural network, regardless of its size. Presently, there is a
+lack of a systematic method which will allow the considerations of both the size of
+the network and the speed of learning concurrently. Many ad-hoc methods have
+been used to design the ‘optimum’ neural networks. The most often used approach
+is to find a network architecture of the ‘right size’ that gives a good fit to the data.
+Examples of such ad-hoc approaches are: (i> to start with an overly small network
+and expand it until it fits the given data; (ii) to train several networks of different
+sizes and use cross-validation to choose the most suitable network.
+The next section of this paper reviews some of the existing methods that have
+been developed for the optimal design of neural networks. Section 3 provides an
+introduction to the proposed Taguchi method for optimizing neural network
+design. This method, which was developed by Genichi Taguchi 151,has been widely
+used for product and process design in many manufacturing companies. Section 4
+describes a neural network design problem. The problem domain concerns designing a robust neural network for determining operational policies for manufacturing
+systems. Section 5 describes the main steps in Taguchi method. Section 6 specifies
+the objective functions and the control factors of the design problem. Section 7
+J.F. C. Khaw et al. / Neurocomputing 7 (I 99s) 225-24.5
+formulates the matrix experiments using Orthogonal Arrays for the design of
+neural networks. Section 8 gives a detailed data analysis for results of the
+experiments. Section 9 provides the optimum conditions for the neural network
+design problem and verifies ‘optimality’ of the neural network through confirmation experiments. Section 10 provides a conclusion for this paper.
+In order to address the effective design of neural networks, several researchers
+have applied the genetic algorithm method. This method involves the evolution of
+a neural network for a specific task. Miller et al. [l] have represented each network
+architecture as a connection constraint matrix which is mapped directly into a
+bit-string genotype. A modified genetic operators is used in this method to act on a
+population of the genotypes to produce network architecture with a higher degree
+of fitness over successive generations. In this work, the degree of fitness is assessed
+by training a particular network and measuring their final performance. This
+method has been applied for the design of simple neural networks. The main
+advantage with this method is associated with its ability to automatically discover a
+new form of neural network architecture applicable to a specific application. This
+evolutionary process however, entails a high computation cost penalty, particularly
+for domains which are large and difficult.
+Lirov [2] has proposed a hybrid expert system architecture by merging both
+knowledge-based and neurode-based components to automate the design of neural
+network architecture. In this approach, a heuristic search strategy is used for
+choosing the most promising candidate from a given population of networks. This
+second step is to use an adapter to fine-tune the design parameters of the most
+promising candidate in order to develop an autoregressive moving-average model
+that best fits the given data. This is followed by a performance checking for the
+model. If the performance is deemed satisfactory, the neural network design is
+thus considered as optimal. Otherwise, the model generation module will be
+activated. Lirov’s hybrid system is conceptually similar to the genetic algorithm
+method. His approach provides a means for a more directed search in comparison
+Other design effort focuses mainly on the size of the neural network, namely the
+number of hidden layer and its corresponding number of neurons. Maza [3], for
+example, has developed a heuristic algorithm, called the SPLITnet, for the
+dynamic adjustment of the number of hidden neurons in a neural network. In this
+approach, neurons of a neural network are regarded as feature detectors. They can
+take three states, i.e. yes, no, and maybe. Each state corresponds to the output
+value of a hidden neuron when a particular pattern of inputs is presented. Each
+hidden neuron carries an evaluation function that calculates the relative frequency
+of occurrence of a particular state. A hidden neuron will be split into two neurons
+with identical connection weights when the neuron’s evaluation function exceeds a
+predetermined threshold value. This algorithm, however, falls short of addressing
+J. F.C. Khaw et al. / Neurocomputing 7 (1995) 225-245
+the impact of initial weight condition which may effect the frequency of occurrence
+Wang and Hsu [4] have introduced a new algorithm called the “Self Growing
+Learning Algorithm” for determining the appropriate number of hidden neurons.
+This concept is based on an algorithm drawn from the “Heuristic Terminal
+Attractor Backpropagation”. This method consists of a set of rules for adding or
+deleting a hidden neuron. This algorithm allows the neural network to learn and to
+reach the global minimum in finite time. This approach however, does not address
+the impact of a hidden layer on the number of hidden neurons.
+Other methods which have been developed to improve the performance of
+neural networks include pruning [ll] and Bayesian statistics [13]. Network pruning
+is a concept which attempts to minimize network complexity by removing small
+weights in the connections. This method, however, requires a large number of trial
+and error experiments to be carried out. Bayesian statistical approach has been
+applied to determine the saliency or usefulness of input features and hidden nodes
+for optimizing the size of the hidden layer in a multi-layer perceptron network. In
+this approach, the partial derivative of the outputs of hidden nodes provide a
+saliency measure for determining the sensitivity of the feedforward network
+trained with a mean squared error learning procedure to a given number of hidden
+nodes. This approach requires considerable preparation and analysis of the problem at hand before a reduced number of hidden nodes for saliency measurement
+3. Taguchi method for neural network design
+From the existing work, one can observe that currently there is still lack of a
+systematic method which allows a designer to consider several key factors critical
+to a successful neural network design concurrently. These critical factors include
+both the macro-structural and micro-structural considerations of a neural network
+design. In addition, the existing methodologies did not address the robustness of a
+neural network design. Robustness from the neural network perspective can be
+defined as a sensitivity measure of the performance quality of a neural network to
+noise. Examples of this noise include variation of training data and different initial
+weight condition during a training session. The Taguchi method is a variance
+reduction technique which can improve quality of a neural network at minimum
+cost. The design of a high-quality neural network at low cost with high performance is identical to the design of products, processes or manufacturing systems
+[6]. A designer must identify the input, the output, the constraints and the ideal
+functionality. It is important to ensure that the resultant functionality resembles as
+closely as possible the ideal function. Therefore it is most crucial to develop a
+means for measuring the deviation between the actual and the ideal cases.
+This paper describes the effective application of Taguchi method [7] for the
+design of neural networks which can conform to the required accuracy and
+convergence speed. It consists of the following items:
+J.F.C. Thaw et al. /Neurocomputing 7 (1995) 225-245
+(1) Creating a neural network which is robust against initial weights condition
+during learning phase, thereby reducing the chance for settling at a local
+(2) Ensuring that the performance of neural network is insensitive to the architectural variation, thus allowing for the selection of the right number of hidden
+(3) Making the neural network design insensitive to input data variation, thereby
+improving the reliability and accuracy of the network; and
+(4) Developing a structured methodology so that the time needed for neural
+network development can be used productively.
+One of the main processes in the design of neural networks is to systematically
+select the design parameters at both the micro-structural and macro-structural
+levels. Technical experience together with experiments, through computer simulations, are needed to establish the most suitable values for these design parameters.
+A common approach to establish these values is through the trial and error
+method. Such a method is a time consuming and expensive process and can lead to
+the premature termination of the design process so that the resultant neural
+network design is non-optimal. This results in an inferior quality neural network
+with an inflated cost. The Taguchi method provides a mathematical tool called the
+orthogonal arrays which allows the analysis of the relationships between a large
+number of design parameters within the smallest number of possible experiments.
+A key concept to the Taguchi method to quality is to quantify ‘losses’ which
+occur because of poor quality, using ‘loss functions’. Taguchi considered such a
+loss function as quadratic in nature, with losses increasing in proportion to the
+square of the deviation of the performance from the target. In order to measure
+the quadratic loss function, Taguchi introduces the signal-to-noise ratios. Thus, by
+using the signal-to-noise ratios for measuring the quality of a neural network
+design through orthogonal array based experiments, the most economical neural
+network in terms of high accuracy and fast convergence speed at the smallest
+development cost can be accomplished. A more detailed description of the
+quadratic loss function and signal-to-noise ratios is given in the Appendix.
+In order to illustrate the use of the Taguchi method for neural network design,
+a case study for the design of a feed-forward back-propagation neural network for
+determining operational policies for manufacturing systems [8] is used. In a
+dynamic manufacturing environment, an operational policy prescribes when and
+orders are assigned to resources (such as machines) of a
+work center in a manufacturing system. An operational policy is a weighted
+scheduling criterion which estimates the effect of a particular assignment decision
+based on the desired performance measure of the work center. For example, in
+order to minimize the tardiness of work orders, the work orders with the earliest
+start date will be scheduled first to the machine. In this example, minimization of
+work order tardiness is the desired performance measure.
+In the decision making process, a complex relationship exists between the
+performance measures and the scheduling criteria. This relationship can be specified in terms of weights. These weights represent the relative importance of the
+scheduling criteria. The criteria and their associated weights define the operational
+policy. In this case study, a back propagation neural network was chosen to
+establish the relationship of the global performance measures with respect to the
+operational policies and the work orders to be scheduled. A neural network
+approach was chosen largely because analytical and simulation approaches are
+The main design concern in this case study is associated with the performance
+of the proposed backpropagation neural network. The neural network consists of
+three output neurons which corresponds to three operational policies, and six
+input parameters that correspond to four performance measures and two shop
+floor workload conditions, as shown in Fig. 1. The main objective of the proposed
+backpropagation neural network is to produce operational policies which are both
+accurate and reliable. The accuracy and reliability is defined to be within twostandard-deviation confidence levels, even when new and unseen input data are
+provided. The secondary objective is to ensure the resultant neural network learns
+In contrast to the existing methods for the design of neural networks as
+described above, Taguchi method is based on a macro-modeling approach. In the
+macro-modeling approach, the step needed for building a mathematical model is
+omitted, such as with genetic algorithms. The primary concern is to obtain an
+J.F.C. k%aw et al. /Neurocomputing 7 (1995) 225-245
+Fig. 2. A ‘black box’ view of the neural network.
+optimum neural network configuration given a range of possible design parameters
+and not to obtain a detailed understanding of the neural network itself. As such,
+the Taguchi method will provide a means to achieve accurate results. It helps to
+determine the specific design information needed for the optimization process for
+a minimum required number of experiments.
+From a design perspective, the proposed neural network can be viewed as a
+‘black box’ as illustrated in Fig. 2. The design parameters that influence the neural
+performance are identified and divided into two classes: noise factors and design
+(or control) factors. Noise factors including the initial values of connection weights
+and the values of input data are considered as external to the system and as such
+they cannot be controlled at all. The Taguchi method provides a means to design a
+neural network that is insensitive to these noise factors by setting of the design
+factors, such as the number of hidden layers and hidden neurons, through a set of
+systematic experiments. The third factor as shown in Fig. 2, is known as the signal
+factor that is specified by the neural network designer to express the intended
+function of the neural network. This factor does not affect the performance of the
+neural network. Examples of signal factors are the three operational policies in the
+output layer and the six input parameters in the input layer.
+The design of a neural network essentially involves the determination of the
+best network architecture, given the design factors and noise tolerance level. The
+Taguchi method is an approach for finding the optimum settings of the design
+factors to make the neural network insensitive to the noise factors. The design of
+the proposed neural network using the Taguchi method involves the following
+J.F. C. Khzw et al. / Neurocomputing 7 (I 995) 225-245
+Identify the design factors and specify objective functions to be achieved;
+Design the matrix experiments and define the data analysis procedure;
+Conduct the matrix experiments and compute the performance
+Determine the most suitable design parameters which maximize the signal-tonoise ratio; and
+(5) Perform the confirmation experiments for verification.
+As illustrated in the main steps above, the Taguchi method uses an engineering
+approach to plan and design optimum neural networks systematically. It makes use
+of the orthogonal arrays and signal-to-noise ratios [5] to design high quality and
+robust neural networks. The following sections explain in detail the use of these
+two tools for the neural network design problem.
+6. Neural network design factors and objective functions
+The first step in the design process is to identify the relevant performance
+measure, design factors and noise factors. In this approach, the value of a
+performance measure represents some aspect of neural network performance such
+as the accuracy of output and the convergence speed. The second step in the
+design process is to determine the objective function in terms of the signal-to-noise
+(S/N) ratio. Th e accuracy of the resultant network output is determined by
+comparing the actual network output values with the target values. The ideal
+differences in terms of network accuracy should be zero (i.e. the smaller the error
+between the actual values and the target values, the better will be the accuracy). By
+defining the network accuracy as a type of signed-target problem [7], the objective
+function to be maximized can thus be represented by the following equation:
+where 77is the S/N ratio for the network accuracy; it is the representative
+of measurements p is the mean value of y; and yi is defined as
+where p is the index ranging over the set of test data; j ranges over the set of
+output neurons; yp represents the error on test data p; and t and o represent the
+target output and the actual output respectively.
+The ideal value for the network convergence speed is also zero (i.e. the smaller
+the number of iterations needed to reach convergence, the better will be the
+performance of the neural network). It must be realized that there is a difference
+between the objective function of the network output accuracy and that of the
+.network convergence speed, even though in both cases the best value is zero. In
+terms of accuracy, the performance measure can take both positive and negative
+values. Whereas in terms of convergence speed, the performance measure must
+have an absolute value. Therefore, the convergence speed belongs to a smaller-
+J.F.C. Khaw et al. /Neumcomputing 7 (1995) 225-245
+the-better type problem [7] and its corresponding
+mized is represented by the following equation:
+where 7’ is the S/N ratio for the network convergence speed, and zi is the
+observed number of iterations for the network to reach convergence which has an
+The third step is to define a range of acceptable design factors. The design
+factors are the independent variables of the neural network whose values are
+within the control of its designer. In this neural network design problem, the
+design factors under consideration and their alternative levels are given in Table 1.
+These factors are the most commonly considered design factors [lo]. A brief
+description of each design factor is given below.
+l The number of hidden layers and their corresponding
+A, and B or C) are important design parameters which determine the size of the
+neural network. In this study, emphasis is placed on the design of a neural
+network which is robust rather than one which is small in size. The selection of
+the optimal number of hidden layers is one of the most important configuration
+issues in neural network design. In most cases, one hidden layer is sufficient to
+compute arbitrary decision boundaries for the outputs. Others have used a
+two-hidden -layer network architecture for more complicated applications. In
+both cases, the number of hidden neurons required are dependent on the
+number of hidden layers used. In this case the number of hidden neurons is a
+nested factor of factor A (the number of hidden layer), which is also called the
+nesting factor [9]. In order to establish the number of neurons required,
+Kolmogorov’s and Lipmann’s approaches 1101 as shown respectively below can
+be used to set the lower and upper boundary level:
+Lower bound of neurons in first hidden layer: 2N + 1
+Upper bound of neurons in first hidden layer: OP x (N + 1)
+.I.F. C. Kfzaw et al. / Neurocomputing 7 (199.5) 225-245
+where, N, the number of input neurons, is dependent on input representation
+scheme used, OP, the number of output neurons, is set at three (for three
+operational policies). In this design problem, the number of hidden neurons can
+have either one of the two alternatives as indicated by factors B and C. If one
+hidden layer is used, then the number of hidden neurons is given by Eq. (4) or
+(5) above. If two hidden layers are required, then the number of neurons in the
+first hidden layer is given by Eq. (4) or (5) above, and the number of neurons in
+the second hidden layer has a ratio of 1: 3 to that of the first layer. For example,
+if the first hidden layer contains 33 neurons, then the number of neurons in the
+second hidden layer is 11. Neurons in one layer are fully connected to neurons
+in the succeeding layer. Obviously strong interactions (influences) exist between
+The input representation scheme (factor D) refers to the method for representing input data. Basically there are two representing schemes: local and distributed. In the local representation scheme, each neuron represents a concept
+whereas in the distributed approach, a concept is represented by a number of
+neurons. In this design problem, six neurons are used to represent the six input
+parameters for the local representation scheme; and for the distributed representation scheme, ten neurons are used.
+The training sample size (factor E) is included in this study to determine if the
+number of training data sets will have an impact on the network accuracy and
+the convergence speed. Orthogonal array, an important technique in the Taguchi
+method, is used to determine the number of training data required from two
+simulation models [ll]. Using orthogonal array based simulation, a sufficient
+number of training data sets is determined to be 18. The alternative level is to
+The choice of learning coefficient (factor F) in the backpropagation learning
+algorithm may have an effect on the learning speed of a neural network. In this
+study, two types of learning coefficient are adopted. One is based on fixed
+learning coefficient which is fixed at 0.3 for all layers. The other type uses a
+variable learning coefficient which has a higher value in the hidden layer and
+The Taguchi method used in this research provides a systematic way to analyze
+the accuracy of the backpropagation neural network when given a set of input
+data; and to measure the sensitivity of the network when it encounters different
+noise level. It involves the use of the orthogonal arrays to formulate the matrix
+experiments that gives a more reliable estimate of the design factors. In addition
+fewer experiments will be needed when compared with other methods for the
+design of experiments. This methodology further includes a linear graph technique
+which allows the designer to study the effects of interactions between the design
+L, orthogonal array and factor assignment
+This design problem has five main factors to be considered as shown in Table 1.
+Within each factor there are two levels of interest. One of the main areas of
+interest is to study the interactions between factors A and B/C, and between
+factors A and D. To study the effect of the two interactions, an additional two
+degrees of freedom are required. An orthogonal array L, is most suitable for this
+problem because it has seven 2-level columns to match the needs of the matrix
+experiment. The L, orthogonal array for this design problem is shown in Table 2.
+The corresponding linear graph is shown in Fig. 3. In the linear graph, lines are
+used to connect interacting factors together. Fig. 3 shows that factor A is connected to factors B/C and D. The number in parenthesis shown in Fig. 3 indicates
+the column used for estimating the effect of a factor. For example, column 5 is
+used for the estimation of the effect of interaction between factors A and D. Thus,
+column 5 should not be assigned to any other factor. It has a ‘nil’ value as shown in
+Table 2. It is thus much easier to assign each factor and their interactions to the
+various columns of an orthogonal array using a linear graph.
+For each experiment corresponding to each row of the L, orthogonal array, ten
+different random numbers with three replications are used to establish the starting
+connection weights prior to a learning session. Thus a total of 240 (30 starting
+conditions for 8 rows) experiments are to be conducted in order to assess the
+sensitivity of the network performance towards the controlled noise variation. Note
+that there are essentially eight main experiments to be carried out in order to
+Fig. 3. Linear graph for assignment of factors to columns.
+J. F. C. Khaw et al. / Neurocomputing 7 (I 995) 225-245
+SummaIy of results for network perfol ml ante measures
+study the effects of each of the six design factors. The other 232 experiments are
+basically replications of the 8 main experiments. This is necessary in order to have
+a more precise estimation of experimental error.
+Following the development of a detailed experimental plan, the next step is to
+proceed with the experiment. For each of the 240 experiments (network learning
+sessions), a number of results are collected. The results collected were the number
+of iterations that a specific neural network configuration take in order to reach
+convergence, together with the accuracy of the trained network when given a set of
+test data. The results are then compiled and analyzed using a statistical software
+package. The package computes the two signal-to-noise ratios (S/N), 77 and n’,
+using Eqs. (1) and (3) respectively, for each row of the L, orthogonal array. A
+summary of the compiled results is shown in Table 3.
+Variance analysis was performed for each of the performance measures using
+the S/N ratio as the response. The purpose in conducting variance analysis is to
+determine the relative magnitude of the effect of each factor on the objective
+functions, 7 and q’, and to estimate the error variance. At this stage, factors which
+have a significant effect on the S/N ratio are identified. These factors are now
+adjusted and set at the levels which will maximize the S/N ratio. The variance
+analysis of factor effects on the network accuracy and the convergence speed are
+given in Tables 4 and 5 respectively, and their corresponding plots are shown in
+In Tables 4 and 5, Df is the degree of freedom, S is the sum of squares, e is the
+error estimate, (e) is the error due to pooled factors, and V is the mean square. F,
+the variance ratio, is used to judge the largeness of a factor effect. The larger the
+F values, the larger the factor effect is compared to the error variance. For
+example, the F value of factor D is the largest in Table 5, indicating the factor has
+a significant effect on the convergence speed. As shown in Tables 4 and 5, factors
+with sum of squares lower than error sum of squares are pooled for estimating the
+error variance, which is then used to calculate the F values. A more detailed
+discussion on the variance analysis can be found in Ross 191.
+J.F.C. Khaw et al. /Neurocomputing 7 (1995) 225-245
+Variance analysis of network accuracy data
+Variance analysis of convergence speed data
+Indicates ftiom wihxe levels are al stsrting condition@
+Indates ftiors whose levels are at optimum condition
+Fig. 4. Plots of factor effects for network accuracy data.
+.I.F. C. Khaw et al. / Neurocomputing 7 (1995) 225-245
+Fig. 5. Plots of factor effects for convergence speed data.
+The task of determining the best setting for each design factor is highly
+complicated particularly when multiple objective functions have to be optimized
+simultaneously. This is because different levels of the same factor can be optimum
+for different objective functions. Therefore trade-offs are necessary when different
+objective functions suggests conflicting levels of optimality. For the neural network
+design problem, the following observations about the optimum setting can be
+drawn from Tables 4, 5 and 6, and Figs. 4 and 5:
+of hidden layers (factor A> has a minimal effect on the network
+accuracy but is rather significant in the convergence speed. By having a
+network structure, the 77’ can be improved by about
+S/N ratio is in dB and raw data indicate8 number of itmlicm
+J.F. C. Khaw et al. / Neurocomputing 7 (1995) 225-245
+75.58) - (- 83.50)) = 8 decibels (dB). This is equivalent to a (18487 t
+6981) = 2$fold improvement (i.e. more than 11,000 iterations) in convergence
+speed. The effect of having a two-hidden-layer structure on network accuracy
+is only {( - 14.96) - (- 15.21) = 0.25 dB, which is negligible. Thus the number
+of hidden layer can dramatically improve the convergence speed and does not
+have much effect on the network accuracy.
+The number of hidden neurons (factors B and C) is a nested factor of factor
+A. As such, it also has very minimal effect on the network accuracy but has
+major effect on convergence speed. Factor C is much better than factor B by
+an average of {( - 82.37 + ( - 84.64)) - ( - 78.15 + ( - 73.02))) + 2 = 8 dB in
+terms of convergence speed. This confirms that a two-hidden-layer network is
+superior than a network with one-hidden-layer.
+improvement of about {( - 78.15) - (- 73.02)) = 5 dB by having 33 nodes in
+the first hidden layer and 11 nodes in the second hidden layer. The net results
+show an increase of almost (16604 + 5018) = 3.3-fold in convergence speed
+for factor C2 as compared to factor Bl, the starting condition.
+The input representation (factor D) has a large effect on both the network
+accuracy and the convergence speed. The distributed representation scheme
+can improve the network accuracy by approximately 3 dB. There is also a
+great potential for further improvement in the S/N ratio by having a
+scheme for the output layer. The convergence
+speed using a distributed representation shows a large degree of improvement
+of about 11.32 dB or about (20362 + 5106} = 4-fold faster in convergence
+Training sample size (factor E) has a large effect on network accuracy and has
+no effect on convergence speed. By having a large training data sets (36
+samples), the network accuracy can improve by about 2.5 dB in comparison to
+a training sample size of 18. This observation can be expected since the
+neural network has a greater exposure to more different scenarios. A larger
+training sample size from these experiments shows that it increases the
+The use of a variable learning coefficient (factor F) can give some improvement (of about 1.33 dB) to the network accuracy in comparison to a fixed
+learning coefficient. It has little impact on the convergence speed.
+From these detailed analysis and interpretations,
+back-propagation neural network for determining operational policies should have
+(1) A two-hidden-layer structure (factor A21 with 33 neurons in the first hidden
+layer and 11 neurons in the second hidden layer (factor C,) to improve the
+(2) A distributed representation scheme (factor D,) in the input layer to improve
+the convergence speed and network accuracy;
+(3) A variable learning coefficient (factor E,) to improve the network accuracy;
+J.F.C. Khaw et al. /Neurocomputing 7 (1995) 225-245
+Fig. 6. Architecture of the proposed feedforward back-propagation network.
+(4) 36 training samples (factor F,) should be used to train the neural network for a
+The optimum architecture of the feedforward back-propagation neural network is
+The next step in the design process is to confirm that the recommended
+optimum settings of the proposed neural network will indeed yield the projected
+improvement. If the observed S/N ratios under the recommended settings are
+close to their respective projection, then we conclude that the chosen design is
+functionally adequate. Otherwise, a new design cycle will be initiated since this will
+indicate that some of the assumptions made during the analysis may not be valid,
+for example, the effects of ignoring interaction between different design factors.
+From Tables 4 and 5, the projection of the S/N ratios, G, under the optimum
+for both the network accuracy and the convergence
+speed, and their corresponding 99% confidence intervals, CI, can be calculated as
+ii accurncy= D, + E, + F, - 2T = - 13.54 - 13.93 - 14.42 - 2( - 15.08)
+J.F.C. Khaw et al. /Neurocomputing 7 (1995) 225-245
+T is the overall mean of the experiments, F,,, is the variance ratio at 99%
+confidence, V, is the error variance, N is the total number of main experiments,
+and u is the total degrees of freedom associated with the design factors used in the
+Note that some of the design factors (for example, the effects of the training
+sample size on the convergence speed) were insignificant to the accuracy or
+convergence speed and are therefore ignored in the projection. Thus, from Eqs. (6)
+and 031, the projection of the S/N ratios in the data analysis under the optimum
+settings for the network accuracy and the convergence speed are -11.73 dB and
+-64.23 dB respectively. Correspondingly, from Eqs. (7) and (9), the 99% confidence
+interval for the projection of the S/N ratios of network accuracy and convergence
+speed under the optimum settings are -11.73 f 1.98dB and -64.23 f 5.55dB
+respectively. If the observed S/N ratios from the confirmation experiments are
+within these confidence intervals, then the proposed neural network under the
+optimum settings can be assumed to be a good approximation of reality.
+Subsequently the optimum neural network is configured and 30 confirmation
+experiments were conducted to evaluate its performance. The results from these
+confirmation experiments are summarized in Table 7. In terms of network accuracy, the variance of the accuracy was reduced from 36.81 at the starting level to
+16.32 at the optimum level. This shows an improvement of 56 percentage point. In
+terms of convergence speed, the mean number of iterations needed was reduced
+from 27647 at the starting level to 2819 at the optimum level. This results
+demonstrate an improvement of 90 percentage point. On the S/N ratio scale, the
+improvement for network accuracy and convergence speed are 3.53 dB and 20.14
+dB respectively. It is important to note that the observed S/N ratios for network
+accuracy and convergence speed under the optimum settings are well within their
+respective 99% confidence intervals. In addition, the S/N ratios under the
+optimum settings is comparable to the best of the eight main experiments from
+Table 3 in terms of both the network accuracy and the convergence speed. From
+these results, we can confidently conclude that the resultant neural network using
+the recommended settings will be significantly robust for actual applications.
+Khaw et al. /Neurocomputing 7 (1995) 225-245
+In this paper, the Taguchi method for the optimal design of neural networks has
+been presented. Many benefits can arise from using this method for neural
+network design. Firstly, this methodology is the only known method for neural
+network design which explicitly considers robustness as a significant design criterion. This will enhance the quality of the neural network designed. Secondly, with
+the effective use of the methodology, several important design factors of a neural
+network can be considered simultaneously. This will enable a designer to evaluate
+the impact of these factors of interest concurrently, and subsequently to make
+intelligent trade-offs that best suit the application needs. Thirdly, the Taguchi
+method uses orthogonal arrays to systematically design a neural network. Thus the
+design and development time for neural networks can be reduced tremendously.
+Finally, the Taguchi method is not strictly confined to the design of back-propagation neural networks. It can indeed be used to evaluate neural networks of
+different types such as counter-propagation, Boltzmann machine, and self-organizing map. This methodology will thus allow the rapid development of the best
+neural network to suit a particular application.
+The authors are grateful to Associate Professor S.C. Tam of Nanyang Technological University for his constructive comments on the variance analysis as applied
+to this work. This work is supported in part by Singapore Computer Systems
+Quadratic loss functions and signal-to-noise ratios
+Let y be the performance measure of a product and m be the target value for y.
+Deviations of y from m are what cause ‘loss’ to the manufacturer. This loss,
+perceived as a loss to society by Taguchi, can be represented as a quadratic loss
+where k is a constant called quality loss coefficient, which can be determined from
+knowledge of the customers tolerance specifications. Eq. (Al) is plotted in Fig. Al.
+Eq. (Al) and Fig. Al are for nominal-the-best type of problem [7]. Other variations
+of the loss functions include the smaller-the-better
+which are used in this paper. Because of the noise factors, the performance
+measure y of a product varies from unit to unit, and from time to time during the
+J.F.C. Khaw et al. / Neurocomputing 7 (1995) 225-245
+usage of the product. Let yr, y,, . . . , y, be n representative measurements
+performance measure y. Then the average quality loss, Q, is given by
+where p and u2 are the mean and the variance of y, respectively. When n is large,
+Q is also called quality loss before adjustment. If we want to get ,U on target m, we
+So the quality loss after adjustment, Q,,
+Since k and m are constants we need to focus our attention only on (p2/a2), which
+is called the signal-to-noise (S/N) ratio. Maximizing (~~/a*) is equivalent to
+minimizing the quality loss after adjustment and is also equivalent to minimizing
+sensitivity to noise factors, given by Eq. (As). For improved addivity of the design
+factor effects, it is a common practice to take the log transform of (p2’/oz) and
+Since log is a monotone function, maximizing (p*/a*> is equivalent to maximizing
+111 G.F. Miller, P.M. Todd and S.U. Hegde, Designing neural networks using genetic algorithms,
+Proc. 3rd Int Conf. on Genetic Algorithms (1989) 379-384.
+Dl Y. Lirov, Computer aided neural network engineering, Neural Networks 5 (1992) 711-719.
+131 M. de la Maza, SPLIT net: Dynamically adjusting the number of hidden units in a neural network,
+Artificial Neural Networks, (1991) 647-651.
+141 S. Wang and C. Hsu, A self growing learning algorithm for determining the appropriate number of
+hidden units, Proc. Int. Joint Conf. on Neural Networks, Singapore, (1991).
+151 R.K. Roy, A Primer on Taguchi Method (Van Nostrand Reinhold, 1990).
+[61 R.J. Mayer and P.C. Benjamin, Using the Taguchi paradigm for manufacturing system design using
+simulation experiments, Compute. in Industrial Eng. 22 2 (1992) 195-209.
+171 MS. Phadke, Quality Engineering Using Robust Design, (Prentice Hall, 1989).
+PI G. Chryssolouris, M. Lee and M. Domroese, The use of neural networks in determining operational policies for manufacturing systems, J. Manufacturing Syst. 10 2 (1991) 166-175.
+[91 P. Ross, Taguchi Techniques for Quality Engineering (McGraw Hill, 1988).
+[lOI A.J. Maren, D. Jones and S. Franklin, Configuring and optimizing the back-propagation network,
+in: A.J. Maren, C.T. Harston and R.M. Pap, eds., Handbook of Neural Computing Applications
+[ill J. Khaw, B.S. Lim and L. Lim A constraint satisfaction neural network for GT scheduling, Proc.
+Pacific Conf. on Manufacturing, Osaka, Japan, (1992) 697-705.
+1121 H.H. Todberg, Improving generalization of neural networks through pruning, Znt. J. Neural Syst. 1
+[131 K.L. Priddy, S.K. Rogers, D.W. Ruck, G.L. Tarr and M Kabrisky, Bayesian selection of importance
+features for feedforward neural networks, Neurocompuring (2&n (1993) 91-103.
+John Khaw is a research engineer at the GINTIC Institute of Manufacturing
+Technology and is completing a Ph.D. degree at the Nanyang Technological
+University, Singapore. His research interests are in computer simulation, neural networks, and scheduling theory and applications. He received his B.S. and
+M.S. degrees in Industrial and Systems Engineering from Ohio University,
+USA. He is a registered Professional Engineer in Singapore.
+Dr. Lim received his B.Sc. and Ph.D. in Production Engineering and Management from the University of Nottingham, UK. Presently, he is an Assistant
+Research Director at the GINTIC Institute of Manufacturing Technology,
+GIMT. Dr Lim has completed more than 220 practical projects in the development of control, communication and integration software and new products
+with local industry. Currently, he supervises 3 Ph.D. candidates at both NTU
+and NUS. Before joining GIMT in 1987, Dr. Lim was a Senior Research
+Associate at Brighton Polytechnic, UK, where he was involved with the development of an Expert System for the Configuration of Flight Simulators. Dr Lim
+has more than 20 years of practical working industrial ranging from toolmaking,
+process planning, cost estimation and quality assurance in the aerospace and
+press tools industry. Dr. Lim has contributed more than 19 international
+journal articles and 63 international conference papers.
+J.F.C. Thaw et al. /Neurocomputing 7 (1995) 225-245
+Len& L&n is a Professor and Vice Dean of the School of Mechanical and
+Production Engineering Nanyang Technological University, Singapore. He received his B!3c and Ph.D. degrees from the Surrey University, UK. His research
+interests are in product and process design, and production management.

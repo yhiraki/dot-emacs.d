@@ -1,0 +1,429 @@
+int. j. prod. res., 01 may 2004, vol. 42, no. 9, 1727–1745
+Due date assignment using artiﬁcial neural networks under diﬀerent shop
+Due date assignment (DDA) is the ﬁrst important task in shop ﬂoor control. Due
+date-related performance is impacted by the quality of the DDA rules. Assigning
+order due dates and delivering the goods to the customer on time will enhance
+customer service and provide a competitive advantage. A new methodology for
+lead-time prediction, artiﬁcial neural network (ANN), is adopted to model new
+due date assignment rules. An ANN-based DDA rule, combined with simulation
+technology and statistical analysis, is presented. Whether or not the ANN-based
+DDA rule can outperform the conventional and Reg-based DDA rules taken
+from the literature is examined. The interactions between the DDA, order
+review/release (ORR), and dispatching rules signiﬁcantly impact upon one
+another, and it is therefore very important to determine a suitable DDA rule
+for the various combinations of ORR and dispatching rules. From the simulation
+and statistical results, the ANN-based DDA rules perform better in due date
+prediction. The ANN-based DDA rules have a smaller tardiness rate than the
+other rules. ANN-based DDA rules have a better sensitivity and variance.
+Therefore, if system information is not diﬃcult to obtain, the ANN-based
+DDA rule can perform a better due date prediction. This paper provides suggestions for DDA rules under various combinations of ORR and dispatching rules.
+ANN-Sep is suitable for most of these combinations, especially when ORR,
+workload regulation (WR) and two boundaries (TB), rules are adopted.
+Due date assignment (DDA) is the ﬁrst important task in shop ﬂoor control.
+Due date related performance is impacted by the quality of the DDA rules.
+Assigning exact due dates and delivering the goods to the customer on time will
+enhance customer service and provide a competitive advantage. Assigning a due date
+is a diﬃcult decision. As a job arrives at the shop, due dates are speciﬁed indicating
+when the job is expected to be completed. This assignment is complicated by the fact
+that each arriving job has processing needs on various machines in the shop. Each
+machine continually experiences diﬀerent and varying levels of congestion that
+change as the jobs ﬂow through the shop. Therefore, a new methodology is considered for lead-time prediction, namely the artiﬁcial neural network (ANN) prediction.
+ANNs are an artiﬁcial intelligence (AI) approach that has been applied to such
+general problem areas as prediction, control, data compression and surface ﬁtting.
+However, to date, most applications have been non-managerial scenarios such as
+robot control, visual systems and airport bomb detection. The focus of this research
+is to develop an ANN-based DDA rule combined with simulation technology and
+Department of Industrial Engineering and Management, National Chiao Tung
+*To whom correspondence should be addressed. e-mail: yjsha@cc.nctu.edu.tw
+International Journal of Production Research ISSN 0020–7543 print/ISSN 1366–588X online # 2004 Taylor & Francis Ltd
+statistical analysis for a complex job shop, such as a wafer fabrication plant. We will
+model some conventional and regression-based (Reg-based) DDA rules for wafer
+fabrication as benchmarks. This study attempts to determine if the ANN-based
+DDA rules can outperform conventional and Reg-based DDA rules in wafer fabrication. The basic methodological approach employed is statistical analysis of the
+Furthermore, the shop ﬂoor control strategies, like order review/release (ORR)
+and dispatching rules, adopted in the shop, will aﬀect the ﬂow time of the orders.
+Diﬀerent ORR and dispatching rules will make for diﬀerent throughputs in the shop.
+It is important to consider the ORR and dispatching rules adopted in the shop when
+testing the due date assignment rules. Diﬀerent combinations of ORR and dispatching rules will require suitable due date assignment rules. We will consider some of the
+public ORR and dispatching rules here. Trying to ﬁnd the suitable due date assignment rules under diﬀerent shop ﬂoor control strategies is another important target.
+The paper is organized as follows. Section 2 summarizes the relevant literature on
+due date assignment and ANNs. Section 3 discusses the DDA methodology, including conventional rules, Reg-based rules and ANN-based rules. The choosing of shop
+ﬂoor control strategies is discussed in section 4. Section 5 describes the simulation
+model and experimental design. In section 6, the statistical results are presented and
+the performance of the DDA rules will be discussed. The conclusions and suggestions for future study will form section 7.
+The DDA rules used in the related researches can be classiﬁed into four
+Direct procedures assign due dates using such information as the job characteristics, shop conditions and dynamic shop condition (Smith and Seidman 1993). This
+method is convenient and is easily computed; however, some parameters must be
+Initially, researchers examined DDA rules that considered only the job characteristics. These methods include TWK, where the due dates are based on the total
+amount of works; SLK, where the jobs are given ﬂow allowances that reﬂect equal
+waiting times or equal slack times; and NOP, where the due dates are set according
+to the number of operations to be performed in the job. (For a glossary of terms see
+the appendix.) More recently, another class of DDA methods has been proposed
+that includes job-characteristic information and shop-status information. As Cheng
+and Gupta (1989) noted, many researchers reported improved performance from
+these methods. This includes JIQ, where the due date is determined based on the
+current queue lengths in the system (Eilon and Chowdhury 1976).
+Computer technology advances have made simulations to be one of the public
+methods used in due date assignment research. Weeks (1979), Vig and Dooley (1991),
+Kaplan and Urnal (1993) adopted simulations in their research. Simulations allow
+the evaluation of the eﬀects of diﬀerent policies without actual execution.
+Due date assignment under shop ﬂoor control strategies
+Analytical methods based on the queuing theory estimate the mean and standard
+derivation of order ﬂow time (Enns 1993). Because analytical method assumptions
+usually conﬂict with the conditions of the real world, analytical method applications
+Statistical analysis uses the regression method (Smith et al. 1995) and relation
+analysis (Kaplan and Urnal 1993) to ﬁnd the relations between order ﬂow times and
+other variables. The deﬁciency in statistical analysis is that past trends may not exist
+Chung et al. (1997) used both the simulation method and queuing theory to
+estimate ﬂow time and establish control parameters for ﬂow time. They attempted
+to assign an achievable due date for an order. Their method used queuing theory to
+estimate the system status, such as WIP and throughput.
+Recently, many AI and soft computing methods have been used for decision
+support and forecasting. Philipoom et al. (1994) considered a new procedure for
+internally setting due dates, namely, neural network prediction, in a simple ﬂow
+ANNs are computing systems that incorporate a simpliﬁed model of the human
+neuron, organized into networks similar to those found in the human brain. ANNs
+are computer simulations of biological neurons. They are not programmed; they
+learn by example. Neural networks are composed of processing elements (nodes)
+and connections. Each processing element has an output signal that fans out along
+the connections to the other processing elements. Each connection is assigned a
+relative weight. A node’s output depends on the speciﬁed threshold and the transfer
+function. ANNs are used in pattern recognition, speech recognition, group technology, scheduling, prediction, optimization, etc. An ANN is characterized by its architecture, activation function and learning method. There are many diﬀerent types of
+ANNs that model how the human brain uses thought to learn. These ANN types
+include the Hopﬁeld, Brain-State-in-a-Box, Bi-directional Associative Memory,
+Boltzmann, Adaptive Resonance Theory, Hamming and Spation-temporal
+ANNs are becoming more well known and have been successfully implemented
+in manufacturing (Udo 1992). For instance, Philipoom et al. (1994) used neural
+network models to forecast the order due date in a simple ﬂow shop manufacturing
+system. The neural network model yields better forecasting results than conventional
+DDA (Philipoom 1994). Their research pointed out that neural networks could
+outperform conventional, Reg-Based DDA rules. They concluded that neural networks were worthy of further experimentation as the methodology of choice in due
+date prediction. However, order due dates in a ﬂow shop are stable, and the system
+deviation is smaller than that in a job shop.
+Huang et al. (1999) constructed an ANN model to predict production performance for a wafer fabrication factory. They used a three-layer back-propagation
+neural network that allowed for more accurate prediction of the WIP level and for
+moving volume in the next period for each wafer fabrication operation stage. Using
+neural network models to predict wafer fabrication, production performance has the
+. Neural networks can obtain a probable result even if the input data are
+. A well-trained neural network model can provide a real-time forecasting result.
+. Creating a neural network model does not necessitate understanding the
+complex relationship among the input variables.
+Back-propagation neural networks (BPN) are widely used and produce
+good results in prediction and pattern recognition. This study constructed a BPN
+model for order due date prediction in wafer fabrication. It integrated the ANN,
+simulations and statistical tools for modeling an ANN-based DDA rule in wafer
+In general, the internally set due dates can be represented using the following
+qi total queuing time in the system for order i.
+In formula (1), ri and pi are the known near constants after order i arrives.
+The total queuing time for order (qi) is the only variable that needs to be estimated
+for predicting di in formula (1). Hence, the manager must establish an applicable
+prediction model for qi to predict precisely the due date for an order.
+The total queuing time in the system for an order (qi) consists of two major parts
+(formula 2). First, qpsp is the time from order acceptance to order release into the
+shop (i.e. the queuing time in the pre-shop pool). qs is the total queuing time in the
+shop (from order being released in the shop to the ﬁnished order). To provide an
+exact customer due date, the manager must establish precise prediction models for
+qpsp and qs. Most researchers used Reg-based rules to predict the due date. One
+or more factors, including job characteristics or system status, are considered in
+building a regression model for due date prediction, such as TWK, NOP and JIQ.
+Reg-based and ANN-based rules are used to predict the due date (di) in this research:
+total queue time in the pre-shop pool for order i,
+Most of the conventional DDA rules consider only one factor-related
+job characteristic or system status. We will compare some of these rules with
+the Reg-based and ANN-based rules. Ragatz and Mabert (1984) published a
+comprehensive comparison of diﬀerent due date assignment rules. They considered
+the performance of eight diﬀerent assignment rules in a simulated speciﬁc shop. We
+will consider two public DDA rules, TWK and JIQ, in our simulation model.
+Due date assignment under shop ﬂoor control strategies
+(1) Total work content (TWK): assigns due dates to each order as a multiple of
+the order’s total processing time. TWK is widely used in the industry. The
+where di is the assigned due date for order i, and k is the parameter that
+reﬂects the expected queue time which order i will experience in the system.
+Pi is the total processing time of order i. k is estimated based on the regression models.
+(2) Jobs in queue (JIQ): assigns due dates to each order as a multiple of the
+number of orders in the queue. JIQ is widely used in practice. The JIQ rule is
+where di is the assigned due date for order i, and k is the parameter that
+reﬂects the expected queue time which order i will experience in the system.
+qs is the number of lots in the shop. k is estimated based on the regression
+In TWK and JIQ, qi, the total queuing time, including qpsp and qs, will be predicted considering just a single factor. Most of the conventional DDA rules consider
+one or more factors building a regression-based model for predicting the order due
+date. Owing to the complexity of wafer fabrication, many factors aﬀect due date
+prediction. Ninety-two factors are considered in this research in building a Regbased DDA rule. The signiﬁcant factors prediction model (SFM) will use the signiﬁcant factors among the 92 factors.
+The 92 factors can be classiﬁed into three classes: system conditions, order characteristics and the pre-shop-pool (PSP) condition. There are some subclasses in the
+system and PSP conditions. The classiﬁcation structure of the prediction factors is
+The prediction model for qs was built by choosing one or more signiﬁcant factors
+from main classes 1 and 2. The qpsp prediction model considers all of these factors in
+Classiﬁcation structure of the prediction factors.
+(1) SFM-Sep: considers the signiﬁcant factors under statistical analysis. The
+queuing time, qs and qpsp, are forecasted separately. The due date for each
+where di denotes the assigned due date for order i, qSFM(PSP) and qSFM(S) are
+the qpsp and qs equations using the SFM regression models.
+(2) SFM-Com: considers all of the signiﬁcant factors. The queuing time (qi),
+including qs and qpsp, are forecasted using one regression model. The due
+date for each order is assigned as follows:
+where di is the assigned due date for order i, qSFM(total) is the qi estimation
+Using historical data as the input variables, the regression model and neural
+network model represent the properties and variations in a system. When a system
+is stable, acceptable forecasting accuracy using the two models is expected. However,
+ﬁnding a non-linear regression model that can correspond to the historical data
+and represent the system’s status is diﬃcult. Many independent variables must be
+considered in our case. Furthermore, some of the data do not ﬁt the basic assumptions in the regression models. Thus, additional data transformations are necessary
+to generate our regression model. Alternatively, creating neural network models does
+not have the above conditions. Moreover, in practice, neural network models can
+yield better results than regression models (Philipoom et al. 1994, Shyur et al. 1996).
+In our research, an artiﬁcial neural network, simulations and statistical analysis
+tools are integrated to model an ANN-based DDA rule. The structure of the rule is
+shown in ﬁgure 1. Two types of ANN-based DDA rules are developed. The ﬁrst rule,
+Due date assignment under shop ﬂoor control strategies
+ANN-Com, adopts one neural network to predict the waiting time (including
+waiting time in PSP and waiting time in the shop) in a wafer fab. The second rule,
+ANN-Sep, uses two neural networks to predict the waiting time in PSP and the
+shop separately. The prediction diﬀerence between the ANN-Com and ANN-Sep
+To obtain adequate data for modelling the DDA rules, a virtual wafer fabrication system was modelled based on a real wafer fab. The wafer fab conﬁguration
+considered is a wafer fabrication factory in Taiwan. It consists of 53 workstations
+and 301 machines. The fab has three types of products with a product mix of 0.2,
+0.35 and 0.45. The entire process requires 16, 18 and 17 loops. That is, a lot visits
+photolithographic exposure workstations 16, 18 and 17 times. The processing time
+for a lot is randomly generated from a uniform distribution between 0.95  MPT
+and 1.05  MPT, where the MPT (mean processing time) is given for each workstation. The set-up time is included in the processing time. The virtual fab takes into
+account the downtime, which includes unscheduled breakdowns. The time between
+failure and repair for each workstation is randomly generated from exponential
+distributions with given means. A lot (a cassette for wafers) contains 24 wafers
+and the transfer time between workstations is ignored in the simulation. The virtual
+wafer fab was built on personal computers with Pentium III 800 processors using the
+eM-plant, a simulation package developed by Tecnomatix Technologies Corp,
+Much data can be collected using a simulation experiment in the virtual fab. A
+data set consists of 92 variances, and the real ﬂow time for each lot (containing the
+processing time and actual waiting time in the PSP and shop). This data set was used
+for training our ANN and regression model. It is necessary to guarantee statistical
+independence among the data before the test is performed. To insure this, only one in
+every 10 outputs from the shop simulation was randomly selected to be included in
+the sample of 33 000 jobs. The simulation was designed for a simulation time period
+of 24 hours a day, and the data were collected after 150 simulated days as a warm-up
+Creating an ANN initially involves determining the input variables. Based on the
+data obtained, a correlation analysis was performed to help determine the input
+variables. Forty-two variables (i.e. the signiﬁcant factors of due-date prediction)
+were modelled in our ANN model. These variables had signiﬁcant correlation
+Our research constructed three BPN prediction models using the neuralworks
+professional II/Plus, a neural network package developed by NeuralWare, Inc.,
+Carnegie, USA. The ﬁrst BPN focused on the total wait time in the system, including
+the wait time in the PSP and shop. The other two BPNs focused on predicting the
+wait time in the PSP and shop separately.
+Example of three-layer back-propagation neural network.
+Modelling a BPN must apply the experimental design method to determine the
+optimum BPN structure. Figure 2 is an example of a three-layer BPN network. The
+number of hidden layers in a BPN model, and the number of nodes on the hidden
+layer must be determined. The momentum and learning rate for the model must also
+Supervised learning is adopted in our BPN model. The gradient-descent
+algorithm is employed (Rumelhart and McClelland 1989: 322–328). Through a
+supervised learning rule, the collected data set (training data) comprises an input
+and an actual target output. The gradient-descent learning algorithm enables a
+network to enhance the performance by self-learning. Two phases are available
+for computing: forward and backward. In the forward phase of back-propagation
+learning, the input data pattern is directly passed into the hidden layer. Each element
+in the hidden layer calculates an activation value by summing up the weighted
+inputs, and then transforms the weighted input into an activity level using a transfer
+function (the sigmoid function is broadly used). The resulting activity is allowed to
+spread through the network to the output layer. If a diﬀerence arises, i.e. an error
+term, the gradient-descent algorithm is used to adjust the connected weights in the
+backward phase. This learning process is repeated until the error between the actual
+and desired output (target) converges to a predeﬁned threshold. A trained neural
+network is expected to predict the output when a new input pattern is provided to it.
+The BPN model training occurs oﬄine. The dataset is separated into two parts
+before model training. The ﬁrst set is the training data (30 000 records). The second
+set (3000 records) is used for certiﬁcation. To improve prediction accuracy, diﬀerent
+data sets should be used in training and certiﬁcation. To assure that the model is
+suitable for prediction, online retraining is designed in the BPN model. That is, the
+model is retrained using recently completed data lots.
+When the trained BPN is online, the ANN-based DDA rules can immediately
+assist the due date acknowledgement. When a customer asks for a due date quote for
+an order, a new input pattern consists of all of the input variables provided to the
+Due date assignment under shop ﬂoor control strategies
+BPN for predicting the total wait time. The due date is conﬁrmed based on formulas
+qANN_Com(total) is the estimation of the total wait in the system under the trained BPN
+model, and qANN_Sep(PSP) and qANN_Sep(S) are the wait time estimations in PSP and
+The SFC strategies, including order review/release and dispatching rules considered in our research, are based on the research of Sha and Hsu (2002). ORR and
+dispatching rules were discussed in their research. Seven ORR and eight dispatching
+rules are considered. We will use some of these public and outstanding rules in our
+ORR rules focus on the mechanism that triggers the release of one or more
+orders. In the simulation result of Sha and Hsu (2002), load-oriented rules are superior to others, including TB (two boundaries) and WR (workload regulation). TB
+focuses on the actual output and the expected output from the ﬁrst layer. If the
+actual output from the ﬁrst layer is less than the expected output, and the actual
+inventory for the ﬁrst layer is less than a predetermined inventory level, the job will
+be a candidate for release. The candidate with the largest product weight and difference in output will be released (Lou and Kager 1989). WR will release new wafers
+to maintain a constant amount of expected work at a bottleneck station (Wein 1988).
+The expected workload level is predetermined to maintain bottleneck station utility
+(not less than 90%). TB and WR will be used in our research. UNIF releases a new
+lot into the fab at a constant rate. It is commonly used in the industry, and most
+researches have adopted it as a benchmark. UNIF will be used in our research.
+The dispatching rules focus on the bottleneck station, i.e. photolithography
+station, in wafer fabrication. Five classes and eight rules of dispatching rules were
+adopted in the simulation experiment by Sha and Hsu (2002). Owing to their outstanding performance, EDD, CR, SRPT and COVERT were used in our simulation
+model. First in ﬁrst out (FIFO) is used industry wide, and TB þ is developed for the
+TB order-releasing mechanism. We adopted FIFO as our benchmark. TB þ is used
+just for the speciﬁc ORR rule, TB. The methodologies for these dispatching rules are
+. CR: smallest CR, CR ¼ (due date – total remaining PT – present date)/total
+. SRPT: shortest total remaining processing time.
+. COVERT: largest C, C ¼ delaying cost/total remaining time. Delaying cost is
+x ¼ finish date of lot i  due date of lot i
+. TB þ : if the actual output from each layer<expected output and actual
+inventory for each layer<predetermined inventory level, then the job will be
+a candidate. The candidates having the largest product weight value ¼
+product  weight of layers  diﬀerence in output will be assigned a high priority.
+In this paper, the DDA rule is tested under diﬀerent SFC strategies, including
+ORR and dispatching rules, in a virtual wafer fabrication plant. There are three
+ORR rules, i.e. WR, UNIF and TB, and six dispatching rules, i.e. FIFO, EDD, CR,
+SRPT, COVERT and TB þ , are included. Dispatching rule, TB þ , is especially
+designed for TB. This was adopted when the ORR rule, TB, was used. There are
+16 ORR and dispatching rule combinations. Three types of DDA methodologies
+with six rules were tested in our simulation model under diﬀerent SFC rule combinations. There were three factors and 96 treatments in our simulation experiment (six
+runs). Table 2 shows a summary of these DDA rules. The required parameter values
+for each rule were predetermined. The regression and ANN models were built before
+The performance measures used for the comparison were tardiness, lateness,
+earliness and the percentage of on-time deliveries. Tardiness is the absolute diﬀerence
+between the actual completion date and the promised due date for orders. This
+method was used as the primary performance measure. A smaller tardiness implies
+a better due date prediction capability. Tardiness is always equal to the sum of
+the lateness and earliness. The percentage of on-time deliveries is deﬁned as the
+percentage of orders that have less than 1 day tardiness. The formulas used for
+Due date assignment under shop ﬂoor control strategies
+Percentage of on time ¼ percentage of orders with tardiness smaller than 1 day,
+The wafer fab considered in this study is a wafer fabrication factory in Taiwan.
+This fab consists of 53 workstations and 301 machines. The product type, processing
+time and other information related to the virtual wafer fab is shown in section 3.3.
+Under the order release mechanism, the fab utilization is nearly 90%. The orders
+are kept in a pre-shop pool before a lot is released. Only one in every 10 outputs from
+the virtual fab was randomly selected to be included in the sample of 600 jobs for
+measuring the DDA rule performance. The simulation was designed for a 24 hoursa-day period. The data were collected after 150 simulated days as a warm-up period.
+A due date is quoted immediately when an order is accepted. All of the information
+used in these DDA rules was collected at that time.
+The performance of the six due date assignment rules is shown in table 3.
+The correlation is the correlation coeﬃcient between the actual ﬂow time and the
+estimated ﬂow time. ANN-Sep has the largest correlation coeﬃcient. ANN-Sep is
+superior to the others in tardiness, lateness and on-time delivery. The tardiness for
+ANN-Sep and Reg-Sep are smaller than 3 days. More than 40% of the jobs can be
+delivered on time. Maximum lateness is not larger than that for the conventional
+DDA rules, JIQ and TWK. Note that the ANN-based DDA rule is better than the
+Reg-based and conventional DDA rules. ANN-Com uses a BPN model to estimate
+the total wait time for jobs. ANN-Sep uses two BPN models to estimate separately
+the wait time in the PSP and system. The ANN-Sep performance is superior to
+ANN-Com, especially in on-time delivery and tardiness. The performance of
+Reg-Sep is signiﬁcantly better than that of Reg-Com. The wait time for the PSP
+and in the shop should therefore be estimated separately.
+Table 4 shows the performance of DDA rules blocking by the SFC strategies.
+Figures 3 and 4 focus on the tardiness mean and on-time delivery for the DDA rules
+dispatching FIFO EDD CR SRPT COVERT FIFO EDD CR SRPT COVERT FIFO EDD CR SRPT COVERT TB þ Average
+Performance of DDA under diﬀerent SFC strategies.
+Due date assignment under shop ﬂoor control strategies
+Performance of due date assignment rules.
+under diﬀerent dispatching rule blocking by the ORR rules. In table 4, the underlined and bold data indicate the best blocking. When the ORR rule, WR, is adopted,
+ANN-Sep and Reg-Sep are suitable for due date assignment. In the 16 blocks,
+ANN-Com is not as good as ANN-Sep. ANN-Com is not suitable for estimating
+the total wait time, using only a single ANN. In the Reg-based rules, Reg-Com
+has a greater number of late jobs and a high tardiness value. Reg-Sep is better
+than Reg-Com. Generally speaking, the conventional DDA rules are inferior to
+Due date assignment under shop ﬂoor control strategies
+Performance of due date assignment rules.
+the ANN-based and Reg-based rules. JIQ is superior to TWK when the ORR rules,
+The p-values of DDA rule blocking by the SFC rules are shown in table 5. The
+performance of the DDA rules is signiﬁcant under most of the ORR and dispatching
+rule combinations. Finding a suitable DDA rule under diﬀerent SFC strategies is
+important for improving the due date-oriented system performance. We adopted
+Duncan’s test to test these DDA rules under diﬀerent ORR and dispatching rule
+combinations. The test result is shown in table 6. ANN-Sep is better than the other
+rules. Suggestions for DDA rules under diﬀerent SFC rules are shown in table 7.
+p value of DDA blocking by ORR and dispatching strategies.
+ANN-Sep is suitable for 11 ORR and dispatching rule combinations. ANN-Com is
+better than the others when just the SFC rule, WR*CR, is adopted. Reg-Sep is better
+than the others in six SFC rule combinations, including WR*FIFO, WR*EDD,
+We modelled some ANN and Reg-based due date assignment rules under diﬀerent SFC strategies. We attempted to improve the due date oriented system performance using ANNs. An ANN-based DDA rule combination with a BPN model and
+simulation technology was also developed. Two conventional DDA rules and four
+regression-based DDA rules were adopted for benchmarking. We attempted to
+determine suitable DDA rules under diﬀerent order releasing and dispatching rule
+combinations. In the simulation experiment results the ANN-based DDA rules were
+superior to the regression-based and conventional rules. ANN-Sep was better than
+the others. The mean tardiness rate for ANN-Sep was smaller than 3 days, and the
+percentage of on-time deliveries was greater than 40%. Reg-Sep was second best
+with 4.07 days of tardiness and 41% on time delivery. The conventional rules,
+including TWK and JIQ, were inferior to the ANN-based and Reg-based rules.
+JIQ was better than TWK, especially when the ORR rules, UNIF and WR, were
+adopted. The suitable DDA rules diﬀered under diﬀerent SFC rule combinations.
+It is very important to adopt suitable DDA rules under diﬀerent situations. We
+provided some suggestions for DDA rules under diﬀerent SFC rules for improving
+the system performance, based on the statistical analysis results from this study.
+There are other topics that can be discussed in the future. Integrated SFC rules
+that consider due date assignment, and ORR and dispatching should be developed to
+improve system performance. Because the interaction among the shop ﬂoor control
+strategies is signiﬁcant, the ORR and dispatching eﬀect on due date prediction
+Due date assignment under shop ﬂoor control strategies
+** Number represents the rule of DDA: 1, Reg-Sep; 2, JIQ; 3, ANN-Sep;
+Duncan’s test* of DDA rule blocking by ORR and
+Recommended DDA rule in diﬀerent scheduling rule.
+cannot be ignored. Load-oriented due date assignment rules can be discussed in the
+future. Capacity planning and bottleneck situations in the system should be considered in due date assignments.
+The authors acknowledges the subvention from National Science Council (NSC)
+in Taiwan, Project: NSC 91-2213-E-009-113.
+back-propagation network, one kind of ANN
+total works, due date prediction rule based on the total amount of works
+jobs in queue, due date prediction rule based on the current queue length
+signiﬁcant factors regression method, regression-based due date prediction
+regression-based due date prediction rule considering the signiﬁcant
+factors, the waiting time in PSP and waiting time in the shop are
+estimated separately (using two regression models)
+regression-based due date prediction rule considering the signiﬁcant
+factors, the waiting time in PSP and waiting time in the shop are
+estimated integrately (using one regression model)
+ANN-based due date assignment rules, the waiting time in PSP and
+waiting time in the shop are estimated separately (using two ANN models)
+ANN-based due date assignment rules, the waiting time in PSP and
+waiting time in the shop are estimated integrately (using only one ANN
+two boundary, an order review/release rule. If the actual output of the
+ﬁrst layer < expected output and actual inventory of the ﬁrst layer<
+predetermined inventory level, the job will be a candidate. The candidates
+having the largest value of weight of product  diﬀerence in output will be
+workload regulation, an order review/release rule. Regulating new wafer
+releases to maintain a constant amount of expected work at a bottleneck
+uniform, an order review/release rule, releases a new lot into the fab at a
+ﬁrst in ﬁrst out, an order dispatching rule
+shortest total remaining processing time, an order dispatching rule
+earliest due date, an order dispatching rule
+critical ratio, an order dispatching rule
+order dispatching rule, that lot will be processed which has the largest C,
+Due date assignment under shop ﬂoor control strategies
+CHANG, F. C. R., 1994, A study of factors aﬀecting due-date predictability in a simulation
+dynamic job shops. Journal of Manufacturing System, 13, 393–400.
+CHENG, T. C. E. and GUPTA, M. C., 1989, Survey of scheduling research involving due date
+determination decisions. European Journal of Operation Research, 38, 156–166.
+CHUNG, S. H., YANG, M. H. and CHENG, C. M., 1997, The design of due date assignment
+model and the determination of ﬂow time control parameters for the wafer fabrication
+factories. IEEE Transaction on Component, Packaging, and Manufacturing
+EILON, S. and CHOWDHURY, I. G., 1976, Due-date in job shop scheduling. International Journal
+ENNS, S. T., 1993, Job shop ﬂow time prediction and tardiness control using queue analysis.
+International Journal of Production Research, 31, 2045–2057.
+FAUSETT, L., 1994, Fundamentals of Neural Networks (Englewood Cliﬀs: Prentice-Hall).
+HUANG, C. L., HUANG, Y. H., CHANG, T. Y., CHANG, S. H., CHUNG, C. H., HUANG, D. T. and
+LI, R. K., 1999, The construction of production performance prediction system for
+semiconductor manufacturing with artiﬁcial neural networks. International Journal of
+KAPLAN, A. C. and URNAL, A. T., 1993, A probabilistic cost-based due date assignment model
+for job shops. International Journal of Production Research, 31, 2817–2834.
+LOU, S. X. C. and KAGER, P. W., 1989, A robust production control policy for VLSI wafer
+fabrication. IEEE Transactions on Semiconductor Manufacturing, 2, 159–164.
+PHILIPOOM, P. R., REES, L. R., and WIEGMANN, L., 1994, Using artiﬁcial neural networks to
+determine internally-set due-date assignments for shop scheduling. Decision Sciences,
+RAGATZ, G. L. and MABERT, V. A., 1984, A simulation analysis of due date assignment rules.
+Journal of Operation Management, 5, 27–39.
+RUMELHART, D. E. and MCCLELLAND, J. L., 1989, Parallel distributed processing: explorations
+in the microstructure of cognition, Vol. 1 (Cambridge, MA: MIT Press).
+SHA, D. Y. and HSU, S.-Y., The eﬀect of rework on the shop ﬂoor control in wafer fabrication.
+Journal of Manufacturing Technology Management (in press).
+SHYUR, H. J., LUXHOJ, J. T. and WILLIAMS, T. P., 1996, Using neural networks to predict
+component inspection requirements for aging aircraft. Computers and Industrial
+SMITH, C. H., MINOR, E. D. and WEN, H. J., 1995, Regression-based due date assignment rules
+for improved assembly shop performance. International Journal of Production Research,
+SMITH, M. L. and SEIDMAN, A., 1993, Due date selection procedure for job shop simulation.
+Computers and Industrial Engineering, 7, 297–320.
+UDO, G. J., 1992, Neural networks applications in manufacturing process. Computers and
+VIG, M. M. and DOOLEY, K. J., 1991, Dynamic rules for due-date assignment. International
+Journal of Production Research, 29, 1361–1377.
+WEEKS, J. K., 1979, A simulation study of predictable due-dates. Management Science, 25,
+WEIN, L. M., 1988, Scheduling semiconductor wafer fabrication. IEEE Transaction on

@@ -1,0 +1,661 @@
+IEEE TRANSACTIONS ON AUTOMATIC CONTROL, VOL. AC-31, KO. 6 , JUNE 1986
+Decentralized Learning in Finite Markov Chains
+Abstract-The principal contribution of this paper is a new result on
+the decentralized control of finite Markov chains with unknown transitionprobabilitiesandrewards.Onedecentralizeddecisionmaker
+associated with each state in which two or more actions (decisions) are
+available. Each decision maker uses a simple learning scheme, requiring
+minimalinformation, to updateitsactionchoice.
+updating is done in sufficiently small steps, the groupwill converge to the
+analysis i s based on learning in sequential stochastic games andon certain
+properties, derived in this paper, of ergodic Markov chains. A new result
+on convergence in identical payoff games with a unique equilibrium point
+ECENTRALIZED decision making requiring limited
+information is a highly desirable feature of large complex
+systems. In some cases, these systems can be described only by
+imprecise models and yet decentralized methodsstill maybe
+necessary. This paper presents one such method, applicable to an
+important class of stochastic systems, finite state Markov decision
+processes. It is shown that decentralized decision makers, located
+at the states of a finite Markov chain, can effectively use simple
+learning schemes to update their decisions. The principal result
+derived (Theorem 3) is that, without prior knowledge of transition
+probabilities or rewards, the collection of controllers will converge to the set of actions that maximizes the long-term expected
+reward per unit time obtained by the system.
+Finite state Markov decision processes (controlled Markov
+chains) arise when state transitions generate rewards or costs
+which depend on actions taken in some or all states. Both finite
+time and infinite time problems with various performance criteria
+have been posed and means of determining the optimal policy via
+dynamic programmhg methods are well known [I]-[3].
+However, several important factors have limited the applicabiiity of this type of control. First, the computation becomes
+burdensome when the number of states, although finite, is very
+large. Second, often the information about the model required for
+a centralized approach such as dynamic programming isnot
+available. Specifically, transition probabilities and corresponding
+rewards associated with various actions may be unknown at the
+time control is begun or may change during system operation.
+This leads to an adaptive problem in which, typically, parameters
+are estimated and, using a separation principle, the subsequent
+estimates are used to update control actions. This problem
+formulation has attracted recent interest and several results on
+convergence of the parameter estimates and control policy are
+now available [4]-161. Finally, uncertainty may be present in the
+form of incomplete or noisy state observation. Versions of this
+problem have been solved (e.g., [7], [SI), but imperfect state
+observation coupled with the adaptive problem remains a difficult
+The learning approach presented in this paper addresses
+primarily the adaptive problem, although much of the computational difficulty mentioned above is avoided as well. The model
+differs from that of other adaptive approaches in that no explicit
+dependence of the svstem behavior on an unknown uarameter is
+assumed, and hence no explicit estimation is required. In contrast,
+the setting is one of myopic local agents, one located at each state,
+who are unaware of the surrounding world. There is no
+knowledge that other agents exist or indeed that the world is an Nstate Markov chain whose transition probabilities and corresponding rewards depend on actions chosen. Each local agent, in
+attempting to improve its performance, simply chooses an action,
+waits for a response, and then updates its action. Significantly, no
+prior computation must be done to solve for the optimal policy
+assuming the parameters were known, a nontrivial problem in
+There is no explicit synchronization of decision makers in this
+formulation. The algorithm at any state is updated only at those
+instants when the process returns tothat state. The updating is
+done via a simple learning scheme which uses the cumulative
+reward obtained from a given action normalized by the total
+elapsed time under that action as its environmental response. The
+intriguing and powerful resuli isthat individuals operating in
+nearly total ignorance of their surroundings can implicitly
+coordinate themselves to lead to optimal group behavior. This
+result is based on a new result on learning in N-player identical
+payoff games, presented in Section III, and exploits a special
+property of ergodic Markov chains, discussed in Section N.
+Some simple examples are included in Section V to demonstrate
+the convergence behavior of the learning schemes.
+The control of finite Markov chains for which transition
+probabilities and rewards are known is a well-known problem
+(e.g., [9], [l]) and can be stated as follows. Let 9 = {41,42,
+* . ., &} be the state space of a finite Markov chain ( X ~ } ~ and
+CY:,} be the finite set of actions (also called
+controls or decisions) available in state Qi. The transition
+probabilities tj.(k)and rewards rj(k) depend on the starting state
+di, the ending state 4,, and the action ah(k = 1, * . ri)used
+4%The goal is to choose the set of actions, or policy, a = CY,^,
+ai2,. . , a:;'} E a = al @ a* 8 * 8 a , ~that
+Manuscript received December 17, 1984; revised August 5! 1985 and
+Dr-ember 23, 1985. Paper recommended by Past Associate Editor, H. K.
+Khalil. This work was supported by the Schlumberger Corporation and the
+Systems Research Division of the ITT Advanced Technology Center.
+R . M. Wheeler, Jr. was with the Center for Systems Science, Department
+of Electrical Engineering, Yale University, New, Haven, CT06520. He is now
+with Sandia National Laboratories, Livermore, CA 94550.
+K. S . Narendra is with the Center for Systems Science, Department of
+Electrical Engineering, Yale University, New Haven, CT 06520.
+where r(x(t), x(? l), a)is the reward generated by a transition
+from x(t) to x(t + 1) using policy a. The set of policies is
+limited in this formulation to stationary nonrandomized policies.
+Hence, the best strategy inany state is a pure strategy andis
+independent of the time at which the state is occupied. Under the
+following assumption, it can be shown that the optimal a in fact
+IEEE TRANSACTIONS ON AUTOMATIC CONTROL, NO.
+Assumption I : The Markov chain corresponding to each
+Thus, there are no transient states and a limiting distribution
+a2(a), * -,aN(a))exists, with each ai(a)> 0,
+which is independent of the initial state. Under Assumption 1, the
+expected reward per step J ( a ) defined in (1) can also be written in
+terms of the limiting (stationary) probabilities .(a) as
+The above expression is used to derive an interesting and essential
+relationship between changes in a and relative values of J ( a )
+A dynamic programming solution that optimizes (1) [or
+equivalently (2)] when full information is available was given in
+[ 11, but the computational cost of the scheme increases dramatically with increasing N.Other methods have been proposed which
+provide an easily computable bound on the difference in performance between a given policy and the optimal policy [ IO], [ 1I]. A
+two-layer scheme with control algorithms at the two layers
+operating on different time scales has also been suggested as a
+means of dealing with high dimensionality [12]. However, the
+major practical limitation ofmany theoretical results. In this
+respect, decentralization ishighly desirable and thus plays a
+central role in the problem formulation in this paper.
+An entirely new set of difficulties arises when the transition
+probabilities or rewards, assumed known above, are not available.
+In this case, information about the unknown system must be
+learned as control action is taking place. Thus, the optimal policy
+cannot be found off-line even if the computational problem can be
+overcome. This adaptive problem can .be stated in terms of an
+unknown parameter 0 upon which the tj(k, 0) depend (e.g., [4][6]). All the uncertainty is embodied in 0 and the rewards (or
+costs) are assumed known. The general approach is to estimate 0
+at each instant and then use the action that would beoptimal if the
+estimate were the true value. Probabilistic learning schemes have
+also been applied to this version of the adaptive problem in [ 131,
+[14], although in [14] a discounted reward criterion is used.
+The problem as formulated in this paper is strikingly different
+from that just described. Specifically, no knowledge of either
+tj(k)or r!(k)is assumed, other than that the rj(k)are normalized
+to lie in &e interval [0, 11. Since control is effected in a direct
+method, no explicit parameter estimation is needed. Most
+important, the control scheme is implemented in a decentralized
+fashion. While this problem formulation was treated in [ 151, no
+globally optimal adaptive scheme was given.
+The preceding discussion is summarized below.
+Statement of the Problem: Let the controlled Markov chain
+~ , , state 4; at time n, where 4; E 9,the set of N
+states. States in which at least two actions are available are
+distinguished as action states. Clearly, if @*is the set of all action
+states (I@*[ = N* 5 N),then 9* E 9.If #i E 9*,decision
+consists of the probability vector ti(k) governing the state
+transition from 4i and a corresponding reward vector ri(k).The
+chain then moves from 4ito 4j and a reward rj(k) is generated.
+Both tf(k) and rj(yC) are unknown. If 4i 9 * , there isonly one
+transition vector f ’ and one reward vector ri governing the chain.
+Problem: Find a decentralized control scheme for each Ai so
+that asymptotically the collection of decision makers { A , } will
+evolve to policy a* E a where J(a*)= max, {J(a)}and J ( a )
+i) In contrast to the methods referred to above, a key element
+of the desired control scheme is that no prior computation must be
+done to solve for the optimal policy for each value of an unknown
+ii) It will be shown below that only a minimum of information
+exchange among the decentralized decision makers is required.
+Even the number of states N is not used by any local decision
+any stochastic convergence problem, asymptotic
+behavior must be qualified. The scheme proposed belowconverges to a* with probability arbitrarily close to one (w.p. 1 E), where e can be made as small as desired by adjusting a
+The adaptive scheme introduced in this paper makesuseof
+learning automata and the analysis isbased on convergence
+properties of such automata in stochastic games. While a vast
+literature exists on learning schemes that achieve various types of
+performance, only the basic features necessary to derive the key
+result on learning in games (Theorem 1) are presented in Section
+ILI. It is the combination of properties of Markov chains and the
+behavior of automata in games that enables the total solution to the
+Learning models have been studied extensively by psychologists and systems theorists from both modeling and control
+viewpoints [ 161-[20]. A particularly simple model for sequential
+decision making in unknown random environments is the learning
+automaton (see [21], [22] for extensive bibliographies). While
+many variants of this model have been proposed and studied, the
+underlying idea can be simply stated. The automaton has a finite
+set of actions and sequentially updates a probability distribution
+over the action set, based on the environmental response to the
+stimulus of a particular action chosen. In this manner, the
+automaton attempts to improve its behavior in some sense, i.e.,
+learn. Typically, itis assumed that the response is a random
+variable whose distribution, while stationary, is different for each
+automaton action set and 6 be the environment response set. Each
+element of fl is quantified and for convenience normalized to lie in
+the interval [0,11, where 1 corresponds to the best response and 0
+to the worst. If at time n the action, response, and action
+probability vector are denoted by a(n) E a.P(n) E /3, andp(n)
+= { p l ( n ) ,pz(n), . . , p r ( n ) } ,respectively, then the manner in
+which p(n) is updated is governed by the learning algorithm T
+where p(n + 1) = T [ p ( n ) ,a@), P(n)].The specification of T
+constitutes the design of the automaton. Although many nonlinear
+schemes have been studied, the essential behavioral properties of
+any automaton can be exhibited by the following linear algorithm
+pi(n + 1) =pi(n)+aP(n)[l -pi(n)l- b[l -P(n>1pl(n)
+where 0 < a < 1 and 0 5 b < 1 are constants called the reward
+and penalty parameters, respectively. It is assumed that all initial
+probabilities p,(O) lie in the open interval (0, 1). If b = a the
+scheme is called linear reward-penalty (LR.p):if b 4 a it is called
+reward-inaction (LR.,).While any of these schemes could be used
+as decentralized controllers, in the remainder of the paper
+attention will be restricted to the LR.,scheme.
+Convergence Properties: Convergence of the LR.1 version of
+(3) is demonstrated by observing that it gives rise to a Markov
+process with stationary transition probabilities. The vector p(n)
+defined by (3) is a random vector. If the distributions of the
+response P(n) to the various actions ai are independent of time,
+then the probability of p(n + 1) is determined completely by
+WHEELER AND NARENDRA: DECENTRALIZED LEARNING
+p(n). Further, if for any n the unit simplex S, is defined as
+then the learning scheme represents the mapping T : S, --* S,.
+Hence, { ~ ( n ) ] ~ ,is, a discrete parameter Markov process defined
+on the state space S, with a stationary transition function.
+An important feature of the linear algorithm (3) for any a and b
+is the distance-diminishing property, which makes the resulting
+Markov process compact. The mapping Tdefined on's, is said to
+be distance diminishing on S, (i.e., T i s a stochastic contraction)
+if, for any points p 1 and p2belonging to S,,
+where d(xl, x * ) is the Euclidean metric. The convergence of the
+scheme then amounts to the asymptotic behavior of compact
+Markov processes. While much is known about such processes,
+the following important convergence result is sufficient in this
+If P(n) is viewed as a measure of relative success, with P(n) =
+1 equal to the maximum success, then the expected success is
+E [ P ( n ) I p ( n ) l = CEIB(n)lailpi(n).
+Defining do = maxi {EIP(n)lai]),Norman [18] has shown the
+Theorem: For any E > 0 and any p(0) in the open simplex S,,
+there exists an 0 < a* < 1 such that f o r b = 0 and any a < a* in
+Proofi The proof is given'in [18], for the case in which P(n)
+is a binary random variable (#?= (0, 11).
+The proof of this result, termed E-optimality, for the general
+B(n) is similar [23]. All automata convergence results stated or
+derived in this paper are in terms of E-optimality.
+Much of the original inquiry into automata attempted to model
+decentralized control in biological systems [20]. By contrast,
+decentralization is not an issue in the model as discussed above.
+However, it becomes the principal issue when many automata are
+interconnected as in the Markov chain control problem considered
+in this paper. The close connection between such problems and
+abstract games was recently identified in [24]. It is this realization
+that motivates the discussion of automata games below, including
+An automata game involves N automata Ai(i = 1, . N ) ,
+eachwith an action (strategy) set a' = {.ill ai, . - - ,a:i),
+interacting through a stationary random environment. At each
+instant n, each A i selects one action according to its current
+probability distributionp'(n) = ( p l , p i , * p:,),. The joint action
+(or play) a ( n ) = a = (CY;,, aiz, . - * , a:,}, chosen with
+the random responses Pi(n) received. Stationarity comes from the
+fact that the response distributions are fixed over time. Each
+automaton has access only to its own response. In contrast to usual
+game-theoretic formulation, no player is aware of other players,
+the play chosen at any instant or any of the response distributions.
+Inthe Markov chain problem, the automaton at each state
+mobabilisticallv chooses an action, waits for a response, and then
+ipdates its actibn probabilities. The response reciived is the only
+information available to A; and it depends upon actions taken by
+other automata when the chain is in other states. In this respect,
+the decentralized control of Markov chains bears a strong
+similarity to an automata game, even though the automata are not
+synchronized in the former case as they are in the latter.
+The performance of automaton Ai in the game is judged, as in
+the single automaton case, by the asymptotic behavior of
+E[Mi(n]] where Mi@) A BP'(n)b(n) = (p'(n), p2(n), -,
+However, the notion of E-optimality is not in general well defined
+for @e game, since individual and group rationality are usually
+inconsistent. A notable exception is the two-person zero-sum
+game for which the value solution is well established as rational
+behavior. Although learning algorithms of the type (3) were
+designed as clever devices in simple environments, a powerful
+result is that they demonstrate group rationality (converge to the
+value) in the zero-sum game as well [25], [26].
+Rational behavior, and therefore E-optimality,in games with
+identical payoffs (&(a) = d(a),V i) is also well defined and
+amounts to choosing actions resulting in the optimum payoff, by
+definition the same for individual and group. Clearly the control
+of Markov chains falls into this class of game, since there is a
+single performance index to be optimized. The concept of an
+equilibrium point in strategy space is important in the identical
+Definition: Let aJibe the j p strategy of player i and Mi(afl,
+aYINo)is an equilibrium if M'(a") = maxji Mi(ajI0,ai20,
+Nash [27] proved that all fmite games in strategic form have at
+least one pure or mixed strategy equilibrium. In the two-player
+identical payoff game the payoff structure can be represented by a
+game matrix. Any element of the matrix which is simultaneously
+maximum in its row and column is a pure strategy equilibrium.
+This property generalizes in a straightforward manner to the Nplayer game.
+The following result on the convergence of learning schemes in
+identical payoff games plays a central role in the proof of
+convergence of the decentralized automata in the controlled
+Markov chain presented in Section IV. It is stated below with an
+outline of the proof, but the complete proof is contained in the
+Theorem I : Let r be an identical payoff game among N
+players Ai(i = 1, * -,N ) , each with r, actions, and let all Ai use
+identical LR-Ilearning schemes. Let I? have a unique pure strategy
+equilibrium a* = (a!, a;, * , a:) with corresponding expected
+success d(a*)(each A; uses its first action).
+If the above conditions are satisfied, then for any E > 0, there
+exists an 0 < a* < 1 such that for b = 0 and any a < a* in (3)
+Outline of Proofi The proof of Theorem 1 is presented in two
+stages. In the first stage, we consider an ordinary differential
+W(-) (defined below) are the stationary points of the ODE. It is
+demonstrated that under the conditions specified by Theorem 1,
+all but one of the stationary points are unstable. Hence, any
+solution of the ODE with initial conditions in the interior of the
+simplex converges to the stable solution denoted by f*.
+In the second stage, the distancediminishing property (5) is
+shown to hold in the game, implying that t h e ove&l Markov
+IEEE TRANSACTIONSON AUTOMATIC CONTROL, NO.
+process is compact. It follows that p(n) converges to the set of
+ergodic kernels (absorbing states) of the process with probability 1
+[18]. Next, the stochastic difference equation
+- f(n) = kla and E [ ( p ( n ) - f(n))'I = k2a
+for all n, it follows that limn-- Pr(p(n) = f*} > 1 - E can be
+realized by the proper choice of the step size a. From this the
+statement of Theorem 1 is easily obtained.
+i) Theorem 1 can be viewed in terms of stochastic hillclimbing. With a small a, many steps can be taken without moving
+very far from the current position, and hence averaging can occur,
+resulting in expected progress in the upward direction. For any
+number of equilibria it has been shown that M ( n ) 2 0 for any
+ii) Special cases of the conditions of Theorem 1 have been
+treated. Initial formulations of the automata game appear in [28][30] and a partial analysis of the two-player game is found in [3 11.
+If the restrictive property of dominance holds, then a result for a
+limited class of nonstationary environments [32] is applicable.
+This has been exploited in the two-player game where each player
+has two actions to show e-optimality [15].
+This section consists of three parts. In Section IV-A an updating
+scheme is proposed for the decentralized controllers in a
+controlled Markov chain. In Section IV-B a property of Markov
+chains is derived relating changes in policies (I to an ordering of
+the corresponding J ( a ) . This result (Theorem 2) is of particular
+importance to decentralized control. Finally, using Theorems 1
+and 2, it is shown in Section IV-C that the collection of updating
+schemes used in the problem of Section I1 is globally €-optimal
+The Aigorithm: Each A ; is assumed to use the updating
+scheme (3). with P(n) defined by (8). The modified scheme is
+The above procedure can be summarized as follows.
+i) If at time n, x(n) = 4; E a*, only A i updates its action
+ii) If x(n) E @ - a* no control is taken, but the reward
+generated and one instant of global time are added to their
+respective current totals by the coordinator.
+iii) In the intervening time between two visits to any $;, no
+knowledge of the sequences of states visited is provided to A;.
+Only the current values of total reward and n are needed and these
+are incremented at each n whether or not x(n) E a*.
+Notethat the role of the coordinator, while essential to the
+scheme, is that of bookkeeper, not decision maker. All estimation
+and control functions are performed by the decentralized automata.
+B. A Property of Ergodic Finite Markov Chains
+Let an N-state Markov chain have Na action states @$
+with action set (I' = {ai,a;, . -,a:,},r, 2 2, in each state.
+Associate one decision maker Ai with each 4F. Then r = ( N A ,
+a, J } denotes a finite identical payoff game among { A i )in which
+Proof: For convenience, assume that a dummy decision
+maker with only one action is also associated with each nonaction
+state. In the corresponding N-player game r ', a play (policy) has
+Nrather than NAcomponents. However, since the action sets in N
+- NAstates are degenerate, any play (I in r is equivalent to a play
+in I' ' in which the NA action state decision makers use a.We will
+The proof is related to that given by Howard [ l ] for the
+convergence of the policy iteration method. I
+Assume that a play a is a nonoptimal equilibrium point (EP) of
+r '. In Howard's terminology, the gain J(a) andthe relative
+values ui(a)associated with a are found as the solution to
+The decentralized learning control of a Markov chain as
+proposed here involves one learning automaton for each action
+state and a coordinator to perform simple administrative tasks.
+Each automaton operates on its own local time scale ni = ( 0 , 1 , 2,
+* ] while the chain, along with the coordinator, operates on the
+global time scale n = ( 0 , 1, 2, - } . Ifx(n) = 4; E @*,then A;,
+activated by the coordinator, chooses an action a i according to its
+current action probability vector pi(n,).Otherwise, no control is
+taken and the chain is governed by a fixed transition vector and
+A central feature of the control scheme isthat A , isnot
+informed of the one-step reward rj(k) resulting from its action. In
+fact, A ; receives no information whatsoever about the effect of its
+action or about the activity of the chain until the process returns to
+4;. At that time ni + 1, A; receives two pieces of data from the
+coordinator: 1) the cumulative reward generated by the process up
+totime n, and 2) the current global time n. From these. Ai
+computes the incremental reward A p i ( n , ) generated since
+ni(ai(ni) = a i ) and the corresponding elapsed globaltime
+A q i ( n i ) . These increments are added to their current cumulative
+totals pi(ni) and qi(ni), resulting innew totals p:(ni
+qi.(ni + 1). n e environment response (input to A ; )is then taken
+where qi(a)= E:; I tj(a)rj(cy)and u s ( a ) is set to zero arbitrarily
+to guarantee a unique solution. Usingpolicy iteration, a better
+play than a can be found. Assume that state i is one of the states in
+which the better play differs from a. Consider the play /3 which
+differs from a only in state i. The component of fi used in state i is
+found as that k which maximizes the following "test quantity''
+Ti(k, a ) = qt'j((kk))+v J ( a ) - u i ( a )
+r,. The test quantity depends on cr since the
+values d ( a ) in (10) are kept as the ones computed from the
+original play a.A useful property of the test quantities is that for
+any play p, J(0) = Cfll n,{p)~,{p,a),where T,@) is the steady
+state probability for state j under playand
+quantity formed in state j by using play fi in state j but relative
+values associated withplay a [l]. Assumption 1 assures the
+existence of the T,@) for all j and P. From the maximization of
+Since the rj(k)are normalized to lie in [0,11, clearly Pi(ni)also
+I The authors are indebted to an anonymous reviewer who suggested this
+approach instead of a lengthier proof given in an earlier version of the paper.
+WHEELER AhW NARENDRA:DECENTRALIZEDLEARNING
+Since 0 is superior to a and differs from a only in one state, a
+cannot be an EP, leaving the optimal play in r' as the unique EP.
+Comment: The uniqueness of an equilibrium in r isan
+intriguing property. In any controlled Markov chain satisfying
+Assumption 1, the second bestpolicy differs from the optimal
+policy only in the action chosen in exactly one state. In general,
+the kth best policy can differ from the optimal policy in at most
+C. Convergence of the Decentralized Controllers
+In the above discussion, the controlled Markov chain was
+represented as a game r, whichwas shown to have a unique
+equilibrium. If r were an automata game, then players using
+learning scheme (3) would be €-optimal. However, a payoff in r
+is obtained asymptotically by using a fixed policy. Since each
+decision maker uses the updating procedure T 1 , r can onlybe
+viewed as a limiting game r = limn+- r(n). The elements of
+r(n), s ( a , n ) P E[P(n)Ia(n)= a ] ,depend on n and thus the
+Markov chain updating isnot the same as the updating in an
+automata game. However, from Assumption 1 it follows that
+limndms ( a , n) = J ( a ) . For a sufficiently large n the ordering
+among the s ( a , n) will be identical to that among the J ( a ) in r.
+Therefore, it is sufficient to analyze the automata game l'.
+The fact that Tl results in asynchronous updating, while the
+updating in an automata game is synchronous, is not important as
+long as the ratio of updating frequencies of any two controllers
+to zero with increasing n. It follows from
+paper can be stated as the following theorem.
+Theorem 3: Let an automaton Ai using learning scheme Tl be
+actions, of an N state Markov chain. If Assumption 1 is satisfied,
+then for any E > 0, there exists an 0 < a* < 1 such that for b =
+learning curve E [ p , ( n ) ] , typicalsample path p,(,n), and
+approximate solution of associated deterministic differential equat~onf ( n )
+where the actions of A I and A2 correspond to the rows and
+columns, respectively, of r l .The environment model is assumed
+to be binary, and hence P(n) can only assume the values
+l(success) or O(fai1ure). Each element of rl is the expected
+success resulting from the corresponding action pair.
+In the experiment, A I and A 2 both used algorithm (3) with a =
+0.02 and b = 0. The results are shown in Fig. 1, in which the
+horizontal and vertical axes represent the probabilities of the first
+actionspf (n)andp:(n) ofAl andAz,respectively. All 30 sample
+paths converged to the optimal action pair and the mean curve
+converged to (0.95, 0.95) in approximately lo00 steps. The
+smooth curve f (n)is the approximation, valid to within O(a2),to
+the solution of the deterministic differential equation
+(see the proof of Theorem 1 in the Appendix). It is clear that the
+difference between E[p,(n)]and f ( n ) is small for any n.
+Experiment 2-Controlled Markov Chain, N = 2, NA = 2:
+In this example, both states are action states. Two actions are
+available in each state. The transition probabilities and rewards
+Proof: The proof follows immediately from Theorems 1 and
+Comment: In the above discussion, it is assumed, for ease of
+exposition only, that all of the automata use the same reward
+parameter a. This may not be desirable in decentralized control
+problems and is by no means necessary for decentralized learning
+results, as has been shown elsewhere (see, e.g., [26]).
+Two decentralized learning experiments, each with two controllers A I and A 2 , are described below. The first deals with an
+identical payoff game as discussed in Section III (summarized in
+Theorem 1). The second treats the Markov chain control problem
+(summarized in Theorem 3). The mean learning curve is denoted
+p:(n)) denotes a typical sample path. In each case, the mean
+learning curve was computed by averaging over 30 sample paths.
+Experiment I- Two-Player Identical Payoff Game: The
+game played by A I and A2 is represented by the matrix
+Each controller uses the updating procedure Tl described in
+Section I V , with a = 0.1 and b = 0. It follows that the
+and hence choosing the first action in each state is the optimal
+policy. In the simulation, all of the 30 sample paths converged to
+the optimal policy. The mean curve converged to (0.95, 0.95) in
+approximately 900 steps of global time. Note that in each state, a
+higher immediate reward is obtained if the second action is
+chosen. However, the choice of P(n) usedin updating scheme
+T1 prohibits the biasing of the control policy in favor of shortterm rewards.
+IEEE TRANSACTIONS ON AUTOMATIC CONTROL, VOL. AC-31, NO. 6, JUNE 1986
+Two basic problems are addressed in this paper: i) decentralized decision making (and corresponding sequential games) and ii)
+adaptation with minimal prior information. At a gross level, both
+problems amount to the stability of algorithms and many papers
+have been devoted to showing convergence of particular algorithms for either problem. However, the approach presented
+here uniquely combines the structure of f i t e Markov chains with
+the flexibility of learning theory, resulting in decentralized
+adaptation which is globally €-optimal. Several observations about
+the learning approach are summarized below.
+i) The approach as developed here requires no global model to
+be shared by the various controllers. Very little information is
+either assumed a priori or exchanged during operation. Also, no
+precomputation of the optimal policy is required.
+ii) The criterion of long-term expected reward per step is only
+one criterion that can be specified. It appears possible to achieve
+e-optimalitywith respect to other reward criteria by suitably
+iii) B(n) in the updating algorithm is computed as the ratio of
+two numbers, each tending to infinity. Any practical implementation of the scheme would require a modified methodof computing
+i) Ifp(a) = II,”_I p:j, then p ( a \ ai) =
+ii) If the expected success for play a is d(a), then d(a \ a i ) is
+the expected success for the play a \ ai.
+A . Stability of the Stationary Points of the ODE f = W(j-)
+The stationary points of the ODE f = W ( f )are the zeros of
+Every e E Vis a zero of W m and it is shown below that
+only one element of V,e* = ( e ; ,e:, * . el;), is stable. Hence,
+any solution of the ODE with an initlal condition in the interior of
+S converges to the one stable state e*. The following property is
+definition of an equilibrium in a game, given in Section III, can be
+restated as follows. The play a is an equilibrium of r if d ( a ) >
+d(a\ab)viandvk#ii.InTheorem1,a* = (@:,a;,
+Following stability arguments used in [34] and [31], we show
+iv) Another implementation issue, speed of convergence, is
+particularly important in tracking changes in the transition
+probabilities or rewards that might occur. While the LR.,
+algorithm analyzed here is quite slow for small values of a, other
+related learning schemes have been suggested which exhibit faster
+v) As mentioned in the Introduction, the method requires
+perfect state observation in order to activate the proper controller.
+The problem of noisy state observation raises difficult theoretical
+vi) Since the use of the learning approach is independent of the
+Markov chain structure exploited here, the application of decentralized learning algorithms to other collective decision-making
+problems appears promising. A preliminary inquiry into such
+Many of the above comments suggest possible extensions or
+modifications to the problem statement or the learning scheme.
+However, the basic idea presented in this paper constitutes a new
+and important result in decentralized learning-simple and intuitive local schemes operating in an unknown environment can lead
+Note that the derivative in (A.2) can be expressed as
+The second factor in the summation in (A.3) can be shown to be
+negative by defining arbitrary constants X,: satisfying
+The expression (A.3) is now evaluated for all e by considering
+As mentioned in Section III, the proof of Theorem 1 is given in
+two stages (A and B below). The following notation is used
+Let r be the N-player game with player Ai having ri actions.
+Let Ai’s action probability vector at stage n be pi@) E S, where
+S, is the unit simplex in R‘i. The joint action probability vector at
+n is then p(n) = ( p l ( n ) , p 2 ( n ) , * , pN(n))E S = Srl x S, x
+x Srw Let e$ P (0, 0, * , 0, 1 ,0 , * ,0) E Srjwhere the
+4th element is 1. Then V = {e = ( e j l ,ei2, * eiN)}is the set
+of all vertices of S . Note that there is a unique a corresponding to
+Define Ap(n) G E[p(n + 1) - p(n)(p(n)= p ] = a W [ p ] .
+Using the L R . 1 algorithm (3) (and omitting the argument n), it is
+where a - { i }is the play chosen by the N - 1 players, excluding
+A i . Combining (A.3) with (A.S)-(A.7), it follows that dW‘;/
+dpll,, < 0. A similar argument reveals that dW(;/dpjl,, =
+d(a*\ a;) - d(a*) < 0,j # 1. Hence, e* is stable.
+Case ii): Stability of e = (e!, e;., * * , e:, * * , e.:) k f 1:
+Using the same argument as above, It follows that
+a sufficient condition for e of this type to be unstable.
+WHEELER AND NARENDRA: DECENTRALIZED LEARNING
+Choosing any element W:, it can be shown as above that
+Stability requires that -yi < 0 for all i and k , but this is impossible
+from Property 1. Hence, all other e’s are unstable and e* is the
+The fact that p ( n ) consists of probabilities is exploited in the
+determination of stability. In particular, starting with a given e, no
+perturbation dpj can occur outside of the product simplex S.
+To show eoptimality in the game r, it is shown that
+iii) Define f as a stationary point of (A. 11). From the stability
+analysis in Part A of this Appendix, it follows that f * = e* is the
+unique stable station-ary point of (A.10), so that W [ e * ] = 0.
+From (A.ll), a ( W [ f ] - W e * ] ) = O(u2) and hence
+From (A.12) and (A.13), limn+mE[p(n)] - e* = O(a).But this
+for some constant ke and all e # e*. Let k,, = ma% { k e } .From
+(A.9) and (A.14), limn+- Pr {p(n) = e*} > 1 - k,a, which
+iv) Let aebe the play corresponding to the vertex e # e* of S.
+From the definition of M(n) in (7), it follows that
+for any p(0) in the interior of S. This is done in four steps.
+i) We first establish that the collection of LR.Ischemes (3) used
+in r satisfy the definition of a distance-diminishing operator (5).
+Let pk(n) be a particular value of p(n) and the metric d be
+where p i j is the jth component of player Ai’s probability vector at
+If at stage n the play a is used, then from (3) it follows that
+1 and for any a,0 < d ( a ) < 1, the distance
+between pl(n) and p 2 ( n ) can remain unchanged only on a sample
+path of measure zero; otherwise, it must decrease.
+The elements of V are stochastically and topologically closed
+and hence are ergodic kernels. Since the distancediminishing
+property holds, {p(n)>,,, is a compact Markov process whose
+only absorbing states are the elements of V [18]. Hence,
+ii) Consider the deterministic differential equation
+A f(na) be a discrete approximation to f ( t ) in (A.lO).
+6f(n) & f(n+ l ) - f ( n ) = ~ W [ f ( n ) ] + O ( ~ ’ (A.ll)
+It can be shown using arguments given in [I51 that
+E [ ( p ( n ) - f ( n ) } * ] = k 2 a ,for anyp(0) and all n = O , 1 , 2;-*
+Thus, the mean learning curve differs from the deterministic
+trajectory by only a small amount if the reward parameter a is
+R. A. Howard, Dynamic Programming and Markov Processes.
+S . M. Ross, Applied Probability Models with Optimization Applications. San Francisco, CA: Holden-Day, 1970.
+Finite State Markovian Decision Processes. New
+P. Mandl. “Estimation and control in Markov chains,” Adv. ADD/.
+V. Borkar and P. Varaiya, “Adaptive control of Markov chains, I:
+Finite parameter set,“ IEEE Trans. Automat. Contr., vol. AC-24,
+P. R. Kumar and W. Lin, “Optimal adaptive controllers for unknown
+Markov chains,” IEEE Trans. Automat. Contr., vol. AC-27, pp.
+K. Astrom, “Optimal control of Markov processes with incomplete
+stateinformation,” J. Math.Anal. Appl., vol. 10, pp. 174-205,
+I. Marcus, “Decentralized control of finite state Markov
+processes, IEEE Trans. Automat. Contr., vol. AC-27, pp. 426431, 1982.
+R. E. Bellman, “A Markovian decision process,” J. Marh. Mech.,
+D. J. White, “Dynamic programming, Markov chains, and the method
+of successive approximations,” J. Math. Anal. Appl., vol. 6, pp.
+P. Varaiya, “Optimal and suboptimal stationary controls for Markov
+chains,” IEEE Trans. Automat. Contr., vol. AC-23, pp. 388-394,
+J.-P. Forestier and P. Varaiya, “Multilayer control of large Markov
+chains,” IEEE Trans. Automat. Contr., vol. AC-23, pp. 298-305,
+Y. M. El-Fattah, “Recursive algorithms for adaptive control of finite
+Markov chains,” IEEE Trans. Syst., Man, Cybern., vol. SMC-11,
+M. Sato, K. Abe, and H. Takeda, “Learning control of finite Markov
+chains with unknown transition urobabilities,” IEEE Trans. Automat. Contr., vol. AC-27, pp. 562-505, 1982.
+S. Lakshmivarahan, Learning Algorithms: Theory and Applications. New York: Springer-Verlag, 1981.
+R. R. Bush and F. Mosteller, Stochastic Models for Learning. New
+IEEE TRANSACTIONSON AUTOMATIC CONTROL, VOL. AC-31, NO. 6 , JUNE 1986
+R. C. Atkinson, G. H. Bower, and E. J. Crothers, An Introduction to
+Mathematical Learning Theory. New York: Wiley, 1965.
+M. F. Norman, Markov Processes and Learning Models. New
+J. M. Mendel and K. S. Fu, Eds., Adaptive, Learning and Pattern
+Recognition Systems. New York: Academic, 1970.
+M. L. Tsetlin, Automaton Theory and Modeling of Biological
+K. S. Narendra and M. A. L. Thathachar, “Learning automata-A
+survey,” ZEEE Trans. Syst., Man, Cybern., vol. S M C 4 , pp. 323334,1974.
+K. S. Narendra and S. Lakshmivarahan, “Learning automata-A
+critique.” J. Cybern. Znf. Sci., vol. 4 , pp. 53-66. 1977.
+S. Lakshmivarahan and M. A. L. Thathachar, “Absolute expediency of
+Q- and S- model learning algorithms,” Trans. Syst., Man, Cybern.,
+R. M. Wheeler, Jr. and K. S. Narendra, ‘‘Learning models for
+decentralized decision making,’’ Automatica, vol. 21, pp. 479484,
+S. Lakshmivarahan and K . S. Narendra, “Learning algorithms for twoperson zero-sum stochastic games with incomplete information,”
+Math. Oper. Res., vol. 6, pp. 379-386, 1981.
+S. Lakshmivarahan and K. S. Narendra, “Learning algorithms for twoperson zero-sum stochastic games with incomplete information: A
+unified approach,” SIAM J. Contr. and Opt., vol. 20, pp. 541-552,
+J. F. Nash, “Equilibrium points in n-person games,” Proc. National
+Acad. Sci. USA, vol. 36, pp. 48-49, 1950.
+V. L. Stefanyuk, “Example of a problem in the joint behavior of two
+automata,” Automat. Telemekh., vol. 24, pp. 781-784, 1963.
+S. L. Ginsburg, V. Y.Krylov, and M. L. TsetlLn, “One example of a
+game for many identical automata,’’ Automat. Telemekh., vol. 25,
+V. I. Varshavskii, “Collective behavior and control problems,” in
+MachineZntelligence, 3, D. Michie. Ed. Edinburgh: Edinburgh
+R. Viswanathan and K. S. Narendra, “Competitive and cooperative
+games of variable-structure stochastic automata,’’ J. Cybern., vol. 3,
+N. Baba and Y. Sawaragi, “On the learning behavior of stochastic
+automata under a nonstationary random environment,” ZEEE Trans.
+Syst., Man, Cybern., vol. SMC-5, pp. 273-275, 1975.
+M. A. L. Thathacharand P. S. Sastw. “A new auuroach to the design
+of reinforcement schemes for learn& automata;’; Dept. Elec. Eng.,
+Ind. Inst. Sci., Bangalore, India, Tech. Rep. EE/60, 1983.
+convergence in variable-structure automata,” IEEE Trans. Syst. Sci.
+Richard M.Wheeler, Jr. (”84) received the B.S.
+degree in engineering and applied science from Yale
+University, New Haven,CT, in 1974, the M.S.
+degree in systems simulation and policy design from
+Dartmouth College, Hanover, N H , in 1980, and the
+Ph.D. deain electrical engineering from Yale
+He has worked on the application of mathematical
+modeling to energy conservation and small-scale
+hydropower development. At present. he is a
+Member of Technical Staff at Sandia Laboratories
+in Livermore, CA. His currentresearch interests are in decentralized decision
+making under uncertainty, learning systems, and game theory.
+Kumpati S. Narendra(S’Sj-M’66-SM’63-F’79)
+received the Ph.D. degree in applied physics from
+Harvard University, Cambridge, MA, in 1959.
+He is currently the Director of the Center for
+Department of Electrical Engineering, Yale
+University, New Haven, CT. He is the author (with
+J. H. Taylor) of the book Frequency Domain
+Criteria for Absolute Stability (New York:
+Academic, 1973), the editor (with R. V. Monopoli)
+of the book Applications of Adaptive Control
+(New York: Academic, 1980). and is currently editing a book entitled
+Adaptive and Learning! Systems: Theory and Applicarions (New York:
+Plenum, 1986). His present interests are in adaptive control. learning theory,
+decentralized control of large scale systems, and control of flexible space

@@ -1,0 +1,319 @@
+Int. J. Production Economics 104 (2006) 427–440
+The effect of updating lead times on the performance
+Department of Technology Management, Eindhoven University of Technology, NL-5600 MB, Eindhoven, The Netherlands
+Received 16 April 2004; accepted 15 April 2005
+In this study, our concern is to show the effect of updating lead times on the performance of a two-level hierarchical
+planning system. Lead times are updated by taking periodic feedbacks of the most recent information from the
+production environment and using this information in estimating lead times for planning the future production orders.
+A simulation model is used based on a multistage production planning and scheduling environment where the
+components are manufactured in a general job shop and ﬁnal products are manufactured in a ﬂow shop. Our results
+demonstrate that under certain conditions frequent updates of lead times will lead to uncontrolled production system
+r 2005 Elsevier B.V. All rights reserved.
+Keywords: Hierarchical planning; Scheduling; Lead time; Production planning
+In many manufacturing situations hierarchical planning paradigm has been found to be a suitable and
+satisfactory framework for structuring the management tasks. Due to its simplicity in implementation and
+managerial facilities it provides it has widely been used in practice. As well, an extensive piece of literature
+has been built during the last decades, which can be distinguished in three principal lines:
+(1) The hierarchical production planning (HPP) models, based on Hax and Meal (1975), are
+characterized by deterministic optimization models at each of the hierarchical levels, and by pure topdown inﬂuence of higher-levels on lower-levels. The majority of the research in this line has concentrated on
+aggregation–disaggregation rules and heuristics (e.g., Axsäter and Jonsson (1984), and Bitran and Hax
+(1977)). (2) The conceptual hierarchies developed by Bertrand et al. (1990) are characterized by separating
+Corresponding author. Tel.: +31 40 2473828; fax: +31 40 2465949.
+E-mail address: b.selcuk@tm.tue.nl (B. Selc- uk).
+0925-5273/$ - see front matter r 2005 Elsevier B.V. All rights reserved.
+B. Selc- uk et al. / Int. J. Production Economics 104 (2006) 427–440
+out semi-autonomous units (production units) along a (manufacturing) supply chain and the introduction
+of a goods ﬂow control function (GFC). Hierarchical control is primarily aimed at enabling a lower level to
+reach its goals, where it negotiates with the higher level about acceptable workloads. (3) The organizational
+planning hierarchies (OPH) introduced by Schneeweiss (1995) are based on two explicit concepts, namely
+information asymmetry and goal asymmetry. Information asymmetry refers to the difference in the
+information statuses of hierarchical levels and goal asymmetry refers to the difference in the objectives of
+hierarchical levels. The integration between hierarchical levels is achieved through building an anticipation
+of the lower-level model within the higher-level model. By this way the higher-level decisions are structured
+by taking into account the information status of the lower-level.
+Whereas the models described above have been developed conceptually, few performance evaluation
+results are available. In HPP models, comparisons have been made between the relative performances of
+hierarchical models vs. integrated monolithical models (e.g., Graves (1982)). Studies are mainly
+concentrated on solving consistency and feasibility problems between different hierarchical levels. Gelders
+and Van Wassenhove (1982) states that deterministic rolling plans are often employed in practice for
+coordination purposes. However, very little theoretical research has been done on the analysis of
+hierarchical planning systems in a rolling schedule environment, and the evaluations are limited to the static
+deterministic models (i.e., Dempster et al. (1981)). Chung and Krajewski (1987) is the ﬁrst one that modeled
+a rolling horizon feedback procedure to coordinate aggregate planning with master scheduling. However,
+they ignore the stochastic nature of the manufacturing systems, which is, in our concern, a signiﬁcant
+GFC models are conceptually richer than the HPP models, especially for multistage production–distribution systems. The distinction between goods ﬂow control and the production unit control provides
+further modeling of operational units in a supply chain, which is the missing feature in HPP framework.
+However, performance evaluation results for this methodology, especially in a dynamic stochastic setting
+Similarly, OPH methodology puts emphasis on the operational integration of hierarchical-levels through
+the concept of anticipation. Although the framework is fairly conceptual and very few performance
+evaluation results are available, only recently, Rohde (2004) proposes a two-level hierarchical structure
+including dynamic update of setup times through an artiﬁcial neural network-based anticipation. Rolling
+horizons method is applied to gather data for the anticipation purposes, employing a learning mechanism
+inﬂuenced by the past performance of the lower-level models.
+In addition to such theoretical concerns, in practice, the production planning and control softwares are
+generally treated as black-boxes. Practitioners assume that as long as the tool looks correct it is correct and
+the planning parameters are usually set according to a priori simulation results, intuition, and experience.
+However, it is intuitively not possible to estimate the environmental parameters perfectly. Especially, in
+today’s modern manufacturing systems where uncertainty is an important determinant of the performance
+there is a need to facilitate a dynamic and adaptive hierarchical production planning framework, as also
+In this study our primary concern is to provide qualitative and quantitative insights on how updating
+lead times at every replanning epoch may affect the performance of a two-level hierarchical planning system
+for a two-stage, multi product production/assembly situation (see Fig. 1). A considerable research has been
+Fig. 1. Two-stage production/assembly system.
+B. Selc- uk et al. / Int. J. Production Economics 104 (2006) 427–440
+built on the analysis of manufacturing lead times (e.g., Karmarkar (1987) and Zijm and Buitenhek (1996)).
+It is explicitly stated that unlike production design parameters such as unit processing times, total capacity,
+setup times, etc. lead times are observed not as inputs to the production system but as the output of a
+complex process where lot sizes, demand pattern, work in process levels, etc. interact each other. Therefore,
+we employ a rolling horizon procedure to gather the most recent information from the shop-ﬂoor and we
+generate new estimations of lead times by employing an exponential smoothing technique. Similarly Vig
+and Dooley (1991) applied a moving average technique to forecast expected lead times. Our two-level
+hierarchical planning system is composed of a goods ﬂow control model at the top-level, to coordinate the
+production between consecutive stages, and a machine scheduling and sequencing model at the bottomlevel.
+We ﬁrst present the models for both goods ﬂow control and release order scheduling in Section 2. In this
+section the hierarchical structure and the lead time update procedure are also discussed. Then we report the
+research design and the experimental results in Section 3. Finally, a summary of the results and concluding
+The manufacturing environment is based on the following assumptions: Produce-to-stock manufacturing
+strategy is applied at both stages. The intermediate items and the purchased items have only internal
+demand, which is based on the forecasted demand of the ﬁnal products and aggregate planning. The setup
+times are zero and machine breakdowns are not allowed at both production stages. The safety stock for all
+purchased items, components and ﬁnal products are zero. A general job shop manufactures/assembles
+components possibly using common items. A ﬂow shop manufactures/assembles ﬁnal products.
+Fig. 2 provides a simplistic picture of the bill of materials (BOM) and bill of processes (BOP) structure of
+a ﬁnal product. Department D1 produces ﬁnal product F1 through a series of processes in three machines
+M1, M2 and M3 in a ﬂow shop. Department D2 produces components, C1 and C2 in a job shop using
+Fig. 2. BOM and BOP structure of end item F1.
+B. Selc- uk et al. / Int. J. Production Economics 104 (2006) 427–440
+Fig. 3. Two-level hierarchical planning structure.
+The proposed hierarchical structure, shown in Fig. 3, follows the frameworks proposed in Bertrand et al.
+(1990) and Schneeweiss (1995). At the top-level of the hierarchical system, an integer linear program is
+solved to determine the optimal production release quantities for each stage. The optimal ﬂow of goods for
+a ﬁxed planning horizon between different production stages is decided. The solution of the top-level has to
+be feasible in terms of the resource constraints at the bottom-level. This is done by employing the
+anticipated version of the base-level within the top-level model. In this model there is an implicit
+nonreactive anticipation, that is, only a part of the base-level is anticipated. The total capacity for each
+stage is aggregated from the individual machine capacities. Together with the lead time estimates, capacity
+consumption by the open release orders has to be estimated in order to anticipate the total available
+At the bottom-level detailed production schedules for the release orders of components and ﬁnal
+products are decided for each of the production stages.
+The ﬂow of goods between different production stages is controlled via timely releases of orders to meet
+their projected internal and external demands. An integer linear program is provided below to serve for this
+function. The formulation follows the supply chain operations management (SCOP) model in De Kok and
+set of items including purchased items, components and ﬁnal products ¼ {1,2, ..., n}
+number of item i needed to produce one item j. i, j A N
+set of end items ¼ {i: aij ¼ 0, 8j ¼ 1,..., n}
+set of purchased items ¼ {j: aij ¼ 0, 8i ¼ 1,..., n }
+production department index, k ¼ 1, ..., K
+B. Selc- uk et al. / Int. J. Production Economics 104 (2006) 427–440
+production or procurement lead time of item i, i A N\P
+Ck ¼ capacity of department k, k ¼ 1, ..., K
+Uk ¼ set of items that are produced in department k, k ¼ 1, ..., K
+Di (t, t + s) ¼ exogenous demand for end item i in period t + s as recorded at the start of period t, tX 1,
+Bi (t, t + s) ¼ backlog of item i at the start of period t + s as recorded at the start of period t, tX1,
+Ii (t, t + s) ¼ inventory level of item i at the start of period t + s as recorded at the start of period t, t X1,
+ri (t, t + s) ¼ quantity of item i released at the start of period t + s as recorded at the start of period t, tX1,
+qi (t, t + s) ¼ resource utilized for item i in period t + s as recorded at the start of period t, tX1, s X 1 – t,
+Note that, Ii(t, t) and Bi(t, t) represent actuals and are inputs for the program. At each iteration of the
+rolling horizon these inputs are computed based on the latest actual demand information and the
+production quantity of each item. In addition, ri(t, t + s) and qi(t, t + s) for 1 – tpso0 represent actuals and
+I i ðt; t þ s þ 1Þ  Bi ðt; t þ s þ 1Þ ¼ I i ðt; t þ sÞ  Bi ðt; t þ sÞ 
+Bi ðt; t þ s þ 1Þ  Bi ðt; t þ sÞpDi ðt; t þ sÞ
+i ¼ 1; . . . ; n; s ¼ 0; . . . ; T þ Li  2
+B. Selc- uk et al. / Int. J. Production Economics 104 (2006) 427–440
+Constraint set (1) balances the material ﬂow between planning periods. It simply equates the total supply to
+the total demand in each period. Constraint set (2) indicates that the quantity backordered at each period
+cannot exceed the external demand of the corresponding item. It guarantees that the backorder of an
+intermediate item cannot be used to meet the internal demands of the higher-level items in the BOM.
+Constraint set (3) provides the ﬂexibility in the quantity produced at each period. Constraint set (4) ensures
+that any release will be produced within its given lead time. Finally, constraint set (5) sets capacity
+restrictions for each department. Constraint set (4) includes the open release orders as an input to the
+production quantity decisions, which, together with constraint set (5), formulates the available capacity
+GFC provides the optimal production orders for every component item and the ﬁnal product over the
+entire planning horizon. As a natural consequence of rolling-horizon method, only the ﬁrst planning
+period’s production decisions are passed to the base-level for detailed scheduling and sequencing on the
+machines. All newly released orders are passed to the bottom-level simultaneously. The scheduling of these
+orders at each machine is done in a random fashion. However, at each planning period, there may also be
+already existing orders from the previous periods still waiting to be processed. The newly released orders
+are scheduled after the already existing orders, that is, when we consider multiperiod schedules there is a
+The scheduling strategy for the machines in the production departments is a nonpreemptive undelayed
+schedule. Once the processing of a job is initiated it cannot be stopped before its completion, and no
+machine is kept idle as long as there are available orders and available materials to be processed.
+We applied a ‘‘lot-for-lot’’ lot sizing strategy; the items produced within an order are not booked into
+available inventory until the entire production lot has been processed. This is done in order to be consistent
+with the top-level model’s material balance assumption. Accordingly, lot splitting is not allowed.
+In this two-stage production system, the component items are produced in a general job shop where the
+ﬁnal products are produced in a ﬂow shop. Therefore, the queueing of release orders in both the ﬁnal
+products and component items production plays an important role in determining the production lead
+times. Especially in the ﬂow shop case, also due to the ‘‘lot-for-lot’’ assumption, both the effective
+production capacity and the lead times largely depend on how orders are sequenced in front of the
+machines. In a ﬂow shop, an order with a large lot size delays the production of the following orders and
+generates a temporary bottleneck in the system.
+The plan of GFC and its actual execution may deviate from each other because of the detailed
+characteristics of the shop ﬂoor that cannot be seen at the GFC, such as queueing of orders in front of
+the machines, uncertainty in processing times, etc. As a result, feedback from the shop ﬂoor is needed
+(e.g. realized lead times, open release orders, produced quantities) so that more realistic anticipation of the
+base-level can be done at the top-level. The modules attached to the anticipation function (see Fig. 3) use
+the most recent information generated by the execution of past decisions. The proposed ﬂow diagram for
+the solution procedure based on the above hierarchical structure is given in Fig. 4.
+For the sake of simplicity and tractability of the results, only the ﬁnal product lead times are updated
+where Li;t is the lead time estimation of end item i in period t, Li;t1 the realized lead time of end item i in
+period t1, and a the smoothing constant. The realized lead time of an order is exactly the time elapsed
+B. Selc- uk et al. / Int. J. Production Economics 104 (2006) 427–440
+Fig. 4. Flow diagram for the multiperiod planning procedure.
+between the release of that order to the shop ﬂoor and its completion time. However, updating lead times
+can cause infeasibility for aggregate planning. We solve this problem by a resource allocation mechanism
+(RAM), which is the subject of the following subsection.
+In a similar manner the demand forecasts are updated at every replanning by exponential smoothing:
+where D^ i;t1 is the demand estimation of end item i in period t, Di;t the realized demand of end item i in
+period t1, and b the smoothing constant.
+A signiﬁcant concern about lead times update is that the aggregate model can become infeasible
+because the current lead time assumption is not long enough to capture the capacity requirements
+of the past released quantities. This effect becomes obvious when we look at the constraint sets (4) and (5)
+of GFC formulation. Let us consider a single item iAUk where C k ¼ 500 min and pik ¼ 5 min. In the
+current period the lead time estimation, L^ i;t ¼ 6 periods, which, in the aggregate plan, utilizes availability of
+resources for a release of item i during six periods. Let us say that 600 units of item i are released,
+ri ðt; tÞ ¼ 600, and the associated process quantity, qi ðt; tÞ ¼ 100 units. Let us assume that in the next
+replanning, L^ i;tþ1 ¼ 3 periods. Then the GFC becomes infeasible due to the interrelation between the
+B. Selc- uk et al. / Int. J. Production Economics 104 (2006) 427–440
+ri ðt þ 1; t þ 1Þ  qi ðt þ 1; t þ 1Þ  qi ðt þ 1; t þ 2Þ  qi ðt þ 1; t þ 3Þp  500,
+This problem can be solved by a resource allocation mechanism. The main purpose here is to allocate scarce
+capacity among the open orders in order to obtain maximum utilization. The gain obtained by the
+utilization of a unit of capacity for a speciﬁc item is directly proportional to the dollar value of the current
+backorder level of that item and inversely proportional to the unit processing time of that item. Such a
+resource allocation mechanism where all the items share a common capacity can be formulated as an
+where k is the department that is in short of capacity at period t. bi , pi , U k , Bi ðt; tÞ, qi ðt; tÞ, and C k are as
+Integer knapsack problems can be solved to optimality by dynamic programming techniques. However, in
+the problem above, the weights of qi ðt; tÞ, 8i 2 U k are all equal in the constraint (16)
+simple optimal solution: Assign all the capacity to a single item with the highest bi Bi ðt; tÞ=pi value.
+The production system consists of two departments (manufacturing centers), one job shop that produces
+component items and one ﬂow shop that produces ﬁnal products. Through its ﬂexible routing structure job
+shop generates a smooth production of components with less variation in lead times and work in process
+levels. Flow shop, a shop structure that is more suitable for ﬁnal item assembly, can be problematic
+especially under high level of variation in demand. Each department consists of three machines (processing
+cells) with identical unit processing time distribution. Table 1 provides a list of items together with their
+parent-child relationships and routing information.
+The planning horizon is divided into weekly buckets. A rule of thumb commonly seen in the practitioner
+literature is that planning horizon for master schedules should be at least as long as the cumulative
+manufacturing plus procurement lead time (i.e., the critical path in the bill of material). The purchase
+orders are assumed to be replenished from an ample stock within the same week. The job shop utilization is
+subject to experimental design where 65% and 80% utilizations are considered separately. Both cases give
+an average lead time of 1 week for each component. The ﬂow shop utilization is kept ﬁxed at the level of
+65%. The ﬁnal product lead times are however dynamic and updated regularly. The minimum ﬁnal product
+B. Selc- uk et al. / Int. J. Production Economics 104 (2006) 427–440
+lead time is 1 week. Therefore, we used a planning horizon of 10 weeks to capture the possible increases in
+the estimated lead times of ﬁnal products.
+Relying on the terminology deﬁned previously the initiation of the variables are as follows: D^ i;1 ¼ 400,
+Bi ð1; 1Þ ¼ 0, I i ð1; 1Þ ¼ Lcum  D^ i;1 ¼ 400, 8i 2 E; Bi ð1; 1Þ ¼ I i ð1; 1Þ ¼ 0, 8i 2 N\E. The initial backorders
+for all ﬁnal products are set to zero and the initial inventories of the ﬁnal products are equal to the average
+demand during the initial cumulative lead time assumption ðLcum Þ in order to smooth the effects of
+increasing backorders during the ﬁrst few weeks of the simulation. The initial backorders and inventories of
+all other items are set to zero, and they do not have external demand. The forecast update parameters are;
+b ¼ 0:2, and a ¼ 0:2. Such a small value of a avoids big jumps and provides smoothed estimations of lead
+The experimental design conducted in this study is described in Table 2. There are four factors with 36
+treatments in total. The ﬁxed lead times for ﬁnal products are of two-fold; zero lead times and greater than
+zero lead times. In the zero lead times case GFC module assumes that production orders will be completed
+within the period that they are released. However, the actual system characteristics are maintained, since
+our aim is to quantify the effects of different design approaches. Greater than zero lead times are those that
+will be seen in the idealistic situation. For example, in the ﬂow shop, due to the shop settings deﬁned
+previously, each of the ﬁnal products has two weeks of average lead time in a completely deterministic
+environment. Such a ﬁxed lead time approach is also applied by Billington et al. (1983) in a LP formulation
+B. Selc- uk et al. / Int. J. Production Economics 104 (2006) 427–440
+Other experimental design factors are due to the system characteristics. The subassembly capacity or the
+capacity used for the production of components can be ﬁnite or inﬁnite. In the earlier case utilization can be
+either low, 65%, or high, 80%. Low utilization is achieved by an Erlang(9, 9/4) distributed unit processing
+times of each machine in the job shop. High utilization shop has Erlang(9, 9/5) distributed unit processing
+times per machine. The inﬁnite capacitated case is abbreviated by 0% utilization. The machines in the ﬂow
+shop possess Erlang(9, 9/8) unit processing times. Besides, environmental uncertainty is considered via
+coefﬁcient of variation of demand, dD where dD ¼ 0:2 comes from an Erlang(25, 0.0625) distribution, and
+dD ¼ 0:5 comes from an Erlang(4, 0.01) distribution. The relevance of backorder costs to inventory costs is
+analyzed to see the effect of cost structure.
+Full factorial design is employed where a total of 36 different experimental designs are simulated in 10
+repetitions, each during 1000 weeks, with different random number generators. To make the analysis more
+reliable common random numbers are used between different experimental designs.
+In Fig. 5 total periodic costs are smoothed according to the Welch’s procedure, as described in detail in
+Law and Kelton (2000), in order to deﬁne the warm-up period of the simulations. The values are based on a
+single experimental design setting where similar pattern follows for the other settings too.
+where Sk is the smoothed average, TCi,r the total cost for period i in iteration r, and Er[TCi,r] the expected
+total cost for period i over all iterations. m is a constant used to determine the number of values to be
+considered within single smoothed average. We chose m ¼ 200. The system reaches its steady state after
+approximately the 150th period. Therefore the statistical analysis is based on the results between the 151st
+Fig. 5. Smoothed graph of total periodic cost for dD ¼ 0:5, r ¼ 0%, and g ¼ 10.
+B. Selc- uk et al. / Int. J. Production Economics 104 (2006) 427–440
+We aim to ﬁnd insights on how to set the lead time as a parameter in your planning tool. The effects of
+different approaches are determined by this simulation study. The performance evaluations are done
+according to the average periodic total cost. In addition, instability arises as an important concern in the
+updated lead times approach. Here, we deﬁne instability as the occurrence of very large lead time
+estimations that extend beyond planning horizon. Table 3 provides the average performance results, note
+that the instability is denoted by N, and variable lead time is denoted by t~ .
+A strong declaration about the best lead time strategy is not possible as seen in the results. However, we
+can still make some general remarks. For example, it is not efﬁcient to employ an adaptive planning system
+when there is too much noise in the production system itself and its environment. The updated lead times
+put additional variability in the manufacturing activities that aggravates already difﬁcult situation.
+However, in some settings as in the case of 65% component production utilization, which we call settings
+with moderate variability, updating lead times performs best. Increasing the variability in the system in that
+sense works in favor of system performance; especially under expensive backorder cost assumption the
+improvement is impressive. This observation contradicts with the common belief that considers system
+variability as a cost-generating phenomenon. Here, the noise is not a structural part of the system under
+observation, but created by the planner through dynamic estimates of lead times. Different actual lead time
+patterns depending on the planned lead time estimates are depicted in the ﬁgures below.
+Fig. 6 clearly states the lead time inﬂation in the system due to the dynamic lead time estimates. Such a
+phenomenon is conceptually deﬁned in the literature as ‘‘lead time syndrome’’. Bigger lead times incur
+larger orders to be released to the ﬂow shop which cause temporary bottlenecks to occur. As a natural
+result capacity losses can occur due to ﬂow shop structure causing bigger lead times in the system, and the
+lead times provokes each other. Therefore, we can state that adaptive planning systems are not suitable for
+situations when there are signiﬁcant contingencies in the environment, such as material starvation, demand
+When material starvation effect is weak, generating a ‘‘moderate’’ noise in the system, then the actual
+lead time realizations follow a stable pattern as seen in Fig. 7. In order to improve the visibility of the ﬁgure
+by a smooth pattern, moving averages with sample size of 10 are displayed instead of the actual lead time
+values. The coefﬁcient of variations of actual lead times under different planned lead time strategies are:
+CVðt ¼ 0Þ ¼ 0:57, CVðt40Þ ¼ 0:98, CVð~tÞ ¼ 0:92. It should be noted that updating lead times does not
+cause additional variability in the system when compared to ﬁxed and greater than zero-planned lead times.
+Besides, it results in better cost performance. Recall from the GFC formulation in the previous sections that
+the capacity allocated for an order is limited by the planned lead times, which in turn affects the release
+quantities. A small value for the lead time estimation means a tighter upper bound, and a large value for
+% improvements over average periodic costs of t ¼ 0
+B. Selc- uk et al. / Int. J. Production Economics 104 (2006) 427–440
+Fig. 6. Actual lead time occurrences, r ¼ 80%, dD ¼ 0:5, g ¼ 10.
+Fig. 7. Actual lead time patterns, r ¼ 65%, dD ¼ 0:5, g ¼ 10.
+B. Selc- uk et al. / Int. J. Production Economics 104 (2006) 427–440
+planned lead time means a more relaxed upper bound for the release quantities. Dynamic planned lead
+times in that sense provide the planning ﬂexibility resulting in better cost performance.
+In this study we analyzed the effect of updating lead times on the performance of hierarchical planning
+systems in a dynamic and stochastic setting. By using discrete event simulation we showed that under
+‘‘realistic’’ conditions updated lead times policy causes unavoidable increase in lead times and, as a result,
+unstable, inefﬁcient decision making. However, for settings with low degree of variability lead time update
+Speciﬁcally, a robust determination of the best lead time strategy, among the ones proposed in this paper,
+is not available. Dynamic planned lead times do provide the planning ﬂexibility for the order release
+mechanism but on the other hand are too sensitive to random ﬂuctuations in the system. For situations
+with high number of uncertainties, this effect becomes even intolerable, due to huge lead time occurrences.
+As a result, for realistic, two-stage production systems one should pay special attention to internal stability
+problems if he is to update the planned lead times.
+To sum up, the performance of hierarchical planning systems largely depends on the correct parameter
+setting. As an alternative, the concept of adaptive hierarchical planning systems has been recognized over a
+decade. However, there are still very few studies on this appealing approach. This study provides the
+opportunities and threats of adaptive lead times strategy and points out future research directions such as:
+The modeling of a robust adaptive lead time strategy that is stable and at the same time provides the
+The detailed analysis of the trade off between being stable and being adaptive, including the effect of
+Axsäter, S., Jonsson, H., 1984. Aggregation and disaggregation in hierarchical production planning. European Journal of Operational
+Bertrand, J.W.M., Wortmann, J.C., Wijngaard, J., 1990. Production control: A structural and design oriented approach. Elsevier,
+Billington, P.J., McClain, J.O., Thomas, L.J., 1983. Mathematical programming approaches to capacity-constrained MRP systems:
+Review, formulation and problem reduction. Management Science 29, 1126–1141.
+Bitran, G.R., Hax, A.C., 1977. On the design of hierarchical production planning systems. Decision Sciences 8, 28–55.
+Chung, C.H., Krajewski, L.J., 1987. Interfacing aggregate plans and master schedules via a rolling horizon feedback procedure.
+OMEGA International Journal of Management Science 15 (5), 401–409.
+De Kok, A.G., Fransoo, J.C., 2003. Planning supply chain operations: Deﬁnition and comparison of planning concepts. In: De Kok,
+A.G., Graves, S.C. (Eds.), OR Handboook on Supply Chain Management. Elsevier, Amsterdam, pp. 597–675.
+Dempster, M.A.H., Fisher, M.L., Jansen, L., Lageweg, B.J., Lenstra, J.K., Rinnooy Kan, A.H.G., 1981. Analytical evaluation of
+hierarchical planning systems. Operations Research 29 (4), 707–716.
+Gelders, L.F., Van Wassenhove, L.N., 1982. Hierarchical integration in production planning: Theory and practice. Journal of
+Graves, S.C., 1982. Using lagrangian techniques to solve hierarchical production planning problems. Management Science 28,
+Hax, A.C., Meal, H.C., 1975. Hierarchical integration of production planning and scheduling. In: Geisler, M.A. (Ed.), Logistics.
+Karmarkar, U.S., 1987. Lot sizes, lead times and in-process inventories. Management Science 33 (3), 409–418.
+Law, A.M., Kelton, W.D., 2000. Simulation Modeling and Analysis, third ed. McGraw-Hill, New York.
+B. Selc- uk et al. / Int. J. Production Economics 104 (2006) 427–440
+McKay, K.N., Safayeni, F.R., Buzacott, J.A., 1995. A review of hierarchical production planning and its applicability for modern
+manufacturing. Production Planning & Control 6 (5), 384–394.
+Rohde, J., 2004. Hierarchical supply chain planning using artiﬁcial neural networks to anticipate base-level outcomes. OR Spectrum
+Schneeweiss, C., 1995. Hierarchical structures in organisations: A conceptual framework. European Journal of Operational Research
+Vig, M.M., Dooley, K.J., 1991. Dynamic rules for due date assignment. International Journal of Production Research 29 (7),
+Zijm, W.H.M., Buitenhek, R., 1996. Capacity planning and lead time management. International Journal of Production Economics

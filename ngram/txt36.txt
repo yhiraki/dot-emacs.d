@@ -1,0 +1,690 @@
+What You Should Know About Approximate Dynamic Programming
+Department of Operations Research and Financial Engineering, Princeton University,
+Received 17 December 2008; accepted 17 December 2008
+Published online 24 February 2009 in Wiley InterScience (www.interscience.wiley.com).
+Abstract: Approximate dynamic programming (ADP) is a broad umbrella for a modeling and algorithmic strategy for solving
+problems that are sometimes large and complex, and are usually (but not always) stochastic. It is most often presented as a method
+for overcoming the classic curse of dimensionality that is well-known to plague the use of Bellman’s equation. For many problems,
+there are actually up to three curses of dimensionality. But the richer message of approximate dynamic programming is learning
+what to learn, and how to learn it, to make better decisions over time. This article provides a brief review of approximate dynamic
+programming, without intending to be a complete tutorial. Instead, our goal is to provide a broader perspective of ADP and how it
+should be approached from the perspective of different problem classes. © 2009 Wiley Periodicals, Inc. Naval Research Logistics 56:
+Keywords: approximate dynamic programming; reinforcement learning; neuro-dynamic programming; stochastic optimization;
+There is a wide range of problems that involve making
+decisions over time, usually in the presence of different forms
+of uncertainty. Using the vocabulary of operations research
+(which hardly owns this broad problem class), we might
+describe our system as being in a state St , from which we
+take an action xt and then observe new information Wt+1
+which takes us to a new state St+1 . We can represent our rule
+(or policy) for making a decision using the function X π (St ).
+Most of the time, we can assume that we have a transition
+function S M (·) (also known as the “system model” or sometimes just “model”) which describes how a system evolves
+from St to St+1 . The dynamics of our problem can then be
+We assume that there is a choice of decision functions X π
+where π ∈  designates a particular function or policy (we
+use decision function and policy interchangeably). After we
+make a decision xt , we assume we earn a contribution (cost if
+we are minimizing) given by C(St , xt ) which usually depends
+on the state. In some settings, the contribution depends on
+Correspondence to: W.B. Powell (powell@pinceton.edu)
+Wt+1 , in which case it would be written C(St , xt , Wt+1 ). Our
+goal is to ﬁnd the best policy π ∈  that solves
+where γ is a discount factor. We need an expectation because
+the information variable Wt is random (at times before
+This simple framework covers a wide variety of problems.
+There has been a desire among some in the research community to design a general solution framework that covers all
+problems, but we are quite sure that this is going to prove fruitless. What has happened is that there have emerged fairly distinct subcommunities that work on problems that tend to share
+certain empirical characteristics. Somewhat frustratingly,
+these communities have also developed different vocabularies and different notational systems. The three major communities are control theory, which includes mainstream engineering (e.g., electrical, mechanical, and chemical) as well
+as economics, artiﬁcial intelligence (primarily computer science), and operations research. Operations research spans different subcommunities that work on stochastic optimization,
+including the Markov decision process community (whose
+notation has been adopted by the artiﬁcial intelligence community), stochastic programming (a subcommunity of math
+programming that considers uncertainty), and the simulation
+community, which approaches stochastic optimization from
+These communities have evolved a rich vocabulary reﬂecting the different domains in which the work takes place. In
+operations research, the state variable is denoted St and is
+most often understood to represent the physical state of the
+system. In control theory, a state is xt which might refer to
+the physical state of a production plant, the location, velocity,
+and acceleration of an aircraft, or a vector of parameters characterizing a statistical model. We use St as our state, xt as our
+action, and Wt+1 as the information arriving between t and
+t + 1. In the dynamic programming community, it is customary to use the one-step transition matrix p(s  |s, x) which is
+the probability that we transition to state s  given that we are
+currently in state s and take action x. In the controls community, it is more natural to use the transition function S M (·),
+which describes the physics of how the state evolves over
+Given the diversity of applications, it should not be surprising that there is more than one way to approach solving
+the optimization problem in Eq. (3). The most important of
+Simulation-optimization – Here we assume that our
+decision function X π (St ) depends only on what we
+know now, and makes no attempt to use any sort of
+forecast of how decisions now might impact the future.
+These are generally known as myopic policies, and often
+these depend on a set of parameters. We want to ﬁnd
+the set of parameters that perform the best over many
+realizations of the future. Choosing the best set of parameters is typically done using the tools of stochastic
+search [] and the closely related ﬁeld of simulation
+Recognizing that all three approaches can be valid ways
+of solving a stochastic optimization problem, approximate
+dynamic programming speciﬁcally focuses on using Bellman’s equation.
+The remainder of this article provides a brief introduction
+to the very rich ﬁeld known as approximate dynamic programming (ADP). As of this writing, there are three books
+dedicated to this topic, each representing different communities. Neuro-Dynamic Programming [] is a primarily theoretical treatment of the ﬁeld using the language of control
+theory; Reinforcement Learning [] describes the ﬁeld from the
+perspective of artiﬁcial intelligence/computer science; and
+Approximate Dynamic Programming [] uses the language
+of operations research, with more emphasis on the highdimensional problems that typically characterize the problems in this community. Judd [] provides a nice discussion of
+approximations for continuous dynamic programming problems that arise in economics, and Haykin [] is an in-depth
+treatment of neural networks, with a chapter devoted to their
+use in dynamic programming. We do not have the space to
+cover all these perspectives, and focus instead on issues that
+tend to arise in applications from operations research.
+From the seminal work of Bellman [] to Puterman []
+and including numerous authors in between, the ﬁeld that
+is typically referred to as Markov decision processes writes
+Bellman’s equation in the form given in Eq. (4), which we
+refer to as the standard form of Bellman’s equation. For our
+purposes, it is more convenient (but mathematically equivalent) to write Bellman’s equation using the expectation form
+Vt (s) = max(C(St , xt ) + γ E{Vt+1 (St+1 )|St = s}).
+Rolling-horizon procedures – A RHP (sometimes called
+a receding-horizon procedure) uses either a deterministic or stochastic forecast of future events based on what
+we know at time t. We then use this forecast to solve a
+problem that extends over a planning horizon, but only
+implement the decision for the immediate time period.
+Dynamic programming – Dynamic programming makes
+decisions which use an estimate of the value of states
+to which an action might take us. The foundation
+of dynamic programming is Bellman’s equation (also
+known as the Hamilton-Jacobi equations in control
+theory) which is most typically written []
+where St+1 = S M (St , xt , Wt+1 ), and the expectation is over
+the random variable Wt+1 . Vt (St ) is the value function (in
+control theory this is represented by J and is called the costto-go function) which gives the expected value of being in
+state St at time t and following an optimal policy forward.
+We index the value functions by time which is appropriate for
+ﬁnite-horizon models. We use a ﬁnite-horizon model because
+it makes the modeling of information (and randomness) more
+explicit, especially when we use the expectation form.
+The standard presentation in dynamic programming texts
+(e.g., Puterman []) is that the state space is discrete and can
+be represented as S = (1, 2, . . . , |S|). This is known in the
+artiﬁcial intelligence community as a ﬂat representation [].
+The “textbook” solution to dynamic programming assumes
+Vt+1 (s) is known and computes Vt (s) for each s ∈ S. Since
+this step requires stepping backward through time, this is
+often referred to as backward dynamic programming.
+Figure 1. A generic approximate dynamic programming algorithm using a lookup-table representation.
+If St is a discrete, scalar variable, enumerating the states is
+typically not too difﬁcult. But if it is a vector, then the number
+of states grows exponentially with the number of dimensions.
+If St is continuous (even if it is scalar), then we cannot use this
+strategy at all. The essence of approximate dynamic programming is to replace the true value function Vt (St ) with some
+sort of statistical approximation that we refer to as V̄t (St ), an
+The second step in approximate dynamic programming is
+that instead of working backward through time (computing
+the value of being in each state), ADP steps forward in time,
+although there are different variations which combine stepping forward in time with backward sweeps to update the
+value of being in a state. Continuing to use our ﬁnite-horizon
+model, we are going to start with a given state S0 and follow a particular sample path ω ∈ . We are going to do this
+iteratively, so assume we are about to start iteration n. After
+iteration n − 1, we have an approximation V̄tn−1 (St ). We use
+this approximation to make decisions while we are following
+the nth sample path ωn . This means that our decision function
+Note that this provides us with a speciﬁc deﬁnition of
+what is meant by a policy π. In this setting, the policy is
+determined by the value function approximation V̄t+1 (St+1 ),
+which means the policy space  is the set of all possible value
+Let xtn be the value of xt that solves this problem, and let
+be a sample estimate of the value of being in state Stn . Thereare numerous ways to approximate a value function, and as
+a result there are many ways to estimate a value function
+approximation. But the simplest approximation is known as
+a lookup table, which means that for each discrete state s, we
+have an estimate V̄t (s) which gives the value of being in state
+s. If we are using a lookup-table representation, we would
+V̄tn Stn = (1 − αn−1 )V̄tn−1 Stn + αn−1 v̂tn .
+Here, αn−1 is known as a stepsize, since Eq. (8) can be derived
+from a type of stochastic optimization algorithm (see Ref. ,
+Chapter 6 for a more detailed discussion). More on this later.
+Figure 1 summarizes a generic ADP algorithm. Note that
+it steps forward in time, and at no point does it require that
+we enumerate all the states in the state space, as is required in
+classical backward dynamic programming. On the surface, it
+seems as if we have eliminated the curse of dimensionality.
+The algorithm in Fig. 1 serves as a reference point for all
+the research that takes place in the approximate dynamic programming literature. Although it is nice to eliminate the need
+to enumerate states, this algorithm is unlikely to work for any
+problem that cannot already be solved exactly. First, while we
+do not explicitly enumerate all the states, we need an approximation of the value of being in any state that we might visit.
+Although this limits us to states that are visited, and any state
+that might be visited from any state that is actually visited,
+Second, this algorithm only updates the values of states
+that we actually visit. Assume these values are positive, and
+that our initial approximation uses zero. This means that any
+state that we do not actually visit will keep a value of zero.
+Once we visit a state (presumably raising its value), we are
+more inclined to take actions that might take us back to this
+state. This means we have to ﬁnd a way to visit states just to
+There are other problems. While we may have created the
+appearance of solving the curse of multidimensional state
+variables, we still may have a problem with multidimensional information variables. Consider a problem of managing inventories for P product types, where Stp is the number
+of units of product p. Now let D̂tp be the random demand
+for product p at time t, where demands may be correlated.
+Finding the expectation over the multivariate distribution of
+the vector Dt now becomes computationally intractable. This
+Finally, consider what happens when xt is a vector. Let xtp
+be the number of products of type p that we are ordering,
+so xt is now a vector. If we actually were using a lookuptable representation for a value function, the only way to
+solve the optimization problem in Eq. (6) is to enumerate
+the action space. When xt is a vector, the number of potential actions grows just as it does for the state space. This
+is the third curse of dimensionality. A separate but related
+issue arises when states, information, and actions are continuous. This introduces issues even when these variables
+are scalar. Interestingly, approximate dynamic programming
+handles multidimensional discrete variables as if they are
+Before we progress too far, it is important to address the
+three curses of dimensionality, beginning with state variables.
+We begin by noting that the so-called curse of dimensionality is really an artifact of ﬂat representations. If the state St is
+a multidimensional vector of discrete variables, it is almost
+never going to be practical to list out all possible combinations
+of the state variable in a single list (the ﬂat representation).
+Instead, it is much better to retain the original structure of
+the state variable, something that the artiﬁcial intelligence
+community refers to as a factored representation [].
+State variables can be a mixture of discrete, continuous,
+and categorical values. Assume for the moment that all the
+elements of the state variable are numerical (discrete or continuous). The ﬁrst trick that is widely used to overcome
+multidimensional variables is to simply treat the vector St
+as continuous. For example, imagine that Sti is the number
+of units of product of type i. We might then approximate the
+This is a very simple approximation that assumes that the
+behavior of the value function is linear in the number of units
+of product. The parameter θi captures the marginal value of
+products of type i. Now, with just |I| parameters, we have a
+value function that covers the entire state space. Of course,
+this particular approximation architecture (linear in St ) may
+not provide a very good approximation, but it hints at the
+basic strategy for overcoming the curse of dimensionality.
+Section 4 deals with value function approximations in more
+The second problem is the expectation. There are many
+real-world problems where the random information is a large
+vector of prices and demands, making it computationally
+impossible to compute the expectation exactly. It is possible to approximate the expectation by using a sample, but
+this can complicate the optimization problem when xt is a
+There are many problems where the decision is fairly simple (what price to charge, what quantity should be ordered),
+but there are also problems where xt is a potentially high
+dimensional vector. How do I allocate my workforce to different assignments around the world? Which drug treatments
+should I test? When xt is a vector, then we have to draw
+on the ﬁeld of mathematical programming, whether it be
+linear or nonlinear programming, integer programming, or
+a messy combinatoric problem that requires your favorite
+An elegant way to circumvent the imbedded expectation is
+to use a concept called the post-decision state variable. The
+post-decision state captures the state of the system immediately after we make a decision but before any new information
+has arrived. This means that the post-decision state is a deterministic function of St (also known as the pre-decision state)
+To our knowledge, the term “post-decision state” was ﬁrst
+introduced in Ref. , but the concept has been widely used,
+although without much attention given to its importance to
+handling problems that exhibit vector-valued decision, information, and state variables. Judd [] refers to the post-decision
+state as the end-of-period state, whereas in the reinforcement
+learning community, it is called the after-state variable [].
+The decision tree literature has used it extensively when it
+breaks down problems into decision nodes (which represent pre-decision states) and outcome nodes (which represent post-decision states). We have found that when dealing
+with vector-valued decision, information and state variables
+(the three curses of dimensionality), the post-decision state
+Since we are using xt as our decision variable, we let Stx
+represent our post-decision state variable. We assume that we
+are given a deterministic function S M,x (St , xt ) that returns Stx .
+Examples of post-decision state variables include
+Tic-tac-toe – The pre-decision state is the board just before
+we make our move. The post-decision state is the board
+immediately after we make our move, but before our
+Inventory problems – Classical inventory problems are
+described using the equation St+1 = max{0, St + xt −
+D̂t+1 } where St is a scalar giving the amount of inventory, xt is the new product we have just ordered and
+D̂t+1 is the random demand (unknown at time t). St is
+the pre-decision state. We would write Stx = St + xt as
+Blood management – Let Rti be the number of units of
+blood of type i, and let Dtj be the demand for blood
+of type j . For our illustration, assume that unsatisﬁed
+demands are lost to our system (they obtain blood supplies elsewhere). Our state variable would be St =
+(Rt , Dt ). Let xtij be the number of units of blood supply
+of type i that are assigned to demands of type j . The
+Since unsatisﬁed demands are lost, our post-decision
+It takes some time to get used to deﬁning the post-decision
+state. The most important feature is that it has to be a deterministic function of St and xt . This does not prevent us from
+using a forecast of future information. For example, let R̂t+1,i
+be a random variable giving us the donations of blood that
+arrive between t and t + 1. Now let R̄t,t+1,i be a forecast of
+what will be donated between t and t + 1. Of course, this
+forecast is known at time t, and is based on information that
+arrived before time t. We can write the post-decision state
+Another form of post-decision state variable is Stx = (St , xt ),
+which is a concatenation of the pre-decision state and the
+decision vector. For problems in operations research, this
+looks hopelessly clumsy. However, this is precisely what is
+done in a branch of the reinforcement learning community
+that uses a concept known as Q-learning which focuses on
+learning the value of being in a state St and taking an action xt .
+Once we have deﬁned our post-decision state, we then
+have to ﬁt our value function approximation around the postdecision state instead of the pre-decision state. Let V̄tx,n (Stx )
+be our estimate of the value of being in post-decision state
+after n observations. If we are using a lookup-table representation (one value per state), then instead of using the update
+Comparing Eqs. (8) and (10), we see that the update is almost
+the same, except that we use v̂tn (measured at time t) to update
+post-decision state variable St−1 . We note that the smoothing
+(·) represents the step where we approximate
+the expectation. This means that we make decisions using
+X π Stn = max C Stn , xt + γ V̄tx,n−1 Stx .
+Note that the right hand side of Eq. (11) is deterministic
+(everything is indexed by t). This makes it much easier to
+use the large library of solvers for deterministic problems. We
+just have to use some care when designing the value function
+approximation. For example, if maxxt C(Stn , xt ) is a linear
+program, then we would ideally like to choose an approximation architecture for V̄tx,n−1 (Stx ) that does not destroy this
+structure. If it is a concave nonlinear program (note that we are
+maximizing), then the value function approximation should
+retain concavity (and perhaps differentiability). Lookup-table
+representations can only be used if our search procedure is
+The post-decision state variable provides at least a path
+for solving problems which can handle vector-valued states,
+information, and decisions. This returns us to the central
+challenge of approximation dynamic programming which is
+designing and estimating the value function approximation.
+Central to approximate dynamic programming is the use of
+an approximation of the value function for making decisions.
+The holy grail of ADP is to deﬁne an approximation strategy that works for any problem, without tuning. Since we
+have not reached this goal, we tend to seek approximation
+strategies that work for the broadest possible classes. Below,
+we describe three very general strategies, but recognize that
+ADP remains an art form which requires taking advantage of
+Aggregation is a powerful technique that requires perhaps
+the least amount of problem structure among the family of
+statistical tools available. We assume that we have a state
+variable St that is usually multidimensional, and may include
+discrete, continuous, and categorial elements. We are going to
+make no assumptions about the behavior of the value function
+itself (e.g., concavity, monotonicity, or even continuity). But
+we are going to assume that there is a natural way to aggregate
+the state space into successively coarser representations.
+Let S be the original state space, and let S (g) be the state
+space at the gth level of aggregation. Let Gg be a function
+mapping S to S (g) , and let G be the set of indices corresponding to the levels of aggregation. We assume that g = 0 is the
+most disaggregate level, but even at this level we assume the
+state space has been aggregated into a set of discrete values.
+But the number of possible aggregated values may be too
+large to enumerate (even at higher levels of aggregation).
+Our value function approximation estimates a single value
+for a discrete state s at each level of aggregation, but these values are only updated for states that we actually visit. Assume
+that we are at time t, iteration n and we are visiting state Stn
+where the value of being in this state is given by v̂tn [see Eq.
+(s) be an estimate of the value of being in
+state s at the gth level of aggregation. This is updated using
+We note that the stepsize αn−1 is not just a function of the
+iteration counter, but is typically a function of the number
+of times that we have visited a particular state at a particular
+Aggregation has been widely used to overcome the problem of large state spaces (see Ref. for a review). The most
+common strategy is to choose a single level of aggregation, which raises the issue of determining the right level of
+aggregation. The problem with aggregation is that the right
+level changes with the number of times you observe a set of
+states. Some authors have suggested changing the level of
+aggregation with the number of iterations [, ].
+A more ﬂexible strategy is to use a weighted sum of
+estimates from different levels of aggregation, given by
+estimates in inverse proportion to the total variation of the
+where σ̂ 2 (s))(g,n) is an estimate of the variance of the observations of state s after n iterations, at the gth level of aggregation. N g,n (s) is the number of times we have observed state
+s at the gth level of aggregation, and µ̄(g,n) (s) is an estimate
+of the bias between the value at the gth level of aggregation,
+and the more disaggregate level (g = 0). σ̂ 2 (s)(g,n) /N g,n (s)
+is an estimate of the variance of V̄ (g,n) (s) which declines as
+we have more observations of state s. If there are states that
+we do not visit very often, the variance tends to remain high
+because of this term. If we visit a state many times, the total
+variation may decline considerably, or it may remain high if
+our estimate of the bias remains high. The weights are then
+normalized so they sum to one. The computations are quite
+simple, and requires only that we accumulate some statistics
+for every state we visit, at each level of aggregation (see Ref.
+, Section 7.1. for a complete presentation).
+This strategy is very easy to implement, and scales to very
+large problems. If a state has never been observed at a particular level of aggregation, then it is simply assigned a weight of
+zero. This logic tends to put higher weights on more aggregate
+estimates early in the process. As there are more observations for certain states, the weight put on the disaggregate
+levels increases, although generally not for all states. The
+effect of this logic is shown in Fig. 2, which displays the
+objective function if the value function is approximated at a
+single aggregate level, a single disaggregate level, or using
+a weighted combination of both levels of aggregation with
+weights given by Eq. (14). The aggregate value function gives
+Note that the weight we put on the gth level of aggregation
+depends on both the iteration counter and the state. Since
+there are many states, this means that we have to estimate
+a large number of weights. A simple strategy is to weight
+Figure 2. The weights given to two levels of aggregation, showing
+how they put increasingly more weight on disaggregate estimates as
+more information becomes available. [Color ﬁgure can be viewed in
+the online issue, which is available at www.interscience.wiley.com.]
+faster initial convergence, while the disaggregate estimates
+give a better overall solution, but the weighted combination
+Perhaps the most widely publicized strategy for approximating value functions is to capture important quantities from
+the state variable, and build an approximation around these
+quantities. These quantities are captured using basis functions, φf (s), f ∈ F where f is referred to as a feature, and
+φf (s) is a function that captures some particular quality from
+the state variable that is felt to provide explanatory power. We
+This is referred to as a linear model because it is linear in the
+parameters. The basis functions may capture different types
+of nonlinear behaviors. Returning to our product management
+application where Sti is the number of units of product type
+i, we might start with basis functions φf (St ) = (Sti )2 (one
+feature per product type), and φf (St ) = Sti Stj (one feature
+The challenge now is estimating the parameter vector θ .
+A simple strategy is to use a stochastic gradient algorithm,
+θ n = θ n−1 − αn−1 V̄t Stn |θ n−1 − v̂tn ∇θ V̄t Stn |θ n−1
+This method requires that we start with an initial estimate
+θ 0 , after which θ is updated following each observation v̂tn ,
+typically calculated using Eq. (7). This method of updating
+θ is popular because it is simple, but it can be unstable. One
+challenge is that the stepsize α has to be scaled to handle
+the difference in units between θ and the gradient, but it may
+be necessary to use different scaling factors for each feature. More effective algorithms use recursive least squares
+(described in Refs. , , Chapter 7). The Kalman ﬁlter is a particularly powerful algorithmic framework, although it is more
+difﬁcult to implement (see Ref. for a nice discussion).
+Basis functions are appealing because of their relative simplicity, but care has to be put into the design of the features.
+It is tempting to make up a large number of functions φf (S)
+and throw them into the model, but putting some care into
+the choice of functions is generally time well spent. The
+challenge with any choice of basis functions is demonstrating
+that they actually contribute to the quality of the solution.
+It is important to draw on the widest possible range of
+techniques from statistics and machine learning. An excellent
+reference is [], which covers a broad range of methods for statistical learning. Bertsekas and Tsitsikis [] and Haykin [] provide in-depth discussions on the use of neural networks, and
+Chapters 6 and 12 in Judd [] provide a very thorough overview
+of approximation methods for continuous functions.
+A major issue that arises when adapting these methods
+to approximate dynamic programming is the importance of
+using recursive methods, and developing methods that produce “good” approximations as quickly as possible. The
+value of being in a state depends on the quality of decisions
+that are being made which in turn depend on the quality of the
+value function approximation. A poor initial approximation
+can yield poor decisions which bias the estimates v̂tn being
+used to estimate the value function. Not surprisingly, it is easy
+to develop ADP algorithms that either do not converge at all,
+Aggregation and basis functions are two methods that have
+the advantage of being quite general. But with ADP, it is
+especially important to take advantage of problem structure.
+One very broad problem class can be referred to as “resource
+allocation” where decisions involve the management of people, equipment, energy and agricultural commodities, consumer goods and money. Examples of these problems arise in
+transportation (allocation of vehicles), supply chain management, ﬁnancial portfolios, vaccine distribution, emergency
+response management and sensor management (to name just
+A simple but ﬂexible mathematical model consists of
+a = vector of attributes describing a resource,
+Rta = number of resources available with attribute
+d = a type of decision that acts on a single type of
+xtad = the number of times we act on resources with
+attribute a using a decision of type d at
+C(Rt , xt ) = contribution earned by implementing decision
+vector xt given the resource state vector Rt .
+Resources are often reusable, which means if we act on
+a resource with attribute a using decision d, we obtain a
+resource with attribute a  (this can be random, but this is
+not central to our discussion). Let R M (Rt , xt , Wt+1 ) be the
+resource transition function, comparable to our state transition function we deﬁned earlier. We can also assume that we
+have a post-decision resource transition function that returns
+Rtx = R M,x (Rt , xt ). Further assume for illustrative purposes
+that we are using a linear value function approximation of the
+xtn = arg max C Rtn , xt + γ V̄tn−1 Rtx .
+This problem generally has to be solved subject to constraints
+Earlier [Eq. (7)] we used the objective function value v̂tn to
+update our estimate of the value of being in a state. When
+we are solving resource allocation problems, a much more
+effective technique recognizes that we are not so much interested in the value of being in a state as we are interested in
+the marginal value of a resource. Furthermore, we can obtain
+estimates of the marginal value of each type of resource from
+the dual variables of the ﬂow conservation constraints Eq.
+be the dual variable associated with Eq. (17).
+scalar, as was the case before. If we are in fact using a linear
+value function approximation, we can update the slopes using
+Updating these marginal values using dual variables is
+extremely powerful. Not only do we get an entire vector
+of marginal values, but we also get information on slopes
+(which is what we really need) rather than an estimate of
+the value of being in a state. This logic can be extended to
+a range of value function approximation strategies, including piecewise-linear separable, continuously differentiable
+concave functions, and multidimensional cuts (see Ref. ,
+Chapter 11 for a more complete discussion). We note that
+this general strategy includes techniques such as stochastic
+decomposition (see Refs. , ) which are traditionally thought
+of as belonging to the ﬁeld of stochastic programming.
+Resource allocation is one problem class where the dimensionality of xt can be particularly large, and there may also be
+integrality requirements. For these problems, it is particularly
+important to design value function approximations which
+work well with commercial solvers or particular algorithmic
+Assuming that you have found a way to approximate the
+value function that captures the important characteristics of
+your problem, you now know enough to get yourself into
+some serious trouble. Even applied to simple problems, the
+techniques above can work well, but may work very poorly.
+You would not be the ﬁrst person to run some experiments
+and conclude that “approximate dynamic programming does
+not work.” Below, we address two issues that can be described
+Up to now, we have routinely smoothed old estimates with
+new observations to produce updated estimates [see Eq. (8)].
+This smoothing is done with a quantity αn−1 that we have
+referred to as a stepsize. For the purposes of our discussion,
+we assume that we are using the stepsize to smooth between
+old and new estimates (as in (8)), where we can assume that
+the stepsize is between 0 and 1, rather than in an equation such
+as (15), where the stepsize has to perform a scaling function.
+The smoothing step in Eq. (8) is needed only because we
+have to resort to Monte Carlo sampling to compute v̂tn . This
+would not be necessary if we could compute the expectation in Bellman’s Eq. (4) (or (5)). If we could compute the
+expectation, we would use αn−1 = 1, giving us traditional
+value iteration []. In such a setting, the value of a state typically increases over time, representing the approximation of
+the summation in Eq. (3). However, we generally depend on
+Monte Carlo sampling when we are not able to compute the
+Imagine now that we can only measure contributions with
+uncertainty. The uncertainty might be in the contribution
+function itself, or in the constraints that govern the choice
+of a decision. Further imagine that the discount factor γ = 0,
+which means we do not even care about the downstream
+impact of decisions made now. If this were the case, the best
+possible stepsize would be αn−1 = 1/n, which is equivalent to simply averaging different sample observations. The
+so-called “one over n” stepsize rule is well-known to satisfy
+important conditions for convergence, but it can also produce a rate of convergence so slow that it should never be
+used (see Section 9.3. of Ref. ). Care has to be used when
+applying recursive least squares to estimate the parameter
+vector θ, since this uses an implicit 1/n stepsize (see Section
+7.3.3. of Ref. for a way of overcoming this).
+where λn , σ 2 and β n are computed using simple recursions (see Ref. , section 7.1.). Because σ 2 and β n have
+to be estimated from data, the stepsize is stochastic. If
+the noise σ 2 = 0, we get α = 1. As σ 2 grows (relative
+to the bias β n ), the stepsizes tends to 1/n.
+Figure 3. The stepsizes produced by the BAKF stepsize rule
+and the 1/n rule for a typical nonstationary series. [Color
+ﬁgure can be viewed in the online issue, which is available at
+Choosing the best stepsize, then, requires performing a
+difﬁcult balancing act between the need to add up contributions over an extended horizon against the need to smooth
+out the noise from sampling error. There is a wide range of
+stepsize formulas that have been proposed, coming from different communities (see Ref. for a review), but our work
+has suggested that it is useful to consider three classes of
+Constant stepsize – Start by simply choosing a constant
+stepsize αn = α0 , and then experiment with α0 .
+Harmonic stepsize sequence – The problem with a constant stepsize is that it does not decline, which means
+you will never get strong convergence results. A good
+Start with β = 1, but try β = 0.7. Choose a after
+performing experiments with a constant stepsize. There
+are problems where 100 iterations produces very good
+results, while others need 100,000 iterations (or millions). Choose a so that you get a “small” stepsize as
+the algorithm appears to be converging, based on your
+experiments with a constant stepsize. There are problems where a = 5 works well, while other problems
+Stochastic stepsizes – These are stepsizes that adjust themselves to the actual behavior of the algorithm. A strategy
+called the bias-adjusted Kalman ﬁlter (BAKF) stepsize
+rule minimizes the total variation between the actual and
+Stochastic stepsize formulas are appealing because they adapt
+to the data, avoiding the need to tune parameters such as a
+and β. But they do not work well when there is too much
+noise. Figure 3 illustrates the BAKF stepsize rule Eq. (18)
+for a nonstationary series typical of approximate dynamic
+programming. The stepsize is initially larger, declining as
+the data stabilizes. Note that the stepsizes never fall below
+1/n, which is critical to avoid stalling. But if the data is very
+noisy, what can happen is that the stepsize can be fooled into
+thinking that the underlying signal is changing, producing a
+larger stepsize when we really need a smaller stepsize.
+One of the best-known challenges in approximate dynamic
+programming is famously referred to as the exploration vs.
+exploitation problem. Throughout our presentation (as in the
+algorithm in Fig. 1), we have presented ADP as a procedure
+where we ﬁnd an action xtn , and then use this to determine
+the next state. For most problems, this is not going to work,
+although the issues depend very much on the nature of how
+you are approximating the value function.
+Imagine that you are using a lookup table, and that you
+only update the value of a state if you visit the state. Further assume that you initialize the value of being in a state
+to a number that is lower than what you would expect in
+the limit. Each time you visit a state, the value of being in
+that state tends to rise, producing a situation where you are
+biased toward revisiting states that you have already visited.
+Quickly, the procedure can become stuck cycling between a
+relatively small number of states. If values are initialized too
+high, the algorithm tends to endlessly explore.
+Striking a balance between exploration and exploitation
+remains one of the fundamentally unsolved problems in
+approximate dynamic programming (and since ADP mimics life, we would argue that this stands alongside one of the
+unsolved problems of life). There are simple heuristics that
+are often used. For example, before choosing the state to visit
+next, you might ﬂip a coin. With probability ρ, you choose
+the next state at random. Otherwise, you visit the state determined by the action xtn . This works well on small problems,
+but again, if the state space is large, an exploration step has
+We refer the reader to Chapter 10 of Powell [] for a more
+in-depth discussion of strategies to balance exploration and
+exploitation, as well as the strategies for state sampling that
+are presented in Ref. . However, we feel that this general
+problem area represents many opportunities for research.
+The last challenge in the design of an ADP algorithm is
+deciding how to evaluate it. While there is no single answer
+to the question of how to do this, it is very important that
+some sort of benchmark be prepared, since it is possible for
+an improperly ADP algorithm to work very poorly. Some
+strategies that might be considered include:
+Compare to an optimal MDP – In some cases, it is possible to simplify a problem (but not to the point where it
+becomes meaningless) so that it can be solved optimally
+as a standard backward Markov decision process []. If
+this is possible, then apply the ADP algorithm, designed
+for the more complicated problem, to this simpler problem. If the ADP reasonably approximates the optimal
+solution, then we have more conﬁdence that it is doing
+Compare to an optimal deterministic problem – In some
+cases, a deterministic version of the problem is meaningful and can be solved optimally using a commercial
+solver. ADP can handle uncertainty, but it should also
+be possible to apply to a deterministic version of the
+same problem [, ] provide examples of this type of
+Comparison to a myopic or rolling horizon policy – We
+opened this article with a description of three broad
+strategies for solving stochastic optimization problems.
+Sometimes, the best competition will be one of these
+Figure 4 illustrates the evaluation of policy based on
+approximate dynamic programming where it is compared to a
+rolling horizon procedure. Both methods are reported relative
+to a posterior bound where an optimal solution is computed
+after all random quantities become known. Of course, this is
+not possible with all problems, but it is a useful benchmark
+Approximate dynamic programming is an exceptionally
+powerful modeling and algorithmic strategy that makes it
+possible to design practical algorithms for a wide range
+of complex, industrial-strength problems. This probably
+explains its broad appeal with the computer science and
+control theory communities under names that include reinforcement learning and neuro-dynamic programming. Our
+Figure 4. The objective function produced using approximate
+dynamic programming and a rolling horizon procedure compared
+against a posterior bound for 10 different datasets, from Powell [].
+[Color ﬁgure can be viewed in the online issue, which is available
+own personal experience began with projects in freight transportation which has produced practical tools that have been
+implemented and adopted in industry. These applications
+include managing freight cars for Norfolk Southern Railroad
+[], planning drivers for Schneider National [], managing highvalue spare parts for Embraer [], and optimizing locomotives
+for Norfolk Southern. These are production applications,
+However, approximate dynamic programming is also
+famous for its laboratory successes but ﬁeld failures, not
+unlike other areas of science and technology. It is not hard
+to ﬁnd people who have tried ADP, only to report that it did
+not work. Others complain that it requires substantial tuning.
+These complaints are valid, but can be avoided if care is given
+a) ADP is a powerful modeling and algorithmic technology. Not all problems need this. If you can solve your
+problem using policy optimization (tuning a myopic
+policy), then this is usually going to work better, but
+this typically only works well when you can obtain
+good solutions using a relatively simple policy.
+b) It is useful to understand what behavior you are looking for from a value function. For example, if you set
+the value function to zero, what is wrong with the solution? As you design a value function approximation,
+be sure that it directly addresses whatever issue you
+c) The value function approximation should capture the
+structure of your problem. Blindly making up basis
+functions is unlikely to work. You have to have a good
+understanding of the important elements of the state
+variable that impact the future in a way that you feel
+d) If you have a resource allocation problem (which
+describes a large number of problems in operations
+research), use approximations that reﬂect the unique
+behaviors of resource allocation problems. In particular, make sure you take advantage of derivative
+e) The wrong stepsize formula can ruin an ADP algorithm. If the stepsizes decrease too quickly, the algorithm can appear to converge when in fact it is far
+from the correct solution. A stepsize that is too large
+can produce unstable behavior. This is particularly
+problematic when using basis functions where a small
+change in the regression vector θ can change the entire
+value function approximation. These updates have to
+f) A topic that we only touched on is the exploration vs.
+exploitation problem (Chapter 10 of Ref. ). The importance of this issue is problem-dependent, and for many
+ADP seems to work best when there is natural problem
+structure that guides the choice of the value function approximation, but this alone is not enough. Our work in resource
+allocation problems work well because the value function is
+naturally concave (when posed as a maximization problem),
+which also avoids issues associated with exploration (the
+algorithm naturally seeks out the maximum of the function).
+The good news is that ADP solves problems the way
+people do, which is a reason why it has been so popular in the artiﬁcial intelligence community. Getting ADP
+to work well teaches you how to think about a problem.
+The most important dimension of ADP is “learning how
+to learn,” and as a result the process of getting approximate dynamic programming to work can be a rewarding
+This research was supported in part by grant AFOSRF49620-93-1-0098 from the Air Force Ofﬁce of Scientiﬁc
+[1] R. Bellman, Dynamic Programming, Princeton University
+[2] R. Bellman and S. Dreyfus, Functional approximations and
+dynamic programming, Math Tables Other Aids Comput 13
+[3] D. Bertsekas and D. Castanon, Adaptive aggregation methods for inﬁnite horizon dynamic programming, IEEE Trans
+[4] D. Bertsekas and J. Tsitsiklis, Neuro-dynamic programming,
+[5] J. Birge and F. Louveaux, Introduction to stochastic programming, Springer-Verlag, New York, 1997.
+[6] C. Boutilier, T. Dean, and S. Hanks, Decision-theoretic planning: Structural assumptions and computational leverage, J
+[7] H. Chang, M. Fu, J. Hu, and S. Marcus, Simulation-based
+algorithms for Markov decision processes, Springer, Berlin,
+[8] D.P. Choi and B. Van Roy, A generalized Kalman ﬁlter for
+ﬁxed point approximation and efﬁcient temporal-difference
+learning, Discrete Event Dyn Syst 16 (2006), 207–239.
+[9] M. Fu, Optimization for simulation: Theory vs. practice,
+[10] A. George and W.B. Powell, Adaptive stepsizes for recursive estimation with applications in approximate dynamic
+programming, Mach Learn 65 (2006), 167–198.
+[11] G. Godfrey and W.B. Powell, An adaptive, dynamic programming algorithm for stochastic resource allocation problems.
+Single period travel times, Transp Sci 36 (2002), 21–39.
+[12] T. Hastie, R. Tibshirani, and J. Friedman, The elements of statistical learning, Springer series in Statistics, New York, NY,
+[13] S. Haykin, Neural networks: A comprehensive foundation,
+Prentice Hall, Upper Saddle River, New Jersey, 1999.
+[14] J. Higle and S. Sen, Stochastic decomposition: An algorithm
+for two stage linear programs with recourse, Math Oper Res
+[15] K. Judd, Numerical methods in economics, MIT Press, Cambridge, 1998.
+[16] R. Luus, Iterative dynamic programming, Chapman and
+[17] W.B. Powell, Approximate dynamic programming: Solving
+the curses of dimensionality, Wiley, New York, 2007.
+[18] W.B. Powell and H. Topaloglu, “Fleet management,” Applications of stochastic programming, Math Programming Society
+– SIAM Series in Optimization, S. Wallace and W. Ziemba
+(Editors), Philadelphia, 2005, pp. 185–216.
+[19] M.L. Puterman, Markov decision processes, Wiley, New York,
+[20] D. Rogers, R. Plante, R. Wong, and J. Evans, Aggregation and
+disaggregation techniques and methodology in optimization,
+[21] H.P. Simao and W.B. Powell, Approximate dynamic programming for management of high value spare parts, J Manufac
+[22] H.P. Simao, J. Day, A.P. George, T. Gifford, J. Nienow, and
+W.B. Powell, An approximate dynamic programming algorithm for large-scale ﬂeet management: A case application,
+[23] J.C. Spall, Introduction to stochastic search and optimization:
+estimation, simulation and control, Wiley, Hoboken, NJ, 2003.
+[24] R. Sutton and A. Barto, Reinforcement learning, The MIT
+[25] H. Topaloglu and W.B. Powell, Dynamic programming
+approximations for stochastic, time-staged integer multicommodity ﬂow problems, Informs J Comput 18 (2006),
+[26] B. Van Roy, D.P. Bertsekas, Y. Lee, and J.N. Tsitsiklis, “A
+neuro-dynamic programming approach to retailer inventory
+management,” in: Proceedings of the IEEE Conference on
+Decision and Control, IEEE Press, Piscatawa, NJ, Vol. 4, 1997,

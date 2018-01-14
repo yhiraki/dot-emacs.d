@@ -1,0 +1,830 @@
+Neural Comput & Applic (2016) 27:2001–2015
+Heuristic techniques to optimize neural network architecture
+Claudio Ciancio1 • Giuseppina Ambrogio1 • Francesco Gagliardi1
+Received: 9 October 2014 / Accepted: 14 July 2015 / Published online: 31 July 2015
+ The Natural Computing Applications Forum 2015
+Abstract Nowadays application of neural networks in the
+manufacturing field is widely assessed even if this type of
+problem is typically characterized by an insufficient
+availability of data for a robust network training. Satisfactory results can be found in the literature, in both
+forming and machining operations, regarding the use of a
+neural network as a predictive tool. Nevertheless, the
+research of the optimal network configuration is still based
+on trial-and-error approaches, rather than on the application
+of specific techniques. As a consequence, the best method
+to determine the optimal neural network configuration is
+still a lack of knowledge in the literature overview.
+According to that, a comparative analysis is proposed in
+this work. More in detail four different approaches have
+been used to increase the generalization abilities of a neural
+network. These methods are based, respectively, on the use
+of genetic algorithms, Taguchi, tabu search and decision
+trees. The parameters taken into account in this work are
+the training algorithm, the number of hidden layers, the
+number of neurons and the activation function of each
+hidden layer. These techniques have been firstly tested on
+three different datasets, generated through numerical simulations in the Deform2D environment, in an attempt to
+map the input–output relationship for an extrusion, a rolling and a shearing process. Subsequently, the same
+approach has been validated on a fourth dataset derived
+from the literature review for a complex industrial process
+to widely generalize and asses the proposed methodology
+in the whole manufacturing field. Four tests were carried
+Department of Mechanical, Energy and Management
+Engineering, University of Calabria, 87036 Rende, Italy
+out for each dataset modifying the original data with a
+random noise with zero mean and standard deviation of
+one, two and five per cent. The results show that the use of
+a suitable technique for determining the architecture of a
+neural network can generate a significant performance
+improvement compared to a trial-and-error approach.
+Keywords Neural network architecture design  Genetic
+algorithm  Tabu search  Taguchi  Decision trees 
+Feed-forward neural networks have become a standard
+technique for classification and regression problems [1].
+Neural networks consist of some components such as
+architecture structure [2], activation functions of each layer
+and training algorithm. These components can greatly
+affect the performance of a neural network and even if
+several approaches have been proposed in recent years, the
+process of selecting an adequate value of these parameters
+is still a controversial issue. Neural networks have been
+often used in manufacturing applications as the use of this
+technique is a useful tool for the decision maker due to the
+reduced efforts to acquire the knowledge required to make
+the correct process decisions. However, the full application
+of NN tool to manufacturing problems is penalized by the
+limited dataset dimension that can be used during the
+network training. To solve this problem, many manufacturing companies execute the process analysis by using an
+hybrid approach based on the adaption of numerical simulation to enlarge the dataset [3] and the subsequent
+application of NN as prediction tool. The use of this
+approach offers several benefits to the company due to the
+reduced number of experimental tests and the possibility to
+analyze the process behavior under different process conditions (material, equipment, etc). Nevertheless, the number of conditions that can be used during the training phase
+does not exceed the hundreds, while the NN robustness is
+usually proved on thousands of data [4]. To definitively
+asses which technique allows to increase the network
+robustness when a limited number of data are available, a
+similar hybrid techniques, based on the combined use of
+2D numerical simulations and a neural network, were
+applied for changing NN optimization step. More in particular, four different new architecture selection methods
+are proposed in this analysis. All the four methods are
+based on the use of very well-known optimization and
+statistical based approaches. However, their use has been
+adapted for the specific problem (research of the optimal
+neural network architecture). As a result of the implementation, it is clear that the proposed methods select
+better architectures that give more accurate predictions.
+These techniques can be used for a problem that has a small
+set of initial data and can significantly reduce prediction
+errors arising from a wrong match between network size
+and input–output relationship complexity. To generalize
+our results, showing strengths and weaknesses of each tool,
+we used three different datasets describing an extrusion, a
+rolling and a shearing process, respectively. These three
+processes were properly chosen since they are representative of the industrial scenario and widely used for both
+primary and secondary production. Each dataset was generated by performing numerical simulation in 2D conditions using the software Deform 2D to collect the data.
+After that, the methodology was tested on a more complex
+and real industrial problem in which the results were
+compared with those obtainable from conventional
+approaches, thus showing better performances. More in
+detail, the critical problem of residual stress prediction on
+medical components was investigated starting by the same
+dataset used by Umbrello et al. [5]. The paper is organized
+as follows. State of the art is presented in Sect. 2; heuristic
+algorithm to optimize the neural network architecture is
+discussed in Sect. 3. Computational results are reported
+and discussed in Sect. 4, while the full model generalization was proved by the last case study in Sect. 5.
+NNs have been widely introduced to the analysis of
+increasing number of problems in the manufacturing
+field [6]. Different applications are reported in the literature
+for both strategic and operational issues. Yang [7] proposed a NN metamodeling method to generate the cycle
+time—throughput for single/multi-product manufacturing
+Neural Comput & Applic (2016) 27:2001–2015
+environments. In his work, a progressive model-fitting
+strategy was developed to obtain the simplest-structured
+NN that is adequate to capture the required relationships.
+Unal et al. [8] used a genetic algorithm optimized neural
+network for fault diagnosis of rolling bearings. Their
+results show that the optimized NN is able to reach a better
+accuracy compared to one with a reference NN architecture. Venkatesan et al. [9] implemented also the combined
+use of genetic algorithm and NN to optimize the weight
+initialization phase; more in particular, in their approach,
+genetic algorithm is used as a complementary tool for
+weights optimization that serves in turn for NN to perform
+robust prediction of machining process performance.
+Always for machining process, Yao and Fang [10] used
+NN to predict the development of chip breakability and
+surface finish at various tool wear states. Furthermore,
+Umbrello et al. [5] implemented a NN tool, named PREDATOR, to predict the residual stress distribution on
+bearings surface. Moving from machining processes to
+forming operations, NNs result widely utilized to predict
+both quantitative and qualitative variables: Ambrogio and
+Gagliardi [11] designed a customized toolbox combining
+NN and the design of experiments (DoE) for predicting
+opposite performance in porthole die extrusion process;
+Ozcan and Figlali [12] proposed the NN for estimating the
+cost of stamping dies, as alternative and only way to analytical and conventional methods; finally, Saberi and
+Yussuff [13] introduced NN to evaluate advanced manufacturing technologies implementation outcomes and predict company performance as high, low or poor in
+technology adoption. Even if many successfully applications of NN in the manufacturing field are reported in the
+literature, the possible benefits deriving from the use of this
+tool are not always completely achieved due to the use of
+random network parameters or trial-and-error approaches.
+The interest toward algorithms able to optimize NN performance is significantly increased in the last years.
+However, the results of the different proposed techniques
+are often contradictory and do not provide a clear vision of
+the benefits and drawbacks of using such approaches. Initially, the focus of the research was mainly on how to
+determine the number of neurons of a neural network with
+one hidden layer; nevertheless, these methods did not take
+into account the features of the dataset but only its size
+[14]. For example, Baum et al. [15] obtained some bounds
+of the number of neurons, for a network with a linear
+activation function, related to the number of training
+example. Camargo et al. [16] solved the same problem
+implementing a function using Chebyshev polynomial.
+Wangn and Shao [17] proposed an architecture selection
+algorithm based on an extended localized generalization
+error model which considers the generalization capability
+and costs less time than cross-validation. Another method
+Neural Comput & Applic (2016) 27:2001–2015
+Table 1 Heuristic techniques to optimize neural network architecture
+High optimization accuracy. Good ability to
+Exhaustive search of the solutions space.
+Optimization accuracy is highly related to the choice of the
+neighborhood structure. Optimization of complex problems
+Poor estimation of neural networks features interactions
+similar to the genetic algorithm approach was proposed by
+Lirov [18] and is often used as a reference point for new
+techniques. The state of the art about the influence of the
+architecture on the generalization abilities is in agreement
+with the result that the number of optimal nodes in a neural
+architecture for obtaining valid generalization depends
+mainly on two factors [19]: the number of available
+training samples and the complexity of the function. A
+different approach often used to select the features of the
+network is related to the use of information criteria like the
+Akaike’s information criterion (AIC) and the Bayesian’s
+information criterion (BIC). These two criteria can be
+expressed through the following equation:
+where r^2MLE is the maximum likelihood estimate of the
+variance of the residual term and m and T are, respectively,
+the number of parameters in the model and the number of
+data available. Finally, d is a fixed constant usually greater
+than 1. For example, Berger [20] and Bernardo and Smith
+[21] used an approach in which the neural network architecture is selected based on the maximization of the
+expected utility criterion. Also in these approaches, however, the technique is able to give only some indications
+regarding the number of units in the hidden layers. Finally,
+the literature overview clearly stated a lack of homogeneity
+for the advantages and disadvantages of different techniques, as well as it is not possible to identify the most
+promising NN research approach for manufacturing problems, typically characterized by data insufficiency. The aim
+of this work was to present and compare different techniques that can be used to fix all the relevant network
+features taking into account the connections among them.
+Four different approaches (will be tested) based on the use
+of genetic algorithm, tabu search, Taguchi and decision
+trees. In general, all the techniques used in this work can
+provide some insights regard the interactions between the
+considered network parameters. At the same way, all these
+approaches have some drawbacks that discourage their use
+under particular conditions. The next table summarizes the
+main property of these algorithm highlighting their strength
+3 Selection of the neural network architecture
+In this work, four different methods widely present in the
+literature overview to determine the best neural network
+architecture have been proposed and compared. These
+techniques are based on the use of genetic algorithm,
+Taguchi, tabu search and decision trees. The goal of these
+algorithms is to find, in a small computational time, the
+features of the neural network that allow the prediction
+The parameters taken into account in this analysis are the
+number of hidden layers, the number of hidden neurons and
+the activation function of each layer and the training
+algorithm. The choice of the first two parameters is related
+to the ability of the network to approximate complex
+functions. Regarding the number of hidden layers to use,
+there is a consensus about the performance differences:
+The situations in which performance improves by adding a
+hidden layer are very small. One or two hidden layers are
+sufficient for the large majority of problems. In some cases,
+neural networks with more hidden layers seem to work
+better, but the performances are improved only on the
+training set, while in the validation set, the results could
+significantly deteriorate. The most suitable activation
+Neural Comput & Applic (2016) 27:2001–2015
+function of each layer is determined by the characteristics
+of the input–output relationship. Using a good mix of these
+functions, it is possible to approximate any kind of problem. In this work, four different activation function were
+descent and other conjugate gradient methods in a wide
+variety of problems. It is often the fastest backpropagation
+algorithm and highly recommended as first choice among
+supervised algorithms [41]. In this training algorithm, the
+weight update is based on the following formula:
+wðk þ 1Þ ¼ wðkÞ  ðJ T J þ kIÞ1 J T eðkÞ
+The linear function is the most simple transfer function. It
+is mostly used for problem with a limited complexity.
+However, the combination of a linear with a nonlinear
+function results able to approximate any kind of function if
+a sufficient number of hidden unit is available [37]. The
+linear transfer function can be represented through the
+However, in the large majority of cases to represent efficiently complex problems is necessary the use of not linear
+activation functions. The sigmoidal function [38] is a real
+function in the range (0, 1) and is probably the most popular activation function used in the backpropagation. The
+sigmoid is defined by the following expression:
+A transfer function similar to the sigmoid but defined over
+the region ð1; 1Þ is the hyperbolic tangent sigmoid. One
+properties of this activation function is the anti-symmetry.
+This means that for each value of x the following relation
+The anti-symmetry properties are often associated with
+better and faster learning capabilities [39]. This transfer
+The last function considered is the radial basis [40] retained
+as one of the best function to approximate different models.
+The transfer function is calculated in the following way:
+Another factor that can affect the generalization ability of a
+neural network is the training algorithm. In this work, four
+different algorithms were analyzed: Levemberg–Marquardt, quasi-Newton, gradient descent with momentum
+and adaptive learning and resilient backpropagation. The
+Levemberg–Marquardt algorithm is the most widely used
+optimization algorithm. It outperforms simple gradient
+where e is the difference between the actual and the
+required value of the network output and J is the Jacobian matrix. The quasi-Newton and the gradient descent
+with momentum and adaptive learning rate algorithm
+offer more sophisticated exploitation of the gradient
+information compared to simple gradient descent methods, but they are usually more computationally expensive
+[42]. Different variants of the backpropagation algorithm
+have been developed in the last years in which not only
+the local gradient is considered but also the recent
+change of the weight matrix. According to these variants
+at each iteration, the new value of the weights will be
+i;j is the weight of the connection between the
+neuron i of the layer m  1 and the neuron j of the layer m,
+whereas b is called momentum and is usually introduced to
+reduce oscillation in the error function during the iterations. The last training algorithm analyzed is the resilient
+propagation [43, 44]. The main difference between this
+approach and the other techniques previously described is
+that the weight update is not blurred by the gradient
+parameter evolves during the iterations according to the
+behavior of the partial derivative during two successive
+steps. The choice of learning algorithm has a double impact
+on the performance of the neural network because it affects
+both the quality of the solution found and the computational time to reach the convergence [45].
+Genetic algorithm (GA) is an optimization technique that
+tries to replicate the evolution process, in which individuals with the best features have more possibilities of
+surviving and reproducing [22–24]. The first step of this
+method is to encode the features of the neural network
+into specific chromosomes. A chromosome is a sequence
+of bits with value 0 or 1. GA undertakes to evolve the
+solution, during its execution, according to the following
+Neural Comput & Applic (2016) 27:2001–2015
+Random generation of the first population of solutions
+Application of a fitness function to the solutions
+Selection of the best solutions based on the value of the
+Generation of new solutions using crossover and
+Repetition of steps 2–3–4 for n iterations
+where Tr and Te are, respectively, the size of training and
+test set, yi and yni are the real and predicted value of the
+output of ith configuration using the neural network
+decoded from the string of the nth chromosome and zk is a
+binary variable with value 1 if the network a consists of k
+hidden layer, 0 otherwise, while Hk is the corresponding
+3.2.1 Representation of the neural network
+The first step of this method is to define the input variables
+and the chromosome structure. In this work, five input
+variables using chromosomes with 11 genes are considered. The first two genes represent the number of hidden
+layers in the network with a search range from 1 to 3. The
+next four genes are used to represent the activation function
+of the hidden (HL) and output layers (OL). The next three
+genes are used to represent the number of neurons (HN) in
+each hidden layer. The range of these features is fixed from
+2 to 9. Finally, the last two genes are used to represent the
+training algorithm by which the network learns. The whole
+domain of the chromosomes generation is summarized in
+According to this table, 541,184 possible network configurations can be created.
+After the selection of the most promising chromosomes, a
+new population is generated using the crossover technique
+that allows exploring new areas of the feasible region. In
+the genetic algorithm, crossover is a genetic operator used
+to create new chromosomes from one generation to the
+next. Two different crossover operations are used in this
+work: n-point crossover [25] and SBX crossover [26].
+Mutation is another genetic algorithm used to maintain
+genetic diversity from one generation of a population to the
+next. This operation consists of randomly altering the value
+of one element of the chromosome according to a mutation
+The selection of the chromosomes to produce a new generation is an extremely important step of the algorithm. The
+most promising chromosomes will be included in the next
+generation and will be used as ‘‘parents’’ in the crossover
+operations. A chromosome will be selected if the value of
+its correspondent fitness function is low. The fitness function implemented consists of two terms. The first term is
+the sum of the absolute error on the training set using a
+specific neural network, whereas the second term is measured on the test set. Both terms are multiplied by appropriate weights. Finally, a penalty term based on the number
+of hidden layers is introduced to avoid the increase in this
+value. The fitness function is therefore calculated in the
+Selection, crossover and mutation are repeated iteratively
+until one of these conditions is satisfied:
+the processing time exceeds a maximum time;
+the number of iterations performed exceeds a maximum number;
+the fitness function of the best found solution is lower
+Finally, the chromosome with the best fitness function is
+decoded and a neural network with those features is built.
+Tabu search (TS) is a metaheuristic technique that is used
+to find a solution for several kinds of optimization
+problems [27]. One of the main property of this technique
+is the ability to escape from local minima allowing to
+exhaustively exploring the solutions space. In this study,
+we show how to use a tabu search algorithm to solve the
+neural network architecture selection problem. The main
+element of this algorithm are described as follows:
+The solution s is a vector whose elements represent the
+value of the five neural network parameters under
+analysis. We denote as s the current best solution of
+The solution space X is the set of solutions that can be
+generated during the algorithm. The number of network
+configuration taken into account is constrained according to the limitation reported in Table 2;
+The objective function f is the performance criterion
+used to select the optimal network configuration. Also
+in this case, we made use of the fitness function
+reported in equation (11). We denote as f(s) the value of
+the performance criterion using the network parameters
+The neighborhood N(s) is a set of solution (neural
+network architectures) that can be reached from a
+solution s. Three types of neighborhood were considered in this phase to establish the effect of each
+investigated factor. The first contains all the networks
+that can be obtained by adding or removing a neuron
+from one or more hidden layers. The networks belonging to the second neighborhood have the same architecture except for the activation function of one layer.
+Finally, the last neighborhood considers different
+learning algorithms. These three neighborhoods can
+be considered simultaneously at each iteration, or
+Tabu list a set of rules and banned solutions used to
+filter which solutions will be admitted to the neighborhood to be explored by the search.
+Figure 1 highlights the advantages of the tabu search
+The solution s is a local optimum of the problem.
+However, the solution s is the global optimum. If s0 is not
+Neural Comput & Applic (2016) 27:2001–2015
+part of Nðs Þ, this solution will never be reached using
+local search algorithms. This might happen instead using
+the TS method. In fact, s0 can be reached by moving along
+s0 . Another advantage of this technique is the possibility of
+keeping in memory the latest moves made in order not to
+repeat the same exchanges. These memory structures form
+what is known as the tabu list. Hybrid approach based on
+tabu search and neural network were developed in the past
+to improve the performance of the learning algorithm [28].
+In this work, a similar technique is proposed to find the
+optimal neural network architecture by means of tabu
+search. The main steps are summarized in Fig. 2. First of
+all, the architecture of a neural is chosen randomly. Then,
+the neighborhood of the current solution s0 is generated at
+each iteration. To reduce the processing time, it is possible
+to use a diversification strategy. Subsequently, the best
+solution of the neighborhood, N(s), that does not belong to
+the tabu list, TL, or that belongs to TL and is better than the
+solution s is selected. Afterward, the tabu list is updated
+adding the solution s00 . If this solution is better than s , the
+value of this variable is set equal to s00 ; otherwise, the
+counter k is increased by one and only the variable s0 is
+updated. This procedure is repeated iteratively until the
+Fig. 1 Representation of the solution space S of a generic problem
+Neural Comput & Applic (2016) 27:2001–2015
+value of k is less of a maximum threshold kmax . The
+algorithm is repeated several time in order to explore different areas of the feasible region. The starting network is
+chosen randomly only in the earliest iterations. In fact,
+during the execution of the algorithm, statistical information on the neural network analyzed is stored and used to
+explore areas not yet investigated. The following approach
+was used to calculate the probability which an attribute of
+the network is chosen with. Let mki i ¼ 1; . . .; M; k ¼
+1; . . .; K the number of times that the feature k of a network
+assume the value i and let N the number of neural network
+analyzed until that moment. Each parameter of the network
+measure of the performance variability in the presence of
+noise factors. S/N ratio is a performance criterion where S
+stands for mean and is called signal and N stands for
+standard deviation and is called noise. The idea is to
+maximize the S/N ratio, thereby minimizing the effect of
+random noise factors. The S/N ratio is measured with the
+where yi is calculated using the formula (11). For each
+feature of the neural network, the value with the smallest
+In contrast, if N  mki is the number times that the feature k
+The probability pki that the feature k of a new network
+assume the value i is then calculated in the following way:
+The procedure illustrated in Fig. 2 is repeated iteratively,
+using this approach, until a maximum number of iterations
+The Taguchi method was developed as an optimization
+technique by Genuchi Taguchi during the 1950s. The
+method is based on the statistical analysis of data and
+offers a simple means of analysis and optimization of
+complex systems. Taguchi method uses a special design
+of orthogonal arrays to analyze the solutions space with a
+small number of experiments. This method has been used
+to optimize the performances searching the best architecture of the neural network [29–31]. Generally, the
+number of experiments, which compose a fully orthogonal
+experimental plan, is equal to N ¼ LF where F is the
+number of factor and L is the number of levels for each
+factor. Five factors and three levels for each factor are
+considered in this work. The number of required experiments according to fully orthogonal experimental plan
+should be 35 to investigate all the possible solutions;
+however, with Taguchi, it is possible to use a reduced set
+of 33 network configurations. The choice of the optimal
+network is based on the value of the S/N ratio that is a
+Decision trees are one of the most used learning methods.
+The main reasons why this technique is frequently used for
+classification and regression problems are its ease of use,
+the low computational time and the possibility of quickly
+analyzing the results. In the beginning, decision trees were
+used only for classification problems [32], but in 1998
+Neville explained how to use decision trees to create
+stratified regression problems models by selecting different
+slices of the data population for in-depth regression modeling [33]. Decision trees have also some shortcomings.
+When the connections between inputs and outputs is too
+complicated, a simple tree may simply excessively this
+relationship, and even if the tree shows good accuracy, this
+does not mean that the generalization ability is elevated
+because a completely different set of data might give a
+different explanation to the same problem [34, 35]. An
+important issue in the use of decision trees is the branching
+criteria [36]. For this purpose, a measure of goodness of the
+model is calculated at each partition and for each variable.
+Let tr ðr ¼ 1; . . .; sÞ be the number of child groups generated by segmentation and pr the proportion of observations
+that are placed in each child node, with r pr . The criterion can be expressed by:
+where I is a function of impurity. For regression problem, a
+suitable impurity function can be expressed using this
+where ylm is the real accuracy of the neural network l
+belonging to the node m, while y^m is the predicted value of
+all the networks in this node. Other important factors are
+the choice of the rules of pruning and stopping.
+The stopping criteria are used in each node to determine
+whether further ramifications are necessary. There are
+essentially two reasons why an excessive branching is
+unwise: the generalization ability (since a decision tree
+with too many nodes is exceedingly tied to the values of the
+training set but may have worse performance when applied
+on the test set) and the facility to interpret the classification
+rules (since it decreases by the increasing of the tree
+ramifications). To train the decision trees, a set of neural
+networks with different properties are initially tested by
+measuring the average error rate obtained on the validation
+set. The leaf node with the best performance is then
+selected. This leaf could contain different neural networks
+architecture. In this case, all the neural networks that
+belong to that particular leaf are tested searching to find the
+one with the smallest average percentage error. This step
+also highlighted the importance of the stopping and pruning criteria. In fact, if a decision tree too big usually overfit
+the data, an excessively small tree could be useless if the
+number of possible solutions in the optimal leaf is elevated.
+In order to verify the results, the above-introduced
+methods were firstly used to find the best neural network
+configuration for three different manufacturing processes.
+Each dataset is formed by 100 input–output pairs and is
+split in three parts: 80 pairs are used as training set and
+10 as test set. Furthermore, in order to verify the real
+performance of these techniques, 10 input–output pairs
+were used as validation set by using numerical models
+already validated. Four different tests were performed for
+each problem. The original datasets were used for the
+first test, while a random noise with zero mean and
+standard deviation of one, two and five per cent was
+added to the outputs value in the other tests. The aim of
+these additional tests is to verify the ability of the network to filter out the noise and find the real link between
+the inputs and outputs. All the techniques were set up in
+the MATLAB R2011b [46] version except for the decision tree which was adapted by using the existing library
+By taking advantage of the already introduced hybrid
+approaches [3], finite element (FE) models were performed
+to generate the process datasets. The numerical simulations
+have been always more utilized to reduce the number of the
+experimental investigations whose equipment construction
+and trial execution generate great time and money wasting.
+Nowadays, the results which are possible to obtain by
+Neural Comput & Applic (2016) 27:2001–2015
+numerical simulations, if properly set, are in good agreement with the reality. Several papers can be found on this
+topic, thus assessing the FEM general applicability as
+optimization tool. Different investigations can be carried
+out highlighting: (1) local variables, i.e., strain, strain rate
+and stress distributions, in the whole formed part, and (2)
+global greatnesses as the forces which are generated on the
+equipment during the forming phase. By now, the FE
+reliability is well known in various manufacturing applications; the goodness of the results is obviously affected by
+the model settings. More in particular, the utilized
+numerical simulations were set for each investigated process by taking into account previous experiences gained by
+some of the authors; see [47–49]. In the reported works, in
+fact, experimental and numerical results were compared
+validating the reliability of the utilized procedures. Concerning to the proposed work, being the final scope of the
+study the identification of the best technique for optimal
+NN architecture identification, we focused on different
+manufacturing processes to ensure a general approach
+applicability ensuring at the same time a fast generation of
+the datasets. Due to that hypothesis, the highlighted processes are quite simple and so can be properly analyzed by
+using two-dimensional simulations by using specific
+boundary conditions. In fact, both the extrusion and the
+hydro-blanking are characterized by a symmetrical shape,
+while the rolling can be accurately analyzed by using plane
+strain consideration. Taking advantage of that, the commercial finite element code, DEFORM 2DTM [50] was
+utilized for the numerical campaign; this is an useful
+simplification which has been chosen to reduce the computational time ensuring, at the same time, the quality of
+the obtained results. By the way, it has to be taken into
+account that the numerical investigations used for the work
+here proposed, analyze manufacturing processes with different peculiarities; due to that, suitable attentions had to be
+taken into account for the proper setting of each simulation
+case. More in detail, the extrusion is considered as a bulk
+process which is usually characterized by high deformation; this means that the strong reduction in area deeply
+impacts on the remeshing–rezoning code capability, and
+this is a possible reason of result inaccuracy. The simulation convergence, in this type of process, can be reached,
+step by step, through a tidier mesh obtained by numerical
+interpolation from the old to the new discretization. The
+material deformation during the rolling, on the other side,
+is reduced compared to the extrusion; in this case, special
+attention has to be given for the condition setting between
+the formed material and the rollers. Finally, the hydroblanking, being a sheet forming process, is characterized
+by a small dimension of one of the specimen sizes, its
+thickness. According to that, the mesh has to be defined for
+having at least three elements along the thickness; this is a
+Neural Comput & Applic (2016) 27:2001–2015
+necessary condition which has to be complied for a correct
+analysis of the thinning which the sheet is subject to.
+Anyway, all the simulations, were carried out modeling, as
+billet material, an AA6061 whose plastic behavior was
+derived from the FE code library; the different tools of each
+simulation were modeled as rigid bodies to reduce the
+computational time. Mechanical analyses were executed by
+fixing the material temperature for each case. Tetrahedral
+elements were utilized for the discretization of the formed
+part; the different tools, instead, were considered rigid
+bodies to reduce the computational time. The friction
+conditions, moreover, were properly set for each process
+according to the literature [51]. Moreover, the outputs
+which were taken into account for the process optimization
+were chosen according to the main variables which have to
+be investigated for appropriately establishing the process
+effectiveness [51]. In conclusion, 300 numerical simulations, 100 for each case, by using two-dimensional analyses
+were executed according to a full orthogonal plane. The
+computational time can be found in less than 1 h for each
+simulation using a PC-Dual-Xeon 2,8 GHz with 4-GB
+4.2 Optimization techniques initialization
+The proposed optimization techniques require the initialization of different input parameters. According to our
+preliminary analysis (and/or making use of standard techniques setting proposed in the works cited in Table 1), we
+performed the design of each technique according to the
+This design will be used for all the analysis reported in
+the next sections in which the results of each technique
+have been compared with the one obtained using a neural
+network architecture randomly selected (the average percentage error obtained using 10 networks selected
+according to the range defined in Table 2).
+The extrusion process [11] is one of the most used technology in the manufacturing scenario and allows to obtain
+bars, tubes, profile shapes with different sections, (open,
+hollow or filled) and numerous other elements. In its simplest configuration, the process consists in a reduction in
+diameter: by action of horizontal compression, the movement of the punch forces the material (a solid cylinder) to
+flow and then to extrude through a shaped opening (matrix), whose section is equal to that of the product that the
+user wishes to achieve. In this study, punch velocity,
+extrusion ratio and temperature were considered as main
+parameters for the process decision maker. Typical technology constraints, which can penalize the process feasibility, are the maximum punch load and the pressure in the
+critical area of the die, such as it is strategic to determine
+their variations for changing the temperature, the process
+velocity and the extrusion ratio. According to this aim, the
+introduced algorithms were set up to search the optimal
+neural network that minimize the prediction error of the
+highlighted response variables. Both factors and investigated ranges and a sketch of the numerical model for
+simulating extrusion process are reported in Fig. 3.
+As already specified, the described techniques were
+initially tested on the original dataset. Table 4 lists the
+mean absolute percentage error (MAPE) for both the output responses and the selected neural network architecture.
+The table showed that the best performance is obtained
+using the genetic algorithm procedure. However, the error
+obtained using the tabu search is at roughly the same. The
+average percentage error obtained by using the Taguchi
+method or decision trees is slightly higher, but this error
+could be relevantly greater trying to solve this problem
+with a neural network with a random architecture. The
+results of all the other tests with a perturbation of different
+Neural Comput & Applic (2016) 27:2001–2015
+Also in this case, the best performances are reached
+using the tabu search and the genetic algorithm. Both of
+these techniques show a good ability to filter out the noise,
+so to map only the real inputs–outputs relationship. In fact,
+the performances of the neural network found with a noise
+of 5 % have in both cases an average percentage error less
+than 3 %. In all the tests, the neural network obtained by
+using the proposed algorithms is composed of one or two
+hidden layers and the best training algorithm is always
+Levemberg–Marquardt. The magnitude of the perturbation
+does not seem to significantly affect the structure of the
+The rolling process [47] is the second problem analyzed.
+Rolling is a plastic deformation process that allows to
+reduce the cross section of a block, through successive
+operations of reduction in thickness, in a tape with certain
+metallurgical and mechanical properties. In this study, an
+optimal neural network was found with the aim to
+understand how the rolling ratio, the process velocity and
+the temperature can affect the value of the normal pressure and the maximum load that typically penalize the
+process feasibility. A sketch of the used numerical model
+and of the investigated variables range is reported in
+Also in this case, the first test was made on the original
+dataset (Table 6), while the others introducing a perturbation (Table 7). As it is possible to see from the first table,
+the tabu search and genetic algorithm procedure have the
+smallest error (\1 %) for both the output, but also the
+Taguchi method shows good outcomes. Compared to the
+extrusion process tests, the architectures of the neural
+networks selected to describe the rolling performances are
+characterized by a smaller structure; in fact, the optimal
+architecture is always composed of one hidden layer with a
+The last process analyzed is the shearing one [48] assisted
+by a counter pressure on the bottom of the blank. The
+shearing process consists of cutting of a sheet, a plate or a
+tubular component to derive individual components by
+subjecting the material to shear stresses, using a punch and
+a matrix. In the present study, the hydro-assisted variant
+has been considered. More in detail, the punch speed was
+kept constant according to the high values typically used in
+Table 4 Average percentage error (extrusion original dataset)
+Neural Comput & Applic (2016) 27:2001–2015
+Table 7 Average percentage error (rolling noisy dataset)
+industrial applications, while the effect of a fluid pressure
+on the bottom side of the blank was introduced to improve
+the quality of the sheared part [49]. The main variables in
+the blanking process are the radii, the clearance between
+the punch and the die and the counter pressure. The two
+outputs examined in this test are the max normal pressure
+and the punch load. For completeness, a sketch of the used
+numerical model for simulating the shearing process and
+the investigated factor are observable in Fig. 5. As already
+shown for the other two processes, the performances are
+measured on the validation set, using a training set with or
+without perturbation. The results are reported in Tables 8
+Also in this final test, the methods that seem to have best
+generalization ability are the tabu search and the genetic
+algorithms. The results obtained for the normal pressure
+with a perturbation of 5 % gives even more the idea of how
+very important it could be to determine a suitable neural
+network architecture. In fact, the value of the average
+percentage error changes from a value of 26.27 % to a
+A last test was performed to evaluate the robustness of each
+technique. In this case, we solved only one problem performing 100 runs for each technique. A technique will be
+considered robust if is able to provide the same results with
+a good consistency. The evaluation of the punch load and
+the die pressure for the extrusion problem was selected for
+this analysis. The following graph shows the frequency
+with which each neural network architecture is selected in
+each technique (Fig. 6). How it is possible to see from the
+graph the technique characterized by the lowest consistency is the one based on the decision trees. This means
+that the results achieved using this algorithm are highly
+affected by the starting dataset (neural network architectures tested) used to build the analytical model. Obviously,
+the same results are obtained for all the runs using the
+Taguchi technique since it does not use of parameter randomly generated during its execution. Based on the results
+of all the analysis reported in this chapter, it is clear that the
+best trade-off between accuracy and robustness of the
+Neural Comput & Applic (2016) 27:2001–2015
+Table 8 Average percentage error (rolling original dataset)
+Table 9 Average percentage error (shearing noisy dataset)
+algorithm is obtained using the genetic algorithm approach.
+In some cases, neural network with different architecture
+configurations can produce same or similar performance.
+Therefore to validate our results, we found necessary to
+measure the standard deviation of the prediction error
+during the 100 runs. The results of this analysis are
+It is possible to see that the prediction error is really
+In order to generalize the applicability of the proposed
+results, a more complex study was taken into account with
+an increased number of input and output variables. This
+choice was done for testing the procedure goodness if
+industrial cases have to be analyzed. For safe of generality,
+a total different manufacturing process, from the previous
+forming cases, was investigated; in fact, the attention was
+focused on turning of hard machine surface where the
+subsurface properties are deeply affected by material
+parameters (hardness, flow stress), tool shape (cutting edge
+geometry) and machining conditions (rake angle, cutting
+velocity and feed). More in detail, the generation of undesired residual stresses was minimized by changing the
+above six highlighted variables for improving the service
+quality of the components such us fatigue life, tribological
+characteristics and distortion [52]. The industrial case study
+addressed by Umbrello et al. [5] was taken as reference
+where, starting from few acquired residual stress profiles, an
+extensive numerical plan was developed to populate the
+dataset. In particular, the definition of a more extensive
+design space was built to define the problem having also six
+different output responses; in fact, residual stress profile
+was built by taking into account the following variables:
+aAXIAL ; bAXIAL ; cAXIAL ; aHOOP ; bHOOP ; cHOOP [5]. Umbrello
+Neural Comput & Applic (2016) 27:2001–2015
+et al. reached an average prediction error on a further validation set of 8 % by using the trial-and-error approach
+which represent the standard way to look for the optimal
+NN in manufacturing field. Starting by this conclusion, the
+optimal NN was investigated on the same dataset by means
+of one of the discussed innovative technique. More in detail,
+the NNs were found by using the same training and testing
+data and through the GA and tabu search. Table 11 shows
+the average prediction error of both techniques for each
+output comparing the results with the one presented in [5].
+It is possible to see that through the use of both
+techniques the average prediction error is reduced to less
+than 4 % reducing it to more than 50 % of its starting
+In this paper, four different algorithms for the architecture
+selection of a neural network have been proposed and
+compared. The same methods have been tested and
+Table 11 Average prediction error (experimental study)
+validated taking into account three of the most used process
+in the manufacturing industry. The algorithms illustrated
+are not only simple but showed a good efficiency to
+automatically determine the number of hidden layers,
+neurons and other features that guarantee good generalization abilities. The experimental results demonstrate that
+the methods based on tabu search and genetic algorithms
+are able to select a neural network architecture which has a
+higher average testing accuracy. However, the GA seems
+to be more reliable compared to TS and less affected by the
+parameters randomly selected during its execution. For all
+techniques, as is easily predictable, the performance
+decreases by increasing the magnitude of the perturbation
+in the dataset, but the way in which these results deteriorate
+1. Neves J, Rocha M, Cortez P (2007) Evolution of neural networks
+for classification and regression. Neurocomputing 70(16):
+2. Bouzerdoum A, Arulampalam G (2003) A generalized feedforward neural network architecture for classification and regression. Neural Netw 16(5):561–568
+3. Pfingsten JT (2007) Machine learning for mass production and
+4. Pospichal J, Svozil D, Kvasnicka V (1997) Introduction to multilayer feed-forward neural networks. Chemom Intell Lab Syst
+5. Umbrello D, Ambrogio G, Filice L, Shivpuri R (2007) An ann
+approach for predicting subsurface residual stresses and the
+desired cutting conditions during hard turning. J Mater Process
+6. Hambli R (2009) Statistical damage analysis of extrusion processes using finite element method and neural networks simulation. Finite Elem Anal Des 45(10):640–649
+7. Yang F (2010) Neural network metamodeling for cycle timethroughput profiles in manufacturing. Eur J Oper Res
+8. Unal M, Onat M, Demetgul M, Kucuk H (2014) Fault diagnosis
+of rolling bearings using a genetic algorithm optimized neural
+9. Saravanan R, Venkatesan D, Kannan K (2009) A genetic algorithm-based artificial neural network model for the optimization
+of machining processes. Neural Comput Appl 18(2):135–140
+10. Yao YL, Fang XD (1993) Assessment of chip forming patterns
+with tool wear progression in machining via neural networks. Int
+11. Gagliardi F, Ambrogio G (2013) Design of an optimized procedure to predict opposite performances in porthole die extrusion.
+12. Fığlalı A, Özcan B (2014) Artificial neural networks for the cost
+estimation of stamping dies. Neural Comput Appl 25(3–4):1–10
+13. Yusuff RM, Saberi S (2012) Neural network application in predicting advanced manufacturing technology implementation
+performance. Neural Comput Appl 21(6):1191–1204
+14. Jerez JM, Gómez I, Franco L (2009) Neural network architecture
+selection: Can function complexity help? Neural Process Lett
+15. Haussler D, Baum EB (1989) What size net gives valid generalization? Neural Comput 1(1):151–160
+16. Yoneyama T, Camargo L (2001) Specification of training sets
+and the number of hidden neurons for multilayer perceptrons.
+17. Qing M, Jun-Hai Z, Xi-Zhao W, Qing-Yan S (2013) Architecture
+selection for networks trained with extreme learning machine
+using localized generalization error model. Neurocomputing
+18. Lirov Y (1992) Computer aided neural network engineering.
+19. Haykin S (1994) Neural networks: a comprehensive foundation.
+20. Berger JO (1985) Statistical decision theory and Bayesian analysis. Springer, Berlin
+Neural Comput & Applic (2016) 27:2001–2015
+21. Smith AFM, Bernardo JM (2009) Bayesian theory, vol 405.
+22. Johnson JD, Sexton RS, Dorsey RE (1999) Optimization of
+neural networks: a comparative analysis of the genetic algorithm
+and simulated annealing. Eur J Oper Res 114(3):589–601
+23. Araújo R, Soares SA, Carlos H (2013) Comparison of a genetic
+algorithm and simulated annealing for automatic neural network
+ensemble development. Neurocomputing 121:498–511
+24. Bogart C, Whitley D, Starkweather T (1990) Genetic algorithms
+and neural networks: optimizing connections and connectivity.
+25. Spears WM, De Jong KA (1992) A formal analysis of the role of
+multi-point crossover in genetic algorithms. Ann Math Artif Intell
+26. Agrawal RB, Agrawal RB, Deb K (1994) Simulated binary
+crossover for continuous search space. Complex Syst 9(3):1–15
+27. Glover F (1990) Artificial intelligence, heuristic frameworks and
+tabu search. Manag Dec Econ 11(5):365–375
+28. Li M, Ruan X, Ye J, Qiao J (2007) A tabu based neural network
+learning algorithm. Neurocomputing 70(4):875–882
+29. Lim LEN, Khaw JFC, Lim BS (1995) Optimal design of neural
+networks using the Taguchi method. Neurocomputing
+30. Rowlands H, Packianather MS, Drake PR (2000) Optimizing the
+parameters of multilayered feedforward neural networks through
+Taguchi design of experiments. Qual Reliab Eng Int
+31. Tannock J, Sukthomya W (2005) The optimisation of neural
+network parameters using Taguchi’s design of experiments
+approach: an application in manufacturing process modelling.
+32. Quinlan JR (1996) Learning decision tree classifiers. ACM
+33. Neville PG (1999) Decision trees for predictive modeling. SAS
+34. Kim YS (2008) Comparison of the decision tree, artificial neural
+network, and linear regression methods based on the number and
+types of independent variables and sample size. Expert Syst Appl
+35. Kubat M, Ivanova I (1995) Initialization of neural networks by
+means of decision trees. Knowl Based Syst 8(6):333–344
+36. Maji P (2008) Efficient design of neural network tree using a new
+splitting criterion. Neurocomputing 71(4):787–800
+37. Pinkus A, Schocken S, Leshno M, Lin VY (1993) Multilayer
+feedforward networks with a nonpolynomial activation function
+can approximate any function. Neural Netw 6(6):861–867
+38. Cybenko G (1989) Approximation by superpositions of a sigmoidal function. Math Control Signals Syst 2(4):303–314
+39. Orr GB Müller KR LeCun YA, Bottou L (1998) Efficient backprop. In: Neural networks: tricks of the trade. Springer, Berlin,
+40. Sandberg IW, Park J (1991) Universal approximation using
+radial-basis-function networks. Neural Comput 3(2):246–257
+41. Argyros AA, Lourakis MIA (2005) Is Levenberg–Marquardt the
+most efficient optimization algorithm for implementing bundle
+adjustment? In: Tenth IEEE international conference on computer vision, 2005 (ICCV 2005), vol 2. IEEE, pp 1526–1531
+42. Stafylopatis A, Likas A (2000) Training the random neural network using quasi-newton methods. Eur J Oper Res
+43. Braun H, Riedmiller M (1993) A direct adaptive method for faster
+backpropagation learning: The rprop algorithm. In: IEEE international conference on neural networks, 1993. IEEE, pp 586–591
+44. Al Timemy AH, Al Naima FM (2010) Resilient back propagation
+algorithm for breast biopsy classification based on artificial neural
+Neural Comput & Applic (2016) 27:2001–2015
+45. Khoshayanda MR, Soltani Bozchalooic I, Dadgara A, RafieeTehrania MGhaffari A, Abdollahib H (2006) Performance comparison of neural network training algorithms in modeling of
+bimodal drug delivery. Int J Pharm 327(1):126–138
+46. Matlab Users Guide. Version 7.13. 0.564 (r2011b). the mathworks, 2011
+47. Gagliardi F, Giardini C, Ceretti E, Fratini L (2009) A new
+approach to study material bonding in extrusion porthole dies.
+48. Umbrello D Ambrogio G, Filice L (2004) Numerical analysis of
+the fracture surface in thick sheets blanking. In: Proceedings of
+49. Filice L, Ambrogio G, Gagliardi F (2004) First experimental and
+numerical evidences concerning the hydropiercing process. In:
+7th Esaform conference on material forming, Trondheim (Norway), 28–30 April 2004
+50. Fluhrer J (2005) Deform 3d version 5.0 user’s manual [z].
+Columbus: Scientific Forming Technologles Corporation
+51. Schmid SR, Kalpakjian S (2010) Manufacturing processes for
+engineering materials, vol 5. Pearson education
+52. Peascoe RA, Watkins TR, Thiele JD, Melkote SN (2000) Effect
+of cutting edge geometry and workpiece hardness on surface
+residual stresses in finish hard turning of aisi 2100 steel. J Manuf

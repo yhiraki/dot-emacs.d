@@ -1,0 +1,671 @@
+Computer Information Systems, Southwest Missouri State University, 901 South National,
+Springfield, MO 65804, e-mail: RandySexton@smsu.edu
+School of Accountancy, Georgia State University, 35 Broad Street, Atlanta, GA 30303,
+Department of Accounting, University of Southwest Louisiana, P.O. Box 43450, Lafayette,
+LA 70504-3450, e-mail: Harlan@louisiana.edu
+This study proposes the use of a modified genetic algorithm (MGA), a global search
+technique, as a training method to improve generalizability and to identify relevant
+inputs in a neural network (NN) model. Generalizability refers to the NN model’s ability
+to perform well on exemplars (observations) that were not used during training (outof-sample); improved generalizability enhances NN’s acceptability as a valid decisionsupport tool. The MGA improves generalizability by setting unnecessary weights (or
+connections) to zero and by eliminating these weights. Because the eliminated weights
+have no further impact on the training (in-sample or out-of-sample data), the relevant
+variables can be identified from the model. By eliminating unnecessary weights, the
+MGA is able to search and find a parsimonious model that generalizes well. Unlike the
+traditional NN, the MGA identifies the model variables that contribute to an outcome,
+helping decision makers to rationalize output and accept results with greater confidence.
+The study uses real-life data to demonstrate the use of MGA.
+Subject Areas: Artificial Intelligence, Decision Support, Financial Distress,
+The neural network (NN) is a computer-aided decision-support tool that has gained
+prominence in business decision making (Bell, Ribar, & Verchio, 1990; Boritz &
+Kennedy, 1995; Brockett, Cooper, Golden, & Pitaktong, 1994; Coats & Fant, 1993;
+Etheridge & Sriram, 1996; Etheridge, Sriram, & Hsu, 2000; Fanning & Cogger,
+Improving Decision Effectiveness of Artificial Neural Networks
+1994; Liang, Chandler, Han, & Roan, 1992; Montagno, Sexton, & Smith, 2002; Tam
+& Kiang, 1992). Neural networks recognize patterns underlying datasets. Based on
+these patterns, they classify data into discrete categories that assist experts in the
+decision-making process (Bell & Tabor, 1991; Etheridge & Sriram, 1996; Fanning
+& Cogger, 1994; Liang et al., 1992; Parker & Abramowicz, 1989; Sexton & Dorsey,
+2000). For example, bank loan officers classify loan applications as weak, moderate,
+or strong, and auditors, as part of a client audit, evaluate a client’s internal controls
+and financial health in a similar fashion (Bell et al., 1990; Klersey & Dugan, 1995;
+Tam & Kiang, 1992). In these examples, an NN can be used to make the initial
+determination about a loan application, a client’s internal controls, or financial
+health as strong, weak, or moderate. Based on the NN categorization, a loan officer
+or an auditor can decide whether to investigate further before sanctioning a loan,
+extending audit procedures, or qualifying an audit report.
+Several attributes make NNs attractive decision-support tools. Neural networks are basically classificatory and prediction techniques. However, because
+they employ learning algorithms that approximate practical experience, their output can be used by experts to support decision making. When chosen with care
+and used with adequate training (i.e., choose the right NN paradigm, modify the
+basic algorithm suitably, select an appropriate-sized structure, and so on), the NNs
+can be used as decision tools in several situations. Certain attributes of NNs make
+them more reliable than traditional statistical techniques such as logit or multiple
+discriminant analysis (MDA): Neural networks require fewer assumptions about
+the data and the model, and are generally more robust, with fewer classification
+errors (Coats & Fant, 1993; Odom & Sharda, 1990). Neural networks are capable of recognizing trends, learning from the data, and then making predictions.
+These qualities increase their reliability during classification and prediction (Bell &
+Tabor, 1991; Etheridge & Sriram, 1997; Fanning & Cogger, 1994; Liang et al.,
+1992; Parker & Abramowicz, 1989). Unlike regression models, NNs allow the use
+of both quantitative and qualitative cues, while incorporating all possible interactions among the variables.
+Neural networks also have limitations: their paradigms and architectures differ (e.g., backpropagation, categorical learning networks, and probabilistic neural
+networks). Furthermore, their learning laws typically vary across these paradigms:
+For instance, backpropagation NNs use gradient-descent learning laws; categoricallearning NNs use Kohonen learning laws; and probabilistic NNs use both Kohonen
+and probabilistic learning laws. In fact, even within the same paradigm, learning
+laws have several variations. The standard backpropagation learning law, the delta
+rule, has many variants—fast learning, quick prop, normalize cumulative delta,
+delta-bar-delta, extended delta-bar-delta, and so on. Their architectural variations
+influence the NN’s training, selection of input, output, hidden layers, and suitability
+for various problem domains. For example, backpropagation NNs are better suited
+for prediction-type problems, while categorical-learning networks are better suited
+for classification-type problems (Etheridge and Sriram, 1997; Etheridge, Sriram,
+& Hsu 2000). Therefore, if an NN is trained without considering architectural differences and its suitability for a specific problem domain, the NN’s performance
+Neural networks function like black boxes, categorizing an outcome as belonging to either group 1 or group 2. However, they do not indicate why a certain
+observation is categorized as such, nor do they identify the input variables that
+helped to determine this decision. In the absence of such information, decision
+makers would be unable to rationalize the output produced by the NN or use the
+output to support a decision. The foremost issue is the difficulty in generalizing the
+NN’s output beyond the data with which it was trained (Burkitt, 1991; Cottrell, Girard, Girard, & Mangeas, 1993; Holmstrom & Koistinen, 1992; Kamimura, 1993;
+Kruschke, 1989; Romaniuk, 1993). The data used to train an NN and the approach
+used during training (e.g., choice of input, output, and hidden layers used) constrain
+its applicability to other situations. This is a very serious concern. The majority of
+NN research uses derivative-based search techniques in which a researcher, during training, includes all available variables that could help in predicting outcome.
+However, it is unlikely that all the variables included in the model significantly
+contribute to the prediction of an outcome. In the derivative-based approach, the
+weights associated with individual variables cannot have a zero value. To ensure
+that nonzero weights do not impact the final outcome, during training, through intervention, the NN is made to match nonzero weights of irrelevant variables against
+each other so that they cancel each other. However, when a trained NN is used on
+other exemplar sets, the technique may or may not produce values that cancel
+each other, causing an increase in estimation error and a decrease in performance
+Past studies have attempted to overcome the limitation of generalizability
+in backpropagation NNs by eliminating weights that are close to zero (Baum &
+Haussler, 1989; Burkitt, 1991; Cottrell et al., 1993; Kamimura, 1993; Karmin, 1990;
+Romaniuk, 1993). However, this process had its own limitations: researchers observed that removing weights that are close to zero did not necessarily improve
+prediction or generalizability because, at the time of elimination, these items already did not contribute to the prediction; or, alternatively, select input variables
+that could be taken out of the model and retrained separately. This procedure is time
+consuming and reduces the value of using a neural network as a decision-support
+technique. Therefore, a better approach would use a technique that does not depend
+on derivatives and allows weights with zero values. If all of the weights associated
+with an input in the final NN solution are zero, then this input, regardless of its
+value, cannot introduce error into the prediction.
+In this paper, we address some of the issues that constrain NN performance
+and acceptability and propose a technique to overcome them, focusing on refining network training, identifying variables that contribute to a specific outcome,
+finding a parsimonious model, and improving NN generalizability. We propose a
+modified genetic algorithm (MGA) approach to use during NN training that helps
+in overcoming many of these issues (Sexton & Dorsey, 2000; Sexton, Dorsey, &
+Johnson, 1998, 1999). The MGA is a global search technique that improves NN
+performance by simultaneously searching for an optimal structure and a solution
+that best fits the data. We show that the MGA improves the generalization of NN
+output and helps in identifying statistically significant input variables. For greater
+credibility, we use the MGA procedure on real-life data.
+Improving Decision Effectiveness of Artificial Neural Networks
+In the next section, we discuss the methodological issues associated with the
+NN and describe the MGA procedure used in this study. In the third section, we
+illustrate a financial health problem and the data used to evaluate financial health.
+In the last two sections, we discuss the results and offer conclusions.
+NEURAL NETWORKS: THE MODEL SPECIFICATION ISSUES
+To decision makers, an NN will be a valuable support tool if, after training, it
+performs with the same accuracy that it exhibited during training (Burkitt, 1991;
+Cottrell et al. 1993; Drucker & LeCun, 1992; Fahlman & Lebiere, 1990; Holmstrom
+& Koistinen, 1992; Kamimura, 1993; Karmin, 1990; Kruschke, 1989; Lendaris &
+Harls, 1990; Romaniuk, 1993). However, as these studies point out, the prediction
+is far less accurate when the trained NN is used on new data. To a significant extent,
+the loss in performance accuracy can be traced to the search methods and algorithms
+used during training. Most NNs are trained using some forms of gradient search
+algorithms (e.g., backpropagation). Though the gradient search algorithms train
+the NNs well and provide a good fit for the training or in-sample data, the search
+processes used by the gradient search algorithm during training also limit the NN’s
+usability when applied to out-of-sample data.
+While searching for a solution, the gradient search algorithm moves from
+one solution to another until it finds the optimal local solution, which is selected
+by following the path of steepest descent on the current valley of the error surface,
+which is likely to be a local valley. Often, the researcher may force the NN to
+converge to a local solution. This approach would be quite acceptable when a
+decision problem is simple, with only a few acceptable solutions. Even for simple
+functions, the NN model’s error surface could be quite complex, with multiple
+solutions. Under these conditions, applying a single solution that converged or
+was forced to converge locally would be inappropriate. Therefore, for complex
+problems, the network must make an exhaustive search of the parameter space
+before it can identify a globally optimal solution. The researcher must restart the
+search process at appropriate points until the network identifies the global solution.
+However, uncertainty about both the points and the solution persists. Consequently,
+the solution and relationships that were found appropriate during training may
+not hold when the trained NN is applied to other data, undermining the NN’s
+Gradient search algorithms also lead to overfitting (also known as “force
+fit”), which is caused by the additional and unnecessary weights used during the
+training process to map specific points in the training data. When a trained NN
+has too many parameters, it forces the data to a solution instead of learning the
+underlying data patterns associated with a solution. While force fitting is helpful
+in increasing accuracy during training, it is detrimental when applied to data that
+are not similar to the training data. Since the NN did not adequately learn the
+underlying data patterns during training, its ability to discern data patterns from
+new data is questionable, once again undermining generalizability.
+Overfitting is an important issue to researchers because they need to strike
+a balance between finding a good sample fit by increasing the number of parameters and finding a parsimonious model by excluding unnecessary parameters. In
+the traditional statistical literature, several tests are available to identify relevant
+parameters and find a parsimonious model. These tests typically compare a model
+with more parameters and a superior objective function value to a second model
+with fewer parameters. A new parameter is included only if it is shown to statistically improve the value of the objective function. Similar tests are not available in
+the use of the NN. Therefore, many NN studies adapted the traditional statistical
+tests to identify optimal architectures for NNs. For example, several studies used
+gradient techniques to let some of the connection weights to decay to zero (Baum
+& Haussler, 1989; Burkitt, 1991; Cottrell et al., 1993; Kamimura, 1993; Karmin,
+1990; Romaniuk, 1993). However, this procedure did not help in identifying the
+correct weights or the hidden nodes that should be removed during training. Other
+studies eliminated individual weights that were nearly inactive, thus reducing the
+model complexity. However, this approach did not improve generalizability, either.
+These weights were chosen because, at the time of elimination, they had very low
+impact. Further, by focusing on individual weights, the approach ignored the combined impact of several weights. A more accurate approach would remove active
+weights or hidden nodes and then evaluate the impact on the overall solution. Such
+an approach would be similar to the traditional parametric statistical techniques in
+which the model is reestimated and the overall impact of the variable is tested as
+each variable is removed. In this approach, as weights are removed, the network
+is retrained using the new architecture to obtain a new global solution, which is
+subsequently compared with earlier solutions for improvement in network training.
+This technique is very time consuming and would defeat the NN’s usability. This
+study, while using an MGA to train the NN, will also explore many of these issues.
+Before proceeding with a discussion of the MGA procedure used in this study, we
+will briefly describe the genetic algorithm (GA) procedure. The GA is a global
+search method that searches from one population of solutions to another while
+comparing the newly generated solution to the best solution obtained from the
+earlier search. It works well when finding solutions to functions with complex
+nonlinear relationships (Dorsey, Johnson, & Mayer, 1994; Dorsey, Johnson, & Van
+Boening, 1994; Dorsey & Mayer, 1995; Sexton, Alidaee, Dorsey, & Johnson, 1998;
+Sexton & Dorsey, 2000). A researcher can use the GA to improve the performance
+of a backpropagation NN or even as an alternative to backpropagation (Schaffer,
+While the GA can be a substitute for backpropagation in NNs, as prior research reports, when compared to other gradient learning methods, it was not exemplary in optimizing network performance (Schaffer et al., 1992). It was shown
+that the weaknesses in the GA’s performance could be traced to a few implementation issues (Sexton, Dorsey, & Johnson, 1998). For example, most GA studies used
+binary strings while coding variable weights. The binary coding worked well if the
+model contained only a few input variables. However, when the number of variables and the number of weights associated with the variables increased, the binary
+encoding led to long strings, reducing the GA’s functional effectiveness. A few
+studies point out that binary encoding is not required in every case and that instead
+Improving Decision Effectiveness of Artificial Neural Networks
+the real values of the parameters could be used (Davis, 1991; Michalewicz, 1992;
+Montana & Davis, 1989; Sexton & Dorsey, 2000; Sexton et al., 1999). As Montana
+and Davis (1989) observed, when the real values are used, the GA outperforms
+the backpropagation algorithm. Sexton, Dorsey, and Johnson (1998) also showed
+that using real-valued parameters enhances the GA’s performance. The following
+paragraphs provide a description of the GA modifications that created the MGA.
+The objective function commonly used in NN studies is the quadratic loss function (also referred to as sum of squared error [SSE] or root mean squared error
+[RMSE]). Researchers choose the quadratic function because it behaves well, is
+differentiable, and permits the use of derivates useful for optimization. Since the
+GA is not restricted by derivatives, the objective function can be changed to allow
+for a penalty for unneeded weights. Therefore, this study modified the objective
+function so that the objective function decreases as error is reduced and as weights
+are eliminated. The modified objective function is not a smooth function and can
+be irregular when weights are added or removed. Equation (1) shows the modified
+The number of exemplars in the dataset is N, O is the observed value of the
+dependent variable, Ô is the NN estimate, and C is the number of nonzero weights in
+the network solution. Basically, the objective function is the SSE with an additional
+penalty for each nonzero weight that is equal to the current RMSE. The penalty is
+basically the average error of one exemplar for a dataset. The penalty must be set
+properly. For example, if it is set too high, the network, instead of searching for
+optimal weights, will prematurely eliminate required connections, and the resulting
+structure that is identified, while appearing parsimonious, may not predict well.
+On the contrary, if the penalty value is set too low, several of the unneeded weights
+will remain in the final solution, and the trained NN may not predict well when
+applied to other data, leading to reduced generalizability. The objective function
+was chosen only by trial and error, and while it worked well for the problem used
+in this study, it is not proposed as the optimal objective function. Future research
+must examine this issue further to refine the objective function and to identify the
+Along with a modified objective function, it is also important to find a way to automatically introduce zero weights into the solutions, to identify irrelevant weights.
+This was accomplished by an additional MGA operation (mutation2). When a
+newly generated solution is evaluated, mutation2 ensures that each weight in the
+new solution had a small probability of being replaced by a hard zero. The mutation for probability (MUTP) is computed as follows: MUTP = .5∧ (1/KWT),
+where KWT is the current number of input weights in a single solution (please
+note that the MGA only searches for input weights, leaving the output weights to
+be determined by ordinary least squares [OLS]). Because the probability is based
+on the number of current input weights, as the number of hidden nodes increase,
+the probability of replacing an individual weight in the generation decreases. In
+addition to MUTP, for each weight in the new solution, a random number in the
+range of (0, 1) is also generated. If this random number is larger than MUTP, that
+weight is replaced with a hard zero. In all other cases, the weight remains unaltered. Suppose there are 12 solutions in the current population. It is quite likely
+that, for one of these 12 solutions, one of its weights will be replaced with a hard
+zero in each generation of training. After replacing the weight, the MGA will begin
+the evaluation process again on this new generation of solutions. At this stage, it
+finds out whether the solution that had its real-valued weight replaced by a hard
+zero is performing well, compared to the other 11 solutions. If it performs well,
+the chances of this particular solution being redrawn into the next generation are
+increased; if it performs badly, it will probably be eliminated in future generations
+(survival of the fittest). The entire process is repeated until a user-defined number
+of generations is reached. Thus, the procedure searches for a global solution and
+The modified objective function and mutation2 help both the search for a
+parsimonious model and generalization of the neural network. As discussed earlier,
+in most NNs, during training on a dataset, the unnecessary weights are forced to
+cancel each other out because of the gradient algorithm requirement that all of them
+must be nonzero. This may produce a well-trained NN with low errors. However,
+when this trained NN is later used on a new set of data, the weights no longer
+cancel each other, and their performance and applicability to data that differs from
+the training data becomes questionable. Regardless of the search technique used, the
+NN is good at using only the weights that are truly relevant in producing an estimate.
+During training, popular neural network architectures such as backpropagation
+produce weight values that essentially cancel each other. In doing so, these trained
+networks become less than effective when applied to data that differs from the
+training data; in other words, they lose their generalizability because the weights
+no longer cancel each other out, but instead introduce additional errors in the
+estimates. The MGA used in this study does not suffer from this limitation. Instead
+of finding combinations of unneeded weights that cancel each other out during
+training, it simply zeroes them out. During training, the MGA identifies irrelevant
+variables in the model by eliminating unnecessary weights. If all the weights for
+a particular input are found to be unnecessary (or zeroed out), the input has been
+found to be irrelevant in the NN model. Because these irrelevant variables are
+removed in this manner, they can no longer introduce errors into the output, thus
+improving the reliability of the trained network when applied to new data.
+Choosing Hidden Nodes and Selecting the BEST Solution
+One of the issues associated with NN training is overtraining, which occurs in the
+presence of too many hidden nodes and connections in the network structure, and
+when training is prolonged beyond a reasonable limit. Therefore, it is important
+Improving Decision Effectiveness of Artificial Neural Networks
+to choose the optimal number of hidden nodes. To determine this for each model,
+we used the following automatic procedure: We started each NN training, using the MGA previously described, with one hidden node and then trained it for
+MAXGEN generations. For this study, MAXGEN was set to 100 generations during the hidden node search process. Once MAXGEN was reached, the best solution
+at that point was saved as the BEST solution, and an additional hidden node was
+included in the NN architecture. At this point, all of the solutions in the new generation were set to the BEST solution, leaving the additional weights that were added
+with the new hidden node set to a hard zero. In this way, any additional improvement in error did not come from a loss in information from the previous training
+cycle. Also, any additional structure complexity was produced only if, by the original mutation process, a zero weight was replaced by a random value that, when
+evaluated, reduced the objective function value. On completion of this training, the
+BEST solution for this architecture was compared with the BEST solution using
+the objective function value for comparison. If this solution was better than the
+BEST solution, it was then chosen as the BEST solution and was saved for future
+evaluation. This process was continued until there was a hidden-node addition that
+did not find a solution better than the BEST solution. When this occurred, the NN
+model with the BEST solution and its corresponding architecture was trained with
+an additional 1,000 generations, which completed the training process.
+The objective of this study is to test how well an MGA-trained NN performs in a
+real-world situation. The real-world situation is the evaluation of a bank’s financial
+condition, and the data are the financial ratios of a group of healthy and failed
+banks. Evaluating financial condition is very important because of its impact on
+various groups: stockholders want to know about the financial health of the firm
+in which they invest. Bank loan officers evaluate financial health routinely while
+processing loan applications and monitoring loan clients. Regulatory agencies such
+as the Securities and Exchange Commission (SEC) and the federal bank regulators,
+as part of the monitoring process, regularly evaluate the financial conditions of
+these institutions, watching for poor performance and recommending measures to
+improve financial health. Auditors evaluate the financial condition of audit clients
+before expressing an opinion on the continued viability or “going concern” status
+of the client (Dilla, File, Solomon, & Tomassini, 1991).
+The financial health evaluation decision has far-reaching implications, and
+must be conducted with utmost care. For example, if auditors issue an audit opinion
+that states that a client will continue to be viable and the client fails soon afterward,
+the firm’s stockholders and creditors could sue the auditor. On the other hand,
+if auditors inappropriately issue an opinion expressing doubts about a client’s
+financial viability, the opinion could destabilize the firm and could eventually lead
+to its collapse, causing significant loss to stockholders and creditors (Palmrose,
+The far-reaching significance of the financial health evaluation is one of the
+reasons why researchers continue to build financial distress models and experiment with techniques that improve prediction (Altman, 1968; Barr & Siems, 1994;
+Beaver, 1966; Boritz & Kennedy, 1995; Elam, 1975; Etheridge & Sriram 1996,
+1997; Etheridge et al., 2000; Glorfeld, Hardgrave, & Pendley, 1998; Graham &
+Horner, 1988; Hamer, 1983; Jones, 1987; Koh & Oliga, 1990; Koh & Killough,
+1990; Martin, 1977; Ohlson, 1980). Following this stream of research, this study
+reports on modifications to a prediction and classification technique, the NN, and
+examines the ways that these modifications improve the NN’s ability to identify healthy and failing banks. The study also notes that eliminating unnecessary
+weights during training improves the NN’s ability to identify relevant variables that
+contribute to financial health. The study also demonstrates that the MGA-trained
+NN can be applied with greater confidence to data other than the training data, improving the NN’s generalizability. To ensure that the MGA-trained NN is indeed a
+reliable technique to evaluate financial health, its performance is compared with the
+performance of a benchmark NN identified in other studies as a reliable performer.
+These are significant contributions because auditors, loan officers, and other human
+experts are generally uncomfortable accepting outputs from techniques that do not
+allow them to rationalize the predictions. When a decision-support technique identifies the relevant variables associated with a decision situation (e.g., healthy or
+failing), the experts are more comfortable accepting the predictions or classifications and they can more meaningfully interpret the results and form their judgments.
+If the technique also has been shown to work reliably on out-of-sample data, its
+acceptability as a decision-support tool will rise accordingly. This study does not
+propose that an MGA-trained NN would replace human judgment; it demonstrates
+only that an MGA-trained NN can provide reliable decision support. For example,
+in the audit situation, if the MGA/NN determines that banks with certain financial
+attributes are failing, the auditor can use the information as a warning, and can
+then decide whether the situation warrants extending the audit scope and audit
+The bank financial ratio data used in this study were obtained from a Big Four
+accounting firm. The original dataset covered three years, 1986 to 1988, and comprised financial ratio data for 1,139 banks from all regions of the United States. The
+original dataset consisted of 991 healthy banks and 148 failed banks. The definition
+of “failed bank” was based on the Federal Deposit Insurance Corporation (FDIC)
+categorization of failure: assisted mergers and liquidated banks (FDIC Statistics
+on Banking, 1992). The FDIC assumed the operations of the 148 failed banks in
+1989, so we used the years 1986, 1987, and 1988 to represent three years, two
+years, and one year prior to failure for these 148 banks.
+The original data for each bank included a broad-based set of 57 financial
+variables related to the banks’ financial health. Two variables from the original
+sample, interest expenses to deposits and volatility, were excluded from the final
+sample because data were not available for all three years. Similarly, we excluded
+a bank from analysis if data on one or more variables were missing. Therefore, the
+final sample for 1988 was 941 healthy and 137 failed banks; for 1987, 944 healthy
+and 135 failed banks; and for 1986, 968 healthy and 139 failed banks. Although
+there were minor variations in the number of banks used during each of the three
+Improving Decision Effectiveness of Artificial Neural Networks
+years, the same set of banks are compared over the three-year horizon. Using this
+final sample, 30 different datasets were constructed that differed in the combination
+of observations or exemplars included in the training and testing subsamples. The
+holdout sample consisted of 192 healthy and 23 failed banks for each of the three
+years. This was used to ensure that a specific data arrangement did not influence
+As a first step, the MGA procedure was used to train the NN on each of the
+30 datasets. The training began after setting the parameters to values recommended
+by Dorsey and Mayer (1995) and Sexton, Dorsey, and Johnson (1998), and after
+including the additional modifications. After training, the network’s performance
+(as a function of error rates) was compared to a benchmark NN—the categorical
+learning network, or CATLRN, identified in earlier studies as a reliable performer
+(see Etheridge and Sriram, 1997). At the end of the training, 30 NN models were
+available for comparison with the CATLRN model. The comparison was made
+among the average error rates for all 30 NN models trained by MGA procedure
+with the best error rates of CATLRN, on both estimated overall error rate (EOER)
+and on type I and type II error rates for each of the three years prior to bankruptcy.
+The results are reported in Table 1. For brevity’s sake, only the error rates for the
+average of all 30 NN models and the CATLRN are reported. As other bankruptcy
+studies have indicated, the relevant variables change as a firm gets closer to failure,
+and more recent values of input variables predict financial health better than do
+past values. Therefore, a comparison of error rates over the three years allows us
+to evaluate the network’s performance on a time series basis and to observe the
+improvement in predictability as a bank approaches failure.
+The estimated overall error rate was computed as
+EOER = (Type I ∗ Prob. of Failure) + (Type II ∗ Prob. of Nonfailure).
+The estimated overall error rates for both networks were satisfactory, ranging from
+.0410 to .0648 for MGA and .0715 to .1217 for CATLRN. Both MGA and CATLRN
+had low type II errors for three years and two years prior to bankruptcy, indicating
+the ability to reliably identify healthy banks more so than distressed banks. The type
+I error rate—in which a bankrupt bank is incorrectly identified as healthy—was
+higher for both models, particularly when the data pertained to two and three years
+prior to eventual bankruptcy. When compared on the attributes of error types and
+estimated overall error rate, all of the MGA-supported networks appear to perform
+much better than the benchmark network, CATLRN.
+In the real world, when evaluating financial health, decision makers do not
+consider the costs of type I error and type II error to be equal. As past studies point
+Type I Type II EOER Type I Type II EOER Type I Type II EOER
+out, decision makers view incorrectly classifying a bankrupt firm as healthy (type
+I error) to be far more serious than incorrectly classifying a healthy firm as failed
+(type II error) (Altman, Haldeman, & Narayanan, 1977; Hopwood, McKeown, &
+Mutchler, 1989; Sinkey, 1975; Wilson & Sharda, 1994). That is, a financial distress
+model with a low EOER but with a high type I error rate is perceived as costlier
+to use than a financial distress model with a high EOER and a low type I error
+rate. However, in the real world, it is not easy to ascertain the actual costs of type I
+and type II error rates. Therefore, several studies have suggested the use of relative
+cost ratios (Altman et al., 1977; Hopwood et al., 1989; Dopuch, Holthausen, &
+Leftwich, 1986; Zmijewski, 1984). Hopwood et al. (1989) suggests the use of
+following type I/type II cost ratios—1:1, 10:1, 20:1, 30:1, 40:1, and 50:1. We used
+a similar set of ratios to compare the relative costs of misclassification of the MGAtrained NN with the benchmark, CATLRN (see Coats & Fant, 1993; Cottrell et al.,
+1993; Etheridge & Sriram, 1997; Odom & Sharda, 1990).
+Using the cost ratios suggested by Hopwood et al. (1989), we estimated
+relative cost (RC) of using a financial distress model as
+where PI is the probability of a type I error, CI is the relative cost of a type I error,
+PII is the probability of a type II error, and CII is the relative cost of a type II error
+(Koh, 1992). The probability of failure (.02), the probability of nonfailure (.98),
+and the type I and type II model error rates were also used to calculate the NN
+models’ RC. Lower relative costs are preferable to higher relative costs. Table 2
+compares the relative costs of misclassification for MGA and CATLRN.
+Comparisons of the mean relative costs of performance reveals that MGA
+outperforms CATLRN for all three years with lower relative costs misclassification.
+The 1:1 cost ratio is included only to allow comparison with earlier studies.
+The results reported in Table 1 and Table 2 could suffer from one possible
+constraint: overtraining. As pointed out earlier, overtraining occurs when there are
+too many hidden nodes and connections in the network structure, and if the training
+is prolonged beyond a reasonable limit. The MGA procedure used in this study helps
+in choosing an optimal structure in terms of the number of hidden nodes, active
+Excludes the results of the 1:1 cost ratio.
+Improving Decision Effectiveness of Artificial Neural Networks
+connections (nonzero weights), and input variables; therefore, overtraining should
+not be an issue. We wanted to be certain that the network structure generated from
+the MGA procedure was insensitive to overtraining. Since the average training for
+all 30 networks consisted of only 1,850 generations, we chose one of the 30 models
+that had a greater number of hidden nodes and weights compared to the other 29
+models, and subjected it to further training. The average number of hidden nodes
+and the average number of nonzero weights for the 30 models were 8.4 and 56.2,
+respectively. We chose model 23 with 12 hidden nodes and 72 nonzero weights. We
+originally trained model 23 for 2,200 generations: 100 generations for each hidden
+node and a final 1,000 generations to make it converge to the solution. Table 3
+reports the results and compares them to the benchmark CATLRN.
+During the three years, for type I, type II, estimated overall error rates, and
+mean of the relative costs, the MGA model 23 outperformed the CATLRN model.
+Only in the year 1988, model 23 had slightly higher type I error rate than CATLRN.
+That is, after 2,200 generations, the MGA model 23 performed more than satisfactorily. To gain confidence that this model could not be overtrained, we trained
+model 23 for an additional 100,000 generations. Table 4 reports the results. During
+the years 1986–1988, for type II errors, estimated overall error rates, and mean
+of the relative costs, for the extensively trained MGA model 23, the error rate diminished or stayed the same. However, type I error for 1986 was slightly higher
+(misclassification of one additional type I) for the extensively trained model 23.
+We also compared the sum of squared errors of the minimally trained model
+23 to the extensively trained model 23. This comparison shows the changes in
+SSEs as training continued. If the SSEs for the testing set increased after continued
+training, it would indicate the stress of overtraining; if it declined or remained
+unchanged, it would suggest no impact due to overtraining. The SSEs for the
+minimally trained model 23 was 115.43 during training and 26.33 during testing.
+The SSEs for the extensively trained model 23 were 111.89 during training and
+22.54 during testing, showing that model 23 did not suffer from the stress of
+A major purpose of this study is to demonstrate that an MGA-trained NN
+can identify relevant variables from a financial health model. Along with the MGA
+procedure, we used a sensitivity analysis on the 30 models to identify the variables
+that contributed to financial health. One approach we could have taken is to choose
+a specific model—for example, model 23—exclude all irrelevant variables from it,
+and point to the contribution of the remaining variables. Although this approach
+is cost effective, it suffers from certain limitations. Many of the ratio variables
+used in this study are derived from complementary information and are capable of
+signaling financial health in varying degrees. Suppose we select two NN models,
+1 and 2, depending on the initial random starting point and makeup of the dataset.
+Model 1 may identify a different set of ratios variables than model 2. For example,
+model 1 may choose return on equity, while model 2 may choose return on assets.
+Both return on equity and return on assets use revenues as the numerator. Both
+model 1 and 2 may predict equally well. Therefore, using all 30 models from the
+analysis and performing a sensitivity test on all of them makes more sense and
+gives us greater confidence about the sensitivity of the variables.
+Table 4: MGA model 23: Error rates after 102,200 generations.
+Table 3: MGA model 23: Error rates after 2,200 generations.
+Improving Decision Effectiveness of Artificial Neural Networks
+To perform the sensitivity analysis, we first developed a test dataset, using
+the following criteria. For every bank from the sample (including both training
+and holdout samples), we computed the maximum, minimum, and average values
+of each of the 55 input variables. We then created two exemplars or observations
+for each of the variables. For example, the first exemplar contained its minimum
+value as its input value, while the remaining 54 input values contained their respective average values. The second exemplar for variable 1 contained its maximum
+value as its input value, while the remaining 54 input values contained their
+respective average values. This way, when we run these two observations through
+the trained network, the difference between the two predictions will be the net effect
+of this variable, as its value changes from its minimum to its maximum, holding all
+other input values the same. This was done for all of the 55 variables. By testing
+these datasets on the 30 trained NNs, we sought to observe the contribution and
+direction of each input variable as it changed from its lowest to its highest value.
+While the 30 trained NNs predicted similarly, their structures differed. Table 5
+provides descriptive information on the structures and performance of the 30 NN
+The sensitivity analysis also showed that several of the ratio variables were
+capable of indicating financial health. Table 6 lists the 55 variables and their average
+contribution to the prediction, in order of contribution, ignoring the sign. They
+are categorized as Significant Contributors (.35>), Moderate Contributors (.15
+to <.35), Weak Contributors (.05 to <.15), and Noncontributors (<.05). These
+categories are arbitrary and are conservatively based on the amount it would take
+to change the prediction’s classification. (The average distance a prediction must
+change, before its classification changes, is .41; this change is computed by taking
+the absolute difference between the prediction and the cutoff and averaging that
+number over the 30 test datasets.) The results are also presented in a graphic form
+Table 6 shows that some ratio variables were more sensitive in predicting
+financial health than were others. The signs for these variables were either positive
+or negative. A positive sign indicates that an increase in the variable’s value is
+associated with a healthy financial condition, whereas a negative sign indicates
+that an increase in the variable’s value is associated with a failing health condition.
+There were a few variables where the contribution was either positive or negative,
+Table 5: Descriptive statistics for the sensitivity analysis
+Average number of relevant variables identified
+Minimum number of relevant variables identified
+Maximum number of relevant variables identified
+Provision for loan and lease loss to total
+Total interest expense to total operating
+Improving Decision Effectiveness of Artificial Neural Networks
+Table 6: (continued) Average sensitivity analysis.
+Provision for loan and lease loss to total
+Interest-bearing deposits to total deposits
+depending on which NN model was chosen. However, on comparison, either the
+average positive or average negative contribution dominated. For example, in the
+case of the variable LARDPAST its average negative contribution over the 30 NN
+models was –.6543, while its average positive contribution was .0063.
+Three variables from the Significant Contributors section, COMTDEPS,
+COREDEPS, and FUNDINC, had positive signs, indicating that an increase in
+these variables’ value reveals better financial health, and suggesting that a bank
+with higher values for these three variables is more likely to be classified as healthy.
+The three ratios relate to a bank’s operating performance. Seven variables had significant negative association with financial health. Three of these variables relate to
+loan quality (NPASST, NLNSASST, and INSIDRS). Two relate to earnings quality (OEOPINC and OVHROPIN). The remaining two variables, OTHREAST and
+LARDPAST, relate to a bank’s long-term deposit portfolio and real estate loans.
+During the 1980s, decline in real estate values was a major contributor to bank financial distress. These results are consistent with the findings of earlier studies that
+revealed variables associated with loan quality, earnings quality, and commitments
+to be the primary factors associated with the financial health of banks (Etheridge
+& Sriram, 1997; Martin, 1977; Sinkey, 1975).
+Figure 1: Predictive contribution of variables: A sensitivity analysis.
+A neural network is a useful computer-aided decision-support tool. However, the
+NN’s major limitations are the lack of transparency in their prediction and classification, and the inability to provide information on relevant and irrelevant variables
+associated with a specific outcome. This lack of transparency reduced their attraction for decision support to experts who were unable to rationalize the output or
+make sense of the rationality behind the outputs. Further, after training, when the
+NNs were used on out-of-sample data, their performance reliability was far lower.
+This undermined the value of a trained NN as a generalizable decision-support
+In this study, we demonstrated that training the NN with a modified genetic
+algorithm procedure not only made the output generation process more transparent,
+but also improved the NN’s generalizability to out-of-sample data. The study revealed that it is possible for MGA-trained NNs to identify variables that contribute
+to a prediction or classification. As a further improvement of the NN training,
+the study also showed that the MGA was resistant to NN overtraining, continuing to perform reliably after extended training. The study demonstrated all of
+these findings using real-life financial ratio data and in a real-life decision situation, evaluating bank financial health. To further substantiate the reliability of the
+MGA procedure, the study also compared its results with a proven NN technique,
+CATLRN. The MGA approach was not only able to perform equal to the CATLRN;
+in many instances, the MGA outperformed the CATLRN.
+The study makes the following contributions: NN training can be improved
+without the constraints of overtraining; it is possible to use an MGA-trained NN to
+identify not only a parsimonious model, but also the relevant contributing variables
+Improving Decision Effectiveness of Artificial Neural Networks
+within the model; and an MGA-trained NN is more capable of being generalized to
+out-of-sample data than the frequently used NNs. Collectively, these improvements
+are likely to improve the acceptability of the NN as a suitable decision-support
+tool, encouraging human decision makers’ willingness to use the output because it
+provides a basis to rationalize the predictions and classifications. Based on the NN
+output, human experts can better use their experience, intuition, and knowledge to
+decide whether they should further examine an issue before making a final decision.
+[Received: February 2002. Accepted: January 2003.]
+Altman, E. (1968). Financial ratios, discriminant analysis and the prediction of
+corporate bankruptcy. Journal of Finance, 23(4), 589–609.
+Altman, E., Haldeman, R., & Narayanan, P. (1977). ZETA analysis: New model
+to identify bankruptcy risk of corporations. Journal of Banking and Finance
+Barr, R. S., & Siems, T. F. (1994). Predicting bank failure using DEA to quantify
+management quality. Federal Reserve Bank of Dallas Financial Industry
+Baum, E. B., & Haussler, D. (1989). What size net gives valid generalization?
+Beaver, W. (1966). Financial ratios as predictors of failure. Journal of Accounting
+Bell, T. B., Ribar, G. S., & Verchio, J. (1990). Neural nets versus logistic regression: A comparison of each model’s ability to predict commercial bank
+failures. In R. P. Srivastava (Ed.), Proceedings of the 1990 Deloitte and
+Touche/University of Kansas Symposium of Auditing Problems, Lawrence,
+Bell, T. B., & Tabor, R. H. (1991). Empirical analysis of audit uncertainty qualifications. Journal of Accounting Research, 29(2), 350–371.
+Boritz, J. E., & Kennedy, D. B. (1995). Effectiveness of neural network types
+for prediction of business failure. Expert Systems with Applications, 9(4),
+Brockett, P. L., Cooper, W. W., Golden, L. L., & Pitaktong, U. (1994). A neural
+network method for obtaining an early warning of insurer insolvency. Journal
+Burkitt, A. N. (1991). Optimization of the architecture of feed-forward neural nets
+with hidden layers by unit elimination. Complex Systems, 5, 371–380.
+Coats, P. K., & Fant, L. F. (1993). Recognizing financial distress patterns using a
+neural network tool. Financial Management, 22(3), 143–154.
+Cottrell, M., Girard, B., Girard, Y., & Mangeas, M. (1993). Time series and neural
+network: A statistical method for weight elimination. In M. Verlysen (Ed.),
+European Symposium on Artificial Neural Networks. Brussels: D. Facto, 157–
+Davis, L. (1991). Handbook of genetic algorithms. New York: Van Nostrand
+Dilla, W. N., File, R. G., Solomon, I., & Tomassini, L. A. (1991). Predictive bankruptcy judgments by auditors: A probabilistic approach. Auditing,
+Advances in Behavioral Research, 1, 113–129.
+Dopuch, N., Holthausen, R. W., & Leftwich, R. W. (1986). Abnormal stock returns
+associated with media disclosures of “subject to” qualified audit opinions.
+Journal of Accounting and Economics, 8(2), 93–117.
+Dorsey, R. E., Johnson, J. D., & Mayer, W. J. (1994). A genetic algorithm for
+the training of feed-forward neural networks. In J. D. Johnson & A. B.
+Whinston (Eds.), Advances in artificial intelligence in economics, finance,
+and management. Vol. 1, Greenwich, CT: JAI Press, 93–111.
+Dorsey, R. E., Johnson, J. D., & Van Boening, M. V. (1994). The use of artificial neural networks for estimation of decision surfaces in first price sealed
+bid auctions. In W. W. Cooper & A. B. Whinston (Eds.), New direction in
+computational economics. Amsterdam: Kluwer Academic, 19–40.
+Dorsey, R. E., & Mayer, W. J. (1995). Genetic algorithms for estimation problems with multiple optima, non-differentiability, and other irregular features.
+Journal of Business and Economic Statistics, 13(1), 53–66.
+Drucker, H., & LeCun, Y. (1992). Improving generalization performance using
+double backpropagation. IEEE Transactions on Neural Networks, 3, 991–
+Elam, R. (1975). The effect of lease data on the predictive ability of financial ratios.
+Etheridge, H. L., & Sriram, R. S. (1996). A neural network approach to financial distress analysis. Advances in Accounting Information Systems, 4, 201–
+Etheridge, H. L., & Sriram, R. S. (1997). A comparison of the relative costs of
+financial distress models: Artificial neural networks, logit and multivariate
+discriminant analysis. Intelligent Systems in Accounting, Finance, and Management, 6, 235–248.
+Etheridge, H., Sriram, R. S., & Hsu, K. (2000). Artificial neural networks help
+auditors evaluate client financial viability. Decision Sciences, 31(2), 531–
+Fahlman, S. E., & Lebiere, C. (1990). The cascade-correlation learning architecture.
+Neural Information Processing Systems, 2, 524–532.
+Fanning, K., & Cogger, K. O. (1994). A comparative analysis of artificial neural
+networks using financial distress prediction. Intelligent Systems in Accounting, Finance, and Management, 3(4), 241–252.
+FDIC Statistics on Banking. (1992). Washington, DC: Federal Deposit Insurance
+Corporation, Division of Research and Statistics.
+Glorfeld, L. W., Hardgrave, B. C., & Pendley, J. (1998). Bankruptcy prediction of
+financially stressed firms: An extension of the use of artificial neural networks
+Improving Decision Effectiveness of Artificial Neural Networks
+to evaluate going concern. Advances in Accounting Information Systems, 6,
+Graham, F. C., & Horner, J. E. (1988). Bank failure: An evaluation of the factors
+contributing to the failure of national banks. Issues in Bank Regulation, 12(2),
+Hamer, M. (1983). Failure prediction: Sensitivity of classification accuracy to alternative statistical methods and variable sets. Journal of Accounting and
+Holmstrom, L., & Koistinen, P. (1992). Using additive noise in backpropagation
+training. IEEE Transactions on Neural Networks, 3, 24–38.
+Hopwood, W., McKeown, J., & Mutchler, J. (1989). A test of the incremental
+explanatory power of opinions qualified for consistency and uncertainty.
+Jones, F. L. (1987). Current techniques in bankruptcy prediction. Journal of
+Kamimura, R. (1993). Internal representation with minimum entropy in recurrent neural networks: Minimizing entropy through inhibitory connections.
+Network Computation in Neural Systems, 4, 423–440.
+Karmin, E. D. (1990). A simple procedure for pruning back-propagation trained
+networks. IEEE Transactions on Neural Networks, 1, 239–242.
+Klersey, G. F., & Dugan, M. T. (1995). Substantial doubt: Using artificial neural
+networks to evaluate going concern. Advances in Accounting Information
+Koh, H. C. (1992). The sensitivity of optimal cutoff points to misclassification costs
+of type I and type II errors in the going-concern prediction context. Journal
+of Business Finance and Accounting, 19(2), 187–197.
+Koh, H. C., & Killough, L. N. (1990). The use of multiple discriminant analysis
+in the assessment of the going concern status of an audit client. Journal of
+Business Finance and Accounting, 17(2), 179–192.
+Koh, H. C., & Oliga, J. C. (1990). More on AUP17 and going-concern prediction
+models. Australian Accountant, 60(9), 67–71.
+Kruschke, J. K. (1989). Distributed bottlenecks for improved generalization
+in back-propagation networks. International Journal of Neural Networks
+Research and Applications, 1(1), 187–193.
+Lendaris, G. G., & Harls, I. A. (1990). Improved generalization in ANN’s via
+use of conceptual graphs: A character recognition task as an example case.
+Proceedings IJCNN-90. Piscataway, NJ: IEEE, 551–556.
+Liang, T. P., Chandler, J. S., Han, I., & Roan, J. (1992). An empirical investigation
+of some data effects on the classification accuracy of probit, ID3, and neural
+networks. Contemporary Accounting Research, 9(1), 306–328.
+Martin, D. (1977). Early warning of bank failure: A logit regression approach.
+Journal of Banking and Finance, 1, 249–276.
+Michalewicz, Z. (1992). Genetic algorithms + data structures = evolution
+Montagno, R., Sexton, R. S., & Smith, B. N. (2002). Using neural networks
+for identifying organizational improvement strategies. European Journal of
+Montana, D. J., & Davis, L. (1989). Training feed-forward neural networks
+using genetic algorithms. Proceedings of the Third International Conference on Genetic Algorithms. San Mateo, CA: Morgan Kaufmann, 379–
+Odom, M. D., & Sharda, R. (1990). A neural network model for bankruptcy
+prediction. In Proceedings of the International Joint Conference on Neural
+Ohlson, J. (1980). Financial ratios and the probabilistic prediction of bankruptcy.
+Journal of Accounting Research, 18(1), 109–131.
+Palmrose, Z. (1987). Litigation and independent auditors: The role of business
+failures and management fraud. Auditing: A Journal of Practice and Theory,
+Palmrose, Z. (1988). An analysis of auditor litigation and audit service quality.
+Parker, J. E., & Abramowicz, K. F. (1989). Predictive abilities of three modeling
+procedures. Journal of the American Taxation Association, 1, 37–53.
+Romaniuk, S. G. (1993). Pruning divide and conquer networks. Network: Computation in Neural Systems, 4, 481–494.
+Schaffer, J. D., Whitley, D., & Eshelman, L. J. (1992). Combinations of genetic
+algorithms and neural networks: A survey of the state of the art, COGANN92. Combinations of Genetic Algorithms and Neural Networks. Los Alamitos,
+Sexton, R. S., Alidaee, B., Dorsey, R. E., & Johnson, J. D. (1998). Global optimization for artificial neural networks: A tabu search application. European
+Journal of Operational Research, 106, 570–584.
+Sexton, R. S., & Dorsey, R. E. (2000). Reliable classification using neural networks:
+A genetic algorithm and backpropagation comparison. Decision Support
+Sexton, R. S., Dorsey, R. E., & Johnson, J. D. (1998). Toward a global optimum for
+neural networks: A comparison of the genetic algorithm and backpropagation.
+Sexton, R. S., Dorsey, R. E., & Johnson, J. D. (1999). Optimization of neural networks: A comparative analysis of the genetic algorithm and simulated annealing. European Journal of Operational Research, 114, 589–
+Sinkey, J. F., Jr. (1975). A multivariate statistical analysis of the characteristics of
+problem banks. Journal of Finance, 30(1), 21–36.
+Improving Decision Effectiveness of Artificial Neural Networks
+Tam, K. Y., & Kiang, M. Y. (1992). Managerial applications of neural networks:
+The case of bank failure predictions. Management Science, 38(7), 926–947.
+Wilson, R. L., & Sharda, R. (1994). Bankruptcy prediction using neural networks.
+Decision Support Systems, 11(5), 544–557.
+Zmijewski, M. E. (1984). Essays on corporate bankruptcy. Doctoral dissertation.
+Ann Arbor, MI: University Microfilms International, 1–54.
+Randall S. Sexton is an associate professor of computer information systems
+at Southwest Missouri State University in Springfield. He received his PhD in
+Management Information Systems from the University of Mississippi. His research
+interests are in artificial intelligence methods, optimization, genetic algorithms,
+and neural networks. He has published work in a number of journals, including
+Decision Sciences, European Journal of Operational Research, Decision Support
+Systems, OMEGA, Informs Journal on Computing, and Journal of Computational
+Ram S. Sriram is a professor of accounting information systems at the Robinson
+College of Business, Georgia State University, in Atlanta. He specializes in financial
+distress models and the use of artificial intelligence and expert systems as decision
+support in the accounting area. He is the author of more than 40 articles that have
+appeared in journals such as Management Science, Decision Sciences, Journal of
+Information Systems, Auditing, and Intelligent Systems in Accounting.
+Harlan Etheridge is the Home Bank/BORSF Professor of Business Administration and an associate professor of accounting at the University of Louisiana at
+Lafayette. His current research interests are the application of artificial intelligence
+tools to accounting and auditing decisions and the impact of IT governance issues
+on organizations. Dr. Etheridge has published previously in journals such as Decision Sciences, Advances in Accounting Information Systems, International Journal
+of Intelligent Systems in Accounting, and the Journal of Accounting Literature.

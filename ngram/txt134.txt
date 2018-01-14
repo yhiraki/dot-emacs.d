@@ -1,0 +1,1114 @@
+Journal of Manufacturing Systems 38 (2016) 114–133
+Contents lists available at ScienceDirect
+journal homepage: www.elsevier.com/locate/jmansys
+A metamodel-based Monte Carlo simulation approach for responsive
+production planning of manufacturing systems
+Minqi Li a , Feng Yang a,∗ , Reha Uzsoy b , Jie Xu c
+Industrial and Management Systems Engineering Department, West Virginia University, Morgantown, WV 26505, USA
+Edward P. Fitts Department of Industrial & Systems Engineering, North Carolina State University, Raleigh, NC 27695, USA
+Department of Systems Engineering & Operations Research, George Mason University, Fairfax, VA 22030, USA
+Production planning is concerned with ﬁnding a release plan of jobs into a manufacturing system so that
+its actual outputs over time match the customer demand with the least cost. For a given release plan, the
+system outputs, work in process inventory (WIP) levels and job completions, are non-stationary bivariate
+time series that interact with time series representing customer demand, resulting in the fulﬁllment/nonfulﬁllment of demand and the holding cost of both WIP and ﬁnished-goods inventory. The relationship
+between a release plan and its resulting performance metrics (typically, mean/variance of the total cost
+and the ﬁll rate) has proven difﬁcult to quantify. This work develops a metamodel-based Monte Carlo
+simulation (MCS) method to accurately capture the dynamic, stochastic behavior of a manufacturing
+system, and to allow real-time evaluation of a release plan’s performance metrics. This evaluation capability is then embedded in a multi-objective optimization framework to search for near-optimal release
+plans. The proposed method has been applied to a scaled-down semiconductor fabrication system to
+demonstrate the quality of the metamodel-based MCS evaluation and the results of plan optimization.
+© 2015 The Society of Manufacturing Engineers. Published by Elsevier Ltd. All rights reserved.
+This work is concerned with production planning in manufacturing, which can be deﬁned as the problem of ﬁnding a release
+schedule of jobs into the manufacturing system so that the realized outputs over time satisfy predetermined requirements as close
+as possible [1]. The planning horizon of production activities usually ranges from several months to two years, and the frequency of
+planning/replanning is weekly or monthly [2].
+Typically, the planning horizon is divided into a number of discrete periods, and the decision variables represent the quantities
+of work of different types released into the system in each period.
+The performance metrics to be optimized usually include (i) the
+total cost (or proﬁt), which may consist of the holding cost for ﬁnished goods (FG) and work in process (WIP) inventories, production
+costs and backordering costs and (ii) the ﬁll rate, deﬁned as the
+percentage of immediately satisﬁed demand.
+Optimizing the performance metrics with respect to (w.r.t.) the
+release plan is challenging because it is notoriously difﬁcult to
+quantify the relationships between the performance metrics and
+∗ Corresponding author. Tel.: +1 3042939477.
+E-mail address: Feng.Yang@mail.wvu.edu (F. Yang).
+the input decisions. A manufacturing system is subject to inherent uncertainties such as probabilistic processing times, machine
+failures, etc., leading to complicated input–output relationships as
+discussed in Section 3. We shall focus on three principal time series:
+A(t), the number of jobs released for processing during period t,
+Q(t), the number of jobs (i.e., WIP) in the system at the start of
+period t, and D(t) the number of completed jobs departing from
+the system during period t. Fig. 1 illustrates the input–output process of a manufacturing system. The release process A(t), which
+will usually vary over time, is determined by the decision variables
+(the release plan). Given A(t), Q(t) and D(t) are non-stationary time
+series describing the system’s outputs over time, whose evolution
+also depends on the initial status of the system. The realized performance metrics depend on Q(t), D(t), and the customer demand
+D(t); the WIP holding cost incurred is determined by Q(t); and the
+FG holding cost and the ﬁll rate by the departure process D(t) and
+the customer demand D(t). In practice, demand is generally a nonstationary time series, and is speciﬁed through forecasting efforts
+Despite extensive research, it remains a challenge to adequately
+quantify the relationship between the performance metrics and
+the release schedule due to the complex interactions between the
+non-stationary time series A(t), Q(t), D(t), and D(t). To address this
+difﬁculty, this paper develops a metamodel-based Monte Carlo
+http://dx.doi.org/10.1016/j.jmsy.2015.11.004
+0278-6125/© 2015 The Society of Manufacturing Engineers. Published by Elsevier Ltd. All rights reserved.
+M. Li et al. / Journal of Manufacturing Systems 38 (2016) 114–133
+Fig. 1. The input–output process of a manufacturing system.
+simulation (MCS) method with the following features. First, for
+a given release plan, it enables the evaluation of the probabilistic
+measures of system performance including expectations (e.g., the
+mean cost), variances (e.g., the variance of the cost) and probabilities of interest (e.g., the ﬁll rate). Second, it is able to accommodate
+a wide variety of demand patterns. Third, it allows rapid evaluation
+of a candidate plan in terms of its performance metrics, and permits
+The remainder of this paper is organized as follows. Section
+2 provides a review of the related literature. Section 3 gives an
+overview of the metamodel-based MCS method for responsive
+production planning. Section 4 details the input–output metamodeling of a manufacturing system, and the metamodel-based MCS is
+discussed in Section 5. Section 6 formulates the multi-objective
+optimization problem for production planning, and presents the
+optimization scheme that uses the MCS method to quickly evaluate
+each candidate plan. In Section 7, the plan optimization approach
+is applied on a scaled-down semiconductor fabrication system. A
+Production planning problems have been addressed by several
+different streams of research, each emphasizing certain aspects of
+the problem, and thus different mathematical models. A strong case
+can be made [3] that none of these formulations addresses the problem faced in industry in its full complexity and generality. Hence
+in practice the production planning function will often combine
+several different mathematical models. In addition, it is possible
+to formulate the production planning problem in different ways
+depending on the time frame covered and the level of information
+aggregation involved [4,5]. In this paper we shall focus on a limited
+formulation, that of how to release work into a production system
+over time in order to match its output with demand in some optimal
+A central issue in matching production output to demand arises
+from the presence of substantial cycle times in most production
+systems. The cycle time is deﬁned as the time elapsing between a
+unit of work (a job) being released into a production system and its
+emergence from the system as a ﬁnished product. In a practical production system the cycle time of any given job is a random variable
+whose distribution potentially depends on all uncertainties arising
+in the production environment, such as behavior of human decision makers, process times, machine failures, and so on. Queueing
+models [6,7], simulation models (e.g., [8,9]) and empirical observation are all in agreement that the distribution of the cycle time will
+also depend on the average utilization of the production resources.
+This creates a central difﬁculty for production planning systems:
+in order to match output to demand, they need to consider cycle
+times; but the distribution of the cycle time is determined to a
+considerable degree by the resource utilization, which, in turn, is
+determined by the release decisions made by the planning system.
+Hence cycle times are endogenous to the release decisions made
+by the planning system. However, cycle times are determined in
+practice by complex interactions between several complex stochastic processes evolving over time, such as the pattern of releases into
+the system, customer demand, machine failures, and the arrival
+of jobs at machines within the system over time. The difﬁculty
+of a comprehensive analytical treatment of these interactions in
+their entirety constitutes the central difﬁculty faced by production
+Mathematical programming models have focused on the allocation of limited resource capacity among different products over
+time. Much of this work assumes all inputs are deterministic, leading to formulations as linear or mixed integer programs [10–14].
+Most of these models, as well as the widely used Material Requirements Planning (MRP) approach [15–17] treat cycle times as an
+exogenous parameter independent of resource utilization. These
+models ignore the stochastic nature of the problem, requiring
+enhancements to their solutions to be useful in practice, and also
+ignore the relation between release decisions and cycle times. However, deterministic mathematical programming models have been
+used extensively in industry as the basis for successful planning
+systems [18,19]. These deterministic models have been extended
+in several ways to incorporate uncertainty in both production and
+demand. Several authors [20–23] have proposed scenario-based
+stochastic programming models. The main difﬁculty with this
+approach is the extremely rapid growth in the size of the models as
+the number of decision epochs and random variables increases. A
+variety of robust optimization approaches have been proposed, in
+which one seeks a production plan that will provide a satisfactory
+solution over a restricted set of uncertain outcomes [24,25]. Yet
+another approach has been the use of chance constraints, where
+constraints may be violated with a speciﬁed probability [26,27].
+These techniques tend to be computationally less demanding than
+stochastic programming, but also represent uncertainty and its
+consequences in different ways. Aouam and Uzsoy [28,29] compare
+a number of these models in the context of a very simple singlestage production-inventory system under stochastic demand, and
+ﬁnd that they need to be parameterized with care to yield desirable
+Another extension of mathematical programming models has
+been in the direction of explicitly representing the dependence
+between cycle times and planning decisions, making cycle times
+endogenous to the planning models [30,31]. One such approach,
+which is closely related to this work, is the use of nonlinear clearing functions that represent the expected output of a production
+resource during a planning period as a function of some measure
+of its planned workload during that period. The planned workload, is usually computed from a set of state variables such as
+the total amount of work available to the resource in the period
+or the average work in process (WIP) level during the period.
+The clearing function is usually assumed to be, and can in many
+cases be shown to be, a concave nondecreasing function of the
+state variables which admits of piecewise linearization, yielding
+tractable optimization models. Simple clearing functions can be
+derived from classical steady state queueing models (e.g., [32,33])
+or transient queueing models [14,34,35]. In general, the form of
+the clearing function will change from period to period based on
+the values of the state variables used to estimate it. However most
+models using clearing functions have assumed a time-stationary
+function representing the expected performance of the system
+over an appropriate range of operating conditions. Models using
+clearing functions have shown considerable promise in extensive
+computational experiments [33,36–38]. The work in this paper can
+be viewed as a generalization of the clearing functions employed
+to date, extending the number and nature of the state variables
+considered and explicitly modeling the evolution of the clearing
+function over time based on the evolution of the underlying state
+While these approaches may still be sufﬁcient in many cases
+to provide important insights, detailed discrete-event simulation
+(DES) models appear to be the only methodology that permits the
+detailed modeling of complex stochastic systems and their interactions that typify production systems. However, DES comes with
+M. Li et al. / Journal of Manufacturing Systems 38 (2016) 114–133
+its own set of disadvantages, namely the increasing computational
+burden as the system under study is modeled in more detail. These
+computational requirements are further exacerbated by the need
+for multiple replications to ensure an acceptable degree of statistical precision in the results.
+For these reasons simulation optimization has not been extensively applied to production planning problems of the type
+addressed in this paper. The natural formulation of the problem
+would be to consider the releases in each period as the decision variables. However, for problems with many time periods and products,
+this results in a very large decision space. Hasan and Spearman [39]
+consider the problem of determining the optimal release times for
+a ﬁxed sequence of work using a simulation-optimization approach
+based on inﬁnitesimal perturbation analysis. This approach is further developed by Homem de Mello et al. [40]. Liu et al. [41] use
+a simulation-optimization approach based on a genetic algorithm
+to obtain optimal release schedules for the simpliﬁed wafer fabrication facility considered in this paper, and compare the results
+to those from a an optimization model using clearing functions.
+They ﬁnd that the simulation-optimization approach yields better
+solutions than the clearing function model at the cost of significantly higher computation time. Kacar and Uzsoy [42] conﬁrm
+this ﬁnding. A number of authors have used simulation optimization techniques to estimate the values of parameters used
+in more traditional production planning models. Gansterer et al.
+[43] use simulation optimization to determine the optimal values
+of planned lead times, safety stock levels and lot sizes in an MRP
+environment. Albey and Uzsoy [44] similarly use simulation optimization to determine values of planned lead times for use in linear
+programming models. Kacar and Uzsoy [42] use simulation optimization to optimize the parameters of clearing functions which
+are then used in an optimization model. In general, the computational time requirements of simulation optimization based on
+detailed DES models renders their direct use for optimizing release
+plans in large systems impractical, although they can be useful in
+Another stream of literature [45–50] takes a multimodel perspective, integrating linear programming models that assume
+ﬁxed, exogenous planned lead times with a detailed simulation
+model of the production system. An initial set of lead time estimates are used to derive an initial release plan from the LP model.
+The execution of this plan is then simulated, and realized values
+of the cycle times and other parameters of interest are collected.
+These observations are then used to update the planned lead times
+used in the LP model to obtain an updated release plan. The primary disadvantage of these techniques is the need for multiple
+replications of a detailed simulation model at each iteration of the
+planning procedure, which is likely to be prohibitive for large production systems. In addition, the convergence behavior of these
+methods is not yet well understood [50]. Orcun et al. [51] implement a similar approach for production problems with stochastic
+The method proposed in this paper extends the clearing function model signiﬁcantly, by providing a comprehensive statistical
+framework within which multiple time series representing the
+evolution of state variables over time can be used to predict the evolution of system output over time. While some efforts have been
+made to incorporate past history into the estimation of clearing
+functions [52], a rigorous statistical framework has hitherto been
+lacking, and only a very limited set of state variables have been considered. The proposed approach is based on data from extensive
+DES simulations, thus incorporating the detailed representation of
+stochastic interactions and constraints that DES provides; however,
+this knowledge is encoded in a metamodel that permits it to be
+used extremely efﬁciently in predicting the future evolution of the
+In light of the limitations of the existing methods discussed
+above, we developed a metamodeling-based approach: The plan
+optimization is performed using a simulation optimization scheme
+in which the computationally expensive DES is replaced by the
+metamodel-based MCS to allow fast and accurate quantiﬁcation of
+system input–output relationships. Metamodeling is used to bridge
+the gap between the detailed but highly time-consuming DES and
+the need for responsive decision making [53]. Once the conﬁguration of a manufacturing system is established, its DES can be
+developed and kept running for weeks (or even months) to provide
+data for the estimation of the metamodels. The resulting metamodel not only embodies the high ﬁdelity of DES, but also allows
+quick “what-if” analysis, and hence can be used to support responsive production optimization when the need for decision arises.
+The development of the metamodel-based MCS is the key contribution of this work, and serves as the foundation for responsive
+Recall the input–output process illustrated in Fig. 1. We deﬁne
+t: the time interval considered as the basic time unit. All the
+time variables/parameters in this work are measured in terms of
+t: the time index measured in terms of the basic time unit.
+H: the length of planning horizon in terms of the basic time unit.
+A(t): the input release (or arrival) process to the system which
+speciﬁes the number of arrivals during the time interval (t, t + 1].
+x(t) = E[A(t)]: the ﬁrst moment of the arrival process A(t).
+Q(t): the state process of the system which counts the number of
+units of work in process (WIP) in the system at time t.
+mi (t) = E[Qi (t)]: the ith moment of the state process Q(t) (i = 1, 2).
+m1j (t) = E[Q(t)Q(t − j)]: the ﬁrst moment of Q(t)Q(t − j) (j = 1, 2, . . .,
+JQ ), where JQ is the highest order time lag needed to describe the
+D(t): the departure process from the system which counts the
+number of jobs ﬁnished during the time interval (t, t + 1].
+di (t) = E[Di (t)]: the ith moment of the departure process D(t) (i = 1,
+d1j (t) = E[D(t)D(t − j)]: the ﬁrst moment of D(t)D(t − j) (j = 1, 2, . . .,
+JD ), where JD is the highest order time lag needed to describe the
+eQD (t) = E[Q(t)D(t)]: the ﬁrst moment of Q(t)D(t).
+D(t): the demand process which counts the number of items
+requested by customers at the end of period t.
+The input A(t) is assumed to be completely characterized by x(t),
+which is a common assumption in production planning [54]. The
+output time series Q(t) and D(t) are assumed to be adequately
+characterized by their ﬁrst two moments [55,56]. The production
+planning task is thus to determine the release plan {x(t); t = 1, 2, . . .,
+H}. The outputs, {Q(t), D(t); t = 1, 2, . . ., H}, are bivariate time-series
+counts described by the characteristics vector
+y(t) = (m1 (t), m2 (t), d1 (t), d2 (t), m11 (t), . . ., m1JQ (t), d11 (t), . . .,
+The demand D(t) is a given time-series pre-speciﬁed by forecasting
+methods outside of the scope of production planning. The output processes {Q(t), D(t); t = 1, 2, . . ., H}, interact with the demand
+{D(t); t = 1, 2, . . ., H} to determine the system performance over
+t = 1, 2, . . ., H, which typically includes the total cost and ﬁll rate.
+We use a multi-objective genetic algorithm (MOGA) discussed
+in Section 6 to obtain near-optimal release plans. The performance
+M. Li et al. / Journal of Manufacturing Systems 38 (2016) 114–133
+Fig. 2. Evaluating a release plan’s performance.
+metrics of a given candidate input schedule are evaluated using the
+Step (1): For an arbitrary release plan speciﬁed by {x* (t) ; t = 1, 2, . . .,
+H}, the pre-computed metamodel is used to predict the
+characteristics (1) of the output processes {Q(t), D(t); t = 1,
+2, . . ., H} over the planning horizon. As will be detailed
+in Section 4, the metamodel takes the form of difference equations, is ﬁtted from extensive DES data obtained
+ofﬂine (prior to performing plan optimization), and is able
+to accurately quantify the dependence of the output characteristics (1) upon the input release plan. The prediction
+can be performed extremely rapidly with the high-ﬁdelity
+of DES, since the metamodel is a mathematical approximation derived from DES data.
+Step (2): As pointed out in Section 1, the observed performance
+metrics result from the interactions of general time-series
+counts {Q(t), D(t); t = 1, 2, . . ., H} and {D(t); t = 1, 2, . . .,
+H}, and in general cannot be computed analytically. We
+develop an MCS method for time-series counts in Section 5 to simulate {Q(t), D(t) ; t = 1, 2, . . ., H} based on the
+output characteristics (1) obtained from Step (1), and to
+efﬁciently compute the performance metrics.
+4. Metamodeling via ofﬂine discrete-event simulation
+The metamodel in Step (1) of Fig. 2 characterizes the timedependent behavior of a general manufacturing system, and is
+obtained by extending the metamodeling method in [54]. In [54],
+the metamodel is ﬁtted from DES data to quantify the relationship
+between x(t), the ﬁrst moment of the arrivals A(t), and {m(t), d(t)},
+the ﬁrst-moment measures of the output processes {Q(t), D(t)}. As
+noted earlier, {Q(t), D(t)} are bivariate time-series counts, and thus
+their ﬁrst-moment measures are not adequate to characterize these
+processes. In this paper, the metamodeling in [54] is extended to
+quantify the functional relationships between the input x(t) and
+the y(t) vector, including both ﬁrst- and second-moment measures
+of {Q(t), D(t)} as shown in (1). The metamodeling methods are
+described bellow, emphasizing the aspects different from those in
+As in [54], the metamodel takes the form of difference equations,
+where the characteristics vector y(t) can be expressed as
+y(t) = F(x(t − 1), x(t − 2), . . ., y(t − 1), y(t − 2), . . .),
+where F is a vector function of compatible dimension with y(t). Each
+component function Fi speciﬁes the dependence of the ith element
+of y(t) upon a given input {x(t − 1), x(t − 2), . . .} and the system’s
+historical outputs {y(t − 1), y(t − 2), . . .}. As in [54], Fi assumes the
+functional form of a third-order polynomial.
+4.2. Sampling via discrete-event simulation (DES)
+To ﬁt the metamodel (2) that functionally relates x(t) to y(t),
+extensive DES experiments are carried out. For the DES, job arrivals
+are modeled by a time-varying process (e.g., non-stationary Poisson) characterized by its arrival rate x(t). Each simulation run is
+performed by feeding the stochastic arrivals described by a prespeciﬁed x(t) into the system for a simulation period of L time
+units (t), and a total of R simulation replications are obtained.
+The speciﬁcations of the input x(t), L and R are detailed in [54].
+From the rth replication, the arrival, WIP state and departure
+processes {Ar (t), Qr (t), Dr (t); t = 1, 2, . . ., L} are recorded. Based on the
+R replications, the input–output data for the metamodel ﬁtting are
+y(t)); t = 1, 2, . . ., L} and calculated as follows:
+From the data (3), the metamodel (2) is ﬁtted using the method
+provided in Section 5.1 of [54]. The various model selection issues
+regarding the functional terms included in F of the metamodel
+are discussed in Section 5.2 of [54]. The additional model selection issue involved in modeling y(t), which includes not only the
+ﬁrst-moment but also the second-moment measures of the output
+processes, lies in the determination of the time lags, JQ and JD . Recall
+that JQ and JD are the highest orders of autocorrelation needed to
+characterize the processes Q(t) and D(t), respectively. Given the DES
+data {Qr (t), Dr (t); t = 1, 2, . . ., L; r = 1, 2, . . ., R}, JQ and JD can be determined by inspecting the sample partial autocorrelation function
+Once the metamodel has been obtained, it can be used to predict within a second the system’s behavior under any input rate
+x* (t) over a time horizon. Speciﬁcally, suppose that we are currently
+standing at time 0, where typically the system history {y(t); t ≤ 0}
+is available. Using the historical outputs {y(t); t ≤ 0} to initialize the
+metamodel-based computation, the future characteristic processes
+{y(t); t = 1, 2, . . ., H} can be recursively predicted by the metamodel
+It is worth noting that the time to complete the metamodelbased recursive computation for future prediction is not sensitive
+to the complexity of the system being investigated, since the
+computation is performed based on the ﬁtted metamodel, and
+thus involves only basic calculations such as additions and
+M. Li et al. / Journal of Manufacturing Systems 38 (2016) 114–133
+multiplications. This is because the metamodel is developed for
+the entire system, in contrast to the individual resources within
+the system as is the case for most clearing function models.
+5. Metamodel-based Monte Carlo simulation (MCS) for
+In light of these requirements, we have identiﬁed three nonstationary time-series models as the potential candidates for Z(t):
+the N-AR, N-INAR and N-SINAR models [59–76]. Each of these
+models represents a non-stationary extension of its stationary
+counterpart by allowing the model parameters to vary with time.
+All can be written in the general autoregressive form:
+We now discuss Step (2) of Fig. 2: For a release plan {x* (t); t = 1, 2,
+. . ., H}, how to evaluate the resulting system performance, having
+obtained the output characteristics {y(t); t = 1, 2, . . ., H} from the
+Since the performance metrics result from the interactions
+of the time series {Q(t), D(t); t = 1, 2, . . ., H} and the customer
+demand {D(t); t = 1, 2, . . ., H} throughout the planning horizon,
+they cannot in general be evaluated analytically. Hence, an MCS
+method is developed in this work to link {y(t); t = 1, 2, . . ., H}
+and the performance metrics. The MCS is able to quickly generate
+time-series {Q (t), D(t); t = 1, 2, . . ., H}, whose major characteristics match the metamodel-predicted {y(t); t = 1, 2, . . ., H}. Clearly,
+the MCS-simulated processes {Q (t), D(t); t = 1, 2, . . ., H} are meant
+to mimic real (or DES) output processes {Q(t), D(t); t = 1, 2, . . ., H}.
+In this work, a parametric approach is taken to generate
+{Q (t), D(t); t = 1, 2, . . ., H} via MCS: First, a parametric model family of the output time series is identiﬁed (Section 5.1); Then, using
+the selected model family, the time-series model that possesses the
+metamodel-predicted characteristics {y(t); t = 1, 2, . . ., H} is ﬁtted
+(Section 5.2.1); Finally, based on the ﬁtted time-series model, MCS
+is carried out to generate {Q (t), D(t); t = 1, 2, . . ., H} via pseudorandom generation mechanisms (Section 5.2.2).
+In (4), J is a positive integer representing the order of the autoregressive model, ε(t) denotes an independently-distributed innovation
+or shock, {˛j (t); j = 1, 2, . . ., J; t = 1, 2, . . . } are time-dependent model
+parameters, and R a random operator. We assume that all the random operations in R are performed independently of each other
+and of the innovation process {ε(t); t = 1, 2, . . . }.
+The properties of these three models, which we now describe in
+order roof increasing complexity, are summarized in Table 1.
+Model 1: The N-AR model extends the classic AR models [57] to incorporate time-varying parameters
+{˛j (t); j = 1, 2, . . ., J; t = 1, 2, . . . } [77]. For N-AR,
+the general model (4) takes the speciﬁc form
+where Z(t) ∈ R, and ε(t) is independently normally distributed.
+Model 2: The N-INAR model extends the integer valued autoregressive (INAR) model [59,61,62] by
+incorporating time-varying parameters [78,79].
+The INAR model uses the binomial thinning
+operator and integer-valued innovations to
+generate integer-valued time series. For NINAR, the general model (4) takes the speciﬁc
+The model identiﬁcation for the output time series is performed
+ofﬂine based on the DES data obtained for metamodeling. To establish the appropriate model for the bivariate process (Q(t), D(t)) ,
+the ﬁrst task is to identify suitable univariate time-series models
+that describe Q(t) and D(t). The selected univariate models are then
+combined to form a bivariate time-series model for the joint processes (Q(t), D(t)) by incorporating the correlation between Q(t)
+5.1.1. Candidate models of univariate time series
+For ease of exposition, deﬁne Z(t) as a univariate time series
+representing either of the system output processes Q(t) or D(t). Our
+problem is to identify a family of univariate time-series models
+suitable to describe Z(t)? First, Z(t) is a counting process over time
+that takes non-negative integer values. Second, such a process from
+a general queueing system (e.g., manufacturing systems) could be
+over-dispersed, equi-dispersed or under-dispersed, i.e., the variance/mean ratio of Z(t) could be greater than, equal to or less than
+1 [58]. Third, the autocorrelations of Z(t) could involve positive
+and/or negative values. Fourth, the selected model family should
+provide a straightforward relationship between its parameters and
+the process characteristics y(t), since the time-series model serves
+to generate MCS data {Q (t), D(t); t = 1, 2, . . ., H} that possess the
+where Z(t) ∈ N. The innovation ε(t) is an independent non-negative integer-valued random
+variable, and controls the dispersion behavior
+of Z(t) [61]. In order for N-INAR to model over-,
+equi- and under-dispersed data, the following
+discrete distributions could be used for ε(t):
+generalized Poisson (GP) [80], double Poisson
+[81], COM-Poisson [82], Lerch distribution [61],
+or weighted Poisson [61]. In this work, we adopt
+the GP model for ε(t) because this allows the
+distribution parameters of ε(t) to be derived
+easily from the data characteristics y(t) and GP
+is widely used in modeling integer-valued time
+Summary of the candidate univariate time-series models.
+Able to accommodate negative autocorrelations?
+M. Li et al. / Journal of Manufacturing Systems 38 (2016) 114–133
+The operator “◦” in (6) denotes the binomial
+where ˛ ∈ [0, 1] is the operation parameter
+and Cm is a sequence of independent and identically distributed Bernoulli random variables
+independent of Z(t), with P(Cm = 1) = ˛. Since
+˛ takes the value of ˛j (t) (j = 1, 2, . . ., J) in (6),
+˛j (t) is restricted to be within the range of [0, 1];
+hence N-INAR only allows for time series with
+certain positive autocorrelation patterns [57].
+Model 3: N-SINAR N-SINAR is the non-stationary extension of the
+signed integer-valued autoregressive (SINAR)
+model introduced in [67,84]. The general model
+where Z(t) ∈ Z. The innovation ε(t) is an independent integer-valued random variable. As
+with N-INAR, the GP distribution is used for ε(t)
+in N-SINAR, and allows N-SINAR to handle over, equi- and under-dispersed data.
+The operator “F(·) ◦” denotes the generalized
+data are used for time-series model selection. In the spirit of ﬁnding the simplest and adequate model, we provide the following
+First, the steady-state data are subjected to normality tests, such
+as QQ-plot [85], Kolmogorov–Smirnov test [86] or Shapiro–Wilk
+test [87], to determine whether N-AR is appropriate. Although the
+time series are non-negative integer counts, the simplest N-AR may
+provide an adequate ﬁt, especially when the counts are large. If the
+data fail the normality tests, the integer-valued models (N-INAR
+Due to its relative simplicity, N-INAR is favored over N-SINAR
+unless it is inadequate to capture important data features. As shown
+in Table 1, N-INAR and N-SINAR differ in terms of the feasible range
+of the parameters {˛j (t); j = 1, 2, . . ., J}, which allows them to model
+different autocorrelation patterns. Hence, the estimation and inference of {˛j ; j = 1, 2, . . ., J} are used to guide the model selection
+between INAR and SINAR. More speciﬁcally, the sampling autocorrelation function (SACF) can be calculated from the stationary DES
+data and fed to the Yule–Walker equation [57,88] to obtain estimates of {˛j ; j = 1, 2, . . ., J}. Inferences on the Yule–Walker estimates
+can also be derived, and the following hypothesis test performed:
+After appropriate univariate time-series models are selected for
+each of the two processes, Q(t) and D(t), these can then be used to
+form the bivariate time-series model for (Q(t), D(t)) .
+The bivariate time series (Q(t), D(t)) is modeled as:
+where ˛ ∈ [−1, 1] is the operation parameter;
+sign(n) equals to 1 if n ≥ 0 and −1 if n < 0; and
+{Cm ; m = 1, 2, . . .} are independent and identically distributed random variables with the
+probability distribution given as below [84]
+for j = 1, 2, . . ., J. If H0 is rejected for any j, N-SINAR is selected;
+otherwise, N-INAR is adopted. The details for the Yule–Walker estimation and inference are given in Appendix C.
+where ε(t) = (ε(Q ) (t), ε(D) (t)) is the innovation vector with
+Since ˛ takes the value of ˛j (t) (j = 1, 2, . . ., J)
+in (8), ˛j (t) is restricted to the range of [−1, 1];
+thus, N-SINAR can model integer-valued time
+series with both positive and negative serial correlations due to its ﬂexible thinning operators
+In the bivariate model, the marginal distributions of ε(Q) (t) and
+ε(D) (t) are speciﬁed by the corresponding univariate time-series
+model (Section 5.1.1); JQ and JD are the orders of the univariate
+autoregressive models; and the speciﬁc forms of the random operators, R(Q ) and R(D) , correspond to the univariate models selected
+5.2. Metamodel-based Monte Carlo simulation
+5.1.2. Model selection for univariate time series
+From extensive ofﬂine DES (Section 4.2), the time-series data
+for an output process can be obtained as {Zr (t); t = 1, 2, . . ., L; r = 1,
+2, . . ., R}. Recall that L denotes the simulation length of each replication, and R the number of replications. Zr (t) could be the WIP
+state Qr (t) or the departure Dr (t) as denoted in Section 4.2. As discussed in Section 4.3, the autoregressive order J in model (4) can
+be determined based on the data {Zr (t); t = 1, 2, . . ., L; r = 1, 2, . . ., R}.
+The question remaining to be answered is: How to select the
+most appropriate of the three models (N-AR, N-INAR and N-SINAR)
+to describe the data? Both transient and steady-state data are
+included in {Zr (t); t = 1, 2, . . ., L; r = 1, 2, . . ., R} following the design
+of DES experiments in [54]. For convenience, only the steady-state
+As can be seen from Section 5.1, a bivariate time-series model
+family (11) and (12) can be selected for the target processes (Q(t),
+D(t)) based on ofﬂine DES. The selected model can then be ﬁtted from the given characteristics y(t) (Section 5.2.1). The ﬁtted
+bivariate model allows for the MCS of (Q (t), D(t)) (Section 5.2.2).
+Denote the ﬁtted bivariate time-series model as
+M. Li et al. / Journal of Manufacturing Systems 38 (2016) 114–133
+ ε(Q ) (t), ε(D) (t)], which can be derived analytically as funcCov[
+tions of the metamodel-predicted characteristics y(t) as shown in
+Hence, the bivariate process described by the ﬁtted model
+possesses the same characteristics as those speciﬁed by y(t). Specifically,
+• The marginal mean, variance, and lag-j (j = 1, 2, . . ., JQ ) autocorrelations of Q (t) are the same as those speciﬁed by y(t); the same
+• The covariance of Q (t) and D(t) is the same as that speciﬁed by
+5.2.2. Monte Carlo simulation of the system output processes
+The ﬁtted bivariate model (14) and (15) can be used to perform
+MCS to generate (Q (t), D(t)) time series mimicking the real WIPstate and departure processes.
+The historical data {Q(t), D(t); t = 0, −1, . . ., −max(JQ , JD ) + 1} is
+typically available to initialize the computations (14) and (15). With
+given mean vector (E[ε(Q ) (t)], E[ε(D) (t)]) and variance–covariance
+to xp with p = 1, 2, . . ., P. Thus, the release plan over (0, H] can be
+which constitutes the vector of decision variables for plan optimization. The customer demand is a given stochastic time series
+provided by forecasting efforts outside of the scope of production planning. As in Section 3, the demand is denoted by {D(t); t =
+1, 2, . . ., H}. Depending on when demand is actually fulﬁlled (e.g.,
+if shipments are made only at the end or beginning of a period),
+D(t) could be set to 0 at certain time points.
+The parameters, dependent variables, and objective functions of
+the optimization problem are provided below.
+wt the unit holding cost of the WIP per time unit at time t.
+ht the unit holding cost of ﬁnished jobs (or products) per time unit
+G0 the initial number of ﬁnished jobs at time 0, the beginning of
+• The output processes from the system, deﬁned in Section 3 and
+rewritten here to stress their dependence on x:
+Accordingly, the characteristics of (17) are denoted by:
+y(t, x) = (m1 (t, x), m2 (t, x), d1 (t, x), d2 (t, x), m11 (t, x), . . ., m1JQ
+(t, x)d11 (t, x), . . ., d1JD (t, x), eQD (t, x)) .
+the bivariate innovation process (ε(Q ) (t), ε(D) (t)) can be simulated.
+As explained in Section 5.1.1, we assume a univariate innovation
+follows a continuous normal or discrete GP distribution. If both
+ε(Q ) (t) and ε(D) (t) are normally distributed, the bivariate innovations can be easily generated by the simulation algorithms for
+multivariate normal distributions [89]. If both innovation processes
+follow discrete GP, the copula-based algorithm in [90] can be used
+for simulation. Otherwise, if one is discrete and the other is continuous, the algorithm in [91] can be employed. The copula-based
+algorithms developed in [90,91] are given in Appendix E for the
+6. Metamodel-based optimization for online production
+Optimization of production planning is performed using the
+capability of the metamodel-based MCS to very rapidly and accurately evaluate the performance measures for a given input release
+6.1. Problem formulation of production planning
+The plan optimization problem is formulated following the basic
+structure in the existing production literature [14,33,36,37,41,52].
+The problem formulation also represents an extension for generality, which is allowed by our metamodel-based methods.
+Following the notation in Section 3, the planning horizon is
+denoted as (0, H] and divided into P equal-length time periods. H is
+given in terms of the number of time units t. The length of each
+period is set based on the problem environment. Within each time
+period, the job release rate is assumed to be constant and equal
+whose x-free correspondence is deﬁned in Section 3.
+• G(t, x): The number of ﬁnished jobs at the end of the tth time unit,
+after the inventory has been reﬁlled by the newly-completed jobs
+and demand (if any) has been met as far as possible in that time
+and is a time series resulting from the interaction of the two
+stochastic time series {D(t, x); t = 1, 2, . . ., H} and {D(t); t =
+1, 2, . . ., H}. In this formulation, G(t, x) is allowed to be a negative integer, representing the backlogged shortage by the end of
+• I(t, x): The on-hand inventory of ﬁnished jobs at the end of the
+• B(t, x): The number of customer demands that are realized in the
+tth time unit but cannot be satisﬁed immediately with the existing inventory. These demands will be backlogged and fulﬁlled on
+The total cost associated with a release plan x can be written as:
+including the WIP holding cost and the ﬁnished-goods inventory
+cost. The total cost TC(x) is a random variable depending on the
+release plan x, and it is of interest to quantify both its expectation
+E[TC(x)] and its standard deviation Std[TC(x)].
+M. Li et al. / Journal of Manufacturing Systems 38 (2016) 114–133
+(a) the fitted metamodel for the system (Chapter 4); (b) the identified bivariate
+time-series model for the output processes (Q(t), D(t))T (Section 5.1)
+(i) Feed the candidate plan x to the metamodel to obtain the
+(ii) Based on the givens (a) and (b), use
+fitted parameters for the bivariate time-series model (Section 5.2.1)
+(iv) Based on multiple replications of Monte Carlo simulation, obtain
+(v) Employ a multi-objective optimization search to
+generate a candidate release plan x (or a batch of plans)
+Fig. 3. Online optimization for production planning.
+The backlogged shortage {B(t, x) ; t = 1, 2, . . ., H} can be used
+to obtain the ﬁll rate FR(x), the percentage of customer demand
+that can be fulﬁlled immediately with existing inventory, using the
+On a computer with Intel(R) Core(TM) i7 CPU and 8G RAM, it
+takes 0.1 second on average to perform one MCS replication, while
+one DES replication for the sample system in Section 7 takes about
+1 second. It is worth pointing out that the DES time depends on the
+complexity of the real system of interest, whereas the MCS time
+per replication remains approximately unchanged regardless of the
+(iii) Use the fitted bivariate time-series model to perform Monte Carlo
+simulation (Section 5.2.2) to generate simulated outputs
+and the demand process can be simulated as well
+The objectives of production planning could be to minimize
+This formulation represents only one possible way to formulate the optimization problem of production planning [1]. Our
+metamodel-based MCS method can accommodate a wide range of
+formulations, depending on the practical needs.
+Fig. 3 outlines the procedure to search for the production plans
+that combine good cost and service performance. This online production planning is performed with the two givens obtained ofﬂine:
+(a) the metamodel relating a release plan x {y(t, x); t = 1, 2, . . ., H},
+the characteristics of the output processes {Q(t), D(t); t = 1, 2, . . .,
+H}; (b) the bivariate time-series model selected based on the ofﬂine
+To consider multiple objective criteria, a multi-objective optimization algorithm such as gamultiobj in Matlab Optimization
+Toolbox is used to search the decision space of x for Pareto optimal
+solutions (release plans) as shown in Step (v) of Fig. 3.
+Each candidate plan x is evaluated rapidly and accurately
+through Steps (i)–(iv). For a given x, Step (i) can typically be completed within a second to obtain {y(t, x); t = 1, 2, . . ., H} over the
+planning horizon. Using {y(t, x); t = 1, 2, . . ., H}, Step (ii) is to obtain
+the ﬁtted bivariate time-series model for (Q(t), D(t)) .
+In Step (iii), MCS is performed: Based on the ﬁtted time-series
+model, {Qr (t), Dr (t); t = 1, 2, . . ., H; r = 1, 2, . . ., R} is generated,
+with R denoting the number of simulation replications; and by
+using the demand forecasting model, the demand series {Dr (t); r =
+1, 2, . . ., R} is also simulated. The number of replications R required
+for each x to obtain estimates of E[TC(x)], Std[TC(x)], and E[FR(x)]
+with desired statistical precision is determined by a two-stage procedure [41,54] given in Appendix F.
+In Step (iv), the performance metrics E[TC(x)], Std[TC(x)]
+E[FR(x)] are obtained from the multiple replications of MCS data
+{Qr (t), Dr (t); Dr (t); t = 1, 2, . . ., H; r = 1, 2, . . ., R}.
+For purposes of demonstration, the proposed method has been
+applied to solve the production planning problem for a scaleddown semiconductor wafer fabrication system [92] described in
+Appendix A. The system consists of 9 workstations, and involves
+re-entrant ﬂows, machine failures and batch processing, which are
+the main features of a real semiconductor fabrication system. One
+type of job is considered and the job arrivals follow a Poisson distribution with time-varying arrival rates speciﬁed by a release plan.
+Each job has 14 processing steps and needs to visit some workstations more than once. The raw processing time (excluding waiting
+time) for a job is expected to be 12.9 h, and the basic time unit
+The production planning problem is speciﬁed as follows for this
+case. The length of the planning horizon H is set as 672 time units
+(eight weeks) and divided into eight equal-length time periods,
+with each one 84 time units (one week) long. The cost parameters are assumed to be time-independent with values: w = 1 and
+h = 2, following [93,54]. The initial number of ﬁnished jobs G0 = 0.
+The customer demand {D(t); t = 1, 2, . . ., H} is a forecasted time
+series, which in this case is modeled as an AR-GARCH process, a
+widely-used time-series model for demand forecasting [94–97].
+The simulation algorithm for an AR-GARCH is given in Appendix
+G. In this study, four AR-GARCH demand processes are considered,
+with expected values and realization times of demand following
+the four scenarios in Fig. 4. In Scenario 1, the expected weekly
+demand increases steadily over the planning horizon, and customer
+demand is realized once a week; Scenario 2 also follows the general increasing pattern, but allows the demand to be realized twice
+a week. Scenarios 3 and 4 also correspond to different frequencies
+of demand realization (as Scenarios 1 and 2 do); their expected
+demands ﬂuctuate over the time. The values of expected weekly
+demand for each scenario are given later in Table 3. In Scenarios 3
+and 4, the average demand rate in the 4th week exceeds the system
+7.1. Ofﬂine simulation and modeling efforts
+Based on the DES data obtained ofﬂine, the metamodel was
+ﬁtted (Section 4), with the autoregressive order JQ and JD both
+determined as 2. In Appendix B, the ﬁtted metamodel for this sample system is provided and evaluated. Following Section 5.1, N-AR
+and N-INAR were identiﬁed as appropriate univariate time-series
+models for Q(t, x) and D(t, x) respectively. The ﬁtted metamodel
+and identiﬁed time-series models serve as the basis for online production optimization, as shown in Fig. 3.
+For online production optimization, a candidate plan needs to
+be evaluated using the metamodel-based MCS approach per Steps
+(i)–(iv) of Fig. 3. To evaluate the accuracy of the MCS evaluation,
+an extremely large number of DES replications were performed for
+each release plan to evaluate the performance metrics with very
+high precision; the DES estimates can thus be considered as “true”
+M. Li et al. / Journal of Manufacturing Systems 38 (2016) 114–133
+Fig. 4. Expected demand over the planning horizon of 672 time units (i.e., 8 weeks): “◦” corresponds to Scenario 1 or 3; “*” corresponds to Scenario 2 or 4.
+Table 2 compares the estimates of expected total cost E[TC(x)],
+standard deviation of total cost Std[TC(x)] and expected ﬁll rate
+E[FR(x)], obtained via the MCS method and DES respectively, for
+several different release plans. A total of 12 release plans are
+considered, derived from the four demand scenarios (Fig. 4). For
+instance, the ﬁrst plan in Table 2 is denoted as “Scenario 1 × 1.05 ,
+which means that the expected number of jobs weekly released
+under this plan is 1.05 times the expected weekly demand of
+Scenario 1. The table indicates that the MCS method is able to
+provide highly accurate estimates for the performance metrics of
+We consider the production planning as a two-objective
+optimization problem which seeks to minimize the expected
+total cost E[TC(x)] and maximize the expected ﬁll rate E[FR(x)]
+simultaneously. As a multi-objective optimization problem with
+conﬂicting objectives, we seek a set of non-dominated solutions
+that are as close as possible to the Pareto-optimal front and that
+are as diverse as possible [98] to allow decision makers to weigh
+The MOGA function “gamultiobj” provided by Matlab is adopted
+to perform a search in the decision space of x. This function employs
+the Elitist Non-Dominated Sorting GA (NSGA-II) algorithm, which
+is widely used for multi-objective optimization problem [98]. The
+user-speciﬁed parameters for the algorithm include: population
+size, maximum number of generation, stopping criteria, mutation function, elite count, and initial population. In our work, the
+initial population is generated by combining a fractional factorial design and the default space-ﬁlling design in “gamultiobj” to
+provide a good coverage of the x space. The population size and
+maximum number of generations are set to 75 and 8, respectively, and the other parameters are left as their default values in
+The production plan optimization was performed for the four
+demand scenarios (shown in Fig. 4) respectively. It takes about 50 h
+to complete the MCS-based optimization for a given demand scenario on a computer with Intel(R) Core(TM) i7 CPU and 8G RAM. In
+comparison, the same optimization procedure takes about 500 h,
+if the MCS evaluation is replaced by the DES for this scale-down
+fabrication system; the time savings will be more pronounced for
+systems with higher complexity, since DES time is very sensitive to
+For each demand scenario, a number of non-dominated
+solutions were obtained, and each solution’s performance pair
+(E[TC(x)], E[FR(x)]) plotted in Fig. 5. (Appendix H brieﬂy discusses
+the behavior of the NSGA-II algorithm based on our empirical
+results.) The four Pareto fronts of non-dominated solutions provide
+similar coverage of the performance region: The expected total cost
+ranges from 12,879 to 194,925, and the ﬁll rate from 18.82% to
+99.91%, providing decision makers extensive information on the
+trade-offs between cost and customer satisfaction.
+As shown in Fig. 5a or b, the Pareto front depicted by the stars
+(for Scenarios 2 or 4) is slightly higher than that represented by
+the circles (for Scenarios 1 or 3): With the same cost, a higher ﬁll
+rate can be achieved for Scenario 2 (or 4), compared to Scenario
+1 (or 3). This is because the plan optimization is able to match
+the job outputs with the more frequently-realized (biweekly) customer demand in Scenario 2 (or 4), leading to lower ﬁnished-goods
+inventory than the cases (Scenario 1 or 3) where demand is realized
+Evaluation quality of the metamodel-based Monte Carlo Simulation (MCS).
+M. Li et al. / Journal of Manufacturing Systems 38 (2016) 114–133
+Fig. 5. Performance metrics of the non-dominated solutions obtained from the multi-objective optimization for each demand scenario: “◦” corresponds to Scenario 1 or 3;
+Table 3 provides two non-dominated solutions (represented by
+eight-element row vectors in the table) for each demand scenario,
+with ﬁll rates approximately 95% and 99%, the high levels that are
+usually of interest. For comparison purposes, the release plan that
+keeps the system running at 95% utilization over the planning horizon is also given in Table 3, with the expected number of jobs
+released each week being (120, 120, 120, 120, 120, 120, 120, 120)
+during the period. This release plan leads to very high ﬁll rate and
+cost, as expected. The selected solutions (the row vectors in Table 3
+representing the expected number of jobs each week over the horizon) are compared with the expected weekly demand under their
+corresponding demand scenarios. It appears that to achieve a ﬁll
+rate of about 95%, these solutions tend to follow the general trend
+of customer demand (increasing for Scenario 1 and 2, and ﬂuctuating for Scenario 3 and 4), but almost always over-produce a little
+in each week. This pattern becomes less obvious in the solutions
+leading to a ﬁll rate of about 99%, which is achieved by more pronounced over-production at substantially higher total cost. Given
+the high level of utilization required, this is not surprising; there is
+very little excess capacity to allow the system to respond rapidly to
+high demand, requiring inventories to be built up in earlier periods
+with lower demand, and the total demand over the horizon requires
+a high level of production in all periods.
+This work developed a metamodel-based Monte Carlo simulation (MCS) method to address a fundamental issue for optimization
+of production planning: the quantiﬁcation of the relationships
+between a release plan of jobs and its resulting performance metrics
+(total cost and ﬁll rate), which serves as the basis to ﬁnd Paretooptimal release plans. The MCS method is able to overcome the
+lack of ﬁdelity of analytical methods and the computational burden of DES, allows for rapid and accurate evaluation of a release
+plan in terms of its performance metrics, which include not only
+the expectations (e.g., the mean cost) but also the variances (e.g.,
+the variance of the cost) and probabilities of interest (e.g., the ﬁll
+rate). The evaluation time required by the MCS is independent of
+the complexity of the real systems being investigated.
+The real-time “what if” analysis rendered by the MCS method
+provides the necessary basis for the optimization of production
+planning in a timely manner. The MCS-based multi-objective
+Selected non-dominated solutions obtained from multi-objective optimization for each demand scenario.
+Expected weekly demand of Scenarios 1 and 2
+Expected number of jobs released each week
+Expected weekly demand of Scenarios 3 and 4
+Average number of jobs released each week
+M. Li et al. / Journal of Manufacturing Systems 38 (2016) 114–133
+optimization problem has been solved for the production planning
+of a scaled-down semiconductor fabrication system. The evaluation quality of the MCS is demonstrated by comparing the MCS
+estimates with those given by DES. The non-dominated solutions
+obtained from the multi-objective optimization allow decision
+makers to weigh the trade-offs between conﬂicting objectives such
+as minimizing the expected total cost and maximizing the ﬁll rate.
+The system considered in the empirical study is a scaled-down
+semiconductor fabrication system described in [92]. It consists of
+9 workstations, and includes the major features of real semiconductor fabrication system [92] such as re-entrant ﬂows, machine
+failures, and batch processing. One job type is considered in this
+work with job processing sequence shown in Fig. A.6. Each job has
+14 processing steps, and needs to visit workstations 1, 4 and 6 multiple times. The inter-arrival time of jobs are assumed to follow
+an exponential distribution with arrival rate speciﬁed by the job
+release plan. Table A.4 gives the speciﬁc conﬁguration of each of
+the 9 workstations. The ﬁrst three rows of the table specify for
+each station the number of machines, batch processing size, and
+whether the machines are subject to random failures. Lognormal
+This work was supported by National Science Foundation Grant
+No. CMMI-1068131. Any opinions, ﬁndings, and conclusions or recommendations expressed in this material are those of the authors
+and do not necessarily reﬂect the views of the National Science
+Appendix A. Conﬁguration of the example system
+Fig. B.7. Input arrival rate functions for the estimation data set (EDS) and three validation data sets (VDS).
+M. Li et al. / Journal of Manufacturing Systems 38 (2016) 114–133
+distributions are assumed for all the processing times (PT), and
+Weibull distributions for all the times to failure (TTF) and times
+to repair (TTR). For each station, the means and standard deviations (Stdev) of PT, TTF and TTR are also provided in Table A.4. The
+scale-down system is subject to substantial variability caused by
+machine failures and random processing times.
++ 0.1221m2 (t − 1) − 0.1556d2 (t − 1) + 0.8277m11 (t − 1)
+− 0.3062d1 (t − 1)d12 (t − 1) + 0.0124d1 (t − 1)eQD (t − 1)
+The metamodeling method (Section 4) was applied to the system described in Appendix A to obtain the ﬁtted metamodel. DES
+was carried out to collect the estimation data set (EDS). Following
+the experimental design strategies in [54], the input arrival rate
+function x(t) is speciﬁed as in Fig. B.7a for the EDS. x(t) is a piecewise constant function with 5 distinct levels corresponding to ﬁve
+system utilizations: [0.71, 0.50, 0.92, 0.61, 0.82]. The length of a DES
+replication is L = 1260 time units with a total of R = 75,000 replications. The collected EDS takes the form of (3) and is used to ﬁt the
+metamodel following Section 5.1 of [54]. The ﬁtted metamodel is
+− 0.0018m2 (t − 1)2 + 0.0035m2 (t − 1)m11 (t − 1)
++ 0.2436d2 (t − 1)x(t − 1) − 0.0017m11 (t − 1)2
+− 0.0001m12 (t − 1)eQD (t − 1) − 0.5429x(t − 1)2
+d11 (t) = −0.0916 − 0.0294m1 (t − 1) + 0.4253d1 (t − 1)
++ 0.0330m1 (t − 1)d1 (t − 1) − 0.0101m1 (t − 1)d2 (t − 1)
++ 0.1408d1 (t − 1)x(t − 1) + 0.0080m2 (t − 1)x(t − 1)
++ 0.1928d2 (t − 1)d11 (t − 1) − 0.0153m11 (t − 1)x(t − 1)
+d1 (t) = 0.0179 + 0.0434m1 (t − 1) + 0.4561d1 (t − 1)
+− 0.0066m2 (t − 1) + 0.0071m12 (t − 1) − 0.1449d11 (t − 1)
+− 0.0093m1 (t − 1)d2 (t − 1) − 0.0034m1 (t − 1)d11 (t − 1)
++ 0.4666d1 (t − 1)2 + 0.0072d1 (t − 1)m2 (t − 1)
+− 0.0082d1 (t − 1)m11 (t − 1) + 0.0004m2 (t − 1)d11 (t − 1)
++ 0.0741d2 (t − 1)x(t − 1) − 0.0909d12 (t − 1)x(t − 1)
+m12 (t) = 0.4224 − 0.0820m1 (t − 1) − 0.0424d1 (t − 1)
++ 0.0024m1 (t − 1)d12 (t − 1) + 1.0271m1 (t − 1)x(t − 1)
+Appendix B. Estimation and evaluation of the metamodel
+m1 (t) = m1 (t − 1) − d1 (t − 1) + x(t − 1)
++ 0.0083m12 (t − 1)x(t − 1) − 0.0173d12 (t − 1)eQD (t − 1)
+d12 (t) = −0.1667 + 0.0103m1 (t − 1) + 0.2946d1 (t − 1)
+− 0.0116m2 (t − 1) + 0.0105m12 (t − 1) + 0.0699eQD (t − 1)
+− 0.0050m1 (t − 1)d2 (t − 1) + 0.0081m1 (t − 1)x(t − 1)
++ 0.0051d1 (t − 1)m2 (t − 1) − 0.0062d1 (t − 1)m12 (t − 1)
++ 0.4627d1 (t − 1)d12 (t − 1) + 0.0011m12 (t − 1)d12 (t − 1)
+m2 (t) = 0.5662 − 0.1149m1 (t − 1) − 0.7456d1 (t − 1)
++ 1.0536m2 (t − 1) − 0.1939m11 (t − 1) + 0.1469m12 (t − 1)
+− 2.0810eQD (t − 1) + 2.7935x(t − 1) + 0.0119m1 (t − 1)2
++ 1.8148m1 (t − 1)x(t − 1) + 1.0695d1 (t − 1)d2 (t − 1)
+− 1.2257d1 (t − 1)x(t − 1) + 0.0024m2 (t − 1)eQD (t − 1)
+− 0.0026m12 (t − 1)eQD (t − 1) − 0.5545d11 (t − 1)x(t − 1)
+− 1.4809d11 (t − 1)2 + 3.3272d11 (t − 1)d12 (t − 1)
+− 0.0605d11 (t − 1)x(t − 1) − 1.7835d12 (t − 1)2
+eQD (t) = −0.6245 + 0.1760m1 (t − 1) + 0.0134m12 (t − 1)
+− 2.4162d12 (t − 1) − 0.2578m1 (t − 1)d1 (t − 1)
++ 0.8689m1 (t − 1)d11 (t − 1) − 0.4930m1 (t − 1)d12 (t − 1)
+− 0.1511m1 (t − 1)x(t − 1) + 6.2565d1 (t − 1)x(t − 1)
+d2 (t) = 0.0875 + 0.0278m1 (t − 1) + 0.7497d1 (t − 1)
+− 0.0275m11 (t − 1)d11 (t − 1)+0.0217m12 (t − 1)d11 (t − 1)
++ 0.0304m1 d1 (t − 1) − 0.0155m1 (t − 1)d1 (t − 1)
+− 9.5731d11 (t − 1)x(t − 1) + 0.7797eQD (t − 1)
+− 0.0215m1 (t − 1)d11 (t − 1) + 0.3201d1 (t − 1)2
+− 0.1312d12 (t − 1)eQD (t − 1) + 6.1842d12 (t − 1)x(t − 1)
++ 0.2443d1 (t − 1)d2 (t − 1) + 0.1496d2 (t − 1)x(t − 1)
+− 0.1550d12 (t − 1)x(t − 1) − 0.1007x(t − 1)
+m11 (t) = 0.1792 − 0.0852m1 (t − 1) + 0.2214d1 (t − 1)
++ 0.0044m1 (t − 1)2 0.9168m1 (t − 1)x(t − 1)
+− 0.00003m12 (t − 1)eQD (t − 1) + 0.3236x(t − 1)2
+To evaluate the prediction accuracy of the ﬁtted metamodel,
+three validation data sets (VDS) are collected by running 70,000
+replications via DES using the input arrival rate functions shown
+in Fig. B.7b–d, respectively. For VDS 1, x(t) is a piecewise constant
+function which allows the system to be temporarily overloaded.
+For VDS 2, x(t) is a sine wave function with the highest and
+lowest arrival rates correspond to system utilizations of 0.9
+and 0.6 respectively. These two VDS are designed to test the
+metamodel’s ability to predict both transient and steady-state
+M. Li et al. / Journal of Manufacturing Systems 38 (2016) 114–133
+Fig. B.8. Evaluation of the ﬁtted metamodel using VDS 1: dashed curves denote the “true” values and solid curves represent the metamodel-predicted results.
+behavior of the system. For VDS 3, x(t) is a non-dominated
+release plan obtained from the multi-objective optimization (Section 7.3): the ﬁrst non-dominated solution for Scenario 1 given
+in Table 3. The release plan is converted to the number of
+arrivals per t, and plotted in Fig. B.7d, with the 8 distinct levels
+[0.9, 0.95, 1.01, 1.10, 1.29, 1.23, 1.29, 1.40],
+Appendix C. Yule–Walker estimator of autoregressive
+Let Z(t) be an autoregressive process representing one of the
+two stationary processes from steady-state simulation: WIP Q(t)
+and departures D(t). The stationary process Z(t) can be written in
+corresponding to the system utilization levels of [0.60, 0.63, 0.67,
+The characteristics of system outputs estimated from the VDS
+serve as the “true” values and are compared with the metamodelpredicted results. As pointed out in Section 4.4, the system’s future
+outputs can be recursively computed by feeding the arrival rate
+(of a VDS) to the metamodel, and obtained within a second. The
+comparison results are shown in Figs. B.8–B.10. The metamodel
+prediction, which is represented by the solid curves, is able to
+accurately track the “true” values, which are plotted as the dashed
+where J denotes the autoregressive order, {˛j ; j = 1, 2, . . ., J} the
+autoregressive coefﬁcients, ε(t) the innovation term, and N the
+The model selection in Section 5.1.2 between N-INAR and NSINAR is made by performing the following hypothesis test:
+for j = 1, 2, . . ., J. If H0 is rejected for any j, then N-SINAR will be
+selected; otherwise, N-INAR will be adopted. Yule–Walker estimation and inference are performed in this work to test the hypothesis
+M. Li et al. / Journal of Manufacturing Systems 38 (2016) 114–133
+Fig. B.9. Evaluation of the ﬁtted metamodel using VDS 2: dashed curves denote the “true” values and solid curves represent the metamodel-predicted results.
+(C.1), based on the steady-state DES data {Zr (t); t = 1, 2 . . . , N; r = 1,
+2, . . ., R}, where R is the number of replications. Let
+the Yule–Walker equation [57,88] is written as
+where ε(t) is the i.i.d normally-distributed innovation term with
+Replacing { 0 ,  1 , . . .,  J } by the sample estimates {0 , 1 , . . ., J }
+Z (t) have the same autocorrelation structure, it can
+be shown that these two processes have the same Yule–Walker
+M. Li et al. / Journal of Manufacturing Systems 38 (2016) 114–133
+Fig. B.10. Evaluation of the ﬁtted metamodel using VDS 3: dashed curves denote the “true” values and solid curves represent the metamodel-predicted results.
+estimates for ␣ [61,67]. The hypothesis (C.1) is performed based on
+When the sample size N is large, the Yule–Walker estimator ␣
+Z (t) follows the asymptotic normal distribution [88,99]
+Appendix D. Model ﬁtting of bivariate time series
+For the bivariate output process (Q(t), D(t)) driven by an arrival
+process, the ﬁtted metamodel is able to predict its characteristics
+y(t) = (m1 (t), m2 (t), d1 (t), d2 (t), m11 (t), . . ., m1JQ (t), d11 (t), . . .,
+Based on y(t), how to ﬁt a bivariate time-series model for (Q(t),
+D(t)) , with the identiﬁed time-series model family (Section 5.1.3)?
+The general form of the candidate autoregressive models (4)
+identiﬁed for the output processes is re-written below for convenience.
+where wjj denotes the jth diagonal element of  2  . Deﬁne  as
+the cumulative distribution function of the standard normal distribution. For the hypothesis test (C.1) with signiﬁcance level ı, if
+is less than −1 (ı), H0 will be rejected; otherwise, H0 is
+As discussed in Section 5.1.1, the random operator R can be
+scalar multiplication, binomial thinning “◦” or generalized thinning “F(·)◦”, corresponding to N-AR, N-INAR and N-SINAR model
+M. Li et al. / Journal of Manufacturing Systems 38 (2016) 114–133
+respectively. A time series Z(t) following any of the three models
+has the following properties [57,61,62,67]:
+E[R(˛j (t), Z(t − j))] = ˛j (t)E[Z(t − j)]
+As will be seen below, the properties (D.9)–(D.11) enable the
+derivation from the metamodel-predicted characteristics (D.1) to
+the ﬁtted parameters that specify the bivariate time-series model.
+D.2. Fitting the bivariate time-series model
+E[R(˛j (t), Z(t − j)) ] = (˛j (t)) E[(Z(t − j)) ] + fR (˛j (t), E[Z(t − j)])
+The following expectations, variances and covariances can be
+easily obtained from the metamodel prediction (D.1):
+Var[R(˛j (t), Z(t − j))] = (˛j (t))2 Var[Z(t − j)] + fR (˛j (t), E(Z(t − j)))
+ Q (t), Q (t − j)] = m1j (t) − m1 (t)m1 (t − j) for j = 1, 2, . . ., JQ
+E[R(˛j (t), Z(t − j)), R(˛i (t), Z(t − i))] = ˛j (t)˛i (t)E[Z(t − j)Z(t − i)]
+Cov[R(˛j (t), Z(t − j)), R(˛i (t), Z(t − i))]
+ D(t), D(t − j)] = d1j (t) − d1 (t)d1 (t − j) for j = 1, 2, . . ., JD
+The form of fR ( · ) in (D.4) and (D.5) is model-dependent: For
+N-AR, fR (˛j (t), E[Z(t − j)]) = 0; for N-INAR, fR (˛j (t), E[Z − j]) =
+˛j (t)(1 − ˛j (t))E[Z(t − j)]; and for N-SINAR, fR (˛j (t), E[Z(t − j)]) =
+Based on (D.3)–(D.7), some properties of the time series Z(t) and
+the innovation process ε(t) can be derived as follows. Speciﬁcally,
+Cov[R(˛i (t), Z(t − i)), Z(t − j)] + Cov[ε(t), Z(t − j)]
+Following the procedures in [57,61], we use (D.12)–(D.18) to
+derive as follows the ﬁtted model parameters for the bivariate time
+series: {˛j (t); j = 1, 2, . . ., JD }, E[ε(Q ) (t)], E[ε(D) (t)], Var[
+By employing (D.9), {˛j (t); j = 1, 2, . . ., JQ }, E[ε(Q ) (t)] and
+Step (D.8) is obtained by expressing Z(t) and Z(t − j) in terms of
+(D.2). Step (D.9) employs the property (D.7) and the assumption
+By taking expectation and variance on both sides of (D.2) and
+using the properties (D.3) and (D.5), the mean and variance of ε(t)
+can be expressed in terms of the characteristics of Z(t) as follows:
+ Q (t − min(i, j)), Q (t − min(i, j) − |i − j|)],
+where A (t) is a JQ × JQ matrix with the element in the ith row and
+Then, based on (D.10) and (D.11), we have
+M. Li et al. / Journal of Manufacturing Systems 38 (2016) 114–133
+ ε(Q ) (t), ε(D) (t)] is the offNotice that ˛i (t) = 0 for i > JD , and Cov[
+The remaining parameter to be estimated is Cov[
+JQ ≥ JD without loss of generality. The ﬁtted bivariate model can be
+Taking the variance on both sides of (D.22) and using (D.7), (D.23)
+t = 1, 2, . . ., H, i = 1, 2, . . ., JD .
+ Q (t), D(t)] is a metamodel-predicted characteristics,
+and the remaining terms need to be estimated are
+Based on the properties (D.4)–(D.5), it can be shown that
+Using the properties (D.3)–(D.7), and the facts that Q (t − j) is independent of ε(Q ) (t) in (14) and D(t − j) is independent of ε(D) (t) in
+(15), the following results can be obtained:
+ Q (−i), D(−j)]; i, j = 0, 1, 2, . . ., max{JQ , JD } −
+1} can be typically obtained from the historical data to serve as
+the seed to initiate the computation in (D.27) and (D.28). And
+ ε(Q ) (t), ε(D) (t)] can be obtained by plugging (D.26) and (D.18)
+Appendix E. Generation of bivariate innovations
+For the readers’ convenience, the copula-based algorithms
+in [90,91] are provided here for the generation of the bivari
+ate innovation process (ε(Q ) (t), ε(D) (t)) . The characteristics of
+(ε(Q ) (t), ε(D) (t)) are estimated and give as: E[ε(Q ) (t)], E[ε(D) (t)],
+cumulative distribution functions (CDF) for ε(Q ) (t) and (ε(D) (t)) are
+speciﬁed as FQ and FD , respectively. In this work, the CDF could be
+normal or generalized Poisson (GP) as discussed in Section 5.1.1,
+and herein we consider the case where at least one of FQ and FD
+M. Li et al. / Journal of Manufacturing Systems 38 (2016) 114–133
+In the notations below, the time index t is omitted for clarity.
+Let u = (u(Q ) , u(D) ) be a bivariate normal random variable with
+ε = (ε(Q ) , ε(D) ) = (FQ−1 ((u(Q ) )), FD−1 ((u(D) )))
+The  denotes the CDF of stand normal distribution. The covariance
+Cov[ε(Q ) , ε(D) ] = E[ε(Q ) ε(D) ] − E[ε(Q ) ]E[ε(D) ]
+To solve the covariance matching problem in (E.2), the integral of
+E[ε(Q ) ε(D) ] in (E.1) is ﬁrst transformed into a sum of terms, and
+then a numerical algorithm is employed to ﬁnd ϕ that solves (E.2)
+ ε(Q ) , ε(D) ], the algorithm for generatGiven the FQ , FD and Cov[
+ing samples of bivariate random variables {εi ; i = 1, 2, . . ., N} are
+Step 1 : Use the formula (19) in [90] if both ε(Q ) and ε(D) follow GP
+distribution, or (11) in [91] if one of them follows normal
+distribution, to ﬁnd ϕ that solves (E.2) via numerical search
+Step 2 : Generate independent bivariate standard normal variables
+, ui ) , i = 1, 2, . . ., N}, where each ui satisﬁes:
+FQ−1 ((u(Q ) ))FD−1 ((u(D) ))ϕ (u(Q ) , u(D) )du du .
+In (E.1), ϕ (u(Q) , u(D) ) denotes the probability density function of u.
+Obviously, the value of E[ε(Q ) ε(D) ] depends on the choice of ϕ. Hence
+at this point, the problem of generating ε with given characteristics
+turns into the covariance matching problem: Find the value of ϕ
+Many softwares (e.g., Matlab, R) provide efﬁcient algorithms
+Fig. H.11. “◦” highlights non-dominated solutions found by the NSGA-II algorithm. “·” corresponds to all candidate plans visited by the NSGA-II algorithm.
+M. Li et al. / Journal of Manufacturing Systems 38 (2016) 114–133
+Appendix F. Two-stage procedure for sample size
+For a candidate release plan x, how to determine the number of
+Monte Carlo simulation (MCS) replications R needed to obtain highquality estimates of the performance metrics: the expected total
+cost E[TC(x)] and the ﬁll rate E[FR(x)]? Denote a performance metric
+as M(x) in general, where M(x) can be TC(x) or FR(x). In this work,
+the two-stage procedure [41,54] is implemented to determine the
+value of R so that a desired precision can be achieved for E[M(x)],
+ E[M(x)] is the estimated standard deviation of E[M(x)],
+and % the target precision level. At the ﬁrst stage, an initial number
+ 0 E0 [M(x)] as the estimated standard devimean of M(x) and Std
+ation of E0 [M(x)] from the R0 replications. Then the number of
+replications R that is likely to achieve the target precision level %
+At the second stage, R − R0 additional replications are generated
+and the data collected at both stages are used to estimate the performance metrics.
+Appendix G. Simulating the demand process
+where E[D(t)] is pre-given, and v(t) is a stochastic process representing the deviation of D(t) from its mean E[D(t)]. Denote the
+with U being the number of demand realizations over the planning
+horizon. E[D(t)] and v(t) are set as 0 at the time points when no
+In this work, v( i ) is modeled by a AR-GARCH process [100,101],
+which is widely used in modeling and forecasting demand [94–97].
+where ( i ) is Gaussian white noise with unit variance, and , 0 ,
+Appendix H. Behavior of the NSGA-II algorithm
+Fig. H.11 displays for each demand scenario all the candidate
+plans visited by the NSGA-II algorithm. Each plan is denoted as a dot
+in the two-dimensional performance-metric space: the expected
+demand fulﬁll rate E[FR(x)] versus the expected total cost E[TC(x)].
+The plans included in the Pareto frontier by the algorithm are
+[1] Missbauer H, Uzsoy R. Optimization models of production planning problems. In: Kempf KG, Keskinocak P, Uzsoy R, editors. Planning production and
+inventories in the extended enterprise: a state of the art handbook. New York:
+[2] Heizer JH, Render B. Operations management. Upper Saddle River, NJ: Pearson
+[3] Kempf KG, Uzsoy R, Keskinocak P. Planning production and inventories in the
+extended enterprise: a state of the art handbook. Springer; 2010.
+[4] Anthony RN. Planning and control systems: a framework for analysis. Harvard
+[5] Bitran GR, Tirupati D. Hierarchical production planning. Handb Oper Res Manage Sci 1993;4:523–68.
+[6] Buzacott JA, Shanthikumar JG. Stochastic models of manufacturing systems,
+vol. 4. Englewood Cliffs, NJ: Prentice Hall; 1993.
+[7] Hopp WJ, Spearman ML. Factory physics: foundations of manufacturing management. Homewood: Irwin; 2001.
+[8] Atherton RW, Dayhoff JE. Signature analysis: simulation of inventory, cycle
+time, and throughput trade-offs in wafer fabrication. IEEE Trans Compon
+[9] Ankenman BE, Bekki JM, Fowler JW, Mackulak GT, Nelson BL, Yang F.
+Simulation in production planning: an overview with emphasis on recent
+developments in cycle time estimation. In: Keskinocak P, Kempf KG, Uzsoy
+R, editors. Planning production and inventories in the extended enterprise: a
+state of the art handbook. Springer; 2011. p. 565–91.
+[10] Johnson LA, Montgomery DC. Operations research in production planning,
+scheduling, and inventory control. New York: Wiley; 1974.
+[11] Voß S, Woodruff DL. Introduction to computational optimization models for
+production planning in a supply chain, vol. 240. Springer; 2006.
+[12] Pochet Y, Wolsey LA. Production planning by mixed integer programming.
+[13] Hackman S. Production economics: integrating the microeconomic and engineering. Heidelberg: Springer-Verlag; 2008.
+[14] Missbauer H. Order release planning with clearing functions: a queueingtheoretical analysis of the clearing function concept. Int J Prod Econ
+[15] Orlicky J. Material requirements planning: the new way of life in production
+and inventory management. New York: McGraw-Hill; 1975.
+[16] Vollmann TE, Berry WL, Whybark DC, Jacobs FR. Manufacturing planning and
+control for supply chain management. New York: McGraw-Hill/Irwin; 2005.
+[17] Baker KR. Requirements planning. Handb Oper Res Manage Sci
+[18] Leachman RC, Benson RF, Liu C, Raar DJ. Impress: an automated production
+planning and delivery quotation system at Harris corporation semiconductor
+[19] Fordyce K, Wang CT, Chang CH, Degbotse A, Denton B, Lyon P, et al. The
+ongoing challenge: creating an enterprise-wide detailed supply chain plan for
+semiconductor and package operations. In: Planning production and inventories in the extended enterprise. Springer; 2011. p. 313–87.
+[20] Peters R, Boskma K, Kupper H. Stochastic programming in production planning: a case with none-simple recourse. Statistica Neerlandica
+[21] Escudero LF, Kamesam PV, King AJ, Wets RJ. Production planning via scenario
+modelling. Ann Oper Res 1993;43(6):309–35.
+[22] Sen S, Higle JL. An introductory tutorial on stochastic linear programming
+[23] Higle JL, Kempf KG. Production planning under supply and demand uncertainty: a stochastic programming approach. In: Infanger G, editor. Stochastic
+programming: the state of the art. Berlin: Springer; 2010. p. 297–315.
+[24] Bertsimas D, Sim M. The price of robustness. Oper Res 2004;52(1):35–53.
+[25] Bertsimas D, Thiele A. A robust optimization approach to inventory theory.
+[26] Charnes A, Cooper WW. Chance constrained programming. Manage Sci
+[27] Prékopa A. Stochastic programming, vol. 324. Springer Science & Business
+[28] Aouam T, Uzsoy R. Chance-constraint-based heuristics for production planning in the face of stochastic demand and workload-dependent lead times.
+In: Decision policies for production networks. Springer; 2012. p. 173–
+[29] Aouam T, Uzsoy R. Zero-order production planning models with
+stochastic demand and workload-dependent lead times. Int J Prod Res
+[30] Pahl J, Voß S, Woodruff DL. Production planning with load dependent lead
+[31] Pahl J, Voß S, Woodruff DL. Production planning with load dependent lead
+times: an update of research. Ann Oper Res 2007;153(1):297–345.
+[32] Srinivasan A, Carey M, Morton TE. Resource pricing and aggregate scheduling
+in manufacturing systems. Tech. Rep. Carnegie Mellon University, Tepper
+[33] Asmundsson JM, Rardin RL, Uzsoy R. Production planning models for
+resources subject to congestion. Nav Res Logist 2009;56:142–57.
+[34] Selçuk BFJC, De Kok AG. Work-in-process clearing in supply chain operations
+M. Li et al. / Journal of Manufacturing Systems 38 (2016) 114–133
+[35] Missbauer H. Models of the transient behaviour of production units to optimize the aggregate material ﬂow. Int J Prod Econ 2009;118(2):387–97.
+[36] Asmundsson JM, Rardin RL, Uzsoy R. Tractable nonlinear production planning
+models for semiconductor wafer fabrication facilities. IEEE Trans Semiconduct Manuf 2006;19(1):95–111.
+[37] Kacar NB, Irdem DF, Uzsoy R. An experimental comparison of production planning using clearing functions and iterative linear programming-simulation
+algorithms. IEEE Trans Semiconduct Manuf 2012;25(1):104–17.
+[38] Kacar NB, Monch LaUR. Planning wafer starts using nonlinear clearing functions: a large-scale experiment. IEEE Trans Semiconduct Manuf
+[39] Hasan CN, Spearman ML. Optimal material release times in stochastic production environments. Int J Prod Res 1999;37(6):1201–16.
+[40] Homem-De-Mello T, Shapiro A, Spearman ML. Finding optimal material release times using simulation-based optimization. Manage Sci
+[41] Liu J, Li C, Yang F, Wan H, Uzsoy R. Production planning for semiconductor
+manufacturing via simulation optimization. In: Jain S, Creasey RR, Himmelspach J, White KP, Fu M, editors. Proceedings of the winter simulation
+[42] Kacar NB, Uzsoy R. Estimating clearing functions for production resources
+using simulation optimization. IEEE Trans Autom Sci Eng 2015;12(2):539–52.
+[43] Gansterer M, Almeder C, Hartl RF. Simulation-based optimization methods for
+setting production planning parameters. Int J Prod Econ 2014;151:206–13.
+[44] Albey E, Uzsoy R. Lead time modeling in production planning. In: Proceedings
+of the winter simulation conference. 2015.
+[45] Hung YF, Leachman RC. A production planning methodology for semiconductor manufacturing based on iterative simulation and linear programming
+calculations. IEEE Trans Semiconduct Manuf 1996;9(2):257–69.
+[46] Byrne MD, Bakir MA. Production planning using a hybrid simulationanalytical approach. Int J Prod Econ 1999;59(1):305–11.
+[47] Kim B, Kim S. Extended model for a hybrid production planning approach. Int
+[48] Byrne MD, Hossain MM. Production planning: an improved hybrid approach.
+[49] Bang JY, Kim YD. Hierarchical production planning for semiconductor wafer
+fabrication based on linear programming and discrete-event simulation. IEEE
+[50] Irdem DF, Kacar NB, Uzsoy R. An exploratory analysis of two iterative linear programming-simulation approaches for production planning. IEEE Trans
+[51] Orcun S, Uzsoy R, Kempf KG. An integrated production planning model
+with load-dependent lead-times and safety stocks. Comput Chem Eng
+[52] Kacar NB, Uzsoy R. A comparison of multiple linear regression
+approaches for ﬁtting clearing functions to empirical data. Int J Prod
+[53] Ankenman B, Nelson BL, Staum J. Stochastic kriging for simulation metamodeling. Oper Res 2010;58(2):371–82.
+[54] Yang F, Liu J. Simulation-based transfer function modeling for transient analysis of general queueing systems. Eur J Oper Res 2012;223:150–66.
+[55] Gerhardt I, Nelson BL. Transforming renewal processes for simulation of nonstationary arrival processes. INFORMS J Comput 2009;21(4):630–40.
+[56] Nelson BL, Gerhardt I. Modelling and simulating non-stationary arrival processes to facilitate analysis. J Simul 2011;5(1):3–8.
+[57] Box GE, Jenkins GM, Reinsel GC. Time series analysis: forecasting and control.
+[58] del Castillo J, Pérez-Casany M. Overdispersed and underdispersed Poisson
+generalizations. J Stat Plan Inference 2005;134(2):486–500.
+[59] Jung RC, Tremayne AR. Convolution-closed models for count time series with
+applications. J Time Ser Anal 2011;32(3):268–80.
+[60] Jung RC, Tremayne AR. Useful models for time series of counts or simply
+wrong ones? AStA Adv Stat Anal 2011;95(1):59–91.
+[61] Weiß CH. Integer-valued autoregressive models for counts showing underdispersion. J Appl Stat 2013;40(9):1931–48.
+[62] Du J, Li Y. The integer-value autoregressive (INAR(p)) model. J Time Ser Anal
+[63] Fokianos K. Count time series models. Handb Stat Time Ser Methods Appl
+[64] McKenzie E. Discrete variate time series. Handb Stat 2003;21:573–606.
+[65] Jung RC, Kukuk M, Liesenfeld R. Time series of count data: modeling, estimation and diagnostics. Comput Stat Data Anal 2006;51(4):2350–64.
+[66] Grunwald GK, Hyndman RJ, Tedesco L, Tweedie RL. Theory & methods: nonGaussian conditional linear AR(1) models. Aust N Z J Stat 2000;42(4):479–95.
+[67] Kachour M, Truquet L. A p-order signed integer-valued autoregressive
+(SINAR(p)) model. J Time Ser Anal 2011;32(3):223–36.
+[68] Kachour M, Yao J. First-order rounded integer-valued autoregressive
+(RINAR(1)) process. J Time Ser Anal 2009;30(4):417–48.
+[69] Alzaid AA, Al-Osh M. An integer-valued pth-order autoregressive structure
+(INAR(p)) process. J Appl Probab 1990:314–24.
+[70] Weiß CH. Thinning operations for modeling time series of counts – a survey.
+[71] Joe H. Time series models with univariate margins in the convolution-closed
+inﬁnitely divisible class. J Appl Probab 1996:664–77.
+[72] Davis RA, Dunsmuir WTM, Streett SB. Observation-driven models for Poisson
+[73] Zeger SL. A regression model for time series of counts. Biometrika
+[74] Zeger SL, Qaqish B. Markov regression models for time series: a quasilikelihood approach. Biometrics 1988:1019–31.
+[75] Zhu F. Modeling overdispersed or underdispersed count data with
+generalized Poisson integer-valued GARCH models. J Math Anal Appl
+[76] Kim H, Park Y. A non-stationary integer-valued autoregressive model. Stat
+[77] Rao TS. The ﬁtting of non-stationary time-series models with time-dependent
+parameters. J R Stat Soc Ser B (Methodol) 1970;32(2):312–22.
+[78] Brännäs K. Explanatory variables in the AR(1) count data model. Umeå Econ
+[79] Enciso-Mora VNP, Rao TS. Integer valued AR processes with explanatory variables. Sankhyā Indian J Stat Ser B 2009:248–63.
+[80] Consul PC. Generalized Poisson distributions: properties and applications.
+[81] Efron B. Double exponential families and their use in generalized linear
+regression. J Am Stat Assoc 1986;81(395):709–21.
+[82] Sellers KFBS, Shmueli G. The COM-Poisson model for count data: a survey of
+methods and applications. Appl Stoch Models Bus Ind 2012;28(2):104–16.
+[83] Steutel FW, Van Harn K. Discrete analogues of self-decomposability and stability. Ann Probab 1979;7(5):893–9.
+[84] Chesneau C, Kachour M. A parametric study for the ﬁrst-order signed integervalued autoregressive process. J Stat Theory Pract 2012;6(4):760–82.
+[85] Wilk MB, Gnanadesikan R. Probability plotting methods for the analysis for
+the analysis of data. Biometrika 1968;55(1):1–17.
+[86] Massey Jr FJ. The Kolmogorov–Smirnov test for goodness of ﬁt. J Am Stat Assoc
+[87] Shapiro SS, Wilk MB. An analysis of variance test for normality (complete
+[88] Brockwell PJ, Davis RA. Introduction to time series and forecasting, vol. 1.
+[89] Ripley BD. Stochastic simulation, vol. 316. John Wiley & Sons; 2009.
+[90] Avramidis AN, Channouf N, L’Ecuyer P. Efﬁcient correlation matching for
+ﬁtting discrete multivariate distributions with arbitrary marginals and
+normal-copula dependence. INFORMS J Comput 2009;21(1):88–106.
+[91] Channouf N, L’Ecuyer P. Fitting a normal copula for a multivariate distribution
+with both discrete and continuous marginals. In: Proceedings of the winter
+[92] Kayton D, Teyner T, Schwartz C, Uzsoy R. Focusing maintenance improvement
+efforts in a wafer fabrication facility operating under theory of constraints.
+[93] Liu J. Simulation-based transfer function modeling approach for responsive
+production planning [Ph.D. thesis]. West Virginia University; 2011.
+[94] Garcia RCCJVAM, Garcia JBC. A GARCH forecasting model to predict day-ahead
+electricity prices. IEEE Trans Power Syst 2005;20(2):867–74.
+[95] Song H, Li G. Tourism demand modelling and forecasting a review of recent
+[96] Taylor JW, Buizza R. A comparison of temperature density forecasts from
+GARCH and atmospheric models. J Forecast 2004;23(5):337–55.
+[97] Taylor JWMPE, Buizza R. Wind power density forecasting using ensemble predictions and time series models. IEEE Trans Energy Convers
+[98] Deb K. Multi-objective optimization using evolutionary algorithms, vol. 16.
+[99] Brockwell PJ, Davis RA. Time series: theory and methods. Springer; 2009.
+[100] Bollerslev T. Generalized autoregressive conditional heteroskedasticity. J
+[101] Engle RF. Autoregressive conditional heteroscedasticity with estimates of
+the variance of United Kingdom inﬂation. Econom J Econom Soc 1982:987–

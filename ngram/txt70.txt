@@ -1,0 +1,626 @@
+International Journal of Computer Integrated Manufacturing, Vol. 20, No. 6, September 2007, 579 – 587
+Due date quoting and scheduling interaction in production lines
+Dipartimento di Sistemi di Produzione ed Economia dell’Azienda, Politecnico di Torino, Italy
+Scheduling is one of the most important activities of many ﬁrms, especially in a make-toorder environment, since it is used for planning external activities (e.g. material
+procurement) and quoting customers’ due dates. Changes in schedules (owing, for
+example, to a machine failure) may delay activities and decrease the customer service
+level. Our work combines lead time quoting with scheduling decisions. We use a
+computer-based simulation to study a production line in a dynamic context, with multiple
+job types, stochastic job arrivals and random machine failures. The results of our
+experiment show a strict relationship among lead time quoting policies, scheduling
+algorithms, customer service level and cost function used to evaluate the performance of
+the ﬁrm and this relationship itself is shown to represent a powerful tool for production
+Keywords: Flow shop scheduling; Uncertainties; Lead time/due date quoting; Production
+Scheduling is one of the most important activities of many
+ﬁrms, especially in a make-to-order environment, where
+there is a strong interaction between production and
+market demand. In fact, while in a make-to-stock system
+inventories ‘protect’ production from demand ﬂuctuations,
+in make-to-order or assemble-to-order systems no buﬀer
+decouples production from market demand. Since in a
+make-to-order context we start processing a job only when
+there is a customer order, the objective is not to decrease
+stock level and minimize production and holding cost;
+instead, we need carefully to plan each internal activity so
+as to have correct and updated information for planning
+external activities (e.g. material procurement) and quoting
+customers’ due dates. In both cases the objective is to
+develop a production plan at detailed level, i.e. a schedule,
+that is both robust and eﬃcient enough. Even if most of the
+literature about scheduling deals with deterministic problems, the reality is stochastic: jobs arrive dynamically and
+randomly, processing times can be inﬂuenced by the state
+of the system, machines can break down. In such a
+framework it is very common to have changes in the
+schedule that (owing, for example, to a machine failure)
+may delay execution of planned external activities and
+Due dates should be decided on the basis of the estimated
+production lead times. The longer lead times are, the
+further in time due dates should be, otherwise we risk a late
+delivery (customers’ orders delivered after the promised
+date) and this has a negative impact on ﬁrm competitiveness in the medium–long term. On the other hand, if too
+long due dates are quoted to customers, so as to absorb
+possible delays, there could be problems of short-term
+competitiveness, in case ﬁrm’s competitors are able to
+In the current paper, we want to represent the expected
+cost (in terms of expected maximum tardiness) as a
+function of the lead time (due date) quoted to customers.
+We have chosen the maximum tardiness as expected cost
+because in many (small) ﬁrms customers are not willing to
+wait longer than a certain period after their promised
+delivery date. Our analysis can be easily applied to other
+risk measures such as the total tardiness, or the total
+The relationship between due date and expected cost
+depends on the scheduling rule and on the policy used to
+quote lead times, but since we are not explicitly considering
+*Corresponding author. Email: arianna.alﬁeri@polito.it
+International Journal of Computer Integrated Manufacturing
+ISSN 0951-192X print/ISSN 1362-3052 online ª 2007 Taylor & Francis
+any cost, we are not looking for the best combination of
+due date quoting and scheduling policies. Instead we aim at
+developing a norm that gives ﬁrms the intuition of the
+existing relationship among lead time quoting policies,
+scheduling algorithms and cost function used to evaluate
+Our contribution is two-fold. 1) We propose two new
+policies (BASIC and ADVANC) to quote due dates in a
+production line in a dynamic context, with multiple job
+types, stochastic job arrivals and random machine failures
+and we use a computer-based simulation to study their
+behaviour, when the line is scheduled by using algorithms
+drawn from literature. 2) We show how the relationship
+itself between service level and quoted lead time can be a
+powerful decision and evaluation tool for production
+The plan of the paper is the following. A literature review
+on similar problems is presented in section 2. The problem
+is formally deﬁned in section 3. Sections 4 and 5 deal with
+sequencing algorithms and due date quoting. Details on the
+simulation study and results are described in section 6.
+The study of the interaction between internal scheduling
+and delivery dates quoting has recently received much
+attention in the scientiﬁc literature. However, most of the
+literature considers in detail only one of the two relevant
+aspects, that is, (i) either due dates are assumed ﬁxed, and
+the focus is on scheduling or (ii) scheduling is not taken into
+account (customers are served on a ﬁrst come ﬁrst served
+basis) and the focus is on due date quoting.
+When customers’ due dates are assumed ﬁxed, various
+approaches to scheduling in uncertain conditions are
+possible. A ﬁrst stream of papers deals with the development of a predictive schedule capable of absorbing possible
+disruptions while maintaining a high shop performance, in
+cases of dynamic jobs’ arrival and machine failures. Such a
+problem, for various shop layouts, is studied in Mehta and
+Uzsoy (1998, 1999), where the authors construct the
+optimal schedule in terms of predictability by inserting idle
+time into the sequence; the idle time is absorbed in case of
+disruptions and this avoids job rescheduling as much as
+possible. In other situations, the relevant objective is not
+the schedule predictability but its associated cost. Examples
+are in Daniels and Kouvelis (1995) and Kouvelis et al.
+(2000). In Daniels and Kouvelis (1995) a single machine
+problem with uncertain processing time is studied, with the
+objective of minimizing total ﬂow time. In Kouvelis et al.
+(2000) the objective is the minimization of makespan; here
+the layout is a two machine ﬂow shop and the solution
+approach is based on a dominance condition derived from
+the solutions created using Johnson’s algorithm. A diﬀerent
+approach to stochastic scheduling is considered in Cai and
+Zhou (1999). Here the authors model and solve by static
+and dynamic policies the problem of minimum cost in a
+parallel identical machine environment, with earliness cost
+and penalty for tardy jobs and machine subject to random
+failures. Processing times are randomly distributed and
+delivery dates are common exponential distributed deadlines.
+Other papers consider the problem of lead time or due
+date quoting, usually with the objective of ﬁnding the best
+quoting policy. In these cases, however, no sequencing
+aspects are usually considered, and for customers needing
+to be scheduled, a simple FCFS (ﬁrst come ﬁrst served)
+scheduling rule is used; examples of such approach are
+presented in Duenyas and Hopp (1995), Hopp and Roof
+Sturgis (2000, 2001) and Lawrence (1995). Duenyas and
+Hopp (1995) evaluate diﬀerent lead time quoting policies.
+The objective is proﬁt maximization considering the presence
+of penalties for late delivery both in the uncapacitated and
+capacitated case. In Hopp and Roof Sturgis (2000), a general
+rule is used to determine lead time as a parametric function
+of work in progress. Analytic policies for dynamic safety
+lead time quoting are developed in Hopp and Roof Sturgis
+(2001), where the objective is the minimization of the average
+lead time with constraints on tardiness or ﬁll rate. The
+estimation of ﬂow times is approached by Lawrence (1995)
+as a forecasting problem and to set due dates the empirical
+The problem of lead time/due date quoting taking into
+account also scheduling aspects is dealt with in some papers
+such as Moses et al. (2004) and van Ooijen and Bertrand
+(2001), but always with the objective of optimizing a given
+performance measure. In Moses et al. (2004) the due date
+setting is tackled by considering the time phased availability
+of resources. When a new order arrives, considering the
+dynamic availability of resources, a starting time, and then
+a delivery date, is estimated. The system workload is taken
+into account also in van Ooijen and Bertrand (2001), where
+due dates setting in case of penalty for late delivery is
+approached assuming that sometimes customers are willing
+Other works in literature approach similar problems by
+simulation. In Dupon et al. (2002), the authors develop a
+simulation to evaluate the impact of expediting, deexpediting and rescheduling on production lead time. In
+this case, due dates are assumed to be known, that is no due
+date quoting is considered. Simulation to predict order
+completion time in multi-resource systems is studied in
+Roman and Del Valle (1996); when an order arrives a
+simulation is launched for all orders in the system including
+the new arrival, and the scheduling policy is a simple FCFS.
+The simulation is performed until all orders currently in the
+system complete, and the due date for the arriving order is
+set to its completion date in the simulation.
+Due date quoting and scheduling interaction in production lines
+In contrast to those works, we do not aim at optimizing
+some performance measure or at ﬁnding some ‘best policy’.
+Dealing with uncertainty in real systems frequently means
+evaluating the tradeoﬀ between an average position and
+the risk taken with it. Evaluating/measuring this tradeoﬀ
+is extremely important but, in most cases, cannot be
+automatized and then there is the necessity of risk measures
+and curves showing tradeoﬀs. In the present paper we
+address a feasibility study applying the idea of risk
+measures and tradeoﬀ curves to scheduling in a make-toorder stochastic environment. In such a system, job
+scheduling and due date quoting are related problems and
+we aim at evaluating the tradeoﬀ between quoting due
+dates to absorb unpredictable delays and the risk of losing
+We consider a simple ﬂow shop capable of processing
+diﬀerent types of jobs. In a simple ﬂow shop each job is
+processed by a series of machines in exactly the same order.
+Each job has a given process time that we assume to be
+deterministic. This assumption is reasonable since, as
+analysed in Hopp and Spearman (2000), the natural
+variability of process times, excluding random downtimes,
+set-ups or any other external inﬂuence, is very low and in
+most cases its eﬀect can be considered negligible.
+Jobs arrive dynamically and randomly to the line and the
+machines in the line are subject to unscheduled downtimes
+(breakdowns, power outages, running out of consumable,
+We do not take explicitly into account buﬀers between
+machines, and we assume that only permutation sequences
+are feasible, that is, the sequence of jobs on each machine of
+the line is the same. This is the typical situation when it is
+not possible or convenient to exchange the order of jobs
+once they are sequenced on the ﬁrst station, but there is no
+space limit resulting in machine blocking or starving.
+While the permutation schedule assumption is quite
+frequent in many industrial situations, especially in paced
+ﬂow lines, the assumption on unlimited buﬀer can be
+unrealistic, since in such a case, when the system is highly
+congested or some machine breaks down, some queue
+could become inﬁnite and this does not happen in reality
+(the orders are either rejected or left out of the systems until
+the situation comes back to normality, if the customer
+accepts a due date very far in the future). The reason we
+decided to study ﬂow lines with no buﬀer limitations is the
+fact that such systems are simpler to deal with and can give
+information on the required buﬀer size to have the line
+In such a dynamic and stochastic context, assuming
+a penalty for late deliveries, it is apparent the strict
+interaction between scheduling and quoting algorithm
+and we focus exactly on this interaction with the aim to
+construct a kind of ‘eﬃcient frontier’ more than an optimal
+schedule or an optimal lead time. This frontier is a curve
+linking the expected cost (e.g. maximum or total tardiness,
+number of late jobs) to quoted lead time (due dates). Given
+a quoting policy, varying the scheduling algorithm, the
+eﬃcient frontier can change (changing slope, moving
+upward or downward, etc.). Since the eﬃcient frontier, as
+explained in the following, is meant to be a managerial tool,
+it is important to evaluate the impact (if any) of each
+We do not develop any new scheduling algorithm, but
+integrate some of the existing ones with the quoting policies
+proposed in section 5. We consider heuristic algorithms
+belonging to the ‘class’ of permutation sequence dispatch
+heuristics because, while the permutation sequence rules are
+more stable and easier to investigate by search, dispatch
+heuristics are more ﬂexible and able to yield in practice
+good dynamic results at relatively low cost in terms of
+Since we address a permutation problem, we use the
+dispatching rules to ‘compute’ the priority to assign to each
+job only on the ﬁrst machine and we order the jobs
+according to that priority; this order will not be changed on
+The simple dispatching rules we use are SPT (shortest
+processing time), EDD (earliest due date) and FIFO (ﬁrst
+in ﬁrst out). SPT gives a job a priority that is the inverse of
+its processing time (pim ¼ [pim]71) on the m machine where
+it is used (m ¼ 1 in our case) and for this reason it is good in
+a heavily loaded shop. Instead, EDD rule assigns priorities
+according to due dates, that is, pim ¼ 7di and is easy to
+justify on the ﬂoor and good in a lightly loaded shop.
+Similar to EDD in a dynamic shop is FIFO, because in this
+context, it is very likely that due dates are increasing in the
+arrival time (jobs tend to arrive in the shop in the order
+All these rules are static rules, that is the priority assigned
+to jobs does not depend on the time we compute it and
+neither does it change over time. In literature more
+sophisticated dynamic rules exist (e.g. Critical Ration,
+COVERT), and in preliminary tests, not reported in this
+paper, they were tested too. Despite the fact that in those
+cases we can also construct an ‘eﬃcient frontier’ exactly in
+the same way we do with the other rules, we decided not to
+use them in our simulation because: 1) reassigning priorities
+each time a new job arrives can be unpracticable in real
+systems (frequent changes in the schedule could not be
+manageable at shop ﬂoor for space or time reasons); 2)
+most of these rules contain parameters to set and this could
+not be easy in a stochastic environment (the ‘best’
+parameter could change over time, depending on the
+When speaking of due dates we must distinguish internal
+due dates from external ones. Internal due dates are the
+dates when we expect the job to be completed, while
+external due dates are the delivery dates we promise to
+customers. It follows, that external due dates are
+longer than internal due dates and while internal due
+dates must include the estimated lead time (estimated on
+the basis of the current system conditions, in terms of
+queues, machine status, etc.), external due dates must
+account for the uncertainty of the estimated lead time,
+especially in cases when there are huge costs for late
+The lead time uncertainty is due to possible disruptions
+that might occur after the order is released in the system
+and that could delay the order itself. If IDDi, XDDi, LTi, ri
+and ST are respectively the internal and external due date
+for job i, its estimated lead time, its release time to the
+system and the safety time (usually the same for each order
+type) to account for lead time variability, we can write
+down the typical equations used in the literature:
+The term ST could be dynamically set on the basis of the
+orders recently processed in the system, and this, in
+practical situations, could be too time consuming (e.g. we
+have to use the estimated variance per operation at time t,
+or the estimated variance of job waiting time at time job i is
+released). An alternative, is to treat ST as a static
+parameter, rather than as a dynamic decision variable
+(Moses et al. 2004). If we consider ST a static parameter,
+from equations (1) and (2) it immediately follows that
+quoting delivery dates to customers (XDD) corresponds to
+Production lead times can be set using information about
+processing time distributions or independently from the
+distribution function of job processing times. In the present
+paper, we develop two new rules to dynamically quote lead
+times without assuming any distribution function for
+processing times. Both rules estimate the expected lead
+time for a new arriving job on the basis of the current load
+of the system (measured by queue length).
+The idea behind this ﬁrst rule (BASIC) is to neglect the
+presence of overlapping among diﬀerent jobs processing on
+diﬀerent machines (i.e. we do not consider that the
+machines of the line can be working at the same time
+on diﬀerent jobs). In this case we can update the workload
+of the system by adding the processing time at each
+machine when a job arrives in the system and subtracting
+the processing time of a job on a machine when the job
+leaves that machine. Let L be a measure (deﬁned in the
+following) of current load of the system at the time ri
+(arrival time of job i), the internal due date of the job can be
+This rule explicitly links IDD to the state of the system
+and is easily understood and implementable in practical
+situations; it is enough to assign a counter L to the
+production line and update it according to the following
+Not taking into account overlapping times, the lead time
+LTi, equal to the load L, is overestimated. The overestimation depends also on the scheduling rule used to
+manage the line. In fact, if we compute L according to
+equations (4) and (5), even if no overlapping is present, we
+implicitly assume that job i will be processed after each
+other job already in the line, that is we implicitly assume to
+sequence jobs according to the FIFO rule.
+It should be clear at this point that the scheduling rules
+used in the line can inﬂuence the accuracy of BASIC policy.
+In fact, if we use scheduling algorithm diﬀerent from FIFO,
+and the job i is sequenced in an advanced position, IDDi
+computed using equatins (3), (4) and (5) can be unnecessarily long for job i, but the slack (the time between job
+expected completion and its due date) reduces for jobs
+behind job i, since their due dates were quoted without
+A more sophisticated rule, ADVANC, can be used if we
+want to consider overlapping time typical of ﬂow lines. We
+estimate the expected queue at each machine, using also
+the information about the status of the previous machine in
+the line. Let Qm the number of jobs waiting in front of
+machine m, pm the average processing time on machine m,
+WKm the number of jobs currently being processed by
+machine m (WKm can be either 1 or 0 since we consider
+single machine stations). The lead time LTi for job i is
+Due date quoting and scheduling interaction in production lines
+estimated as follows. First evaluate the waiting time at each
+Wm ¼ Qm pm þ WKm pm =2 þ ð1  WKm ÞWKm1 pm1 =2
+quoting are contemporary, but this case is simpler to
+manage, since the order with unacceptable due date is just
+not placed and does not enter the system at all.
+To completely avoid this problem, rules as total work
+content (TWK) (Cheng and Gupta 1989), independent
+from the congestion of the system, have to be used. TWK
+sets the lead time LTi for job i as follows:
+Equation (6) simply states that the waiting time Wm at
+machine m is the sum of the time for processing the jobs
+already in the queue (Qm pm ), the time to complete the job
+(if any) currently in process (WKm pm =2) and the time
+for the previous machine to ﬁnish if machine m is not busy
+Equation (7), once Wm have been computed for each
+machine, is used to evaluate LTi for a job i arriving in the
+system. Since at each machine Wm depends on machine m
+and also on machine m71, to compute LTi it is enough to
+evaluate the maximum time spent over all stations. The
+internal ‘maximum’ in equation (7) account for the fact that
+each machine is working at the same time (on diﬀerent
+jobs), and then there can be overlapping waiting time.
+We use the aggregate information pm in equation (6) and
+the disaggregate value pmi (processing time of job i on
+machine m) in equation (7) because when we are quoting
+the due date for job i, we know exactly which kind of job it
+is and then using its processing time is ‘costless’, while the
+detailed information about all jobs in the queues in each
+time can be costly to gather in practical situations.
+After having determined LT, IDD can be quoted using
+equation (1). This rule reduces the overestimation (the
+overlapping time is taken into account by the last term of
+equation (6)) but suﬀers from the same drawback as
+BASIC rule when using a scheduling algorithm diﬀerent
+Note that, for both rules (BASIC and ADVANC), we
+can easily overcome the imprecision owing to the scheduling eﬀect by operating with time windows. In this
+framework, we let jobs arrive for a certain time, then we
+‘freeze’ the status and compute IDD for the arrived jobs,
+taking into account the order in which they arrived,
+not taking into account the jobs arrived later (they will be
+considered in the next time window). In practice, we reduce
+the real dynamic problem to a series of problems dynamic
+only in the sense that arrival times are diﬀerent. Once we
+have made this reduction, the problem in each time window
+can be solved scheduling ﬁrst and computing IDD afterwards. In reality, this implies that we might accept an order
+from a customer and quote its delivery date later on. If this
+is the case, we have to give customers the right to cancel as
+the delivery date might not ﬁt their needs. This possibility
+must be considered also when order placing and due date
+where k is a parameter bigger than 1. This rule is based on
+the observation that job processing time is only a small
+percentage of the total cycle time for a job; in particular,
+the processing time in real situations is usually only about
+5–10% of the total cycle time (Hopp and Spearman 2000).
+In this case, the load of the line is taken into account
+implicitly by k and jobs are not discriminated, since we
+consider an average load instead of the current load.
+Till now we focused on IDD, but what we promise to
+customers is XDD, that is, according to equation (2), we
+have to estimate the parameter ST to be added to IDD to
+account for uncertainties (machine outages due to failures,
+lack of materials and so on). In determining ST, we have to
+remember that, in a make-to-order environment, due dates
+are negotiated with customers. Thus we have to take into
+account their ‘expectation’ as well as our production
+system. Customers, in fact, want a due date that is not
+too far in the future (they want their order delivered as
+soon as possible), but we can try to convince them to accept
+a delivery at a later date than the date they would like. The
+key issue is that, once the due date is determined, the
+customer wants the order not to be late (sometime he/she
+does not want early orders either, but we do not consider
+In practice, ST has to account for the lead time
+variability owing to uncertainty, considering the service
+level we want to oﬀer to customers and customers’
+perception of a certain due date. If our system suﬀers from
+highly variable lead time and we want to oﬀer a very high
+service level (e.g. 99.99% of orders delivered on time), we
+could just assign ST to ‘inﬁnity’ (e.g. ten times the longer
+ﬂow time experimented in the last 2 years). In this way, we
+do not risk a late delivery, but risk that our customers
+consider that delivery date unacceptable and they do not
+place their orders to us if competitors promising earlier
+deliveries are on the market. On the other hand, if we set
+ST at a very small value (XDD very close to IDD), we risk a
+high percentage of late deliveries in case of outages and
+disruptions, decreasing in this way our service level and
+In literature, ST is usually set to a certain number of lead
+time standard deviations, after assuming (or empirically
+estimating) a lead time probability distribution. In the
+current paper, we operate in the same way, but following
+the approach to variability due to random outages
+proposed in Hopp and Spearman (2000). We compute the
+standard deviation of average processing time to each
+machine owing to random outages. This computation is
+made separately for each machine, that is, we do not take
+into account the so-called ﬂow variability (Hopp and
+In equation (9), sm is the standard deviation of the average
+processing time (over all types of jobs) at machine m and
+Am is the availability of machine m. Given Rm and Gm,
+respectively the average repair time and the average time
+between two successive failures at machine m, Am is
+where Zm is a parameter that can depend on machines or be
+identical for each machine (Z ¼ Zm for all m) and it is used
+to control the service level we want to oﬀer: the bigger Zm,
+the longer XDD, and then the smaller is the probability of
+late deliveries, which means high service level.
+To test the mutual inﬂuence of due date quoting and
+scheduling, and to develop a norm that gives ﬁrms the
+intuition of the relationship between quoting policies and
+scheduling algorithms, we carried out a simulation experiment.
+We simulated a ﬂow shop with four single-machine
+stations. Each station is characterized by failure and repair
+rates. We assume that both failures and repairs are
+exponentially distributed and failures depend on the time
+the machine has been working (if a machine is idle it cannot
+break down). The failure/repair process works as follows:
+each time a machine starts working after a repair, the
+available time before the next failure is ‘extracted’ by an
+exponential distribution with average equal to the mean
+time to failure of the machine. Each time a job starts
+processing on the machine, its processing time is subtracted
+from the available time. When the current available time is
+shorter than the processing time of the job just arrived, it
+means that a failure will occur during the processing of that
+job. At this point, since we consider a preemption-resume
+policy, a repair time is ‘extracted’ from an exponential
+distribution with average equal to the mean time to
+repair the machine and added to the processing time of
+the job. As soon as the job is ﬁnished, the machine has
+been repaired, the next available working time will be
+Jobs arrive at the line randomly and interarrival times
+are exponentially distributed. Each job has an a priori ﬁxed
+processing time on each station, and we assume to know
+the long term percentage, aj, of each job type j.
+Our simulations have been carried out on a workstation
+IBM RISC6000, using a general purpose programming
+language (language C). All the quoting policies presented in
+section 5 (BASIC, ADVANC TWK) were combined with
+all the scheduling algorithms of section 4 (EDD, SPT,
+FIFO); each combination of quoting policy and scheduling
+algorithm was tested with ten diﬀerent values of Zm,
+resulting in 90 classes of simulation experiments. For each
+class, we run 30 independent experiments and in each
+experiment 700 eight hours days were simulated.
+Arrival rate, processing times, failure and repair rate
+have been set in a way to have an average machine
+utilization in the interval (0.85, 0.95) for each machine. The
+parameter k of equation (8), for TWK policy, has been set
+to 15 (i.e. the ﬂow time is roughly 15 times the raw process
+Figures from 1 to 3 present the results, for each quoting
+policy. Each ﬁgure reports, for a given due date quoting
+policy, how the service level (in terms of expected maximum
+tardiness) depends on the average quoted lead time for each
+scheduling rule. All the curves show that longer lead times
+This result was expected and one may object that no
+simulation was needed to prove it. However, the key point
+of our study is the instrument itself and this is our main
+contribution. The curves we create, despite the fact that
+they represent an expected trend, are a powerful tool for
+production managers. They represent the trade-oﬀ between
+the cost of low service level (e.g. penalty to pay for late
+deliveries) and the cost of longer lead time (e.g. probability
+of losing customers) in our production system. A ﬁrst use
+for these curves is to help choosing the working point for
+the system (i.e. an acceptable ‘pair’ of service level and
+quoted lead time). A second use is to evaluate the
+benchmarking of the system itself, since they represent a
+sort of eﬃcient frontier. Referring to ﬁgures 1 to 3, we can
+see that the curves divide the space in two regions; since the
+curves represent the behaviour of the system we are
+studying (they are the result of the system simulation),
+the region below them cannot be reached, if we do not
+improve something in the system (it would imply either an
+increase in service level or shorter lead time). On the
+Due date quoting and scheduling interaction in production lines
+Figure 2. Average results for BASIC quoting policy.
+Average results for ADVANC quoting policy.
+contrary, given the lead time we are currently quoting to
+customers, if we are achieving a lower service level than the
+‘predicted’ one (i.e. we are in the upper region), it means
+The two ways of using these curves make them a valuable
+managerial tool. For example, suppose our four station line
+is scheduled with EDD rules and due date are quoted using
+the ADVANC policy (see ﬁgure 3), if we want a maximum
+lateness not longer than 30 h (i.e. about 3.7 working days),
+the average lead time we have to quote to customers must
+be at least 300 h (i.e. about 37 working days); if the cost of
+a 3.7 day delay is acceptable and 37 day lead time are
+competitive with the other ﬁrms on the market, this can be
+our working point. On the other hand, if quoting 37 days to
+customers results in a maximum tardiness of 10 days, it
+means that something is wrong in the way the line is
+Looking carefully at ﬁgures 1, 2 and 3, the reader can see
+that, changing the due date quoting policy, a lower or
+higher service level can be reached by a given average
+quoted lead time. Even if we are not interested, in this
+paper, in comparing the diﬀerent quoting policies due to
+the presence of parameters such as, for example, k for
+TWK, which surely inﬂuence the order of magnitude of job
+tardiness, ﬁndings deserve a few remarks. First of all, the
+trend for all curves is similar, despite the diﬀerent quoting
+policies or scheduling algorithms. Also, TWK(k) allows the
+lowest expected maximum tardiness to be reached, given a
+quoted LT. This behaviour, however, depends on k, not
+directly linked to the current load of the system. As to
+BASIC and ADVANC, the ﬁrst seems slightly more
+eﬃcient but less robust for non-FIFO rules.
+Considering the impact of scheduling rules on the
+eﬃcient frontier, given a quoting policy, it is possible to
+see that there is no big diﬀerence, even though SPT ‘seems’
+to be dominated by EDD and FIFO, and EDD ‘seems’ to
+be more ‘nervous’, especially in combination with BASIC
+This was expected: the maximum tardiness is a cost
+measure strictly linked to due dates and we expect EDD to
+give good results, and in fact EDD curves are the lower,
+on average. Their slightly ‘hectic’ behaviour can be
+explained by the interference between quoting due dates
+for a job ‘as if it is the last of the queue’, and afterward
+positioning the job in the sequence according to the quoted
+due date (see section 5). FIFO is competitive with EDD
+because quoting due dates according to the status of the
+system, on average, gives jobs arriving later a due date
+farther in time. Instead, SPT is the worst because there is a
+higher (in respect to the other rules) probability that a job
+is sequenced in a position very diﬀerent from the one
+considered to quote due date (i.e. the last). This, on
+Due date quoting and scheduling interaction in production lines
+average, makes several jobs waiting longer than their
+quoted due date for each job waiting less, resulting in a
+greater maximum tardiness. In any case, the diﬀerence
+This small diﬀerence among the various scheduling rules,
+indicates that the eﬃcient frontier is relatively robust with
+respect to changes in shop scheduling, at least in case of
+static sequencing rules, which makes this tool usable in
+In the present paper we study the interaction between
+scheduling algorithms and due date quoting policies in a
+simple ﬂow line with the aim to represent the service level as
+a function of the lead time quoted to customers. These
+curves can give ﬁrms the intuition of the relationship
+among lead time quoting policies, scheduling algorithms,
+customer service level and cost function used to evaluate
+We use some of the most common scheduling algorithms
+(SPT, EDD, FIFO) while we quote due dates using two
+new procedures (BASIC and ADVANC) which estimate
+lead time by looking at the current system load (in terms of
+queues). A well-known quoting rule (TWK), which does
+not consider the current load of the system to quote due
+dates, is also tested to show that our results apply in such a
+We address the analysis by using simulation and our
+result is a set of curves showing the relationship between
+service level and quoted lead time (given a scheduling
+algorithm and a quoting policy). These curves, evaluating
+the trade-oﬀ between the cost of not matching the promised
+delivery date and the cost of quoting longer lead times, are
+a valuable tool for production managers to choose the most
+suitable ‘working point’. Moreover, the same curves can be
+used to evaluate the current performance of the system
+because they represent an eﬃcient frontier. To our knowledge, no such study has been done previously in the
+production systems ﬁeld and this is the main contribution
+Despite the encouraging results, however, much work
+has still to be done. Important aspects to be considered are,
+for example, the interaction between scheduling and due
+date quoting in terms of lead time variability, or the
+extension of the study to more complex systems (assembly
+line, or job shop) and/or in cases of non-regular objective
+functions (i.e. when earliness costs are also present). This
+will be the subject of our future research.
+Cai, X. and Zhou, S., Stochastic scheduling on parallel machines subject to
+random breakdowns to minimize expected costs for earliness and tardy
+job. Operations Research, 1999, 47, 422–437.
+Cheng, T.C.E. and Gupta, M.C., Survey of scheduling research involving
+due date determination decisions. Eur. J. Opl Res., 1989, 38, 156–166.
+Daniels, R.L. and Kouvelis, P., Robust scheduling to hedge against
+processing time uncertainty in single-stage production. Mgmt Sci., 1995,
+Duenyas, I. and Hopp, W.J., 1995, Quoting customer lead times. Mgmt
+Dupon, A., Van Nieuwenhuyse, I. and Vandale, N., The impact of
+sequence changes on product lead time. Robot. Comput. Integr. Mfg,
+Hopp, W.J. and Roof Sturgis, M.L., Quoting manufacturing due dates
+subject to a service level constraint. IIE Trans, 2000, 32, 771–784.
+Hopp, W.J. and Roof Sturgis, M.L., A simple, robust leadtime-quoting
+policy. Mfg Service Ops Mgmt, 2001, 3, 321–326.
+Hopp, W.J. and Spearman, M.L., Factory Physics: foundations of
+manufacturing management, 2000 (Irvin/McGraw-Hill).
+Kouvelis, P., Daniels, R.L. and Vairaktarakis, G., Robust scheduling of a
+two-machine ﬂow shop with uncertain processing times. IIE Trans, 2000,
+Lawrence, S.R., Estimating ﬂowtimes and setting due-dates in complex
+production systems. IIE Trans, 1995, 47, 657–668.
+Mehta, S.V. and Uzsoy, R.M., Predictable scheduling of a job shop subject
+to breakdowns. IEEE Trans Robot Automat, 1998, 14, 365–378.
+Mehta, S.V. and Uzsoy, R.M., Predictable Scheduling of a single machine
+subject to breakdowns. Int. J. Computer Integrated Manufacturing, 1999,
+Morton, T.E. and Pentico, D.W., Heuristic scheduling systems. With
+application to production systems and project management, 1993
+Moses, S., Grant, H., Gruenwald, L. and Pulat, S., Real-time due-date
+promising by build-to-order environment. Int. J. Prod. Res., 2004, 42,
+Roman, D.B. and del Valle, A.G., Dynamic assignation of due-dates in an
+assembly shop based in simulation. Int. J. Production Research, 1996, 34,
+van Ooijen, H.P. and Bertrand, J.W.M., Economic due-date setting in jobshops based on routing and workload dependent ﬂow time distribution
+functions. Int. J. Prod. Econ., 2001, 74, 261–268.

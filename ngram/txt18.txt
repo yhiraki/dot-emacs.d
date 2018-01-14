@@ -1,0 +1,73 @@
+3.2. Simulation model (see Puergstaller 2009)
+The simulation model is a scaled down model of an Austrian optical storage media
+producer (for a description of the real factory see Section 4.4.1) and consists of nine
+individual machines that are non-exchangeable (see Figure 9).
+Figure 9. Production system - simulation model
+The system produces 24 products following the routings depicted in Table 6 (column 2 to
+4). The data of the products are based on the practical case. As in the practical case, there
+are no sequence-dependent setup times and no flexibility in the capacities since the real
+factory runs 24 hours a day and seven days a week. A planning period is a day, and the
+average operation times are approximately 42, 66 and 53 minutes in stages 1, 2 and 3
+respectively (see columns 5 to 7 in Table 6). The first-come-first-served dispatching rule is
+Table 6. Routings and operation times in minutes for all product of the simulation model
+The production in the simulation model is driven by customer orders since the real
+manufacturer follows a make-to-order approach. The interval between arrival date and
+required due date of an order determines the possible release times. The order arrival model
+is formulated as follows: The arrival date is generated as the required due date minus the
+quoted delivery time. The required due date is based on the demand which specifies the
+number of orders to be delivered at the end of the respective period and the quoted delivery
+time is a random variable whose distribution is taken from empirical data (see Puergstaller
+2009, p.67ff.). Order release is performed at the beginning of each period in a rolling
+horizon setting as depicted in Figure 10.
+Figure 10. Rolling horizon planning as part of the simulation study (following
+At the beginning of the simulation the total demand is generated (see next Section 3.2.2).
+At the first period of the planning horizon, which is set to seven periods in our study,
+demand forecasts are made and the order releases are determined by the two LP models (see
+Section 3.1). Note that we do not analyze the influence of demand predictability on the
+performance of the two order release models (as in Puergstaller, Missbauer 2012). Thus, we
+do not consider forecast errors in our study which is a topic for future research (see
+Stampfer et al. 2014). Thereafter, the planned orders are released at the beginning of the
+period and at the end of the period the model collects data for the next period.
+Given the above stated hypotheses we have five different experimental factors that we
+need to take into consideration. We have the two different optimization based order release
+models, the IOC model and the ACF model that we want to compare. With regard to
+hypothesis H1 (and H3) that the ACF model outperforms the IOC model as the variation of
+the total demand increases we differentiate between constant and seasonal demand
+scenarios. In order to analyze hypotheses H2 and H3 we analyze the influence of a constant
+or variable product mix on the performance of the two order release models. Finally, to test
+hypothesis H4a and H4b we include two further factors. Firstly, we test two different period
+lengths and test three different utilization levels. The comparison will be made by applying
+the safety stock adjustment procedure which makes the two models comparable on a single
+performance measure (see Section 3.3). In our study this measure is the resulting total
+inventory level, consisting of the held WIP in front of the machines and the finished goods
+In total we use five experimental factors: Total demand and product mix variability,
+order release method, period length and average bottleneck utilizations which will be
+described in detail in the following paragraphs.
+Total demand- and product mix variability:
+The system faces fluctuating demand which is represented by a sinusoidal demand in the
+simulation model, following the notation given in Table 7. The demand was generated in
+two steps (Steele at al. 1995). In Step 1 the total demand for each planning period was
+Because the total demand is defined as “total demand during a period”, different mean
+demand, amplitudes and cycle length values were used for different period lengths to obtain
+the desired utilization levels (see below). For example, when period length is 960 minutes
+the total mean demand during a period is me=55 units, the amplitude in the case of varying
+demand is a=44 units and the cycle length c=89 periods.
+Step 2 of the demand generation procedure (Steele at al. 1995) gives us the product mix
+variability. Therefore, the demand for the individual products is calculated from the total
+demand (32) multiplied by the proportions (35), which are stated as normally distributed
+(33) and standardized (34) (for the used symbols see Table 7).
+The demand is rounded to integer values. The means and standard deviations of the
+products are given in Table 8 (see Puergstaller 2009, p. 69).
+Percentage of the total demand that is allocated to product j in period t
+Adjusted percentage of the total demand, that is allocated to product j in period t
+Amplitude of the seasonal part of the total demand (number of orders)
+Cycle length of the seasonal part of the total demand (periods)
+Constant part of the total demand (number of orders)
+µ jp σ jp Mean and standard deviation of the normally distributed percentage of the total demand that
+Table 7. Definition of the symbols used in the demand and order arrival model
+Table 8. Mean and standard deviation of the normally distributed percentage of the total demand
+Note that due to the rounding of the demand for the individual products to integers we do
+not always obtain nonzero demands for all 24 products. In the case of constant demand and
+constant product mix we obtain demands for 16 and for variable demand and constant
+product mix we get orders for 19 products. For both cases with varying product mix we
+have a demand for all 24 products over time.

@@ -1,0 +1,755 @@
+ISSN: 0740-817X (Print) 1545-8830 (Online) Journal homepage: http://www.tandfonline.com/loi/uiie20
+Intelligent dynamic control policies for serial
+CARLOS D. PATERNINA-ARBOLEDA & TAPAS K. DAS
+To cite this article: CARLOS D. PATERNINA-ARBOLEDA & TAPAS K. DAS (2001) Intelligent
+dynamic control policies for serial production lines, IIE Transactions, 33:1, 65-77, DOI:
+To link to this article: http://dx.doi.org/10.1080/07408170108936807
+Full Terms & Conditions of access and use can be found at
+http://www.tandfonline.com/action/journalInformation?journalCode=uiie20
+Download by: [Universitaetsbibliothek Innsbruck]
+Intelligent dynamic control policies for serial production lines
+CARLOS D. PATERNINA-ARBOLEDA 1 and TAPAS K. DAS 2
+I Departamento de Ingenieria Industrial Universidad del Norte. Barranquilla, Colombia
+21ndustrial and Management Systems Engineering Department. University of South Florida, Tampa, FL 33620. USA
+Received April 1999 and accepted March 2000
+Heuristic production control policies such as CONWIP, kanban, and other hybrid policies have been in use for years as better
+alternatives to MRP-based push control policies. It is a fact that these policies, although efficient, are far from optimal. Our goal is
+to develop a methodology that, for a given system, finds a dynamic control policy via intelligent agents. Such a policy while
+achieving the productivity (i.e., demand service rate) goal of the system will optimize a cost/reward function based on the WIP
+inventory. To achieve this goal we applied a simulation-based optimization technique called Reinforcement Learning (RL) on a
+four-station serial line. The control policy attained by the application of a RL algorithm was compared with the other existing
+policies on the basis of total average WIP and average cost of WIP. We also develop a heuristic control policy in light of our
+experience gained from a close examination of the policies obtained by the RL algorithm. This heuristic policy named BehaviorBased Control (BBC), although placed second to the RL policy, proved to be a more efficient and leaner control policy than most
+of the existing policies in the literature. The performance of the BBC policy was found to be comparable to the Extended Kanban
+Control System (EKCS), which as per our experimentation, turned out to be the best of the existing policies. The numerical results
+used for comparison purposes were obtained from a four-station serial line with two different (constant and Poisson) demand
+Ever since the introduction of the kanban control policy
+for serial production lines, many other policies have appeared in the literature. Some of these policies are
+CONWIP (Spearman et al., 1990), minimal blocking (So
+and Pinnault, 1988), a combination of basestock and
+kanban (Van Ryzin et al., 1993), and other hybrid policies (Bonvik et al., 1997). A vast literature on kanban
+policies exists of which an excellent survey can be found
+in Berkley (1992). Control policies classified as push and
+pull are compared in Tabe et al. (1980). Some of the
+papers that address the issue of kanban (card) allocation
+on a serial line are Sugimori et al. (1977), and Muckstadt
+and Tayur (1995a, b). Buzacott and Shantikumar (1992),
+and Frein et al. (2000) develop a common framework for
+studying kanban, CONWIP, basestock, minimal blocking, and other hybrid policies. Veatch and Wein (1994)
+numerically solve a dynamic program to develop an optimal policy, and show that basestock policies often perform near optimally when the bottleneck is upstream.
+Dallery and Liberopoulos (2000) present a kanbanbasestock hybrid control policy called the Extended
+Kanban Control System (EKCS) and examine its advantages over the Generalized Kanban Control System
+(GKCS) proposed in Van Ryzin et al. (1993) and Frein
+We focus our attention away from the host of the
+above-mentioned heuristic policies to developing dynamic control policies that are more dependant on the
+system states. We use a recently developed algorithm
+from the field of Reinforcement Learning (RL) (Sutton
+and Barto, 1998), also known as Neuro-Dynamic programming (Bertsekas and Tsitsiklis, 1996), as our means
+to this end. Serial production lines have long been
+modeled as Markov Processes (Askin and Standridge,
+1993; Gershwin, 1994). Hence, the control problems
+associated with production lines are easily cast in the
+framework of Markov or Semi-Markov Decision Problems (MDPs or SMDPs) (Sethi and Zhang, 1994; Sethi
+et al., 1997). Classical dynamic programming based algorithms to solve MDPs and SMDPs, such as value iteration and policy iteration that derive optimal solutions
+can be used to find optimal control polices for production lines. The reader is referred to Putterman (1994)
+for a detailed description of these algorithms. However,
+computational complexity of the DP algorithms, along
+with the complexity of the system modeling, severely
+limit their applications to only small unrealistic problems.
+Computer simulation-based Reinforcement Learning
+(RL) methods of stochastic approximation, such as the
+method of Temporal Differences, TD(A) (Sutton, 1988),
+and Q-Iearning (Watkins, 1989) have been proposed in
+recent years as viable alternatives for obtaining near optimal policies for large-scale MOPs with considerably less
+computational effort than what is required by the DP algorithms. RL has two distinct advantages over DP. First,
+it avoids the need for computing the transition probability
+and the reward matrices. The reason being that it uses
+discrete event simulation (Law and Kelton, 1991) as its
+modeling tool, which requires only the probability distributions of the process random variables (and not the one
+step transition probabilities). Secondly, RL methods can
+hand Ic problems with very large state spaces, e.g., with
+10 15 states (Das el al., 1999) since its computational burden is related only to value function estimation, for which
+it can effectively use various function approximation
+methods (such as regression and neural networks).
+Though a vast RL literature on the discounted reward
+problems exists (Kaelbling et al., 1996), researchers have
+only recently turned their attention to the development of
+algorithms that consider average reward as their performance criterion. This is an important step since many of
+the problems in manufacturing (such as production lines)
+are studied under average measures (e.g., average WIP,
+average utilization, etc.). Das et al. (1999) presents an average reward RL (ARL) algorithm called SMART (SemiMarkov Average Reward Technique). SMART is the only
+algorithm that currently exists in the open literature that
+has been successfully used on a large (with approximately
+107 states) problem of developing dynamic preventive
+maintenance policies for a single-machine production inventory system. SMART was also benchmarked with optimal results on a set of relatively smaller versions of the
+preventive maintenance problem, with approximately
+1000 states (Das and Sarkar, 1999). Some of the most recent work in the development of optimal seeking ARL
+algorithms are Abounadi (1998), and Gosavi (1999). A
+provably convergent version of the SMART algorithm
+(called Relaxed-SMART) can be found in Gosavi (1999).
+It is our conjecture that dynamic control policies that
+can be obtained for production lines through application
+of the ARL algorithms could outperform the existing
+heuristics. One such attempt can be found in Mahadevan
+and Theochaurus (1998) where it is shown that a learned
+dynamic policy outperforms the kanban policy. We note
+however that they consider learning of a preventive machine maintenance policy along with the line control
+policy. As a result, the benefits derived from the control
+policy and the maintenance policy are confounded. Hence
+the measure of the benefits derived solely from the control
+In our study, in addition to the conventional measure
+of average WIP inventory (including finished parts), we
+consider an average WIP cost measure. Stated mathematically, the problems considered in our study are as
+follows. For all stations i = 1,2, ... , k,
+where hi is the holding cost at stage i, SL is the service
+level achieved by the control policy, and p denote the
+Typically, an inventory unit costs more as it travels
+downstream the line. Different control policies tend to
+have different physical distributions of line WIP. For
+example, a kanban policy generally allows less localization of inventory than CONWIP (Bonvik el al., 1997).
+Hence, a suitable method for assessing the cost ofWIP in
+the line (instead of the traditional method of simply
+counting the WIP pieces) could prove to be a very useful
+measure for assessing control policies, especially when the
+WIP values between stages differ significantly. Similar to
+the study reported in Veatch and Wein (1994) for optimal
+control policies for two-station tandem production systems, we consider the average cost of WIP inventory
+In this paper, we consider a four-station serial production line (as shown in Fig. I) with identical features to
+the one that was studied in Bonvik et al. (1997). We
+Fig. I. A general single-product four-machine serial production line with exogenous demand arrivals.
+Intelligent dynamic control policies for serial production lines
+derive the dynamic control policies using a minor variant
+of the SMART algorithm of Das et al. (1999). Based on
+the insights obtained from the policies learned by RL, we
+also develop a simple heuristic policy, named BehaviorBased Control (BBC). The performances (average WIP,
+average cost of WIP, and demand service level) of the
+policies obtained from RL and BBC are compared with
+four other policies studied in Bonvik et al. (1997) and
+with the EKCS policy studied in Dallery and Liberopoulos (2000).
+The remaining part of the paper is organized as follows.
+Section 2 discusses the methodology for deriving a dynamic policy including a model for the system state-space
+and the action-space. This section also includes descriptions of the existing control policies. Section 3 presents a
+description of a typical RL scheme and a minor variant
+of the SMART algorithm. The new heuristic algorithm
+BBC, is outlined in Section 4. BBC is an artificial intelligence technique applied mainly in dynamic active-reactive
+decision-making agents, such as autonomous systems
+such as robotics (Arkin, 1998). The results obtained from
+the four policies in Bonvik et al. (1997), the EKCS policy
+of Dallery and Liberopoulos (2000), and those policies
+derived from the SMART algorithm and the BBC heuristics are presented and compared in Section 5. Results
+are obtained for both the cases of constant demand rate
+(as in Bonvik et al. (1997)) and the Poisson demand process. Section 6 contains the concluding remarks.
+The simulation model for the four-station production line
+was developed using the SIMAN framework of the
+ARENA ® software, from Systems Modeling Corporation. In order to validate our simulation model, we first
+simulated the system with the configurations recommended by Bonvik et al. (1997) for the kanban, the
+CONWIP, the basestock, and the two-boundary hybrid
+control policies. We were able to reproduce the average
+WIP values corresponding to kanban, basestock, CONWIP and the hybrid control policies within 0.22, 0.14,
+0.22, and 0.17% respectively. The kanban control policy
+produced an average WIP level of 15.84 ± 0.07 units,
+compared to 15.82 ± 0.05 WIP units reported in Bonvik
+et al. (1997). For the case of the CONWIP control policy,
+we obtained an average WIP of 14.62 ± 0.02 units,
+which overlaps with the 14.59 ± 0.02 units as reported in
+Bonvik et al. (1997). The implementation of the basestock control policy produced 14.58 ± 0.02 units of
+WIP, and for the hybrid control policy we achieved
+13.95 ± 0.06. The corresponding numbers reported in
+Bonvik et al. (1997) are 14.60 ± 0.02 and 13.93 ± 0.03
+respectively. We thereafter used this simulation model as
+a vehicle for implementing the SMART algorithm in
+order to derive dynamic control policies.
+We first state the assumptions about the four-station
+production line that apply to all control policies. Note
+that these assumptions are identical to those considered
+• The system makes a single product type.
+• There is no delay in material handling between stations.
+• Information is transmitted instantaneously.
+• Machines operate with random production time,
+• Jobs follow a first come first serve dispatch rule.
+• Any unsatisfied demand is lost to the system.
+2.2. Control and system state-space notation
+In this section we develop a notational scheme for the
+system state-space and the action state-space for system
+control. The notation would be essential for implementation of the ARL algorithm.
+Let Qi and M i , for i = 1,2, ... ,k (for a k-station line)
+denote the status of the ith queue (buffer) immediately
+preceding machine i and the condition of machine i respectively. It is considered that Qi E {O, 1,2, ... } and
+M, E {i, w, d}, where the possible machine conditions are
+idle (i), working (w), and down (d). Also, let QJ denote
+the status of the finished product queue, located after the
+kth machine. Thus, the complete state-space (E) for a
+k-station production line can be given as
+Let A denote the action-space for the control actions. A
+vector of size lEI containing actions for each element of
+the state-space is called a control policy. The actions
+available to a decision-maker to choose from are produce
+and do not produce. Hence, denoting the action choices as
+I and 2 respectively, we have A = {I, 2}. Thus the
+complete state-action-space over which a learning agent
+In this section, we review the existing control policies. We
+will use the results obtained from these policies as
+benchmarks for the policies developed in this paper. The
+kanban control is simulated as a synchronized serial line
+with finite internal buffers to limit work in process accumulation. Figure 2 shows how information flows in a
+production line controlled by the kanban policy. The
+dashed lines represent card flow and dark lines show the
+part flow through the line. Each station receives information from its immediate downstream buffer. If a machine failure occurs, demand information propagation
+A CONWIP control policy maintains a constant work
+in process inventory. Figure 3 shows a production line
+eon trolled by CONWIP. The dashed line indicates the
+flow of authorization cards, which accumulate before the
+first station when the first stage machine is busy, reducing
+the average number of actual WIP in the system. In the
+ease of a machine failure, the WIP downstream of the
+failed machine flow through the system and new parts are
+authorized to enter the first station. Such a condition
+generally causes WIP accumulation in the buffers upstream of the failed machine.
+The two-boundary control policy (as presented in
+Bonvik et al. (1997» is a combination of CONWIP and
+kanban policies. A schematic of this policy is shown in
+Fig. 4, where the dashed line represents the flow of
+CONWIP cards and the dotted lines represent the flow of
+kanban cards. Departure of a finished produet sends a
+CONWIP type authorization card to the first stage for a
+new part to enter the system. This card flows with the part
+through the system. The local kanban cards are used to
+limit production at the stages (except the last stage).
+The size of the finished goods buffer (which is equal to the
+number of CONWIP cards) is kept at least as large as
+the basestock level of the last machine to allow the line to
+attain its service level target. Clearly the total inventory in
+the entire line can never exceed the inventory allowed in
+The most recent addition to the literature of flow line
+control policies is called the Extended Kanban Control
+System (EKCS) developed by Dallery and Liberopoulos
+(2000). EKCS combines the benefits of two well-known
+control policies, namely the kanban control and the
+basestock control systems. Figure 5 shows a schematic
+representation of this policy. The dashed lines represent
+r--------------------------------------,I
+Fig. 4. Two-boundary hybrid control policy.
+Intelligent dynamic control policies for serial production lines
+the flow of local kanban cards that limit production at all
+stages, and the solid lines represent the demand propagation back to all stations (as in basestock control). The
+entry of new parts into the system and the production
+operations at all stages are synchronized by both kanban
+and basestock controls. Both the kanban and basestock
+control policies can be obtained as special cases of the
+EKCS policy as explained below. Let K, denote the
+number of kanbans in stage i. If K, -7 00, i.e., local WIP
+is not constrained, then the system behaves as a pure
+BaseStock Control System (BSCS). On the other hand, if
+S, (initial basestock) is set equal to K j , then the system
+dynamics are solely governed by the local WIP constraints of the Kanban Control System (KCS) and
+therefore the demand back-propagation is redundant,
+since D, ~ K, (local demand is always greater or equal to
+the total number of WIP authorizations). We simulated
+both KCS and BSCS policies as special cases of the
+EKCS model to validate our EKCS implementation.
+In the next section, we briefly introduce Reinforcement
+Learning (RL) and some of its implementation issues. We
+also present the Average Reward Learning (ARL) algorithm and its related notation.
+agent, a set of actions, and the environmental response
+(sensory input). The learning agent selects an action for
+the system, which leads the system evolution along a
+unique path till the system encounters another decisionmaking state. At that time, the system consults with the
+learning agent for the next action. After a state-transition,
+the learning agent gathers sensory inputs from the environment, and from it derives information about the new
+state, immediate reward, and the time spent during the
+state-transition. Using this information and the algorithm, the agent updates its knowledge base and selects the
+next action. This completes one step in the iteration process. As this process repeats, the learning agent continues
+to improve its performance. A simulation model of the
+system provides the environment component of the
+model. For further explanation of the working of a reinforcement learning model, refer to Das et al. (1999).
+Figure 7 shows how information flows when RL-based
+control is implemented. The system state is given by a
+vector consisting of the buffer and the machine conditions
+for all stages. The decision agent continuously monitors
+the system state. It revisits its decision to authorize a new
+Reinforcement Learning (RL) is a way of teaching agents
+(decision-makers) optimal control policies. This is accomplished by assigning rewards and punishments for
+their actions based on the temporal feedback obtained
+during active interactions of the learning agents with
+dynamic systems. The agent chooses actions that tend to
+increase the long run average reward (Kaelbling et al.,
+1996). Such an incremental learning procedure specialized
+for prediction and control problems was developed by
+Sutton (1998) and is referred to as Temporal-Difference
+A typical learning model (as depicted in Fig. 6) contains
+four elements, which are the environment, the learning
+Fig. 6. Typical reinforcement learning scheme.
+Fig. 7. Information flow in a dynamic decision-making agent.
+production at the first stage whenever the system state
+changes due to any of the events, such as production
+completion at any stage, failures, repair completion, or a
+demand arrival. At any decision-making epoch, the decision agent looks at the "values" of that system state and
+different action pairs. Such a value for a state-action pair
+is called "action value". The decision agent usually follows a greedy policy for choosing an action. For example,
+in a WI P minimization problem, the action value with
+minimum WI P cost is chosen. As a result of an action
+taken in a state, the system receives some rewards and
+evolves to the next decision-making epoch having a new
+state. At this time the action taken in the previous decision-making epoch is evaluated. A good action (i.e., one
+that generates good rewards) is rewarded by improving
+the action value of that action-state pair. An action value
+is reduced for an action-state pair if the rewards generated by that state-action pair is perceived to be poor.
+Sometimes, the learning agent chooses an action other
+than the greedy policy. This is called exploration. As the
+system evolves through a large number, possibly infinite,
+of such epochs, the action values reach a steady state
+(where perhaps, for each state, one particular action
+choice becomes dominant) and an optimal policy is derived, by inspecting the values.
+The above value updating scheme requires keeping
+values of all the 1£ x AI state-action pairs in a look-up
+table. This could become a computational burden even
+for reasonably sized production lines. This computational
+burden could be alleviated (perhaps, at the cost of devi-
+ating from optimality) by the use of function approximation tools such as a Neural-Network (N-N) or
+regression. The reader is referred to Das et al. (1999) for
+an application of the back-propagation type N-N within
+a RL algorithm. However, another possible avenue for
+reduction of the computational burden is state-space
+aggregation. We adopted this aggregation approach
+purely for simplicity. We redefined the system state-space
+as E = {(M;, WIP,otal): i = 1,2, . . . ,k}, where WIPtotal is
+the actual inventory in the whole system (WIP) plus the
+new product authorization that have not entered stage I
+because machine I is either busy or failed. Note that the
+decision maker at stage i, instead of looking at Qi and Qf,
+looks at the global WIPtotal while deciding its course of
+action. We have chosen to constraint WIPtotal instead of
+WIP because there could be many new part authorizations at the first stage that still have not entered the system. This situation could be related to decision-making
+epochs in which machine I is found failed thus impeding
+the regular flow of products. We were able to reduce
+the size of the state-action-space look-up table from
+8,201,250 values to 3240, i.e., 2 (actions) x 34 (three states
+for each of the four-stations) x 20 (maximum basestock
+quantity). For a more detailed discussion on look-up
+table approaches, the reader is referred to Bertsekas and
+Tsitsiklis (1996) and Kaelbling et al. (1996).
+Any action taken by the agent was assigned a cost
+equal to a linearly weighted time averaged WIP until the
+next decision-making epoch. The choice of the linearly
+weighted WIP cost allowed us to minimize WIP and WIP
+Intelligent dynamic control policies for serial production lines
+cost simultaneously. However, linear weighting of the
+WIP cost is certainly not a model requirement and thus
+Our objective is to compare the average WIP and average WIP cost of a policy learned by the RL algorithm
+with those obtained from the kanban, the CONWIP, the
+two-boundary control, and the EKCS policies. For a fair
+comparison, all the policies were executed with basestock
+levels such that at least a 99.9% service level is achieved.
+To ensure that the policy learned by the RL algorithm
+satisfy this requirement, we modified SMART by constraining WIPtotal within a range [mpt';;;~l' mPt'::~~]. The
+values for mPt':::~I' and mPt'::~'i were obtained through
+trial and error, which we discuss later. In what follows,
+we establish the notation necessary and then present the
+action value for state-action pair (i,a);
+cumulative reward at the mth decisionmaking epoch;
+average reward at the mth decision-making
+probability of exploration (trying a nongreedy action).
+Step I. Let time step m = O. Initialize action values
+Ro1d(i, a) = Rnew(i, a) = 0, 'I! i E E, and a E A.
+Choose the current state i arbitrarily. Set the
+cumulative reward Cm = 0, t m = 0, Pm = O.
+Choose initial values of the rates for exploration
+a. With high probability (I - Pm), choose an
+action a that minimizes Rnew(i, a), otherwise
+Check feasibility of the chosen action, i.e., if
+the resulting WIPtotal in the system (including
+all the authorizations that have not entered
+stage I) is within the range [mPt';;:~I' WIPt';;~a'i].
+I. If TRUE, then carry out the chosen action.
+b. Let the state at the next decision epoch be j,
+r(i, j, a) be the transition time due to action a,
+and rimm(i, j, a) be the immediate reward
+earned as a result of taking action a in state i.
+Then update the action value for (i, a) as
+c. If the action that minimizes Rncw(i, a) was
+• Update total time: t m f- t m + rei, j, a).
+d. Set i f- j, m f- m + I, IXm f - IXm (0.99999),
+Pm f - p.; (0.99999), and return to Step 2.
+After close examination of the policy learned by the ARL
+algorithm (which we discuss in Section 5), we developed a
+heuristic control policy called the Behavior-Based Control (BBC) policy. The BBC policy (as shown in Fig. 8)
+can be explained as follows. There are three types of
+i...._._._._~._._._._._.g'!J.I!!J5!!..'!2Y..jL._._._._._._._._._._. ~ _ .._ .._ .. .._.._ .._ .._ .._ .._ .._ ..j
+authorizations: CONWI P type, kanban type, and emergency type. The basestock of the WIP is controlled as in
+CONWI P policy, where after every satisfied demand, a
+CONWI P card is sent to the first station authorizing a
+new production. ln addition to that, a one-time (nonrecyclable) emergency authorization card for one new
+unit is issued whenever either a demand is not satisfied or
+a machine breakdown occurs. An emergency authorization card is not sent back after the accompanying part is
+taken out by a demand. To further enhance the policy, we
+constraint the buffers at all stations (except the last station) through kanban type authorizations. The concept of
+constraining the buffers at all stations (other than the last
+one) was first implemented in the two-boundary hybrid
+control policy (Bonvik et al., 1997). We first implemented
+the BBC policy without this buffer constraint, which we
+refer to as the BBC-free policy. However, as expected
+(refer to Section 5), the BBC policy performed better than
+The motivation for the BBC policy comes from two
+different sources. First, we traced the output of the simulation file to better understand the actions executed by
+the RL agent. Although the RL policy evaluates a wider
+variety of state change (decision) epochs than the BBC
+policy, at the state change epochs following a machine
+breakdown the RL was found to consistently authorize
+new production in the system. A similar but not as consistent part authorization was observed at lost demand
+epochs. Hence the motivation for emergency part
+authorizations in BBC. Second, the beneficial effect of
+locally constraining the buffers was both intuitively
+appealing and evident from our experiments. In the next
+section we present the results obtained from the different
+We first discuss results obtained from the system modeled
+with a constant demand process. We validate our simulation model by simulating the system with parameter sets
+that were reported to be the best in Bonvik et al. (1997)
+for four of the five policies presented in their report,
+namely kanban, basestock, CONWIP, and the twoboundary control. Subsequently, we ran the simulation
+with Poisson demand. We compare the results obtained
+from these policies and the BBC policy with those obtained from the ARL algorithm.
+Table I shows the parameters used for initialization of
+the simulation model for the different policies in the
+study. The reader may observe that for the RL algorithm,
+we include the range of feasible WIP (instead of a fixed
+number of parts in the system). The RL algorithm, while
+working within the WIPtotal constraints, attains the desired service level. As with the initial basestock for the RL
+policy, the model could start with any value within the
+Table 1. Initialization parameters for the simulation model
+range of WIPtotal' An initial basestock value that is out of
+this range will eventually be forced to fulfill the WIPtotal
+In order to obtain the limits on WI Ptotah we first set the
+value of WJPt~;~1 to one unit less than the total base stock
+considered for most of the heuristic policies studied (i.e.,
+14 units). The upper bound (WJPt~:'aI) is found by trial and
+error, i.e., we move the bound until it accomplished the
+system constraint of service level (SL ;:: {3) constraint. For
+implementing the EKCS policy, we adopted the best
+basestock levels suggested for the basestock policy in
+Bonvik et al. (1997), and then we found the buffer sizes by
+trial and error maintaining the property 0 :5 S; :5 K; given
+The simulated production line has lognormal i.i.d.
+operation times with mean 0.98 and standard deviation of
+0.02 minutes. Failures and repair times are assumed exponential with MTBF of 1000 minutes and MTTR of 3
+minutes. The above parameters were adopted from
+Bonvik et al. (1997). All simulation models run for 30
+replicates and 240 000 time units each replicate.
+We implemented the control policies such that a service
+level of at least 99.9% is obtained. The corresponding
+WIP levels were recorded for all control policies. As in
+Bonvik et al. (1997), we did not consider in our WIP
+calculation the production authorizations that have not
+entered the system as an actual part. Table 2 summarizes
+For the kanban, CONWIP, and two-boundary hybrid
+control policies, we were able to achieve results within
+0.22% of the values reported in Bonvik et al. (1997).
+Also, from Table 2, it can be seen that the policy learned
+by the RL algorithm gives a reduction of 13.83% in the
+WIP as compared to the kanban policy, and 2.15% as
+compared to the hybrid control policy (the best policy in
+Bonvik et al. (1997». The RL policy performs better than
+the EKCS by 1.16%. The BBC heuristic also produced
+better results than the hybrid policy and the EKCS policy, but fell slightly short of the RL policy. We note that
+the implementation of the BBC-free policy is a simple
+Intelligent dynamic control policies for serial production lines
+extension of the typical CONWIP structure. Table 2
+shows the results for the BBC policy with the best combination of buffer sizes found by an exhaustive search
+over the space of possible basestock levels and buffer
+Table 2. Performance of policies under constant demand rate
+To have a cost of WIP-based comparison of the production control policies we obtained a linearly weighted
+WIP cost for all five policies implemented. Table 3 summarizes these results. The BBC-free, the BBC and the RL
+policies show a 3.1, 3.5, and 4.2% improvement respectively over the hybrid policy. As compared to the EKCS
+policy, the improvements in cost are 2.2, 2.6, and 3.3%
+Table 4 compares the actions taken by the various
+production control policies at different decision-making
+epochs. The state description is a combination of all
+machine status and the total basestock in the system. The
+BaseStock (BS) is fixed for all policies except for the BBC
+policy and the RL agent. The BBC policy starts with a
+fixed amount of parts in the system, but the emergency
+cards make the BS variable during a reinforced response.
+As with the RL policy, the basestock is constrained between WIP~\~I and WIP~~:I' The actions considered are
+a., a2, and Pi, for i = I, 2, 3, 4 which are explained in
+Table 3. Distribution of average WIP throughout the system and the resulting weighted cost
+Table 4. Trace table (sample states and corresponding actions) for the various policies under study
+= I, busy = 2, failed ~ 3) is the status of machine i at the decision-making epoch.
+BS is the total basestock in the system (refer to Table 1).
+C, is a production completion event at machine i.
+D represents a demand arrival event, and L a lost demand event.
+32 do not authorize a new part in the system.
+- no action is considered (not a decision-making epoch).
+nla not applicable (i.e., the state condition is never reached when operating under the control policy).
+The first two rows in Table 4 describe a situation in
+which a failure occurs. None of the existing policies could
+react to such an event whereas BBC and RL control
+The third row describes a case in which all policies
+generate an action due to a production completion event
+on machine 2 (C z). The kanban control policy (KCS)
+would authorize the production of a new part if there is a
+card at the kanban queue K z, otherwise the machine
+remains idle. BSCS authorizes a production if at the production completion epoch there is a demand sitting on the
+demand queue D z. CONWI P allows production at rnachine 2 with no restrictions. Both the two-boundary control policy and the BBC policy behave in a similar manner
+to the KCS. The EKCS policy checks for two conditions,
+i.c., it verifies that there is a kanban authorization at queue
+K z, and that there is a demand sitting on the demand
+queue D z. As with the RL control policy, it authorizes
+production of a new part at machine 2, and allows a new
+part to enter the system. Note that the RL algorithm only
+learns thc new product admission part of the policy. Production at the stages is carried out without any restriction
+The fourth row presents a situation where the RL
+policy decides not to produce since the dominant R-value
+at this state corresponds to the non-admission decision.
+Notice that the KCS and BBC policies still authorize
+production of a part at station 2 if a kanban card is
+available at that moment. The remaining policies do not
+apply since the total WI P in the system is beyond the
+maximum WIP and therefore are marked ti]«. Information from all of the remaining rows of Table 4 can be
+Notice that both policies (BBC and RL) account for
+more decision-making epochs than the other heuristic
+policies, improving the dynamics of the control of the
+production system. Also notice that the actions performed by the agents are simple and easy to carry out.
+BBC policy is a generic heuristic that requires little
+knowledge of the system state when compared to the RL
+policy. On the other hand, the RL procedure is casespecific, i.e., each system has to be modeled and interfaced with the algorithm to obtain its control policy.
+Figure 9 gives a graphical description of Table 3. It
+shows how some of the policies under study localize the
+After finding leaner control policies with the RL and BBC
+heuristic for the case of constant demand rate, we generalizcd our findings to a more dynamic environment in
+which demands arrive according to a Poisson process. We
+set the time between arrivals as an exponential random
+variable with mean of one time unit, and ran the experimcnts for the Two-Boundary Control (TBC) hybrid, RL
+Fig. 9. Location of the inventory throughout the system for the
+and BBC policies. We again found that RL and BBC
+performed better than the TBC hybrid policy. Table 5
+shows the results obtained for the three policies under
+study. Due to high variability of the demand arrival process, we lowered our target demand service level to 96%
+for all the policies. Since the EKCS policy was brought to
+our attention at a very late stage of this study, we did not
+have to time to examine this policy under Poisson demand.
+We note from Table 5 that the BBC heuristic yields
+average WIP that is 0.9% higher than the RL policy. The
+hybrid policy accumulates over 7.2% more WIP than the
+As for the constant demand case, we obtained the WIP
+cost for the case of Poisson demand. Table 6 shows the
+weighted cost of work-in-process for the policies studied.
+The average WIP cost offered by the hybrid policy is
+6.5% higher than the RL policy. This difference in the
+case of constant demand rate is only 4.4% indicating that
+RL policies fare better in a more variable environment.
+We feel that more detailed study of all the policies
+under random demand scenario is needed to gain proper
+Table 5. Average WIP levels with Poisson demand. Confidence
+Table 6. Location of work-in-process throughout the system
+and associated costs in the case of Poisson demand
+Intelligent dynamic control policies for serial production lines
+5.3. Intuitive explanation in support of RL and
+In what follows, we offer intuitive explanation to support
+the performances of various control policies. Both the
+CONWIP and kanban policies fare poorly in terms of
+average WIP (or average WIP cost) since these policies
+authorize new productions as soon as parts are lost to the
+demands, irrespective of the inventory conditions in the
+system. The hybrid policy provides a significant performance improvement over kanban and CONWIP simply
+by not letting production authorizations enter stage I
+when stage I already has a sizeable inventory. This avoids
+unnecessary inventory build-up in upstream stages when
+the downstream stages are blocked for some reason (such
+as failure). In other words, the hybrid policy keeps some
+of the new part authorizations from entering the system
+(with a real part) when they are not likely to improve the
+system performance. The EKCS policy regulates the
+pr~~uction process more than the hybrid policy by requmng a kanban as well as a demand authorization for
+production in all the stages (as opposed to only the first
+stage in the .TBC hybrid policy). Thus the EKCS policy
+exercises stricter control on the inventory build-up and
+results in a lower WIP that the TBC hybrid policy.
+The RL policy capitalizes on the concept of allowing
+the system more flexibility in terms of when to authorize a
+new production. It seems clear that authorizing new
+production immediately after satisfying a demand is
+definitely not optimal. Instead, a system state should be
+revie,,:ed, as often as possible, and for each change of
+state in the system the decision-maker should be given the
+flexibility to either authorize or not authorize a production. In a fully computer-controlled system such dynamic
+RL-based policies are easy to implement. In our RL
+algorithm implementation, we consider production
+completion, machine failure, repair completion, and the
+demand arrival epochs as the decision-making epochs.
+However, we notice that our RL policy does not consider
+controlling inventory build-up in the production stages
+by the use of local authorization (kanban) cards. Such an
+addition could significantly improve the RL policy performance.
+The BBC heuristic is based on a concept that it is
+perhaps P?ssible to maintain less basestock, and supplement the mventory with one-time emergency authorizations in reaction to undesirable events such as lost
+demand and machine failures. This phenomenon was also
+observed in t~e RL policy. These events do adversely
+a.ffect the service level and hence emergency authorizations could be used as a means to address that issue. For
+example, when machine 2 fails, it authorizes a production
+in machme I, which can be seen as a way for machine 2 to
+ensure that it has a part available to work on when it is
+repaired. Notice though, that production at machine I is
+also regulated by buffer constraint and, hence, a new
+authorization due to a failure in machine 2 does not
+necessarily mean an immediate inventory build up at
+mach me I. Results show that this concept is valid and the
+buffer restricted BBC policy produces lower WIP than
+almost all of the other heuristic policies.
+5.4. Comments on the performance of the learning agent
+As with any artificial intelligence technique, reinforceme~t learning does classify the system states in likely and
+unlikely states. The main difference between RL and
+~eta-heuristic search techniques such as genetic algonthms and tabu search is that the learning agent learns to
+adapt to sudden changes in the system, making it a more
+robust. technique. Also, RL does not require a set of
+operating conditions to operate; it develops the controls
+as the simulation progresses. RL is not an exhaustive
+search technique. Although it explores all the actions
+available to make decisions, it does decrease exploration
+rate as it performs the optimization. Also, with time, the
+learnmg rate IS slowly decayed to zero, i.e., learning is
+We set the number of simulation steps to 10 times the
+completion time for one replicate, which was taken as
+240000 time units, as in Bonvik et al. (1997), with a
+warm-up period of 9600 time units. This was done to
+promote :'infinite'.' visitation of all states as required by
+RL algonthms. FIgure 10 depicts the performance of the
+SMART algorithm that converged long before the simulation ~an to completion. We divide the learning curve in
+Fig. 10 mto three main phases. The first two phases relate
+to the transient phase of the optimization process, where
+phase I correspond to high state-space exploration necessary during the initial iterations. Phase 2 is indicative of
+reduced exploration and near convergence. The last phase
+shows that a stable policy has been reached and the
+algorithm has converged. Recall that the RL algorithm
+Fig. 10. A typical plot of the average reward gained by the RL
+starts with a high degree of exploration, which is slowly
+The simulation run time was 182.93 minutes, in a
+Pentium MMX 166 MHz, considerably smaller than the
+simulation times reported for other intelligent search
+techniques on similar systems Lutz et al. (1998). For the
+Poisson demand case, the learning algorithm showed very
+similar behavior to that observed for the constant demand case. The algorithm converged long before the end
+We have introduced two new control policies for serial
+production lines and compared their performances with
+those obtained from existing control policies, such as
+kanban, CONWIP, basestock, EKCS, and the twoboundary hybrid control. We carried out the comparison
+using simulation results obtained from a four-station serial line. Results show that both policies (obtained via the
+reinforcement learning algorithm and the BBC heuristic)
+yield better results than almost all the policies that exist in
+the literature. Both policies introduced here performed
+well for different demand processes. Since the RL policy
+outperformed all other control heuristics for the Poisson
+demand case, we claim that the superiority of the RL
+policy would hold for systems that are subjected to
+demand processes with other coefficients of variation.
+We also note that the BBC and the EKCS heuristics
+performed very well and should be explored further.
+The policies derived from RL and the BBC heuristic
+arc not only leaner (with less WIP) but more agile, reacting more rapidly to the changes that affect the system
+thus resulting in a lower WIP, and cost of WIP. The
+hybrid and the EKCS policies, although have smaller
+buffer sizes in internal stations, accumulate more inventory in the last station where it, perhaps, costs more.
+The main reason for the RL-based policy to perform
+better than the other production control heuristics is that
+it considers the aggregate dynamics of the system at every
+event completion, rather than a select few (e.g., demand
+service). However, as we noted earlier, there is a tremendous scope for further improvement of the RL policy. Two main areas of improvement opportunities are:
+constraining the buffer sizes in the production stages; and
+finding efficient methods for function approximation or
+state-space aggregation to minimize the sacrifice of optinullity in RL implementation. Another major addition to
+the RL implementation could be to let the agent learn
+optimal buffer sizes or the optimal production release
+In our study, the EKCS policy proved better than the
+TBC hybrid policy. An attempt should be made to enhance the BBC policy so that it improves the dynamics of
+the EKCS. We conjecture that such implementation will
+make a leaner and more agile production control heuristic, reducing WIP accumulation and costs along the
+production line. We claim that a Reinforced EKCS
+(RECKS) policy should perform better than the BBC
+Our future research includes topics such as handling
+multi-product serial production lines, as well as stations
+with parallel resources. We plan to also extend our work
+to account for demand backlogs in the system, and the
+system reliability. We believe that backlogs in the system
+will make the controller produce an even leaner production control policy, since backlogs will allow the system
+to have less finished product inventory. Though backlog
+consideration will significantly add to the system statespace, the increase can be handled via use of perhaps, a
+feed-forward neural-network to approximate the value
+function for the RL algorithm (Das et al., 1999).
+Abounadi, J. (1998) Stochastic approximation for non-expansive maps:
+applications to Q-Iearning algorithms. Unpublished Ph.D. Thesis,
+Department of Electrical Engineering and Computer Science,
+Massachusetts Institute of Technology, Cambridge, MA.
+Arkin, R.C (1998) Behavior-based Robotics, 1st edn, The MIT Press,
+Askin, R.G. and Standridge, CR. (1993) Modeling and Analysis oj
+Manufacturing Systems, 1st edn, John Wiley & Sons, New York,
+Berkley, B.J. (1992) A review of the kanban production control research literature. Production and Operations Management, 1(4),
+Bertsekas, D.P. and Tsitsiklis, J.N. (1996) Neuro-Dynamic Programming, Athena Scientific, Belmont, MA.
+Bonvik, A.M., Couch, CE. and Gershwin, S.B. (1997) A comparison
+of production-line control mechanisms. International Journal oj
+Buzacott, J.A. and Shantikumar, J.G. (1992) A general approach for
+coordinating production in multiple cell manufacturing systems.
+Production and Operation Management, 1(1),34-52.
+Dallery, Y. and Liberopoulos, G. (2000) Extended kanban control
+system: combining kanban and base stock. II E Transactions,
+Das, T.K., Gosavi, A., Mahadevan, S. and Marchellack, N. (1999)
+Solving semi-Markov decision problems using average reward
+reinforcement learning. Management Science, 45(4), 560-574.
+Das, T.K. and Sarkar, S. (1999) Optimal preventive maintenance in
+a production/inventory system. llE Transactions, 31(6), 537551.
+Frein, Y., Di Mascolo, M. and Dallery, Y. (2000) On the design of
+generalized kanban control systems. International Journal oj
+Operations and Production Management (in press).
+Gershwin, S.B. (1994) Manufacturing Systems Engineering, Prentice
+Gosavi, A. (1999) An algorithm for solving semi-Markov decision
+problems using reinforcement learning; convergence analysis and
+numerical results. Unpublished Ph.D. Thesis, Department of
+Industrial Engineering, University of South Florida, Tampa, FL
+Kaelbling, L.P., Littman, M.L. and Moore, A.W. (1996) Reinforcementlearning: a survey. Journal oj Artificial Intelligence Research,
+Intelligent dynamic control policies for serial production lines
+Law, A.M. and Kelton, W.D. (1991) Simulation Modeling and Analysis, McGraw-Hill, Inc., New York, NY.
+Lutz, C.M., Davis, K.R. and Sun, M. (1998) Determining buffer location and size in production lines using tabu search. European
+Journal of Operational Research, 106(2/3). 301-316.
+Mahadevan, S. and Theochaurus. G. (1998) Optimizing production
+manufacturing using reinforcement learning, in Proceedings of the
+Eleventh International FLAIRS Conference, AAAI Press, Menlo
+Muckstadt, J.A. and Tayur, S.R. (1995a) Comparison of alternative
+kanban control mechanisms. I. background and structural results.
+Muckstadt, J.A. and Tayur, S.R. (1995b) Comparison of alternative
+kanban control mechanisms. II. experimental results. liE Transactions, 27(2), 151-161.
+Putterman, M.L. (1994) Markov Decision Processes, Wiley Interscience, New York, NY.
+Sethi, S. and Zhang, Q. (1994) Hierarchical Decision Making in Stochastic Manufacturing Systems. Birkhauser, Boston, MA.
+Sethi, S., Zhang, H. and Zhang, Q. (1997) Hierarchical production
+control in a stochastic manufacturing system with long-run
+average cost. Journal of Mathematical Analysis and Applications,
+So, K.C. and Pinnault, S.C. (1988) Allocating buffer storages in a pull
+system. International Journal of Production Research, 15(12),
+Spearman, M.L., Woodruff, D.L. and Hoop, W.J. (1990) CONWIP: a
+pull alternative to kanban. International Journal of Production
+Sugimori, Y.. Kusunoki, K., Cho, F. and Uchikawa, S. (1977) Toyota
+production system and kanban system materialization of just-intime and respect-for-humans systems. International Journal of
+Sutton, R.S. (1988) Learning to predict by the methods of temporal
+Sutton, R.S. and Barto, A.G. (1998) Reinforcement Learning: An
+Tabe, T., Muramatsu, R. and Tanaka, Y. (1980) Analysis of production ordering quantities and inventory variations in a multi-stage
+production ordering system. International Journal of Production
+Van Ryzin, G., Lou, S.X. and Gershwin, S.B. (1993) Production
+control for a tandem two-machine system. liE Transactions,
+Veatch, M.H. and Wein, L.M. (1994) Optimal control ofa two-station
+tandem production/inventory system. Operations Research, 42(2),
+Watkins, Ci.l. (1989) Learning from delayed rewards. Ph.D. thesis,
+Carlos D. Paternina received his undergraduate degree in Industrial
+Engineering with Minor in Engineering Project Management from
+Universidad del Norte, Barranquilla, Colombia in August 1994. He
+completed the Master of Industrial Engineering program in 1998 at the
+University of South Florida, in Tampa Florida. He will receive his
+Ph.D. degree in Industrial Engineering at the University of South
+Florida in May 2000. He is currently a Research Professor and
+Director of Graduate Programs at the Industrial Engineering Department, Universidad del Norte. He is a member of AnM (the honor
+society of Industrial Engineers), the Institute of Industrial Engineers,
+the Society for Manufacturing Engineers (SME), and Robotics international of SM E.
+Tapas K. Das is an Associate Professor of Industrial and Management
+Systems Engineering at the University of South Florida, Tampa. He
+received his Ph.D. in Industrial Engineering from Texas A & M University in 1989. His current research interests include modeling and
+performance optimization of large scale stochastic production inventory systems, theory and applications of neurodynamic programming
+(reinforcement learning), economic design of process monitoring tools,
+wavelet-based multi resolution analysis and its applications to multivariate process control. Dr. Das has received multiple research awards
+from NSF and has published in journals like llE Transactions, Management Science, Naval Research Logistics, EJOR etc. He is currently
+the director of the QCRE division of the liE.
+Contributed by the Decentralized Control of Manufacturing Systems

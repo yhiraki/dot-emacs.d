@@ -1,0 +1,423 @@
+Self-Improving Factory Simulation using Continuous-time
+Sridhar Mahadevan and Nicholas Marchalleck Tapas K. Das and Abhijit Gosavi
+Department of Computer Science and Engineering
+inventory control to scheduling and reliability, can be formulated as continuous-time
+Markov decision processes. A primary goal
+policy that minimizes the long-run average
+cost. This paper describes a new averagereward algorithm called SMART for nding gain-optimal policies in continuous time
+semi-Markov decision processes. The paper presents a detailed experimental study of
+SMART on a large unreliable production inventory problem. SMART outperforms two
+well-known reliability heuristics from industrial engineering. A key feature of this study
+is the integration of the reinforcement learning algorithm directly into two commercial
+discrete-event simulation packages, ARENA
+and CSIM, paving the way for this approach
+to be applied to many other factory optimization problems for which there already exist
+Many problems in industrial design and manufacturing, such as scheduling, queueing, inventory control, and reliability engineering, can be formulated as
+continuous-time sequential decision tasks. These problems can be formally characterized as continuous-time
+semi-Markov decision processes (SMDP's), where the
+goal is to nd an optimal policy that minimizes the
+long-term average cost [11]. Since dynamic programming methods, such as policy or value iteration, cannot
+be applied to large SMDP's, a standard approach to
+studying these problems is through the use of discreteevent simulation [8]. Although simulation is valuable
+in evaluating the expected long-run performance of a
+xed policy, it is of limited use in nding good or optimal policies.
+Reinforcement learning (RL) is an ideal approach to
+solving large SMDP's, since it can be easily combined
+with discrete-event simulation models. However, work
+in average-reward reinforcement learning has so far
+been limited to small discrete-time Markov decision
+processes (MDP's) [9, 12, 14, 16]. This paper introduces a new model-free average-reward algorithm
+for continuous-time SMDP's called SMART. Second,
+it presents the rst large scale experimental test of
+an average-reward RL algorithm on a realistic multiproduct unreliable production inventory system (with
+a state space in excess of 1015 states). Finally, it illustrates how RL can be integrated into widely available discrete-event simulation packages (in particular,
+There has been previous work on continuous-time
+SMDP's in the RL literature. In particular, Bradtke
+and Du [2] describe how the well-known discounted
+RL algorithms, including TD() [15] and Q-learning
+[17], can be extended to SMDP's. Crites and Barto
+[3] describe an impressive application of Q-learning to
+a large scale SMDP problem of controlling a group of
+elevators. Both these papers primarily focus on an
+optimality framework, where the goal of the decision
+maker is to maximize the discounted sum of rewards.
+The rest of the paper is organized as follows. Section 2 brie y introduces the semi-Markov decision
+process (SMDP) framework under the average-reward
+paradigm. Section 3 describes the SMART algoARENA is marketed by Systems Modeling Corporation. CSIM is marketed by Mesquite Software.
+rithm. Section 4 describes an unreliable multi-product
+production inventory system, and also discusses how
+SMART was integrated into a discrete-event simulation system. Section 5 presents experimental results
+of using SMART to optimize the production inventory
+system. Finally, Section 6 summarizes the paper, and
+discusses some directions for future work.
+Semi-Markov decision processes extend the usual
+discrete-time MDP model in several respects. The
+most obvious distinction is one of time, which is continuous. However, decisions are only allowed at discrete points in time (or events). In between decisions,
+the state of the system may change continually, unlike
+MDP's where state changes are solely due to actions.
+The reward structure is also di erent: taking an action in a state results in both an immediate lump-sum
+reward, as well as an accumulated reward generated
+at some xed rate until the next decision epoch.
+We brie y introduce the Semi-Markov Decision Process (SMDP) model here [1, 11]. An SMDP is de ned
+as a ve tuple (S; A; P; R; F), where S is a nite set of
+states, A is a set of actions, P is a set of state and action dependent transition probabilities, R is a reward
+function, and F is a function giving probability of transition times for each state-action pair. Pxy (a) denotes
+the probability that action a will cause the system to
+transition from state x 2 S to y 2 S. This transition probability function describes the transitions at
+decision epochs only. It is worth pointing out that the
+trajectory of system states between decision epochs in
+general has no e ect on the state transition matrix,
+and as such gives the decision maker no information.
+The SMDP represents snapshots of the system at decision points, whereas the so-called natural process describes the evolution of states over all time.
+F is a function where F(t j s; a) is the probability that
+the next decision epoch occurs within t time units,
+after the agent chooses action a in state s at a decision
+epoch. From F, and P, we can compute Q by
+where Q denotes the probability that the system will
+be in state y for the next decision epoch, at or before
+t time units after choosing action a in state s, at the
+last decision epoch. Q can be used to calculate the
+expected transition time between decision epochs.
+In general, the reward function for SMDP's is more
+complex than in the MDP model. In addition to the
+xed reward k(x; a), accrued due to an action taken at
+a decision epoch, an additional reward may be accumulated at rate c(y; x; a) for the time the natural process remains in state y between the decision epochs.
+Note that the natural process may change state several times between decision epochs, and therefore, the
+rate at which the rewards are accumulated between
+Figure 1 illustrates the SMDP model using a simple machine maintenance problem. Here, a machine
+makes only one part, and will fail at some unknown
+point in time (characterized by a failure gamma probability distribution). The state of the machine is represented by the number of parts produced. The machine
+can be maintained before it fails, which will restore it
+to its original condition. Failure times are generally
+long, and repairs are expensive. Maintenance times
+are shorter, and less expensive. The tradeo here is
+to decide when to maintain the machine: do it too
+late and risk repair, or do it too early and pay excessive maintenance cost. The production inventory
+problem, described later in the paper, is a much more
+complex and realistic version of the maintenance problem, where the machine may make multiple products,
+each product lls a bu er, which is depleted by di erent demand rates.
+Figure 1: A simple machine maintenance problem to
+illustrate SMDP's. The decision maker has to choose
+between two actions: produce ( P) and maintain (M).
+In case of a failure, the only possible action is a repair (R). The numbers inside the brackets indicate
+lump-sum rewards. Maintenance times are uniformly
+distributed, whereas production and failure times are
+gamma distributed random variables. Reward rates
+Formally, the expected reward between two decision
+epochs, given that the system in state x, and a is cho-
+sen at the rst decision epoch, may be expressed as
+where  is the transition time to the second decision
+epoch, and Wt denotes the state of the natural process.
+Now, starting from state x at time 0, and using a policy
+ for n decision epochs until time t, the expected total
+where k(xn; an) is the xed reward earned at the nth
+decision epoch, and c(y; xn ; an) is the rate at which
+reward is accumulated from the nth to the (n + 1)th
+decision epoch. The average reward  for a policy
+ can be de ned by taking the limit inferior of the
+ratio of the expected total reward up until the nth
+decision epoch to the expected total time until the nth
+epoch. So the average reward of a policy  (x) can be
+For each transition, the expected transition time is
+The Bellman optimality equation for unichain average
+reward SMDP's is analogous to that for the discretetime model, and can be written as
+In unichain SMDP's, the average reward is constant
+across states. Many real-world SMDP's, including the
+elevator task [3] and the production inventory task described below, are unichain.
+We now describe a new model-free average-reward algorithm (SMART) for nding gain-optimal policies for
+SMDP's. The derivation of this algorithm from the
+Bellman equation for SMDP's (Equation 5) is fairly
+straightforward. First, we reformulate Equation 5 using the concept of action-values. The average-adjusted
+sum of rewards received for the non-stationary policy
+of doing action a once, and then subsequently following a stationary policy  can be de ned as
+The temporal di erence between the action-values of
+the current state and the actual next state is used to
+update the action values. In this case, the expected
+transition time is replaced by the actual transition
+time, and the expected reward is replaced by the actual immediate reward. Therefore, the action values
+where rimm (x; a) is the actual cumulative reward
+earned between decision epochs due to taking action a
+in state x, z is the successor state,  is the average reward, and n is a learning rate parameter. Note that
+ is actually the reward rate, and it is estimated by
+taking the ratio of the total reward so far, to the total
+where rimm (xn; an) is the total reward accumulated
+between the nth, and (n + 1)th decision epochs, and
+n is the corresponding transition time. Details of the
+algorithm are given in Figure 2. The learning rate n
+and the exploration rate pn are both decayed slowly
+to 0 (we used a Moody-Darken search-then-converge
+In most interesting SMDP's, such as the elevator problem [3], or the production inventory problem described
+below, the number of states is usually so large as to
+We use the notation u v as an abbreviation for the
+stochastic approximation update rule u (1 ? )u + v.
+1. Set decision epoch n = 0, and initialize action
+values Rn(x; a) = 0. Choose the current state x
+arbitrarily. Set the total reward cn and total time
+(a) With high probability pn, choose an action a
+that maximizes Rn (x; a), otherwise choose a
+(b) Perform action a. Let the state at the next
+decision epoch be z, the transition time be ,
+in this epoch as a result of taking action a in
+(d) In case a nonrandom action was chosen in
+(e) Set current state x to new state z, and n
+rule out tabular representation of the action values.
+In particular, the state space in our problem is a 10dimensional integer space. Following Crites and Barto
+[3], we also used a feed-forward net to represent the
+action value function. Equation 7 used in SMART is
+replaced by a step which involves updating the the
+weights of the net. So after each action choice, in step
+2(c) of the algorithm, the weights of the corresponding
+where (x; z; a; rimm; ) is the temporal di erence error
+rimm (x; a) ? n  + max Rn(z; b; ) ? Rn(x; a; )
+and  is the vector of weights of the net, n is the
+learning rate, and 5 Rn(x; a; ) is the vector of par-
+Figure 3: A production-inventory system with ve
+tial derivatives of Rn(x; a; ) with respect to each component of .
+This section presents the results of simulation experiments applying the SMART technique to the problem of optimal preventive maintenance in a discrete
+part production inventory system. Das and Sarkar [4]
+present a mathematical model of such a system for the
+case where only a single product is produced. Here we
+consider a similar system except that we add the extra
+complexity of multiple products, and multiple bu ers.
+The production system we consider is a discrete part
+production inventory system with a single machine capable of producing multiple product types to satisfy
+external demands (see Figure 3). The system also consists of inventories, or product bu ers, one for each
+product type, that store the appropriate products as
+their production cycle is completed. The bu ers for
+each product type have di ering, nite sizes. When
+the bu er for the product type currently being produced becomes full, the machine changes production
+mode, and begins producing another product type,
+chosen according to a xed product-switching policy.
+3 If the bu ers for all product types are full, the machine is said to go on vacation. During this period
+the machine does not perform any productions, and
+so does not age. Once the bu er for any product type
+falls below its maximum size, the machine again begins producing, commencing with that product type.
+A demand for a product type is satis ed if its bu er
+is not empty, otherwise the demand is lost.
+Failures usually cause long interruptions in the production process, depending on the repair time, and are
+expensive due to the monetary costs associated with
+We used a round-robin policy of going to the next product. We are currently also experimenting with learning the
+repair. Failures that occur at times when bu er levels
+are low, or bu ers are empty, tend to be extremely
+Failures may be avoided by performing maintenance
+on the machine. We assume that after a production
+is completed, the machine can either be maintained,
+or it can begin another production cycle. So, machine
+maintenance also interrupts production. In addition,
+maintenances have an associated cost. Fortunately in
+general, maintenance costs are usually less than repair costs, and we can assume that they take less time
+because they are planned. In addition, because maintenances are planned, it seems logical to perform them
+when the bu er levels are high. The idea is that even
+though production is interrupted, the service level (%
+of demands satis ed) can be kept high if the bu ers
+contain enough products to satisfy demand.
+The cost metric we chose is as follows. We use a reward
+rate (reward in $ incurred in unit time) performance
+where R is the total revenue from satis ed demand of
+all products, Cr is the total cost of repairs, Cm is the
+total cost of maintenances, and T is the total time.
+The system we consider consists of a machine capable
+of producing 5 di erent products. The main parameters for the system are estimated as follows:
+ Demand arrival process for each product i is Pois
+Production time for each product has a Gamma
+Time between failures has a Gamma (k; ) distribution
+Time required for maintenance has a Uniform
+Time for repair has a Gamma (r; ) distribution
+The system is simulated as a discrete-event system
+where the signi cant events are: demand arrival, failure, production completion, repair completion, and
+maintenance completion. An on-vacation event occurs
+when all bu ers reach their maximumlevel. When any
+bu er falls below its maximum level, an o -vacation
+event occurs, causing a decision epoch. Decision
+epochs also occur immediately following production
+completion, repair completion, and maintenance completion events. At these times, the agent may choose
+one of two actions: begin the next production cycle,
+The state of the system at any point in time is a 10dimensional vector of integers < P1 ; B1; : : :; P5; B5 >,
+where Pi is the number of products of type i produced
+since the last renewal (repair or maintenance), and Bi
+is the level of bu er for product i. The bu ers have
+a limited nite size, but the number of production cycles that can possibly be completed for each product
+depends on the time between failures, and the time
+for production of each product. Due to the uncertainty involved in both these factors, it is dicult to
+determine the exact size of the state space. Instead
+we observe the number of production runs completed
+for each product in a system which produces, without
+maintenance, until failure, and obtain a rough estimate. For the systems outlined in Tables 1 and 2,
+the number of production runs until failure for each
+product type is  102 . The maximum bu er sizes are
+ 10. . Therefore the size of the state space may be
+The costs incurred between decision epochs depends
+on the action taken, and the demands satis ed while
+that decision is carried out. For example, if the agent
+decides to perform a maintenance, then the cost incurred is equal to the total rewards from satis ed
+demands during the maintenance, minus the cost of
+maintenance. If the agent chooses to continue producing, and begins the next production cycle, then the
+costs incurred equals the the total rewards from satised demands until the next epoch, less the cost of a
+The size of the state space of this system is large
+enough to rule out use of a lookup table. Instead,
+two multi-layer feedforward neural nets are used to estimate the action values for each action (\produce"
+or \maintain"). We experimented with a number of
+di erent strategies for encoding the state to the neural net. The approach that produced the best results
+Figure 4: SMART is implemented using CSIM, a commercial discrete-event simulator.
+used a \thermometer" encoding with 41 input units.
+The status of each bu er was encoded using 4 input
+units, where 3 units were successively turned on in
+equally sized steps, and the last one was to used handle the \excess" value. Similarly, the \age" of the machine (actual simulation time since last renewal) was
+encoded using 21 input units. Here, the age was discretized in steps of 30, with the last unit being turned
+on proportional to the excess value beyond 600.
+We have implemented SMART using two commercial discrete-event simulators, ARENA and CSIM.
+ARENA is a graphical simulation language based on
+the well-known SIMAN modeling language [10]. The
+attraction of ARENA is that it allows a nice animation of the simulation, which is useful for understanding and demonstration purposes. However, the
+results described below were obtained with a simulation model implemented using CSIM, a C++ library
+of routines for creating process-oriented discrete-event
+models (see Figure 4). The key factor in why CSIM
+was chosen to implement the model was because of its
+eciency. The RL Agent is simply a procedure call
+from an event handler. When an event pertaining to
+the machine occurs (production completion, maintenance completion, repair completion, or o -vacation),
+action choice is required, and the RL code is invoked.
+We now provide detailed experimental results on using
+SMART with CSIM to optimize the production inventory system described above. Since we know of no
+optimal solution to this problem, we compare the results produced by SMART to two well-known heuristic
+procedures, COR and AR. A brief description of the
+Coecient of Operational Readiness (COR):
+The coecient of operational readiness (COR) heuristic [7] attempts to maximize the uptime of the machine. The coecient of operational readiness is given
+where uptime is de ned as the total time spent producing, and downtime is the time spent performing repairs
+and maintenances. The idea behind the heuristic is to
+determine a time interval between preventive maintenances m that will reduce the number of repairs, e ectively reducing the total down time, and maximizing
+the coecient of operational readiness. So we wish to
+where COR is the optimal coecient of operational
+readiness, m is the optimum maintenance interval,
+k is an estimate4 of the number of failures that occur during the interval m , and tmaint, and trepair are
+the average time for maintenances, and repairs respectively. COR can be determined by using a simple
+gradient descent algorithm to search for the optimum
+Age Replacement (AR): This heuristic has been
+studied in the context of machine maintenance by
+Schouten [5]. Here, the machine is maintained when
+it reaches age T. If the machine fails before time T,
+it is repaired. Both repair and maintenance renew the
+machine (i.e., reset its age to zero). Let Cm and Cr
+It can be shown that the average number of failures
+does not exceed k = 1?FF((mm) ) , where F (m ) is the value of
+the cumulative distribution function at m of the random
+denote the cost of maintenance and repair respectively.
+CT = (x+trepair )f(x)dx+ (T +tmaint)f(x)dx;
+where f(x) is the probability density function of the
+time to machine failure. Also the expected cost of a
+using the nets to choose actions. That is, there was no
+exploration, and no learning. At each decision epoch,
+the agent simply chose the action with the maximum
+R-value. The results were averaged over thirty runs,
+each of which ran for 2:5  106 time units of simulation
+time, or approximately 1 million decision epochs.
+Figures 5 show the learning curve for the rst system,
+as well as a plot showing the performance of the xed
+SMART agent (no learning) versus the AR and COR
+The average cost, using the renewal reward theorem,
+is  = EC=CT. Maintenance age T is selected such
+For the experiments described in this paper, we used
+10 di erent systems which conform to the model described above, by varying the input parameters (see
+Table 1). For all systems considered, the parameters concerning the ve di erent product types are as
+Table 1: Production inventory system parameters. In
+all these systems, the repair cost was xed at 5000.
+SMART was trained on all systems for ve million
+decision epochs. In most cases, the learning converged
+in much less time. After training, the weights of the
+neural net were xed, and the simulation was rerun,
+Table 2: Production inventory product parameters
+Figure 5: Results for production-inventory system 1.
+The graph on the top shows the SMART learning
+curve. The graph on the bottom shows the medianaveraged cost rate, over 30 runs, incurred by the
+( xed) policy learned by SMART, compared to the
+Table 3 compares the average cost rate incurred by the
+policy learned by SMART versus that for the COR
+and AR heuristics, for all 10 systems. In all cases,
+SMART produced signi cantly 5 better results than
+The di erences are all signi cant at the 95% con dence
+Table 3: Comparison of the average reward rate incurred by SMART vs. the two heuristics for the production inventory problem.
+TOTAL VACATION TIME VERSUS MAINTENANCE COST
+In order to understand what the SMART algorithm
+has actually learned, we analyzed the results in greater
+detail. We summarize the main ndings of our study
+here. Figure 6 compares the sensitivity of SMART vs.
+AR and COR, as the cost of maintenance is increased
+from a low value of 500 to a high value of 1200 (for the
+10 systems in the above table). Note that the COR
+heuristic is essentially insensitive to maintenance cost.
+The total number of failures and maintenance actions,
+as well as the total vacation time (when the product
+bu ers are full), for COR is essentially at. This insensitivity clearly reveals the reason for the lackluster
+performance of the COR heuristic (e.g. as shown in
+Note that AR demonstrates a linear dependence on
+maintenance cost. As the cost of maintenance is increased, the number of maintenance actions performed
+by AR linearly decreases, whereas the number of failures and the vacation time correspondingly increases.
+Now, compare these with the situation for SMART,
+which demonstrates a somewhat nonlinear dependence
+on maintenance cost. The number of maintenance actions performed by SMART exhibits a nonlinear decrease as maintenance cost is increased. Similarly, the
+number of failures and vacation time increases nonlinearly as maintenance cost is increased. At the highest
+maintenance cost, SMART incurs almost 50% percent
+more failures than AR, whereas at the lowest maintenance cost, the number of failures incurred by SMART
+Figure 6: These graphs compare the sensitivity of AR,
+COR, and SMART to the maintenance cost. All plots
+are averaged over 30 runs of 1 million decision epochs.
+The graphs show that COR is insensitive to maintenance cost. AR exhibits a linear dependence, whereas
+SMART exhibits a nonlinear dependence. This suggests that SMART is more exible than both the AR
+and COR heuristics in nding appropriate maintenance schedules as the costs are varied. Note that
+when maintenance costs are high, the policy learned
+by SMART causes more failures because it cuts back
+on maintenance. Nevertheless, the average reward rate
+of SMART remains higher than COR or AR over all
+This paper describes a new average reward reinforcement learning technique (SMART) that nds gainoptimal policies in continuous-time semi-Markov decision problems. SMART was implemented and tested
+on two commercial discrete-event simulators, ARENA
+and CSIM. The e ectiveness of the SMART algorithm
+was demonstrated by applying it to a large scale unreliable production inventory system. To our knowledge,
+this is the rst large-scale study of average-reward reinforcement learning.
+This work is part of a major cross-disciplinary study
+of industrial process optimization using reinforcement
+learning. This paper only discussed a production system with a single machine, but real factories are much
+more complex systems consisting of numerous interrelated subsystems of machines [6]. In these cases,
+instead of having a single agent governing the whole
+system, it may be more appropriate to design a hierarchical control system where each subsystem is controlled using separate agents. The elevator problem
+[3] is a simpli ed example of such a multi-agent system, where the agents are homogeneous and control
+identical subsystems. Global optimization in a system
+consisting of heterogeneous agents poses a signi cantly
+challenging problem. Sethi and Zhang [13] present an
+in-depth theoretical study of hierarchical optimization
+for complex factories. We are currently exploring such
+hierarchical extensions of SMART for more complex
+factory processes, such as jobshops and owshops.
+This research is supported in part by an NSF CAREER Award Grant No. IRI-9501852 (to Sridhar Mahadevan).
+[1] D.P. Bertsekas. Dynamic Programming and Optimal Control. Athena Scienti c, Belmont, Massachusetts, 1995.
+[2] S.J. Bradtke and M. Du . Reinforcement learning methods for continuous-time markov decision
+problems. In Advances in Neural Information
+Processing Systems 7. MIT Press, Cambridge,
+[3] R. Crites and A. Barto. Improving elevator performance using reinforcement learning. In Neural
+Information Processing Systems (NIPS). 1996.
+[4] T. Das and S. Sarkar. Optimal preventive maintenance in a production inventory system. Submitted.
+[5] F. Van der Duyn Schouten and S. Vanneste.
+Maintenance optimization of a production system
+with bu er capacity. European Journal of Operational Research, 82:323{338, 1995.
+[6] S. Gershwin. Manufacturing Systems Engineering. Prentice Hall, 1994.
+[7] I.B. Gertsbakh. Models of Preventive Maintenance. North-Holland, Amsterdam, Netherlands,
+[8] A. Law and W. Kelton. Simulation Modeling and
+Analysis. McGraw-Hill, New York, USA, 1991.
+[9] S. Mahadevan. Average reward reinforcement
+learning: Foundations, algorithms, and empirical
+results. Machine Learning, 22:159{196, 1996.
+[10] D. Pegden, R. Sadowski, and R. Shannon. Introduction to Simulation using SIMAN. McGraw
+[11] M. L. Puterman. Markov Decision Processes. Wiley Interscience, New York, USA, 1994.
+[12] A. Schwartz. A reinforcement learning method
+for maximizing undiscounted rewards. In Proceedings of the Tenth International Conference on
+Machine Learning, pages 298{305. Morgan Kauf-
+[13] S. Sethi and Q. Zhang. Hierarchical Decision
+Making in Stochastic Manufacturing Systems.
+[14] S. Singh. Reinforcement learning algorithms for
+average-payo Markovian decision processes. In
+Proceedings of the 12th AAAI. MIT Press, 1994.
+[15] R.S. Sutton. Learning to predict by the methods
+of temporal di erences. Machine Learning, 3:9{
+[16] P. Tadepalli and D. Ok. Auto-exploratory
+average-reward reinforcement learning. In Proceedings of the Thirteenth AAAI, pages 881{887.
+[17] C.J. Watkins. Learning from Delayed Rewards.
+PhD thesis, Kings College, Cambridge, England,

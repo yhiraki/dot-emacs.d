@@ -1,0 +1,773 @@
+This article was downloaded by: [138.232.1.196] On: 14 December 2017, At: 09:59
+Publisher: Institute for Operations Research and the Management Sciences (INFORMS)
+Publication details, including instructions for authors and subscription information:
+Solving Semi-Markov Decision Problems Using Average
+Tapas K. Das, Abhijit Gosavi, Sridhar Mahadevan, Nicholas Marchalleck,
+Tapas K. Das, Abhijit Gosavi, Sridhar Mahadevan, Nicholas Marchalleck, (1999) Solving Semi-Markov Decision Problems Using
+Average Reward Reinforcement Learning. Management Science 45(4):560-574. https://doi.org/10.1287/mnsc.45.4.560
+Full terms and conditions of use: http://pubsonline.informs.org/page/terms-and-conditions
+This article may be used only for the purposes of research, teaching, and/or private study. Commercial use
+or systematic downloading (by robots or other automatic processes) is prohibited without explicit Publisher
+approval, unless otherwise noted. For more information, contact permissions@informs.org.
+The Publisher does not warrant or guarantee the article’s accuracy, completeness, merchantability, fitness
+for a particular purpose, or non-infringement. Descriptions of, or references to, products or publications, or
+inclusion of an advertisement in this article, neither constitutes nor implies a guarantee, endorsement, or
+support of claims made of that product, publication, or service.
+Please scroll down for article—it is on subsequent pages
+INFORMS is the largest professional society in the world for professionals in the fields of operations research, management
+For more information on INFORMS, its publications, membership, or meetings visit http://www.informs.org
+Downloaded from informs.org by [138.232.1.196] on 14 December 2017, at 09:59 . For personal use only, all rights reserved.
+Tapas K. Das • Abhijit Gosavi • Sridhar Mahadevan • Nicholas Marchalleck
+Department of Industrial and Management Systems Engineering, University of South Florida, Tampa, Florida 33620
+Department of Industrial and Management Systems Engineering, University of South Florida, Tampa, Florida 33620
+Department of Computer Science, Michigan State University, East Lansing, Michigan 48824
+Cybear, Inc., 2709 Rocky Pointe Drive, Tampa, Florida 33607
+large class of problems of sequential decision making under uncertainty, of which the
+underlying probability structure is a Markov process, can be modeled as stochastic
+dynamic programs (referred to, in general, as Markov decision problems or MDPs). However,
+the computational complexity of the classical MDP algorithms, such as value iteration and
+policy iteration, is prohibitive and can grow intractably with the size of the problem and its
+related data. Furthermore, these techniques require for each action the one step transition
+probability and reward matrices, and obtaining these is often unrealistic for large and
+complex systems. Recently, there has been much interest in a simulation-based stochastic
+approximation framework called reinforcement learning (RL), for computing near optimal
+policies for MDPs. RL has been successfully applied to very large problems, such as elevator
+scheduling, and dynamic channel allocation of cellular telephone systems.
+In this paper, we extend RL to a more general class of decision tasks that are referred to as
+semi-Markov decision problems (SMDPs). In particular, we focus on SMDPs under the
+average-reward criterion. We present a new model-free RL algorithm called SMART (SemiMarkov Average Reward Technique). We present a detailed study of this algorithm on a
+combinatorially large problem of determining the optimal preventive maintenance schedule
+of a production inventory system. Numerical results from both the theoretical model and the
+(Semi-Markov Decision Processes (SMDP); Reinforcement Learning; Average Reward; Preventive
+A wide variety of problems in diverse areas, ranging
+from manufacturing to computer communications,
+involve sequential decision making under uncertainty.
+A subset of these problems, which are amenable to
+Markovian analysis (Markov chains, in particular), are
+referred to as Markov decision problems (MDPs).
+MDPs have been studied extensively in the stochastic
+dynamic programming literature. Some examples of
+such problems that can be studied under the stochastic
+Management Science/Vol. 45, No. 4, April 1999
+Copyright © 1999, Institute for Operations Research
+Downloaded from informs.org by [138.232.1.196] on 14 December 2017, at 09:59 . For personal use only, all rights reserved.
+Dynamic Programming (DP) framework are inventory
+management, preventive maintenance, polling systems in computer networks, AGV path planning,
+repair allocation, call routing in cellular telephone
+networks, job shop scheduling, et cetera.
+MDPs, developed by Bellman (1957) and extended by
+Karlin (1955), Howard (1960), Blackwell (1965), to
+name a few, is quite extensive and rigorous. Well
+known algorithms, such as value iteration, policy
+iteration, and linear programming find optimal solutions (i.e., optimal policies) of MDPs. However, the
+main drawback of these classical algorithms is that
+they require, for every decision, computation of the
+corresponding one step transition probability matrix
+and the one step transition reward matrix using the
+distributions of the random variables that govern the
+stochastic processes underlying the system. For complex systems with large state spaces, the burden of
+developing the expressions for transition probabilities
+and rewards could be enormous. Also, the computational requirement of storing these matrices (e.g., of
+size 10 11 for the problem considered later in this paper)
+would make the problem intractable. This is commonly referred to as curse of dimensionality in the DP
+literature. In the absence of better approaches, problem-specific heuristic algorithms that attempt to reach
+acceptable near-optimal solutions are often used.
+Computer simulation-based reinforcement learning
+(RL) methods of stochastic approximation, such as
+decentralized learning automata (Wheeler and Narendra 1986), method of temporal differences, TD(l)
+(Sutton 1988), and Q-learning (Watkins 1989) have
+been proposed in recent years as viable alternatives
+for obtaining near-optimal policies for large scale
+MDPs with considerably less computational effort
+than what is required for DP algorithms. RL has two
+distinct advantages over DP. First, it avoids the need
+for computing the transition probability and the reward matrices. The reason being that it uses discrete
+event simulation (Law and Kelton 1991) as its modeling tool, which requires only the probability distributions of the process random variables (and not the
+one-step transition probabilities). Secondly, RL methods can handle problems with very large state spaces
+Management Science/Vol. 45, No. 4, April 1999
+(e.g., with 10 12 states) since its computational burden is
+related only to value function estimation, for which it
+can effectively use various function approximation
+methods (such as regression and neural networks).
+Most of the published research in reinforcement
+learning is focused on the discounted sum of rewards
+as the optimality metric (Kaelbling et al. 1996, Van Roy
+et al. 1997). However, in many engineering design and
+decision making problems, performance measures are
+not easily described in economic terms, and hence it
+may be preferable to compare policies on the basis of
+their time averaged expected reward rather than their
+expected total discounted reward. Some examples of
+such measures are average waiting time of a job in the
+queue, average number of customers in the system,
+average throughput of a machine, and average percentage of satisfied demands in an inventory system.
+Applications of RL under the average reward criterion
+have been limited to MDPs only with a small state
+Bradtke and Duff (1995) discuss how RL algorithms
+developed for MDPs can be extended to generalized
+versions of MDPs, in particular semi-Markov decision
+problems (SMDPs), under the discounted cost criterion. Recently, applications of RL have been extended
+to semi-Markov decision problems with the discounted cost criterion. These include a discounted RL
+(Q-learning) algorithm for elevator control (Crites and
+Barto 1996) and a Q-learning algorithm for dynamic
+channel allocation in cellular telephone systems
+(Singh and Bertsekas 1996). The latter presents experimental results for a special case of SMDPs, namely
+continuous-time Markov decision problems (CTMDPs), where the sojourn times at the decision making
+states are always exponentially distributed with parameters dependent on the initial state.
+In this paper, we first discuss the basic concepts
+underlying the reinforcement learning approach and
+its roots in algorithms such as Bellman’s value iteration algorithm (1957) and Sutton’s temporal difference
+(TD) algorithm (1988). We then present an average
+reward RL algorithm, called SMART (semi-Markov
+average reward technique), for semi-Markov decision
+problems (SMDPs). The algorithm presented here can
+be applied to a much larger class of problems for
+Downloaded from informs.org by [138.232.1.196] on 14 December 2017, at 09:59 . For personal use only, all rights reserved.
+which stochastic approximation algorithms based on
+average reward reinforcement learning have not been
+We present experimental results from the proposed
+algorithm via a challenging problem scenario involving optimal preventive maintenance of a production
+inventory system. The optimal results, obtained numerically, from its semi-Markov model for a set of
+problems (with a limited state space) are compared
+with the results obtained from the SMART algorithm.
+The speed and accuracy of the SMART algorithm is
+extremely encouraging. To demonstrate the performance of RL algorithm for problems with a large state
+space, we subsequently expand the preventive maintenance problem to represent a more real life situation
+(with state space of 7 3 10 7 3 |R 1|), and compare the
+results from SMART with those obtained from two
+heuristic algorithms that are based on well-known
+Many sequential decision making problems have underlying probability structures that can not be characterized solely by Markov chains; for example, systems
+with sojourn times that are drawn from general probability distributions having parameters dependent on
+(perhaps) both the initial and final states of the sojourns. Such problems can often be modeled as semiMarkov decision Processes (SMDPs) embedded on
+continuous time semi-Markov processes (SMPs).
+Suppose, for each n [ 1 (the set of integers), a
+random variable X n takes values in a countable set %
+and a random variable T n takes values in R 1 5 [0, `],
+such that 0 5 T 0 # T 1 # T 2 . . . . The stochastic
+process (X, T) 5 {X n , T n : n [ 1} is said to be a
+Markov renewal process (MRP) with state space %,
+when for all n [ 1, j [ %, and t [ R 1 , the following
+P$X n11 5 j, T n11 2 T n # t|X 0 , . . . , X n T 0 , . . . , T n %
+Define L 5 sup n T n , then L is the lifetime of (X, T). If
+% is finite and the Markov chain X 5 {X n : n [ 1} is
+irreducible, then L 5 1` almost surely. Define a
+process Y 5 {Y t : t [ R 1 }, where Y t 5 X n , if T n # t
+, T n11 . The process Y is called a semi-Markov process
+Clearly, for SMDPs, decision epochs are not restricted to discrete time epochs (like in MDPs) but are
+all time epochs at which the system enters a new
+decision making state. (Decisions are only made at
+specific system state change epochs that are relevant
+to the decision maker.) That is, the system state may
+change several times between two decision epochs.
+We will refer to the Markov renewal process embedded at the decision making epochs of Y as the decision
+process, and the complete process Y as the natural
+process. The decision process can be formalized as
+follows. Let T̂ m , m [ 1, be the time of the mth
+decision epoch of Y and the system state immediately
+following T̂ m be X̂ m . Define X̂ 5 {X̂ m : m [ 1} and T̂
+5 {T̂ m : m [ 1}. Then we have the decision process
+(SMDP) as (X̂, T̂) 5 {(X̂ m , T̂ m ) : m [ 1}. For an SMDP,
+we assume that sojourn times are finite and a finite
+number of transitions take place within a finite time
+period. For any state i, ! i denotes the set of possible
+actions, and ø ! i 5 ! (the action space). For the
+Markov chain X̂ underlying the SMDP, and for any
+action a [ !, there is a state transition matrix P(a)
+5 {P ij (a) : i, j [ %}, where P ij (a) represents the
+probability of moving from state i to state j under
+The reward structure for SMDPs that includes most
+applications can be given as follows. For i [ %, when
+action a [ ! i is chosen, a lump sum reward of k(i, a)
+is received. Further accrual of reward occurs at a rate
+c(l, i, a), for all l [ %, as long as the natural process
+Y occupies state l during a transition of the embedded
+decision process from state i caused by action a. That
+is, between two transitions of the decision process, the
+continuous reward accrual rate may vary with the
+natural process. The total expected reward between
+mth and (m 1 1)st decision epochs (r(i, a)), when the
+system state at the mth epoch is i and action taken is a,
+Management Science/Vol. 45, No. 4, April 1999
+Downloaded from informs.org by [138.232.1.196] on 14 December 2017, at 09:59 . For personal use only, all rights reserved.
+Clearly for stationary processes, the sojourn time
+T̂ m11 2 T̂ m depends only on the state-action pair (i, a)
+at the starting epoch, and is independent of m. Let, for
+i [ % and a [ ! i , y(i, a) denote the expected length
+of time until the next decision epoch, given that action
+a is chosen when the system state at the mth decision
+5 P$X̂ m11 5 j, T̂ m11 2 T̂ m # t|X̂ m 5 i, A m 5 a%.
+Then the gain (average reward rate) of an SMDP
+starting at state i and continuing with policy p can be
+given (using the renewal reward theorem (Ross 1983)
+In this paper, we focus on problems with average
+reward performance measure, where, for every stationary policy, the embedded Markov chain X̂ has a
+unichain transition probability matrix (i.e., every stationary deterministic policy p*, which is a mapping p* :
+% 3 !, has a single recurrent class plus a possibly
+empty set of transient states, Puterman 1994, p. 348).
+Under this assumption, the expected average reward
+of every stationary policy does not vary with the
+where y(i, a) is the average sojourn time of the SMDP in
+state i under action a, and the “greedy” policy p* formed by
+selecting actions that maximize the right-hand side of the
+A proof of the above theorem can be found in
+A value iteration algorithm (similar to the one for
+MDPs) can be derived from the above Bellman equation for solving SMDPs. We note, however, that the
+immediate reward r(i, a) calculation for SMDPs is
+quite difficult, since it requires calculation of the
+limiting probabilities of the natural process (Y) in
+which SMDPs are embedded. In addition to the above
+mentioned difficulty, value iteration sweeps through
+the whole state space and simultaneously updates the
+values of all the states in every iteration. This creates a
+considerable computational challenge for value iteration, especially for problems with large state spaces.
+Even under favorable conditions, convergence of the
+average reward value iteration algorithm is very slow.
+Also, since v n (the value at the nth iteration) diverges
+linearly in n, the average reward value iteration
+becomes numerically unstable. A relative value iteration algorithm given below (White 1963) avoids the
+difficulty with divergence, but does not enhance the
+1. Select v 0 [ V, choose k* [ %, specify e . 0, and
+2.1. Bellman Optimality Equation for Average
+The Bellman optimality equation for SMDPs can be
+Theorem 1. For any finite unichain SMDP, there
+exists a scalar g* and a value function R* satisfying the
+Management Science/Vol. 45, No. 4, April 1999
+3. If sp(v m11 2 v m ) , e , go to step 4. Otherwise
+increment m by 1 and return to step 2. sp denotes
+span, which for a vector v is defined as span(v)
+5 max i[% v(i) 2 min i[% v(i) (Puterman 1994).
+4. For each i [ %, choose e-optimal action in steady
+Downloaded from informs.org by [138.232.1.196] on 14 December 2017, at 09:59 . For personal use only, all rights reserved.
+This algorithm differs from value iteration in that it
+normalizes the value by subtracting a constant after
+each iteration. The relative value iteration is a synchronous algorithm, in that it conducts an exhaustive
+sweep over the whole state space at each step. An
+alternative approach is to update the value of one state
+at a time. This can be accomplished by using an
+asynchronous version of the relative value iteration
+along with system simulation. The simulation provides, at every state transition epoch, the new state
+whose value is updated. The values of the other states
+2.3. Asynchronous Relative Value Iteration
+1. Select v 0 [ V, choose any k* [ %, specify e . 0,
+2. Let the system state (obtained from simulation)
+at the mth decision making epoch be i [ %. Compute
+3. Update the values at the (m 1 1)st epoch for all
+Steps 4 and 5 are same as steps 3 and 4 of the
+It can be shown very easily that this algorithm can
+diverge; a learning-based version of this algorithm has
+no known counter example showing divergence
+(Abounadi 1998). In the learning-based version, the
+step (2) of the asynchronous relative value iteration
+where a is the learning rate with a small starting value
+which is decayed suitably to zero. Many variants of
+the relative value iteration algorithm, given above,
+have been used to develop reinforcement learning
+algorithms (Abounadi 1998, Bertsekas and Tsitsiklis
+Reinforcement learning (RL) is a way of teaching
+agents (decision makers) optimal control policies. This
+is accomplished by assigning rewards and punishments for their actions based on the temporal feedback
+obtained during active interactions of the learning
+agents with dynamic systems. Such an incremental
+learning procedure specialized for prediction and control problems was developed by Sutton (1984), and is
+referred to as temporal-difference (TD) methods.
+Any learning model basically contains four elements which are the environment, the learning agent,
+a set of actions, and the environmental response
+(sensory input). The learning agent selects an action
+for the system which leads the system along a unique
+path until the system encounters another decision
+making state. At that time, the system needs to consult
+with the learning agent for the next action. During a
+state transition, the agent gathers sensory inputs from
+the environment, and from it derives information
+about the new state, immediate reward, and the time
+spent during the state-transition. Using this information and the algorithm, the agent updates its knowledge base and selects the next action. This completes
+one step in the iteration process. As this process
+repeats, the learning agent continues to improve its
+A reinforcement learning model is depicted in Figure 1. On the nth step of interaction, based on the
+system state x n 5 i and the action values R(i) 5 {R(i,
+k) : k [ ! i } for the k available actions, the agent takes
+an action a. The system evolves stochastically in
+response to the input state-action (i, a) pair, and
+results in responses concerning the next system state
+x n11 and the reward (or punishment) r( x n , x n11 )
+obtained during the transition. These system responses serve as the sensory inputs for the agent.
+From the input x n11 , the function I helps the agent in
+Management Science/Vol. 45, No. 4, April 1999
+Downloaded from informs.org by [138.232.1.196] on 14 December 2017, at 09:59 . For personal use only, all rights reserved.
+perceiving the new system state. (The perceived new
+state could be different from x n11 only for partially
+observable processes.) Using the information about
+the new state (from I) and the sensory input r( x n ,
+x n11 ), the reinforcement function R accomplishes the
+following: 1) calculates the new action value R(i, a) for
+the previous state action pair ( x n 5 i, A n 5 a) and 2)
+updates the value function for action a. For a greedy
+policy, at any state i, the decision maker chooses the
+action with the highest (or lowest for minimization)
+Initially, the action values for all state-action pairs
+are assigned arbitrary equal values (e.g., zeros). When
+a system visits a state for the first time, a random
+action gets selected because all the action values are
+equal. As the system revisits the state, the learning
+agent selects the action based on the current action
+values which are no longer equal. For ergodic processes, the states continue to be revisited and consequently the agent gets many opportunities to refine
+the action values and the corresponding decision
+making process. Sometimes, the learning agent
+chooses an action other than that suggested by the
+greedy policy. This is called exploration. As the good
+actions are rewarded and the bad actions are punished
+over time, for every state, the action values of a
+smaller subset (one or more) of all the available actions
+Management Science/Vol. 45, No. 4, April 1999
+become dominant. The learning phase ends when a
+clear trend appears, and the dominant actions constitute the decision policy vector.
+A detailed account of average-reward reinforcement learning (ARL) can be found in Mahadevan
+(1996). For an overview of work in reinforcement
+learning using the discounted criterion, see the excellent survey paper by Kaelbling (1996).
+Note that both the synchronous and the asynchronous
+algorithms for value iteration are model based, since
+they require the one step transition probabilities
+(P ij (a)s, for all i, j [ % and a [ !). The model-based
+RL algorithms estimate the transition probabilities
+from sample paths produced during system simulation, which, as mentioned in §1, requires only the
+probability laws governing the random variables associated with the system. These probabilities are used
+to estimate the action values using variants of asynchronous value iteration (e.g., Sutton 1991). A key
+strength of RL is that it can also be applied to infer
+optimal policies without the need for transition probabilities; such algorithms are referred to as model-free
+algorithms. The model-free algorithms can infer the
+action values for all state-action pairs (on which
+the policy depends) directly from the sample paths
+generated by simulation. Some applications of such
+model-free methods can be found in studies, such as
+controlling a team of elevators in a multi-storey building (Crites and Barto 1996), NASA space shuttle
+job-shop scheduling (Zhang and Dietterich 1995), and
+dynamic channel allocation in cellular telephone systems (Singh and Bertsekas 1996).
+A problem with reinforcement learning methods is
+how to assign temporal credit (utility value or reinforcement) to an action that might have far-reaching effects.
+It is often practically impossible to wait infinitely long
+to truly assess the credit of an action. Using the
+insights from value iteration, RL algorithms assign
+credit to a state-action pair based on the immediate
+reward and the action value of the next state. A subset
+of the temporal difference algorithms, referred to as
+TD(l) in RL literature (Sutton and Barto 1998), forms a
+class of TD(0) algorithms, where l 5 0 indicates a
+single step updating. In TD(0) algorithms, assigning
+Downloaded from informs.org by [138.232.1.196] on 14 December 2017, at 09:59 . For personal use only, all rights reserved.
+utility value (reinforcement) to an action is done based
+on one-step performance only. We describe the action
+value updating rule of an infinite horizon discounted
+MDP (Sutton 1990) to build intuition for the value
+updating part of the SMART algorithm described
+later. Suppose that when action a is chosen in state i,
+it results in immediate reward r imm(i, a, j) and the
+system makes a transition to state j. Then, value
+updating for the state-action pair (i, a) is done as
+1 a @r imm~i, a, j! 1 g max R~j, b! 2 R old~i, a!#,
+where g is the discounting factor and a is the learning
+rate. It may be noted that the first two terms within the
+square brackets of the above equation constitute an
+estimate of the action value for taking action a in state
+i. This approach of assessing action value from a
+single sample path is known as Robbins-Monro stochastic approximation (Robbins and Monro 1951). We
+also note that the component within square brackets of
+the updating equation (i.e., newly assessed action
+value minus the old action value of a state-action pair)
+denotes the one step temporal difference TD(0), of
+which a small (a) fraction is added to the old action
+The above updating equation can be rewritten as
+written as R*(i) 5 max a R*(i, a). The average reward
+Bellman equation for SMDPs (5) can be rewritten in
+3.2. SMART: A Model-Free Average Reward RL
+Let R*(i, a) be the expected average adjusted value of
+taking action a in state i, and then continuing infinitely
+by choosing actions optimally. Then R*(i), the value of
+state i when the initial action is also optimal, can be
+Then, we have p *(i) 5 argmax a R*(i, a) as an optimal
+policy. Note that, since the R( z , z ) function makes the
+action explicit, the SMART algorithm estimates R
+values on-line using a temporal difference method,
+and then uses them to define a policy. The value of the
+state-action pair (i, a) visited at the mth decision
+making epoch is updated by SMART as follows.
+Let simulation of action a in state i result in a system
+transition to state j at the subsequent decision epoch,
+R new~i, a! 5 ~1 2 a m !R old~i, a! 1 a m $r imm~i, j, a!
+where r imm(i, j, a) is the actual cumulative reward
+earned between two successive decision epochs starting in state i (with action a) and ending in state j
+respectively. t (i, j, a) is the actual sojourn time
+between the decision epochs, and a m is a learning rate
+parameter for updating of the action value of a stateaction pair of the mth decision epoch. Note that g m is
+the reward rate (or, gain, as defined in (4)), which is
+estimated by taking the ratio of the total reward
+earned and the total simulation time till the mth
+The SMART algorithm, which is developed next, is
+based on the average reward Bellman equation, and is
+similar in spirit to the TD(0) approach in its action
+Details of the algorithm are given in Figure 2. A
+small percentage of the time, decisions other than that
+with the highest reinforcement value were taken. This
+is referred to in the RL literature as exploration (Bertsekas and Tsitsiklis 1996). Exploration plays an important role in ensuring that all the states of the underlying Markov chain are visited by the system and all the
+potentially beneficial actions in each state are tried
+out. When all the system states are visited, the Markov
+Management Science/Vol. 45, No. 4, April 1999
+Downloaded from informs.org by [138.232.1.196] on 14 December 2017, at 09:59 . For personal use only, all rights reserved.
+SMART: A Model-free Algorithm for Computing Gain-Optimal
+1. Let time step m 5 0. Initialize action values R old(i,
+a) 5 R new(i, a) 5 0 for all i [ % and a [ ! i . Set the
+cumulative reward c new 5 0, the total time be t new
+5 0, and the reward rate g new 5 0. Also, initialize
+the input parameters for the Darken-Chang-Moody
+(DCM) scheme ( a 0 , a t , p 0 , and p t ). Start system
+If the system state at the time step m is i [ %,
+(a) Calculate p m and a m using the DCM scheme.
+(b) With high probability 1 2 p m , simulate an
+action a [ ! i that maximizes R new(i, a), otherwise choose a random (exploratory) action
+(c) Simulate the chosen action. Let the system state
+at the next decision epoch be j. Also let t (i, j, a)
+be the transition time, and r imm(i, j, a) be the
+immediate reward earned as a result of taking
+(e) In case a nonexploratory action was chosen in
+• Update total reward c new 4 c new 1 r imm(i, j, a)
+• Update total time t new 4 t new 1 t (i, j, a)
+• Update average reward g new 4 c new/t new
+(g) Set current state i to new state j, and m 4 m
+chain remains irreducible. It is also required that each
+state is visited infinitely often, which is a precondition
+for asymptotic convergence of the learning algorithms. The learning rate a m and the exploration rate
+p m are both decayed slowly to 0 according to a
+Darken-Chang-Moody search-then-converge procedure (1992) as follows. Note that, in the expression
+Management Science/Vol. 45, No. 4, April 1999
+below, Q can be substituted by a and p for learning
+3.2.1. Reinforcement Value Function Approximation in SMART. In most real life SMDPs, the number
+of states is usually so large as to rule out tabular
+representation of the reinforcement action values. Following Crites and Barto (1996), we used a feedforward net to represent the action value function.
+Equation (7) used in SMART is replaced by a step
+which involves updating the weights of the net. So
+after each action choice, in Step 2(c) of the algorithm,
+the weights of the corresponding action net are updated, using the well-known backpropagation algorithm, as follows:
+D f 5 a m e ~i, j, a, r imm~i, j, a!, f !¹ f R m ~i, a, f !,
+where e (i, j, a, r imm(i, j, a), f ) is the temporal
+The symbol f denotes the vector of weights of the net,
+a m is the learning rate used at the mth iteration, and
+¹ f R m (i, a, f ) is the vector of partial derivatives of
+R m (i, a, f ) with respect to each component of f.
+We first consider an unreliable discrete part production inventory system with limited state space, that is
+modeled as an SMDP (Das and Sarkar 1999). Numerical results for the problem obtained from both the
+theoretical model and SMART are presented and
+compared. For the expanded problem, we use results
+from two well-designed heuristic approaches to compare with SMART results.
+Downloaded from informs.org by [138.232.1.196] on 14 December 2017, at 09:59 . For personal use only, all rights reserved.
+The production inventory system considered here
+produces a single product type to satisfy an exogenous demand process. To hedge against the uncertainties in both the production and the demand processes,
+provision for an inventory buffer of the product
+between the system and the demands is kept. Demands that arrive when the inventory buffer is empty
+are not backordered and are, therefore, lost. (The
+assumption here is that the customers are not loyal
+and thus use alternate manufacturing facilities to meet
+It seems logical that some form of preventive maintenance of the system may improve the performance
+of the production process by avoiding unscheduled
+and usually long interruptions caused by the system
+failures. However, since preventive maintenance also
+interrupts the production process, the important question is: Should the system be maintained? If so, how often?
+The issue of determining the optimal level of preventive maintenance that maximizes the system performance is addressed here. The measure of system
+performance considered for optimization is the average reward G ($/unit time), which is a function of the
+service level (% of satisfied demands), numbers of
+repair and maintenance, and the cost parameters of
+the system. The average reward rate is obtained as the
+rate of revenue earned from demand serviced minus
+the repair cost rate and the maintenance cost rate. This
+performance measure is used as the basis to optimally
+determine the maintenance criteria, which can be
+stated as: If the current inventory is i and the production
+count (number of products made since the last repair/
+maintenance) is at least N i , then maintain the machine.
+4.1.1. Numerical Results on the Single Product
+Problem. A fairly general numerical example problem is considered as a vehicle for obtaining optimal
+results that can be used to compare with the results
+obtained from the SMART algorithm. The characteristics and the input parameters of the example problem are as follows. The demand arrival process (with
+batch size of 1) is Poisson (g). The unit production
+time, machine repair time, and the time between
+machine failures are gamma distributed with parameters (d, l ), (r, d ), and (k, m ) respectively. The time for
+preventive maintenance has a uniform (a, b) distribution. The buffer inventory is maintained by an (S 5 3,
+s 5 2) policy. The system stops production when the
+buffer inventory reaches S (such a period of inaction is
+often referred to as server vacation in queueing literature), and the production resumes when the inventory
+drops to s. During its vacation, the system stays in
+cold standby mode and does not age or fail. Preventive maintenance decision is made only at the completion epoch of a part production.
+The following values of the input parameters were
+used: g 5 0.10, d 5 8.0, l 5 0.80, k 5 8.0, m 5 0.80,
+a 5 5.0, b 5 20.0, r 5 2.0, d 5 0.01. Table 1 shows
+various other combinations of the input parameters.
+For each of the nine parameter sets (shown in Table 1),
+the cost parameters considered were: C d (net revenue
+per demand serviced) 5 $1, C r (cost per repair) 5 $5,
+The optimal results (average reward) for the singleproduct inventory system obtained numerically from
+the theoretical model and SMART are summarized in
+Table 2. Results clearly show that the reinforcement
+learning algorithm (SMART) performs extremely well
+(the mean values lie within 4% of the optimal values).
+To further demonstrate the power of the SMART
+algorithm, we extended the system to accommodate
+five (5) different products each having its own separate (S i , s i : i 5 1, . . . , 5) inventory buffer. (See Figure
+3.) Each product has its separate Poisson demand
+Input Parameters for Nine Sample Numerical Examples with
+Management Science/Vol. 45, No. 4, April 1999
+A Production-Inventory System with Five Product Types
+Downloaded from informs.org by [138.232.1.196] on 14 December 2017, at 09:59 . For personal use only, all rights reserved.
+Note: The results were averaged over 40 runs, where each simulation run
+arrival process, and random production times. The
+service policy used is as follows. The machine continues to produce a product type until the buffer reaches
+level S i . At that time the machine has two options,
+either to begin production of another product type, or
+to take a vacation (period of no production). The first
+option is selected if one or more product buffers are at
+or below their s i levels. When more than one buffer
+needs replenishment, buffer with the lowest index (i)
+is given priority. The machine vacation ends as soon
+as any of the buffer levels drop to s i .
+The state of the system is an 8-tuple consisting of the
+buffer levels of all five products, the age of the
+production system since the last maintenance/repair,
+machine operating condition, and the product type
+that the machine is currently set up for. Hence, the
+cardinality of the state space for the five-product
+problem can be approximated by |%| 5 (5N s ) i51
+1 1) 1 5) 3 |R |, where N s 5 4 indicates the
+number of operating status of the machine (e.g., on
+vacation, working, under maintenance, and under
+repair). |R 1| represents the state space of the system
+age. Hence, for a problem with maximum buffer sizes
+(S i for i 5 1, . . . , 5) of 30, 20, 15, 15, and 10, the state
+space is approximately 7 3 10 7 3 |R 1|. If |R 1| is
+approximated by 10 3 intervals, then the state space is
+4.2.1. Input Parameters. Ten different numerical
+Management Science/Vol. 45, No. 4, April 1999
+variants of the five-product problem, that are given in
+Table 3, were considered to study SMART performance. The variations among the parameter values
+are highlighted in the table containing the parameters.
+For all 10 systems, product-related parameters were
+4.2.2. SMART Implementation. The production
+inventory system was simulated, using a discrete
+event simulator (CSIM), where the significant events
+were demand arrival, failure, production completion,
+repair completion, and maintenance completion. Except for demand arrival, all the remaining event
+epochs were considered to be decision epochs.
+The size of the state space of this system is large
+enough to rule out explicit storage of the action values
+for each action-state pair. Hence, two multilayer feedforward neural nets were used to approximate the
+action values for each action (“resume production/
+vacation” or “start maintenance”). Baird (1995)
+showed that, instead of gradient descent-based neural
+network, a residual gradient method should be used
+for RL applications. However, for our problem, gradient descent-based method converged for all the cases
+studied. We experimented with a number of different
+strategies for encoding the state to the neural net. The
+approach that produced the best results used a “thermometer” encoding with 41 input units. The status of
+Downloaded from informs.org by [138.232.1.196] on 14 December 2017, at 09:59 . For personal use only, all rights reserved.
+Note: In all these systems, the repair cost was fixed at $5000.
+each buffer was encoded using four input units, where
+three units were successively turned on in equally
+sized steps, and the last one was used to handle the
+“excess” value. Similarly, the “age” of the machine
+(actual simulation time since last renewal) was encoded using 21 input units. Here, the age was discretized in steps of 30, with the last unit being turned
+on proportional to the excess value beyond 600. The
+constants used in the Darken-Chang-Moody decaying
+scheme for the learning and exploration rates were
+chosen as a 0 5 p 0 5 0.1, and a t 5 p t 5 10 11 .
+Gertsbakh (1976), is as follows. Let T be the operational time after which the system is preventively
+maintained. Then the expected number of failures (k)
+occurring over the interval T of operation time can be
+shown to not exceed F(T)/(1 2 F(T)), where F[ is
+the cumulative probability distribution of the time to
+failure of the machine. Define a maintenance cycle
+time as CT 5 T 1 kT r 1 T m , where T r and T m are the
+mean time required for repair and maintenance respectively. Then the operational availability of the
+machine in a maintenance cycle is given as COR
+5 T/CT. The value of T that maximizes COR is
+selected. An assumption made in this heuristic is that
+repairs carried out after failures are of minimal type
+(i.e., repairs do not change the age of the system). Only
+after maintenance (done after the system has operated
+for a time T) is the system age reset to zero.
+Age Replacement (AR) Heuristic. The age replacement (AR) heuristic, that we have developed based on
+the renewal reward theorem, can be given as follows.
+The system is maintained when it reaches age T. If a
+failure occurs before time T, it is repaired. Both repair
+and maintenance renew the machine (i.e., resets its age
+to zero). Let C m and C r denote the cost of maintenance
+and repair, respectively. Then the renewal cycle time
+4.2.3. Heuristic Methods. Two different heuristic algorithms were developed in order to benchmark the
+performance of the SMART algorithm on the five-product inventory problem. We describe the heuristics next.
+where f( x) is the probability density function of the
+time to machine failure (X). The expected cost (EC) of
+a renewal cycle is given as EC 5 P(X . T)C m 1 P(X
+, T)C r . Then the average cost (r), as per renewal
+reward theorem, is given as: r 5 EC/CT. Maintenance
+age T is selected by solving a constrained optimization
+For the numerical example problems, a gradient
+descent optimization algorithm (available within
+MATLAB software) was used to obtain the maintenance interval (T).
+COR Heuristic. The COR (coefficient of operational readiness) heuristic, which was adopted from
+4.2.4. Results and Analysis. Tables 3 and 4 give
+the input parameters for the ten numerical example
+Management Science/Vol. 45, No. 4, April 1999
+Downloaded from informs.org by [138.232.1.196] on 14 December 2017, at 09:59 . For personal use only, all rights reserved.
+Results for Production-Inventory System 1. The Graph on the
+Top Shows the SMART Learning Curve. The Graph on the
+Bottom Shows the Median-averaged Cost Rate, over 30 Runs,
+Incurred by the (Fixed) Policy Learned by SMART, Compared
+of Table 3, and also a plot showing the performance of
+the SMART agent (after learning) versus the AR and
+COR heuristics. Table 5 compares the average reward
+rate accrued by the policy learned by SMART versus
+that for the COR and AR heuristics for all 10 systems.
+A negative average reward implies cost. In all cases,
+SMART produced significantly better results than
+problems. SMART was trained on all systems for five
+million decision epochs. In most cases, the learning
+converged in much less time. After training, the
+weights of the neural nets were fixed, and the simulation was rerun using the nets (with fixed weights) to
+choose actions without any exploration or learning.
+The results (average rewards) were averaged over
+thirty runs, each of which ran for 2.5 3 10 6 time units
+of simulation time, or, approximately one million
+Figure 4 shows the learning curve for the system #1
+Management Science/Vol. 45, No. 4, April 1999
+4.2.5. Sensitivity Analysis. Since there are several
+factors that seem to affect the maintenance decision, it
+is imperative for the maintenance planner to know
+what factors are most critical to influencing the average reward. To address this issue, we designed a
+simple fractional factorial experiment (Taguchi’s L8
+array (1994)) for analyzing the variances resulting
+from the key factors affecting the average reward. We
+studied four factors, namely maintenance time, fixed
+cost of maintenance, repair time, and fixed cost of
+repair. The L8 experiment allows up to four main
+factors and three interactions to be tested. We only
+tested the above four main factors and used the other
+columns to estimate the error. The two levels of the
+four factors that were considered are given in Table 6.
+Other parameters of the problem were kept the same
+as for system 1 of Table 3. At 90% confidence level,
+only the fixed cost of maintenance was found to
+The differences are all significant at the 95% confidence level using
+Downloaded from informs.org by [138.232.1.196] on 14 December 2017, at 09:59 . For personal use only, all rights reserved.
+Levels of the Factors Used in Variance Analysis
+lier version of this algorithm with some preliminary
+results originally appeared in Mahadevan et al. (1996).
+SMART was implemented and tested on a commercial
+discrete-event simulator, CSIM. The effectiveness of
+Sensitivity of AR, COR, and SMART to the Maintenance Cost
+ANOVA: Analysis Is Performed at 90 Percent Confidence
+be significant in affecting the response (average reward). The analysis of variance (ANOVA) is shown in
+As a follow up of the variance analysis, we studied
+the sensitivities of the SMART, AR, and COR algorithms with respect to the fixed cost of maintenance.
+The sensitivities were measured via factors, namely 1)
+the total number of maintenance actions and 2) the
+total number of failures, and 3) total vacation time of
+the system. For System 2 of Table 3, maintenance cost
+was varied from a low value of $500 to a high value of
+$1200 (Systems 2 through 10 of Table 3). Figure 5
+shows the sensitivity plots. The COR heuristic algorithm does not consider cost at all, hence its performance did not vary with maintenance cost. This
+insensitivity is the primary reason for the lackluster
+performance of the COR heuristic (as shown in the
+bottom graph in Figure 4). The AR algorithm shows a
+linear trend. The SMART algorithm shows an adaptive trend, as expected, which partly explains its
+superior performance (shown in Figure 4).
+This paper presents an average reward reinforcement
+learning algorithm (SMART) that finds near-optimal
+policies for semi-Markov decision problems. An ear-
+Management Science/Vol. 45, No. 4, April 1999
+Downloaded from informs.org by [138.232.1.196] on 14 December 2017, at 09:59 . For personal use only, all rights reserved.
+the SMART algorithm was demonstrated by first
+comparing its results with optimal results (for a small
+problem), and then applying it to a large-scale problem and comparing its results with those obtained
+from two good heuristic methods. The results obtained are quite encouraging, and, to our knowledge,
+this study is the first large-scale implementation of
+average-reward reinforcement learning. This work is
+part of a major ongoing cross-disciplinary study of
+industrial process optimization using reinforcement
+learning. For more complex systems consisting of
+numerous interrelated subsystems of machines (Gershwin 1994), instead of having a single agent governing the whole system, it may be more appropriate to
+design a hierarchical control system where each subsystem is controlled using separate agents. The elevator problem (Crites and Barto 1996) is a simplified
+example of such a multiagent system, where the
+agents are homogeneous and control identical subsystems. Global optimization in a system consisting of
+heterogeneous agents poses a significantly challenging problem. Sethi and Zhang (1994) present an indepth theoretical study of hierarchical optimization
+for complex factories. We are currently exploring such
+hierarchical extensions of SMART for more complex
+factory processes, such as jobshops and flowshops. An
+application of SMART on a transfer line can be found
+in Mahadevan and Theocharous (1998). Our recent
+work also includes development of a TD(l) extension
+of the SMART algorithm (named l-SMART) and its
+implementation on a dynamic seat allocation problem
+faced by the airline industries (Gosavi et al. 1999). 2
+This research is supported in part by NSF Grant # DMI-9500289 (to
+Tapas K. Das) and NSF CAREER Award Grant # IRI-9501852 (to
+Abounadi, J. 1998. Personal communication via email.
+1998. Stochastic approximation for non-expansive maps: application to q-learning algorithms. Unpublished Ph.D. Thesis.
+Department of Electrical Engineering and Computer Science,
+Baird, L. C. 1995. Residual algorithms: reinforcement learning with
+function approximation. Proc. Twelfth Internat. Conf. Machine
+Learning, Morgan Kauffman, San Mateo, CA.
+Bellman, R. E. 1957. Dynamic Programming. Princeton University
+Management Science/Vol. 45, No. 4, April 1999
+Bertsekas, D., J. Tsitsiklis. 1996. Neuro-Dynamic Programming.
+Blackwell, D. 1965. Discrete dynamic programming. Ann. Math. Stat.
+Bradtke, S. J., M. Duff. 1995. Reinforcement learning methods for
+continuous-time Markov decision problems. Advances in Neural
+Information Processing Systems 7. MIT Press, Cambridge, MA.
+Crites, R., A. Barto. 1996. Improving elevator performance using reinforcement learning. D. S. Touretzky, M. C. Mozer, M. E. Hasselmo, eds.
+Advances in Neural Information Processing Systems 8. MIT Press, Cambridge, MA. 1017–1023.
+Darken, C., J. Chang, J. Moody. 1992. Learning rate schedules for
+faster stochastic gradient search. D. A. White, D. A. Sofge, eds.
+Neural Networks for Signal Processing 2—Proc. 1992 IEEE Workshop. IEEE Press, Piscataway, NJ.
+Das, T., S. Sarkar. 1999. Optimal preventive maintenance in a
+production inventory system. IIE Trans. 31, (in press).
+Gershwin, S. 1994. Manufacturing Systems Engineering. Prentice Hall,
+Gertsbakh, I. B. 1976. Models of Preventive Maintenance. NorthHolland, Amsterdam, Netherlands.
+Gosavi, A., N. Bandla, T. K. Das. 1999. Dynamic airline seat
+allocation among different fare classes. Working paper. Department of Industrial & Management Systems Engineering, University of South Florida, Tampa, FL.
+Howard, R. 1960. Dynamic Programming and Markov Processes. MIT
+Kaelbling, L. P., M. L. Littman, A. W. Moore. 1996. Reinforcement
+learning: a survey. J. Artificial Intelligence Res. 4.
+Karlin, S. 1955. The structure of dynamic programming models.
+Law, A. M., W. D. Kelton. 1991. Simulation Modeling and Analysis.
+Mahadevan, S. 1996. Average reward reinforcement learning: foundations, algorithms, and empirical results. Machine Learning 22
+, N. Marchalleck, T. K. Das, A. Gosavi. Self-improving factory
+simulation using continuous-time average-reward reinforcement learning. Proc. Thirteenth Internat. Conf. on Machine Learning. Morgan Kaufmann, San Mateo, CA, 202–210.
+, G. Theocharous. Optimizing production manufacturing using
+reinforcement learning. Proc. Eleventh Internat. FLAIRS Conf.
+Puterman, M. L. 1994. Markov Decision Processes. Wiley Interscience,
+Robbins, H., S. Monro. 1951. A stochastic approximation method.
+Ross, S. M. 1983. Stochastic Processes. John Wiley & Sons, New York.
+Sethi, S., Q. Zhang. 1994. Hierarchical Decision Making in Stochastic
+Manufacturing Systems. Birkhauser, Boston, MA.
+Singh, S., D. Bertsekas. 1996. Reinforcement learning for dynamic
+channel allocation in cellular telephone systems. Neural Information and Processing Systems MIT Press, Cambridge, MA.
+Downloaded from informs.org by [138.232.1.196] on 14 December 2017, at 09:59 . For personal use only, all rights reserved.
+Sutton, R. S., A. G. Barto. 1998. Reinforcement Learning. MIT Press,
+Sutton, R. S. 1984. Temporal Credit Assignment in Reinforcement
+Learning. PhD thesis. University of Massachusetts, Amherst,
+1988. Learning to predict by the methods of temporal differences. Machine Learning 3 9 – 44.
+1990. Integrated architectures for learning, planning, and
+reacting based on approximating dynamic programming. Proc.
+7th International Workshop on Machine Learning. Morgan Kaufmann, San Mateo, CA, 216 –224.
+1991. DYNA, an integrated architecture for learning, planning, and reacting. Working Notes of the AAAI Spring Symposium on Integrated Intelligent Architectures and SIGART Bull. 2
+Tadepalli, P., D. Ok. 1996. Scaling up average reward reinforcement
+learning by approximating the domain models and the value
+function. Proc. Thirteenth Internat. Machine Learning Conf. Morgan Kaufmann, San Mateo, CA, 471– 479.
+Taguchi, G. 1994. System of Experimental Design, Volume 1. Kraus
+International Publications, White Plains, NY. (American Supplier Institute, Inc., Dearborn, MI).
+Van Roy, B., D. P. Bertsekas, Y. Lee, J. N. Tsitsikilis. 1997. A Neuro-Dynamic
+Programming Approach to Retailer Inventory Management. MIT Technical Report, Massachusetts Institute of Technology.
+Watkins, C. J. 1989. Learning from Delayed Rewards. PhD thesis. Kings
+Wheeler, R., K. Narenda. 1986. Decentralized learning in finite markov
+chains. IEEE Trans. Automatic Control 31 (6) 373–376.
+White, D. J. 1963. Dynamic programming, Markov chains, and the
+method of successive approximations. J. Math. Anal. Appl. 6
+Zhang, W., T. Dietterich. 1995. A reinforcement learning approach
+to job-shop scheduling. Proc. 13th IJCAI.
+Accepted by Linda V. Green; received September 1997. This paper has been with the authors 2 months for 2 revisions.
+Management Science/Vol. 45, No. 4, April 1999

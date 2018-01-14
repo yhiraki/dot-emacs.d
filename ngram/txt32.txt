@@ -1,0 +1,274 @@
+int. j. prod. res., 2003, vol. 41, no. 17, 4011–4024
+Using Functional Virtual Population as assistance to learn scheduling
+knowledge in dynamic manufacturing environments
+DER-CHANG LIy*, LONG-SHENG CHENy and YAO-SAN LINy
+When a scheduling environment is static and system attributes are deterministic,
+a manufacturing schedule can be obtained by applying analytical tools such
+as mathematical modelling technology, dynamic programming, the branchand-bound method or other developed searching algorithms. Unfortunately,
+a scheduling environment is usually dynamic in a real manufacturing world.
+A production system may vary with time and require production managers to
+change schedule repeatedly. Therefore, the main aim here was to ﬁnd a scheduling
+method that could reduce the need for rescheduling. An approach called
+Functional Virtual Population was proposed as assistance to learn robust
+scheduling knowledge for manufacturing systems under rationally changing
+environments. The used techniques include machine learning with artiﬁcial
+neural networks and IF–THEN scheduling rules. To illustrate the study in
+detail, a simulated ﬂexible manufacturing system consisting of four machines,
+four parts, one automatic guided vehicle and eight buﬀers was built as the foundation for learning the concept. Also, Pythia software (a back-propagation-based
+neural networks) was employed as the learning tool in the learning procedure.
+Scheduling, i.e. being part of production planning and control, plays an important role in the entire manufacturing process. When a scheduling environment is
+static and the system attributes are deterministic, the optimal schedule can be
+obtained by applying analytical tools such as mathematical modelling technology,
+dynamic programming, branch-and-bound methods or other developed searching
+algorithms. Unfortunately, scheduling the environment is usually dynamic in a real
+manufacturing world. A production system can vary with time and require that the
+scheduling method is ﬂexible for modiﬁcation or change during production (Chen
+and Yih 1996). A scheduling method having this property is thus referred to here as a
+dynamic scheduling method. The IF–THEN-type scheduling system is typical since it
+adapts the scheduling decisions to the production conditions.
+It is the development of artiﬁcial intelligence techniques in recent decades that
+has provided such an eﬀective means of tackling some of the dynamic scheduling
+problems. According to a survey of artiﬁcial intelligence-based scheduling systems,
+applying machine-learning technologies to acquire dynamic scheduling knowledge is
+one useful way (Li et al. 1994, 1997, Sim et al. 1994, Li and She 1996, Niyogi et al.
+1998, Westkämper et al. 1998). An inductive learning method is widely applied to
+such problems. Research including ID3 (Quinlan 1996) and back-propagation
+yDepartment of Industrial Management Science, National Chen Kung University,
+1 University Road, Tianan, 70101 Taiwan, ROC.
+*To whom correspondence should be addressed. Lidc@mail.ncku.edu.tw
+International Journal of Production Research ISSN 0020–7543 print/ISSN 1366–588X online # 2003 Taylor & Francis Ltd
+artiﬁcial neural networks are the well-known methods of learning from samples
+(Sabuncuoglu and Touhami 2002). In addition, many other researches that apply
+machine-learning technology to dynamic scheduling problems (e.g. Sarin and
+Salgame 1990) used a knowledge-based method to build one interactive and realtime scheduling system. Nakasuka and Yoshida (1992) proposed a learning-aided
+dynamic scheduler (LADS) to solve scheduling problems.
+Similarly, the aimed problem in the approach is about the scheduling diﬃculty
+caused by system variation which resulted from a change of manufacturing conditions. This situation happens often in industry. On this situation, learned knowledge
+is usually not applicable while the production system has changed signiﬁcantly.
+Again, since the existing scheduling knowledge is no longer applicable to the current
+system situation owing to a change of manufacturing conditions, it is necessary to
+change scheduling knowledge. In other words, theoretically speaking, the need is to
+reset or at least revise the domains of system attributes for the learning of new
+scheduling knowledge. Among ways to implement this work, using the new manufacturing data directly to build new scheduling knowledge is one of the easiest
+approaches. However, this approach would result in a severe frequent rescheduling
+strait when a manufacturing system is in a highly dynamic environment.
+This study tries to redeﬁne the domains of manufacturing attributes, instead of
+simply applying the new data, by expanding the original domain ranges of system
+attributes. Besides, in the learning procedure, the new data are used to contain the
+expansion of domain ranges. The created domain is called Functional Virtual
+Population (FVP) on which the virtual data are generated for learning new scheduling knowledge. The particular kind of population has a relatively smaller size compared with the one built with regular statistics theory since it is merely used for a
+speciﬁc function, say for a particular scheduling criterion. In all, brieﬂy, this research
+proposes an FVP concept to tackle the problem of a changing manufacturing environment. In FVP, the word ‘functional’ refers to a speciﬁc purpose of learning and
+the phrase ‘virtual population’ refers to the extension of simulated samples.
+To illustrate the concept in detail, a simpliﬁed FMS was designed as the base to
+generate simulated samples and be used as a neural networks software (Pythia) to
+implement the learning processes. The research systematically generates virtual samples for the learning system; in the mean time, we searched for the smaller number of
+samples to use by monitoring learning accuracy. The proposed method could be
+diﬃcult in the long-term theoretical study but is relatively practical and easy at this
+stage such that is applicable in industry. With this method, the performance of the
+learning system was drastically improved using the virtual population, and the
+learned scheduling knowledge is believed to be robust.
+PROMODEL II software is used to build an FMS simulation model (ﬁgure 1).
+Its operating assumptions are as follows:
+Capacity of load/unload station is not limited.
+Only one part can be taken by one automatic guided vehicle (AGV) at one time.
+Each machine can only process one part at one time.
+Tools and ﬁxers are enough to process all parts.
+Processing time of machine includes set-up time.
+Machining sequence and processing times (min)
+Processing sequence and processing times of parts.
+. Breakdown of machines and AGV is not considered.
+. If there is more than one AGV in the FMS, the nearest AGV will take the part.
+The preset processing times and sequence of operations are shown in table 1. The
+due date for each arrived part is set randomly within three times the sum of the
+2.2. Attributes determining the dynamic of the production system
+In addition to the system entities (parts, machines, processing times, sequences),
+three system control attributes are deﬁned to describe the operating conditions of
+. Buﬀer size: capacities of in- and out-buﬀers (places).
+. Arrival rate of parts: frequency of parts incoming to the FMS (units/shift, two
+By referring to the system entities and control attributes, one can conﬁgure a whole
+picture of this production model and processing the simulation of its operation.
+An enumerative procedure is applied to search for the best scheduling rule of
+the production system. Frequently used performance indexes for FMS are minimizing load imbalances, minimizing machine duplication and maximizing resource
+utilization (Srinivasan and Moon 1997). Here the third kind of index (machine utility)
+is selected arbitrarily to evaluate production performance and, for the purpose of
+being simple and clear, three basic dispatching rules are set in the scheduling rulebase for choosing with. In the situation where there is more than one part in the inbuﬀer waiting to be processed, one of the following dispatching rules will be applied to
+decide which machine should be used to process it. The used dispatching rules are as
+Through a simulation and complete search, the best scheduling rules are found
+(table 2). To explain the ﬁrst case in table 2 as an example, it is transferred into
+The best scheduling rule should be SPT and the production performance is as
+Original system data and its best scheduling rules.
+Owing to ease of access, Pythia software (Neural Network Designer ß 2000
+by Runtime Software) acquired the scheduling knowledge. Note that the software
+is just one of the learning tools available and not necessarily the only choice. An
+arbitrary and simple knowledge-based learning system is thought good enough to ﬁt
+the needs of this research. The learning phase for dynamic scheduling is described as
+Search for the best scheduling rule for each sample.
+Apply the software to the generated production samples.
+Following the four steps, ﬁrst all attributes in the case are assumed to be independent of each other. After setting the domain range for each attribute, samples are
+then generated randomly within the set domain ranges (a duplicated sample can be
+generated). Twenty original data are generated (table 2) and a four-level structured
+neural network (ﬁgure 2) is adopted in the learning process. The number of neurons
+includes three input neurons, 10 hidden neurons and one output neuron. (Pythia
+software has a built-in tool called Evolutionary Optimizer for generating neural
+networks on a given training pattern set.) A similar artiﬁcial neural networks
+learning system is also used to ﬁnd the relationship between the input and output
+data sets (Posey 1996, Lin and Liu 1997).
+Artiﬁcial neural networks learning model generated by Pythia software.
+3. Development of the functional virtual population (FVP)
+Assuming that because the quantity of demand has increased and making the
+production conditions increasingly tighter, the production manager has reasons to
+require a veriﬁcation of the existing scheduling knowledge. Thus, the 20 new system
+After encoding, the old scheduling knowledge was tested using new system data.
+The testing result is shown in table 4. Accuracy was as low as 32.75% for the new
+system samples. Therefore, creating a functional virtual population to update the
+existing scheduling knowledge is considered to be needed.
+3.2. Expanding domains of system attributes
+In the procedure for generating a FVP, a one-dimensional moving strategy was
+used to vary the domain value of attributes. The three simple searching strategies:
+right searching, left searching and mixed searching, were considered in the act of
+changing the domain range of the attributes. They were ﬁgured as follows:
+where R is the domain range and d is the expanding incrementation.
+The procedures for developing an FVP are constructed in the following steps:
+Step 1. Choose one system attribute, select the moving direction and determine the
+increment to expand the domain range (d ) —around
+range is suggested — to obtain new domain range R , (R ¼ R  d).
+Step 2. Generate a number of virtual samples within the new domain range.
+Step 3. Train the neural network using the generated virtual samples and monitor
+the learning accuracy with the obtained new system data (table 3); repeat
+Steps 2 and 3 a few times and go to Step 4 if the learning accuracy reaches its
+peak and starts declining, otherwise keep repeating Steps 2 and 3.
+Learning accuracy of the new system data.
+Step 4. Fix the determined domain range and try other number of virtual samples in
+Step 5. Try other expanding directions for the selected attribute and run Steps 2–4.
+Step 6. Iterate the above procedure (Steps 1–5) for the next attribute in the
+production system until all attributes are tested completely.
+Step 7. Form the integrated FVP and the optimal sample size.
+Note that for a feasible solution, the used increment for domain range and sample
+size expansion is somewhat directed by experience. It should be a decision of a
+Step 1. Attribute 1 (buﬀer size) is selected (the other two attributes are ﬁxed) and the
+right direction is chosen arbitrarily to expand the domain range of attribute
+Step 2. Generate 20 virtual samples within the new domain range and increase the
+Step 3. Learn the scheduling knowledge using Pythia software and test the accuracy
+Nine experiments were done (table 5) and from the data a domain range {7–14}
+with sample size 60 had the highest accuracy rate, 50.78 %.
+Step 4. Following the expansion, we search further for other possible sample sizes
+(other than 60) that yield as high learning accuracy as 60 does on the domain
+range (7–14). In table 6, the sample size is still decided to be 60 since the
+accuracy cannot be improved signiﬁcantly when the size is increased or
+decreased. Table 6 shows that increasing sample size would not guarantee
+a better learning accuracy in this experiment.
+Step 5. Implement left moving for attribute 1. After doing a similar procedure (Steps
+2–5) for attribute 1, table 7 indicates that when the range of attribute 1 has
+reached 4, accuracy is 26.65 %. Besides, for believing that the machine utility
+cannot be improved by further reducing the buﬀer size, the searching ceases
+on 4 and we conclude that left expanding is a failure for attribute 1.
+Conclusively, after processing both left and right expansions for attribute
+Results of right expansion on attribute 1 (buﬀer size).
+Samples size of attribute 1 with domain range {7–14}.
+Results of right expansion on attribute 2.
+Samples size of attribute 2 with domain range {20–40}.
+1, data show that the domain range {7–14} and sample size 60 are the best
+Step 6. The next test is on attribute 2, i.e. arrival rate. The initial attribute is in the
+domain range {20–30}. This paper uses the right searching rule ﬁrst and the
+increment is set as 10. When the range of the attribute is expanded each time,
+the number of samples is also increased by 20. Nine experiments were run
+and the results obtained are shown in table 8. Note that the domain range
+{20–40} reaches the best accuracy rate of 56.27% and others were about
+60%. When arrival rate is over 40, further expanding the range would not
+promote the learning accuracy further. As for number of samples, the
+number of samples on the domain range of {20–40} are increased and
+decreased and the data are obtained (table 9). Note that the suitable attribute domain range is {20–40} with a sample size of 40.
+Following the same procedure as for attribute 1, left searching on attribute 2 did
+not improve the learning accuracy. Comparing tables 9 and 10 shows that right
+expansion is better than left expansion for attribute 2.
+Finally, while working on attribute 3, the domain range of attributes 1 and 2 were
+ﬁxed. The initial attribute was domain range {50–70}. The right searching rule is
+Table 10. Results of left expansion on attribute 2.
+Table 11. Results of right expanding on attribute 3 (speed of AGV).
+Table 12. Sample size of attribute 3 on domain range {50–110} and its accuracy.
+again taken for expansion and the increment is set to 20 (table 11). When the domain
+range of attribute 3 is more than 110, the accuracy rate becomes stable. As for the
+sample size, for domain range {50–110} there are eight further experiments (table 12).
+The selected sample size was 60 with a learning accuracy of 64.31%.
+Step 7. After processing of these three system attributes is ﬁnished, the results are
+. Attribute 1: range {7–14}, sample size 60, accuracy 50.78%.
+. Attribute 2: range {20–40}, sample size 40, accuracy 56.27%.
+. Attribute 3: {50–110}, sample size 60, accuracy 64.31%.
+Based on the results listed above for the three attributes, 60 data are generated
+accordingly for the learning system to evaluate the performance of integrated FVP.
+In the integrated FVP, which no longer ﬁxes any attribute, samples are generated
+Table 14. Samples size and accuracy of integrated FVP.
+simultaneously using the determinate domain ranges of the three attributes. They are
+To ﬁnd the economical sample size for the learning system, identical learning
+procedures are repeated six times using the above 60 samples. Ten data are then used
+for ﬁrst-time learning and 20 data for second-time learning, and so on by adding 10
+data for the learning system each time until learning works are completed six times.
+Each time in the learning, the new system data are used (table 3) to test the learned
+scheduling rules. The obtained results (repeating the above procedures 10 times and
+having the average and standard deviations) are shown in table 14. It shows that
+when the sample size reaches 40, learning performance becomes stable and is acceptable. Increasing sample size would not be needed while the used samples have
+provided suﬃcient information to the learning system.
+An artiﬁcial neural network was applied to learn scheduling knowledge. The
+result was proved to be no longer accurate since the production system had changed
+(the learning accuracy was as low as 32.75% when applying the new system data to
+the learned scheduling knowledge). This scenario is popular in the industries and the
+work of rescheduling needs intuitive thought. To prevent implementing this work
+too often, it is suggested that an FVP concept ﬁnds a new scheduling knowledge that
+is relatively robust. The domain range is systematically expanded for each system
+attribute to generate virtual samples for the learning system and to search for the
+The experiment successfully developed an FVP that dramatically improved the
+learning accuracy using samples as low as 40. The result strongly encourages the
+notion that the idea is worth applying to industry since the proposed method was
+A few discussion points remain to be answered:
+. Other than for the universal or general purpose, the FVP is developed for a
+particular manufacturing criterion. It might not be a regular estimation of a
+real population from the viewpoint of statistics. It might be a biased estimation
+of the real population and also has greater chance to be only part of the real
+FVP could change or move around in the real population when the system
+performance index is changed (the used criterion is machine utilization in this
+research). Thus, for diﬀerent index, one might need a diﬀerent FVP.
+Other than applying the systematic way proposed here to ﬁnd the scheduling
+knowledge, a more eﬃcient approach to form a feasible FVP is using the
+background knowledge obtained from analysing the new system data or a
+so-called directed searching algorithm. This suggestion can help to save
+time, but the result might not be so robust.
+In the experiment, right expansions happen to be better than left expansions.
+This result is believed not to be a general case but because the used example
+assumes that the system changes for increasing market demand. In another
+case where the system changes by many factors, it is believed that the left
+expansion would be as signiﬁcant as the right expansion. In a case in which
+left and right expansions both contribute to better learning performance, the
+mix expansion might be needed in the learning procedure.
+In the authors’ experience, variance of learning accuracy is high when using
+neural networks to learn scheduling knowledge. Learning accuracy varies
+between softwares and also between runs when using software.
+The research was supported by the National Science Council Taiwan, ROC.
+CHEN, C. C. and YIH, Y., 1996, Identifying attributes for knowledge-based development in
+dynamic scheduling environments. International Journal of Production Research, 34,
+LI, D.-C., HAN, K.-L. and TONG, K. Y., 1996, A strategy for evolution of algorithms to
+increase the computational eﬀectiveness of NP-hard scheduling problems. European
+Journal of Operational Research, 88, 404–412.
+LI, D.-C. and SHE, I.-S., 1994, Using unsupervised learning technologies and simulation
+analysis to induce scheduling knowledge for ﬂexible manufacturing systems.
+International Journal of Production Research, 32, 2187–2199.
+LI, D.-C., WU, C. and TONG, K., 1997, Using an unsupervised neural network and decision
+tree as knowledge acquisition tools for FMS scheduling. International Journal of
+LIN, Z. C. and LIU, Q.-Y, 1997, Selection of coordinate measuring machines by the neural
+network method. International Journal of Advanced Manufacturing Technology, 13,
+NAKASUKA, S. and YOSHIDA, T., 1992, Dynamic scheduling system utilizing machine learning
+as a knowledge acquisition tool. International Journal of Production Research, 30,
+NIYOGI, P., GIROSI, F. and POGGIO, T., 1998, Incorporating prior information in machine
+learning by creating virtual samples. Proceedings of the IEEE, 86, 275–298.
+POSEY, C. L., 1996, Neural networks applied to knowledge acquisition in the student model.
+QUINLAN, J. R., 1996, Learning decision tree classiﬁers. ACM Computing Surveys, 28(1), 71–
+SABUNCUOGLU, I. and TOUHAMI, S., 2002, Simulation metamodelling with neural networks: an
+experimental investigation. International Journal of Production Research, 40, 2483–2505.
+SARIN, S. C. and SALGAME, R. R., 1990, Development of a knowledge-based system for
+dynamic scheduling. International Journal of Production Research, 28, 1499–1512.
+SIM, S. K., YEO, K. T. and LEE, W. H., 1994, An expert neural network system for dynamic job
+shop scheduling. International Journal of Production Research, 32, 1759–1773.
+SRINIVASAN, M. and MOON, Y. B., 1997, A framework for a gold-driven approach to group
+technology applications using conceptual clustering. International Journal of Production
+WESTKÄMPER, E., PIRRON, J. and SCHMIDT, T., 1998, Simulation based on learning methods.
+Journal of Intelligent Manufacturing, 9(4), 331–338.

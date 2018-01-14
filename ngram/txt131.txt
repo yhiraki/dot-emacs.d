@@ -1,0 +1,446 @@
+Expert Systems with Applications 39 (2012) 8736–8743
+Contents lists available at SciVerse ScienceDirect
+journal homepage: www.elsevier.com/locate/eswa
+Reinforcement learning approach to goal-regulation in a self-evolutionary
+Moonsoo Shin a, Kwangyeol Ryu b, Mooyoung Jung c,⇑
+Department of Industrial and Management Engineering, Hanbat National University, San 16-1, Duckmyoung-dong, Yuseong-gu, Daejeon 305-719, Republic of Korea
+Department of Industrial Engineering, Pusan National University, San 30, Jangjeon-dong, Geumjeong-gu, Busan 690-735, Republic of Korea
+School of Technology Management, Ulsan National Institute of Science and Technology (UNIST), Banyeon-ri 100, Ulsan 689-798, Republic of Korea
+Up-to-date market dynamics has been forcing manufacturing systems to adapt quickly and continuously
+to the ever-changing environment. Self-evolution of manufacturing systems means a continuous process
+of adapting to the environment on the basis of autonomous goal-formation and goal-oriented dynamic
+organization. This paper proposes a goal-regulation mechanism that applies a reinforcement learning
+approach, which is a principal working mechanism for autonomous goal-formation. Individual goals
+are regulated by a neural network-based fuzzy inference system, namely, a goal-regulation network
+(GRN) updated by a reinforcement signal from another neural network called goal-evaluation network
+(GEN). The GEN approximates the compatibility of goals with current environmental situation. In this
+paper, a production planning problem is also examined by a simulation study in order to validate the proposed goal regulation mechanism.
+Ó 2012 Elsevier Ltd. All rights reserved.
+Up-to-date market dynamics has been strongly demanding ﬂexibility and responsiveness from the manufacturing systems. Actually, the manufacturing enterprises strive to facilitate continuous
+and quick adaptation to the constantly varying customer requirements and the competitive environment. The conventional manufacturing systems, however, are not suited for the ever-changing
+environment because of their rigid organizational structure and
+preoccupied static goals (Frayret, D’Amours, & Montreuil, 2004;
+Heragu, Graves, Kim, & Onge, 2002; Renna & Ambrico, 2011). In order to ensure their competitive power, the manufacturing systems
+should have an advanced capability to dynamically organize their
+production resources and autonomously formulate their goals. Furthermore, a manufacturing system is required to have a capability
+of facilitating self-evolution according to its environmental situation (Shin, Mun, & Jung, 2009a).
+In keeping with this line of thought, various multi-agent systems (MAS) have been proposed in the literature, including MetaMorph (Maturana, Shen, & Norrie, 1999), MetaMorph II (Shen,
+Maturana, & Norrie, 2000), PROSA (Van Brussel, Wyns, Valckenaers, Bongaerts, & Peeters, 1998), ADACOR (Leitão & Restivo,
+2006), and FrMS (Ryu, Yücesan, & Jung, 2006), and r-FrMS (Shin,
+Mun, Lee, & Jung, 2009b). The agent-based manufacturing systems
+⇑ Corresponding author. Tel.: +82 52 217 1011; fax: +82 52 217 1058.
+E-mail address: myjung@unist.ac.kr (M. Jung).
+0957-4174/$ - see front matter Ó 2012 Elsevier Ltd. All rights reserved.
+ﬁt naturally into a decentralized control structure, whereby they
+have a ﬂexible and reconﬁgurable organizational structure (Weiss,
+1999). Based on such a principle, all these systems continuously
+adapt their organizational structure to the environment by means
+of self-organizing mechanisms toward achieving a goal. That is,
+goal-orientation is a main organizing rule.
+In the area of MAS, researchers have been interested in reinforcement learning approaches to the problem of how an agent
+learns to select proper actions for achieving its goals through interacting with its environment (Wang & Usher, 2007). There have
+been several examples dealing with dynamic order acceptance
+(Arredondo & Martinez, 2010), production control (Csáji, Monostori, & Kádár, 2006), production scheduling (Wang & Usher, 2004,
+2007; Zhang, Zheng, & Weng, 2007), and agent architecture (Tan,
+Ong, & Tapanuj, 2011). All these examples have shown successful
+approaches to goal-orientation, assuming well-deﬁned goals. Every
+production resource represented as a resource agent, however, is
+required to regulate its own goal, not only to adapt to the changing
+environment but also to conform to its cooperators and competitors. An action oriented toward a ﬁxed goal inappropriate to changed environmental situation results in an adverse effect on overall
+performance. Despite the various successful approaches to goalorientation, the regulation mechanism of a predeﬁned goal has
+In a manufacturing system, an aiming level with respect to various criteria (e.g. returned proﬁt, utilization of resources, and processing lead time) can be considered as a goal. For example, if the
+M. Shin et al. / Expert Systems with Applications 39 (2012) 8736–8743
+aiming level of returned proﬁt is too high, the resource agent tries
+to undertake high proﬁt tasks only whereas it ignores relatively
+low proﬁt tasks. Thus, the agent tends to miss the opportunity to
+undertake many tasks, since the high proﬁt tasks might be assigned to other agents which have much competitiveness (e.g.
+low cost, short processing time, and high quality). Consequently,
+not only utilization rate but also returned proﬁt becomes low. In
+this case, the agent should lower the aiming level of returned profit. In other words, the resource agent should regulate its own goal
+so as to conform to its environmental status (involving competitive
+or collaborative features of the entire environment and the interrelated features with competitors).
+This paper proposes an autonomous goal-regulation mechanism that adopts a reinforcement learning approach, aiming at
+implementation of self-evolutionary manufacturing system. The
+proposed regulation mechanism facilitates adaptation of a predeﬁned goal to the changing environment. Individual goals are
+dynamically changed by a neural network-based fuzzy inference
+system, and the neural network is updated by a reinforcement signal from the environment. The remainder of this paper is organized
+as follows. Section 2 presents previous researches on self-evolutionary manufacturing systems, and discusses a reinforcement
+learning approach based on actor-critic learning. Section 3 is devoted to details of the proposed regulation mechanism. In Section
+4, a case study on production planning is presented. Finally, the
+2.1. Self-evolutionary manufacturing system
+Shin et al. (2009a) have proposed a self-evolution framework
+for manufacturing systems. Here, the self-evolution means a continuous process of adaptation to the environment, by which not
+only the entire system but also its production resources autonomously regulate their own goal, and also the organizational structure of the production resources is dynamically changed. The selfevolution framework consists of three components (see Fig. 1): (1)
+fractal organization-based control architecture, (2) goal-oriented
+dynamic organizing mechanism, and (3) autonomous goal-formation mechanism. The term ‘fractal’ denotes a self-similar shape
+recursively constructed, implying ‘a similar pattern inside of another
+similar pattern’ (Mandelbrot, 1982). Fractal organization is a fractal-like structured association of distributed entities in which a
+self-similar organizing pattern is recursively deployed into the
+Fig. 1. Embodiment framework of a self-evolutionary manufacturing system. Shin
+Shin et al. (2009b) have also proposed a relation-driven fractal
+organization for distributed manufacturing systems, namely, rFrMS, along with its organizing mechanism. In the r-FrMS, production resources are represented as individual agents, namely, autonomous and intelligent resource units (AIR-units). Every AIR-unit is
+a goal-oriented decision-maker, and it collaborates and competes
+with other AIR-units in order to establish its own goal. Especially,
+the r-FrMS is organized through a market-based negotiation between the AIR-units.
+Ryu and Jung (2004) have investigated the goal-orientation features of a fractal organization and proposed a goal-generation
+mechanism that operates in a goal-formation framework. The
+goal-generation mechanism mainly propagates a predeﬁned goal
+into several sub-goals, focusing on the interrelation between a
+decision entity and its subordinate decision entities. Furthermore,
+Shin, Cha, Ryu, and Jung (2006) have presented a conﬂict detection
+and resolution mechanism, which is one of principal working
+mechanisms for autonomous goal-formation. In order to clarify
+the vague mutual interactions among goals, the conﬂict detection
+and resolution mechanism adopts an indirect evaluation scheme:
+(1) transformation of individual goals into sets of tasks, and then
+However, despite the visionary prospect of these research
+contributions, there are some limitations. The goal-generation
+mechanism proposed by Ryu and Jung (2004) is limited in its consideration for dynamic changes of individual goals. Moreover, the
+conﬂict detection and resolution mechanism proposed by Shin
+et al. (2006) has no consideration for conﬂict-free situations. Thus,
+a goal-regulation mechanism is required to adapt individual goals
+to the changing environment and also to continuously improve the
+goals and the resultant performance. While the goal-regulation
+mechanism is another principal working mechanism for autonomous goal-formation, it is still an open issue. In this paper, a reinforcement learning approach to autonomous goal regulation is
+proposed, based on the self-evolution framework addressed by
+Shin et al. (2009a) and its organizational model investigated by
+The adaptive heuristic critic (AHC; Barto, Sutton, & Anderson,
+1983; Sutton & Barto, 1998) is the best known actor-critic learning method, which was introduced to solve a pole-balancing control problem and implemented in such parameterized functional
+forms as neural network-based function approximators. The
+AHC model basically consists of two neural networks: the adaptive critic element (ACE) and the associative search element
+(ASE). The ACE plays the role of a critic, and it approximates an
+evaluation function in an adaptive way from the primary reinforcements given directly by the environment through rewards
+and punishments. The evaluation function represents an internal
+reinforcement, mapping states to expected values. The internal
+reinforcement is more informative than the primary reinforcement. On the other hand, the ASE plays the role of an actor,
+implementing and adjusting decision policies, and mapping states
+to actions (Mizutani, 1997). The ASE learns to select actions that
+lead to better critic values by using the internal reinforcement
+Jouffe (1998) has introduced the fuzzy actor-critic learning
+(FACL) which is dedicated to tune online the conclusion part of fuzzy inference systems (FIS). The FACL is an extension of the AHC, in
+which fuzzy logic is used as a function approximator. According to
+the Jouffe (1998), FACL allows the state representation to be more
+generalized than the original AHC. In other words, FACL is allowed
+to deal with discrete as well as continuous actions, whereas AHC is
+M. Shin et al. / Expert Systems with Applications 39 (2012) 8736–8743
+The approximate reasoning based intelligent control (ARIC), another learning method based on AHC, was proposed by Berenji
+(1992), and its extension, the generalized ARIC (GARIC) architecture, was then proposed by Berenji and Khedkar (1992). The GARIC
+architecture is used to reﬁne the linguistic label values of a fuzzy
+rule base which was previously constructed manually or with another automatic method. In this paper, the GARIC model is adopted
+as the autonomous goal regulation framework. For more detailed
+discussion on GARIC, see Berenji and Khedkar (1992).
+The goal-regulation mechanism addressed in this paper adopts
+a fuzzy inference system as a goal-regulator which is implemented
+by a neural network called goal-regulation network (GRN). The
+fuzzy inference system selects a goal-regulating action associated
+with the estimated current state. That is, the GRN determines a
+control action which directly affects individual goals. Based on
+the fuzzy inference scheme, prior expert knowledge can be easily
+incorporated into the process of goal regulation. In addition, the
+GRN learns to become a reasonable goal-regulator that selects
+goals more compatible with the environmental situation by using
+another neural network called goal evaluation network (GEN).
+The GEN serves as an internal critic. Both networks adapt their
+weights concurrently to improve the resultant performance. The
+overall goal-regulation mechanism is schematically shown in
+Fig. 2. Following notations are, for simplicity, employed in this
+Input vector which denotes a current state
+Output vector which denotes a goalregulating action
+Softmin parameter which is a ﬁnite number
+Rt denotes the discounted sum of future reinforcement, and rt+k is
+expected reinforcement k steps later. However, the critic value cannot be calculated directly, and thus a feed-forward neural network
+(i.e., GEN) is employed so as to estimate the critic value.
+The structure of a GEN includes a bias node (i.e., x0), m input
+nodes (i.e., x1, . . . , xm), and h hidden nodes (i.e., v1, . . . , vh) as shown
+in Fig. 3. aij, bi, and cj denote the weight associated with the link
+connecting the nodes. Consequently, the critic value is estimated
+At time step t, the critic approximation error is simply deﬁned as
+V (Xt) denotes the optimal approximation of the critic value with respect to the input vector in time step t, and, based on Bellman optimality equation (Bellman, 1957), it is approximated as follows:
+Then, the critic approximation error may be rewritten as follows:
+~etþ1 ¼ rtþ1 þ cV t ðX tþ1 Þ  V t ðX t Þ
+The critic approximation error estimated by Eq. (7) is also employed
+The learning algorithm of this network is based on Sutton’s AHC
+algorithm (Sutton, 1984; Sutton & Barto, 1998) for the output node
+and the error back-propagation algorithm (Rumelhart, Hinton, &
+Williams, 1986) for the hidden nodes. Based on the internal reinforcement (see Eq. (7)), weights in the GEN are updated according
+Fig. 2. Schematic architecture for goal regulation mechanism.
+Daij ¼ gGEN  ~etþ1  v j  ð1  v j Þ  sgnðcj Þ  xi
+The GEN plays the role of an action evaluation network (AEN;
+Berenji & Khedkar, 1992), which is an adaptive critic element
+(ACE; Barto et al., 1983; Sutton & Barto, 1998). The critic value,
+V, indicates the ﬁtness level of a current goal for the environment.
+Input vector, X, consists of variables describing a current state
+(including the current goal), and the primary reinforcement, r, is
+the level of goal achievement, G that is explained more in detail
+by means of an exemplary goal model in Section 4.
+At time step t, the critic value is deﬁned as follows:
+M. Shin et al. / Expert Systems with Applications 39 (2012) 8736–8743
+In Eq. (10), we use the sign of a hidden unit’s output weight (i.e.,
+sgn(cj)) rather than its value itself (i.e., cj). According to Anderson’s
+empirical result (Anderson 1986), use of the sign of weight makes
+the algorithm more robust than using its value itself.
+Every node p in layer 2 corresponds to an antecedent label, and
+it is an adaptive node with a node function as follows:
+Rk : If x1 is Ak1 and    and xm is Akm ; then y1 is C k1 and    and yn is C kn
+The output of each node k in layer 3 represents the ﬁring
+strength of a rule (rk), which represents the degree to which the
+antecedent part of that rule is satisﬁed. The node implements the
+conjunction of all the relevant antecedent labels in a rule by means
+of following the differentiable function presented by Berenji and
+kth rule in the rule base (k = 1, . . . , NR)
+Linguistic term (antecedent label) of input variable xi in
+Linguistic term (consequent label) of output variable yj in
+lth linguistic term of ith input variable xi
+Number of linguistic terms of ith input variable
+Every node j in layer 5 represents an output action variable (yj).
+The node put together the recommendations from all the fuzzy
+control rules by means of the following weighted sum.
+lth linguistic term of jth output variable yj
+Number of linguistic terms of jth output variable
+Defuzziﬁed value of lth linguistic term of output variable
+Every node i in layer 1 represents an input state variable (xi).
+lCj;l Membership function of linguistic term Cj,l
+Every node q in layer 4 corresponds to a consequent label, and it
+defuzziﬁes the consequent label in order to extract a crisp value.
+The node receives input signals from all rules corresponding to
+lAi;l Membership function of linguistic term Ai,l
+Following notations are, for simplicity, additionally employed in
+In other words, the output of the node is the membership grade of a
+corresponding fuzzy set Ai,l, and it speciﬁes the degree to which the
+given input xi satisﬁes the quantiﬁer Ai,l. Here the membership function can be any appropriate parameterized membership function.
+The GRN performs the role of an action selection network (ASN;
+Berenji & Khedkar, 1992), which is an associative search element
+(ASE; Barto et al., 1983; Sutton & Barto, 1998). The GRN is a
+feed-forward neural network with ﬁve layers of nodes as shown
+in Fig. 4. Input vector, X, denotes a current state the same as in
+the GEN, and it consists of antecedent variables for fuzzy rules.
+Output vector, Y, consists of variables each of which describes a
+regulating action for an individual sub-goal, and the output variables are consequent variables for fuzzy rules.
+The GRN implements a rule base composed of fuzzy rules of the
+Learning in the GRN is based on a gradient-descent method, whereby all the weights in the network are continuously updated. For
+simplicity, W denotes the vector of all the weights. The eventual
+aim of the GRN is to maximize V estimated by the GEN, so that
+the ﬁtness level of a goal for the environment is increased. Hence,
+V is the objective function required to be maximized as a function
+where gGRN denotes a learning rate. However, since the dependence
+of V on y is not explicit, an approximation is used as follows:
+Production planning is a process of determining operations to
+be undertaken by production resources during a given planning
+M. Shin et al. / Expert Systems with Applications 39 (2012) 8736–8743
+period. Assuming that a production order and a set of production
+resources are given, a set of tasks for individual production resources is drawn in the process of the production planning. Shin
+et al. (2009b) have investigated a production planning problem
+from the perspective of dynamically organizing production resources represented as autonomous and intelligent resource units
+(AIR-units). The AIR-units are equipped with respective production
+capabilities, and they are allowed to belong to diverse organizations. An AIR-unit (as an employer) employs other AIR-units required to fulﬁll the production order released to it, and the
+employed units (as an employee) take respective tasks. In this
+way, AIR-units make virtual employment relations among one another for a given production order, whereby the organizational
+structure is dynamically formulated. In this paper, the decision
+model for AIR-units (including the goal model) presented in Shin
+et al. (2009b) is adopted as a goal-oriented decision-making mechanism, and then the goal-regulation mechanism proposed in this
+paper is validated by means of a simulation study. That is, every
+decision entity is represented as an AIR-unit; hereafter, the term
+AIR-unit is interchangeably used with a production resource or a
+Shin et al. (2009b) have proposed a fuzzy goal model that is represented as an integrated form of various sub-goals. The achievement level of each sub-goal is represented by a fuzzy set
+implying ‘‘the goal is achieved.’’ Following notations are, for simplicity, additionally deﬁned.
+Target level with respect to ith sub-goal
+Estimated level of measure involved in sub-goal gi (ex.,
+Weight factor indicating the relative importance of subgoal gi
+Membership function of linguistic term implying ‘‘subgoal gi is achieved’’
+Basically, the overall achievement level of the goal (i.e., G) is described by the following:
+y1: force applied to regulating target level of returned proﬁt (g1)
+y2: force applied to regulating target level of weighted utilization
+y3: force applied to regulating the weight factor of weighted utilization (w2)
+The regulating forces of goal parameters are as follows, assuming that g1 and g2 lie in the ranges between [100, 2000] and
+[0.2, 1.6], respectively, and w1 and w2 lie in the range of [0.2, 0.8].
+The value of state variables actually estimated (i.e., x1 and x2)
+among antecedent variables is linguistically deﬁned by two labels:
+High (H) and Low (L). On the other hand, the value of state variables
+to be directly regulated (i.e., g1 and g2) is deﬁned in more detail:
+Very High (VH), High (H), Low (L), and Very Low (VL). Four labels
+are used to linguistically deﬁne the value of consequent variables
+(i.e., y1, y2, and y3) which denote regulating-actions recommended
+by each fuzzy rule: Strongly Upward (SU), Weakly Upward (WU),
+Weakly Downward (WD), and Strongly Downward (SD).
+Based on the linguistic variables, the fuzzy regulating rules are
+shown in Table 1. Antecedent labels conform to the sigmoidal
+where a controls the slope at the crossover point x = c, and N is a
+normalizing constant. Depending on the sign of the parameter a, a
+sigmoidal membership function is inherently open right or left.
+The initial deﬁnitions of all the antecedent labels are listed in Table
+2. On the other hand, the triangular membership functions are used
+triangleðx; c; sL ; sR Þ ¼ 1  sL ; if c  sL 6 x < c
+In this paper, returned proﬁt (g1) and weighted utilization (g2) are
+employed as sub-goals. Returned proﬁt measure (x1) denotes subtraction of cost factor from general revenue factor. Weighted utilization measure (x2) adopts relative importance of each task as a
+where c, sL, sR denote the center, left spread, and right spread of the
+fuzzy membership function, respectively. The initial deﬁnitions of
+all the consequent labels are listed in Table 3.
+On the basis of the proposed mechanism, the GEN has 4 input
+nodes describing an input state vector (X), a bias node, 5 hidden
+nodes, and an output node. The input state vector is normalized,
+so that each value of state variables lies in the range from 0 to 1.
+The weights of the network are initialized at 0.1. The learning rate
+Here, fuzzy goal-regulation rules for an employee unit are
+developed. Antecedent variables for the fuzzy rules are as follows:
+X = [x1, g1, x2, g2]. The proposed mechanism regulates the parameters that represent not only the target levels of returned proﬁt
+and weighted utilization (i.e., g1 and g2) but also the weight factors
+of these two criteria (i.e., w1 and w2). Thus, consequent variables
+are deﬁned by following three factors: Y = [y1, y2, y3]. Note that
+w1 + w2 = 1 by deﬁnition of goal model addressed in the previous
+M. Shin et al. / Expert Systems with Applications 39 (2012) 8736–8743
+(gGEN) for these weights is ﬁxed at 3.0, and the discount rate (c)
+used in this calculation is 0.9. On the other hand, the GRN has 4 input nodes (the number of antecedent variables), 12 nodes in layer
+2 (the number of antecedent labels), 9 nodes in layer 3 (the number of rules), 12 nodes in layer 4 (the number of consequent labels),
+and, ﬁnally, 3 output nodes to compute the respective regulating
+forces. The softmin parameter (H) of Eq. (13) is set at a value of
+To validate the performance of the proposed mechanism applying the fuzzy goal-regulation rules, a production planning simulation was examined from the perspective of cost effectiveness as
+goals of individual AIR-units are gradually regulated. The simulated production system is composed of 16 AIR-units, and exemplary 4 production orders are deployed into the production
+system. A virtual employer unit corresponding to each production
+order makes employment contracts with the AIR-units.
+Table 4 lists the production capabilities of the AIR-units, showing the operating costs per unit processing time with respect to 4
+types of production capability. Table 5 gives the principal parameter settings for the exemplary production orders. It was assumed
+that the initial goal of every AIR-unit except for Res16 is as follows:
+g1 = 1000, w1 = 0.4, g2 = 1.1, and w2 = 0.6. Here, Res16 is a greedy
+resource rather than a goal-oriented normal decision-maker, and
+it tries to undertake any task regardless of returned proﬁt and utilization. However, all production orders can be fulﬁlled by other 15
+In this study, the greedy resource (i.e., Res16) was introduced to
+highlight the negative effect on overall performance that results
+from inappropriate goals of AIR-units. Res16 has every manufacturing capability and inﬁnite capacity, but very expensive. Its operating cost per unit time is constantly set at 100. Nevertheless, if
+every AIR-unit adheres to a task with high proﬁt or high utilization,
+other low return tasks are eventually assigned to the greedy resource; consequently, the overall costs increase but the goal
+achievement of individual AIR-units decreases.
+Furthermore, the performance of the goal-regulation mechanism was validated by comparison with a genetic algorithm approach to production planning, which is a global search
+heuristics to solve NP-hard resource management problems (Liu,
+Sun, Yan, & Kang, 2011; Rau & Cho, 2009). Unfortunately, we could
+not ﬁnd a related work using a distributed problem-solving approach regarding goal-regulation; thus, direct comparison with
+other previous approaches has not been feasible. Instead, the total
+costs which are gradually improved by the proposed mechanism
+Membership functions of antecedent labels.
+Operating costs per unit time of the exemplary AIR-units.
+Parameter settings for exemplary production order.
+were compared with a near optimal value produced by a genetic
+Table 6 lists the experimental results. At the initial time step
+according to the initial goal setting, the overall total costs
+(TC = 383,090) are very high because some of the operations are assigned to the greedy AIR-unit (i.e., Res16). On the other hand, the
+total costs decrease drastically through the process of goal-regulation (see Fig. 5), in which an AIR-unit equipped with low competitiveness makes downward regulation of its goal while other AIRunits equipped with relatively high competitiveness make upward
+regulation. Actually, the total costs come very close to the ones
+resulting from GA-based production plans (TC = 143,682). At the
+last time step, the proposed approach (TC = 148,930) has only a
+detriment of 3.65%, compared with the GA-based approach. That
+is, even if the proposed mechanism is based on a distributed problem solving approach which is hard to ﬁnd a global optimum, its
+outcome converges on at least a near optimal value in the process
+Tables 7 and 8 list the returns of individual AIR-units at the initial time step (time = 1) and at the last time step (time = 100),
+Membership functions of consequent labels.
+M. Shin et al. / Expert Systems with Applications 39 (2012) 8736–8743
+respectively. At the initial time step, the mean of the proﬁts (x1)
+produced by normal resources (i.e. Res01–Res15) is 3124; however, the mean of the weighted utilizations (x2) is only 0.989. That
+is, since every AIR-unit aims at uniformly high level of proﬁts
+(g1 = 1000), its weighted utilization level is relatively low. Even
+Res05 and Res13 have no undertaking. As a result, operating cost
+involved in Res16 is as much as 285,600. Total operating costs involved in other 15 AIR-units is only 97,490. On the other hand, at
+the last time step, every AIR-unit aims at a level of proﬁt and
+weighted utilization, different from each other. As a result, some
+Fig. 5. Proﬁle of total costs of 4 production orders according to goal regulation.
+Returns of individual AIR-units (time step = 1).
+Returns of individual AIR-units (time step = 100).
+M. Shin et al. / Expert Systems with Applications 39 (2012) 8736–8743
+of AIR-units return loss (e.g. Res05, Res13); therefore, the mean of
+the proﬁts is relatively low (i.e., 19,381). However, the mean of the
+weighted utilization level gets higher (i.e., 1.240). Actually, the
+mean of the goal achievement level of AIR-units also gets higher
+from 0.519 to 0.552. Above all, Res16 has no undertaking, and thus
+total operating costs is only 148,930. These results clearly demonstrate that the proposed goal-regulating mechanism assists the
+individual AIR-units to play a decision entity role conforming more
+This paper has proposed a goal-regulation mechanism that
+adopts a reinforcement learning approach on the basis of actorcritic learning. The proposed mechanism is devoted to autonomous
+regulation of a predeﬁned goal itself, whereas most of the reinforcement learning approaches focus on learning to select proper
+actions for achieving a predeﬁned goal. Every decision entity,
+namely, autonomous and intelligent resource (AIR) unit, is
+equipped with the following two neural networks: goal evaluation
+network (GEN) and goal regulation network (GRN). The GEN is a
+critic estimator which approximates the compatibility of the current goal by using reinforcement signals from the environment.
+The GRN implements a fuzzy inference system that encapsulates
+the goal-regulation rules, and it is continuously updated by an
+internal reinforcement signal delivered from the GEN.
+The proposed mechanism was simulated in a production planning problem with exemplary fuzzy rules. As is clearly shown in
+the simulation result, the proposed mechanism assists individual
+AIR-units to play a decision entity role conforming to its dynamic
+environment. Actually, the AIR-units are enabled to facilitate continuous and autonomous adaptation of their own goals to the
+changing environment. In the simulation study, although the GAbased approach had a narrow lead over the proposed approach
+from the perspective of cost effectiveness, a centralized problem
+solving approach such as the GA-based approach is not suitable
+for current distributed and decentralized production environments. Actually, there cannot be a central decision entity authorized to access all the necessary information to formulate and
+solve a problem in such a complex environment. Therefore, distributed or decentralized approaches have been required. The proposed goal-regulation mechanism is a promising approach to
+making an efﬁcient collaboration between distributed and decentralized production resources.
+For further research, we will endeavor to enable individual AIRunits to learn and become more reliable regulators. The current
+system assumes predeﬁned regulating rules that are actually
+deterministic linguistic labels involved in the rules; thus, AIR-units
+may take the same regulating actions corresponding to the distinct
+environment. Therefore, it is necessary to tune the fuzzy logic controller according to the environment encountered. In another aspect of further research, the fuzzy goal model and its constituent
+terms will be examined more extensively to explore the possibility
+of incorporating them into practical industrial situations, as well
+as the possibility of incorporating the formulas representing various objective terms of production resources into the fuzzy goal
+This research was supported by the Basic Science Research Program through the National Research Foundation of Korea (NRF)
+funded by the Ministry of Education, Science, and Technology
+(2009-0077660). The authors would like to express their gratitude
+Anderson, C. W. (1986). Learning and problem solving with multilayer
+connectionist systems. Ph.D. Thesis, University of Massachusetts.
+Arredondo, F., & Martinez, E. (2010). Learning and adaptation of a policy for
+dynamic order acceptance in make-to-order manufacturing. Computers &
+Barto, A. G., Sutton, R. S., & Anderson, C. W. (1983). Neuronlike adaptive elements
+that can solve difﬁcult learning control problems. IEEE Transactions on Systems,
+Bellman, R. E. (1957). Dynamic programming. Princeton, NJ: Princeton University
+Berenji, H. R. (1992). An architecture for designing fuzzy controllers using neural
+networks. International Journal of Approximate Reasoning, 6(2), 267–292.
+Berenji, H. R., & Khedkar, P. (1992). Learning and tuning fuzzy logic controllers
+through reinforcements. IEEE Transactions on Neural Networks, 3(5), 724–740.
+Csáji, B. C., Monostori, L., & Kádár, B. (2006). Reinforcement learning in a distributed
+market-based production control system. Advanced Engineering Informatics, 20,
+Frayret, J. M., D’Amours, S., & Montreuil, B. (2004). Coordination and control in
+distributed and agent-based manufacturing systems. Production Planning &
+Heragu, S. S., Graves, R. J., Kim, B., & Onge, A. St. (2002). Intelligent agent based
+framework for manufacturing systems control. IEEE Transactions on Systems,
+Jouffe, L. (1998). Fuzzy inference system learning by reinforcement methods. IEEE
+Transactions on Systems, Man, and Cybernetics-Part C: Applications and Reviews,
+Leitão, P., & Restivo, F. J. (2006). ADACOR: A holonic architecture for agile and
+adaptive manufacturing control. Computers in Industry, 57(2), 121–130.
+Liu, M., Sun, Z., Yan, J., & Kang, J. (2011). An adaptive annealing genetic algorithm for
+the job-shop planning and scheduling problem. Expert Systems with Applications,
+Mandelbrot, B. B. (1982). The fractal geometry of nature. New York: Freeman.
+Maturana, F., Shen, W., & Norrie, D. H. (1999). MetaMorph: An adaptive agent-based
+architecture for intelligent manufacturing. International Journal of Production
+Mizutani, E. (1997). Learning from reinforcement. In C. Jang, C. Sun, & E. Mizutani
+(Eds.), Neuro-Fuzzy and Soft Computing: a Computational Approaches to Learning
+and Machine Intelligence (pp. 258–300). Upper Saddle River, NJ: Prentice-Hall.
+Rau, H., & Cho, K. (2009). Genetic algorithm modeling for the inspection allocation
+in reentrant production systems. Expert Systems with Applications, 36,
+Renna, P., & Ambrico, M. (2011). Evaluation of cellular manufacturing
+conﬁgurations in dynamic conditions using simulation. International Journal of
+Advanced Manufacturing Technology. doi:10.1007/s00170-011-3255-0.
+Rumelhart, D., Hinton, G., & Williams, R. J. (1986). Learning representations of backpropagation errors. Nature, 323, 533–536.
+Ryu, K., & Jung, M. (2004). Goal-orientation mechanism in the fractal manufacturing
+system. International Journal of Production Research, 42(11), 2207–2225.
+Ryu, K., Yücesan, E., & Jung, M. (2006). Dynamic restructuring process for selfreconﬁguration in the fractal manufacturing system. International Journal of
+Shen, W., Maturana, F., & Norrie, D. H. (2000). MetaMorph II: An agent-based
+architecture for distributed intelligent design and manufacturing. Journal of
+Intelligent Manufacturing, 11(3), 237–251.
+Shin, M., Cha, Y., Ryu, K., & Jung, M. (2006). Conﬂict detection and resolution for
+goal-formation in the fractal manufacturing system. International Journal of
+Shin, M., Mun, J., & Jung, M. (2009a). Self-evolution framework of manufacturing
+systems based on fractal organization. Computers & Industrial Engineering, 56,
+Shin, M., Mun, J., Lee, K., & Jung, M. (2009b). R-FrMS: A relation-driven fractal
+organisation for distributed manufacturing systems. International Journal of
+Sutton, R.S. (1984). Temporal credit assignment in reinforcement learning. Ph.D.
+Sutton, R. S., & Barto, A. G. (1998). Reinforcement learning: An introduction.
+Tan, A. H., Ong, Y. S., & Tapanuj, A. (2011). A hybrid agent architecture integrating
+desire, intention and reinforcement learning. Expert Systems with Applications,
+Van Brussel, H., Wyns, J., Valckenaers, P., Bongaerts, L., & Peeters, P. (1998).
+Reference architecture for holonic manufacturing systems: PROSA. Computers in
+Wang, Y. C., & Usher, J. M. (2004). Learning policies for single machine job
+dispatching. Robotics and Computer-Integrated Manufacturing, 20, 553–562.
+Wang, Y. C., & Usher, J. M. (2007). A reinforcement approach for developing routing
+policies in multi-agent production scheduling. International Journal of Advanced
+Weiss, G. (1999). Multiagent systems: A modern approach to distributed artiﬁcial
+Zhang, Z., Zheng, L., & Weng, M. X. (2007). Dynamic parallel machine scheduling
+with mean weighted tardiness objective by Q-learning. International Journal of
+Advanced Manufacturing Technology, 34, 968–980.

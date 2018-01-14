@@ -1,0 +1,329 @@
+Expert Systems with Applications 37 (2010) 5186–5191
+Contents lists available at ScienceDirect
+journal homepage: www.elsevier.com/locate/eswa
+Multi-agent based distributed inventory control model
+Chang Ouk Kim a,*, Ick-Hyun Kwon b, Choonjong Kwak c
+Department of Information and Industrial Engineering, Yonsei University, Seoul 120-749, Republic of Korea
+Department of Systems Management Engineering, Inje University, Gimhae, Gyeongnam 621-749, Republic of Korea
+Research Evaluation and Planning Division, Korea Aerospace Research Institute, 45 Eoeun-Dong, Yuseong-Gu, Daejeon 305-333, Republic of Korea
+We consider a multi-stage inventory control problem with nonstationary customer demand under a customer service-level constraint. We propose a multi-agent based model for distributed inventory control
+systems. In this model, the agent at the ﬁrst stage is called a retail agent and those at the remaining stages
+are called supply agents. The retail agent makes an effort to satisfy a target customer service level by
+adjusting its order release time according to the changes of customer demand trends. On the other hand,
+each supply agent tries to control its order release time so that product supply from its upstream agent is
+synchronized with the order request from its downstream agent. A cooperative demand estimation protocol and a distributed action-reward learning technique are developed to satisfy the target customer service level under nonstationary situations. A simulation based experiment was performed to evaluate the
+performance of the proposed multi-agent model.
+Ó 2009 Elsevier Ltd. All rights reserved.
+In supply chain management, it has been increasingly addressed in industry to satisfy target customer service levels with
+minimum chain-wide inventories. At the same time, it has been
+more difﬁcult to achieve such an objective, as customer demands
+become more diverse and the lifecycles of products are shorter.
+The customer demands of most products ﬂuctuate over time,
+showing nonstationary trends (Axsäter, 2006).
+Inventory control is a classic problem in supply chain management. Over the last four decades, this area has gained great research interest as a result of increasing attention to supply chain
+management. Various theoretical models have been developed to
+provide optimal or near-optimal solutions (Forteus, 2002; Zipkin,
+2000). However, a critical assumption on customer demand makes
+it difﬁcult to apply the models to the real ﬁeld. Most models assume that customer demand follows stochastic processes such as
+Markov modulated processes (Gavirneni & Tayur, 2001; Song &
+Zipkin, 1993), an autoregressive, moving average demand process
+(Disney, Farasyn, Lambrecht, Towill, & Van de Velde, 2006; Johnson
+& Thompson, 1975), and cyclic demand distributions (Zipkin,
+1989). Graves (1999) considered an adaptive base-stock policy
+for a single product inventory system, where the demand faced
+by a retailer is an integrated moving average process of order
+(0, 1, 1). In reality, however, customer demand is not known a priori. Furthermore, demand trends are likely to vary over time.
+* Corresponding author. Tel.: +82 2 2123 2711; fax: +82 2 364 7807.
+E-mail address: kimco@yonsei.ac.kr (C.O. Kim).
+0957-4174/$ - see front matter Ó 2009 Elsevier Ltd. All rights reserved.
+The importance of adaptive models has surfaced with the
+necessity of controlling the parameters of inventory control models according to the changes in unstable customer demand. However, most of proposed adaptive models are limited to supply
+chains with two stages. Kim, Jun, Baek, Smith, and Kim (2005) proposed an adaptive inventory control model for a supply chain with
+a supplier and multiple retailers. They proposed an action-reward
+learning method, a kind of reinforcement learning techniques,
+which controls both the supplier’s safety lead time and the retailers’ safety stocks adaptively according to the variation of customer
+demand stream. The objective of the model was to satisfy a target
+customer service level predeﬁned at each retailer. Kim, Kwon, and
+Baek (2008) proposed an asynchronous learning method that enhances the learning speed of the action-reward method signiﬁcantly, and applied it to the inventory control of a two-stage
+supply chain. The learning objective was to minimize the average
+of the total inventory holding and shortage costs incurred at the
+two stages. Jiang and Sheng (2009) proposed a multi-agent based
+model for a two-stage supply chain for satisfying a target service
+level using a reinforcement learning technique combined with
+case-based reasoning. Recently, Kwak, Choi, Kim, and Kwon
+(2009) proposed a situation reactive approach for vendor managed
+inventory control. In the approach, they modiﬁed the asynchronous action-reward learning (Kim et al., 2008) for the vendor managed inventory control.
+System analysis based on the multi-agent concept provides an
+effective application development approach (Gjerdrum, Shah, &
+Papageorgiou, 2001; Swaminathan, Smith, & Sadeh, 2007). Supply
+chain agents represent physical entities (e.g., retailers and
+C.O. Kim et al. / Expert Systems with Applications 37 (2010) 5186–5191
+suppliers) with control elements (e.g., inventory control policy and
+optimized production planning). The agents work together to simulate the complex behavior of supply chains. Govindu and Chinnam (2007) proposed a generic process-centered methodological
+framework to simplify the development of a multi-agent system
+for supply chain applications. Liang and Huang (2006) proposed a
+multi-agent model for a four-stage supply chain with the aim of
+minimizing total inventory cost. They deﬁned two types of agents.
+A control agent in each stage collects data on historical demand
+and inventory status. A central demand forecast agent shares the
+data and calculates a near-optimal order quantity for every stage
+In this paper, we propose a multi-agent model for the nonstationary inventory control problem with a service-level constraint in a multi-stage supply chain. In the multi-agent model,
+the agent who is responsible for controlling the inventory of the
+ﬁrst stage is called a retail agent and those for the remaining stages
+are called supply agents. The retail agent places orders on the ﬁrst
+supply agent who places orders on the second supply agent, and so
+on. Upon an order request from a downstream agent, the next upstream agent processes semi-manufactured products if it keeps enough inventory for the process and ships the processed products
+immediately to its downstream agent. As products ﬂow to downstream stages, more value-added processes are performed.
+Each agent uses a traditional order release policy, by which an
+order with a ﬁxed size is placed on the next upstream agent when
+a reorder condition is satisﬁed. The reorder condition needs future
+demands as its input. The estimation accuracy of the future demands signiﬁcantly affects the performance of inventory control.
+Traditionally, suppliers used to estimate their future demands
+using historical orders by their downstream partners. However,
+this kind of forecasting does not sufﬁciently reﬂect a recent variation of customer demand (Chopra & Meindl, 2007). To resolve this
+problem, we propose a cooperative demand estimation protocol.
+By sharing recent customer demand data, forecasting approaches
+will achieve better results than ones based on historical order data
+(Simchi-Levi, Kaminsky, & Simchi-Levi, 2008). In the proposed
+cooperative protocol, the retail agent ﬁrst estimates its future demands, that is, future customer demands, with recent customer demand data. In the second step, the retail agent also estimates the
+future demands of the ﬁrst supply agent with the estimated customer demands. The ﬁrst supply agent in turn uses its future demands to estimate those of the second supply agent. This
+procedure is iterated until the most upstream agent receives estimated demands.
+Our multi-agent model is not an application development
+framework, but is characterized as a distributed supply chain control algorithm. Interacting with a supply chain system, our model
+monitors customer service level and on-time delivery to control
+physical product ﬂows by adjusting order release time. All agents
+have their own missions. The retail agent is responsible for satisfying a target customer service level. To achieve the mission with
+nonstationary customer demand, the retail agent adjusts its order
+release time adaptively according to the changes of customer demand trends. The ﬁrst supply agent makes an effort to control its
+order release time so that product supply from the second supply
+agent is synchronized with the order request from the retail agent.
+This just-in-time supply principle is applied to all supply agents,
+whose mission is to satisfy the retail agent’s orders on time without surplus inventory.
+The rest of this paper is organized as follows. Section 2 presents
+the formal deﬁnition of the nonstationary inventory control problem. This section also proposes a distributed action-reward learning technique and a cooperative demand estimation protocol. In
+Section 3, we evaluate the performance of the proposed multiagent model through a simulation based experiment. Finally, we
+provide concluding remarks and suggest future research direction
+We consider an N-stage, serial supply chain (see Fig. 1). As
+shown in the ﬁgure, each agent places orders on its next upstream
+agent. Supply agent N places orders on an outside supplier with
+unlimited capacity. The order size for all stages is the same as Q.
+When a supply agent receives an order, the agent fulﬁlls the order
+by delivering Q products. Between two adjacent stages i and i + 1,
+there exists lead time Li that is required for manufacturing and
+shipping products. The lead time is called normal lead time that
+is deﬁned as an integer multiple of a review period. Due to the possibility of inventory shortage at upstream stage i + 1, of course, actual lead time may be longer than the normal one.
+The mission of the retail agent is to maintain customer service
+level at a predeﬁned target. This is also the objective of this inventory control problem with the target customer service level as a
+constraint. Among several deﬁnitions of service levels, this paper
+adopts a-service-level. It measures the probability that all customer demands that the retail agent receives within a given time
+interval is completely satisﬁed by stock on hand without unnecessary delay. See Schneider (1981) and Tempelmeier (2000) for a detailed description of the a-service-level.
+All agents employ action-reward learning to achieve their missions. The action-reward learning is one of reinforcement learning
+techniques (Sutton & Barto, 1998). Since we deal with a minimization problem in learning, we will use the term ‘‘penalty” instead of
+‘‘reward” hereafter. As a learning parameter, each agent uses a time
+buffer called safety lead time. A positive or negative safety lead
+time can either expedite or delay order release. In the learning paradigm, agents select their safety lead times and the supply chain
+responds to the safety lead times by giving rise to penalties. The
+missions of all agents are achieved by minimizing their average
+penalties by adapting their safety lead times to nonstationary customer demands. For the retail agent, the penalty is the deviation of
+customer service level from its target. For each supply agent, the
+penalty is the time gap between the order request from its downstream agent and the order fulﬁllment from its upstream agent.
+Fig. 2 shows what tasks the agents carry out and when they do
+the tasks. In each review period, the agents cooperate to estimate
+their future demands that are needed to evaluate their order release rules. Then, they independently make order decisions. On
+the other hand, the safety lead times of the agents are updated
+asynchronously because they have different lead times. For example, agent i can update its safety lead time after it replenishes the
+inventory of agent i  1, because the penalty for a safety lead time
+can be obtained only after replenishment.
+C.O. Kim et al. / Expert Systems with Applications 37 (2010) 5186–5191
+(a) Safety lead time is not applied when customer demand is underestimated.
+The agent tasks are explained in the following subsections.
+In review period t ðt ¼ 1; . . .Þ, agent i on stage i ði ¼ 1; . . . ; NÞ
+places an order on its upstream agent i + 1, if the forecasted inven
+tory position at t þ Li þ li is below zero. This order release rule can
+t;tþk  0; then place an order of size Q at time t:
+(b) A positive safety time is applied when customer demand is underestimated.
+In this rule, li is the safety lead time selected at stage i and IPi,t is the
+inventory position of stage i that is deﬁned as its stock plus all
+materials in transit to the stage in period t. D
+stage i forecasted in period t for period t + k.
+Safety lead time is a virtual concept introduced to adjust or
+der release time. Depending on the sign of safety lead time li ,
+the above rule expedites or delays order release. For example,
+consider a situation where a stage frequently experienced stockouts during recent periods. This may be a strong signal of demand underestimation. In this case, the order release
+considering just normal lead time Li cannot solve the stockout
+problem (see Fig. 3(a)). Instead, it will decrease the chance of
+stockout to extend the normal lead time Li by using a positive
+safety lead time as in Eq. (1) (see Fig. 3(b)). On the other hand,
+if the stage continues to keep a large amount of surplus inventory, a negative safety lead time will be effective in reducing
+2.2.2. Cooperative demand estimation protocol
+In order to use the order release rule in Eq. (1), each agent needs
+b i . It is not difﬁcult for the retail agent to get
+its future demand, because the retail agent can directly access customer demand data. A linear regression model, an one-parameter
+adaptive forecasting method (Makridakis, Wheelwright, & Hynd
+man, 1997), is used to forecast demand for ½t; t þ L1 þ l1  based on
+historical data on customer demand. The method is known as an
+effective time series model especially under nonstationary demand
+In the cooperative demand estimation protocol, the retail agent
+is also responsible for forecasting demands for supply agents. Unlike customer demand, the size of the demand for the supply
+agents in each review period will be either 0 or Q. The forecast
+horizon of the retail agent is extended from t; t þ L1 þ l1 to
+t; t þ L½2;N þ j¼2 lj  ðN  1Þ where L½2;i ¼ j¼2 Lj . In order to explain why the horizon is extended, suppose that we deal with a
+three-stage inventory problem (N = 3) where all lead times are
+equal to three (L1 = L2 = L3 = 3) and all safety lead times are zero
+li ¼ 0; i ¼ 1; 2; 3 . In review period t, agent 2 prepares forecast
+agent 3’s order should be placed on agent 4 in the review period
+by Eq. (1). In this protocol, the preparation of the forecast data is
+also supported by agent 1, the retail agent. The agent 1 provides
+D t;tþ2 ; D t;tþ3 ; D t;tþ4 for D t;tþ2 and D t;tþ3 ; D t;tþ4 ; D t;tþ5 for D 3t;tþ3 .
+Thus, the agent 1 should make ﬁve estimates, D
+make their replenishment decisions. The end of the forecast
+horizon of the agent 1 is t þ L2 þ L3 þ l2 þ l3  ðN  1Þ ¼ t þ 4. The
+forecast horizon of the agent 2 is also extended from
+t; t þ L1 þ L2 þ l1 þ l2 to t; t þ L½3;N þ Nj¼3 lj  ðN  2Þ . Without
+loss of generality, the forecast horizon of agent i ði ¼ 1; . . . ; N  1Þ
+is deﬁned as t þ L½iþ1;N þ Nj¼iþ1 lj  ðN  iÞ.
+The idea of the cooperative demand estimation is implemented
+through the following two steps. In review period t, set the initial
+(1) Step 1: Agent i forecasts demand for agent i + 1 by considering the order release rule: For t 0 ¼ t; t þ 1; . . . ; t þ L½iþ1;N þ
+D t;t0 þk  0, then set IP i;t0 þ1 to IP i;t0 þ Q  D
+b iþ10 ¼ Q : Otherwise, set IPi;t0 þ1 to IP i;t0  D
+(2) Step 2: Set i ¼ i þ 1. If i ¼ N, then stop. Otherwise, repeat Step
+At the end of the iteration, supply agent i ði ¼ 2; . . . ; NÞ obtains a
+set of demand estimates, in which the size of each estimate is
+C.O. Kim et al. / Expert Systems with Applications 37 (2010) 5186–5191
+Four experimental factors were considered: the number of
+stages, the type of customer demand, coefﬁcient of variation (CV)
+and lead time. For the number of stages, we considered three-stage
+Figs. 4 and 5 show the overall simulation results for cases NS1
+and NS2, respectively. In most cases, the multi-agent model
+(NEW in the ﬁgures) shows better performance than the three
+If t1  t2 > 0, the order request from agent i  1 is satisﬁed with
+normal lead time Li1, but inventory holding time t1  t2 occurs to
+agent i. Therefore, it is necessary to reduce the safety lead time li .
+On the other hand, if t1  t2 < 0, agent i  1 will receive the ordered
+quantity with additional delay t2  t1 beyond Li1. In this case, the
+placement on agent i + 1. If p t 1 ; t 2 : li ¼ 0, the safety lead time
+achieves just-in-time delivery. Parameter w is a weight for inventory holding time and set by users considering the inventory holding time and shortage time. We use the same softmax rule in Eq.
+(3) to determine the next safety lead time.
+where t1 and t2 in penalty p t 1 ; t 2 : li are the time of order request
+from agent i  1 to agent i and the time of product supply from
+agent i + 1 to agent i, respectively. For agent N, agent i + 1 is an out
+side supplier with unlimited capacity. The penalty p t 1 ; t 2 : li is deﬁned as:
+2.2.3.2. Supply agents. In the multi-agent model, the mission of
+supply agents is to satisfy the retail agent’s orders on time without
+surplus inventory. For each supply agent, this can be achieved by
+synchronizing product supply from its upstream agent and the order request from its downstream agent. Considering the mission
+with action-reward learning, the following learning formula is
+where H1 is the set of candidate safety lead times for the retail
+where p l1 ¼ a l1  aT and k 2 ½0; 1 is a smoothing parameter.
+The safety lead time is changed based on the average penalty, when
+The opportunity of selecting l1 again depends on the updated
+new l1 . The opportunity will increase, as a l1 gets close
+to the target service level. We use the following softmax rule to
+As the type of customer demand changes from DT 1 to DT 3, the
+mean change event occurs more frequently with bigger ﬂuctuations, resulting in the increase of the nonstationary level.
+Three types of coefﬁcient of variation (CV) were also taken into
+consideration for performance evaluation, where the CV is deﬁned
+as the ratio of the standard deviation to the mean. The standard
+deviation of customer demand can be computed by the multiplication of the mean and CV. Three CV values were considered: CV1
+(CV = 0.1), CV2 (CV = 0.3), and CV3 (CV = 0.5). The larger CV, the
+Two types of lead time were considered: LT 1 ðLi ¼ 3Þ and LT 2
+ðLi ¼ 5Þ for stage i ði ¼ 1; . . . ; NÞ. The set of candidate safety lead
+times, Hi was deﬁned as ½ðLi  1Þ; Li  1 with a step size of 1.
+The target service level was set to 95%, and actual average service
+level was considered as a performance measure. Smoothing
+parameter k in Eq. (2) and weight parameter w in Eq. (5) were
+set to 0.1 and 0.5, respectively. Each simulation ran for 10,000 periods. For each combination of the four experimental factors, 20 simulations were conducted and their average was considered as the
+Three comparison models were designed to evaluate the performance of the proposed multi-agent model. The comparison models
+do not use a learning approach to safety lead time against our
+learning technique (i.e., safety lead times are ﬁxed to zero for all
+agents). All comparison models overestimate future customer demands as an effort to compensate demand uncertainty. The idea
+behind this strategy is to provide a buffer against demand variability, which is similar to the concept of safety stock. The comparison
+2.2.3.1. Retailer agent. For the retail agent, penalty pðl1 Þ is deﬁned
+as the squared deviation of realized customer service level aðl1 Þ
+from target service level aT during lead time. Average penalty
+ðl1 Þ for safety lead time l1 is updated by
+(NS1) and four-stage (NS2) serial supply chains. Customer demand
+follows a normal distribution, but its mean is designed to vary at
+every random interval T according to the rule of meannew = meanold + slope with an initial mean value of 200. In this rule, slope
+and T are random variables that follow uniform distributions
+U(sm, sm) and U(tu/2, tu), respectively. Using this rule, we characterized three types of customer demand as follows:
+The inventory control agents achieve their missions through
+trial and error, by choosing safety lead times that generate smaller
+penalties over time. Ideally, the safety lead times with small penalties should occur more frequently, whereas those with large penalties should rarely recur. It is desirable to give more chances to
+C.O. Kim et al. / Expert Systems with Applications 37 (2010) 5186–5191
+comparison models. In order to present the simulation results
+more efﬁciently, we deﬁne the following service level error.
+where aT is the target service level and aA is the actual service level.
+Fig. 6 summarizes the averages of the service level errors for each
+model. Each value in Fig. 6 is the average error of 18 problem instances, the combination of three types of customer demand (DT
+1, DT 2, and DT 3), three types of CV (CV1, CV2, and CV3) and two
+types of lead time (LT 1 and LT 2). From Fig. 6, it is observed that
+the average errors of the multi-agent model are small (1.19 and
+1.12 for NS1 and NS2, respectively), which are less than those of
+As shown in Figs. 4 and 5, however, the average service levels of
+all models decrease as customer demand becomes more unstable
+(from DT 1 to DT 3). The reason is that the increase of the demand
+randomness deteriorated the forecast accuracy of the one-parameter adaptive forecasting method. In addition, the increase of uncertainty in other experimental factors such as CV, lead time and the
+number of stages negatively inﬂuenced the performance of the
+From the analysis of the simulation results, we derived two signiﬁcant ﬁndings. One is that, in most cases, the average service levels of the multi-agent model are less inﬂuenced by the changes of
+the experimental factors compared with those of the three comparison models. This ﬁnding supports the robustness of the multi-agent model in nonstationary environments. This is veriﬁed
+from Fig. 7 that shows the sample paths of the service level of
+the multi-agent model for the case of (NS2, DT 3, and LT 2) by three
+CV values. It is observed from Fig. 7 that there is no remarkable difference in the sample paths for the three CV values.
+The other ﬁnding is that, unlike the three comparison models,
+the average service levels of the multi-agent model decrease significantly as LT 1 changes to LT 2 (see Figs. 4 and 5). The reason may
+be that, since the number of candidate safety lead times for LT 2 is
+larger than LT 1, the learning speed for LT 2 became slow with a
+Fig. 7. Sample paths of service level for (NS2, DT 3, and LT 2) case.
+In this paper, we dealt with a nonstationary inventory control
+problem of a multi-stage supply chain under a customer service-level constraint. Due to the dynamic and unpredictable nature of
+customer demand, it is hard to solve such a nonstationary problem
+through traditional mathematical methods. To overcome the difﬁculty, we proposed a multi-agent based model for distributed
+inventory control systems. A cooperative demand estimation protocol and a distributed action-reward learning technique were
+developed to satisfy the target customer service level under various nonstationary situations. A simulation based experiment veriﬁed that the multi-agent model outperformed three comparison
+models. A future research topic is to extend the multi-agent model
+to more complex supply chains such as assembly and distribution
+C.O. Kim et al. / Expert Systems with Applications 37 (2010) 5186–5191
+Axsäter, S. (2006). Inventory control. Springer.
+Chopra, S., & Meindl, P. (2007). Supply chain management: Strategy, planning, and
+Disney, S. M., Farasyn, I., Lambrecht, M., Towill, D. R., & Van de Velde, W. (2006).
+Taming the bullwhip effect whilst watching customer service in a single supply
+chain echelon. European Journal of Operational Research, 173, 151–172.
+Forteus, E. (2002). Foundations of stochastic inventory theory. Stanford University
+Gavirneni, S., & Tayur, S. (2001). An efﬁcient procedure for non-stationary inventory
+George, A. P., & Powell, W. B. (2006). Adaptive stepsize for recursive estimation with
+applications in approximate dynamic programming. Machine Learning, 65,
+Gjerdrum, J., Shah, N., & Papageorgiou, L. G. (2001). A combined optimization and
+agent-based approach to supply chain modelling and performance assessment.
+Production Planning and Control, 12, 81–88.
+Govindu, R., & Chinnam, R. B. (2007). MASCF: A generic process-centered
+methodological framework for analysis and design of multi-agent supply
+chain systems. Computers and Industrial Engineering, 53, 584–609.
+Graves, S. C. (1999). A single-item inventory model for a non-stationary demand
+process. Manufacturing and Service Operations Management, 1, 50–61.
+Jiang, C., & Sheng, Z. (2009). Case-based reinforcement learning for dynamic
+inventory control in a multi-agent supply-chain system. Expert Systems with
+Johnson, G. D., & Thompson, H. E. (1975). Optimality of myopic inventory policies
+for certain dependent demand processes. Management Science, 21, 1303–1307.
+Kim, C. O., Jun, J., Baek, J. K., Smith, R. L., & Kim, Y. D. (2005). Adaptive inventory
+control models for supply chain management. International Journal of Advanced
+Kim, C. O., Kwon, I. H., & Baek, J. G. (2008). Asynchronous action-reward learning for
+nonstationary serial chain inventory control. Applied Intelligence, 28, 1–16.
+Kwak, C. J., Choi, J. S., Kim, C. O., & Kwon, I. H. (2009). Situation reactive approach to
+vendor managed inventory problem. Expert Systems with Applications, 36,
+Liang, W. Y., & Huang, C. C. (2006). Agent-based demand forecast in multi-echelon
+supply chain. Decision Support Systems, 42, 390–407.
+Makridakis, S. G., Wheelwright, S. C., & Hyndman, R. J. (1997). Forecasting: Methods
+Schneider, H. (1981). Effect of service-levels on order-point or order-levels in
+inventory models. International Journal of Production Research, 19, 615–631.
+Simchi-Levi, D., Kaminsky, P., & Simchi-Levi, E. (2008). Designing and managing the
+supply chain: Concepts, strategies, and case studies. McGraw-Hill.
+Song, J. S., & Zipkin, P. H. (1993). Inventory control in a ﬂuctuating demand
+environment. Operations Research, 41, 351–370.
+Sutton, R. S., & Barto, A. G. (1998). Reinforcement learning. MIT Press.
+Swaminathan, J. M., Smith, S. F., & Sadeh, N. M. (2007). Modeling supply chain
+dynamics: A multiagent approach. Decision Sciences, 29, 607–632.
+Tempelmeier, H. (2000). Inventory service-levels in the customer supply chain. OR
+Zipkin, P. H. (1989). Critical number policies for inventory models with periodic
+Zipkin, P. H. (2000). Foundation of inventory management. McGraw-Hill.

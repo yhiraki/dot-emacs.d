@@ -1,0 +1,680 @@
+int. j. prod. res., 2000, vol. 38, no. 1, 161± 185
+Machine learning based adaptive production control for a multi-cell
+¯ exible manufacturing system operating in a random environment
+An adaptive production control approach is used for controlling a multi-cell FMS
+with machines subject to failures, operating in a highly changing produce-toorder environment. A probabilistic machine learning procedure is integrated
+within a two-level Distribution Production Control System (DPCS). This enables
+the DPCS to adapt itself to large ¯ uctuations in demand as well as to other
+stochastic factors. An extensive simulation study shows that the proposed adaptive control approach signi® cantly improves the production system performance
+in terms of a combined measure of throughput and order tardiness. The proposed
+DPCS can be easily implemented as a real-time DPCS due to its simplicity,
+modularity and the limited information it requires. The proposed adaptive
+scheme can be integrated in any parametric production control system.
+A multi-cell ¯ exible manufacturing system (FMS) consists of several independent
+¯ exible cells. Each ¯ exible-manufacturing cell (FMC) includes several computercontrolled machines, equipped with facilities for automating changing of parts and
+tools and interconnected by automated handling and storage facilities. Each FMC is
+Nowadays, the ability to ful® l customers’ speci® c demands in very short time
+becomes vital for business success. In this customer-oriented world, orders consisting
+of only a few items are transferred directly from vendors to shops and need to be
+supplied within short lead times. This challenges producers, faced with a produce-toorder situation in the shop ¯ oor.
+In a produce-to-order situation, the system is confronted with a dynamically
+changing ¯ ow of orders. Each order consists of di erent part-types in di erent
+quantities, di erent arrival times and di erent due-dates.
+The pro® tability of using a FMS, which is capital intensive, relies heavily on the
+ability to operate it e ciently. In such an environmentÐ which is on one hand highly
+stochastic (due to the rapid changes in the product mix and machine failures) and, on
+the other hand, has demands that should be supplied within short due-datesÐ a realtime production control system (PCS), which utilizes the system’s ¯ exibility and
+automatically reacts to the various stochastic events, is essential.
+Extensive research has been performed on real-time production control of FMS
+(e.g. Stecke and Solberg 1981, Denzler and Boe 1987, Montazeri and VanWassenhove 1990, Dolinska and Besant 1995). Yet only a few works deal with a
+{ Department of Industrial Engineering, Tel Aviv University, Tel Aviv, Israel 69978.
+* To whom correspondence should be addressed. e-mail: arzi@eng.tau.ac.il
+International Journal of Production Research ISSN 0020± 7543 print/ISSN 1366± 588X online
+http://www.tandf.co.uk/journals/tf/00207 543.html
+multi-cell FMS. In an early work in this ® eld, Maimon and Choong (1986) developed
+an optimal policy for dynamic routing in a re-entrant multi-cell FMS. In another
+work, Liu (1990) suggested a dynamic optimal dispatching model for monitoring inprocess inventory in a periodically reviewed multi-cell system.
+A Distributed Production Control System (DPCS) is a common approach in
+dealing with the complexity of FMS. Advantages of DPCSs stated in the literature
+are: greater reliability, modularity, more e ectiveness in handling device failures,
+increased ¯ exibility, improved performance and cost e ectiveness (Shaw 1988).
+Lin and Solberg (1992) presented a framework for a distributed shop ¯ oor production control using autonomous agents. Their approach provides jobs and resources
+Another approach to handle the high level of uncertainty characteristic of the
+produce-to-order environment, is adaptive production control. In adaptive production control the PCS tests, from time to time, several predetermined system state
+variables, analyses the system by a decision model, and selects a strategy to control
+the system until the next test (e.g. Chu and Moodie 1986, Jones and Mclean 1986,
+To the best of our knowledge no published work has addressed adaptive control
+for a dynamically changing produce-to-order environment. In other production
+circumstances, several researchers used an online simulation (Chen and Talavage
+1982, Ishii and Talavage 1991), knowledge-based and expert systems (e.g. Nof et al.
+1980, Ben Arieh et al. 1985, Naidu and Viswanadham 1992), machine learning techniques such as decision trees (Shaw et al. 1992, Shinichi and Taketoshi 1992, Li and
+She 1994), and neural networks (Cho and Wysk 1993, Sun and Yih 1996). Several
+works integrated an expert system, an online simulation and machine learning techniques (Wu and Wysk 1988, Chaturvedi et al. 1992).
+In a previous work, Arzi (1995) suggested a DPCS for a multi-cell FMS, operating in a produce-to-order environment, with machines and handling facilities subject
+to failures. Each cell is independently controlled, in real-time, by its own cell-controller, using a two-level heuristic procedure. The upper level of the procedure
+chooses the parts to be produced within the cell by taking into account the parts’
+due-dates, the relative advantage of their production in a particular cell (over other
+cells) and their contribution to the reduction of the cell workload imbalance. The
+lower level controls the parts ¯ ow through the cell by applying the Largest Relative
+Advantage for Orders (LRAO) rule (Arzi and Roll 1993). Simulation study showed
+that the Arzi’ s (1995) DPCS achieves high performance in terms of throughput and
+tardiness of orders. Arzi’ s DPCS incorporates two principles: the use of the system’s
+processing ¯ exibility, and assigning parts to cells and machines on the basis of their
+relative advantage in processing them. The DPCS is governed by several control
+parameters, which should be calibrated whenever signi® cant changes in the environment (such as signi® cant changes in demands, changes in management policy, external stochastic events) occur.
+Following Arzi (1995), Herbon (1998) developed an alternative version to Arzi’ s
+DPCS, which is more compatible with a situation of signi® cant changes in the order
+¯ ow. As in Arzi (1995), Herbon’ s DPCS also requires calibration of several control
+parameters from time to time. In the current paper, learning capabilities are provided
+to the DPCS suggested by Herbon (1998). By using a probabilistic machine learning
+algorithm, the DPCS is caused to adapt itself to large ¯ uctuations in demands, by
+automatically re-calibrating the control parameters where necessary.
+Machine learning adaptive production control
+We use in the paper the following terminology:
+. A part: a speci® c workpieceÐ one unit that needs to be processed.
+. A part-type: a productÐ in the system there are several parts (units) of the
+. An order: a list of parts of various types that a speci® c customer orders at a
+speci® c time and that needs to be supplied at a speci® c due-date (each part-type
+may be ordered in any quantities). All the parts of an order should be processed until the order’ s due-date, otherwise the order is late.
+The rest of the paper is organized as follows: section 2 introduces the manufacturing environment and section 3 brie¯ y presents Herbon’ s (1998) DPCS. The
+suggested adaptive control scheme is introduced in general in section 4, and in detail
+in sections 5 and 6. Section 7 describes the integration of the adaptive procedures
+within the DPCS. Section 8 describes a comparative simulation study. Finally, in
+section 9 the results are discussed and conclusions are given.
+The multi-cell FMS consists of several independent FMCs, where each is dedicated to the complete processing of a known set of part-types taken from the system’s part-types population (which is also known, and possibly large). Each cell
+consists of several computer-controlled machines that are capable of performing a
+wide range of operations and are subject to failures. Machines are equipped with
+means (pallets, automatic tools and pallet changers, communication network etc.)
+for processing di erent parts with relatively short changeover activities. A local-area
+network (LAN) links together cell-controllers, an orders controller and ® le-servers
+storing the various programs and databases necessary for operating and controlling
+the system. A typical layout of a multi-cell FMS is illustrated in ® gure 1.
+Completion of a part requires several operations, which can be performed in one
+or more of the cells in one or more alternative machine sequences. An operation can
+be processed by more than one machine at di erent processing times. A machine
+does not perform machining when loading or unloading. Processing interruption of
+an operation, due to a machine breakdown, causes a reprocessing of the operation.
+Processing times are assumed to be distributed with a very small variance (this is a
+reasonable assumption for advanced computer controlled machines).
+A central bu er serves the cell with limited capacity. Parts can be handled from
+the bu er to any machine in the cell, and back from machines to the central bu er,
+or out of the cell by a computer controlled handling device, which is also subject to
+random failures. Handling times are short relative to processing times. Parts can be
+transferred only one at a time. Parts cannot be transferred between cells.
+The multi-cell FMS operates in a dynamically changing produce-to-order environment characterized by a changing ¯ ow of orders arriving at the system. The
+various orders arrive at random to the system. Each order is composed of parts of
+di erent types in di erent quantities and an individual due date.
+The production control system’s objective is to assign the arriving parts to the
+cells and to control the parts ¯ ow within them. Its goal is to optimize a combined
+measure of orders tardiness and the system throughput.
+The system throughput, P, is measured by the total amount of work (in time
+units) produced within an observed period. Since an operation of a part can be
+performed on alternative machines with di erent processing times, a measure is
+required for determining the amount of work related to each part-type. The workload polk imposed by an operation o of a part of type l on cell k is estimated by the
+average processing time of all the alternatives of that operation. By summing the
+workloads of all operations of that part-type
+o olk . The total amount of work, P is then
+been produced in cell k during the observed period.
+A tardy order is one in which at least one part is still un® nished at the order’ s due
+date. The tardiness is measured by its value, expressed in weighted days. Let nd
+denote the number of orders that are tardy d days during an observed period.
+Assuming an increasing negative e ect of tardiness, the number of tardy days, d,
+1 ). Then the tardiness measure is obtained from:
+measure, for an observed period, is de® ned
+as the ratio between throughput and tardiness achieved at this observed period. This
+Machine learning adaptive production control
+measure gets high values for high throughput and low tardiness, and vice versa. The
+combined measure, F is therefore obtained from:
+The coe cient ­ should be selected according to the relative importance given to
+tardiness in each speci® c case. As ­ gets higher values, the relative weight of tardiness
+in the composite performance increases. The unity in the denominator is intended to
+handle situations where no late orders are observed.
+General description of the origina l DPCS
+The distributed production control system (DPCS), which is used in the current
+paper, is described in detail in Herbon (1998). As mentioned before, this DPCS is a
+revised version of the DPCS developed by Arzi (1995). Here, only a short overview
+The DPCS is based on autonomous operation of each one of the cell controllers.
+Each cell controller operates on two main levels: The upper levelÐ the lot selectorÐ
+selects, out of the arriving parts, a batch of parts, named `a lot’, to be processed in
+the cell. This lot is transferred to a cell’ s lot queue, and waits there for its turn to be
+dispatched to the cell. The waiting of lots in the lot queue is required in order to
+perform various preparation activities (preparing raw materials, loading programs,
+various set-up activities etc). The lower levelÐ the part ¯ ow controllerÐ controls, in
+real-time, the dispatching of lots to the cell and the ¯ ow of parts within it. As is
+explained below, the procedures in bothÐ the lot selector and the parts ¯ ow controllerÐ use control parameters, which should be determined according to the production system state. A schematic diagram of the DPCS is given in the previous
+The cell lot selector is activated each time a lot (a selected batch of parts) is
+dispatched from the lot queue to the cell. Its task is to select parts for processing in
+its cell from the waiting ones. Three considerations determine the cell lot selector
+process: the orders’ due-dates, the relative advantages of the cell in processing the
+various parts and the contribution of parts to the cell workload balancing.
+The lot selector of each cell k is governed by three predetermined control park
+ameters. Two parameters X1 and X2 determine the number of parts that are selected
+to be processed in cell k on the basis of the various considerations. As X1 gets lower
+values and X2 gets higher values, the number of parts that are selected to be processed on the basis of the cell’ s relative advantages consideration increases relative to
+the number of parts that are selected on the basis of the due-date and the workload
+balancing considerations (and vice versa). The third parameter, ³ 1 , determines the
+Once the cell lot selector has chosen a lot, the parts ¯ ow in each cell is controlled
+independently by the parts ¯ ow controller. The parts ¯ ow controller’ s task is to
+control the transfer of lots from the lot queue to the cell central bu er, and the
+A lot is dispatched to the cell if there is available space in the central bu er,
+provided the time elapsed since the last transfer exceeds a minimal period required
+The ¯ ow of parts in each one of the cells is controlled by a priority rule, which
+sets preferences between available parts for processing on an empty machine. The
+priority rule considers four factors: relative advantages in processing operations by
+the machines, marginal contributions of operations to the cell balancing, parts time
+slacks until due-date, and parts length of stay within the cell (Arzi and Roll 1993).
+For each cell k, these four factors are merged into one priority index by using ® ve
+control parameters ³ 2 ; ³ 3 ; ³ 4 ; ³ 5 ; ³ 6 which determine the relative weights of the priority index components (three of the parameters are multipliers and the two others are
+powers). These ® ve parameters have to be determined to suit a particular cell environment, especially a speci® c order arrival ¯ ow.
+We assume that, in a highly dynamic environment, performance will improve by
+adjusting the production control logic to the system’s current state on the basis of
+knowledge acquired during the system’s operation.
+The formerly described DPCS is based on eight control parametersÐ the cell lot
+selector parameters: X1k , X2k , ³ k1 and the part ¯ ow controller parameters:
+³ 2 ; ³ 3 ; ³ 4 ; ³ 5 ; ³ 6 . These parameters are set independently for each one of the cells,
+and actually determine the DPCS decisions.
+Each one of the cell controllers operates autonomously, and is supported by an
+individual and independent adjustment mechanism that determines the control parameter values, periodically.
+The e ect of the cell lot selector parameters X1 and X2 on the DPCS decisions is
+well understood, so that they can be adjusted to changes by a simple tracking procedure. Conversely, the e ect of the other control parameters on the DPCS behaviour is much more complicated and is strongly dependent upon the interrelations
+between the parameters. Therefore, an adjustment procedure that can handle such a
+highly complicated situation is required. To that end, and in order to reduce the
+number of parameters handled by the more complex procedure, we decided to use
+two separate adjustment procedures: a simple tracking procedure for the two park
+ameters X1 and X2 and a probabilistic machine learning procedure for the rest. Each
+one of the procedures is activated periodically. When activated, it detects the cell
+state variables and determines new control parameter values.
+Adjusting control parameters X 1k and X 2k
+As explained earlier, the constants X1 and X2 determine the number of parts that
+are selected to be processed in cell k on the basis of due-date and workload considerations rather than on operational e ciency (relative advantage) ones. Selection
+of too many parts without reference to relative advantage will cause processing of
+parts on less e cient machines, and might leadÐ in the short termÐ to a decrease in
+the cell throughput. As the throughput will decrease, it will be more di cult for the
+cell to meet the short due-dates so that, in the long-term, orders tardiness might
+The adjustment mechanism regulates o -line, at every constant time period T lk ,
+the values of constants X1k and X2k by decreasing X1k and increasing X2k when a
+Machine learning adaptive production control
+combined measure of the entire system throughput and order tardiness deteriorates,
+Let t be a point in time in which an adjustment of the parameters X1k and X2k
+takes place and let P… t† and N… t† be the entire system throughput (amount of
+produced work) and number of tardy orders during an observed time interval
+‰ t ¡ T l ; tŠ respectively. Then, the performance of the entire system at this time interval Fl … t† can be evaluated by: Fl … t† ˆ P… t† = … N… t† ‡ 1† . The ratio between the system
+performance in two successive periods, ¿ … t† ˆ Fl … t† = Fl … t ¡ T lk † , indicates the trend of
+the system behaviour. Thus, ¿ … t† > 1 indicates an improvement in the entire system
+performance while ¿ … t† < 1 indicates a decline. The control parameters are then
+A probabilistic machine learning approach is used for adjusting the control park
+ameters ³ i of each one of the cells independently. The procedure enables the system
+to cope with random events and to reduce the dependency of the DPCS on the initial
+The learning process maps the links between the cell states and the control parameters on the basis of aggregated past experience.
+The state of a cell k at any point in time t is determined by state variables ¶ i … t† ,
+i ˆ 1; . . . ; m which characterize the cell’ s physical behaviour. The state variables
+constitute an m-dimensional state space, k … t† : h ¶ ki … t† i ˆ 1; . . . ; mi . Each one of
+the state variables is bound by minimal and maximal values, ¶ i;min … t† and ¶ i;max … t†
+respectively. In order to generate a ® nite number of cell states, the continuous state
+space … t† is transformed into a discrete one S … t† as follows.
+Step 1. Establish 2 equal m-dimensional subspaces by dividing each state variable
+and ‰ 0:5 … ¶ i;max ‡ ¶ i;min † ; ¶ i;max Š . Each
+range is divided into two segments only because, due to the periodical
+adjustment of the subspaces (described later), a division into more segments
+will increase signi® cantly the computing time of the procedure without earning any signi® cant improvement.
+Step 2. Determine all points in k … t† that are included in a subspace as a single cell
+state s … t† so that, S … t† : h s … t† ˆ 1; . . . ; 2 i .
+At any given point in time t, for each cell state s … t† a probabilistic mapping of
+the control parameter space is generated. The mapping consists of the two following
+(1) discrete presentation of the control parameter space;
+At any point in time t and for each cell state s … t† its control parameters ³ j … s … t† † ,
+1; . . . ; q constitute a q-dimensional control parameter space k … sk … t† † : h ³ kj … sk … t† † ,
+j ˆ 1; . . . ; qi . Each control parameter is bounded by minimal and maximal values,
+³ j ;min … s … t† † and ³ j ;max … s … t† † respectively. Similar to the cell state space, in order to
+get a ® nite number of control parameter sets, the continuous state space k … sk … t† † is
+transformed into a discrete one V k … sk … t† † as follows.
+Step 1. Establish 2 equal q-dimensional subspaces by dividing each control variable
+range ‰ ³ j;min … s … t† † ; ³ j;max … s … t† † Š into two equal segments: ‰ ³ j; min … s … t† † ;
+0: 5 … ³ j;max … s … t† † ‡ ³ j;min … s … t† † † Š and ‰ 0:5 … ³ j;max … s … t† † ‡ ³ j;min … s … t† † † ;
+³ j ;max … s … t† † Š and calculate the central point of each segment: ³~j … s … t† † ˆ
+³ j ;min … s … t† † ‡ 14 … ³ j ;max … s … t† † ¡ ³ j ;min … s … t† † † and ³~j ‡ … s … t† † ˆ ³ j ;min … s … t† † ‡
+… † † ¡ ³ j ; min … s … t† † † , respectively.
+Step 2. Represent each control parameter subspace in k … sk … t† † by a set vk … sk … t† †
+composed of the values of the subspace’ s geometrical centre v … s … t† † :
+f³~j … s … t† † ; j ˆ 1; . . . ; qg ; ³~j … s … t† † 2 f ³~j … s … t† † or ³~j ‡ … s … t† † g , so that,
+V k … sk … t† † : h vk … sk … t† † ; vk ˆ 1 . . . ; 2q i :
+Any state sk … t† is linked to its corresponding
+control parameter space, V k … sk … t† † , by
+mapping probabilities, Pv s t , so that v2 V k sk t Pv s t ˆ 1 8 k; t; s … t† . The mapping
+probability Pv s t denotes the probability of a given control parameter set v … s … t† †
+to be selected as current control parameters when the cell is in a state s … t† . Similarly,
+the probability P³~j s t of a given control parameter value ³~j … s … t† † to be selected as a
+current control parameter when the cell is in a state s … t† is de® ned as the sum of all
+probabilities Pkv s t over all the control parameter sets in which the parameter
+The learning process starts, in each one of the cells, with an initial cell state space
+where its states are related to identical initial control parameter spaces by identical
+arbitrary mapping probabilities Pv s t ˆ 21q 8 k; t; s… t† ; v… t† 2 V … s … t† † . The aim of the
+learning process is to generate a mapping that directs the cell towards minimization
+of a predetermined cell goal function f … t† that evaluates the current internal operational status of the cell. The goal function may be di erent in various implementations. The selected goal function for our proposed DPCS is introduced later (section
+7.3, equation (15)).During the cell’ s operation the following three processes occur in
+(1) The mapping probabilities are continuously updated according to changes in
+(2) The cell state space is adjusted periodically to correspond to actual state
+(3) The cell control parameter spaces are adjusted periodically to correspond to
+These processes, presented in detail later, generate after an adequate period of time
+an independent mapping for each cell state. The ® rst process increases mapping
+probabilities, related to links between cell states and control parameter sets, which
+improve performance (in terms of the goal function), and decreases the mapping
+probabilities related to the other links. The two other processes adjust the state space
+Machine learning adaptive production control
+An example of a learning process of control parameters.
+and the control parameter space to the dynamically changing system environment
+when necessary. When the learning process has progressed for a su cient amount of
+time, the cell state spaces and their corresponding control parameter space mapping
+become independent of their initial values.
+The assumption is that by repeating these processes for a su cient time, the
+mapping adjusts itself to the changing environment, so that each cell state is related
+to the most promising control parameter set.
+In order to demonstrate this learning process, a three-cell FMS (described later in
+section 7) was simulated for 500 000 time units (Min.). As we wanted to illustrate the
+learning process convergence, the system was confronted with a random order ¯ ow
+yet without signi® cant changes in the long-range proportions between part-types (the
+proportions are those of part-type mix no. 6 in table 4). For example, the convergence process of two of the control parameters related to cell state s5 of cell 1
+( ³ 3 … s5… t† † and ³ 4 … s5… t† † ) is shown in ® gure 2. As can be seen, at the beginning the
+¯ uctuations are relatively high but the parameter values are stabilized afterwards.
+At any given time t, the cell controller uses a speci® c current control parameter
+set, vcur … s … t † † 2 V … s … t † † , that was selected at a previous point in time t . This
+current control parameter set is related to the cell state that was identi® ed at time t ,
+when the control parameter set was selected. Any time the parts ¯ ow controller
+selects a part to be processed in an emptied machine, the mapping probabilities,
+Pkv s t , related to the last identi® ed cell state, are updated.
+The mapping probabilities are updated according to the degree of change in the
+cell goal function, and the normalized Euclidean distances between the control parameter set currently in use and each one of the sets.
+The change f k … t† in the goal function f k … t† since the last updating at time t is
+and the normalized Euclidean distances, rvcur ;v … s… t† † between the control parameter
+set currently in use vcur … s … t† † and each one of the sets v … s … t† † is calculated from:
+where mj … s … t† † is the range length of control parameter ³ j … s … t† † :
+Each mapping probability related to a link between the cell state and a control
+parameter set Pv s t is multiplied by an updating factor, Uv s t . This updating
+factor is an exponential function of the product of the change in the goal function
+f k … t† and the normalized Euclidean distances between the control parameter set
+currently in use and the control parameter set rkvcur ;v … s… t† † . Hence,
+where c, the learning coe cient, is a constant that determines the learning rate (the
+intensity of changes in the probabilities values). A large value for c causes a low
+learning rate so that in each step the probability values are changed by small increments. In such a low learning rate there is a high chance of achieving proper probabilities but the process may take too much time. On the other hand, a too small
+value for c causes a high learning rate but with a small chance to determine proper
+probabilities. Therefore, the value of c has to be caref ully set so that the learning
+process will provide accurate probabilities values and will also take a reasonable
+amount of time. An exact procedure for determining the learning coe cient value is
+beyond the scope of this paper and is a matter of further research. For our proposed
+DPCS we determined the value of c by a trial-and-error process.
+t† , the sum of probabilities over all control
+parameter sets v … s … t† † to be a unity, vk sk t Pv s t ˆ 1, each updated mapping
+probability Pv s t is obtained from the ratio between the product Uv s t Pv s t and
+the sum of these products over all control parameter sets. Hence,
+0 and c > 0 then whenever the goal function improves:
+Uv s t > 1. The magnitude of Uv s t increases exponentially with rvcur ;v … s… t† † .
+Hence, when the goal function deteriorates ( f … t† > 0 ), Uv s t values related to
+remote control parameter sets increase signi® cantly, while those related to close
+Machine learning adaptive production control
+control parameter sets remain almost unchanged (the increase is relatively very
+small). Conversely, when the goal function improves ( f … t† < 0 ), Uv s t values
+related to remote control parameter sets decrease signi® cantly, while those related to
+close ones decrease negligibly (of course, since rvcur ;vcur ˆ 0 the Uv s t value related to
+the current control parameter set remains unchanged).
+Hence, when the goal function improves, Uv s t values related to relatively
+remote control parameter sets decrease much more then those related to close
+ones (the value related to the current control parameter set does not change at
+all). As a result, the nominator of equation (8) decreases much more for remote
+control parameter sets than for the relatively close ones, while the denominator of
+equation (8) is the same for all the sets. Therefore, as from equation (8), as the goal
+function improves, the mapping probabilities related to the current control parameter set and to the sets relatively close to it increase, and the mapping probabilities
+related to the relatively remote sets decreases. Conversely, as the goal function
+deteriorates the probabilities that related to control parameter sets that are relatively
+remote from the current control parameter set increase and the probabilities that
+related to relatively close control parameter sets decrease.
+As the initial bounds of the state space variables are arbitrarily determined, and
+due to the dynamically changing nature of the system environment, an incompatibility may arise between the state space and the actual values of the state variables.
+There may be two types of such incompatibilities.
+The ® rst incompatibility is where the actual variable values are all condensed in
+merely a small fraction of the state space. In that case, most of the state space is
+redundant, and the learning mechanism cannot di erentiate between various cell
+states. As the size of the space fraction actually in use becomes smaller, the learning
+mechanism becomes less sensitive to di erent cell states.
+The second incompatibility is just the opposite of the ® rst one. That it to say, the
+state space covers only part of the actual state variables values, and in that case the
+learning mechanism does not take into consideration part of the actual state space.
+The state space adjustment module adjusts at every predetermined T ck time units
+the state space to the current actual values of the state variables, and by that prevents
+incompatibilities of the state space and avoids the dependence of the learning
+The current actual values are estimated on the basis of the data collected during
+the last t time units. The parameter t has to be large enough to collect su cient
+data, but not too large to avoid the in¯ uence of old and irrelevant data on the
+The state space adjustment procedure is directed to ® t the actual variable values
+at a high signi® cance level (at least 95%). The procedure is as follows:
+(a) Compute the average and standard deviation of each state variable,
+AV … ¶ ki … t† † and SD … ¶ ki … t† † respectively from the recorded values during the
+(b) Determine the new minimal and maximal bounds for each state variable by:
+(c) Determine the new state space created by the variables’ bounds, and divide it
+into 2 equal subspaces (as described in section 6.1.)
+Similarly to the state space, the control parameter space should also be adjusted
+to avoid space incompatibility. The adjustment procedure updates for each cell state
+the control parameter space linked to it, to ® t the control parameters’ actual values.
+The procedure is activated together with the state space adjustment procedure.
+Hence, the control parameter space linked to each cell state is adjusted at every
+T c time units. The control parameter space adjustment procedure for a cell k at
+(a) Compute for each state s … t† in cell k, the expected value E‰ ³ j … s … t† † Š and the
+standard deviation SD‰ ³ j … s … t† † Š of each one of the control parameters
+(b) Determine for each state s … t† in cell k new minimal and maximal bounds for
+where the constants ¹ ³ j … s … t † † and « ³j … s … t † † are calculated by equation (14),
+as part of the former adjustment (step (e)), at time t ˆ t ¡ T ck .
+(c) Determine for each state sk … t† in cell k the new 2q control parameter sets
+… v … s † t† † (as described in section 6.1.).
+(d) Update the probabilities Pv s t from:
+where v … s … t† † and v k… s … t† † are the new and the old control parameter sets
+respectively. Notice that the above equation updates the probabilities to the
+new control parameter space so that any old set v … s … t† † a ects all new
+probabilities Pv s t according to its relative distance rkv;P
+ability Pv s t . This transformation assures that
+Machine learning adaptive production control
+(e) Update the constants ¹³ j … s … t † † and « ³ j … s … t † † . Changes in the mapping
+probability values indicate that the control parameter space should be changed. Conversely, no change in the mapping probabilities indicates that no
+change of the control parameter space is required. Hence, by determining
+that if the mapping probabilities remain unchanged, the values ³ j;min … s … t† †
+and ³ j;max … s … t† † should not be changed as well, the constants ¹ ³j … s … t† † and
+« ³ j … s … t† † are derived from (Herbon, 1996):
+The values P³~j s t and P³~j s t , which are the probabilities of parameter
+values ³ j … s… t† † and ³ j‡ … s… t† † to be selected as control parameters, are calculated from equation (3).
+In order to demonstrate the idea of a probabilistic-mapping-based adjustment
+process, a simple example of a PCS for only one cell, consisting of only two state
+variables ¶ 1 and ¶ 2 and only two control parameters ³ 1 and ³ 2 , is given here and
+Let us assume that initially (at t ˆ 0) the state variables’ ranges are: ¶ 1 2 ‰ 0; 80Š ,
+¶ 2 2 ‰ 30; 120 Š and the control parameters’ ranges are: ³ 1 2 ‰ 0; 100 Š and,
+³ 2 2 ‰ 100; 300 Š . The two-dimensional state space is then transformed into a discrete
+space by dividing it into the following four equal two-dimensional subspaces:
+s1… 0† ˆ f‰ 0; 40† ; ‰ 30; 75† g ; s2… 0† ˆ f‰ 40; 80Š ; ‰ 30; 75† g ; s3… 0† ˆ f‰ 0; 40† ; ‰ 75; 120 Š g
+and; s4… 0† ˆ f‰ 40; 80Š ; ‰ 75; 120 Š g . Each one of the four states is mapped to the control
+parameter space that consists of four sets. Initially all mappings are identical, so that
+V … s1… 0† † ˆ V … s2… 0† † ˆ V … s3… 0† † ˆ V … s4… 0† † ˆ V … s… 0† † where V … s… 0† † : h v1… s… 0† ;
+v2… s… 0† ; v3… s… 0† ; v4… s… 0† i . The central point values are ³~1 … s… 0† † ˆ 25;
+³~1‡ … s… 0† † ˆ 75; ³~2 … s… 0† † ˆ 150 and ³~2‡ … s… 0† † ˆ 250. The control parameter set’s
+values are therefore: v1… s… 0† † ˆ … 25; 150† ; v2… s… 0† † ˆ … 75; 150† ; v3… s… 0† ˆ … 25; 250†
+and v4… s… 0† † ˆ … 75; 250† . Correspondingly, the mapping probabilities are:
+Pv s 0 ˆ 0:25 8 v… s… 0† † . Let us also assume that at t ˆ 0 control parameter set
+v4… s… 0† † is arbitrarily selected; hence, the current control parameters at t ˆ 0 are:
+³ 1;vcur ˆ ³ 1 … s… 0† † ˆ 75 and ³ 2;vcur ˆ ³ 2 s… … 0† † ˆ 250. The initial situation is presented in
+Say that at t ˆ 50 the parts ¯ ow controller is activated, and the control parameters need to be re-selected. Assume also that the current cell state is
+s3… 50† s3… 0† . The distances between the current control parameter values and
+Mapping of state and control parameter spaces: one cell± two dimensional example
+their values in each one of the sets related to state s3 is calculated by equations (5)
+rvcur ;v2 … s3… 50† † ˆ rvcur ;v3 … s3… 50† † ˆ 0: 50 and rvcur ;v4 … s3… 50† † ˆ 0. For the purpose of the
+example let us assume arbitrarily a learning coe cient c ˆ 50 and a change in the
+goal function f … 50† ˆ 5 the updated probabilities derived from equations (7) and
+Machine learning adaptive production control
+Mapping of state and control parameter spaces: one cell± two dimensional example
+Notice that an increase in the goal function value (which indicates a deterioration
+in the internal operational status of the cell) decreases the probability related to the
+current control parameter set, v4, and increases the probabilities related to the other
+sets, corresponding to their distances from the current set.
+Let us say (arbitrarily) that, at time t ˆ 3000 the state space and the control
+parameter space are updated (see ® gure 4), and that the actual average and standard
+deviation of the state variables during the last
+AV … ¶ 1 … 3000† † ˆ 65; SD … ¶ 1 … 3000† † ˆ 10; AV … ¶ 2 … 3000† † ˆ 40; SD … ¶ 2 … 3000† † ˆ 6
+respectively. Then, the new bounds become: ¶ 1;min … 3000† ˆ 65 ¡ 3 10 ˆ 35;
+¶ 1;max … 3000† ˆ 65 ‡ 30 ˆ 95; ¶ 2;min … 3000† ˆ 22 and ¶ 2;max … 3000† ˆ 58. Therefore,
+as introduced in ® gure 4, the updated cell states are: s1… 3000† ˆ f‰ 35; 65† ; ‰ 22; 40† g ;
+s2… 3000† ˆ f‰ 65; 95Š ; ‰ 22; 40† g ; s3… 3000† ˆ f‰ 35; 65† ; ‰ 40; 58Š g and; s4… 3000† ˆ
+6.5.4. Control parameter space adjustment
+At time t ˆ 3000 the mapping between each one of the four cell states and the
+control parameter space are also updated. Let us take, for example, the mapping of
+state s3, assuming that the mapping probabilities at that time (after several adjustments of the probability values that have been carried out between t ˆ 50 and
+t ˆ 3000) are: Pv1 s3 3000 ˆ 0:26, Pv2 s3 3000 ˆ 0: 43, Pv3 s3 3000 ˆ 0:10 and
+Pv4 s3 3000 ˆ 0:21. The last control parameter sets were calculated from
+ˆ 0, and so are the constants ¹ ³ … s3… 0† ˆ ¹ ³ … s3… 0† † ˆ
+:5 ˆ 2 and « ³1 … s3… 0† ˆ « ³2 … s3… 0† † ˆ ‰ 1 ‡ 2… 0:25 ‡ 0:25† Š =
+2 0:5 0:5 ˆ 2 … Pv s 0 ˆ 0:25 8 v… s… 0† † † . The control parameter space is then adjusted
+(a) The expected value and the standard deviation of the control parameter are
+computed from equations (9) and (10) as follows: E‰ ³ 1 … s3… 3000† † Š ˆ 25
+0: 26 ‡ 75 0:43 ‡ 25 0:1 ‡ 75 0:21 ˆ 57, E‰ ³ 2 … s3… 3000† † Š ˆ 181 and,
+57† 0:26 ‡ … 75 ¡ 57† 0:43 ‡ … 25 ¡ 57† 0:10 ‡ … 75 ¡ 57† 0:21Š
+(b) The new minimal and maximal bounds for each one of the control parameters are computed by implementing equations (11) and (12):
+³ 2;min … s3… 3000† ˆ 181 ¡ 2 46: 2 ˆ 88:6
+(c) The new control parameter sets are therefore: v1… s3… 3000† † ˆ … 33: 0; 134:8† ;
+v2… s3… 3000† † ˆ … 81:0; 134: 8† ; v3… s3… 3000† ˆ … 33: 0; 227:2† ; and v4… s3… 3000† † ˆ
+(d) The mapping probabilities are updated. First the normalized distances
+‡ … … 134: 8 ¡ 150† = 184: 8† ˆ 0: 117. The
+rest of the normalized distance values are represented in table 1. Then, the
+mapping probabilities are adjusted to the new mapping by implementing
+equation (13). The nominators of equation (13) for sets v1… s3… 3000† to
+0:26= 0: 117 ‡ 0: 43= 0:445 ‡ 0:10= 0: 629 ‡ 0:21= 0: 762
+Machine learning adaptive production control
+Table 1. Normalized distances between old and new sets at t ˆ 3000.
+3:621; 5.056; 2.455 and 3.067 respectively, and the probabilities are:
+Pv1 s3 3000 ˆ 3: 621= 14: 199 ˆ 0:255; Pv2 s3 3000 ˆ 0:356; Pv3 s3 3000 ˆ 0: 173;
+0:572† ˆ 1:8755, ¹³2 … s3… 3000† † ˆ 1:806 and «³2 … s3… 3000† † ˆ 2:280.
+In this section we will describe how the adjustment procedures are integrated
+within the original DPCS (described in section 3). As explained in section 4, each cell
+controller is composed of two levels: the lot selector and the part ¯ ow controller.
+Four state variables were found suitably to characterize the cell’ s physical
+behaviour in relation to the DPCS considerations. The four state variables are as
+(a) ¶ 1 … t† : the average workload per part-type, per time unit imposed on the cell
+by all the parts within the cell and in the lot queue, plus the relative part of
+the expected workload imposed on the cell by the parts that are waiting to be
+selected to one of the cells (based on statistical information from the past).
+Let nk be the total number of part-types that cell k can process, Plk … t† the
+imposed on the cell by all parts of type l per time unit at time t
+l 1 Plk … t† nk . This state variable indicates the short-term
+(immediate) expected workload that is imposed on the cell.
+(b) ¶ k2 … t† : The standard deviationPof the workload per part-type per time unit
+imposed on the cell, ¶ 2 … t† ˆ ‰ l k 1 … ¶ 1 … t† ¡ Plk … t† † = nk Š . This indicates the
+degree of variety in the cell’ s short-term expected part-mix. Typically, a large
+standard deviation indicates that the workload is imposed by only a few parttypes. As the variety of part-types increases the standard deviation becomes
+smaller. A large variety of part types enables balanced workloads on
+machines and therefore has a signi® cant e ect on the cell’ s ability to use
+machines e ciently and to achieve high performance (for detailed discussion
+(c) ¶ 3 … t† : The average waiting time in the cell of parts that have been ® nished
+within the last t time units. This indicates the average work in process level
+(d) ¶ 4 … t† : The average relative advantage of machines to process the operations
+that have been actually processed by them, and belong to parts that have
+been ® nished during the last t time units. This indicates the quantity of
+operations that are actually processed in an e cient alternative.
+The procedure for adjusting the control parameters X1 and X2 is integrated as a
+part of the cell lot selector. Each predetermined constant time period T l the adjustment procedure is activated and the control parameters are updated as presented in
+section 5. The constant time period between two successive adjustments should be
+large enough to capture changes in tardiness and throughput, but short enough to
+prevent a serious decline of the system’s performance.
+During operation, between two successive adjustments, the lot selector uses the
+recently updated control parameters and operates exactly as in the original DPCS.
+The control parameters ³ kj j ˆ 1; . . . 6 are updated according to the procedures
+described in section 6. Two of the three adjustment procedures, the one that updated
+the state space and the one that updated the control parameter space, are activated
+every predetermined constant time period, T c . This predetermined constant time
+period needs to be large enough to avoid super¯ uous adjustments, yet small
+enough to avoid signi® cant space incompatibility situations. Since the lot selector
+is related to a relatively much larger range than the parts ¯ ow controller, the park
+ameter T c is typically much smaller than the parameter T l (the time period between
+successive adjustments of parameters X1 and X2 ).
+The third adjustment procedure, the one that updates the mapping probabilities,
+is activated each time a decision is being taken by the parts ¯ ow controller.
+At any time when the parts ¯ ow controller is activated (i.e. when an operation is
+selected to be processed on a machine) the control parameters are selected according
+to the current probabilistic mapping. Actually, the control parameters’ adjustment
+procedure is an integral part of the parts ¯ ow controller.
+As described in section 6.2. the core of the control parameters adjustment prok
+cedure is the learning process directed to minimize a goal function f … t† . The goal
+function that was selected for the DPCS is:
+The learning process related to the probabilistic mapping of the state and the control
+parameter spaces is directed therefore to decrease the average and standard deviation
+of the workload imposed on the cell and the average waiting time of parts, and to
+increase the number of operations assigned according to their relative advantage.
+Notice that the exponential function in the numerator of expression (15) leads to a
+quick response to an increase in the average workload and its variability.
+The selection process of the control parameters is as follows:
+(a) Update for the current state … the one that was last identi® ed, at t ˆ t )
+skcur … t† ˆ sk … t † and its related control parameter space V k … skcur … t† † † the corre0
+Machine learning adaptive production control
+sponding probabilities Pv s t , as presented in section 6.2, using the goal
+(b) Compute the current state variable values k … t† : h ¶ ki … t† ; i ˆ 1; . . . ; 4i and
+identify the corresponding new current cell state, skcur … t† .
+(c) Sample from the control parameter space V … scur … t† † the set vcur … scur … t† †
+according to the computed probabilities Pv s t .
+An extensive simulation study was carried out in order to test the e ect of the
+proposed adaptive control method on the DPCS performance. The performance of
+the proposed DPCS is compared with the original DPCS without adaptive control
+(Herbon, 1998) and to the DPCS proposed by Arzi (1995)
+The tested system consists of three independent cells, k ˆ 1; 2; 3 with 5, 4 and 3
+machines, respectively (see ® gure 1). The number of parts within the cell was limited
+to 120, 90 and 60 parts, respectively. A single handling device serves each cell.
+The part population consisted of 20 part types that di er in the number of
+operations, the number of alternative machines for each operation, the number of
+operations sequences and the processing times. The parts’ feasible operations
+sequences and the workload they imposed on each cell are given in table 2. The
+processing time means of each operation on each feasible machine are selected
+randomly from the range (10, 99 min). The processing time means of seven of the
+Table 2. Part type’ s feasible operations sequences and workloads (min.)
+Processing times of seven of the part types (Min.)
+20 part types are presented in table 3 (the data for the other 13 part types are
+available from the authors). Actual processing times were assumed to be distributed
+uniformly within an interval of 1% of the mean. Loading and unloading times
+were set to be one minute each for all cells and machines.
+Three levels of breakdowns were tested: no breakdowns, 5% downtime and 10%
+downtime. The times between failures are distributed exponentially with means of
+600 minutes for each machine and 1200 minutes for each handling device. The times
+to repair are also exponentially distributed. The means for 5% downtime are 31.6
+and 63.5 minutes for each machine and handling device respectively; and for 10%
+downtime, 66.7 and 133.5 minutes for each machine and handling device respectively.
+The minimal time lag between successive lot transfers was set to be 60 minutes for
+all cells. The control parameters initial values were: X11 ˆ 5 days, X12 ˆ 4 days,
+X1 ˆ 3 days and for all k ˆ 1; 2; 3, X2 ˆ 0: 2, ³ 1 2 ‰ 0:5; 3:0Š , ³ 2 2 ‰ 500; 10 000 Š ,
+³ 3 2 ‰ ¡ 250; ¡ 50Š , ³ 4 2 ‰ 5; 9Š ; ³ 5 2 ‰ ¡ 9; ¡ 5Š ; ³ 6 2 ‰ 6; 10Š . The state variables’ initial
+values were: ¶ k1 … 0† 2 ‰ 0: 1; 0:8Š , ¶ k2 … 0† 2 ‰ 0: 00; 0:36Š , ¶ k3 … 0† 2 ‰ 0; 5000 Š min and
+Machine learning adaptive production control
+ˆ ‰ 8; 18 Š min for all k ˆ 1; 2; 3. The predetermined parameters required for the
+adaptive control scheme were set, according to preliminary experiments, to be:
+c ˆ 50, T lk ˆ 10 000 min., T ck ˆ 250 min. and t ˆ 10 000 minutes. As mentioned
+before, the coe cient of the composite performance measure ­ should be selected
+according to the relative importance given to tardiness in each speci® c case. In our
+study ­ was set to be ­ ˆ 1:5, accordingly to Arzi (1995) and Herbon (1988).
+In each run the system was simulated for 250 000 minutes. In order to generate
+a highly changing environment, the arriving orders ¯ ow was randomly changed
+periodically, every 50 000 minutes. The arriving orders ¯ ow was generated by
+sampling from the following variable distributions: time between orders
+(lognormal (60, 9) min.); total workload in an order (uniform (400, 1200) min.); a
+part mixÐ the probabilities of part types to be in an order (one out of the eight
+discrete distributions presented in table 4); the probability of a part mix to be
+selected (equal probabilities); time to due date (uniform (2± 6) days). The part
+mixes (table 4) are of three types: roughly balanced mixes (1± 3), biased towards
+only few part types (4, 5) and biased towards part types that can be processed in
+one of the cells (6± 8). As explained, a sequence of ® ve di erent part mixes is implemented during each run. The resulting orders ¯ ow is classi® ed as: balanced, if at least
+three part mixes (out of the ® ve) are from mixes 1± 3; part-type-biased, if at least two
+part mixes are from mixes 4, 5; cell-biased, if at least three mixes are from mixes 6± 8;
+and unclassi® ed (orders ¯ ows that belong to more than one type were not considered).
+The system was simulated for one level of time to due-date, three levels of downtime rate (0%, 5%, 10%), four types of orders ¯ ow (balanced, part-type-biased, cellbiased and unclassi® ed) and three di erent DPCS (the proposed adaptive-control-
+Table 4. Party type distributions in the orders’ mixes.
+based, the identical DPCS without adaptive control capability, and Arzi’ s 1995).
+Each combination of factors was replicated twice with a di erent set of randomized
+seeds. Hence, a total of 72 runs were carried out.
+The objective of comparing the adaptive-control-based DPCS to the identical
+one that has no adaptive control capability is to analyse the e ect of the adaptive
+control scheme on the system’s performance. Furthermore, the comparison of the
+proposed DPCS to Arzi’ s DPCS allows an analysis of the proposed DPCS’s performance relative to one that has already been shown to achieve good results.
+The results of the simulation runs were summarized and statistically analysed.
+The major results are summarized in tables 5± 7.
+Table 5 shows that the adaptive control capability signi® cantly improves (with
+95% con® dence level) the throughput by about 3.7%. The proposed DPCS achieves
+higher throughput than Arzi’ s DPCS by about 5.6%.
+Tables 6 shows that for any machine downtime level the adaptive-control-based
+DPCS decreases tardiness signi® cantly relative to the original one. The improvement
+in tardiness decreases as the machine downtime rate increases. The improvement in
+Throughput achieved by the tested DPCS (workload per min.)
+Weighted order’s tardiness (days per an order).
+Machine learning adaptive production control
+Combined performance measure ln … F† [Min./day].
+the average number of tardy days per order relative to the original one decreases
+from about 75% for no downtime to 43% for 10% downtime. The adaptive-controlbased DPCS achieved also signi® cantly better results relative to Arzi’ s DPCS.
+Table 7 represents the results in terms of the composite performance measure,
+towards which the proposed DPCS directs the system behaviour (expression 1,
+­ ˆ 1: 5). For low values of orders tardiness, this measure is very sensitive to small
+changes in orders tardiness values. This sensitivity causes the range of the results to
+include values of di erent scales. Therefore, in order to enable a reasonable comparison between results of the various runs, the performance measure, F, was normalized to a natural logarithmic scale. The logarithmic scale emphasizes small
+di erences when they are signi® cant (when the values are relatively small) and
+covers them up when they are insigni® cant (values are large).
+The results show a signi® cant improvement in the system performance of the
+adaptive-control-based DPCS relative to the two other DPCSs. In general, the average improvement of the proposed DPCS relative to the original one is about 14%
+and relative to Arzi’ s DPCS is about 24%. The improvement in performance
+decreases with the increase in machine downtime rate. The average improvement
+relative to the original one is about 18% for no machine breakdown, 13% for 5%
+The CPU time was also recorded. The average CPU time per scheduling decision
+is about 74 ms for the proposed DPCS, 55 ms, for the original DPCS and 22 milliseconds for Arzi’ s DPCS. Despite the di erences, the CPU time for all three DPCSs
+is short enough for operating the system in real time.
+A real-time DPCS for a multi-cell FMS operating in a highly random environment has been developed. The DPCS has a self-adjustment capability to dynamic
+changes in the production system behaviour, provided by adaptive control mechanisms. The adaptive control capability was implemented to a DPCS, which achieves
+good results in a produce-to-order environment, but requires calibration when confronted with signi® cant changes in the part type distribution of the arriving orders.
+This implementation improves the production system performance. This improvement increases as the machine breakdown rate decreases.
+The proposed DPCS achieved signi® cantly better results than a formerly developed DPCS which has already been shown to operate satisfactorily in conservative
+produce-to-order environments (Arzi, 1995). Hence, it has been demonstrated that
+the proposed DPCS achieves good results, and handles the highly random environment well.
+In the proposed DPCS, each cell is operated by its own controller independently
+of the other cells, using only local and short-term information. These characteristics,
+in addition to the use of very simple procedures, allow short response times, which
+are essential for any real-time production control system.
+The independence of each cell leads to a modular structure of the DPCS, which
+makes it easy to add, remove or change any number of cells. No modi® cations in the
+various proceduresÐ both the decision procedures and the adjustment onesÐ are
+required. All that is needed is the update of several parameters.
+The proposed adaptive control mechanisms can be implemented not only in the
+DPCS described in this paper, but also in any parameter-based production control
+system, that requires updating of control parameters according to the dynamic
+Alternative models of adaptive control, such as online simulation, cluster analysis
+and neural networks require a large volume of history data, which have to be
+handled online (updating, sorting and searching). The proposed learning methodology, which uses only the current mapping between the system state and the control
+parameter space, requires relatively very limited volume of the recent state variables
+Arzi, Y., 1995, On-line scheduling in a multi-cell ¯ exible manufacturing system. International
+Journal of Production Research, 33, 3283± 3300.
+Arzi, Y. and Roll, Y., 1993, Real time production control of an FMS in a produce-to-order
+environment. International Journal of Production Research, 31, 2195± 2214.
+Ben-Arieh, D., Moodie, C. L. and Nof, S. Y., 1985, Knowledge-based control system for
+automated production and assembly. Towards the Factory of the Future, edited by
+Bullinger, H. J., Warnecke, H. J. (Springer-Verlag) pp. 285± 293.
+Chandra, J. and Talavage, J., 1991, Intelligent dispatching for ¯ exible manufacturing.
+International Journal of Production Research, 29 , 2259± 2278.
+Chaturvedi, A. R. Hutchinson, G. K. and Nazareth, D. L., 1992, A synergistic approach
+to manufacturing systems control using machine learning and simulation. Journal of
+Chen, P. H. and Talvage, J. J., 1982, Production Decision Support System for
+Computerized Manufacturing Systems. Journal of Manufacturing Systems, 1, 157± 168.
+Cho, H. and Wysk, R. A., 1993, A robust adaptive scheduler for an intelligent workstation
+controller. International Journal of Production Research, 31 , 771± 789.
+Chu, C. C. and Moodie, C. L., 1986, Experimentation with an adaptive control methodology
+for material handling systems containing robots and conveyors. Materials Flow, 3, 141±
+Denzler, D. R. and Boe, W. J., 1987, Experimental investigation of ¯ exible manufacturing
+system scheduling decision rules. International Journal of Production Research, 25 , 979±
+Dolinska, M. and Besant, C. B., 1995, Dynamic control of ¯ exible manufacturing systems.
+International Journal of Advanced Manufacturing Technology, 10 , 131± 138.
+Herbon, A., 1996, On-line production control of a ¯ exible manufacturing system with
+machine learning capabilities. M.Sc. dissertation, Tel Aviv University, Department of
+Industrial Engineering, Tel Aviv, Israel; 1998, On-line production control of a ¯ exible
+Machine learning adaptive production control
+multi-cell manufacturing system operating in a highly dynamic environment.
+International Journal of Production Research, 36, 2771± 2791.
+Ishii, N. and Talvage, J. J., 1991, A transient-based real-time scheduling algorithm in FMS.
+International Journal of Production Research, 29, 2501± 2520.
+Jones, A. T. and McLean, C. R., 1986, A proposed hierarchical control model for automated
+manufacturing systems. Journal of Manufacturing Systems, 5 , 15± 25.
+Li, D. C. and She, I. S., 1994, Using unsupervised learning technologies to induce scheduling
+knowledge for FMSs. International Journal of Production Research, 32 , 2187± 2199.
+Lin, G. Y. and Solberg, J. J., 1992, Integrated shop ¯ oor control using autonomous agents.
+Liu, J. J., 1990, Optimal dispatching in a periodic review cellular manufacturing system.
+Maimon,, O. Z. and Choong, Y. F., 1986, Dynamic routing in reentrant FMS. Proceedings of
+the Second ORSA/TIMS Conference on Flexible Manufacturing Systems, edited by
+Stecke, K. E. and Suri, R. (Amsterdam: Elsevier Science) pp. 467± 475.
+Montazeri, M. and van Wassenhove, L. N., 1990, Analysis of scheduling rules for an FMS.
+International Journal of Production Research, 28, 785± 802.
+Naidu, E. B. and Viswanadham, N., 1992, An expert system for real-time scheduling in
+¯ exible manufacturing systems. Information and decision Technologies, 18 , 151± 170.
+Nof, S. Y., Whiston, A. B. and Bullers, W. I., 1980, Control and decision support in
+automatic manufacturing systems. AIIE Transactions, 12, 156± 169.
+Roll, Y., Karni, R. and Arzi, Y., 1992, Measurement of processing ¯ exibility in ¯ exible
+manufacturing cells. Journal of Manufacturing Systems, 11, 256± 268.
+Shaw, M. J., 1988, Dynamic scheduling in cellular manufacturing systems: A framework for
+network decision making. Journal of Manufacturing Systems, 7, 83± 94.
+Shaw, M. J., Park, S. and Raman, N., 1992, Intelligent scheduling with machine learning
+capabilities: the induction of scheduling knowledge. IIE Transactions, 24 , 156± 168.
+Shinichi, N. and Taketoshi, Y., 1992, Dynamic scheduling system utilizing matching learning as a knowledge acquisition tool. International Journal of Production Research, 30,
+Stecke, K. E. and Solberg, J. J., 1981, Loading and control policies for a ¯ exible manufacturing system. International Journal of Production Research, 19, 481± 490.
+Sun, Y.-L. and Yih, Y., 1996, An intelligent controller for manufacturing cells. International
+Journal of Production Research, 34 , 2353± 2373.
+Wu, S. Y. D. and Wysk, R. A., 1988, Multi-pass control systemÐ a control/scheduling structure for ¯ exible manufacturing cells. Journal of Manufacturing Systems, 7 , 107± 119.

@@ -1,0 +1,878 @@
+Engineering Applications of Artiﬁcial Intelligence 16 (2003) 277–291
+AI and machine learning techniques for managing complexity,
+changes and uncertainties in manufacturing
+Computer and Automation Research Institute, Hungarian Academy of Sciences, Kende u. 13-17, Budapest, P.O. Box 63, H-1518, Hungary
+The application of pattern recognition techniques, expert systems, artiﬁcial neural networks, fuzzy systems and nowadays hybrid
+artiﬁcial intelligence (AI) techniques in manufacturing can be regarded as consecutive elements of a process started two decades ago.
+The paper outlines the most important steps of this process and introduces some new results with special emphasis on hybrid AI and
+multistrategy machine learning approaches. Agent-based (holonic) systems are highlighted as promising tools for managing
+complexity, changes and disturbances in production systems. Further integration of approaches is predicted.
+r 2003 Elsevier Ltd. All rights reserved.
+Keywords: Artiﬁcial intelligence; Machine learning; Intelligent manufacturing systems
+Growing complexity is one of the most signiﬁcant
+characteristics of today’s manufacturing, which is
+manifested not only in manufacturing systems, but also
+the products to be manufactured, in the processes, and
+the company structures (Wiendahl and Scholtissek,
+1994). The systems operate in a changing environment
+The term of Intelligent Manufacturing Systems
+(IMSs) can be attributed to a tentative forecast of
+Hatvany and Nemes (1978). In another landmark paper
+of Hatvany (1983), IMSs were outlined as the next
+generation of manufacturing systems that—utilising the
+results of the Artiﬁcial intelligence (AI) research—were
+expected to solve, within certain limits, unprecedented,
+unforeseen problems on the basis of even incomplete
+and imprecise information (Hatvany, 1983).
+The most frequently cited deﬁnition of learning comes
+from Simon (1983): ‘‘Learning denotes changes in the
+system that is adaptive in the sense that they enable the
+system to do the same task or tasks drawn from the
+same population more effectively the next time’’. With
+respect to advanced engineering automation, as stated in
+Lu (1990), ‘‘we need new computer technologies that
+E-mail address: laszlo.monostori@sztaki.hu (L. Monostori).
+0952-1976/$ - see front matter r 2003 Elsevier Ltd. All rights reserved.
+cannot only generate, record, and retrieve information,
+but also digest and synthesise information into knowledge and represent this knowledge properly to support
+decision-making’’. It can be emphasised that intelligence
+is strongly connected with learning, and learning ability
+must be an indispensable feature of IMSs (Monostori
+The structure of the paper is as follows. Section 2
+gives a short survey of AI and machine learning (ML)
+techniques available. Approaches to handling changes
+and uncertainties in the process/machine level are
+treated in Section 3. System level issues are addressed
+in Section 4, while Section 5 attempts to draw some
+conclusions and to highlight some future research
+2. AI and ML techniques for intelligent machines and
+Over the past decades, the ﬁeld of AI has made great
+progress toward computerising human reasoning. Symbolic approaches are based on the hypothesis of
+symbolic representation—the idea that perception and
+cognitive processes can be modelled as acquiring,
+manipulating, associating, and modifying symbolic
+representations. Expert systems represent the earliest
+and most established type of intelligent systems
+L. Monostori / Engineering Applications of Artificial Intelligence 16 (2003) 277–291
+attempting to embody the ‘‘knowledge’’ of a human
+expert in a computer program. Knowledge representation in these systems proceeds symbolically in the form
+of production rules, frames or semantic networks.
+A different approach to intelligent systems involves
+constructing computers with architectures and processing capabilities that mimic the processing characteristics of the nervous system. The technology that
+attempts to achieve these results is called neural
+computing or artiﬁcial neural networks (ANNs). These
+subsymbolic methods work with numeric values and
+seem to be more appropriate for dealing with perception
+tasks and perhaps even with tasks that call for combined
+Investigations conﬁrmed that—similarly to our present conception of biological structures—adaptive ANN
+techniques seem to be a viable solution for the lower
+level of intelligent, hierarchical control and monitoring
+systems where abilities for real-time functioning, uncertainty handling, sensor integration, and learning are
+essential features. Since the higher levels of the control
+and monitoring hierarchy require mostly symbolic
+knowledge representation and processing, the combined
+or integrated use of symbolic and subsymbolic methods
+is of great importance (Monostori and Barschdorff,
+Several techniques for integrating expert systems and
+neural networks have emerged over the past few years
+spreading from stand-alone models, through transformational, loosely and tightly coupled models to fully
+integrated expert system/neural network models
+(Kandel and Langholz, 1992). The integration of neural
+and fuzzy techniques, which can be considered as a ‘‘full
+integration’’, is an approach of high importance.
+Over the past years signiﬁcant research efforts have
+been devoted to the development and use of Distributed
+Artiﬁcial Intelligence (DAI) techniques (e.g. Bond and
+Gasser, 1988). An agent is a real or virtual entity able to
+act on itself and on the surrounding world, generally
+populated by other agents. Its behaviour is based on its
+observations, knowledge and interactions with the world
+of other agents. An agent has several important features.
+It has capabilities of perception and a partial representation of the environment, can communicate with other
+agents, can reproduce child agents, and has own
+objectives and an autonomous behaviour (Koussis
+et al., 1997). A multi-agent system (MAS) is an artiﬁcial
+system composed of a population of autonomous
+agents, which co-operate with each other to reach
+common goals, while simultaneously pursuing individual objectives (Koussis et al., 1997).
+A learning agent (Fig. 1) can be outlined as one
+having several modules: ﬁrst, it is the acting module,
+which takes percepts both of the external world and its
+own state and selects the external actions of the agent.
+The learning module improves the actions of the acting
+Fig. 1. General model of a learning agent and its interactions with the
+module. The learning process could be assisted by a
+critic module, which applies external performance
+standards, and the problem generator module, which
+suggests deliberate exploratory actions, so that the
+agent’s view of the world should become more and
+more appropriate. (As it will be seen later, in most
+applications only some of these modules have been
+Learning processes could be classiﬁed by the available
+supervised learning: the correct response is provided
+reinforcement learning: less feedback is given, since
+not the proper action, but only an evaluation of the
+unsupervised learning: no evaluation of the action is
+While in the ﬁrst two methods the teach-in and
+application phases can be clearly distinguished even
+when they occur in cycles, in unsupervised learning
+usually there is no distinct, predeﬁned teach-in phase; in
+most cases the learning system itself should give a signal
+While various kinds of simple learning methods work
+with examples only, the more powerful learning systems
+make use of some background knowledge of the world.
+Most research in ML has been concerned with
+methods that employ a single learning strategy, that is,
+with monostrategy methods. With the growing understanding of the capabilities and limitations of monostrategy methods, there has been an increasing interest
+in multistrategy systems that integrate multiple inference
+types and/or computational mechanisms in one learning
+system. Such systems are expected to learn from wider
+scope of input, and be applied to a wider range of
+problems than monostrategy methods (Monostori and
+L. Monostori / Engineering Applications of Artificial Intelligence 16 (2003) 277–291
+3. Managing uncertainties and changes in process/
+There are various signals (force, torque, temperature,
+mechanical vibration, acoustic emission, etc.) which
+correlate to the condition of the manufacturing processes, and are the subjects of different control and
+monitoring algorithms. However, all the efforts to ﬁnd a
+unique signal, which is applicable from different
+(technical, economic) points of view, failed. It is to be
+expected that the performance of present control and
+monitoring systems can be enhanced by the simultaneous processing of different signals (Monostori, 1988).
+In order to illustrate the difﬁculty of the problem,
+cutting force components and mechanical vibration of
+the workpiece holder in face milling are illustrated in
+Numerous statistical (e.g. mean value, quadratic
+mean value, variance, standard deviation, effective
+value, third and forth central moments, skewness,
+excess, etc.) and spectral features (e.g. absolute and
+relative power in frequency bands, frequency and power
+of the largest peak, normalised moment of the spectrum,
+and normalised central moment of the spectrum, etc.)
+can be computed from the measured signals.
+Because of the great number of considered features
+and in order to enhance the learning, estimation and
+classiﬁcation performances of modelling and monitoring
+procedures, sequential forward search (SFS) feature
+selection is usually accomplished for every group of
+investigations by using the criterion like the following
+where Sb is the between class and Sw is the within class
+scatter matrix, respectively (Devijver and Kittler, 1982;
+Dornfeld, 1990). Through this feature selection, the
+relative importance of measured signals in wear estimation/classiﬁcation can also be evaluated.
+The pattern recognition (PR)—ANNs—hybrid AI
+systems evolution in applications can be found in this
+section where the overlapping ﬁelds of tool condition
+monitoring (TCM), process modelling and adaptive
+control issues will be treated. Special emphasis is laid on
+learning abilities, admitting that learning cannot be
+treated separately from the other important issues (selfcalibration, signal processing, decision-making, fusion
+The application of numerical PR techniques for
+monitoring purposes started with linear decision
+functions trained iteratively (Sata et al., 1973; Dornfeld
+and Bollinger, 1977; Zhang et al., 1982). Fuzzy PR
+techniques proved to be efﬁcient tools for dealing with
+the uncertain nature of cutting processes (Monostori
+et al., 1996). A number of multipurpose monitoring
+systems were developed on the basis of PR, multisensor
+integration and parallel processing through multiprocessor systems (Weck et al., 1984; Monostori,
+The main common features of the developed systems
+Fig. 2. Mechanical vibration (up) and force components (down)
+modular, reconﬁgurable, multiprocessor structure,
+the ability to measure and process relatively numerous analogue and digital signals,
+the capability of profound preprocessing of measured
+signals, including frequency based analysis as well,
+the ability to make complex, multiparameter decisions,
+a variety of preprocessing and decision-making
+PR is the ﬁeld, where ANNs seem to have the most
+potential beneﬁts for practical applications. Taking into
+account other favourable features of neural networks
+(e.g. parallelism, robustness and compactness), it was
+expected that this technique can be used advantageously
+Dornfeld applies ANNs for TCM (Dornfeld, 1990).
+The applicability of ANNs for multisensor integration
+L. Monostori / Engineering Applications of Artificial Intelligence 16 (2003) 277–291
+Fig. 3. Structure of the networks for estimation and approximation of ﬂank wear with a 6–6–1 BP network, tool life cycle, target (measured ﬂank
+wear in mm) and network output (estimated ﬂank wear).
+Fig. 4. Structure of the networks for classiﬁcation and result of a BP networks with 6–6–2 structure, tool life cycle, target for class 1 (worn), outputs
+for class 0 (sharp) and for class 1 (worn).
+(acoustic emission (AE) and cutting force) was demonstrated. The comparison of results gained by linear
+classiﬁers and ANNs’ trained by the back propagation
+(BP) technique, outlined the better noise suppression
+and classiﬁcation abilities of neural networks.
+One of the main—but often neglected—problems in
+monitoring of machining processes is how to treat the
+varying process parameters. Some possibilities for
+incorporating process parameter information into the
+learning and classiﬁcation phases were demonstrated in
+networks trained under constant process parameters,
+networks trained under varying process parameters,
+networks incorporating process parameters as inputs.
+The ﬁrst investigations aimed at the estimation of the
+ﬂank wear of turning tools. The measured wear values
+were given as target values for three-layer BP networks
+Their learning and approximation performance was
+relatively strongly dependent on the considered features
+even with constant process parameters. Using steadystate signals, the best performance (max. quadratic error
+0.022 mm2, average quadratic error 0.0011 mm2) was
+reached with patterns determined from force signal
+(second normalised central spectral moment, effective
+and mean value of the feed component, and power,
+quadratic mean value and mean value of the cutting
+component) by a 6–6–1 network with 6 input nodes, 6
+hidden elements and 1 output node (Fig. 3).
+The performance of these networks decreased when
+cutting under operating conditions different from those
+In the experiments aiming at state classiﬁcation of
+tools in turning, patterns determined from signals
+collected between 0 and 0.2 mm ﬂank wear were
+assumed to be generated due to cutting with a fresh
+tool. Patterns associated with a ﬂank wear level greater
+than 0.5 mm were assumed to belong to worn tool
+The right side of Fig. 4 shows the performance of a
+6–6–2 BP network during the whole tool life cycle with
+patterns not incorporated in the learning set. Using the
+same 6 features as before, the two network outputs
+produce relatively smooth signals during the life cycle
+remarkably in the middle period (ﬂank wear between 0.2
+and 0.5 mm) too, the period which was not represented
+at all in the learning phase. (The network classiﬁes the
+tool state into worn category, when output 1 is greater
+than output 0.) Recognition ability of 100% was
+experienced for test patterns with wear o0.2 mm or
+L. Monostori / Engineering Applications of Artificial Intelligence 16 (2003) 277–291
+Fig. 5. Approaches to handling varying cutting conditions; using training patterns from the whole operating range of cutting conditions investigated
+(left), supplementing networks’ inputs with process parameters (right).
+>0.5 mm. During classiﬁcation, target values for
+patterns with ﬂank wear between 0.2 and 0.5 mm were
+Further investigations showed that networks trained
+under constant cutting conditions have limited validity
+over a broader range of process parameters. Having
+changed the cutting parameters with factors between
+0.33 and 1.5, using force features, a classiﬁcation
+performance of only 80–96.7% was attained for worn
+tools with neural networks with different number of
+input nodes (6,12) and hidden elements (2,4,6), keeping
+the 100% recognition ability for sharp tools.
+Having compared the feature selection criteria Eq. (1)
+for patterns generated under constant and varying
+process parameters, criteria belonging to patterns
+determined under varying constant parameters were
+found to be signiﬁcantly smaller (e.g. one-ﬁfth),
+therefore, such patterns are much more difﬁcult to
+The technique described above is of limited applicability. Changes in process parameters can cause similar
+effects in the measured signals as tool failures. Networks
+having no information about these conditions can
+hardly be expected to operate well over a broader range
+The simplest mode to generate networks, which work
+prospectively well over a broader range of cutting
+parameters, is to use training patterns which characterise sufﬁciently different cutting conditions (left-hand
+side of Fig. 5). The other, most sophisticated way is to
+supplement networks’ inputs with process parameters
+The application of the second type of networks (righthand side of Fig. 5) gave very promising results. Having
+completed the force features with process parameters
+(depth of cut, d; feed rate, f ; cutting velocity Vc ; and
+workpiece diameter, D) and applied the resulted feature
+vector as networks’ input during training and classiﬁcation, 100% classiﬁcation ability was attained for known
+Moreover, this type of networks gave the best results
+for patterns generated under cutting conditions outside
+the region considered during the training phase. The
+advantage of this approach manifested itself particularly
+in experiments where only vibration signals were
+considered. Depending on the network structure, a
+classiﬁcation performance between 96.5% and 98% was
+Comparing the different approaches, the best generalisation ability (networks’ performance for patterns
+generated under cutting conditions outside the region
+considered during the training phase) was achieved with
+the latter variant, i.e. the networks were able to ﬁlter out
+the disturbing effects of the varying process parameters,
+Due to the numeric, real-time nature of TCM,
+comparing with connectionist approaches, relatively
+few reports are available regarding the application
+symbolic learning techniques in this ﬁeld. In Junkar
+et al. (1991), the identiﬁcation of the plunge grinding by
+decision tree generation using vibration signals generated by the grinding wheel was described.
+The existence of low dimensional chaos in turning was
+proved, and a uniﬁed approach for TCM using a
+combination of wavelets and fractal dimensions was
+Combined structure and parameter learning technique through a neuro-fuzzy (NF) system for the
+classiﬁcation of the wear states of milling tools in four
+categories was described in Monostori and Egresits
+(1997). A four-step learning algorithm integrating
+self-organised clustering, competitive learning, and
+supervised BP learning techniques was applied for
+determining the fuzzy rules and the parameters of the
+As an example (Fig. 6), 14 rules have been automatically selected from the possible 1152 ones during the
+competitive learning phase in a self-organising way. The
+mean values and variances of bell shaped MBFs were
+adjusted to reach a kind of optimum regarding the
+network error for training patterns (Monostori and
+Egresits, 1997). The NF technique with structure and
+parameter learning showed superior performance to the
+BP solution and previous investigations with a commercial NF system.
+Further improvements have been reached by using
+genetic algorithms for rule set generation (Egresits et al.,
+L. Monostori / Engineering Applications of Artificial Intelligence 16 (2003) 277–291
+Fig. 6. NF structure for the four-class problem, after learning, with normalised inputs and output and the learnt membership functions for one of the
+Reliable process models are extremely important in
+different ﬁelds of computer integrated manufacturing,
+such as design, optimisation, control and simulation of
+processes and design of equipment (Merchant, 1998;
+et al., 1988). Difﬁculties in modelling manufacturing processes are manifold: the great number of
+different machining operations, multidimensional, nonlinear, stochastic nature of machining, partially understood relations between parameters, lack of reliable
+data, etc. In the CIRP survey on developments and
+trends in control and monitoring of machining processes, the necessity of sensor integration, sophisticated
+models, multimodel systems and learning ability was
+ANNs as learning structures for the lower level of an
+intelligent controller were suggested in Rangwala and
+Dornfeld (1989). A learning process (Fig. 7) enables the
+controller to understand how input variables (such as
+feed rate (f ), depth of cut (d), and cutting velocity (v))
+affect output variables (such as cutting force (F ), power
+(P), temperature (T) and workpiece surface ﬁnish (R)) in
+The decision-making approach of Chryssolouris and
+Guillot (1988) incorporates several process models that
+correlate process state variables such as surface roughness or chip merit mark to process parameters such as
+feed rate, cutting speed and tool rake angle. In
+Monostori (1993) inverse models of the milling process,
+i.e. separate models for three process parameters (axial
+depth of cut, cutting speed, and tooth feed) were
+generated always using the other two process parameters and force and vibration features as networks’
+Analytical models (e.g. for forces or wear occurring in
+proﬁle grinding) are available and can be adapted to
+Fig. 7. Learning of process models in machining.
+Fig. 8. Optimisation and preventive quality assurance for manufacturing processes.
+different quantities by using learning strategies. These
+analytical models can be combined by simulation
+techniques, e.g. by FEM simulation to estimate the
+thermoelastic behaviour of the workpiece. ANNs due to
+L. Monostori / Engineering Applications of Artificial Intelligence 16 (2003) 277–291
+their high adaptivity and non-linearity can be advantageously used also here (Fig. 8, Westk.amper et al., 1995).
+The combination of multisensor integration, propound
+signal processing, adaptive models, process simulation
+can lead to the adaptive control of quality.
+In Monostori and Viharos (1999) a novel approach
+for generating multipurpose models of machining
+operations combining ML and search techniques is
+described. Simulated annealing search is used for ﬁnding
+the unknown parameters of the multipurpose model in
+certain applications including modelling of process
+The above described investigations for determining
+suitable process models for machining operations aimed
+at realising powerful adaptive control schemes.
+The task to be fulﬁlled can be formulated as follows
+(Fig. 9). There exist some limitations on input variables
+(e.g. machine limitations), some output variables are to
+be kept sufﬁciently close to the desired values and others
+can have upper limits (e.g. vibration). The algorithm
+suggested in Rangwala and Dornfeld (1989) is based on
+an augmented Lagrangian method to minimise a
+properly selected combined performance index,
+which takes into consideration the above requirements.
+Their attractive algorithm, which implies forward and
+BP, has resulted in good performance using simulated
+As further improvement to this ‘‘batch mode’’
+technique (where the learning and synthesis are done
+separately) a so-called incremental approach was
+introduced, where the learning and synthesis phases
+proceed simultaneously. However, during this incremental operation only a part of the possible input space
+is scanned, mostly the region near to the operating
+point. Tested with values further from this region,
+Fig. 9. Synthesis phase of the neural network based adaptive control.
+the network showed poor generalisation properties
+One of the most well-known models for intelligent
+machining was introduced in Chryssolouris et al. (1987).
+The control strategy is based on the simultaneous
+measurement and processing of different signals (force,
+temperature, acoustic emission). These signals are fed
+into independent process models. The essential element
+of this structure is the synthesis of the different sensor
+Two hybrid AI systems for control and monitoring of
+manufacturing processes on different hardware and
+software bases were described in Barschdorff et al.
+(1997). In these hybrid systems, networks outputs are
+conveyed to an expert system that provides process
+control information. On the base of accumulated
+knowledge the hybrid systems inﬂuence the functioning
+of the subsymbolic levels, generate optimal process
+parameters and inform the user about the actual state of
+In the HYBEXP system (Monostori, 1995), an ANN
+simulator called NEURECA constitutes the lower,
+subsymbolic level (A in Fig. 10). The higher, symbolic
+level is based on the commercially available GoldWorks
+Both the symbolic and neural subsystems are connected to the machine tool (the machine tool controller
+is incorporated). The symbolic part forwards (II)
+process parameter information (feed rate, depth of cut,
+cutting speed) to the machine tool (C). The generated
+indirect signals (e.g. force components, vibration) are
+measured and conveyed (III) to the subsymbolic part
+In the ﬁgure the machine tool is substituted by a
+simulator of the manufacturing process (called SIMURECA, a version of NEURECA), enlightening the test
+and demonstration of the system. On the base of
+accumulated knowledge and actual process parameters
+(cutting speed, feed rate, depth of cut), SIMURECA
+estimates the selected features of the force and vibration
+signals. These features are forwarded to the NEURECA
+subsystem, which fulﬁls the estimation or classiﬁcation
+According to previous investigations (Monostori,
+1993), reliable ANN models for classiﬁcation of cutting
+tools or for tool wear estimation using indirect signals
+can only be constructed if they handle process parameter (e.g. cutting speed, feed rate, depth of cut)
+information. Therefore, the inputs of ANN models used
+in HYBEXP additionally incorporate cutting parameters to indirect signal features. Models for both
+classiﬁcation and estimation can be used.
+In both cases the results are conveyed to the hybrid
+part, where using additional stored knowledge (e.g. the
+type and number of cutting tools available, actual
+cutting parameters, the parts to be machined, etc.)
+L. Monostori / Engineering Applications of Artificial Intelligence 16 (2003) 277–291
+Fig. 10. Components of the HYBEXP hierarchically structured hybrid AI system.
+different decisions can be made. HYBEXP can initiate,
+e.g. machine stop, tool change, modiﬁcation of cutting
+parameters (AC control) or change of parts to be
+machined. HYBEXP can work also as a decision
+3.4. Modelling and management of process chains
+To realise adaptive control of a production chain,
+models have to be ordered to every stage of the
+production and connected by their input–output parameters. In Monostori and Viharos (1999) a software
+package ProcessManager is described, which supports
+the modelling and adaptive control of processes and
+process chains as well. It incorporates (Fig. 11):
+determination of the process models in a hybrid way,
+by integrating analytical equations, expert knowledge
+connection of the single models into a process
+chain by coupling input–output model parameters
+not limited to models of successive processes in
+deﬁnition of eligible intervals or limits for the process
+deﬁnition of a cost function to be optimised, etc.
+Fig. 12 illustrates the application of ProcessManager
+for three-criterion optimisation according to the
+interests of the customer (minimisation of the
+surface roughness), owner of the company (proﬁt/
+productivity maximisation) and the production engineer
+(maximisation of process stability through the a/f ratio).
+Parameters resulted by the optimisation of the plate
+turning operation are illustrated by 3D-plots in Fig. 13.
+Ratios of the weighting factors of the three variables
+to be optimised are represented along the axes. The
+‘surfaces’ are to be used together, i.e., the moving along
+the plane marked by Ra and a=f occurs on each of the
+diagrams at the same time. The corner marked by q
+indicates the position where the criteria of the company
+owner is the most important and the movement along
+the axes Ra and a=f represents that the criteria of the
+customer and the engineer are more and more important
+It is worth mentioning that the results illustrated here
+are based on ANN models generated with measured
+L. Monostori / Engineering Applications of Artificial Intelligence 16 (2003) 277–291
+Fig. 11. Hybrid modelling and optimisation of process chains by ProcessManager.
+Fig. 12. Hybrid modelling and optimisation by ProcessManager (model of the plate turning operation with optimisation criteria).
+4. Intelligent techniques for management of complexity,
+In today’s manufacturing systems, difﬁculties arise
+from unexpected tasks and events, non-linearities, and a
+multitude of interactions while attempting to control
+various activities in dynamic shop ﬂoors. Complexity
+and uncertainty seriously limit the effectiveness of
+conventional control and (off-line, predictive) scheduling approaches.
+The performance of manufacturing companies ultimately hinges on their ability to rapidly adapt their
+production to current internal and external circumstances. Two main kinds of approaches to dealing with
+the enumerated problems are: to enhance the reactivity
+of traditionally structured (mostly hierarchical) systems
+by sophisticated new control techniques (Tóth and
+Erdélyi, 1997; Hornyák and Monostori, 1998; Mezgár
+et al., 2000), and to construct decentralised, distributed
+systems (Baker, 1998). Another—also overlapping—
+way of dealing with changes and disturbances is to
+develop adaptive systems, which are able to learn from
+A survey of reactive scheduling approaches can be
+found in a recently published book chapter (Szelke and
+Monostori, 1999). Here we concentrate on distributed,
+4.1. Holonic manufacturing systems (HMSs)
+Holonic systems, as one of the new paradigms of
+manufacturing, consist of autonomous, intelligent,
+ﬂexible, distributed, co-operative agents or holons
+(Valckenaers et al., 1994; Márkus et al., 1996).
+Three types of basic holons, namely resource holons,
+product holons and order holons, together with the
+L. Monostori / Engineering Applications of Artificial Intelligence 16 (2003) 277–291
+Fig. 13. Parameters resulted by the three-fold optimisation of the plate turning operation.
+main information ﬂows between them are deﬁned in
+Van Brussel et al. (1998). These basic entities are
+structured by using object-oriented concepts such as
+aggregation and specialisation. Staff holons are also
+foreseen to assist the basic holons in performing their
+work. The same paper gives a reference architecture for
+holonic manufacturing systems (Van Brussel et al.,
+1998). Other authors refer only to two types of basic
+building blocks, e.g. order and machine agents in, job
+and resource agents, or order and machine (resource)
+holons (Monostori et al., 1998). A common feature of
+these approaches is that the functions of the order and
+product holons are somehow integrated in one basic
+Hierarchical, heterarchical and holonic control structures for an assembly cell are compared in Valckenaers
+et al. (1994). Holonic systems were found to deliver
+better performance in a wider range of situations than
+their more conventional counterparts. One of the most
+promising feature of the holonic approach is that
+it represents a transition between fully hierarchical
+and heterarchical systems (Valckenaers et al., 1994;
+The industrial acceptance of holonics, however, is
+relatively low among others things by reasons of
+the relative crudeness of the agent theory and its
+the insufﬁcient communication and decision-making
+capabilities of present numerical controls,
+the high investment costs of a production system
+working according to the agent principles,
+the seemingly insurmountable difﬁculties in their
+stepwise integration into existing production systems
+Several approaches are introduced and treated in
+Ka! da! r and Monostori (1998) to overcome the above
+difﬁculties. Here, approaches are considered where
+4.2. Development of agent-based architectures by
+There are a number of open questions in holonics
+(Ka! da! r et al., 1998), which can be answered by extensive
+simulation only. The object-oriented simulation framework for the development and evaluation of distributed
+L. Monostori / Engineering Applications of Artificial Intelligence 16 (2003) 277–291
+manufacturing architectures described in Ka! da! r et al.
+(1998) provides a root model that represents a plant and
+can contain different agents. The object library incorporates two main agent types: resource agent and order
+A plant in the model will contain only one order
+agent, which is responsible for order processing, job
+announcements and job dispatching between different
+resources or groups. A model may incorporate
+several resource agents, which can be initialised
+during construction (giving the name of the resource,
+process-capabilities of the resource, etc.). Only one
+information provider, i.e. the registration book, is
+The simulation framework is intensively used for
+research purposes. By its aid, a new approach, which
+breaks with the decision myopia, a common drawback
+of distributed approaches, is described in Monostori
+4.3. Holonic control of traditional systems by using
+In Ka! da! r and Monostori (1998), a novel approach to
+holoniﬁcation of manufacturing systems was introduced
+based on an extension of the Virtual Manufacturing
+(VM) concept (Onosato and Iwata, 1993) where
+manufacturing sub-systems can be classiﬁed into four
+categories: Real Physical System (RPS), Real Informational System (RIS), Virtual Physical System (VPS),
+Virtual Informational System (VIS). VM makes it
+possible to simulate manufacturing processes in advance, without using real facilities, and by this, to
+accelerate the design and re-design of real manufacturing systems.
+A fundamental feature of the VM concept is that it
+realises a one-to-one mapping between the real and
+virtual systems, i.e. VIS and VPS try to simulate RIS
+and RPS, respectively, as exactly as possible. The main
+novelty of the approach described in Ka! da! r and
+Fig. 15. Concept for holoniﬁcation of traditional manufacturing
+Monostori (1998), is the break with the above one-toone mapping, more exactly the use of the VM concept to
+control a traditional (centralised/hierarchical) manufacturing system in a holonic way.
+The virtual part of the system (Fig. 15) runs in a
+holonic way and incorporates order management,
+scheduling and control issues. For the realisation of
+the virtual part, simulation systems such as the
+simulation framework described earlier in this section
+can be advantageously used. Resource agents which,
+from technological point of view, correspond to the real
+resources of the traditional system can be easily
+constructed by using the object library of the simulation
+framework (Ka! da! r et al., 1998). Order management
+Decisions are made in the virtual, holonic system and
+conveyed to the VIS of the traditional system. The real
+production situation is sensed by the RPS and
+forwarded to the VIS, which initiates appropriate
+measures in a holonic way. As a summary, the
+traditional system shows holonic behaviour.
+The holonic information system tested in a virtual
+environment has the potential of being used in real
+holonic systems. Some requirements for this system-level
+holoniﬁcation are also given in Ka! da! r and Monostori
+4.4. Approaches to increase the performance of
+To overcome the disadvantages associated with
+hierarchical control several researchers (e.g. Hatvany,
+1985; Dufﬁe and Piper, 1986), proposed a heterarchical
+Heterarchical control is a highly distributed form of
+control, implemented by a system of independent cooperating processes or agents without centralised or
+explicit direct control. Control decisions are reached
+through mutual agreement and information is exchanged freely among the participating agents. The
+concepts for heterarchical control are derived from
+biological metaphors and analogies to the free market
+economy (Va! mos, 1983). Therefore, heterarchical control architectures offer similar prospects of reduced
+complexity, high ﬂexibility and a high robustness against
+disturbances in manufacturing. As such, there is no need
+Experiments (Dufﬁe and Prabhu, 1994) and theoretical considerations (Luh and Czerwinsky, 1994) have
+partially proven these expectations. However, it has
+also turned out that heterarchical control, banning
+all forms of hierarchy, cannot guarantee optimum
+performance. Even more essential might be that the
+behaviour of a system under heterarchical control can
+L. Monostori / Engineering Applications of Artificial Intelligence 16 (2003) 277–291
+4.5. Concept of hierarchy in a distributed system
+To combine robustness against disturbances with
+performance optimisation and predictability the incorporation of hierarchy in a distributed control system
+was proposed in Bongaerts et al. (2000). The resulting
+control architecture has a basic structure of autonomous
+co-operating local agents, which are capable of negotiation with each other in order to achieve production
+targets. That basic structure is extended with central
+agents (for instance a scheduler agent) to co-ordinate the
+behaviour of the local agents. The resulting architecture
+complies with the concepts of holonic manufacturing.
+Such a system then has both distributed and centralised
+control capabilities. The central agents operate concurrently with local agents and contribute to the same
+decision-making processes as the local agents. The local
+agents maintain their decision making autonomously,
+but may request advice from the central agents. In this
+way, the central agents can co-ordinate and optimise the
+4.6. Learning issues in agent-based manufacturing
+It is extremely difﬁcult or even impossible to correctly
+determine the behavioural repertoire and concrete
+activities of a MAS a priori (Shen et al., 2000). In the
+referred paper important aspects of learning in a multiagent setting are discussed, i.e. why, when, where and
+what to learn. In this domain both ‘‘learning from
+history’’ and ‘‘learning from the future’’ can be
+advantageously used. Concerning the latter, let us refer
+to the simulation framework described in this section,
+which can be used as a tool for learning from the future.
+In agent-based manufacturing systems a number of
+system level and resource level parameters can be the
+subject of a learning process, an important issue is, how
+Having recognised the importance of learning in
+agent-based manufacturing architectures, research was
+initiated at the Computer and Automation Research
+Institute to develop agent-based manufacturing control
+architectures with increased and more balanced performance. The ﬁrst results are treated in Ka! da! r and
+Monostori (2001). Two attempts to enhance the
+performance of agent-based manufacturing systems
+using adaptation/learning techniques were outlined in
+the paper. Some agent-level parameters were introduced, by which the system behaviour could be tuned.
+The research was carried out with the help of a
+simulation framework presented here earlier.
+It was assumed that the goal of the agents is to
+maximise their proﬁt and the evaluation of the bids is
+done on cost basis. Each agent incorporates a rule base
+with which it can locally decide on the cost factor to be
+applied for an announced task. The preconditions of
+Comparison some performance measures of a simulated manufacturing system without and with cost factor adaptation
+these rules are the utilisation of the resource and the
+ratio between the won and lost bids. The data about
+the bidding history are stored locally for each agent in
+the table of machine abilities and history (Ka! da! r and
+Table 1 illustrates the results recorded during two
+experimental runs. In the ﬁrst case, the resource agents
+were not permitted to change their cost factors, while in
+the second case they were entitled to do so.
+Some performance measures of the system are
+enumerated in the ﬁrst column. The second column
+illustrates the results without cost factor adaptation,
+while the third column shows the results achieved with
+cost factor adaptation. In the second experiment the
+precondition limits for the low and high level utilisation
+were set to 40% and 80%, respectively, while the
+resource agents were permitted to change their cost
+The simulation results demonstrate that the major
+advantage of the proposed solution is the more
+equilibrated usage of resources. Moreover, several
+performance measures such as maximum tardiness and
+the makespan are better with cost factor adaptation
+Learning process models, cause-effect relations, automatically recognising different process changes and
+degradation and intervening in the process in order to
+ensure safe processes and product qualities are sophisticated approaches with high potential. They are the
+subjects of intensive research and development work
+world-wide. The complexity of the problem and the
+associated uncertainties necessitate the application of
+L. Monostori / Engineering Applications of Artificial Intelligence 16 (2003) 277–291
+learning techniques to get closer to working IMSs. In
+correspondence with a recently published larger survey
+on ML approaches to manufacturing (Monostori et al.,
+1996), the following main trends can be enumerated:
+attributable mostly to the results of ANN research—
+in contrast to the situation 8–10 years ago, when they
+were considered as ﬁelds hardly manageable with AI
+techniques—the area of process modelling, monitoring and control came to the fore;
+in recent years ANN-based learning is the dominant
+ANNs are natural tools at lower levels of IMs where
+abilities of sensor integration, signal processing,
+uncertainty handling, real-time and adaptive functioning are required, but
+ANNs ﬁnd their applications on nearly every, also on
+non-sensory domains of manufacturing, as general
+information processing blocks with learning abilities;
+development and routine production of programmable ANN chips (e.g., cellular neural networks
+(Roska and Rodriguez-Vazquez, 2000) will give a
+new, spectacular impulse to ANN applications in
+manufacturing, especially with the rapid spread of
+neuro-fuzzy approaches manifest themselves as prospective tools of numerous problems in manufacturing where real-time nature, learning ability, handling
+of uncertainty and both symbolic and numeric
+as the considerable number of projects with multistrategy learning methods shows, the future belongs
+to these integrated approaches (Egresits et al., 1998).
+Distributed, holonic-like systems represent viable
+alternatives to hierarchical and heterarchical structures
+and the corresponding reactive scheduling approaches.
+Both of these—apparently distinct—lines can be advantageously used in rapidly changing production
+environments, however, none of them can be regarded
+as a universal tool. Even the application of such
+powerful global optimisation techniques as GAs, are
+not appropriate for very large problems, and as
+centralised approaches, are not totally devoid of all
+the known drawbacks of centralised/hierarchical control
+systems (Monostori et al., 1998). The multi-agent
+approach also becomes unrealistic beyond a given
+problem size, ﬁrst of all due to the rapidly increasing
+communication burden. Consequently, both directions
+crave for some kind of aggregation (Van Brussel et al.,
+1998). There is a scope for temporal or permanent
+hierarchies also in holonic architectures (Bongaerts et al.,
+2000). By this way, the amount of necessary communication can be decreased, and the holonic concept can
+be expanded to the level of extended or virtual
+A fundamental issue in distributed systems is how to
+ensure global performance with selﬁsh agents pursuing
+their own goals (Hatvany, 1985). The integration of
+scheduling agents as a kind of staff holons (Van Brussel
+et al., 1998) into the architecture, can contribute to
+achieving global coherence in distributed systems
+The object-oriented simulation framework described
+in the paper, is expected to provide the necessary
+framework for further research addressing such
+fundamental issues of distributed manufacturing as
+agent structures, communication protocols, group formation, negotiation, global versus local optima, scalability, system tuning, agents’ behaviour, learning at
+system and agent levels (Monostori et al., 1996).
+The further integration of more traditional AI
+and ML techniques with the agent-based approach in
+the ﬁeld of intelligent machines can be predicted
+resulting in systems with emergent behaviour (Ueda
+This work was partially supported by the National
+Research Foundation, Hungary, Grant Nos. T 026486
+Baker, A.D., 1998. A survey of factory control algorithms that can be
+implemented in a multi-agent heterarchy: dispatching, scheduling
+and pull. Journal of Manufacturing System 17 (4), 297–320.
+K!ad!ar, N., 1997. Approaches to coupling connectionist and
+expert systems in intelligent manufacturing. Computers in Industry
+Bond, A.H., Gasser, L., 1988. Readings in DAI. Morgan-Kaufmann,
+Bongaerts, L.L., Monostori, D., Mcfarlane, D., K!ad!ar, B., 2000.
+Hierarchy in distributed shop ﬂoor control. Computers in Industry
+Bukkapatnam, S., Lakhtakia, A., Kumara, S., 1995. Analysis of sensor
+signals shows turning on a lathe is chaotic. Physics Reviews E 52
+Byrne, G., Dornfeld, D., Inasaki, I., Ketteler, G., Konig,
+1995. Tool condition monitoring (TCM)—the status of research
+and industrial applications. CIRP Annals 44 (2), 541–568.
+Chryssolouris, G., Guillot, M., 1988. An AI approach to the selection
+of process parameters in intelligent machining. Proceedings of the
+Winter Annual Meeting of the ASME on Sensors and Controls for
+Chryssolouris, G., Guillot, M., Domroese, M., 1987. An approach to
+intelligent machining. Proceedings, 1987 American Control Conference, Minneapolis, MN, June 10–12, pp. 152–160.
+Devijver, P.A., Kittler, J., 1982. Pattern Recognition—A Statistical
+Dornfeld, D.A., 1990. Neural network sensor fusion for tool condition
+L. Monostori / Engineering Applications of Artificial Intelligence 16 (2003) 277–291
+Dornfeld, W.H., Bollinger, J.G., 1977. On line frequency domain
+detection of production machinery malfunctions. Proceedings of
+the 18th International Machine Tool Design and Research
+Dufﬁe, N.A., Piper, R.S., 1986. Non-hierarchical control of manufacturing systems. Journal of Manufacturing Systems 5 (2), 94–107.
+Dufﬁe, N.A., Prabhu, V.V., 1994. Real-time distributed scheduling of
+heterarchical manufacturing systems. Journal of Manufacturing
+Egresits, Cs., Monostori, L., Horny!ak, J., 1998. Multistrategy learning
+approaches to generate and tune fuzzy control structures and their
+applications in manufacturing. Journal of Intelligent Manufacturing 9 (4), 323–329.
+Hatvany, J., 1983. The efﬁcient use of deﬁcient information. CIRP
+Hatvany, J., 1985. Intelligence and co-operation in heterarchic
+manufacturing systems. Robotics & Computer-Integrated Manufacturing 2 (2), 101–104.
+Hatvany, J., Nemes, L., 1978. Intelligent manufacturing systems - a
+tentative forecast, In: A Link Between Science and Applications of
+Automatic Control, Proceedings of the VIIth IFAC World
+Congress, Vol. 2, Helsinki, Finland, pp. 895–899.
+Horny!ak, J., Monostori, L., 1998. Genetic algorithms for predictive
+and reactive scheduling of manufacturing systems. Proceedings of
+ICME98 CIRP International Seminar on Intelligent Computation
+in Manufacturing Engineering, Capri, Italy, pp. 213–220.
+Junkar, M., Filipic, B., Bratko, I., 1991. Identifying the grinding
+process by means of inductive machine learning. Proceedings of the
+First Workshop of the Intelligent Manufacturing Systems Seminars
+on Learning in IMSs, Budapest, Hungary, pp. 195–204.
+K!ad!ar, B., Monostori, L., 1998. Agent based control of novel and
+traditional production systems. Proceedings of ICME98 CIRP Int.
+Seminar on Intelligent Computation in Manufacturing Engineering, Capri, Italy, pp. 31–38 (key-note paper).
+K!ad!ar, B., Monostori, L., 2001. Approaches to increase the
+performance of agent-based production systems. Engineering of
+Intelligent Systems Lecture Notes in AI 2070 IEA/AIE-01 14th
+International Conference on Industrial & Engineering Applications
+of Artiﬁcial Intelligence & Expert Systems, June 4–7, Budapest,
+K!ad!ar, B., Monostori, L., Szelke, E., 1998. An object oriented
+framework for developing distributed manufacturing architectures.
+Journal of Intelligent Manufacturing 9 (2), 173–179.
+Kandel, A., Langholz, G., 1992. Hybrid Architectures for Intelligent
+Koussis, K., Pierreval, H., Mebarki, N., 1997. Using multi-agent
+architecture in FMS for dynamic scheduling. Journal of Intelligent
+Lu, S.C.-Y., 1990. Machine learning approaches to knowledge
+synthesis and integration tasks for advanced engineering automation. Computers in Industry 15, 105–120.
+Luh, P., Czerwinsky, L.S., 1994. Scheduling products with bill of
+material using an improved Lagrangian relaxation technique.
+Transactions on Robotics and Automation 10(2), p. 99.
+M!arkus, A., Kis, T., V!ancza, J., Monostori, L., 1996. A market
+approach to holonic manufacturing. CIRP Annals 45 (1), 433–436.
+Merchant, M.E., 1998. An interpretive look at 20th century research
+on modelling of machining. Inaugural Address, Proceedings of the
+CIRP International Workshop on Modelling of Machining
+Mezg!ar, I., Monostori, L., K!ad!ar, B., Egresits, Cs., 2000. Knowledgebased hybrid techniques combined with simulation: application to
+robust manufacturing systems. Chapter 25 in the book: Knowledge-based Systems, Academic Press, New York, pp. 755–790.
+Monostori, L., 1986. Learning procedures in machine tool monitoring.
+Monostori, L., 1988. Signal processing and decision making in
+machine tool monitoring systems. Proceedings of the Manufacturing International’88 Symposium, Vol. I., Product and Process
+Design, Atlanta, GA, April 17–20, pp. 277–284.
+Monostori, L., 1993. A step towards intelligent manufacturing:
+modelling and monitoring of manufacturing processes through
+artiﬁcial neural networks. CIRP Annals 42 (1), 485–488.
+Monostori, L., 1995. Hybrid AI approaches for supervision and
+control of manufacturing processes. Key-note paper, Proceedings
+AC’95 IV International Conference on Monitoring & Automation
+Supervision in Manufacturing Miedzeszyn, Poland, pp. 37–47.
+Monostori, L., Egresits, Cs., 1997. On hybrid learning and its
+application in intelligent manufacturing. Computers in Industry
+Monostori, L., Barschdorff, D., 1992. Artiﬁcial neural networks in
+intelligent manufacturing. Robotics and Computer-Integrated
+Monostori, L., Viharos, Zs.J., 1999. Multipurpose modelling and
+optimisation of production processes and process chains by
+combining machine learning and search techniques. Proceedings
+of The 32nd CIRP International Seminar on Manufacturing
+Monostori, L., M!arkus, A., Van Brussel, H., Westk.amper, E., 1996.
+Machine learning approaches to manufacturing. CIRP Annals 45
+Monostori, L., K!ad!ar, B., Horny!ak, J., 1998. Approaches to manage
+changes and uncertainties in manufacturing. CIRP Annals 47 (1),
+Onosato, M., Iwata, K., 1993. Development of a virtual manufacturing system by integrating product models and factory models.
+Rangwala, S.S., Dornfeld, D.A., 1989. Learning and optimisation of
+machining operations using computing abilities of neural networks.
+Roska, T., Rodriguez-Vazquez, A., 2000. Towards the Visual
+Sata, T., Matsushima, T., Nagakura, T., Kono, E., 1973. Learning and
+recognition of the cutting states by the spectrum analysis. CIRP
+Shen, W., Maturana, F., Norrie, D.H., 2000. Enhancing the
+performance of an agent-based manufacturing system through
+learning and forecasting. Journal of Intelligent Manufacturing 11,
+Simon, H.A., 1983. Why should machines learn? In: Michalski, R.,
+Carbonell, J., Mitchell, T. (Eds.), Machine Learning: An
+Artiﬁcial Intelligence Approach. Tioga Press, Palo Alto, CA,
+Szelke, E., Monostori, L., 1999. Reactive scheduling in real-time
+production control, Chapter. In: Bandimarte, P., Villa, A. (Eds.),
+Modeling Manufacturing Systems. Springer, Berlin, pp. 65–113.
+H.K., Wulsberg, J.P., Kals, H.J.J., Konig,
+Luttervelt, C.A., 1988. Developments and trends in monitoring
+and control of machining processes. CIRP Annals 37 (2), 611–622.
+T., Erd!elyi, F., 1997. The role of optimisation and robustness in
+planning and control of discrete manufacturing processes. Proceedings of The Second World Congress on Intelligent Manufacturing
+Processes & Systems, Budapest, pp. 205–210.
+Ueda, K., M!arkus, A., Monostori, L., Kals, H.J.J., Arai, T., 2001.
+Emergent synthesis methodologies for manufacturing. CIRP
+Valckenaers, P., Bonneville, F., Van Brussel, H., Bongaerts, L., Wyns,
+J., 1994. Results of the holonic system benchmark at KULeuven.
+Proceedings of the Fourth International Conference on CIM and
+Automation Technology, Troy, New York, pp. 128–133.
+V!amos, T., 1983. Co-operative systems—an evolutionary perspective.
+IEEE Continuous Systems Magazine 3 (2), 9–14.
+L. Monostori / Engineering Applications of Artificial Intelligence 16 (2003) 277–291
+Van Brussel, H., Wyns, J., Valckenaers, P., Bongaerts, L., Peeters, P.,
+1998. Reference architecture for holonic manufacturing systems.
+Proceedings of the VDI/VDEGMR Tagung Verfahren und Systeme zur technischen Fehlerdiagnose, Langen, FRG, pp. 139–154.
+Westk.amper, E., Lange, D., Hoffmeister, H.-W., 1995. Safe
+abrasive processes through adaptive control under highly chaotic
+conditions, Proceedings of the IV. International Conference
+On Monitoring and Automatic Supervision in Manufacturing,
+Wiendahl, H.-P., Scholtissek, P., 1994. Management and control of
+complexity in manufacturing. CIRP Annals 43 (2), 533–540.
+Zhang, Y.Z., Liu, Z.F., Pau, L.X., Liu, Y.I., Yang, W.B., 1982.
+Recognition of cutting states for the difﬁcult-to-cut materials.
+Application of the pattern recognition techniques. CIRP Annals 31

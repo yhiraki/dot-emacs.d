@@ -1,0 +1,521 @@
+International Journal of Production Research,
+Vol. 45, No. 21, 1 November 2007, 4937–4957
+Adaptive exponential smoothing versus conventional approaches for
+lumpy demand forecasting: case of production planning for
+College of Business, Department of Management Science and Statistics, University of Texas
+at San Antonio, 6900 N. Loop 1604 West, San Antonio, Texas 78249-0632
+Production planning in a lumpy demand environment can be tenuous, with
+potentially costly forecasting errors. This paper addresses the issue of selecting the
+smoothing factor used in lumpy demand forecasting models. We propose a simple
+adaptive smoothing approach to replace the conventional industrial practice of
+choosing a smoothing factor largely based on the analyst or engineer’s experience
+and subjective judgment. The Kalman filter approach developed in this study
+processes measurements to estimate the state of a linear system and utilises
+knowledge from states of measurements and system dynamics. Performances of
+an array of forecasting models that have been shown to work well in lumpy
+demand environments are compared with respect to the proposed adaptive
+smoothing factor and the conventional smoothing constant across a spectrum of
+lumpy demand scenarios. All models using the adaptive smoothing factor
+based on Kalman filter weighting function generate smaller errors
+than their conventional counterparts, especially under high lumpiness
+demand environments. Our proposed approach is particularly useful when
+production management is concerned about simplicity and transferability of
+knowledge due to constant personnel turnaround and low retention rate of
+Keywords: Demand estimation for manufactured goods; Kalman filter;
+Effective decision-making in the management of design and delivery of goods for
+many companies has become increasingly erratic due to structural changes in the
+market. According to Bartezzaghi (1999), these structural changes are attributed
+to the numerousness of potential customers in the market, heterogeneity of
+customers, frequency of requests, variety of customers’ requests, and the lack of
+correlations among customers’ requests. These changes generate a highly irregular
+or ‘lumpy’ demand, often characterised by relatively large differences between
+successive demand observations and sporadic demand peaks that follow several
+periods of zero or low demand (Bartezzaghi 1999). Further, this type of demand
+*Corresponding author. Email: rquintana@utsa.edu
+International Journal of Production Research
+ISSN 0020–7543 print/ISSN 1366–588X online ß 2007 Taylor & Francis
+is set apart by low volume overall and a high degree of uncertainty as to when
+and at what level demand will occur (Vollman 1995, Johnston and Boylan 1996,
+Verganti 1997). This pattern is usually found in products that are phasing in or
+out of the product line, demanded by relatively few customers, divided among
+many stocking locations so that the demand at each location is low, or derived
+from a demand from other items. Similar lumpy demand patterns can also occur
+when orders are consolidated, particularly when one moves up the supply chain.
+Such demand patterns are particularly difficult to forecast using traditional
+techniques. However, because such items may represent as much as 50 percent of
+the products a firm handles, they represent a special demand-forecasting problem
+for the logistician (Silver et al. 1999).
+Production planning in a lumpy demand environment can thus be tenuous, with
+a potential for costly forecasting errors. For example, forecasting production orders
+requires a projection of when to re-order and how many shifts of production that will
+be required in order to minimise the probability of stock outs. One alternative is to
+build large stocks of packed product inventory. This has been shown to be a poor
+alternative given the high carrying costs and large amount of product coverage
+required. Furthermore, under an erratic or lumpy demand environment, the stability
+of workforce is often impacted and the probability of stock outs increases due to
+possible consecutive periods of large demand (Schuster 1990). Verganti (1997) found
+that lumpy demand could cause fluctuations in the demand parameters, which result
+in an increase in the average annual cost of placing orders and holding inventory,
+and a discrepancy between the customer service level desired and that actually
+Established forecasting models calculate the value of some time-dependent
+quantity based on the time series’ characteristics. Based on this information,
+the appropriate smoothing factor is chosen depending on the demand’s variability.
+According to Ferris (1999), the conventional approach adopted in the industry
+usually establishes the smoothing constant for a forecasting model by the analyst’s
+experience and judgment. As a matter of fact, even under non-lumpy demand
+environments, inexperienced analysts are most prone to errors.
+To resolve the issue, some researchers have proposed methods for forecasting
+an uncertain lumpy demand while others have focused on the management of
+the manufacturing resources in its wake (Bartezzaghi 1999). This paper addresses
+the former by evaluating the effects of the selection of the smoothing factor.
+It is hypothesised that the choice of smoothing factor can significantly impact
+the accuracy of the underlying forecasting model especially under a lumpy
+demand environment. Our proposed approach is developed from a consulting
+case study on a production facility in the automobile industry. The industrial
+partner in this applied research study is willing to sacrifice forecasting accuracy
+for the ease of computation, implementation, and general comprehensibility by
+the management team. It is understood that there are relatively more
+sophisticated time series forecasting techniques available. Nevertheless, they are
+usually much more complex and require a solid and profound background in
+statistics. Most managers operating the production lines in the American twinplant industry in Mexico and Central America are not sufficiently experienced
+with this expertise given the significant personnel turn-over in this environment
+Adaptive exponential smoothing versus conventional approaches
+Due to the company’s constant personnel turnaround and low retention rate of
+expertise, the management is particularly concerned about the simplicity of the
+forecasting models and the ease of transferability of knowledge among analysts
+and engineers. It is understood that the management is willing to accept a higher risk
+of inaccuracy as a trade-off for a simple and consistent forecasting model for its
+In this case study, we develop a simple yet highly effective approach which
+conforms to the requirements from and fulfils the objectives of the company’s
+management. The proposed Kalman filter (Antuulas 1991) weighting function
+processes measurements to estimate the state of a linear system using knowledge of
+system and measurement dynamics with initial condition information. The adaptive
+smoothing factor established by this Kalman filter approach can thus be applied to
+or embedded in different forecasting models which explicitly take into account the
+short term fluctuation, trend, and seasonality of demand patterns. Hence, in our
+approach, only a single smoothing factor is needed to be controlled—an imperative
+attribute of simplicity as expected by the company.
+Practically speaking, this approach is pretty simple to compute and implement,
+besides its autonomous characteristic that requires little human expertise in analysis.
+Although this approach may not be as accurate as other relatively more sophisticated
+methods, it is especially appealing to companies without dedicated or profound
+expertise in product forecasting. Also, the ease of implementation makes the
+proposed approach versatile and alleviates the critical issue of high employee
+turnaround. It follows that the required training is relatively simple and the long-run
+Our empirical evaluation benchmarks the forecast accuracy of adaptive
+smoothing factor developed in this study against stationary smoothing
+constants (the current forecasting practice at this production facility) across
+a spectrum of forecasting models. Specifically, the contributions of this
+. Developing a Kalman filter weighting function as the adaptive smoothing
+factor to be used with a variety of forecasting models.
+. Comparing the performances of the adaptive smoothing approach with the
+conventional smoothing factor derived by analyst with respect to the
+demands of (12) products outsourced at this production facility.
+. Evaluating the adaptive approach over a broad range spectrum of lumpy
+demand scenarios versus different fixed smoothing constants.
+This paper is organised as follows. In the next section, various forecasting models
+which have shown to be useful in predicting lumpy demands in the industry are
+summarised and briefly discussed. Using historical information, our proposed
+adaptive smoothing approach will select the values of smoothing factor dynamically
+for each of these models. In section 3, the technical details of our adaptive smoothing
+approach are explained. The smoothing factor computed by this Kalman filter
+algorithm will be embedded in the three forecasting models described in section 2.
+Comparative evaluations of forecast performances as well as its results are presented
+in section 4. To obtain more unbiased conclusions, simple exponential model is also
+included in the experiment. Section 5 concludes the paper. It also provides
+Johnston and Boylan (1996) present some general results that enable variance
+estimates to be made, and these are particularly straightforward when the demand
+occasions can be represented as a Poisson process. They also find that exponential
+smoothing forecast methods have been ineffective where transactions occur on
+a somewhat infrequent basis. When using these forecasting techniques, immediately
+after a demand transaction occurs, the forecast will exceed the average demand
+per period. For such scenarios, it is preferable to forecast two separate components
+of the demand process, i.e. the time between consecutive transactions and
+the magnitude of individual transactions (Croston 1972). Croston suggests that the
+forecast for replenishment purposes will usually be needed immediately after
+a transaction. He shows that the forecast at that time is preferable to that obtained
+by simple exponential smoothing because it is unbiased and has a lower variance.
+However, he warns that the infrequent updating introduces a marked lag in
+respondent to actual changes in the underlying parameters. Thus, the CROSTON
+method may be better suited for demand that has a seasonal series.
+Lewandowski’s (1982) forecasting system (FORSYS) model can forecast over
+varying time horizons by exploiting short-term trends without ignoring long-term
+growth and seasonal patterns. Lewandowski notes that, by using this model, there is
+a considerable improvement in the forecast accuracy. FORSYS combines the
+advantages of time series forecasting with those of econometric modelling.
+Essentially, it finds the optimal least squares for the parameters of the model.
+Then the values of the initial parameters are continuously updated when fluctuations
+occur that are thought to be non-random. FORSYS does not assume that a series
+will increase monotonically. Rather, it searches among several alternative estimates
+of the trend. The choice of a particular alternative is made dependent on the time
+horizon of the forecasting. In the short term, the forecasts become a straightforward
+extrapolation of the most recent values. However, as the time horizon of the forecast
+increases, the trend estimate based on the most recent periods is taken less into
+account and that based on the whole series is assumed to influence future sales to a
+greater extent. The FORSYS method can therefore be expected to respond faster to
+changes in demand than any other method to forecast for lumpy demand. This is
+because the trend and other factors such as outliers can be eliminated and therefore
+the lag between forecasts or periods that show the rest of the techniques are
+Clifford’s CONFOR method allows the user to define the minimum and
+the maximum growth rates calculated from past data, after which any method can be
+used to perform the forecast (Schilling 1981). Theoretically, CONFOR method
+should respond quickly to the lumpiness of demand since the minimum and the
+maximum growth rates that best describe the specific item in the manufacturing
+environment are prescribed. For the sake of brevity, interested readers can refer to
+the original article for a detailed technical exposition of the method.
+Through his empirical experiment, Hernandez (1998) shows that the CROSTON,
+FORSYS, and CONFOR forecasting methods are the most accurate forecasting
+models for lumpy demand in terms of the mean square error (MSE) performance
+measure. These models utilise the concept of smoothing factors due to the fact that
+all of them incorporate the simple exponential smoothing technique in the
+Adaptive exponential smoothing versus conventional approaches
+forecasting process, which is not based on the analysis of the entire historical
+time series but rather uses a weighted moving average as the forecast with
+the assigned weights decreasing exponentially for periods farther in the past.
+Vollman (1995) illustrates the taxonomy of different types of exponential smoothing
+models. The following method describes the simple exponential smoothing
+New forecast ¼ ðactual demandÞ þ ð1  Þðprevious forecastÞ
+For convenience, the model can be written as follow:
+forecast for period t, or current period, and
+forecast for the period following t, or next period.
+The most recent value of the time series is weighted by , the next most recent
+value is weighted by (1  ), the next value by (1  )2, and so forth. All weighted
+values are then summed to determine the forecast. Typically,  is calculated by
+the reciprocal of the number of actual data points, although  is typically a chosen
+value dependent on the analyst’s experience (Vollman 1995).
+Hernandez (1998) concludes that the demand pattern that performs better with
+the simple exponential method is the one showing trends of deterministic
+characteristic with large spikes of two or three times greater than the average.
+Hernandez also shows that, by using a smoothing constant between 0.7 and 0.8,
+this forecasting method performs better than any others. Among other forecasting
+techniques, the simple exponential smoothing with a large smoothing constant comes
+first in six out of the 12 products studied in his research. According to Hernandez,
+if accuracy is not the primary concern to forecast any particular product under an
+erratic environment, and if no history is available to determine the demand patterns,
+the simple exponential smoothing is recommended.
+Vollman (1992) recommends not reacting quickly to changes in the lumpy
+demand pattern for such products and services if no assignable causes can be found
+for the demand shifts. Rather, he suggests using a simple, stable forecasting method
+that does not react rapidly to change, such as the basic exponential smoothing model
+with a low smoothing constant value or a regression model that is refitted no more
+frequently than on an annual basis. The next section addresses the use of an
+adaptive/dynamic approach for selecting the smoothing constant for forecasting in a
+Makridakis et al. (1983) described an extension to traditional exponential smoothing
+model, generally known as adaptive exponential smoothing. This approach
+continuously evaluates the performance in the previous period and updates
+the smoothing coefficient. Mabert (1978) provides an example of this technique
+in operations management while Leung et al. (2000) illustrate an application
+to financial sector. For the sake of brevity, interested readers should refer to
+Makridakis et al. (1983) for an exposition of technical details. Essentially, the
+traditional adaptive smoothing approach utilises two control and two endogenous
+parameters, making the execution of the approach slightly more complex and
+subjects the forecasting model to higher potential of estimation error. This also
+contradicts the company management’s request for simplicity and ease of
+Another aspect to consider is the sensitivity and stability of the estimated model
+over time. Because of the potential for high lumpiness in some product demands,
+some estimated endogenous parameters may have small values. Consequently,
+the adaptive smoothing parameter (t, which is a ratio of these endogenous
+parameters) can be very sensitive to sudden and drastic demand changes over time.
+Furthermore, depending on the lumpiness and pattern of historical demand, the
+amount of data required for these models to attain stable performance may be
+As a result, the traditional adaptive smoothing variable approach would not be
+the preferred method of analysis herein given the company’s desire for a simple and
+robust methodology. Therefore, a less complex adaptive scheme better aligns with
+the industrial partner’s expectation, as developed in the next sections.
+Choosing the proper value for the exponential smoothing constant requires a
+considerable degree of judgment and experience. The higher the value of ,
+the greater the weight placed on the most recent demand level. This allows the model
+to respond more quickly to changes in the time series. However, a too high  value
+may make the forecast ‘nervous’ and track random variations in the time series
+rather than the fundamental changes. The lower the  value, the greater the weight
+given to the demand history in forecasting future demand and the longer the time lag
+in responding to fundamental changes in the demand level. Low  values provide
+stable forecasts that are not likely to be heavily influenced by randomness in the time
+series. Typical values for  typically range from 0.01 to 0.3, although higher
+values may be used for short time periods when anticipated changes will occur
+Since most of the time the most appropriate value for  depends on an analyst’s
+experience, our study focuses on obtaining an  value that does not depend on the
+analyst’s experience, rather it will be determined by the system itself. Thus, our
+approach stresses simplicity and transferability of knowledge especially for
+manufacturing lines with constant personnel turnaround and low retention rate of
+Technically speaking, the value of smoothing constant  value can be obtained
+using a Kalman filter algorithm. Soreson (1985) developed a recursive computational
+procedure which processed measurements to estimate the state of a linear system
+based on the knowledge of the system and measurement dynamics, given statistics of
+system noises and measurements errors, and initial condition information.
+Adaptive exponential smoothing versus conventional approaches
+Logic of adaptive smoothing approach utilising a Kalman filter.
+He concluded that, among other advantages of this algorithm, it statistically
+minimises the estimation error and makes complete use of all measurement data plus
+prior knowledge about the system. The noted disadvantages are the sensitivity to
+erroneous a priori models and statistics, and the inherent computational burden.
+Nevertheless, with the capacity of modern day computers, this computational
+burden should not be a material issue. In separate studies, Bunn (1981), Enns et al.
+(1982), and Snyder (1988) illustrated the use of the Kalman filter in estimation based
+on exponential smoothing. Their results shared the common notion that the Kalman
+filter provides meaningful improvements to forecasting. Nevertheless, their
+methodologies and algorithms are significantly more computationally demanding
+than our proposed method and thereby less desirable to the industrial partner.
+The ‘System’ described in figure 1 can be seen as the current forecasting method
+(e.g. CROSTON, FORSYS, CONFOR) augmented by the Kalman filter, and used
+to predict the demand for any particular product characterised by having a ‘lumpy’
+behaviour. ‘System error sources’ is the variability or nervousness of the demand due
+to heterogeneity of customers, frequency requests and variety, and correlation
+between customers among others. The ‘System output’ is the estimated demand
+given by the forecasting technique used. The ‘Measurement error sources’ are the
+irregular patterns of the demand, the manufacturing variability, the sample
+parameters reporting the underlying population, and the goodness of fit distributions
+used to model the behaviour of the demand. The ‘Measure’ is the forecast error
+determined by the measure of performance selected. The ‘Observation’ is the actual
+demand of the product being forecast. The ‘a priori information’ is the expected
+lead-time inventory on hand. The observation and the a priori information are fed to
+the ‘Kalman filter’, which uses the appropriate weighting factor in order to produce
+the ‘System state estimate’, which is the ‘lumpy forecast’ for the product being
+The adaptive smoothing factor () established by this Kalman filter approach can
+be applied to or embedded in different forecasting models which explicitly take
+into account the short term fluctuation, trend, and seasonality of demand patterns.
+Hence, in our approach, only a single smoothing factor is needed to be
+controlled—an imperative attribute of simplicity as expected by the company in
+Kalman filters can be applied to state estimation problems defined over a finite or
+infinite time interval. It is applicable to lumpy demand forecasting in which the
+signal model is a linear but possibly time-varying linear system. Loosely defined,
+it is a problem of calculating a scalar constant x based on n noise-corrupted
+The Kalman filter is derived from optimising the assumed form of the linear
+estimator. Essentially the estimate of the state is corrected at the time of each
+measurement according to a weighted difference between the actual and the
+anticipated measurement vectors. The quantification of the weighted difference as
+a weighting function regularises the estimate by not allowing system fluctuations to
+significantly affect it. The weighting function W( j) for a particular period j is a key
+element of the Kalman filter and is equivalent to the adaptive smoothing variable ()
+The stochastic nature of product demand, even with the relatively high variability
+posed by a lumpy environment, still has a statistical tendency towards
+self-regulation, just as the actual number of forecasted pieces tends toward the
+actual number of pieces, which is the centre of mass. A high difference between the
+actual and expected demand requires greater adjustment, but this individual
+adjustment must be tempered with the stochastic nature of the demand.
+The difference between the actual and expected demand for any particular period
+must thus be statistically weighted in order to determine accurately the state of the
+forecasting system after any given period is completed. This is the limitation of
+a deterministic and static smoothing factor.
+At any given period, ( j ¼ 1, 2, 3, . . .), the weighting function W( j) of the Kalman
+filter in vector form is computed as follows:
+where in the absence of noise H( j) ¼ I (¼1 in the scalar case) at time period j, and
+P( j) is the covariance matrix. The starting covariance of the state variables
+(P( j/j  1)) is the standard deviation of the demand at time period j( j) in the scalar
+case. Further, it is assumed that P( j/j  1) exists for all time periods. The optimumweighting matrix W( j) minimises the difference between the current period and the
+The proposed model assumes no error in measuring the demand; therefore, the
+covariance of measurement noise is 0 for all measurement periods. As a result,
+equation (3) is reduced to equation (4) in the scalar case.
+At any current period j, the Kalman Filter weighting function W( j þ 1) developed
+as a smoothing variable () for forecasting lumpy demand at period j þ 1 can
+Adaptive exponential smoothing versus conventional approaches
+be expressed as equation (5) by expanding the standard deviation terms in
+weighting function (adaptive smoothing variable);
+The numerator is the standard deviation of the demand from the current period
+back N periods, while the denominator is the difference between the standard
+deviations for N previous periods from the current and the previous periods,
+respectively. In this manner weighting function acts as an estimation regulator in that
+it will dampen the effects of statistical outliers. Let
+The mathematical properties of the weighting function are such that limSDiff!1
+Wð jÞ ¼ 0 and limSDiff!0 Wð jÞ ¼ 1 3 fSDiff "ð0; 1Þg and SDiff. The weighting function
+can thus be interpreted; i.e. the larger the difference between the actual demand and
+the forecasted demand at the current period ( j), the smaller the value of W( j)
+and hence, the smaller weight (smoothing factor) that will be given to the estimate
+(forecast) for the next ( j þ 1) period. On the other hand, the smaller that difference
+the value of W( j) will be closer to one. A W( j) value of one implies a maximum
+Our computational experiment serves three primary purposes:
+1. To evaluate the forecast performance of the adaptive smoothing approach
+relative to that of the conventional method used in the industry.
+2. To examine whether the degree of demand lumpiness exerts a significant
+influence to the overall performance of the proposed approach in the
+3. To investigate how the performance of the approach reacts to the choice of
+For the purpose of classifying the degree of lumpiness, the manufacturing company
+in this consulting case study defines a ‘low’ lumpy environment as one within 1
+standard deviation from the mean demand. Medium and high lumpiness are defined
+as within 2 and beyond 2 standard deviations from the mean, respectively.
+In summary, our empirical experiment is designed to test the following null
+(H1): There is no significant difference in performances between the proposed
+Kalmam filter model and the CROSTON, the CONFOR, the FORSYS,
+and the simple exponential models, respectively.
+(H2): The ranks of relative performances among all experimental models are the
+same for the three (high, medium, and low) levels of demand lumpiness.
+(H3): The length of forecast horizon does not create material impact on the ranks
+of relative performances among all experimental models.
+The empirical evaluation is performed using 36 months of historical lumpy
+demand data based on 12 products collected from the industrial partner,
+an American twin-plant manufacturer in Cd. Juarez, Mexico. Detailed product
+To facilitate a parallel comparison, eight different sets of demand forecasts are
+generated for each product. The first four sets of forecasts are estimated by the
+CROSTON, CONFOR, FORSYS, and simple exponential smoothing models using
+a fixed smoothing constant of 0.8. Hernandez (1998) concludes that a  value of 0.8
+reacts quickest to the erratic environment of the data presented in table 1.
+Then, these forecasts based on fixed smoothing constant are benchmarked against
+the forecasts computed by the Kalman filter-based adaptive smoothing approached
+adapted for the same four forecasting models. In other words, the relative
+performances of a stationary smoothing factor and a dynamic smoothing factor
+are compared. Figures 2 to 5 depict the plot of the actual demand against the
+forecasts using the adaptive smoothing factor, as well as the forecast using
+the conventional fixed smoothing constant of 0.8. Three separate lengths of forecast
+horizon used in Kalman filter are considered (N ¼ 2, 6, 12). (These forecast horizon
+lengths reflect the multiples of production cycle duration. The values are selected
+Each figure shows the forecasts for each individual model for product
+10316D185, which has been deemed by the company to have the most erratic
+demand. Results on other products follow a similar pattern.
+The total mean square error (MSE) for each of the eight sets of forecasts for
+product 10316D185 is delineated in figure 6. MSE was chosen in this study as the
+primary evaluation criterion because the industrial partner practices a just in time
+(JIT) manufacturing philosophy, which attempts to keep inventories at the right
+levels. The impact of a small deviation from the anticipated buffer or safety
+stock level will be very different from that resulted from a large deviation.
+Consequently, the management’s tolerance reduces drastically when the inventory
+deviation becomes larger. Essentially, this notion motivated the adoption of
+MSE, which tends to penalise large forecasting errors. In addition, the selection of
+MSE provides a parallel comparison with prior studies at this company, such as
+Demand of this product displays the highest standard deviation among the twelve
+product lines examined. A side-by-side comparison of the forecasted results
+illustrates that the Kalman filter-based adaptive smoothing factor performs generally
+Month 13 Month 14 Month 15 Month 16 Month 17 Month 18 Month 19 Month 20 Month 21 Month 22 Month 23 Month 24
+Month 1 Month 2 Month 3 Month 4 Month 5 Month 6 Month 7 Month 8 Month 9 Month 10 Month 11 Month 12
+Adaptive exponential smoothing versus conventional approaches
+Month 25 Month 26 Month 27 Month 28 Month 29 Month 30 Month 31 Month 32 Month 33 Month 34 Month 35 Month 36
+Adaptive exponential smoothing versus conventional approaches
+Forecast comparison for product 10316EH1006 using croston model
+Demand forecasts of product 10316EH1006 using the Croston model.
+Forecast comparison for product 10316H1006 using confor model
+Demand forecasts of product 10316EH1006 using the CONFOR model.
+better than the fixed smoothing constant (with  ¼ 0.8) across the four forecasting
+models included in this study. This finding is useful and practically meaningful to the
+manufacturing company because the adaptive smoothing factor is derived from data
+autonomously without the expertise of an experienced analyst. The superiority of the
+adaptive approach represents an appealing feature to operation environments
+exhibiting constant personnel turnaround and low retention rate of expertise, as well
+as to smaller companies with fewer resources for analysis. In addition, models used
+in conjunction with the Kalman filter adaptation respond quickly to relatively large
+changes in demand pattern possibly due to the technique’s inherent dynamic nature
+and rolling horizon updating. It is also found that the behaviours of forecasted
+demand vary depending on the extent of demand lumpiness. This observation
+Forecast for product 1006 using FORSYS model
+Demand forecasts of product 10316EH1006 using the FORSYS model.
+Forcast for product 10316H1006 using simple exponential method
+Figure 5. Demand forecasts of product 10316EH1006 using the simple exponential
+is further supported by many studies in the literature including Schultz (1987),
+Johnston and Boylan (1996), and Verganti (1997), Bartezzaghi (1999).
+Given these encouraging findings, we extend our empirical investigation to cover
+all 12 products with respect to different levels of demand lumpiness. Further,
+adaptive smoothing factor is compared with 10 levels of smoothing constant
+(in increment of 0.1) for all four forecasting models. Results for this full-scaled
+experiment are tabulated in table 2. It can be seen that the adaptive smoothing
+approach outperforms the conventional fixed smoothing constant method in all
+categories. Thus, a reduction in forecast error can be realised by different forecasting
+Adaptive exponential smoothing versus conventional approaches
+Figure 6. Total mean square errors of forecasted demands of product 10316ED185 based on
+fixed smoothing constant and adaptive smoothing factor.
+models at different lumpy environments when the adaptive smoothing factor is
+utilised. In addition, the higher the lumpiness (i.e. higher standard deviation of the
+demand), the more magnitude gain is captured by the Kalman filter smoothing
+approach. The observations corroborate our previous conjecture and lead to a
+favourable implementation of this new operation analysis for the manufacturing
+company. A schematic sketch of the experimental results is illustrated in figure 7,
+where the adaptive smoothing factors and the fixed smoothing constants from 0.1 to
+1.0 are used to generate demand forecasts from the four underlying models; i.e.
+simple exponential smoothing, CROSTON, CONFOR, and FORSYS. MSEs based
+on the 10 fixed smoothing constants are collapsed (averaged) to a single entity for
+A further comparison of the effectiveness of the adaptive smoothing approach
+over the three ranges of lumpiness with respect to MSE is shown in figures 8 to 10.
+Note that the dotted lines in these figures indicate the minimum levels of mean
+square errors associated with simple exponential, CROSTON, CONFOR, and
+FORSYS models. Further, all minimum levels are achieved by the Kalman
+filter-based adaptive smoothing approach.
+MSE of the adaptive smoothing factor is benchmarked against those of the fixed
+smoothing constants in steps of 0.1. The dotted lines indicate the minimum levels of
+MSEs associated with simple exponential, CROSTON, CONFOR, and FORSYS
+models. It can be seen that the minimum MSE level for each model is attained by the
+adaptive smoothing factor, regardless of the degree of demand lumpiness. Moreover,
+a more detailed examination of the figures suggests that the CROSTON model
+Comparison of mean square errors between adaptive smoothing factor and fixed smoothing constant across different demand lumpiness and
+Adaptive exponential smoothing versus conventional approaches
+Figure 7. Comparison of MSE for all products with respect to different underlying
+in conjunction with adaptive Kalman filter smoothing performs the best in high and
+medium lumpy environments whereas the exponential smoothing model with
+adaptive smoothing outperforms others in low lumpy scenarios. Although there
+may not exist a best performer in lumpy demand forecasting, results here point to the
+statistical value of implementing the rather autonomous adaptive smoothing
+approach in addition to the various managerial issues addressed by the
+In this case study, we propose an adaptive smoothing approach to enhance the
+conventional industrial practice of choosing a smoothing factor largely based on
+the analyst or engineer’s experience and subjective judgment. This approach is pretty
+simple to compute and implement, besides its autonomous characteristic that
+requires little human expertise in analysis. Although this approach may not be
+as accurate as other relatively more sophisticated methods, it is especially appealing
+Comparison of the fixed smoothing constant vs. adaptive smoothing factor
+Comparison of forecast performances in high lumpy demand environment.
+Comparison of the fixed smoothing constant vs. adaptive smoothing factor
+Comparison of forecast performances in medium lumpy demand environment.
+Adaptive exponential smoothing versus conventional approaches
+Comparison of the fixed smoothing constant vs. adaptive smoothing factor
+Figure 10. Comparison of forecast performances in low lumpy demand environment.
+to companies without dedicated or profound expertise in product forecasting.
+Also, the ease of implementation makes the proposed approach versatile and
+alleviates the critical issue of high employee turnaround. It follows that the required
+training is relatively simple and the long-run productivity ratio can be bolstered.
+All models using the adaptive smoothing factor based on Kalman filter weighting
+function generate smaller errors than their conventional counterparts, especially
+under high lumpiness demand environments. Empirical experiment also finds that
+the superiority of the adaptive approach is independent of the choice of underlying
+forecasting model. Since the conventional practice of selecting a fixed smoothing
+constant depends on the analyst’s experience, it is concluded that, when an
+inexperience analyst or one new to the company is to use these forecasting methods,
+the use of the adaptive smoothing variable is recommended in order to obtain the
+Further research should consider external variables that can affect the forecasted
+results. For example, Bartezzaghi (1999) noted that demand lumpiness is a
+multi-dimensional phenomenon, generated by different market characteristics,
+namely, numerousness of customers, heterogeneity of customers, frequency
+requests and variety, goodness of fit distributions used to model the behaviour of
+the product, lead times, turnovers, and absenteeism. These variables are external
+to the system and can have a significant effect on the output. Nevertheless,
+(e.g. multivariate transfer function and generalised method of moments) and is in
+contrast to the company’s explicit requirement of simplicity and ease of
+This research was funded by the National Science Foundation (1998–99 GOALI
+DMI 9810011) and Cutler-Hammer Sensors Division in Cd Juarez, Mexico.
+The authors acknowledge Dr Donald Senich, Program Director of the
+NSF-GOALI program, and Dr Larry Seiford, NSF Operations Research and
+Production Systems Program Director. Further, Jesus Hernandez, process engineer
+at Cutler-Hammer, is acknowledged for his initial work, as well as his support and
+guidance. Mr Jose T. Arredondo, an IE graduate student at the University of Texas
+at El Paso, performed the data collection and ran the analytical models. The authors
+also would like to thank Dr Hazem Daouk of Cornell University and Dr Doug
+Blocher of Indiana University for their valuable comments. Any errors in this paper
+Antuulas, A., Mathematical System Theory: The Influence of R.E. Kalman, 1991
+Bartezzaghi, E., Measuring the impact of asymmetric demand distributions on inventories.
+Int. J. Prod. Econ., 1999, 60–61, 395–404.
+Box, G., Forecasting by exponential smoothing operator. Oper. Res., 1970, 9(5), 686–687.
+Bunn, D.W., Recursive estimation of the observation and process noise covariances in online
+Kalman filtering. Euro. J. Oper. Res., 1981, 6, 302–308.
+Croston, J.D., Forecasting and stock control for intermittent demands. Oper. Res. Quart.,
+Enns, P.G., Machak, J.A., Spivey, W.A. and Wrobleski, W.J., Forecasting applications
+of an adaptive multiple exponential smoothing model. Manage. Sci., 1982, 28,
+Ferris, N., ERP: sizzling or stumbling? Managing technology. Gov. Exec., 1999, July, 7–16.
+Hernandez, J., Forecasting techniques for lumpy demand items, in 4th Annual International
+Conference on Industrial Engineering, Theory, Applications and Practice, 1998, pp. 1–8.
+Johnston, F.R. and Boylan, J.E., Forecasting for items with intermittent demand. J. Oper.
+Lewandowski, R., Sales forecasting by FORSYS. J. Forecast., 1982, 1, 205–214.
+Leung, M.T., Daouk, H. and Chen, A.S., Forecasting stock indices: a comparison
+of classification and level estimation models. Int. J. Forecast., 2000, 16, 173–190.
+Mabert, V.A., Forecast modification based upon residual analysis: a case study of check
+volume estimation. Dec. Sci., 1978, 9, 285–296.
+Makridakis, S., Wheelwright, S.C. and McGee, V.E., Forecasting Methods and Applications,
+2nd ed., 1983 (John Wiley and Sons: New York).
+Quintana, R., A production methodology for agile manufacturing in a high turnover
+environment. Int. J. Oper. Prod. Manage., 1998, 18(5), 452–470.
+Schilling, C.W., 1981, Conditional forecasting: the key to continuing profitability
+in the changing future, in Fall Industrial Engineering Conference Proceedings,
+Schuster, E., A deterministic spreadsheet simulation model for production scheduling in
+a lumpy demand environment. Prod. & Invent. Manage. J., 1990, 31, 39–43.
+Adaptive exponential smoothing versus conventional approaches
+Schultz, R., Forecasting and inventory control for sporadic demand under periodic review.
+Silver, E.A., Pyke, D.F. and Peterson, R., Inventory Management and Production Planning and
+Scheduling, 3rd ed., 1999 (John Wiley & Sons: New York).
+Soreson, H.W., Kalman Filtering: Theory and Application, Vol. 38, pp. 75–82, 1985 (IEEE
+Snyder, R.D., Progressive tuning of simple exponential smoothing forecasts. J. Oper. Res.
+Verganti, R., Order overlapping with uncertain lumpy demand: A simulation theory.
+Vollman, T, Manufacturing Planning and Control Systems, 1995 (Irwin Publishers:

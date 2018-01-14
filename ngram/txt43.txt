@@ -1,0 +1,153 @@
+16th European Symposium on Computer Aided Process Engineering
+and 9th International Symposium on Process Systems Engineering
+A Real Time Adaptive Dynamic Programming Approach For Planning
+Nikolaos E. Pratikakisa , Jay H. Leea∗ , and Matthew J. Realﬀ
+School of Chemical and Biomolecular Engineering, Georgia Institute of Technology,
+311 Ferst Drive NW, Atlanta,+ GA 30332, USA
+Abstract In this paper we propose a real time dynamic programming architecture for
+learning a high quality policy through simulation geared towards multi-stage stochastic
+decision problems. The method of real-time dynamic programming is made computationally tractable for practical process scheduling problems by the adoption of a notion
+called ‘adaptive action set.’ We apply the proposed approach to an exemplary manufacturing process with stochastic demand and product yield and compare its performance
+with an ‘ideal’ solution derived from a mixed integer programming formulation. We also
+investigate the eﬀect of value table initialization by comparing two diﬀerent initialization
+Keywords: Reinforcement learning, approximate dynamic programming, real-time dynamic programming, planning and scheduling
+Optimal resource planning, scheduling, and allocation under uncertainty is one of the
+important challenges arising in industrial process scheduling applications. Historically,
+these types of problems have been approached by using mixed integer programming (MIP)
+methodologies. Despite the rigor of optimality, math program based methods are limited
+in terms of number of scenarios they can consider due to computational reasons.
+The focus of this paper will be on an alternative strategy for solving such problems based
+on real-time dynamic programming. The aim of the strategy will be to learn a high quality
+policy, not necessarily an optimal policy, for inﬁnite horizon dynamic decision problems
+for complex stochastic systems, in a computationally tractable way. The system is to
+be formulated as a Markov Decision Process (MDP), a formal deﬁnition of which can be
+found in [1]. The proposed architecture combines mathematical programming(e.g., MIP),
+localized function approximators [2] (e.g., k-Nearest Neighbors), and real time dynamic
+One computational method for constructing an optimal policy for a MDP is Dynamic
+Programming (DP). An essential concept in DP is the so called ‘value function,’ which
+The authors gratefully acknowledge the ﬁnancial support from the National Science Foundation
+maps a state s0 to the expected reward starting from that state for a given policy π ∈ Π,
+as expressed in Eq.(1), assuming an inﬁnite horizon formulation:
+In particular, the focus is on ﬁnding the optimal value function, which corresponds to the
+The classic DP algorithms that guarantee convergence to the optimal value function include value iteration, policy iteration, and linear programming (details in [1]). These
+classical algorithms are rendered impractical, however, by the “curse of dimensionality”,
+which refers to the exponential growth of the computation with respect to the dimension
+of the state space. For instance the conventional value iteration requires 1) the enumeration and storage of the value for each (discretized) state, and 2) repeated updates of the
+value function of each state until convergence. We note that each value function update
+calls for the evaluation of the reward under all the possible actions with respect to that
+state in order to ﬁnd an optimal one. In real applications, the size of the state and action
+space may be such that it is very diﬃcult or even impossible to store and update the
+values for all the states. Also for uncountable state and action space, discretization and
+interpolation are essential, but the resulting errors may destroy the convergence to the
+The proposed RTDP approach, on the other hand, learns the value function in a manner
+similar to the reinforcement learning techniques, that is, by having the agent interact
+with its stochastic environment, typically through simulation, to gradually build a value
+table for those states encountered [3]. In addition to building the value table for the
+encountered states only, we also try to alleviate the curse of dimensionality associated
+with the action space by considering a so called ‘adaptive action set (AAS),’ denoted as
+Asub from here on, for each state. The AAS, which ensures asymptotic convergence for
+stochastic shortest path problems, is used to modify the RTDP approach so that it is
+computationally tractable for practical scheduling problems. We call the modiﬁed RTDP
+method real-time adaptive dynamic programming (RTADP). Note that the original RTDP
+architecture was proposed to solve robotic MDP path planning problems, and it considered
+every possible control action in updating the value table as the number of possible actions
+was rather limited. However, this is not the case for typical process scheduling problems
+and complete evaluation of all possible actions may be impractical.
+2. A Real-Time Adaptive Dynamic Programming (RTADP) Approach
+The proposed approach is a variant of the RTDP approach as described in Barto et al
+[3] and combines the RTDP approach with the k-nearest neighbor (k-NN) approximation
+The procedure gradually constructs a value table starting from an empty one and
+gradually adding more and more entries as they are encountered. Also, as same states are
+A Real Time Adaptive Dynamic Programming Approach for Planning and Scheduling 1181
+visited multiple times, its value estimates gets better and better. One requirement for this
+procedure is the construction of a mathematical optimization model or a heuristic policy
+for each application of interest so that the state space can be explored with reasonable
+actions. The following describes the steps involved in each update.
+Step 1 Each iteration starts with a state si .
+Step 2 Find the set of states Nδ (si ), which contains the states within the δ distance of
+si . Here we use the Euclidean distance metric d, as proposed by [2], with a user
+where W is a feature weighting diagonal matrix. The detailed can be found in [2].
+Step 3 Update the value functions for the k-nearest neighbors in Nδ (si ) (represented
+from here on as Nk (si ) ⊂ Nδ (si ))according to Eq.(4). In order to do each update,
+we construct the Asub , (Asub ⊂ A, where A is the set of all possible controls that
+the decision maker can exercise at any time instance for a given state). Details
+about the notion of Asub are given in Section 2.2. Every control in Asub is evaluated
+with respect to the objective function in Eq.(4) and the decision -maker follows a
+policy that is greedy with respect to the most recent estimate of the value function
+(Eq.(5)). The reader can ﬁnd more insight about the optimality equation Eq.(4)
+and the convergence property for discounted inﬁnite horizon MDPs in [1].
+The evaluation of each candidate optimal control Eq.(4) requires an initial approximation of J(sj ). More details about this are outlined in Section 2.3.
+Step 4 Update the value of si via the Bellman equation (Eq.(4)). Successor states sj are
+augmented to S, if the cardinality of neighborhood Nδ (sj ), deﬁned by (Eq.(2)), is
+Step 5 A state sj is sampled according to the probability distribution p(sj |si , α∗ ) as
+deﬁned from the Markov model of the random variables. The sampled sj is set as
+si+1 . Set i = i + 1 and we go back to Step 1.
+The AAS is constructed in such a way that, despite the partial evaluation of the action
+space in each update, we can guarantee a worst performance bound and convergence in
+the long run for a certain class of applications. It is also desired that the quality of the
+value estimates for each state in the table increases with the iteration.
+1. Heuristic actions: Heuristics map states to actions via ap priori knowledge about
+the problem. By including the controls given by the heuristics, we ensure that this
+approach gives the worst-case performance that is better than the expected performance of the best among the tested heuristics. It is also possible to use the actions
+resulting from the deterministic math program formulations, which represents a
+suboptimal policy, as we do in this paper.
+2. Best known action: This action summarizes the a-priori learning with respect to the
+value function. If the state to be updated is a state never visited before, then its best
+known action is simply empty. If the state has been revisited, a best known action
+should have been stored with respect to the prior estimate of the value function.
+3. Random actions: Random controls ensure that we eﬀectively explore the entire
+action space and exclude the possibility of not visiting any portion of the state
+space. This enables us to ensure asymptotic convergence with probability one in
+4. Other candidate optimal actions can originate from the nearest neighbors of the
+The calculation of J i+1 (si ) involves the knowledge of the value function of all possible
+successive states J i (sj ) for each action in Asub . During this calculation we will encounter
+• Scenario 1: All sj ’s belong to S. In this case all states have a registered value
+function J i (sj ) in the value table. We use these values for the update of J i+1 (si ).
+• Scenario 2: Some of the sj ’s do not belong to S. In order to approximate the value
+functions for these states, we utilize a local k-nearest neighbor approximator [3].
+The mathematical expression for approximating the value function for each sj is as
+• Scenario 3: What if Nδ (sj ) < k ? One approach that is intuitive and computationally the cheapest is to initialize every successive state with a low value function
+bound, assuming a maximization problem. An alternative tested is, for a given sj ,
+A Real Time Adaptive Dynamic Programming Approach for Planning and Scheduling 1183
+we sample M future scenarios ξ1 , ξ2 , ..., ξM from the underlying probability distribution and construct the following sample average:
+where F (sj , ξi ) is the optimal objective function for each scenario for state sj .
+3. Problem Description of a Manufacturing Job Shop Under Uncertain Demand and Product Yield
+We concentrate on an example of internal capacity adjustment and resource allocation of a single agent in a
+single product setting, in order to illustrate the RTADP
+approach. The speciﬁc structure of the manufacturing
+process considered is shown in Fig 1. The formulation
+of this problem as an MDP can be found in Pratikakis
+et al [4]. Brieﬂy the manufacturing process is divided
+into three interdependent stages with physical queues to
+represent the in-process inventory and ﬁnal product inventory. The demand for the ﬁnal product is stochastic
+and is represented by a Markov chain. A further complicating factor in this example is the uncertainty in the
+product yield. The rate of product failure is also a ranFigure 1: Infrastructure of an
+dom process characterized by a two state Markov chain
+(with high and low failure rate states). The decisions are
+made on a discrete time grid. At each grid point, the
+number of machines (representing the production capacity) can be increased or decreased by a limited amount and for some cost. In addition,
+the the decision maker has the ﬂexibility of idling a percentage of the available machines
+The value function of every successive state to be augmented to the value table is
+initialized with a constant lower value bound. We also assign the lower values, which
+act as barriers in the maximization problem, when exploring the states corresponding to
+the queues at the second, third and stock level greater than a threshold queue of 600.
+The exact form of the stage-wise reward r(s, a), for the results (Fig. 2) can be found in
+[4]. Good performance is achieved, if we meet demand D at each time period, control
+the stock level near the desired value of Sdes = 500, and minimize the queue lengths at
+station 2,3 (w2 , w3 ) by adjusting the production resources:
+We compared the RTADP against a MIP formulation, which uses knowledge of the future realizations of the random variables. Hence the MIP solution represents an idealistic
+policy that is not implementable in practice. The results show the performance gap of
+13% in favor of the MIP. These results are very satisfactory, since the performance by
+Figure 2. Cummulative results comparing an MIP with full information and RTADP.
+this ideal policy is not even attainable in practice, and prove the viability of this method
+for scheduling and planning applications under Markovian uncertainty. Moreover we can
+observe that RTADP controls St bias to Sdes and minimizes w2 , w3 . On the other hand
+the MIP controls St perfectly to Sdes but operates the shop, on average, with more resources at all stations. Gradually, RTADP “learned” good estimates for all entries in
+the table and operated the system smoothly with less resources and without facing any
+“stock out” event throughout the simulations. The simulation baseline parameters are
+not displayed in this paper due to the space constraint but you may contact the authors
+for the simulation details (email:jay.lee@che.gatech.edu).
+1. M.L. Putterman, Markov Decision Processes: Discrete Stochastic Dynamic Programming , New York: John Wiley and Sons, 1994.
+2. J.M. Lee, N.S. Kaisare and J.H. Lee, Jourmal Process Control, Vol.16, Issue 2,
+3. A. Barto, S. Bradtke and, S.Singh, Artiﬁcial Intelligence, Vol.72, (1995), pp.81-138.
+4. N.E. Pratikakis, M.J. Realﬀ and J.H. Lee, Submitted to Special Issue of J. Naval

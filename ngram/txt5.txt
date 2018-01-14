@@ -1,0 +1,729 @@
+Uncertainty management in optimal disassembly planning
+School of Industrial & Systems Engineering, Georgia Institute of Technology, 765 Ferst Drive, Atlanta, GA 30332, USA
+Received March 2004 and accepted October 2005
+Currently there is increasing consensus that one of the main issues differentiating remanufacturing from more traditional manufacturing processes is the need to effectively model and manage the high levels of uncertainty inherent in these new processes. Hence, the
+work presented in this paper concerns the issue of uncertainty modeling and management as it arises in the context of the optimal
+disassembly planning problem, one of the key problems to be addressed by remanufacturing processes. More speciﬁcally, the presented
+results formally establish that the theory of reinforcement learning, currently one of the most actively researched paradigms in the area
+of machine learning, constitutes a rigorous, efﬁcient, and effectively implementable modeling framework for providing (near-)optimal
+solutions to the optimal disassembly problem, in the face of the aforementioned uncertainties. In addition, the proposed approach is
+exempliﬁed and elucidated by application on a case study borrowed from the relevant literature.
+Keywords: Disassembly planning, product recovery, uncertainty management, reinforcement learning, (neuro-)dynamic programming
+During the last decade, the developed economies have been
+becoming increasingly aware of the need to handle used
+products in an environmentally conscious manner. The typical practices adopted in the earlier phases of industrialization, that would dispose of products reaching the end of
+their functional life either through dumping in landﬁll sites
+or through shredding and incineration, are thought to be
+too polluting and unnecessarily wasteful of precious environmental resources, by failing to retrieve and reuse materials and functional components potentially available in the
+discarded product. Hence, under the pressure of emerging
+legislation in most of the developed countries, manufacturers are beginning to set up additional operational networks
+to retrieve their products upon reaching the end of their life,
+and if possible, reprocess and reuse the constituent components and materials. This new set of reclaiming, reprocessing and redistribution operations is collectively known as
+reverse logistics (Fleischmann et al., 1997), and their design
+and management deﬁnes a novel and challenging technical
+area of production system modeling, analysis and control.
+One particular theme that is emerging as a predominant
+issue in the current reverse logistics related literature is the
+need for effective modeling, analysis and management of
+the high levels of uncertainty inherent in the operation
+of these systems. For instance, three recent survey works
+(Fleischmann et al., 1997; Lee et al., 2001; Tang et al.,
+2002) identify the modeling and analysis of the impact
+of the product and environmental uncertainties underlying the operation of modern reverse logistics systems as
+one of the major issues to be addressed by the research
+community. Furthermore, the same works point out that
+the effective management of these uncertainties is one of
+the fundamental issues differentiating reverse logistics and
+remanufacturing-related research from more traditional logistics and manufacturing systems theory.
+Motivated by these general remarks, the work presented
+in this paper undertakes the problem of uncertainty modeling and management in the context of the more speciﬁc area
+of (Optimal) Disassembly Planning (ODP), which constitutes a core problem to be addressed in the operation of
+any reverse logistics process. A basic characterization of
+the ODP problem is provided by means of Fig. 1, which
+has been adapted from Lee et al. (2001). As depicted in
+Fig. 1, the disassembly of the reclaimed product units into
+a number of components and subassemblies constitutes a
+primary step in the entire reverse logistics process. The derived units will be subsequently directed either: (i) for remanufacturing/refurbishing and reuse; or (ii) for extraction and recycling of (some of) their materials; or, ﬁnally,
+(iii) for disposal through dumping or incineration. In this
+operational context, the ODP problem seeks to determine
+the level of disassembly of each returned product unit to its
+Fig. 1. The typical material ﬂow in reverse logistics systems—adapted from Lee et al. (2001).
+constituent elements, and the particular venue of disposition of the retrieved components, so that the total (monetary) value extracted during the process operation is maximized, while at the same time, various technical, legislative,
+environmental, and any other managerial considerations
+It can be argued that the ODP problem is one of the most
+extensively investigated problems in the reverse logistics literature. As already mentioned, three recent and quite comprehensive surveys of the relevant literature are provided in
+Fleischmann et al. (1997), Lee et al. (2001) and Tang et al.
+(2002). All the works presented in these surveys address
+the ODP problem by: (i) ﬁrst formalizing in a particular
+representation the dynamics of the disassembly process, as
+constrained by the relevant technological, environmental
+and legislative requirements; (ii) subsequently augmenting
+this representation with a “cost structure” modeling the
+economic elements involved in the decision-making process; and (iii) ﬁnally deﬁning and solving an optimization
+problem by means of the modeling framework established
+in steps (i) and (ii). Yet, it is also true, that with the exception of the papers of Looney (1988), Zussman et al. (1994),
+Geiger and Zussman (1996), Gungor and Gupta (1998),
+Salomonski and Zussman (1999), Meacham et al. (1999),
+Zussman and Zhou (2000), Lambert (2002) and Erdos et al.
+(2001), all the remaining existing works on the ODP problem assume a totally deterministic model for the underlying process dynamics and the applying cost structure.
+Furthermore, among the works that recognize the potential stochasticity of these problem elements, many of them
+(e.g., Gungor and Gupta (1998), Meacham et al. (1999),
+Zussman and Zhou (2000), Lambert (2002), and Erdos
+et al. (2001)) deal with this issue only as an afterthought,
+through: (i) a sensitivity analysis of a solution developed
+according to a deterministic optimization model; and/or
+(ii) an on-line heuristical adjustment of the derived solution, in case that there exists signiﬁcant deviation of the
+actual implementation from the normative model. On the
+other hand, the papers of Looney (1988), Zussman et al.
+(1994), and Geiger and Zussman (1996), recognize the need
+to explicitly address the involved uncertainty during the determination of the optimal policy, but they resort to problem representations that presume the a priori availability of
+some (quite sophisticated) model that provides a complete
+quantitative characterization of this uncertainty; only the
+work of Salomonski and Zussman (1999) recognizes the
+potential unavailability of the information necessary to develop such a priori fully quantiﬁed models and the resulting
+need to derive this information in real-time.
+The deﬁning positions of our work, which are in
+agreement with the positions taken in Salomonski and
+Zussman (1999), and also with an emerging consensus in the
+broader community, are that: (i) understanding the impact
+of the involved uncertainty and accounting for it during the
+development of optimized disassembly plans, is important
+for the effective optimization of the overall process performance; furthermore, (ii) any assumption regarding the a
+priori availability of a fully quantiﬁed model characterizing problem elements such as the statistical distributions
+and/or indices modeling the randomness in the cost data
+and the probability distributions determining the classiﬁcation of the various components and subassemblies to different quality classes, is rather unrealistic, since (much of) the
+information necessary to develop such a model can be provided only through observation of the process itself. These
+two positions further suggest that any attempt towards developing an optimizing solution to the ODP problem, which
+is the focus of this work, must involve some algorithmic
+components that will allow the decision-making process to:
+(i) accumulate its past experience to a pertinently deﬁned
+set of data structures; and, at the same time, (ii) exploit the
+“knowledge” captured in these data sets towards improving
+the overall system performance. In broader systems theory,
+algorithms with the aforementioned capabilities are known
+as “learning” algorithms (Mitchell, 1997). Hence, the main
+topic and the intended contribution of this paper is the design of effective and computationally efﬁcient learning algorithms for the ODP problem. More speciﬁcally, we focus on
+a particular class of learning algorithms known as “reinforcement learning” in the relevant literature (Sutton and
+Barto, 2000). We believe that these algorithms are most
+appropriate for the ODP problem due to: (i) their strong
+afﬁnity to the dynamic programming framework (Bertsekas
+and Tsitsiklis, 1996), which, as will be shown in the next
+section, is the natural representation of the problem under consideration; and (ii) their computational simplicity
+and implementation ﬂexibility, two properties which render them compatible with the conditions prevailing in the
+involved facilities. In addition, reinforcement learning algorithms have been extensively studied recently, and currently,
+there is a signiﬁcant body of analytical results characterizing their convergence and dynamics.
+With this basic positioning of the presented results, the
+rest of the paper is organized as follows. The next section
+provides an analytical characterization of the ODP problem that not only reveals the underlying problem structure
+but also the nature and impact of the aforementioned uncertainties on the derived solutions. Subsequently, Section 3
+establishes that reinforcement learning provides an effective
+and computationally efﬁcient method for generating optimized disassembly plans in the face of the aforementioned
+process uncertainties. Section 4 considers the implementation of the proposed algorithms in the remanufacturing facility, providing a number of observations and suggestions
+that can potentially expedite the learning process and facilitate the integration of these algorithms into the overall
+operational context. Finally, Section 5 concludes the paper and highlights directions for future work. Throughout
+the paper, a case study adapted from Krikke et al. (1998) is
+used to exemplify and elucidate the primary concepts and
+2. An analytical formulation of the ODP problem
+2.1. A Petri-net-based modeling framework
+As was pointed out in the discussion of the introductory section, any analytical characterization of the ODP problem
+must be based on a formal representation of the disassembly
+process that will be able to express explicitly, yet compactly,
+all the feasible1 disassembly sequences and their associated
+economics. Presently, the two most widely adopted representations for the disassembly process and the associated
+ODP problem are based on: (i) AND/OR graphs (Homen
+de Mello and Sanderson, 1990), and (ii) Disassembly Petri
+Nets (DPNs) (Zussman and Zhou, 1999)—see also Tang
+et al. (2002) and Lambert (2003). Although these two representations are essentially equivalent (Zussman and Zhou,
+1999; Tang et al., 2002), in this work we adopt the DPN
+version, since the semantics of the Petri-net-based modeling framework: (i) are more standardized than those of the
+AND/OR graphs, by now being widely accepted as a basic
+modeling framework in the broader systems literature; and
+in addition, (ii) they provide, through the notions of “place
+marking” and “transition ﬁring”, a well-deﬁned mechanism for representing the disassembly process state and the
+evolution of the process dynamics. However, our work extends the basic deﬁnition of DPNs provided in Zussman
+and Zhou (1999) and Tang et al. (2001), in a way that accounts for the explicit modeling of the part condition and
+the relevant classiﬁcation/testing process; for this reason,
+We remind the reader that feasibility in the ODP context should
+be perceived with respect to technological, as well as environmental and legislative considerations.
+the adopted PN-based representation will be characterized
+as the Extended DPN (E-DPN) model. Next, we proceed to
+a detailed characterization of the E-DPN model, assuming
+that the reader is familiar with the basic elements of the PN
+theory; an excellent introductory treatment of PN theory
+and its use in manufacturing applications can be found in
+The E-DPN model is formally deﬁned as an eight-tuple:
+1. Z = (P, T, F, m0 ) is a connected acyclic Petri net presenting the following structure:
+(a) The set of places, P, is partitioned to three subsets:
+PR , PC and PL . Places p ∈ PR model the originally
+retrieved product units as well as units extracted from
+the various disassembly steps in their Raw status, i.e.,
+before their testing and classiﬁcation to the various
+quality classes discerned by the underlying process.
+Places p ∈ PC model (Classiﬁed) units after testing,
+categorized according to some quality attribute(s).
+Finally, places p ∈ PL model units directed to their ﬁnal reprocessing operation; therefore, they constitute
+terminal (or Leaf) places in the considered disassembly sequence.
+(b) The set of transitions, T, is also partitioned to three
+subsets: TD , TC and TP . Transitions t ∈ TD model disassembly operations, while transitions t ∈ TP model
+operations corresponding to the ﬁnal reprocessing of
+the extracted units. Finally, transitions t ∈ TC model
+the classiﬁcation of the different extracted artifacts,
+through testing and evaluation of some quality attribute(s).
+(c) The net ﬂow relation, F, is a function from (P × T) ∪
+(T × P) to the set of non-negative integers, Z0+ ; in the
+E-DPN modeling framework, F models the dynamics of a typical disassembly process by satisfying the
+i. {p ∈ P :· p = ∅} = {p0 } ⊆ PR , i.e., the whole net
+has a single source node, corresponding to the
+original artifact in its raw (unclassiﬁed) state.
+Also, ∀p ∈ PR ∪ PC , |p· | ≥ 1, where | · | denotes
+the cardinality of the set argument; i.e., places
+p ∈ PR ∪ PC correspond to nonterminal stages in
+ii. ∀t ∈ TD , · t = {p} ⊆ PC , and t · ⊆ PR ; i.e., a disassembly operation has as input a single classiﬁed
+We remind the reader that, in the PN formalism, F(p, t) denotes
+the number of tokens that must be available at place p for a single ﬁring of transition t, and are consumed by this ﬁring. Similarly, F(t, p) denotes the number of tokens placed in place p by a
+single ﬁring of transition t. Furthermore, · p = {t ∈ T : F(t, p) ≥
+1}; p · = {t ∈ T : F(p, t) ≥ 1}; · t = {p ∈ P : F(p, t) ≥ 1}; and t · =
+item and it produces a number of new unclassiﬁed
+artifacts. Similarly, ∀t ∈ TC , · t = {p} ⊆ PR , and
+t · = {q} ⊆ PC , while ∀t ∈ TP , · t = {p} ⊆ PC , and
+iii. Finally, F must take binary values on all of its
+domain, except for the part corresponding to
+TD × PR ; for pairs (t, p) ∈ TD × PR , F(t, p) will
+express the number of artifacts of the p-type that
+are generated through a disassembly operation of
+the t-type, and therefore, this value can be any
+(d) The net initial marking, m0 , is a function from the
+place set P to Z0+ ; in particular, m0 (p) equals one if
+p = p0 , and zero otherwise, i.e., the entire disassembly process starts with a returned but still unclassiﬁed
+product unit. Also, to facilitate the subsequent discussion, we characterize as a terminal marking, any
+marking m reachable from m0 through a sequence of
+transition ﬁrings, with m(p) = 0, ∀p ∈ PR ∪ PC .
+2. ρ is a set of discrete probability distributions, with each
+distribution corresponding to a place p ∈ PR , and with
+its support being equal to p · . Given a place p ∈ PR and
+a transition t ∈ p · , ρ(p, t) denotes the probability that a
+unit of type p, upon testing, will be found in the condition
+3. τ : TD ∪ TP → R0+ , where R0+ denotes the set of nonnegative real numbers, is a function modeling the (expected) costs incurred by the various disassembly and
+4. ξ : PL → R0+ is a function modeling the (expected) returns from the various terminal operations.
+5. δ represents another set of discrete probability distributions, with each distribution corresponding to a place
+p ∈ PC , and with its support being equal to p· . For every place p ∈ PC and a transition t ∈ p· , δ(p, t) denotes
+the probability that a unit of type p will be disposed according to the operation modeled by transition t. These
+distributions will express the adopted disassembly plan.
+In this work, we are interested in identifying a disassembly plan, expressed by a distribution set δ ∗ , that will maximize the expected return from each processed item. This objective is formally expressed by introducing the place value
+function, π δ : P → R, which is associated with the disassembly plan deﬁned by the distribution set δ, and maps
+each place p ∈ P to a real value representing the expected
+return to be obtained from the processing of a unit of the
+artifact represented by place p, according to the disassembly
+plan deﬁned by the aforementioned distribution set δ. Then,
+our problem is to identify δ ∗ = arg maxδ {π δ (p), ∀p ∈ P}.3
+We shall also denote π ∗ (p) ≡ π δ (p) across all p ∈ P. The
+π ∗ (p) values for places p ∈ PL are equal to ξ (p), introduced
+in item 4 of the E-DPN deﬁnition. For the remaining places,
+We remind the reader that arg maxx∈X f (x) denotes any maximizer of the function f () among the elements of the set X.
+an optimized disassembly plan and the resulting π ∗ (p) values can be computed according the Dynamic Programming
+2.2. Computing an optimal disassembly plan through DP
+In the face of the acyclic structure of the E-DPN model
+introduced in the previous section, the maximization of
+π δ (p), ∀p ∈ P, can be achieved through a specialization of
+the broader logic of DP to the ODP problem context, that
+computes the maximized π ∗ (p)-values in a recursive manner, starting from the leaf nodes. The detailed recursion is
+Equations (1)–(3) above have a very straightforward interpretation in the E-DPN context. Speciﬁcally, Equation (1)
+implies that the value extracted from the various artifacts in
+their terminal operations is determined by external factors
+relating to their inherent value and the prevailing market
+conditions. Equation (2) expresses the fact that the value of
+an unclassiﬁed item in some place p ∈ PR is deﬁned by the
+values corresponding to the various classiﬁcations of this
+item, {π ∗ (t · ) : t ∈ p· }, averaged according to the classiﬁcation probability distribution ρ(p, ·). Finally, Equation (3)
+implies that the optimal expected value to be associated
+with an artifact belonging to the category corresponding to
+a place p ∈ PC is the value resulting from a processing option that maximizes the resulting (expected) return, where
+the latter is deﬁned as the cumulative optimal value of all the
+derived artifacts reduced by the corresponding processing
+cost. This last observation characterizes also the optimal
+disassembly plan: using the δ ∗ representation introduced
+With a slight abuse of notation, π ∗ (t · ), in Equation (2), denotes
+the value of the single place q which is the output place of transition t (since, for the considered case, t ∈ TC – c.f. item (1.c.ii) in
+Table 1. The example data; processing options annotated in boldface represent the optimal disassembly plan
+Viable options (proc. cost, value generated)
+Notice that the optimal plan δ ∗ , deﬁned in Equation (4).
+has δ ∗ (p, t) ∈ {0, 1} for all pairs (p, t), i.e., it constitutes
+a deterministic (disassembly) policy, according to the DP
+The E-DPN modeling framework and the application of
+the DP-based algorithm for the computation of the optimal value function and the optimal disassembly plan, is
+demonstrated by means of an example case study adapted
+from Krikke et al. (1998). The returned item is a particular TV model, with the basic bill of materials presented in
+Table 1. During the disassembly, each of the extracted components is classiﬁed in two classes, “repairable” (or class 1)
+and “worn out” (or class 2), according to the probability distributions listed in Table 2. The disposition venues generally
+available for the TV sets and the extracted components are:
+upgrading (UP), restoration (RES), disassembly (DSBL),
+recycling (REC) and disposal (DISP). However, the particular options available for a certain component depend on its
+quality class, with the exception of recycling and disposal,
+which are class-independent. Furthermore, each processing option results in the generation of (monetary) value,
+which depends on the component, its condition, and, of
+course, the selected option itself. The viable processing options for each (sub)assembly, the corresponding processing
+costs, and the value generated by those options that constitute terminal processing steps are also listed in Table 1.
+On the other hand, the expected values resulting from the
+various disassembly steps depend on the classiﬁcation distribution(s) associated with the components generated by
+UP(40,70), RES(30,40), REC(20,56), DISP(10,0)
+UP(30,80), RES(25,50), REC(120,20), DISP(80,0)
+that step, as well as the subsequent actions taken, and therefore, they are not part of the data listed in Table 1. Instead,
+the optimized set for these values can be computed by applying the DP algorithm, expressed by Equations (1)–(4), on
+the E-DPN model of the considered disassembly process;
+the E-DPN model for this example, the optimal value function π ∗ , and the corresponding optimal disassembly policy
+In Fig. 2, places in PR , corresponding to unclassiﬁed
+units, including the original product unit itself, are depicted with dotted lines; places in PC , corresponding to
+units classiﬁed (through testing) to one of the two recognized quality classes, are depicted with dashed lines; ﬁnally,
+places in PL , corresponding to terminal operations, are
+Table 2. Item classiﬁcation probabilities: ρ(i|j) denotes the probability that the considered item will be in class i given that its
+parent item was in class j; for the case of the original product,
+i.e., level 0 item, the corresponding classiﬁcation probabilities are
+Fig. 2. The E-DPN model and the optimal value function for the considered case study.
+depicted with solid lines. For referential purposes, each
+place is uniquely identiﬁed by a label annotated within the
+corresponding circle. In particular, the dashed-line places,
+that correspond to classiﬁed units, are characterized by a
+label with its ﬁrst part being deﬁned by the corresponding
+item ID #—as speciﬁed in the second column of Table 1—
+while its last digit is the quality class code: 1 for a repairable
+condition and 2 for worn out. Dotted-line places, that correspond to unclassiﬁed units, are characterized by the concatenation of the item ID # and the label of the parental
+classiﬁed node, whose disassembly generated the considered item; however, in the case of item 0, that corresponds
+to the original product unit, the second part of the label
+does not exist, and it is denoted by “-”. Finally, solid-line
+places, that correspond to terminal operations, are characterized by the abbreviation of the corresponding operation. The numbers attached to transitions in TD ∪ TP —that
+correspond, respectively, to disassembly and terminal operations for classiﬁed units—represent the (expected) cost
+of the corresponding operation, provided in Table 1 (ﬁrst
+entry in the pair accompanying each operation). The num-
+bers attached to transitions in TC —that represent the classiﬁcation of the unit associated with their input place to
+the quality class associated with their output place—are
+the relevant classiﬁcation probabilities, provided by Table
+2. Finally, the numbers attached to the various places represent their optimal value, π ∗ (p). For places in PL , corresponding to terminal operations, these values are provided
+in Table 1 (second entry in the pair accompanying each
+operation). For the remaining interior places, these values are obtained according to the DP logic expressed by
+Equations (2) and (3). For instance, the optimal value of
+place p71 , that corresponds to item 7 in repairable condition, is computed, according to Equation (3) as: π ∗ (p71 ) =
+max{70 − 40, 40 − 30, 56 − 20, 0 − 10} = 36. On the other
+hand, the value of place p741 , that corresponds to an unclassiﬁed unit of item 7, obtained from the disassembly of
+a unit of item 4 in condition 1 (repairable), is computed,
+according to Equation (2), as: π ∗ (p741 ) = 1.0 × π ∗ (p71 ) =
+1.0 × 36 = 36. Similarly, one can ﬁnd that π ∗ (p81 ) =
+max{80 − 30, 50 − 13, 0 − 10} = 50 and that π ∗ (p841 ) =
+1.0 × π ∗ (p81 ) = 1.0 × 50 = 50. Then, the value of place p41 ,
+that corresponds to one unit of component 4 in condition 1
+(repairable), can be obtained, according to Equation (3), as:
+π ∗ (p41 ) = max{60 − 17, 36 + 50 − 10, 0 − 20} = 76. Furthermore, the logic of Equation (4) indicates that, based
+on the above calculations, the respective optimal options
+for p71 , p81 and p41 are RECYCLING, UPGRADING and
+DISASSEMBLY. Working in this fashion, from the terminal nodes of the E-DPN graph towards its source node,
+one can obtain the optimal value for each node and the entire optimal disassembly plan; the latter is depicted by the
+thicker transitions in Fig. 2, and it consists of the options
+listed in boldface characters in Table 1.
+The presented example, and also Equations (1)–(4), provide a complete characterization of the data set needed for
+the computation of the optimal disassembly plan through
+the basic DP algorithm. In particular, this data set includes
+the expected costs and revenues associated with the various processing stages, as well as the classiﬁcation probabilities for the extracted components and subassemblies (c.f.,
+Tables 1 and 2). Yet, as noted in the introductory section,
+data such as the item classiﬁcation probabilities will be hard
+to estimate a priori, since they are determined by the process input stream, which, in turn, consists of items exposed
+to uncontrollable and unobservable consumer behaviors. In
+a similar vein, the expected costs and revenues associated
+with the various processing stages can be signiﬁcantly affected by the quality status of the processed material, which
+again implies that they will not be amenable to guesstimate mechanisms. Furthermore, many of these parameters
+can vary with time, as they will be affected by shifts and
+drifts of the prevailing operational and the market conditions. The next section discusses how these data-related issues can be addressed by reinforcement learning algorithms,
+which augment the basic DP logic with learning and adaptive capabilities.
+3.1. Reinforcement learning: The general framework
+Reinforcement Learning (RL) theory is a paradigm developed by the machine learning and the broader artiﬁcial intelligence community in an effort to design algorithms that
+will allow systems to “learn how to make good decisions
+by observing their own behavior, and use built-in mechanisms for improving their actions through a reinforcement
+mechanism” (Sutton and Barto, 2000). The basic structure
+of any RL implementation is depicted by the block diagram
+of Fig. 3. A controlled plant evolves in a discrete state space
+through the execution of a sequence of actions commanded
+to it by a learning controller. The execution of an action at
+the running plant state causes the transition of the plant to
+a new state, and it also generates an immediate reward or
+reinforcement feedback that is a function of the state-action
+Fig. 3. The basic architecture of a RL-based controller.
+pair. The intention of the learning controller is to select the
+actions to be commanded at every plant state in a way that
+maximizes some objective function of the sequence of the
+collected rewards. In the most typical RL implementations,
+the optimal action selection scheme can be characterized by
+an optimal value function that associates an (expected) value
+with every state-action pair, such that the optimal actions
+for any given state are the maximizers of the restriction of
+this value function to that state. Hence, given a plant and
+an associated objective function, the RL controller tries to
+identify an optimal policy for them by “learning” the corresponding optimal value function. More speciﬁcally, the
+learning controller maintains an estimate of this value function, that is initialized to some arbitrary set of values, and it
+is subsequently updated every time that a new reward observation is obtained, in a way that brings the maintained value
+estimates closer to the value function corresponding to the
+observed plant behavior. On the other hand, the running
+estimate of the optimal value function affects the action selection process itself, since, at each decision epoch, actions
+are selected in a way that seeks to balance the conﬂicting objectives of: (i) maximizing the resulting value, as perceived
+by the aforementioned estimate of the optimal value function; and (ii) enhancing the quality of this estimate through
+further exploration over the plant state-action space; this
+last conﬂict is known in the relevant terminology as the
+The theory of RL algorithms was substantially strengthened by the realization that, in their basic deﬁnition, many
+of these algorithms essentially constitute stochastic approximations of some more classical DP algorithms. More
+speciﬁcally, under their DP-based interpretation, RL algorithms essentially seek to compute an underlying optimal
+value function, π ∗ (·), in an iterative fashion that constitutes the Robbins-Monro stochastic approximation of some
+DP recursion deﬁned according to Bellman’s equation; the
+reader is referred to Bertsekas and Tsitsiklis (1996), Chapters 4 and 5, for the more technical details. The interpretation and study of RL theory in the prism of this ﬁnding
+has led to a more profound understanding of the underlying learning mechanisms, and eventually, to the broader
+dissemination and acceptance of the ﬁeld. Next we employ
+this connection between DP and RL theory, in order to
+transform the DP recursion for the ODP problem, developed in Section 2, to a RL algorithm; this part of our work
+will focus on a particular class of RL algorithms known as
+3.2. Q-learning implementation for the ODP problem
+ing the information contained in the sequence of the immediate rewards generated by the plant. In the ODP problem
+context, these immediate rewards are deﬁned by the returns
+generated every time that a certain artifact in some quality
+class p ∈ PC is processed through an option t ∈ p· . Upon
+the generation of such a reward, the algorithm will update
+the corresponding Q-factor estimate, Q(p, t), by employing the following Robins-Monro stochastic approximation
+When viewed in the aforementioned DP context, the deﬁning property of the Q-learning algorithms is that the optimal value function learned by them is not the optimal
+state value function, π ∗ (·), itself, but a reﬁnement of it
+known as the (problem) Q-factors; these Q-factors are deﬁned for each state-action pair (i, u), such that the optimal
+Q-factor values—to be denoted by Q∗ (i, u)—express the expected (total) value that results by selecting action u at state
+i and following the optimal policy thereafter (Bertsekas and
+Tsitsiklis, 1996; Watkins, 1989). Obviously
+The quantities π̂ and τ̂ , that appear in Equation (7), denote respectively the (observed) returned revenue and processing cost applying to that instance. In the same spirit,
+F̂(t, q) denotes the number of units of the type modeled
+by place q, that were actually obtained during the applied
+processing step, represented by transition t. In the case of
+a disassembly operation, ρ̂(q, ξ ) denotes the percentage of
+the obtained F̂(t, q) units that were eventually classiﬁed in
+the class represented by transition ξ ∈ q · . Finally, γ is an
+implementational parameter known as the algorithm learning rate; it must have a value in the interval (0, 1], and it can
+be interpreted as the “percentage” of the “error” term5
+In the E-DPN representation for the ODP problem developed in Section 2, the primary decision points are represented by places p ∈ PC . Hence, a set of Q-factors adequate
+to implement the Q-learning algorithm in the considered
+problem context, is deﬁned by the pairs (p, t), p ∈ PC and
+t ∈ p· . Furthermore, the above interpretation of the optimal Q-factor values, Q∗ (p, t), implies that, in the context of
+the ODP problem, they must satisfy the following Bellman
+In plain words, Equation (6) can be interpreted as follows.
+The optimal Q-factor values for transitions corresponding
+to terminal operations for some extracted item, are equal
+to the expected (monetary) value resulting from those operations minus the processing costs involved. On the other
+hand, the optimal Q-factor value for transitions modeling
+disassembly operations is determined by the cumulative expected value of the derived components, where the expectation is taken with respect to the classiﬁcation probabilities
+of the derived items, and the values of the various quality classes are determined by the optimal Q-factor values
+According to the general discussion of RL algorithms
+provided in Section 3.1, a Q-learning implementation for
+the ODP problem will try to develop accurate estimates,
+Q(p, t), of the optimal Q-factor values, Q∗ (p, t), by exploit-
+that must be added to the current value of the Q(p, t) factor
+It should be clear from the above interpretation of the
+various parameters involved in the updating expression of
+Equation (7), that all the relevant data can be obtained from
+direct observation of the system operation at each processing cycle, and therefore, in case that the Q(p, t) estimates
+converge to the optimal Q∗ (p, t) values, the presented algorithm has indeed the potential to establish optimal operation despite the lack of an explicit model for the system
+The expression of Equation (8) can be interpreted as the difference between the Q∗ -value of the (p, t) pair assessed based on the
+currently experienced results of executing option t on an item of
+the quality class p, and the available Q(p, t) estimate.
+behavior. The next theorem establishes that for the ODP
+problem version introduced in Section 2, this convergence
+will always take place, provided that the algorithm implementation satisﬁes some additional conditions.
+Theorem 1. Consider the implementation of the Q-learning
+algorithm for the ODP problem, deﬁned by the updating
+scheme of Equation (7), and further suppose that:
+1. For every place p ∈ PC and transition t ∈ p· , the sequence
+of learning rates γk (p, t) k = 1,2,. . . , utilized in the updates of the estimate Q(p, t), satisﬁes the following two
+2. For every component class p ∈ PC , the algorithm selects
+every processing option t ∈ p· , an inﬁnite number of times.
+Then, the algorithm estimates, Q(p, t), will converge to
+the corresponding optimal values, Q∗ (p, t), with probability
+one, and irrespectively of the initializing values of the Q(p, t)
+Proof. The proof of Theorem 1 results immediately from
+Proposition 5.5 of Bertsekas and Tsitsiklis (1996), when
+noticing that the E-DPN structure, introduced in Section
+2, implies that, starting from the initial marking m0 , every
+execution of the learning algorithm will result in a terminal
+marking, m, in a ﬁnite number of steps, and therefore, in
+the terminology of Bertsekas and Tsitsiklis (1996), every
+feasible disassembly policy is proper (c.f., their Deﬁnition
+Conditions 1 and 2 of Theorem 1 are necessary in order
+to ensure that: (i) the algorithm implementation allows for
+sufﬁcient exploration; and that (ii) the algorithm convergence is not compromised by the stochasticity inherent in
+the observed rewards. A practical way to guarantee the requirements of the ﬁrst condition, is by having the learning
+rates, γk (p, t), decrease asymptotically to zero, according to
+where a and b are positive constants. On the other hand,
+condition 2 can be enforced by introducing a small positive parameter 
+scheme that, at every decision cycle, selects an action corresponding to a maximal Q(p, t) estimate6 with probability
+1 − , and an alternative random action with probability
+.7 Hence, both conditions 1 and 2 can be effectively satisﬁed during the algorithm implementation, and therefore,
+In order to demonstrate the ability of the Q-learning algorithm, deﬁned by Equation (7), to determine an optimal
+policy for the ODP problem, and to elucidate the dynamics
+of the learning process as it converges to the optimal value
+function, we applied it to the ODP example discussed in
+Section 2. The presented implementation satisﬁed conditions 1 and 2 of Theorem 1 according to the mechanisms
+delineated in the previous section; speciﬁcally, the learning rate used for the kth updating of the Q(p, t) value,
+p ∈ PC , t ∈ p· , was γk = 0.3/(1+k/1000), while the value of
+the randomizing parameter  was set to 0.2. Furthermore,
+the initial estimates of the Q-factors were set to zero.
+Figures 4 and 5 depict, for two indicatively selected
+places, the evolution of the Q∗ values learned by the algorithm. In the reported results, each trial corresponds to the
+processing of a single product unit. As is expected from Theorem 1, the juxtaposition of Figs. 4 and 5 with the π ∗ values
+reported in Fig. 2 veriﬁes that the implemented algorithm
+indeed converges to the optimal Q values for the depicted
+state-action pairs. At the same time, these ﬁgures reveal the
+signiﬁcance of exploration in the learning dynamics; for instance, it can be seen in Fig. 5 that it took a number of
+“nongreedy” selections—corresponding to the jumps taking place in the relevant curve—before recycling emerged
+as the dominant option for the corresponding stage.
+Figure 6 depicts the monetary value accrued by the disposition of the 2000 product units through the processing
+options selected by the algorithm. The positive impact of
+the underlying learning process on this quantity is revealed
+by the acceleration with which this value is accumulated
+over the different trials; for instance, while the total value
+accumulated during the processing of the ﬁrst 1000 units is
+around $85 000, the corresponding value for the next 1000
+units is around $135 000, an increase by a factor of 1.6.
+The previous section modeled the ODP problem as a learning process, and established that Q-learning constitutes an
+effective algorithm to support the required learning. In
+this section we discuss some more practical issues concerning the implementation of the proposed algorithm in an
+actual remanufacturing facility. These issues concern: (i)
+the characterization of the computational and operational
+infrastructure necessary to support the implementation of
+Such an action selection scheme is characterized as “greedy” in
+For a more extensive discussion on the “exploration versus exploitation” problem and some additional ways to address it, the
+reader is referred to Bertsekas and Tsitsiklis (1996) and also
+Fig. 4. Example: learning the Q∗ (p, t) values for place p02 ( = 0.2; γk = 0.3/(1 + k/1000); Q0 (p, t) = 0, ∀p ∈ PC , ∀t ∈ p · ).
+the learning process expressed by Equation (7); (ii) the investigation of the possibility of assisting the learning task
+by integrating in it any a priori available, although partial,
+information about the costs and returns to be expected by
+the various processing options; and (iii) the extension of
+the algorithm so that it can effectively deal with potential
+process nonstationarity. We deal with each of these issues
+Fig. 5. Example: learning the Q∗ (p, t) values for place p71 ( = 0.2; γk = 0.3/(1 + k/1000); Q0 (p, t) = 0, ∀p ∈ PC , ∀t ∈ p · ).
+Fig. 6. Example: the accumulation of the extracted value ( = 0.2; γk = 0.3/(1 + k/1000); Q0 (p, t) = 0, ∀p ∈ PC , ∀t ∈ p · ) .
+4.1. Implementing Q-learning in a remanufacturing facility
+We envision the underlying operational environment as a
+disassembly process dedicated to a particular product type.
+This process is continuously fed with reclaimed units of the
+considered part type, each of which is disassembled according to a plan that is determined on-line by the randomized
+action selection scheme introduced in Section 3.2, based
+on the currently available Q-values for the different itemoption pairs. At the same time, the outcomes of the executed processing steps provide the data for the updating of
+the maintained Q-values, according to the logic expressed
+From a computational standpoint, the above mechanism
+is very efﬁcient since the only thing that it requires is the
+regimented updating of the Q-value corresponding to every
+selected item-option pair according to a very simple and
+straightforward calculation.8 A more pragmatic concern,
+however, is the extent to which the underlying disassembly
+process and its broader operational context are adequately
+ﬂexible to support the revision of the applied disassembly
+Actually, a more careful consideration of this updating mechanism and of the content of Equation (7) will reveal that
+they present a very strong similarity to the updating mechanism employed by the exponential smoothing-based forecasting
+(Makridakis and Wheelwright, 1985); hence, all the advantages
+and computational efﬁciency that are typically associated with
+that forecasting methodology can also be attributed to the proposed implementation of Q-learning.
+plan on a unit-by-unit basis. If such an operational scheme
+is not deemed feasible, then the entire operational logic outlined above is still implementable on a batch-based mode;
+i.e., a constant disassembly plan is selected and applied on
+an entire batch of reclaimed units, while the batch sizes are
+selected large enough to ensure the operational stability of
+the facility. The Q-values of the item-option pairs appearing
+in the executed plan will still be updated according to the
+logic of Equation (7); however, this updating will take place
+upon the completion of the entire batch, and it will employ the batch-means for the various quantities appearing
+in Equation (7). Furthermore, to ensure a more expedient
+convergence for this version of the algorithm, one should
+perform these Q-value updates working from the leaf nodes
+towards the source node of the underlying E-DPN.
+A last concern regards the extent to which the assumption of providing a dedicated facility to a single product
+unit reﬂects the prevailing industry practice. Based on some
+investigation of the industry trends reported in Cotton
+and Reveliotis (2003) and Reveliotis (2003), we believe
+that industry will soon present the necessary economies
+of scale for adopting such a product-focused lay-out; the
+emerging trend of outsourcing the recycling function to
+third party service providers is a major step in that direction. Furthermore, the aforementioned assumption is
+not strictly required for the effective implementation of the
+proposed learning mechanism. The algorithm is also implementable in time-shared facilities as long as: (i) a different set of data structures is employed and maintained for
+each (re)processed product type; and (ii) the facility provides ample capacity for the timely reprocessing of all the
+returned product units. On the other hand, if the various
+product types are competing for the processing capacity
+of the remanufacturing facility, then, this effect introduces
+an additional resource allocation constraint in the original
+problem formulation, and necessitates the reinvestigation
+of the problem under this modiﬁed set of assumptions.
+We conclude this discussion on the implementability of
+the proposed learning framework, by noticing that it is very
+similar, in spirit, to the framework of Statistical Process
+Control (SPC) (De Vor et al. 1992), that has been applied
+to more traditional manufacturing processes. In both cases,
+the ultimate objective is to obtain a higher value from the
+underlying process, by applying tighter and more systematic
+control on it, that is enabled by the information provided
+through an effective monitoring function. As established by
+the experience of the SPC revolution of the late 1980s/early
+1990s, the effective deployment of such a control capability
+is a challenging task, since it requires a very disciplined
+operation and a well-understood and managed process, but
+4.2. Eliminating suboptimal options based on partial
+It should be obvious from the previous discussion that the
+number of trials required for the eventual convergence of
+the Q-learning algorithm to the optimal policy depends
+strongly on the size of the underlying E-DPN structure.
+Therefore, any effort to reduce the size of this E-DPN structure by identifying and eliminating processing options that
+are going to be suboptimal can have a considerable pay-off
+in terms of the convergence rate of the applied algorithm
+and the total value extracted by the underlying disassembly process. Indeed, in many cases it is reasonable to assume some a priori knowledge regarding the cost of the
+various processing options and the expected returns, expressed by a set of reliable lower and upper bounds for each
+of these quantities. More formally, we can assume that for
+each cost element τ (t), t ∈ TP ∪ TD , we are given a lower
+and an upper bound, respectively denoted by τ (t) and τ̄ (t).
+Similarly, for each processing option p ∈ PL , we are given
+a lower and an upper bound for the expected return, respectively denoted by ξ (p) and ξ̄ (p). This information can
+subsequently enable an E-DPN reduction scheme that will:
+(i) compute lower and upper bounds, Q(p, t) and Q̄(p, t),
+for all p ∈ PC , t ∈ p· ; and (ii) eliminate from the E-DPN
+structure those actions t ∈ p· , p ∈ PC , for which ∃t  ∈ p·
+The computation of the lower and upper bounds, Q(p, t)
+and Q̄(p, t), for all p ∈ PC , t ∈ p· , that is involved in step
+(i) above, can be performed through the following recursion
+that proceeds from the E-DPN leaf nodes towards its source
+node, and can be derived straightforwardly from Equations
+(1)–(6), that constitute the DP characterization of the ODP
+∀p ∈ PL , π (p) := ξ (p), π̄ (p) := ξ̄ (p),
+∀p ∈ PR , π (p) := min· {π(t · )}, π̄ (p) := max· {π̄(t · )}, (13)
+:= {t ∈ p· : ∃t  ∈ p· s.t. Q(p, t  ) > Q̄(p, t)},
+4.3. Dealing with nonstationary processes
+Throughout the previous discussion it has been assumed
+that the unknown parameters will remain constant during
+the entire operation of the ODP process. In reality, however,
+it is possible that (some of) these parameters will present signiﬁcant variation during the process life cycle. For instance,
+the various cost and return parameters will be determined
+by the prevailing market conditions, which might significantly evolve during the process life cycle. Similarly, the
+classiﬁcation probabilities for the various components and
+subassemblies might be different for different input batches,
+obtained from different sources. A sound implementation
+of the proposed algorithm must be aware of the various
+nonstationarities that can potentially arise in the considered operational environment, and provide the mechanisms
+to control the impact of these nonstationarities on the process performance. Hence, in the subsequent discussion, we
+provide some “rules of thumb” that will minimize the adversarial impact of these nonstationarities on the process
+When dealing with the potential process nonstationarities, it is pertinent to discriminate between: (i) major abrupt
+“shifts”; and (ii) slow, yet considerable, “drifts” for (some
+of) the process parameters. Regarding the former, we expect that (almost all of) these changes will be caused by
+some speciﬁc source event(s) taking place in the process
+operational or business environment, and therefore, they
+should be immediately foreseen and anticipated by an alert
+process management team. In that case, the problem reduces to the effective and efﬁcient relearning of an optimal policy, under the new prevailing conditions. This can
+be readily done by “resetting” the entire learning process,
+either to some “default” initial Q values, or to some Q values that are deemed to reﬂect the experienced situation. In
+some other cases, these parameter shifts can result from a
+systematic rotation of the process through a number of operational modes; for instance, the process might systematically rotate among the processing of batches coming from
+different input streams with different quality classiﬁcation
+probabilities. In this case, it is advisable that the algorithm
+maintains a “bank” of different sets of Q values, each applicable to a speciﬁc operational mode. Finally, in order
+to guard against any major parametric shifts that can occur in an unexpected and otherwise undetected fashion,
+one can incorporate in the process some “error-tracking”
+mechanism that will monitor the estimation errors generated by the various item-option pairs according to Equation (8), and provide an “alert” signal in case that these
+errors are unexpectedly and persistently increased. Foregoing the technical details due to space limitations, we notice
+that this idea can be implemented through some statistical
+analysis of these errors and the creation of appropriate conﬁdence intervals for them, similar to the case of exponential
+The second type of nonstationarity mentioned above is
+more insidious and therefore more difﬁcult to detect based
+on external input. To deal effectively with it, the adopted
+implementation of the proposed learning algorithm must
+present a high degree of alertness to change and learning
+ﬂexibility. This conceptual requirement suggests, in turn, an
+increased value for the exploration-controlling parameter,
+, and the preservation of a high learning rate, γk ; a practical
+way to satisfy this last requirement is by eliminating the
+dependence of the learning rate on the trial number k, and
+setting it on a fairly high constant level.
+The starting point and the major motivation for the work
+presented in this paper was the observation that the effective
+management of the uncertainties inherent in the emerging
+re-manufacturing processes has not been adequately addressed in the relevant literature, even though it is currently
+recognized as an essential issue for the process viability.
+Hence, the presented work undertook the problem of uncertainty management, as it arises in the context of optimal
+disassembly planning, one of the key tasks to be resolved
+for the efﬁcient operation of the aforementioned processes.
+Using recently emerged results from (approximate) DP and
+machine learning, this work provided a rigorous framework
+for the modeling and analysis of the ODP problem in the
+face of the aforementioned uncertainties, and an effective
+and easily implementable computational algorithm for obtaining optimal disassembly policies. The last part of the
+paper considered some additional practical issues that need
+to be addressed for the effective implementation of the proposed algorithm in any “real-life” remanufacturing facility.
+As part of our future work, we shall seek to implement
+the presented algorithm on an industrial-scale remanufacturing process. On the more theoretical side, we are currently investigating a number of issues that can lead to:
+(i) more expedient convergence of the Q-learning algorithm
+in the considered application context; and (ii) more enhanced responsiveness to any experienced changes in the
+process parameters. Some mechanisms that can lead to such
+enhanced performance include: (i) the exploitation of the
+acyclic E-DPN structure in the management of the “exploration vs. exploitation dilemma”; and (ii) the integration
+to the learning framework developed in this work of some
+further modeling capability that will seek to explicitly learn
+an approximating model of the underlying process dynamics and the associated cost structure. Finally, as previously
+mentioned in Section 4.1, another interesting problem is
+the extension of the developed methodology so that it applies to resource-constrained, multiproduct disassembly processes, i.e., processes that disassemble two or more product
+types which compete for a shared set of resources. The work
+of Meacham et al. (1999) could be a good starting point for
+this task; the systematic understanding and the formal characterization of the process economics and dynamics underlying this new operational setting, in a way that enables the
+development of an on-line/incremental process optimization algorithm, are also part of our research agenda.
+This work was partially supported by NSF grant DMII0318657 and the Logistics Institute—Asia Paciﬁc (TLIAP). The author would also like to acknowledge the help of
+Gopal Jayaram and Sagar Kalyankar in the development
+of the MATLAB code and the execution of the simulated
+Bertsekas, D.P. and Tsitsiklis, J.N. (1996) Neuro-Dynamic Programming,
+Cotton, D. and Reveliotis, S.A. (2003) An overview of the legislation and
+applications of reverse logistics relating to product take back. Technical report, School of Industrial & Systems Engineering, Georgia
+De Vor, R.E., Chang, T.-H. and Sutherland, J.W. (1992) Statistical Quality, Design and Control, Prentice Hall.
+Erdos, G., Kis, T. and Xirouchakis, P. (2001) Modeling and evaluating
+product end-of-life options. International Journal of Production Research, 9, 1203–1220.
+Fleischmann, M., Bloemhof-Ruwaard, J.M., Dekker, R., Van der Laan,
+E., Van Nunen, J.A.E.E. and Van Wassenhove, L.N. (1997) Quantitative models for reverse logistics: A review. European Journal of
+Geiger, D. and Zussman, E. (1996) Probabilistic reactive disassembly
+Gungor, A. and Gupta, S.M. (1998) Disassembly sequence planning for
+products with defective parts in product recovery. Computers & Industrial Engineering, 35, 161–164.
+Homen de Mello, L.S. and Sanderson, A.C. (1990) And/or graph representation of assembly plans. IEEE Transactions on Robotics and
+Krikke, H.R., Van Harten, A. and Schuur, P.C. (1998) On a medium
+term product recovery and disposal strategy for durable assembly
+products. International Journal of Production Research, 36, 111–139.
+Lambert, A. (2002) Determining optimum disassembly sequences in electronic equipment. Computers & Industrial Engineering, 43, 553–
+Lambert, A. (2003) Disassembly sequencing: a survey. International Journal of Production Research, 41, 3721–3759.
+Lee, D.-H., Kang, J.-G. and Xirouchakis, P. (2001) Disassembly planning and scheduling: review and further research. Proceedings of the
+Institution of Mechanical Engineers, Part B (Journal of Engineering
+Looney, C.G. (1988) Fuzzy petri nets for rule-based decision making.
+IEEE Transactions on Systems, Man and Cybernetics, Part B (Cybernetics), 18, 178–183.
+Makridakis, S.G. and Wheelwright, S.C. (1985) The Handbook of Forecasting, Wiley, New York, NY.
+Meacham, A., Uzsoy, R. and Venkatadri, U. (1999) Optimal disassembly
+conﬁgurations for single and multiple products. Journal of Manufacturing Systems, 18, 311–322.
+Mitchell, T.M. (1997) Machine Learning, McGraw Hill,
+Reveliotis, S.A. (2003) Uncertainty management in optimal disassembly
+planning through learning-based strategies, in Proceedings of the
+NSF–IEEE–ORSI International Workshop on IT-enabled Manufacturing, Logistics and Supply Chain Management, pp. 135–141.
+Salomonski, N. and Zussman, E. (1999) On-line predictive model for
+disassembly process planning adaptation. Robotics and Computer
+Sutton, R.S. and Barto, A.G. (2000) Reinforcement Learning, MIT Press,
+Tang, Y., Zhou, M. and Caudill, R.B. (2001) An integrated approach to disassembly planning and demanufacturing operation. IEEE Transactions on Robotics and Automation, 17, 773–
+Tang, Y., Zhou, M., Zussman, E. and Caudill, R.B. (2002) Disassembly modeling, planning and application. Journal of Manufacturing
+Watkins, C.J.C.H. (1989) Learning from delayed rewards. PhD thesis,
+Zhou, M. and Venkatesh, K. (1998) Modeling, Simulation and Control
+of Flexible Manufacturing Systems: A Petri Net Approach, World
+Zussman, E. Kriwet, A. and Seliger, G. (1994) Disassembly-oriented assessment methodology to support design for recycling. Annals of the
+Zussman, E. and Zhou, M. (1999) A methodology for modeling and
+adaptive planning of disassembly processes. IEEE Transactions on
+Zussman, E. and Zhou, M. (2000) Design and implementation of an
+adaptive process planner for disassembly processes. IEEE Transactions on Robotics and Automation, 16, 171–179.
+Spyros A. Reveliotis received his Ph.D. in Industrial Engineering from the
+University of Illinois at Urbana-Champaign in 1996. He also holds an MS
+degree in Electrical & Computer Systems Engineering. Currently, he is an
+Associate Professor of the School of Industrial & Systems Engineering, at
+the Georgia Institute of Technology. His research interests are in the area
+of discrete event systems theory and its applications. His current research
+focuses on: (i) the logical/structural control of ﬂexibly automated production systems, workﬂow management systems and guidepath-based
+trafﬁc systems; (ii) the development of effective scheduling policies for
+these environments; and (iii) the development of customized algorithms
+and implementations of approximate dynamic programming and machine learning theory for the aforementioned application contexts. He is
+a senior member of IEEE and a member of IIE and INFORMS. He is
+also a member of the IFAC technical committee on discrete event systems,
+and a member of the College-Industry Council on Material Handling Education. He has been an Associate Editor for the IEEE Transactions on
+Robotics & Automation, and he is currently serving as an Associate Editor
+for the IEEE Transactions on Automation Science & Engineering. Finally,
+he was the recipient of the Kayamori Best Paper Award in the 1998 IEEE
+International Conference on Robotics & Automation.

@@ -1,0 +1,470 @@
+systems, job shobs, manufacturing lead times are often long and variable,
+and control systems. The first is to treat
+planning and control tends to emphasise the development of planning procedures. However, of equal
+importance for successful production planning is
+the quality of the planning data, such as engineering data (routing sheets and bills of materials),
+capacity data (on the workforce and work centres),
+and lead time data (suppliers’ lead times and
+In intermittent production systems, commonly
+known as job-shops, the main problems of concern
+with the basic planning data are the uncertainties
+and variations in the manufacturing lead times.
+These are at the heart of production scheduling.
+They have an importance for the production,
+marketing and financial functions of the firm.
+Procedures like quoting delivery dates (marketing),
+capacity planning, order release and machine loading (production) and capital tied-up (finance) are
+all based on planning data about manufacturing
+lead times in intermittent production systems are often very long. Yet the actual
+processing times on all the machines through which
+the product has to pass are usually quite small.
+The manufacturing lead times are dominated by
+the transit times between operations. This is demonstrated by the speed with which urgent orders
+can be expedited through the system when required. Stommel [40] showed that about 90% of
+the total flow time is due to transit times, of which
+85% is due to queuing, 3% to quality control and
+2% to transportation. Only 10% is due to actual
+processing operations. The problem of determining planning values for manufacturing lead times
+is mainly a problem of discovering the underlying
+factors that influence these inter-operation transit
+times are clearly needed for each individual product for use in the formal planning system. Two
+distinct alternative approaches have been taken to
+(b) Emphasise the control of the manufacturing
+The first option starts from the stance that lead
+The best that can be done is to have a formal
+planning system that reacts quickly to changes and
+then adjusts the planned values used to the actual
+lead times as often as is necessary. Lead time
+estimation is treated as a forecasting problem. The
+emphasis is on accurate forecasting and then developing a planning routine to minimise the im-’
+pact of forecast errors. Planning values for transit
+times between operations and safety time buffers
+are based on historic data and/or on forecasting
+the congestion in the shop as a result of the new
+master schedule. If the actual lead times increase
+then the planning values are automatically increased also.
+In the second option, the production system
+attempts to manage the average actual lead times
+to match pre-determined planning values (norms).
+The actual lead times are still calculated. However
+this is to determine whether action needs to be
+taken to bring them closer to the norms, rather
+than to update the planning data. The emphasis is
+then placed on determining which levels of planning affect lead times significantly and how they
+can be controlled to give average values close to
+The objective of the present article is to compare these two different approaches and to review
+the main streams of related research. What follows
+is not claimed to be an exhaustive account of the
+relevant literature, since it must reflect the subjective view the authors take of the problem.
+The starting point for both methods is to try to
+understand what factors and procedures influence
+lead times. Thus the various attempts to analyse and understand lead times are
+At the long-term planning level, lead times are
+in aggregate determined by factors like the product structure, the production process and the
+lay-out of the production facility. At the operational level, the factors that influence inter-operation transit times have been classified by
+Heinemeyer [ 181, into short-term, medium-term
+and non-quantitative (machine break-downs, missing tools and material, absences). Examples of
+short-term influence factors are the batch quantity, processing time, set-up time, priority rule, due
+date, etc. The research concluded that none of
+these short term factors has a significant influence
+In particular the relative importance of the
+widely studied priority dispatching rules as in
+[ 12,13,29,3,38] is doubtful. Research undertaken
+by Berr and Papendieck [9] concluded that as far
+only a difference at most of 0.5% between the best
+and the worst priority rule. What seems to have a
+much more significant impact on manufacturing
+costs and lead times, asccording to Bakker [4] and
+Kettner [27], is the timing of releasing jobs to the
+shop-floor. Research by Pappas [34] came to the
+conclusion that no sophisticated priority rule
+should be used since the interruption of the ‘natural’ flow of work in the shop adds more problems
+The general conclusion is that the medium-term
+influence factors are by far the most important.
+The role of the backlog of work in the shop as a
+major factor influencing lead times is apparent if
+the shop is viewed as a complex queuing system.
+An early recognition of this role is Little’s result
+[31], that the mean number of jobs in the shop,
+which is directly related to the mean workload in
+the shop, is equal to the product of the mean
+number of jobs arriving at the shop per unit time
+and the mean job flow-time. Bertrand and Wortmann [lo] showed that the variations in mean
+flow-time and in workload induced by variations
+in the rate at which orders arrive at the shop are
+approximately linearly related to each other.
+A remarkable real data simulation system for
+analysing manufacturing lead-times and their factors of influence, called DUBAF [27], has been
+developed at the University of Hanover, W.
+Germany. The system has been used in a series of
+research studies [23,46,27] and various projects in
+While the relation of the backlog of work and
+transit times between operations is easily recognized, the role of capacity planning strategies is
+often not clear. Critical accounts of capacity planning strategies are given by Stommel [40], Adam
+and Surkis [ 11, while Kochhar [30] describes capacity planning techniques commonly used by standard software
+scheduling, infinite capacity loading, load levelling). A fundamental difference exists between operations-oriented and order-oriented strategies. In
+the first class of strategies, which dominate the
+existing capacity planning modules, the planning
+units are the operations. Within the constraints of
+earliest and latest release dates, a shop order is
+released as soon as capacity is available for the
+first operation in the job sequence. In the second
+class of strategies, a shop order is not released
+unless capacity is available for all its operations.
+The order remains close together and shorter transit times between operations are achieved. However, this reduction is at the cost of longer waiting
+times in the ‘pool’ of non-released planned orders,
+where all orders stay from the time that material
+becomes available until they are actually released
+to the shop. Since non-released orders have low
+value (raw material only), the strategy leads to
+lower capital tied-up. On the other hand it allows
+less flexibility to the foreman for day-to-day
+The choice between the different existing capacity planning strategies has an influence on the time
+that a job spends on the shop-floor, which is
+makes little difference to the total time that a job
+spends in the shop, as this includes the time elapsed
+between the arrival of material and the actual
+release to the shop-floor. It is this total lead time
+which is of interest to the marketing function. An
+integrated capacity planning strategy should therefore take into account lead times at all levels, since
+it should cover both the marketing and production
+3. Lead time management as a forecasting problem
+Two different approaches can be distinguished
+(a) Use planning values based on historical
+(b) Forecast lead-times on the basis of the actual shop load.
+The first approach is widely used in industrial
+practice. Many companies, especially those operating manual systems, use a simple rule of thumb
+with regard to the inter-operation time and usually
+allow a number of days or a whole week for the
+completion of an operation. Statistical analysis of
+past data can help in determining more accurate
+mean values for transit times at each work centre.
+These mean values are the sum of set-up, processing, queuing and breakdown times of all jobs that
+passed through the work centre over a long time
+A more sophisticated version of this approach
+is the development of a transition matrix (‘fromto’) between all the work centres in the shop. The
+manufacturing lead-time is given as the sum of
+set-up, processing times and the transit times between the work centres in the job sequence, as
+specified by the stored transition matrix.
+Another popular method has been to calculate
+lead-times on the basis of the job’s processing
+time, multiplied by some empirical factor. Jobs are
+given flow allowances that are proportional to the
+total work required, Griebel [16], Baker and
+Bertand [4]. The method relies on an information
+base consisting of the parameters describing the
+individual job to which a manufacturing lead-time
+is being assigned. No shop status information is
+included, either in the form of historical data or in
+the form of the actual shop workload. Apart from
+that, the fact that the processing time is usually a
+small part of the total flow time does not justify it
+being considered as a major factor of influence
+The method used by the majority of standard
+software packages for their capacity planning
+strategies is the mean planning values for transit
+times from one machine group to another (transition matrices). These quite often inaccurate values
+result in false reservations of capacity, therefore
+false balancing, overloads, increased in-process inventories, increased lead times, missing due dates
+and, finally, even greater inacccuracy of planned
+transit times. This vicious circle (Kettner and
+Jendralski [28], is the main reason for the lack of
+satisfaction among the users of capacity planning
+A more ambitious approach to the lead-time
+estimation problem is to include information about
+the actual shop status. For such a purpose, the
+shop work load is a natural indicator to use because it is logical that waiting times should reflect
+A common method using shop workload information is closely connected with the finite
+capacity planning technique [ 11. To find the arrival
+time of a job at the next work centre, one has to
+add, to the arrival time of the job at the current
+work centre, the set-up, processing and transport
+times of the operation being performed as well as
+the existing load at the work centre. The obvious
+disadvantages of this technique arise from its static
+view of the shop, since changes of load from the
+time of planning until the job actually arrives at
+the work centre are not aken into account.
+Reiter [37] and Holstein [19] proposed an improved technique which viewed the shop as a
+dynamic statistical system, taking into account the
+expected congestion that jobs might encounter as
+they proceed through the shop. To find the arrival
+time of a job at the next work centre, one has to
+add, to the arrival time of a job at the current
+work centre, the estimated delay or waiting time
+resulting from the congestion at the work centre in
+that time period as well as the set-up, processing
+and transport times for the operation. The significant departure from the previous approach is the
+intoduction of the periodic waiting time concept.
+The waiting times or delays are calculated for each
+work centre for a specific number of future periods. In order to obtain and update these estimated
+delays for each work centre at each successive time
+period, a forecast of the number of jobs and their
+processing times is required. The main drawback
+of the approach is that jobs are loaded forward.
+The method cannot be applied to the backwards
+Eilon and Chowdhury [ 131 investigated leadtime assignment methods based on an estimate of
+the future uilisation of capacities in order to assign
+optimum due-dates. Their results indicate that the
+actual shop workload is an important variable for
+due-data assignment. Similar results have been
+obtained by Heard [ 171, Weeks [45] and Fryer and
+Adam et al. [2], used time-series analysis to
+model the delay processes at the queues. The models were used to predict future operation flow-times
+from the flow-times realized in past periods. They
+indicated that in a shop with high utilisations, the
+behaviour of the workload and the flow-times over
+time is highly autocorrelated, so that the actual
+workload may be a good predictor of the workload
+estimation problem is the work of Sainis [39], who
+used data from the master schedule to determine
+the arrival rate at each work centre in a queuing
+model. The lack of analytical results in queuing
+of Jackson’s decomposition rule [22], that each work centre can
+be viewed as an independent queuing system. This
+rule is most appropriate in situations where there
+is a random flow of work in the shop, i.e. in pure
+job-shops. However, the approach of Sainis remains to be proved in practice.
+The recent development of cheap on-line data
+retrieval systems [32], suitable and affordable even
+for small and medium-sized companies, will allow
+for close monitoring of the work-in-process. A
+computerized WIP system makes it possible for
+the management to determine realistic values of
+queue times by observing at frequent intervals, the
+queues that build up at a particular work centre.
+By drawing a histogram of the frequency at which
+a particular queue size occurs at the work centre,
+the average queue size can be computed. However,
+merely ensuring that the planning data about
+manufacturing lead times is always up-to-date is
+Most people believe that they need a system
+capable of responding more quickly and precisely,
+changing planned lead-times to match the actual
+lead-times experienced. The vicious circle, reported by Mather and Plossl[33] and Plossl[35] as
+the ‘lead time syndrome’ shows that nothing could
+be further from the truth. An increased rate of
+incoming customer orders inflates lead times.
+Planning values for lead times are updated to
+reflect the latest situation in the shop. Hence longer
+lead times are quoted. Customers react by releasing more orders to cover the requirements during
+the increased lead times and lead times are further
+inflated. The shop decides to increase its capacity.
+Lead times then drop. The customers release fewer
+orders. Capacity is decreased and the circle starts
+4. Lead time management as a control problem
+Lead time in practically any company is a function of the backlog (Plossl and Wight [36]). Based
+on this truth, a technique called Input/Output
+Control (IOC) st.arted to become popular in the
+early seventies, as a consequence of the need to
+avoid the disastrous ‘lead time syndrome’. The
+idea is, roughly, to keep the amount of workload
+at each work centre at a constant level [7,8,35].
+Actual average work centre queuing times are the
+mean times for all individual orders processed in
+one work centre over some period. According to
+the IOC technique, actual and planned average
+queuing times must be the same. This requires
+managing backlogs of work-in-process at each work
+centre by controlling the input of new orders
+against output of completed work, i.e. against
+The main reason behind the build-up of backlogs is the erratic input of work at the work
+centres. Backlogs act as buffers for work input
+variations just as inventories are buffers against
+variations in demand. Thus backlogs can be viewed
+as inventories of work. If the work supply to the
+work centres is very regular with respect to, time,
+the mean job flow-time can be very low. In extreme cases such as conveyer belt production lines,
+the mean job waiting-time can be zero, even if
+capacity utilization is practically equal to one.
+Thus the mean flow-time can be reduced by making the work supply more regular.
+The lessons of IOC are fairly simple, but not
+always understood in industrial practice:
+(a) Input of work must never exceed the output
+(b) Input must be regular and smooth over
+Based on the ideas of Wight, Belt and Plossl,
+Karni [26] developed an extensive systematization
+and mathematical formulation of the technique. In
+this work Karni tried to provide analytical solutions to the problem of determining optimal work
+centre capacities, assuming that the input of new
+orders is given. Several dynamic programming and
+transportation-type algorithms are presented in [24]
+for solving this problem under restrictions of permissible waiting queue sizes and work station
+capacities, derived from regular shift, overtime and
+two-shift operation. The result is a Capacity Requirement Plan (CRP) with the minimum sum of
+A simpler case than planning with variable
+capacities, is to be able to plan with constant
+capacities for every work centre over the planning
+horizon. Karni [25] suggests that for complex cost
+functions and permissible underloading of work
+centres, complete enumeration of all feasible solutions is the simplest approach.
+The assumption of inflexible input of shop
+orders, provided by the MRP system, prevents the
+planner from carrying out alternative feedback
+actions such as altering the master production
+schedule, and consequently the input, instead of
+changing capacity. Analytical algorithms which are
+able to incorporate combined input and output
+planning, since they are presumably far more com-
+Bertrand and Wortmann [lo] describe an approach which is essentially an IOC technique, but
+builds on the basic concepts of general control
+theory, which deals with the study of dynamic,
+stochastic control problems. However, the available techniques of this theory can rarely be applied
+in a straightforward way to the design of production control systems in practice. This is due to the
+wide gap existing between the relatively simple
+problems subjected to analytic treatment and the
+complex nature of actual production control problems (Tocher [43]). Therefore, Bertrand and Wortmann use control theory in order to conceptualize
+the problem situation. The problem is then decomposed into relatively simple control subproblems which are solved by means of simple heuristic
+Bertrand and Wortmann [lo] and Bertrand [ 1 l]
+investigated the relation between the mean job
+flow-time and mean workload. In [lo] they showed
+that the variations in mean flow-time and in
+workload, induced by variations in the rate at
+which orders arrive at the shop, are approximately
+linearly related to each other. In [l l] a model is
+presented of the dynamic behaviour of a system,
+where new jobs are released or production is varied
+such that the actual workload is kept in accordance with a predetermined workload norm. Typical differences are revealed between workload control by means of capacity variations and by means
+The main difficulty with the IOC method is
+controlling the input to secondary work centres. In
+a production line environment, control of input is
+relatively simple and can be done by balancing the
+input against the output from the line. In a jobshop with random work flow it is only the input to
+the first operation, or ‘gateway’ work centres that
+can be similarly controlled at the shop order release level. Controlling the input to the other secondary work centres is considerably more difficult
+to do. This is because their input is the combined
+output from many previous work centres and varies
+with product mix, routing sequence, and the operation processing times. Hence, it is only the foreman who controls the input to the queues of
+secondary work centres at the detailed dispatching
+A solution to this problem can perhaps be
+found in capacity planning methods based on
+orders, which do not use the traditional concept of
+transit times between operations [20,21,23,6,42].
+In traditional scheduling studies, all jobs are
+sent to their first operation machine as soon as
+they arrive in the shop. However, in industrial
+practice jobs are often found to accumulate in the
+production control office and issued to the shop as
+a batch (Eilon [ 131). Jobs are not released immediately after it becomes theoretically possible to
+do so. Rather they are retained in a ‘suspense file’.
+This is nothing more than a notation in a scheduling book or at most an open purchase order or
+This scheme creates a ‘job pool’ of unreleased
+jobs to the shop-floor. Under the job pool concept
+the shop consists of a pool of jobs not yet released
+to the floor and distinct work centres with a queue
+of jobs in front of each. Loading consists of the
+release into the shop of a subset of the pool every
+scheduling period. The scheduling period can be a
+shift, a day, a week, etc. Decisions are not made in
+a continuous fashion, but rather they are made
+periodically and in a ‘discrete fashion’. The loading algorithms attempt to control the work flow
+and to balance the aggregate load ahead of each
+work centre for the immediate next scheduling
+period, without making time-phased load projections.
+Irastorza and Deane [21] and Irastorza [20]
+used the job pool concept in connection with a
+loading algorithm which utilizes a mixed integer
+programming approach, with constraints based on
+the current workload assignments at each work
+centre. The objective of the program consists of
+minimizing the sum of absolute deviations from
+the desired aggregate load for each work centre.
+The desired load is set by management and provides control over the shop operation. An additional term is introduced in the objective function
+to make jobs in the pool increasingly attractive to
+be loaded in the shop as their due date approaches. The weight assigned to this term can be
+easily controlled by the production planner.
+Jendralski [23], Kettner and Jendralski [28], and
+Bechte [6], describe heuristic loading algorithms
+for choosing jobs from the pool. The planner sets
+‘boxes’ of maximum permissible aggregate load
+ahead of each work centre, so that an inventory of
+work exists always in front of the work centres.
+The loading algorithm tries to fill the boxes with
+jobs which are picked up from the job pool
+according to some priority criteria. In this way,
+queues are controlled and job flow-times can be
+In contrast to the Karni [24,25] algorithms, the
+above algorithms try to control the input of work
+to the work centres, assuming known capacities.
+Again an algorithm providing facilities for combined input/output
+Another weakness of these approaches is that
+they control only the output from the job pool by
+releasing shop orders to the shop floor. They seem
+to ignore the input to the pool, as this is due to
+marketing decisions concerning the negotiation and
+quotation on customer orders. However, the total
+elapsed between the arrival of material and the
+delivery date, includes both the time spent in the
+pool of unreleased jobs and the time spent on the
+shop-floor, i.e. the actual throughput time or job
+flow-time. Controlling this total manufacturing
+lead time is vital to the higher level objectives of
+the firm, above the individual concern of the production or the marketing functions.
+Traditional loading techniques as well as the
+relatively new techniques of IOC and ‘discrete
+decision-making’ concentrate their attention on
+balancing the released work to the shop-floor and
+reducing throughput times. The hidden role of the
+pool, which accounts for the total manufacturing
+lead time, is usually ignored. However, reducing
+throughput times and balancing the work on the
+shop-floor, leads almost inevitably to increases in
+the waiting time in the pool of unreleased jobs.
+The total manufacturing lead time remains equal
+or even longer as in the case where jobs are
+released as soon as they become available.
+In order to be able to control both ends of the
+pool and, consequently, total delivery times, new
+planning tools are required. Froehner [ 141 suggests
+the requirements of future planning systems include:
+(a) Integration of long term planning with production control;
+(b) Submitting the planning activities to higher
+Gelders and Van Wassenhove 1151 in their re-
+view on production planning made a strong plea
+towards a functional integration of the planning
+activities “ . . . production is just one link in this
+chain. A major reason for the gap between production planning theory and production planning
+practice is that many researchers deny some of the
+obvious interactions of production with other elements of the logistics system”.
+The authors take the view that attempting to
+manage the lead times to desired norms, is the
+appropriate stance to adopt. However in our view
+this requires a close cooperation of the production
+and marketing functions of the firm, see Tatsiopoulos [41]. Long delivery lead times and poor due
+dates performance or poor capacity utilisation are
+not necessarily due to bad production scheduling.
+Their origin may well be wrong commitments of
+the marketing department made a long time ago,
+that created major unbalances to the level of work
+in the shop. We conclude that too much effort has
+been devoted to considering short term scheduling
+problems, the lowest level of decision of the three
+level decision hierarchy of Gelders and Van Wassenhove’s review [ 151. Control of lead times is best
+achieved at the upper decision level of determining
+the master schedule, which must be extended to
+include the marketing function, the control of the
+order acceptance rate and the timing of promises
+The present work of the authors [41,42] concentrates on building a hierarchical input/output
+control system, integrating the production and
+marketing functions of the firm. Quoted jobs, confirmed customer orders waiting for material, unreleased shop orders waiting in the ‘job pool’, released shop orders and queues of items waiting in
+front of each work centre form a hierarchical
+chain of backlogs connected by input/output
+relations. Heuristic algorithms have been developed in
+order to control this hierarchy at two levels:
+system aims at managing lead times to desired
+average lengths by controlling all backlogs in the
+hierarchy. However, the system as currently developed applies only to small firms, usually component suppliers of large companies, where the
+integration is facilitated by the fact that there are
+no organisational and behavourial difficulties due
+to clearly set boundaries between the marketing
+and the production control departments, as can
+happen in larger firms. The question remains for
+further research whether such an approach can be
+durch belastung[61 W. Bechte, Steuerung der Durchlaufzeit
+[I21 R.W. Conway, W.L. Maxwell and L.W. Miller, Theory of
+[ 151 L.F. Gelders and L.N. Van Wassenhove,
+zur Bestandsregelung in der Werkstattfertigung,
+of work station loading, AIIE Trans. (December
+[31] J.D.C. Little, A proof of the queueing
+G. Plossl and W. Welch. The Role of Top Management
+[37] S. Reiter, A system for managing job-shop

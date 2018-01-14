@@ -1,0 +1,571 @@
+Reinforcement learning versus heuristics for order
+M. Mainegra Hing · A. van Harten · P. C. Schuur
+Received: 30 December 2002 / Revised: 27 April 2006 / Accepted: 4
+May 2006 / Published online: 21 December 2006
+C Springer Science + Business Media, LLC 2006
+Abstract Order Acceptance (OA) is one of the main functions in business control.
+Accepting an order when capacity is available could disable the system to accept
+more profitable orders in the future with opportunity losses as a consequence. Uncertain information is also an important issue here. We use Markov decision models and
+learning methods from Artificial Intelligence to find decision policies under uncertainty. Reinforcement Learning (RL) is quite a new approach in OA. It is shown here
+that RL works well compared with heuristics. It is demonstrated that employing an
+RL trained agent is a robust, flexible approach that in addition can be used to support
+Keywords Order acceptance . Opportunity costs . Decisions under uncertainty .
+Markov decision process . Reinforcement learning . Artificial neural networks
+One of the main functions in a business control framework is Order Acceptance (OA).
+Basically, OA involves for each order a reject/accept decision. It is essential to manage
+the interface between customers and production. Traditionally, this problem is solved
+by always accepting orders, greedily with respect to immediate profits, as long as
+sufficient capacity is available. However, always accepting an order when there is
+capacity available is myopic. Such a policy can prevent the system from accepting
+M. M. Hing () . A. van Harten . P. C. Schuur
+School of Business, Public Administration and Technology, University of Twente, Enschede,
+36 Isabelle, Gatineau, Québec, Canada, J8Y 5G5
+more profitable orders in the future (opportunity loss). Another important aspect is the
+availability of information to the decision maker. Basically, information on the arrivals
+of future orders contains uncertainty. Generally, in the literature information regarding
+negotiation with the customer such as an estimate of the work content of an order, a
+norm for the necessary due date and the price are assumed to be known or estimated.
+Further, a model of the production process and the planning procedure for execution of
+the jobs is also considered to be known beforehand. But most of the time it is difficult
+to have such information exactly. For example, there might be uncertainty in job
+Here we analyze the trade-off between on one hand, capacity reservation to avoid
+opportunity losses and to have a safety margin for disturbances and on the other hand,
+immediate yield in case of order acceptance under uncertainty. We use a stochastic
+modeling approach, Markov decision theory and learning methods from Artificial
+Intelligence to find decision policies under uncertain information.
+Reinforcement Learning (RL) is a new approach that combines very well with the
+idea of Markov decision modeling and its solution methods based on value functions.
+Further, there are some other aspects that make RL appealing to our problem. The
+idea of learning without the need for complete model information and the possibility
+of learning even from delayed rewards allows us to consider different degrees of
+uncertainty, not only with respect to job execution, but also with respect to other
+parameters such as arrival rates of certain types of jobs. RL is a rather new field and
+successful applications are not always fully understood yet on a theoretical level. It
+means that convergence properties of the algorithms and procedures for tuning the
+parameters have to be explored. Hence, a lot of work still has to be done in order to
+understand how RL can best be applied to business problems in various areas and to
+gain insight into the RL outcomes. Altogether this problem area constitutes a new and
+interesting field for several lines of research. In this paper we focus on the possible
+contributions to order acceptance. Our goal is to compare decision policies found by
+Finding good heuristics in a complex situation is a delicate art even in case of
+complete knowledge of the order arrival statistics. It turns out that an RL trained agent
+usually outperforms simple greedy heuristics, showing that such agents learn to deal
+with opportunity losses in a satisfactory way. An obvious advantage of heuristics is
+the more appealing insight in their structure and performance. As for more advanced
+heuristics it can be expected that -once adequate structures with sufficiently many
+parameters are introduced- they should perform also very well if properly tuned. Such
+heuristics are not easily determined in complex situations. An interesting idea is to
+use an RL trained agent to detect good advanced heuristics, meanwhile interpreting
+the agent’s performance. Our goal is to show that this can indeed be done in certain
+cases. Furthermore, we emphasize that RL trained agents are a more flexible and
+robust approach with respect to incomplete information, than tuning parameters in a
+In the next section we comment on related work. In Section 2 we introduce the
+OA situation under study and model it as a semi-markov decision problem (SMDP).
+In Section 3 we specify the Reinforcement Learning techniques used. In Section 4
+we introduce a new general class of heuristics for the purpose of comparison with
+and interpretation of RL trained agents. In Section 5 we report on computational
+Reinforcement learning versus heuristics for order acceptance on a single resource
+results comparing RL trained agents with (advanced) heuristics. Finally, we give
+our conclusions, summarize the acquired new insight and formulate some ideas for
+Relatively little attention has been paid to the order acceptance problem in the literature.
+Some studies have been done about the degree of information required to deal with the
+coordination mechanism between the order acceptance and the scheduling functions.
+Different policies for OA decisions in production processes are studied in Wester et al.
+(1992), Tesauro (1994), and ten Kate (1994). Basically they study integrated as well as
+hierarchical approaches. The integrated approach uses detailed schedule information
+for the OA decision while the hierarchical uses aggregate information. These studies
+are mainly capacity based instead of revenue based.
+The idea of opportunity losses in order acceptance problems is recognized (Guerrero
+and Kern, 1998) but not worked out in as full generality as we propose. This problem
+arises naturally in the context of reservation systems for car rentals, room reservations
+in hotels or tank capacity rental, and hence the relationship between OA and yield
+management. Yield management is a strategy used for service firms. The strategy
+appears to be rather simple: give the right service to the right type of customer, at the
+right time and for the right price. It was first used in the airline industry but nowadays
+it has been applied to reservations in railroads, to the lodging industry, car rental companies, broadcasting industry, etc. The yield management problem is best described
+as a non-linear, stochastic, mixed-integer mathematical program that requires a large
+amount of data and decision variables. Therefore, the practical solution to this problem
+is usually reduced to three smaller ones: overbooking, discount allocation and traffic
+management. The yield management problem considers an order acceptance problem
+taking into account opportunity costs, where the decision of acceptance is combined
+with other decisions as overbooking, discount allocations and traffic management.
+An important step in considering opportunity costs in OA is through the use of
+dynamic programming models. A single server system in continuous time in which
+opportunity costs play a role is studied in Nawijn (1985).
+Artificial Intelligence tools have been widely used in several applications, but hardly
+for OA problems. However, in Wang (1994) the author proposed a multicriteria OA
+decision tool in which the OA decision rule is based on a prioritization given by a pairwise comparison using a neural network based preference model. Orders are accepted
+following the priority ranking if capacity is available, but opportunity losses are not an
+explicit issue there. Reinforcement Learning has already been used in some logistic
+problems where the size of the problems made them intractable for traditional dynamic programming methods like job-shop scheduling (Zhang and Dietterich, 1995;
+Riedmiller and Riedmiller, 1999), elevator control (Crites and Barto, 1996), and resource allocation (Singh and Bertsekas, 1997).
+The study of order acceptance policies in a production or service environment
+using RL started recently. In Snoek (2000) a neuro-genetic architecture using RL aims
+at optimizing OA and scheduling policies in a job-shop environment. This approach
+outperforms two simple heuristic policies. In Mainegra-Hing et al. (2001) an RL policy
+is shown to converge to the optimal policy for a simple OA case with a single server
+with at most one job in execution. Here we consider a more general case with several
+independent job types that compete for capacity on a single resource. The scarce
+capacity of the resource should be allocated to a set of concurrent jobs planned over
+a given planning horizon. Further, we allow for stochastic perturbations during job
+execution resulting in a higher or lower capacity realization than anticipated.
+It is not very difficult to define reasonably simple heuristics for OA problems
+(Pinedo and Chao, 1999; Raaymakers, 1999). In Ebben et al. (2005) the authors compare four workload based policies varying from rules based on aggregate information
+to detail scheduling methods in a make to order job shop with stochastic processing
+times. To account for inaccuracy in methods and uncertainty, a safety factor for the
+capacity utilization is explored. Altogether this line of work is oriented mainly towards
+due date performance and capacity utilization, not so much towards costs and profits,
+In the area of management accounting, opportunity costs related to order acceptance
+have received some more attention since the eighties, though it has been recognized
+that opportunity costs are hard to determine (Miller and Buckman, 1997; Gietzmann
+and Ostaszewski, 1996). In Gietzmann and Monahan (1996) an MDP model of a
+simple stochastic manufacturing process is modelled in order to assess two heuristic
+costing rules: direct and absorption costing based acceptance rules. The direct costing
+(DC) rule accepts an order if its contribution margin exceeds the expected holding cost
+associated with the order. This rule ignores opportunity costs. The absorption costing
+(AC) rule seeks to account for opportunity costs and accepts an order if its contribution
+margin exceeds the sum of its expected holding cost and the allocated cost of providing
+the capacity. The optimal policy is only partially obtained for some states; this allows
+to study the behavior of the two heuristics and to reach the conclusion that none of
+these two heuristic rules is better than the other for all parameters of the problem. The
+MDP model allows to obtain an “open acceptance” condition on the parameters of the
+problem under which the AC rule is better than the DC rule. Opportunity costs are
+analyzed as part of relevant costs for order acceptance decisions in Wouters (1997).
+However, alternatives for considering opportunity costs are only related to planned
+capacity, not to future situations. Wouters recognizes the difficulties for calculating
+relevant costs under uncertainty and gives some suggestions to assess the reliability
+Here a more general setting for a class of heuristics is presented, which allows for
+a wealth of advanced heuristics taking system state characteristics into account. This
+approach to more general heuristics is not addressed in the literature to the best of our
+Let us now describe our OA situation in more detail. Order definitions are based on
+a finite number N of job types, where type i has an arrival rate (λi ), due date (ti ),
+requested capacity (wi ) and generates an immediate reward (ri ) upon acceptance.
+Arrivals of orders may take place at any continuous time moment. However, arrivals
+are only evaluated at discrete equidistant time moments, which defines our unit of
+Reinforcement learning versus heuristics for order acceptance on a single resource
+time. These time moments are the decision moments in which jobs are rejected or
+chosen for service. So we consider aggregate batch arrivals, i.e., several arrivals of
+each job type during the previous time interval. The number of arrivals in a unit time
+interval follows a Poisson distribution with average λi , depending on the job type.
+Each job asks for service on a shared resource, which can process different jobs at
+the same time (i.e., concurrency is allowed). Job acceptance has to be planned over a
+rolling planning time horizon with H stages. Each stage spans one time unit. There
+is a maximum capacity Cmax for each stage that can only be excessed at the cost of a
+penalty as we explain in the next paragraph. By ct we refer to the occupied capacity
+at stage t of the planning horizon due to jobs in execution accepted previously. With
+c we denote the associated vector of occupied capacity in the current planning horizon.
+Figure 1 shows an example of capacity utilization in a planning horizon with H = 10
+stages and Cmax = 8 where c = (4, 2, 8, 7, 5, 2, 4, 8, 4, 8).
+We assume that the due dates are redefined relative to our planning horizon. Job
+processing requires a job type dependent expected workload wi . We allow for uncertainty due to workload realization which differs from the expectation, causing a
+possible capacity perturbation. For simplicity we consider a random perturbation term
+p ∈ {−1, 0, 1} which affects the capacity profile ct only for t = 1. If c1 > 0 then in
+the realization during the next period the actually required capacity turns out to be
+c1 + p instead of the anticipated c1 > 0 . The probability of a perturbation p is denoted
+by Pr ( p). If extra capacity is used in realization ( p = 1) and no regular capacity is
+available we introduce a penalty pen(c, p) for using non-regular capacity as follows:
+When the available capacity is not sufficient for an arriving job, given its capacity
+request and its due date, the only option is rejection. We do not allow late delivery.
+Further decision postponement by putting a job in queue till a next decision is not
+allowed. At each decision epoch we assume that arriving orders occurring after the
+previous decision epoch are accumulated into a list. Then, a decision has to be made
+about which subset of the jobs requesting service to accept. In principle each subset
+of jobs should be analyzed to see whether it fits into the available capacity in such
+a way that the due dates are not violated. In order to reduce the number of possible
+Algorithm 1 BWL (c, i): Backward loading procedure for job type i in a capacity profile c
+decisions to a polynomial size in the number of job types we impose some restrictions
+on the structure of the decision rule. Instead of focussing on all possible subsets of
+jobs at once as possible decisions, we impose that the decision is created sequentially
+while we call a time off. Each single decision i in the sequence is either the selection
+of one of the jobs from the list (i ∈ [1..N ]) or the rejection of all of them (i = 0). By
+definition we put i = 0 also if the remaining list is empty. If the available capacity
+is not enough for a job, then the selection of that job is not an option. If i > 0 then
+capacity is allocated to one job of type i and the list of the remaining jobs is updated.
+If i = 0 we go to the next decision epoch with a time on and a list of newly arriving
+The capacity profile is updated given the decision (I) (i > 0) of accepting a job
+of type i, or (II) (i = 0) rejecting the complete job list. In case (I) we choose for a
+Backward Loading (BWL) principle, since allocating capacity as close to the due date
+as possible provides the best conditions for accepting more jobs from the job list.
+Case (II) is completely different. If there is still available capacity in the first stage
+(t = 1), then it will get lost unless we adapt the allocation. We may create the best
+conditions for accepting jobs from the new list at the next decision epoch, if we fill
+the still available capacity at t = 1 according to a “least shift back” (LSB) principle.
+This boils down to looking for already allocated capacity forward in time starting at
+t = 2 , which is replanned to t = 1, until the still available capacity at t = 1 is filled
+as much as possible. Algorithms 1 and 2 sketch these two procedures.1
+Cases of more realistic order acceptance problems may be studied. Nevertheless
+this case is rich enough to demonstrate the complications that may arise in finding an
+We now formally describe this problem as a semi-markov decision problem (SMDP).
+The state at each decision moment is defined by s = (k, c), where k = (k1 , . . . , k N )
+is the job list and ki represents the amount of jobs of type i requesting service. By
+The notation x(t : H ) refers to the sub-array of x taking from the t − th element up to the H − th one.
+Reinforcement learning versus heuristics for order acceptance on a single resource
+Algorithm 2 LSBp(c,p): Least Shift Back plus capacity perturbation allocation procedure for capacity
+c = (c1 , . . . , c H ) we denote the capacity profile and ct is the total capacity already
+allocated in stage t. For each job type i we restrict the maximum amount of jobs in the
+job list to m i . This number may be determined by the arrival probabilities or by the
+limited capacity.The state space S is the set of all possible states and
+(m i + 1) in the general case, and (H Cmax + 1) i=1
+case all jobs have the same due dates, in which case the capacity profile may be only
+a number representing the total occupied capacity on the planning horizon.
+The action space is A = {0, 1, . . . , N }. The set of allowed actions A(s) for a state
+s = (k, c) is defined as follows. Action i ∈ [1..N ] is allowed if job type i is present in
+the job list and capacity is available for at least one occurrence of that job type, rejection
+ job list is always an option (i.e., A(s) = {i ∈ [1..N ] |ki = 0, BWL(c, i)
+is possible} {0}. In case a job type i is chosen an immediate reward ri is received and
+a transition to the next state s  occurs deterministically with the time off, i.e., the elapsed
+time d(s, i) = 0. The new job list is given by k − ei where ei is a unit vector with 1
+in position i and the capacity profile is updated with the procedure BWL(c, i). In case
+the job list is rejected (i = 0) the immediate reward is stochastically dependent on the
+capacity perturbation (p) and is given by the penalization function (1). Now we have a
+time on situation with the elapsed time d(s, 0) = 1 and we are in situation (II), where
+a new list of arriving jobs is considered. The new arrivals vector k  is determined by
+the job arrival process with statistics as described before and the function LSBp(c, p)
+updates the capacity profile given the current capacity profile c and the perturbation
+term p, so the transition probability depends on the arrival process and on the capacity
+perturbation. The state transition is described in Table 1.
+The objective is to find a deterministic policy π:
+which maximizes the performance of the system. The performance of the system is
+measured as the expected value of the total discounted reward. The corresponding
+Bellman equation for the state value function V π is given by:
+Pr(s, π (s), s  ) rew(s, π (s), s  ) + γ d(s,π (s)) V π (s  )
+with γ the discount factor and d(s, i) the elapsed time as introduced before. The
+optimal action value function Q ∗ in this case satisfies:
+Pr(s, i, s) rew(s, i, s  ) + γ d(s,i) max
+and an optimal policy π ∗ (s) can be determined by:
+Solving this problem even when the parameters of the model are known (exactly or
+by some statistical estimation) is still a difficult task due what is usually referred to as
+the “curse of dimensionality”. It is known that finding an optimal policy requires an
+overwhelming computational effort if the dimension of the state space increases. The
+state space may be tremendously large. As a consequence π ∗ (s) may be a complex
+rule. A simple structure “accept if capacity is available and the reward per unit of
+requested capacity is sufficiently high” as found in the prototype problem in MainegraHing et al. (2001) may no longer be expected for the general case. What one should
+expect is that in case of low utilization of the capacity an optimal decision rule will be
+inclined to accept more jobs which generate low profit per unit of requested capacity
+Reinforcement learning versus heuristics for order acceptance on a single resource
+than in case of high utilization. Further, one should expect that even in case of high
+utilization certain small rush jobs, that fit well into a gap in the capacity profile are
+still attractive for acceptance, also if they are not so profitable, simply because the
+gap is too small to accommodate other jobs. An interesting aspect of this research is
+to assess the degree that the learning approach leads to an approximate decision rule
+In the previous sections we have argued that in order to support order acceptance
+decisions we need to explore new alternatives able to cope with long term opportunity
+loss and uncertain environments with incomplete information. In this section we deal
+with one of such possible alternatives: Reinforcement Learning. These methods do
+not assume an a priori model and they can construct good policies without the need for
+learning model parameters. However, hybrid approaches in which learning parameters
+of the model are an explicit part of the learning process may also be applied.
+An RL system consists of two components, an agent2 and its environment.
+An RL-agent is characterized by a knowledge structure, a learning method to update
+its knowledge and a specific behavior (policy). In general, an RL system is considered
+to be an SMDP where the actions are controlled by an agent. The environment is
+characterized by states, rewards and transitions, as introduced in the previous section.
+Figure 2 summarizes the communication between the agent and its environment. At
+each decision moment the agent observes the current state (1) of the environment and
+performs an action (2) selected according to its decision policy. As a result of the
+received action in the environment (3) a transition to a new state takes place and a
+Although we focus here on a single agent system, multiagent systems in which a group of agents communicate and cooperate have also been considered in the context of RL problems.
+reinforcement, or reward signal is generated (4). The reward signal and the new state
+are received by the agent (5) and can be used through the agent’s learning method
+in order to update its knowledge about the environment, and consequently it can update its policy (6). Rewards and state transition functions may be in general stochastic, and the underlying probability distributions are assumed not to be known to the
+In this context we can situate our OA problem with incomplete information by
+considering the decision maker as an agent who has to act in a (partially) unknown
+environment where orders arrive and have to be accepted or rejected. Specifically
+in our problem we consider incomplete information in the sense that the agent does
+not know the frequency of order arrivals. Using the model described in Section 2 we
+simulate the dynamics of the environment. Then through interaction an agent who
+does not know about such dynamics, should learn a good policy through the learning
+method. Order characteristics become available upon arrival. Next, we discuss the
+agent knowledge representation, learning method, behavioral structures and related
+parameters. For an introduction on RL (see Bertsekas and Tsitsiklis, 1996; Sutton and
+Our focus here is on Q-Learning (QL) methods that aim at learning the optimal action
+value function (3) as a way to obtain an optimal policy. The method is based on
+estimations of the Q-values that are updated after each agent-environment interaction.
+The agent starts with some estimation (arbitrarily, say with zero Q-values, or using
+some a priori information in case it is available).
+At each decision moment t in which the environment is in state st the agent chooses
+an action at based on its current estimation Q t (s, a) and some specific policy. Examples
+of policies are a greedy policy3 and an exploratory policy,4 but we will use an in between
+policy. Exploration increases experience by for example choosing actions at random.
+Exploitation deals with the use of the available knowledge by for example choosing
+the greedy actions using (4). The known exploitation-exploration trade-off can be
+briefly described as follows. If we always exploit the actual knowledge taking the
+optimal action with respect to the actual Q-values without exploration, many relevant
+state-action pairs may not be visited. That is why mainly at the beginning when the
+knowledge we have is not very accurate yet, exploration is very important. Here we
+use a policy which at iteration t chooses with probability εt for the exploratory policy
+and with probability 1 − εt for the greedy policy.
+The environment reacts to the taken action by giving a reward rt+1 =
+rew(st , at , st+1 ) to the agent and changing to a new state st+1 in a next decision epoch
+t + 1 that occurs after d(st , at ) units of time. With this new information the agent
+updates the Q-values and decides upon a new action at+1 for the present state st+1 ,
+etc. The update rule for this method given the experience tuple < st , at , rt+1 , st+1 > is
+A greedy policy is one in which all the actions are greedy. An action a is greedy if a = arg maxa  Q(s, a  ).
+An exploratory policy can choose actions at random which can be useful when there is not enough
+knowledge, for example at the beginning of the learning process.
+Reinforcement learning versus heuristics for order acceptance on a single resource
+Q t+1 (st , at ) = (1 − αt )Q t (st , at ) + αt rt+1 + γ d(st ,at ) max Q t (st+1 , a)
+where γ is the discount factor, and αt is the learning rate.
+Agents are trained for a period of L iterations, considering one iteration as an agentenvironment interaction as explained before. Here we use decreasing functions as in
+Mainegra-Hing et al. (2001) for the exploration and learning parameter. At iteration t
+the learning and exploration parameters are
+where α0 and ε0 are initial values and Tα , Tε define the decreasing speed respectively.
+The knowledge representation in this method concerns the Q-values representation.
+Here we use parametrized function approximations that can generalize and interpolate
+for states and actions never seen before. Function approximations are necessary when
+the state and action spaces are too large to be represented on backup tables.
+An Artificial Neural Network (ANN) is an example of such a parametrized function
+approximation with a massively parallel distributed structure. Such a structure and the
+capability to generalize make it possible for ANNs to solve complex problems. An
+ANN is made up of simple processing units typically known as neurons.
+The most widely used ANNs are of type multilayer perceptron (MLP) where neurons are arranged in layers. For reasons of simplicity we will focus here on multilayer
+perceptrons with one hidden layer and a single output, which will be referred to as
+I − m − 1 perceptrons where I and m are the sizes of the input and the hidden layer,
+the 1 is for the single output. This notation is taken from Haykin (1999). See Fig. 3
+for an example of using an I − m − 1 perceptrons for representing the Q-values.
+Fig. 3 An I − m − 1 perceptron for representing the Q-values, where I and m are the sizes of the input
+The inputs of the ANN are the state of the system s and an action a for that state. The
+output is then the corresponding Q-value Q(s, a). For the actions we use an integer
+input that takes values from 0 to N indicating rejection of the current job list or the
+type of job chosen. For the state we use N integer inputs showing the amount of jobs
+of each type and H integer inputs in the general case, showing the allocated capacity
+at each stage of the capacity profile. In a case where all jobs have the same due dates,
+the capacity profile may be simplified with only an input representing the total used
+capacity over the planning horizon. For the action we use an integer input. So for a given
+state-action pair (s, a) where s = (k, c), k = (k1 , . . . , k N ) and c = (c1 , . . . , c H ), the
+input of the ANN is either a vector Input = (k1 , . . . , k N , c1 , . . . , c H , a) or a vector
+Input = (k1 , . . . , k N , C T , a), where C T = i=1
+Each input is connected to each neuron in the hidden layer, and each hidden neuron
+is connected to the output neuron. All these connections are weighted. It is also a
+common practice to apply an external bias to each neuron expanding the range of
+functions that the ANN may effectively approximate.
+Thus an ANN representing the action-value function Q is parametrized by the
+weights set w. The set w is defined as w = {W, b, W0 , b0 }, where W is an I × m
+matrix of the weights from the input layer to the hidden layer, b is an m-dimensional
+vector of all the biases to each hidden neuron, W0 is an m-dimensional vector of the
+weights from each hidden neuron to the output neuron, and b0 is the bias of the output
+neuron. Each neuron has an associated transfer function which defines the neuron’s
+As transfer functions we use at each hidden neuron the hyperbolic tangent function
+which defines the output of each neuron given an input x as follows:
+The input x j to the hidden neuron j is x j = b j + i=1
+For the output neuron we use a linear transfer function. This design is known to work
+as a universal function approximator such that given a sufficient number of hidden
+neurons and by properly adjusting the weights one can approximate any measurable
+function with arbitrary accuracy. The output of such an I − m − 1 perceptron for a
+given Input (1 × I dimensional) and a set of weights w is given by
+Q(Input) = tanh(Input ∗ W + b) ∗ W0 + b0 .
+The knowledge of an agent using such an ANN is in the the set w. Updating the
+knowledge consists of adjusting the weights to obtain an appropriate approximation
+to the optimal Q values. We use the traditional backpropagation training to update the
+weights, see Sutton and Barto (1998), Bertsekas and Tsitsiklis (1996), and Haykin
+To use the QL algorithm we define a learning schedule with six parameters
+(L , α0 , ε0 , Tα , Tε , m). This schedule defines the number of iterations of the training process (L), the initial values of the learning and exploration rates (α0 , ε0 ), the
+parameters for the learning and exploration rates decreasing functions (Tα , Tε ) and the
+Reinforcement learning versus heuristics for order acceptance on a single resource
+number of hidden neurons (m). In our implementations these parameters have been
+chosen through experimental experience and are by no means optimized. It could be
+possible after extensive numerical experiments to extract regularities that may help to
+set guidelines for the tuning of the parameters. Algorithm 3 sketches the QL method
+A general class of heuristics for the OA problem can be defined as follows. Given
+the state space S (description of the OA system) and the action space A (decisions, in
+general we consider here A = {0, 1, . . . , N } as in Section 2) we introduce for each
+state s ∈ S the set of allowed decisions A(s) ⊂ A. For example A(s) can be defined as
+in our model from Section 2: a job type j is accepted for a given state s = (k, c) if k j
+> 0 (the job is on the list) and the requested capacity is available before the due date.
+But even more conditions may be included in A(s) like quality of jobs or capacity level
+criteria. For example jobs with rewards under a certain level may be always rejected,
+so choosing them is not an option. Next we introduce a linear ordering  on the action
+space that defines preference relations. We denote with i k the action in position k with
+respect to this ordering: θ = i 1  i 2  · · ·  i N  i N +1 so job type i 1 is preferred over
+job type i 2 , etc. A heuristic policy π can be defined that assigns to each state s ∈ S an
+allowed action from A(s) considering the defined ordering as follows:
+i.e., π(s) is the maximum action from all the actions in A(s) according to the ordering θ.
+Note that the given structure of the heuristic is very powerful. On one hand the heuristic
+is completely defined by A(s), the ordering θ and the expression (7). On the other hand
+any policy π can be represented in this form by defining unitary subsets A(s) = {π (s)}
+and the ordering does not matter. Also, the RL-trained agent can be represented in this
+way by putting A(s) = {arg maxa Q(s, a)} and again the ordering is not important. But
+of course, finding the subsets A(s) and the actions ordering is just as difficult as solving
+the Markov decision problem with its curse of dimensionality exactly. To illustrate
+the flexibility of this approach for describing heuristics we consider next some useful
+examples constructed by relating the ordering and subsets to relevant criteria such as
+the reward per requested unit of capacity for a job (i.e., wj
+utilization defined as the occupied capacity as a percentage of the full capacity. An
+example of this sort is the optimal policy for a simple OA problem in Mainegra-Hing
+A(s) = i ∈ A\{0}| wrii ≥ b and cap(s, i) ≤ ti Cmax
+Here cap(s, i) denotes the occupied capacity up to stage ti after accepting job i when
+in state s. ti Cmax is the total capacity in the planning horizon up to stage ti . According
+to this policy only jobs with a reward per requested unit of capacity above a threshold
+b may be accepted. This threshold is related to the avoidance of opportunity losses. In
+the next section this sort of policies will be referred to as Jobquality(b).
+Improvements of this heuristic can be done. Note that in case of penalization for
+excess capacity it might be better to fill capacity only up to a certain level of utilization.
+So there is a safety margin for dealing with perturbations due to non-anticipated
+extra capacity demand during job execution. Also, job types with equal wj
+discriminated in a better way. The former remark leads us to requiring that after
+acceptance of job i the capacity utilization of the total capacity in the planning horizon
+(H Cmax ) is still under a capacity level threshold (ρi ). The latter remark can be included
+in the ordering. This leads us to the following family of policies:
+A(s) = {i ∈ A\{0} | cap(s, i) ≤ ρi ti Cmax }
+In the next section this sort of policy will be referred to as PlanCaplev(ρ). Note
+that the previous heuristic can be included here by making
+Note that the definition of the family of heuristics Jobquality(b) includes the Directed Costing rules and Absorption Costing rules discused in Section 1, see also
+(Gietzmann and Monahan, 1996). Furthermore the family of heuristics PlanCaplev(ρ)
+is a generalization of the policies that consider a safety factor for the capacity utilization, see Ebben et al. (2005).
+We present the application of RL methods as discussed in Section 3 to some cases of the
+OA problem described in Section 2 with Poisson arrivals, and discount factor γ = 0.9.
+We compare the RL policies with some heuristic policies as introduced in Section 4. As
+a performance measure we use the Total Average reward. The graphics show the total
+Average Reward of agents following the different policies. For the RL agents we show
+only the results after a period of training (Q-values are not updated anymore). Table 2
+lists the parameters for the RL-agents, L is the number of iterations for training the RL
+agent, α0 , Tα , ε0 , Tε are the parameters of the learning and exploration rate as in (6) and
+m is the number of hidden neurons. These parameters are chosen trough experimental
+experience. For more details on the effects of changing the number of hidden neurons
+and/or the exploration and exploitation functions in the training algorithm of our ANN
+Reinforcement learning versus heuristics for order acceptance on a single resource
+we refer to Mainegra-Hing et al. (2001). In the graphics the initial behaviour, before
+the lines become almost constant, is due to the samples needed for convergence of the
+To test the RL approach we use six cases with different complexity. The first case does
+not consider capacity perturbation. The second case considers capacity perturbation
+but there is no penalization for using non-regular capacity and all jobs have the same
+reward per requested capacity ( wrii ). In the third case we consider capacity perturbation
+with penalization for using non-regular capacity and different wrii . The first three cases
+consider all jobs with the same due date. Case 4 is a variation of case 3 that introduces
+different due dates. The last two cases introduce different arrival rates of the jobs and
+they also have different due dates. Case 6 is a variation of case 5 that considers capacity
+perturbation with penalization for using non-regular capacity.
+All cases have 5 job types. In the first four cases all jobs have the same arrival rate
+λi = 0.4 and m i = 2 is the maximum number of arrivals to be considered. In the first
+three cases all jobs have the same due dates (ti = 5, in cases 1, 2 and ti = 3 in case 3).
+The maximum capacity per stage is Cmax = 4 (cases 1, 2) Cmax = 2 (cases 3, 4) and
+Cmax = 3 (cases 5, 6). The planning horizon is H = 5 (cases 1, 2, 5, 6) and H = 3
+(cases 3, 4). As explained in Section 2.1 the first three cases, with the same due date
+for all jobs, use a reduced state space and the last three use the general capacity profile
+formulation. Therefore the state space is of size |S| = 5103 in cases 1, 2, |S|= 1701
+in case 3, |S| = 6561 in case 4 and |S| = 401408 in cases 5 and 6. Table 3 shows the
+Case 1. It is clear that a good policy is of type Jobquality as introduced in the previous
+section. The best of this family of heuristics is Jobquality(6) which only accepts jobs
+of type 1, 2 in that order. This threshold illustrates how opportunity costs are avoided
+by always rejecting jobs with wrii < 6. The RL-agent approximates this heuristic with
+an average relative error of 0.43% in the average reward and outperforms the greedy
+policy (Jobquality(3)) by 9.25%, see Fig. 4.
+Case 2. In this case where there is no difference in the reward per capacity per job type,
+a good policy is to fill all the available capacity (even using all the extra capacity)
+as in the greedy policy PlanCaplev(ρi = 1). The RL-policy approximates such a
+policy with a mean relative error of 0.6%, see Fig. 5.
+Case 3. Here the situation is less clear. The best of the restricted heuristics
+PlanCaplev(ρ) which considers the same value ρ for all job types is the greedy
+one PlanCaplev(ρi = 1). The RL-trained agent outperforms this policy with an improvement of 23.51%. See Fig. 6. The best heuristic from family (a) is Jobquality(3).
+This heuristic only accepts jobs of type 3, 4, and 5 whose wrii ≥ 3 in that order. The
+RL-policy also outperforms this policy with an improvement of 2.32%.
+It is necessary to introduce more flexibility in the heuristics. A better heuristic should
+deal with the issue of accepting jobs with a smaller wrii but not risking too much for
+penalties. But how do we find the exact level ρi per job type i? To find such a heuristic
+we will use the RL-trained agent as our inspiration. Let us try to characterize the
+learned RL-policy in terms of the general structure of heuristics type PlanCaplev(ρ)
+Reinforcement learning versus heuristics for order acceptance on a single resource
+introduced in the previous section. By a complete characterization of the state space
+(1701 states) and the corresponding learned actions we infer the following heuristic
+If job 3 is present and the available capacity is sufficient, accept job 3
+else if job 4 is present and the available capacity is sufficient, accept job 4
+else if job 5 is present and the available capacity is sufficient, accept job 5
+else if job 2 is present and ((the available capacity - capacity job2) >
+This rule completely characterizes the RL policy. It is interesting that the RLpolicy can be described using the general structure as in (b) in the previous section
+with 3  4  5  2  1  0 and ρ3 = ρ4 = ρ5 = 1, ρ2 = 0.5, ρ1 = 0. This policy
+never accepts jobs of type 1, which is the least profitable one, but it is also the smaller
+one. Obviously, if no jobs of type 2, 3, 4, 5 are requesting service, the system is empty
+and if a job of type 1 is requesting service, it is better to accept this job, otherwise the
+capacity at t = 1 would be lost without any purpose (there is no risk of penalization).
+The conclusion is that the RL-rule can still be improved by putting in the previous
+PlanCapLev policy ρ1 = 0.5. However, considering this case (Heuristic* policy)
+does hardly improve the RL policy performance as can be seen in Fig. 6. Both policies
+behave quite similarly, the extra rule included in the Heuristic* policy seldom occurs
+(0.022 frequency). Both policies also achieve similar performances ( 7.34 and 7.37 of
+average reward respectively), the relative error of the performance of Heuristic* with
+respect to the performance of the RL-rule is 0.4%. The relative error is calculated by
+Case 4. In this case the best heuristic from family (a) is again Jobquality(3). The best of
+the restricted heuristics PlanCaplev(ρ) that takes the same value ρi for all job types
+is PlanCaplev(ρi = 0.8). In this case the agent performance decreases compared to
+case (3) due to time limitation but still the RL-agent outperforms both heuristics by
+1.25% and 15.8% respectively, and the greedy one (PlanCaplev(ρi = 1)) by 17.1%,
+Recall that we use the heuristics as a means of measuring the RL performance but
+unlike RL, the heuristics need to have complete information in order to be used. In
+more complex cases even higher flexibility may be needed in heuristics when jobs
+differ also in due dates and arrival rates. We have shown that training an RL agent is
+Case 5. In this case there is higher variation between orders of different types. The
+more profitable orders are of type 3, 1 and 2 in that order. However these are also
+the less frequent types of orders and with the smallest due time.
+In this case the best heuristic from family (a) is Jobquality(3). The best of
+the restricted heuristics PlanCaplev(ρ) from family (b) that takes the same value
+ρi for all job types is PlanCaplev(ρi = 0.6). PlanCaplev(ρi = 0.6) outperforms
+Jobquality(3) by 33.3% and the greedy by 35.6%. The RL-agent outperforms
+Reinforcement learning versus heuristics for order acceptance on a single resource
+all these heuristics: the greedy by 64.8%, the Jobquality(3) by 62.1% and the
+Case 6. In this case the best heuristic from family (a) is again Jobquality(3). The
+best of the restricted heuristics PlanCaplev(ρ) from family (b) that takes the same
+value ρi for all job types is PlanCaplev(ρi = 0.6). The RL-agent outperforms
+all these heuristics: the greedy by 289.4%, the Jobquality(3) by 55.5% and the
+We described an RL-NN based decision support approach for order acceptance problems under uncertainty that take into account opportunity losses. This approach has
+shown good performance. In cases where good heuristic policies could be defined,
+the RL-NN approach approximates those heuristics. Recall that, in order to define the
+heuristics that we employed, we need complete information about the problem case.
+Particularly finding the ρ parameters for the safety margin in the capacity level is
+not an easy task even with complete information. In more complex situations our
+RL approach outperforms simple heuristic policies, building a mixture of simple
+The RL-NN method has also an intrinsic adaptability and generic design. The
+same RL-NN structure may be used to learn different policies for different cases. For
+online use the long training period may be improved by using model based simulation
+events. Here, for a relatively small sized problem, we use statistic information in
+order to interpret the RL-NN policy in terms of a general framework for heuristics.
+The interpretation of the RL-NN policy in general still requires the development of
+adequate methods. We expect to find intelligent rules in the policies obtained with
+these methods. We believe that the RL approach is a very flexible method that could
+help in the search for good order acceptance rules.
+Further studies could analyze extended models and the possibility of including
+OA-RL strategies in a multi-resource capacity planning approach. Furthermore, other
+neural network architectures may be explored that make better use of information
+about the problem structure. Another issue that could be interesting is to study the
+possibilities of the RL approach for other kind of decisions. We believe that since
+RL uses a simulation model instead of a formal model, it has the flexibility to deal
+adequately with order acceptance and related decision problems such as overbooking,
+discount allocation and traffic management in the case of yield management in airline
+industries. In a future paper we shall demonstrate the usefulness of our RL-approach
+for OA problems in a job-shop manufacturing environment involving outsourcing,
+routing, due-date and price negotiations.
+Bertsekas, D.P. and J.N. Tsitsiklis. (1996). Neuro-Dynamic Programming, 1st edn. Athena Scientific, Belmont, MA.
+Crites, R.H. and A.G. Barto. (1996). “Improving Elevator Performance Using Reinforcement Learning.” In
+D.S. Touretzky, M.C. Mozer, and M.E. Hasselmo (eds.), Advances in Neural Information Processing
+Systems, Cambridge, MA, The MIT Press, vol. 8, pp. 1017–1023.
+Ebben, M.J.R., E.W. Hans, and F.M. Olde Weghuis. (2005). “Workload Based Order Acceptance in Job
+Shop Environments.” Spectrum OR 27(1), 107–122.
+Gietzmann, M.B. and G.E. Monahan. (1996). “Absorption Versus Direct Costing: The Relevance of Opportunity Costs in the Management of Congested Stochastic Production Systems.” Management Accounting
+Reinforcement learning versus heuristics for order acceptance on a single resource
+Gietzmann, M.B. and A. Ostaszewski. (1996). “Optimal Disbursement of a Sunk Resource and Decentralized Cost Allocation.” Accounting and Business Research 27(1), 17–40.
+Guerrero, H.H. and G.M. Kern. (1988). “How to More Effectively Accept and Refuse Orders.” Production
+and Inventory Management Journal 29(4), 59–62.
+Haykin, S. (1999). Neural Networks: A Comprehensive Foundation, 2nd edn. Prentice Hall.
+ten Kate, H.A. (1994). “Towards a Better Understanding of Order Acceptance.” International Journal of
+Mainegra-Hing, M., A. van Harten, and P. Schuur. (2001). “Order Acceptance with Reinforcement Learning.” Technical Report 66, BETA, University of Twente, The Netherlands.
+Miller, B.L. and A. Buckman. (1987). “Cost Allocation and Opportunity Cost.” Management Science 33(5),
+Nawijn, W.M. (1985). “The Optimal Look-Ahead Policy for Admission to a Single Server System.” Operations Research 33(3), 625–643.
+Pinedo, M. and X. Chao. (1999). Operations Scheduling with Applications in Manufacturing and Services.
+Raaymakers, W. (1999). “Order Acceptance and Capacity Loading in Batch Process Industries.” PhD thesis,
+Technische Universiteit Eindhoven, The Netherlands.
+Riedmiller, S.C. and M.A. Riedmiller. (1999). “A Neural Reinforcement Learning Approach to Learn
+Local Dispatching Policies in Production Scheduling.” In D. Thomas (ed.), Proceedings of the 16th
+International Joint Conference on Artificial Intelligence (IJCAI-99), S.F. Morgan Kaufmann Publishers,
+Singh, S. and D. Bertsekas. (1997). “Reinforcement Learning for Dynamic Channel Allocation in Cellular
+Telephone Systems.” In M.C. Mozer, M.I. Jordan and T. Petsche (eds.), Advances in Neural Information
+Processing Systems, The MIT Press, vol. 9, p. 974.
+Snoek, M. (2000). “Neuro-Genetic Order Acceptance in a Job Shop Setting.” In Proceedings of the 7th
+International Conference on Neural Information Processing, Taejon, Korea, pp. 815—819.
+Sutton, R. and A. Barto. (1998). Reinforcement Learning: An Introduction. MIT Press, London, England.
+Tesauro, G. (1994). “TD-gammon, A Self-Teaching Backgammon Program, Achieves Master-Level Play.”
+Wang, J. (1994). “Multicriteria Order Acceptance Decision Support in Over-Demanded Job Shops: A Neural
+Network Approach.” Mathematical and computer modelling 33.
+Wester, F., J. Wijngaard, and W. Zijm. (1992). “Order Acceptance Strategies in a Production to Order
+Environment with Setup Times and Due Dates.” International Journal of Production Research 30,
+Wouters, M. (1997). “Relevant Cost Information for Order Acceptance Decisions.” Production Planning
+Zhang, W. and T. Dietterich. (1995). “A Reinforcement Learning Approach to Job-Shop Scheduling.” In
+Proceedings of the Fourteenth International Joint Conference on Artificial Intelligence pp. 1114–1120.

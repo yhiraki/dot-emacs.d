@@ -1,0 +1,1122 @@
+European Journal of Operational Research 223 (2012) 150–166
+Contents lists available at SciVerse ScienceDirect
+journal homepage: www.elsevier.com/locate/ejor
+Simulation-based transfer function modeling for transient analysis
+Industrial and Management Systems Engineering Department, West Virginia University, P.O. Box 6070, Morgantown, WV 26506, United States
+This paper is concerned with characterizing the transient behavior of general queueing systems, which is
+widely known to be notoriously difﬁcult. The objective is to develop a statistical methodology, integrated
+with extensive ofﬂine simulation and preliminary queueing analysis, for the estimation of a small number of transfer function models (TFMs) that quantify the input–output dynamics of a general queueing
+system. The input here is the time-varying arrival rate of jobs to the system; the time-dependent output
+performances include the departure rate of jobs and the mean of the work in process (i.e., number of jobs
+in the system). The resulting TFMs are difference equations, like the discrete approximations of the ordinary differential equations provided by an analytical approach, while possessing the high ﬁdelity of
+simulation. Our method is expected to overcome the shortcomings of the existing transient analysis
+approaches, i.e., the computational burden of simulation and the lack of ﬁdelity of analytical queueing
+Ó 2012 Elsevier B.V. All rights reserved.
+This paper is concerned with the transient behavior of queueing
+systems (Kleinrock, 1975) which may arise in manufacturing and
+The primary motivation of this work stems from production
+planning in manufacturing, which can be loosely deﬁned as the
+problem of ﬁnding a best release plan of jobs so that the actual outputs over time satisfy, as closely as possible, the predetermined
+requirements with the minimum cost (Missbauer and Uzsoy,
+2010). This deﬁnition clearly suggests that the ability to accurately
+quantify the relationship between the input release and the system
+output is the key to generating a good or near optimum plan. However, this input–output relationship has never been adequately
+addressed in existing production planning models, from the Material Requirement Planning (MRP) developed in the 1960s to the
+mathematical programming-based approaches that are widely
+used in industry and academia. This obvious ﬂaw is due to the simple fact that such input–output relationships are notoriously difﬁcult to quantify for manufacturing systems: They are not only
+nonlinear but also time-dependent due to the variability inherent
+in manufacturing processes (e.g., random machine failures and
+⇑ Corresponding author. Tel.: +1 304 293 9477; fax: +1 304 293 4970.
+E-mail address: feng.yang@mail.wvu.edu (F. Yang).
+0377-2217/$ - see front matter Ó 2012 Elsevier B.V. All rights reserved.
+http://dx.doi.org/10.1016/j.ejor.2012.05.040
+stochastic processing times). Although it has been recognized that
+manufacturing systems, which can be considered as general queueing networks (Whitt, 1983; Hopp et al., 2002; Shanthikumar et al.,
+2007), exhibit nonlinear time-dependent (transient) behaviors
+(Papadopolous et al., 1993; Uzsoy et al., 1992; Zäpfel and Missbauer, 1993; Riano, 2003; Missbauer and Uzsoy, 2010), no existing
+method is able to efﬁciently describe such nonlinear dynamics.
+In the literature, both discrete-event simulation and analytical
+methods have been used to address the transient behavior of
+queueing systems. The former approach can incorporate, at least
+in theory, any details that are important to the system, but frequently becomes too computationally demanding for real-time
+‘‘what-if’’ analysis. Analytical methods, on the other hand, are subject to restrictive assumptions (e.g., the Markov property) that may
+well not hold in practice, and thus fall short in providing an accurate
+description of real systems. These two approaches are brieﬂy
+The existing analytical methods can be divided into two categories: exact and approximation methods. The exact methods represent the mainstay of the analytical work, and are restricted to
+Markov queueing systems. These methods seek to develop and
+solve time-dependent ordinary differential equations (ODEs) for
+the state probabilities of the system. Analytical solutions to these
+ODEs are rare with a few exceptions including the known solutions
+for the M(t)/G/1 and M/M/1 systems (Kleinrock, 1975; Gross and
+F. Yang, J. Liu / European Journal of Operational Research 223 (2012) 150–166
+Harris, 1985), and the Ph(t)/Ph(t)/1 systems investigated by
+Nelson and Taaffe (2004a,b). Substantial efforts have been devoted
+to developing numerical solutions of the ODEs, and Ingolfsson et al.
+(2007) provides a fairly complete review of these methods including Rothkopf and Oren (1979), Clark (1981), Gross and Miller
+(1984), Taaffe and Ong (1987), Green and Kolesar (1991), Green
+et al. (1991), Eick et al. (1993a,b), Jennings et al. (1996), and
+Massey and Whitt (1997). Note that the construction of these ODEs
+relies on the Markov property, and numerically solving the typically large set of ODEs is also computationally challenging. Besides
+the exact ODEs methods briefed above, research efforts have also
+been made to develop analytical approximations. This stream of
+work includes ﬂuid approximations, which are accurate when
+there is little variability, and diffusion models, which are good
+for heavily loaded systems (Chen and Mandelbaum, 1994; Mandelbaum and Massey, 1995; Kelly et al., 1996). In addition, the
+production-oriented literature has also explored analytical approximations, and provides several methods for the characterization of
+system dynamics: Based on Transient Little’s Law, Riano (2003)
+established an integro-differential equation for the expected work
+in process (WIP); Armbruster et al. (2006) developed hyperbolic
+conservation law models to describe product ﬂows; and Hackman
+(2008, Chapter 19), extended a two-point boundary approximation
+method to capture production dynamics. All these analytical methods, be it exact or approximation, fall into two classes: those that
+are highly accurate (or exact) but computationally intensive
+(comparable to detailed simulation), and those that are fast but relatively inaccurate. Nevertheless, a common limitation of these
+methods is that they rely on analytical assumptions of one sort
+or another, and thus are inadequate to fully accommodate many
+features of realistic manufacturing systems such as non-Markovian
+interarrival/service times, server failures, and re-entrant job ﬂows.
+Compared to analytical methods, computer simulation provides
+a high-ﬁdelity alternative to address the transient behavior of
+queueing systems. It is ﬂexible, easy to use and widely accepted
+among practitioners. The shortcoming of simulation is that many
+replication runs are required to obtain good estimates of timedependent performance measures, and thus simulation is frequently too computationally expensive for real-time decision
+In light of the discussions above, the existing methods fall short
+in terms of the ability to accurately and timely predict the transient behavior of a general queueing system that may involve features of realistic manufacturing systems.
+1.3. Research objectives and contributions
+The objective of this work is to develop a statistical methodology, integrated with extensive ofﬂine simulation and preliminary
+queueing analysis, to generate a number of transfer function models (TFMs) that can adequately characterize a general queueing
+system’s transient behavior. The TFMs are difference equations
+quantifying the input–output dynamics of the system. The input
+to the TFMs is the arrival rate of jobs (i.e., the ﬁrst moment of
+the arrival process), which may vary with time. The outputs of
+the TFMs include the departure rate of jobs from the system (i.e.,
+the ﬁrst moment of the departure process), and the mean of the
+number of jobs in the system; both outputs are usually timedependent. For a given system of interest, the proposed method assumes the availability of its discrete-event simulation (DES) model,
+and fully utilizes ofﬂine simulation time, which is typically plentiful in practice, to estimate a number of TFMs.
+The proposed TFMs fall into the general form of the production
+dynamic function suggested by Hackman (2008, Chapter 17). In this
+paper, a speciﬁc functional form was identiﬁed for the target TFMs,
+and a unique simulation-based modeling method was developed to
+estimate the TFMs with high accuracy. The proposed modeling
+approach combines the advantages of both existing transient analysis methods, i.e., computer simulation and pure analytical methods, while avoiding their shortcomings. (i) The TFMs embody the
+high ﬁdelity of simulation to real systems since they are estimated
+from detailed simulation data. (ii) The TFMs are difference equations, the discrete-time counterpart of the ODEs provided by an
+analytical approach; supposing that a certain input is fed to the
+system under given initial conditions, the TFMs can be used to
+recursively compute the system’s future output performance in a
+timely manner. Hence, the TFMs resulting from our method are able
+to accurately describe the transient behavior of realistic systems
+and, at the same time, they allow for prompt ‘‘what-if’’ analysis.
+These advantages make our TFMs-based approach a solid and
+sound basis to support responsive decision making such as production planning (or re-planning) in manufacturing.
+The proposed method belongs to the metamodeling approach
+(Chapter 18 in Henderson and Nelson (2006)), which refers to
+the techniques that utilize simulation to generate mathematical
+approximations quantifying the relationships implied by the simulation. However, to the best of our knowledge, this is the ﬁrst
+attempt to develop a metamodel that takes the form of difference
+equations. Our approach is suitable to application contexts where
+metamodeling can realize the maximum potential. Such a context
+is articulated in Ankenman et al. (2010) as follows: the time to
+exercise the simulation model in advance of the decision making
+is relatively plentiful, whereas the decision-making or decisionmaker’s time is relatively scarce or expensive. Responsive production planning represents one such context: The simulation model
+of a manufacturing system can be developed and kept running
+for weeks (or even months) as soon as the system conﬁguration
+has been established; while in case of production disruptions such
+as supplier failures, demand-forecast mismatches and natural
+disasters (Shefﬁ and Rice, 2005; Datta et al., 2007; Pinedo, 2007;
+Stadtler and Kilger, 2007), a decision needs to be made quickly –
+as soon as possible – on how to adjust the production plan for that
+system. The metamodel, i.e., the TFMs in this work, fully utilizes
+the plentiful ofﬂine simulation time and allows for responsive
+This paper focuses on characterizing a system (or subsystem) by
+a single set of TFMs, for which the inputs/outputs involved are all
+system-level variables: The TFMs take as input the arrival rate of
+jobs to the system, and output the departure rate of jobs from
+the system and the expected number of jobs in the system. As a
+metamodeling approach, the method developed in this paper is
+applicable to approximate the transient behavior of a queueing
+system that satisﬁes the following three conditions:
+Constraint 1: The system involves a single class of jobs.
+Although preliminary work suggests that the metamodeling
+approach can be extended to multi-class systems, a full investigation of which is reserved for future research.
+Constraint 2: The arrival process does not depend on the state
+of the system. This push, as opposed to pull, logic (Hopp, 2007)
+is commonly assumed in the existing production planning models (Missbauer and Uzsoy, 2010) and also frequently encountered in service systems.
+Constraint 3: The third limitation also lies in the requirement
+on the arrival process to the system, and it stems from the functional form of the proposed TFMs: The arrival rate is the sole
+input taken by the TFMs for the prediction of a system’s output
+evolution. For such TFMs to adequately describe system performance, the assumption needed is that, loosely speaking, the
+F. Yang, J. Liu / European Journal of Operational Research 223 (2012) 150–166
+arrivals can be fully characterized by its rate (ﬁrst moment
+measure). More speciﬁcally, our method is applicable to two
+(a) A non-stationary Poisson process (NSPP) whose arrival
+rate can be any function of time. An NSPP is known to
+be completely characterized by its time-varying rate,
+(b) A non-stationary non-Poisson process (NSNP) whose
+arrival rate can be any function of time, and that satisﬁes the conditions given below.
+Describing an NSNP itself is not a trivial task (Daley and
+Vere-Jones, 2002; McKenzie, 2003), and we ﬁrst sketch out some
+background. Recall that this metamodeling work is built on the
+availability of a DES model that captures the real system of interest
+with high ﬁdelity. The TFMs are estimated from simulation data,
+and thus are directly associated with the simulated arrivals which
+are modeled from real data. Modeling NSNP arrivals is a challenging research topic beyond the scope of this paper, and here, we
+simply discuss the conditions required by our metamodeling on
+NSNP arrivals in the context of simulation input modeling. To
+derive characteristic features of real NSNP arrivals, it is a common
+practice to divide the period of concern into a number of time
+intervals (Leemis, 1991; Harrod and Kelton, 2006; Gerhardt and
+Nelson, 2009). Denote the number of arrivals in the ith interval as
+Ai. The sequence {Ai; i = 1, 2, . . .} constitutes a discrete-variate time
+series, which is typically characterized by the marginal distribution
+(MD) of Ai, denoted as Pi, and the covariance between Ai and Aj,
+denoted as Cov[Ai, Aj] with i, j = 1, 2, . . . and i – j. From real data,
+the MDs (or statistics of the MDs) and correlation structure can
+be derived to build the appropriate simulation model for arrivals.
+The time discretization for arrivals aligns with the discrete-time
+TFMs. Inheriting the notations/practices above, our TFMs-based
+metamodeling imposes the following conditions on an NSNP, in order for it to be fully characterized by its arrival rate over time.
+(i) For any interval pair i and j(i – j), the difference in the MDs
+Pi and Pj is completely captured by E[Ai] and E[Aj], the ﬁrstmoment measures that can be interpreted as the arrival
+rates per time interval. We provide two examples. The simplest is one where Pj differs from Pi only by a horizontal
+shift of E[Aj]  E[Ai]. In the second example, suppose that
+the MDs follow negative binomial distribution with two
+parameters: the stopping-time parameter r and the probability of success p. Varying p while holding r constant across
+time intervals leads to a sequence of MDs that satisfy the
+(ii) For positive integers i and j(i – j), Cov[Ai, Ai+j] decays quickly
+to 0 as j increases, and can be typically considered 0 for j > 2
+as the covariance (or autocorrelation) for continuous-variate
+autoregressive time series (Box et al., 2008); plus, for i and j
+that have Cov[Ai, Ai+j] – 0, Cov[Ai, Ai+j] can be approximated
+as an i-independent and j-dependent function of E[Ai] and
+E[Ai+j], the arrival rates. The simplest case that satisﬁes this
+condition is a discrete-variate time process with Cov[Ai, Ai+j]
+Apparently, the NSPP arrivals exactly apply to the modeling of
+TFMs with the arrival rate being the sole input. As to NSNP, the
+conditions (i) and (ii) above depict a non-stationary discrete-variate time series whose autocorrelation decays quickly and whose
+major statistical characteristics can be fully captured by the
+time-varying arrival rate. Such arrivals represent a fair proportion
+of the non-Poisson arrivals that are modeled/simulated by the
+existing literature (McKenzie, 2003; Gerhardt and Nelson, 2009).
+Section 4.2.1 provides the algorithms used to simulate the arrivals
+Aside from the three constraints above, an empirical recommendation is made here as to the system conﬁguration suitable
+for the transfer function modeling. A single set of TFMs, with inputs and outputs both given at the system level, is most suitable
+to approximate the transient behavior of a system that is dominated by one bottleneck (BN) station. Speciﬁc deﬁnitions and
+discussions in this regard will be given in Section 6.2.2.
+The remainder of the paper is organized as follows. Section 2
+provides an overview of the proposed method. The preliminary
+queueing analysis is performed in Section 3. The metamodeling
+approach, i.e., the simulation-based transfer function modeling, is
+described in Sections 4 and 5. In Section 6, the proposed method
+is applied to a range of queueing systems including a scale-down
+semiconductor manufacturing system, and the empirical results
+are provided. Section 7 gives a brief summary.
+We consider the system of interest as a queuing system that involves three major time-dependent processes:
+Q(t): the state process representing the number of jobs in the
+system at time t, with t 2 (1, 1), the whole time axis.
+A(u, v): the random variable counting the number of arrivals in
+the system within the time interval (u, v]; u, v 2 (1, 1) and
+D(u, v): the random variable counting the number of departures
+in the system within the time interval (u, v]; u, v 2 (1, 1) and
+Let H0 ¼ fQ ðtÞ; Að1; tÞ; Dð1; tÞ; t 2 ð1; 0g denote the history of the system evolution up to time 0. The question we intend
+to address here is: Standing at time 0, how do we predict the system’s behavior from time 0 onward given the history H0 ? In a push
+system where arrivals are independent of the system status (Section 1.4), {A(0, t); t > 0} is considered as the imposed input ﬂow,
+and {Q(t), D(0, t); t > 0} the dependent variables representing the
+output performance of the system. The objective of this work is
+to establish the time-dependent relationship between the ﬁrst moment measures of these three processes, which are deﬁned as
+m(t) = E[Q(t)], the ﬁrst moment of the number of jobs in the system at time t.
+It is assumed that x(t) and d(t) exist and are ﬁnite. Usually, x(t)
+and d(t) are also referred to as the intensity or rate of the corresponding point process. In this work, x(t) is the input variable that
+is able to fully characterize the arrival process (Section 1.4), and
+y(t) = (m(t), d(t)) is the 2  1 vector including the output performance variables. The objective is to capture the input–output
+dynamics of a queueing system by the TFMs:
+yðtÞ ¼ Fðxðt  1Þ; xðt  2Þ; . . . ; yðt  1Þ; yðt  2Þ; . . .Þ;
+which is a discrete-time functional approximation. The time t in (1)
+denotes discrete time points. In the rest of this paper, t will be used
+to represent both continuous and discrete time index without causing any confusion.
+The vector function F in the TFMs (1) includes two functions,
+and is of the same dimension as y(t). Each component of F is a difference equation relating an output performance at time t to the
+F. Yang, J. Liu / European Journal of Operational Research 223 (2012) 150–166
+input and output history of the system. Suppose that we stand at
+the current time 0 and that the future time horizon is (0, P]. Given
+the seed values of {x(t), y(t), t 6 0}, which can be derived from H0 ,
+the TFMs are able to compute recursively the system’s future performance {y(t), t 2 (0, P]} under any input {x⁄(t), t 2 (0, P]}.
+It is difﬁcult to obtain the TFMs that can accurately characterize
+the transient dynamics of a general queueing system, and our
+processes (Daley and Vere-Jones, 2002), the condition for which
+The arrivals A(u, v) and departures D(u, v) are as deﬁned in Section
+2, along with the state process Q(t). Under condition (3), the ﬁrst
+moment measures of the arrivals and departures can be written as
+ Queueing analysis (Section 3): We perform queueing analysis
+under fairly general assumptions. Such a theoretical analysis,
+although inadequate to address the time-dependent behavior
+of realistic systems, sheds lights on the functional forms of
+ Data collection via ofﬂine simulation (Section 4): Under selected
+input processes, we run simulations to obtain paired input–output time series for the ﬁtting of the TFMs. We emphasize that
+our simulation is carried out ofﬂine in advance of the need to
+ Transfer function modeling (Section 5): From the simulation data,
+we develop statistical methods to obtain the parsimonious
+TFMs (1) that are adequate to capture the system’s dynamic
+In this part, we perform analytical analysis on some simple
+queueing systems to gain insights to their non-stationary behavior.
+These analytical results are also what primarily motivated the
+For the purpose of intuition and motivation, we consider the input–output dynamics of the simple queueing model M(t)/M/1,
+which is one of the very few models whose transient behavior
+can be characterized analytically. Suppose that the service rate
+for each job is l. From the Kolmogorov forward equations for the
+state probabilities (Ross, 1995), we can easily derive the following
+These ODEs describe the evolution of the outputs y(t) = (d(t), m(t))
+as functions of x(t). Given the initial state of the system at time 0,
+the numeric solution of {y(t); t > 0} can be obtained for any given input {x⁄(t); t > 0}.
+Unfortunately, the situation becomes much more complicated
+as soon as a ﬁnite number of servers is introduced or the Markovian assumption is relaxed. Closed (or solvable) ODEs like (2) cannot
+be obtained even for single-station systems such as M(t)/M/s and
+In this subsection, we perform non-stationary analysis on a general queue to understand the transient behavior of non-Markovian
+systems and to obtain a theoretical basis for the ability of TFMs (1)
+We consider a single-server system with the service time following a general distribution, say G(s), where s 2 (sL, sU) with
+0 6 sL < sU 6 1. Jobs are served on a ﬁrst come ﬁrst served basis.
+The arrivals are independent of the system state. The additional
+assumptions made solely for the analytical analysis of this subsection are: Both the arrival and departure processes are orderly point
+For such a single-server queue we seek to derive the dependence of
+y(t) = (d(t), m(t)) upon x(t), as we did for M(t)/M/1 in Section 3.1.
+Following the notation given in Section 2, let
+xn ðtÞ ¼ limþ d1 PrfAðt; t þ dÞ ¼ 1; QðtÞ ¼ ng
+dn ðtÞ ¼ limþ d1 PrfDðt; t þ dÞ ¼ 1; QðtÞ ¼ ng:
+Here, xn(t) denotes the arrival rate at time t while there are n jobs in
+the system, and dn(t) represents the departure rate at time t with n
+jobs (including the one that is about to leave) in the system. In
+Appendix A.1, we have derived the dynamic equations for the
+x(t)  y(t) relationship, which is given as follows:
+m0 ðtÞ ¼ xðtÞ  dðtÞdðtÞ ¼ sLU x0 ðt  sÞdGðsÞ þ sLU ðdðt  sÞ  d1 ðt  sÞÞdGðsÞ
+Unlike Eq. (2) for the M (t)/M/1 system, (5) for the general queue
+are not closed, and thus not solvable: Aside from the input x(t)
+and the outputs of interest m(t) and d(t), (5) also involves unknown
+time-dependent functions x0(t) and d1(t). However, for mediumly/
+heavily loaded queues, it is reasonable to assume that x0(t), the arrival rate when no job in the system, and d1(t), the departure rate
+when no job is in the waiting queue, are relatively small and can
+x0 ðtÞ  p0 ðtÞ  xðtÞ  e1 xðtÞ and d1 ðtÞ  p1 ðtÞ  dðtÞ
+with e1 and e2 being small fractional constants. If we plug (6) into
+(5) and take the ﬁnite-difference approximation of the derivative
+and integrals in (5), it is clear that the discrete approximations of
+Replacing the single server by multiple identical servers in the
+general queue investigated above, we have also derived equations
+of the same nature as (5) and of more complicated functional
+forms. The analytical results obtained for these single-station
+queues are what motivated us to adopt the TFMs (1) in the ﬁrst
+place. With general arrivals and services, the single-station systems considered in this subsection provide a good representation
+of an aggregate queueing system. The x(t)  y(t) equations derived
+for these queues, along with the ODEs given by (2), strongly suggest that the TFMs as (1) have the potential to provide discretetime approximations adequate to describe the aggregation performance of a real queueing system.
+For a given queueing system, we assume the availability of its
+DES model, and seek to estimate from simulation data a set of
+TFMs describing that system’s transient behavior. In this part, we
+are concerned with collecting via simulation the input–output data
+needed for metamodeling. However, as will become clear later in
+this section, to specify the simulation experiments, an upfront
+capacity/bottleneck analysis is necessary (especially for a system
+F. Yang, J. Liu / European Journal of Operational Research 223 (2012) 150–166
+consisting of multiple stations) and thus brieﬂy described in
+Section 4.1 before simulation-based data collection is discussed.
+4.1. Capacity and bottleneck analysis of a system
+For a system consisting of, say J stations, existing analytical
+models in the literature can be used to (i) obtain the system capacity and (ii) identify the bottleneck (BN) station(s). The capacity of
+station j(j = 1, 2, . . . , J) is deﬁned as the upper limit on that station’s
+arrival rate for long-term stability, and is denoted as lj. The capacity of the system is deﬁned as l = min{lj; j = 1, 2, . . . , J}; and the
+station jBN that achieves the system capacity is called the BN station, which is the most heavily utilized station in the system.
+The analytical models that can provide such capacity/bottleneck
+analysis include Kumar and Kumar (2001), Hopp et al. (2002), and
+Meng and Heragu (2004). These models can accurately or even
+exactly calculate the station capacity {lj; j = 1, 2, . . . , J} for real
+systems that involve batching, re-entrant ﬂows, and machine failures and setups. In this paper, the analytical model developed in
+Hopp et al. (2002) is used to identify the capacity and BN station(s)
+for a system of interest, before any simulation experiments are
+For a given system, its DES model is assumed available to our
+metamodeling and will be run for data collection. Section 4.2.1
+brieﬂy discusses the simulation algorithms involved in the DES
+models, and Section 4.2.2 describes how the sample data are obtained from simulation.
+A DES model representing a real queueing system can be considered as comprised of two algorithms: the one that mimics the
+system conﬁguration and logic, and the one that simulates real
+arrivals. The former algorithm is known to be able to accommodate
+any complexities inherent in a real system (Law and Kelton, 2000),
+and is implemented in Microsoft C++ for the empirical examples
+We next discuss the latter algorithm for simulating input arrivals. In this work, the arrivals to the system are allowed to be an
+NSPP as well as a restricted NSNP (Section 1.4). In our simulation
+experiments, an NSPP is generated using the thinning algorithm
+proposed by Lewis and Shedler (1979), and it applies exactly to
+the modeling of TFMs, as pointed out in Section 1.4; NSNP arrivals,
+on the other hand, are generated by the algorithms in Gerhardt and
+Nelson (2009) and deserve more discussions below. In Gerhardt
+and Nelson (2009), a complete set of input modeling methods
+was proposed: Techniques were developed to derive the ﬁrst
+two-moment features of real arrivals; algorithms were developed
+to generate an NSNP that mimics the real data by transforming a
+stationary renewal process. In their paper, it has been shown that
+the pre-speciﬁed time-varying arrival rate (that is, the rate estimated from the real data) can be achieved by the simulated NSNP,
+and the variability of the NSNP can be controlled to reﬂect that of
+the real arrivals by controlling the coefﬁcient of variation (CV) of
+Recall that for an NSNP to be eligible for our metamodeling, it
+has to satisfy the two conditions speciﬁed in Constraint 3, Section
+1.4. Through Monte Carlo simulation, we have empirically veriﬁed
+that those conditions are satisﬁed by the NSNP arrivals generated
+by the algorithms in Gerhardt and Nelson (2009). Speciﬁcally, following the notations in Section 1.4, (i) the second moment of the
+marginal distribution of Ai, the number of arrivals in the ith time
+interval, can be approximated as a function of the arrival rate
+E[Ai]; (ii) Cov[Ai, Ai+j] decays exponentially with the increase of j,
+and can be approximated as a function of E[Ai] and E[Aj]. Thus,
+the generated NSNP arrivals are eligible to the TFMs-based modeling, which is also evident from the metamodeling results presented
+in Section 6.1. Lastly, it is worth mentioning that McKenzie (2003)
+also discusses the modeling of {A1, A2, . . .} based on discrete-variate
+time series, which can lead to simulation algorithms for nonPoisson arrivals eligible to our metamodeling.
+Given that arrivals are adequately characterized by its ﬁrst moment measure x(t), Section 4.3 will discuss the speciﬁcation of x(t)
+in our simulation experiments. Here, assuming a selected x(t), we
+describe how sample data are collected from, say I, simulation
+replications under the speciﬁed (and likely random) input ﬂow.
+During each replication, sample data are taken at discrete, equispaced intervals of time, and the basic sampling interval is denoted
+as Dt. The sampling interval Dt is a user-speciﬁed parameter, and
+is selected out of the following considerations: Dt should be sufﬁciently small to allow all the systematic variation occurred in the
+inputs/outputs to be taken account of, and at the same time be
+large enough to smooth out some random variations. We recommend setting Dt as 1/10  1/5 of 1/l, where l is the system capacity deﬁned in Section 4.1.
+Let the sampling interval Dt serve as the unit of time. The simulation length of each replication is denoted as T time units, and T
+is a positive integer whose value will be speciﬁed in Section 4.3.2.
+For replication i(i = 1, 2, . . . , I), the arrival, departure and state processes {Ai(t  0.5, t + 0.5), Di(t  0.5, t + 0.5), Qi(t);t = 1, 2, . . . , T} are
+recorded; note that the 0.5 here represents half of the time unit.
+From the I simulation replications, the paired time series {(X(t),
+Y(t)), t = 1, 2, . . . , T} are estimated as follows.
+Both the arrival rate X(t) and the departure rate Y2(t) are given in
+terms of the average number of occurrences per time unit (i.e.,
+In this part, we discuss the design of experiments issues, which
+in our metamodeling work amount to specifying the input rate
+function x(t) and determining the number of replications I for the
+To collect simulation data for the TFMs estimation, we adopt a
+piecewise constant (PWC) form for the rate function x(t) out of the
+following considerations. The TFMs are required to be able to describe the system’s steady-state behavior with the input x(t) held
+unchanged for t ? 1 (as will be articulated in Section 5.1). A
+PWC input x(t) can provide some steady-state simulation data necessary to ensure the steady-state convergence of the ﬁtted TFMs. It
+is worth pointing out that the PWC arrival rate is for the simulation
+performed to estimate the TFMs only; once the TFMs have been obtained, they can be used to predict the system’s dynamics under an
+input rate of arbitrary forms (including continuously changing
+For a PWC input rate x(t), we denote its distinct constant levels
+as {x1, x2, . . . , xM}, with xm 2 [xL, xU]. Here we intend to establish
+F. Yang, J. Liu / European Journal of Operational Research 223 (2012) 150–166
+[xL, xU], the range of input rates for the simulation experiments carried out for the TFMs estimation. For convenience of discussions,
+the concept of utilization is ﬁrst introduced as follows. Given a
+system, the system capacity l can be obtained using preliminary
+analytical methods (Section 4.1). Suppose that the arrival rate to
+the system is xm, then the long-run system utilization is q = xm/l
+A queueing system designed for a real-world application is typically mediumly/heavily utilized the vast majority of the time
+(if not all the time). For instance, semiconductor manufacturing
+systems are operated 24/7 with a high utilization. Also, due to
+queueing effects, a system’s performance under high utilizations
+is usually of much more concern than that under low utilizations.
+Thus, in this work, particular interest is given to the performance of
+a system over a range of relatively high utilizations (P0.5). Denote
+the utilization range as [qL, qU]. The values of qL and qU are speciﬁed by the user depending on the real system’s utilization in practice. In this paper, we set [qL, qU] = [0.5, 0.95], which is suitable for
+semiconductor manufacturing. Given the system capacity l and
+the selected utilization range [qL, qU], the range of the input rate
+For the TFMs modeling, the design of experiments (DOE) needs
+to specify the rate x(t) of the input process, which is a PWC function like that in Fig. 1a, and the number of simulation replications
+I. Speciﬁcally, there are four questions that need to be addressed.
+First, how should {x1, x2, . . . , xM} be selected? This includes
+determining the size M and the value of xm(m = 1, 2, . . . , M) with
+xm 2 [xL, xU]. The selection here is guided by the system’s steadystate behavior, which has been thoroughly investigated in the literature and a recent sequence of papers by Yang and co-authors
+(Yang et al., 2007; Yang, 2010). Based on their extensive empirical
+experience, ﬁve different arrival rates, approximately evenly
+spread over mediumly/heavily utilized range [xL, xU], are sufﬁcient
+to characterize the steady-state input–output relationships. Thus,
+in our simulation experiments, function x(t) is set as one with
+M = 5 constant levels over the range [xL, xU]:
+max minfjxm  xm1 j; i ¼ 1; 2; . . . ; 5g
+The solution to (8) can be easily obtained by permutating the ﬁve
+Third, how to determine the simulation length ‘m at each input
+level xm(m = 1, 2, . . . , M)? We set ‘m = 2‘tr, and ‘tr is the length of
+transient period for the initially empty system under the average
+input level xL + (xU  xL)/2. The transient period ‘tr is determined
+based on preliminary simulation experiments following the methods in Chapter 9 of Law and Kelton (2000). Note that the length ‘m
+is selected to ensure that sufﬁcient data is collected in steady state
+for reasons already mentioned. The total length of a simulation
+Fourth, how many replications should be performed at the selected time-varying input process? We use c%, the desired preci^
+replications through a two-step process. In the ﬁrst step, I0 replica^ 0 ðtÞ as
+tions are performed under the speciﬁed input x(t). Denote m
+the estimate from the I0 replications. The maximum sample stan^ 0 ðtÞ over the simulation length, say [0, T], is
+Let tmax be the time index that achieves r
+. The number of replications I that is likely to provide the desired precision c% is esti
+I  I0 simulation replications are performed, and based on all the I
+replications carried out, the time series estimates are obtained
+following Eq. (7) and will be used for the TFMs ﬁtting discussed
+To conclude this section, we remind the readers that the goal of
+DOE is to provide representative sample data so that the TFMs ﬁtted from the data can accurately predict the performance of a real
+system. Thus, the input x(t) used in the sampling should be speciﬁed based on the real arrivals to the system. The DOE strategies
+proposed here are particularly suitable to manufacturing. If the
+real arrivals for some other application differ substantially from
+those in manufacturing, then the DOE should be adjusted accordingly. For instance, as will be mentioned later in Section 6.2.3, if
+a system’s overloaded behavior is of particular interest, then in
+Second, how to determine the sequence of these ﬁve arrival
+rates? It is desirable to be able to examine the interaction effects
+of x(t) and y(t) = (m(t), d(t)). For instance, does the same x(t) cause
+m(t) to respond in a different manner when m(t) is at different
+values? In light of this, we determine the sequence of
+{x1, x2, . . . , x5} in such a way that the minimum jumps (up or down)
+between the successive levels of arrival rates is maximized. Initially at time 0, the system is empty and the arrival rate is
+x0 ¼ 0, and the sequence {x1, x2, . . . , x5} is determined by
+Fig. 1. Arrival rate for the EDS and VDS for the single-server system.
+F. Yang, J. Liu / European Journal of Operational Research 223 (2012) 150–166
+the DOE, x(t) should include arrival rates greater than the system
+5. Statistical modeling issues of the TFMs
+The modeling of the system dynamic behavior is based on the
+pair estimates {X(t), Y(t), t = 1, 2, . . . , T} obtained from simulation
+experiments. These estimates are subject to random errors, and
+we use the following parametric model to represent the stochastic
+YðtÞ ¼ Fðh; Xðt  1Þ; Xðt  2Þ; . . . ; Yðt  1Þ; Yðt  2Þ; . . .Þ
+e(t) = (e1(t), e2(t)) denotes the disturbance. The parameter vector h
+includes all the unknown parameters involved in the vector function F. For convenience of the discussion, we also write Model
+Y 1 ðtÞ ¼ F 1 ðh1 ; Xðt  1Þ; Xðt  2Þ; . . . ; Yðt  1Þ; Yðt  2Þ; . . .Þ þ e1 ðtÞ
+Step 1: Fit the ARMA model of the identiﬁed structure to residuals
+f^ei ðtÞ; i ¼ 1; 2g using Matlab function GARCHFIT. Note that
+the ﬁtted ARMA model for residuals completely speciﬁes
+Ci(q) in (13) and Di(q) in (14), and also leads to the esti^ 2i .
+mated variance of the white noise wi(t), denoted as r
+Step 2: Use the least square methods to reﬁt the TFMs assuming
+that the errors are given as the ARMA models obtained
+from the previous step. Speciﬁcally, the TFMs (11) will
+be transformed as follows to achieve additive white noise
+wi(t)/ri(i = 1, 2) with constant variance 1.
+The white noise wi(t) is normally distributed with a mean of zero
+and a variance of r2i . The backward shift operator q1 is deﬁned
+by q1z(t) = z(t  1), and we have qmz(t) = z(t  m). The operators
+For an ARMA process, the coefﬁcient ci(k) (or di(k)) is typically zero
+Since the error terms {ei(t), i = 1, 2} are not i.i.d normal, we propose the following process to estimate the TFMs.
+Step 0: Fit the TFMs to the {X(t), Y(t),t = 1, 2, . . . , T} data using
+least-square methods (Ljung, 1999) as if the errors were
+i.i.d normal. Based on the ﬁtted TFMs, compute the residuals f^ei ðtÞ; i ¼ 1; 2g. Identify the most appropriate ARMA
+structure (say, AR (1)) for ^ei ðtÞ following the graphical
+approach in Chapter 3 of Box et al. (2008).
+In this part, we discuss the ﬁtting of the TFMs assuming that a
+speciﬁc functional form (model structure) has been obtained.
+As a generalization of the i.i.d (identically and independently
+distributed) assumption made on error terms in regular regression
+(or regular transfer function modeling), the correlation among the
+temporal errors {ei(t); t = 1, 2, 3, . . .} is accommodated in this work
+(for i = 1, 2). The temporal errors are modeled by a stationary autoregressive moving average (ARMA) process (Box et al., 2008),
+Y 2 ðtÞ ¼ F 2 ðh2 ; Xðt  1Þ; Xðt  2Þ; . . . ; Yðt  1Þ; Yðt  2Þ; . . .Þ þ e2 ðtÞ;
+with h = (h1, h2). Our task is to obtain the TFMs that are of the
+simplest functional form and adequate to describe the system’s
+dynamic evolution based on the paired simulation data (X(t), Y(t)).
+Xðt  2Þ; . . . ; Yðt  1Þ; Yðt  2Þ; . . .Þ
+given time-series data {X(t), Y(t), t = 1, 2, . . . , T}. With the newly
+ﬁtted TFMs, the residuals are computed and updated.
+Steps 1 and 2 can be repeated until there is no signiﬁcant
+changes in the resulting TFMs. In our experience, it sufﬁces to perform one round of the ﬁtting process to achieve well-estimated
+5.1.3.1. Stability. The dynamic TFMs should be stable: The TFMs
+should be able to converge to the system’s steady-state input–output relationships. Suppose that the input rate x(t) is held constant
+at the ﬁxed level x. We write the outputs as y(x, t) emphasizing the
+dependence of the outputs on time t as well as on x. With the input
+held ﬁxed at x, the dynamic outputs described by the TFMs should
+eventually converge to y(x, 1), the steady-state equilibrium. To
+ensure the stability of the resulting TFMs, in our method, the simulation data are collected in such a way that a substantial amount
+of steady-state time series (Section 4.3.2) are included. Hence, the
+TFMs ﬁtted from the data also well reﬂect the system’s steadystate behavior.
+5.1.3.2. Statistical inference. In Ljung (1999), the asymptotic normality of the least-square parameters ^
+statistical inference on the estimated TFMs is discussed in
+The estimation of TFMs in Section 5.1 is based on a given functional form. In this section, we discuss the selection of the most
+appropriate structure for the target model.
+F. Yang, J. Liu / European Journal of Operational Research 223 (2012) 150–166
+Achieving the parsimonious TFMs that can accurately describe
+the system’s transient performance is difﬁcult, and we resort to a
+number of venues in search of the model family for TFMs.
+speciﬁcs of the backward model selection method are given in
+5.2.1.1. Transient queueing analysis. As pointed out in Section 3,
+which is devoted to non-stationary queueing analysis, the analytical results obtained for some simple queueing systems are what
+primarily motivated the development of the TFMs. Eq. (2) for the
+M(t)/M/1 and Eq. (5) for the general single-server queue both suggest that the time-dependent difference Eq. (1) have the potential
+to provide an accurate description of the system behavior in terms
+of m(t), the expected number of jobs in the system, and d(t), the
+In addition, the transient queueing analysis in Section 3.2 suggests that the simplest possible form for the TFMs is likely to be:
+y1 ðtÞ ¼ b0 þ b1 xðt  1Þ þ b2 y1 ðt  1Þ þ b3 y2 ðt  1Þ
+y2 ðtÞ ¼ c0 þ c1 xðt  1Þ þ c2 y2 ðt  1Þ:
+Given a queueing system whose simulation model is available,
+we apply the metamodeling method and seek to describe its transient behavior by a set of TFMs estimated from simulation data.
+Using such TFMs, the system’s future dynamics can be predicted
+in a timely manner without running additional simulation. In this
+section, the following examples are presented to illustrate the
+ Single-station systems (Section 6.1): As pointed out in Section 3,
+transient analysis of even single-station systems is analytically
+intractable when general arrivals or services are involved.
+ A scale-down semiconductor fabrication system (Section 6.2):
+This system consists of nine stations, and involves re-entrant
+ﬂows, machine failures, and batch processing.
+Recall that (y1(t), y2(t)) = (m(t), d(t)).
+5.2.1.2. Steady-state behavior. The previous study performed in
+Yang et al. (2007) suggests that models of the following form can
+adequately approximate the steady-state behavior of real manufacturing systems.
+Here, x denotes the constant rate of arrivals into the system, and l
+the system capacity (Section 4.1). The stability condition requires:
+x/l < 1. The term P(x/l) represents a polynomial function of x/l.
+As mentioned earlier, the TFMs are supposed to converge to the stationary Eqs. (17) and (18) in steady state. While Eq. (18) simply
+means that the departure rate is equal to the arrival rate in the long
+run, Eq. (17) indicates the possible existence of higher-order polynomial terms such as x(t  1)  y2(t  1), x3(t  1), and y32 ðt  1Þ in
+5.2.1.3. Empirical experience. The analysis above assists to identify
+the model family for TFMs, which may contain main effects, higher-order polynomials or interactions of historical inputs/outputs:
+bjkl  yj1 ðt  qÞ  yk2 ðt  qÞ  xl ðt  qÞ for i ¼ 1; 2:
+For each system being investigated, our metamodeling method
+was applied to generate a set of TFMs that describe the system
+dynamics. Simulation experiments were performed following the
+design strategies in Section 4.3, and the resulting data set, which
+will be referred to as the estimation data set (EDS), was used to
+estimate the TFMs following the statistical modeling approaches
+in Section 5. With the ﬁtted TFMs, the future evolution of the
+system can be predicted under any input rate given the history
+of the system. To evaluate the prediction provided by the TFMs, a
+validation data set (VDS) was collected which contains simulation
+data different than and independent of those in the EDS, and the
+system dynamics directly described by the VDS was compared to
+that predicted by the TFMs. For all the numeric examples that
+we have investigated, the resulting TFMs are able to accurately
+predict the future evolution of the system, judging from the VDSbased cross validation.
+Before discussing the empirical results, it is worth mentioning
+that in our discrete TFMs, one time unit represents the sampling
+interval Dt, which is introduced in Section 4.2.2. To avoid possible
+confusion, in the examples below we specify all the time periods
+(interarrival time, service time, simulation length, and future horizon) in terms of the time unit Dt. The arrival/service rates are also
+In (19), R represents the highest polynomial order, and Q the highest
+time order in the model. In our metamodeling of queueing systems
+(including the ones involving non-Markovian arrivals and services,
+machine failures, and re-entrant ﬂows), R turned out to be no higher
+than 3, and Q no higher than 1. Hence, we recommend considering
+(19) with (R, Q) = (3, 1) as the most complicated functional form for
+the target TFMs. The values of (R, Q) can certainly be augmented if
+Given the model family identiﬁed in Eq. (19), we developed a
+backward model selection strategy to obtain the parsimonious
+TFMs that are adequate to provide a good ﬁt. We start with the
+most complicated Model (19), and then seek to downsize the
+model by eliminating the functional terms that do not make a signiﬁcant contribution in terms of describing the dynamic evolution.
+During the backward selection, the estimation of a candidate model is performed following the ﬁtting process in Section 5.1.2. The
+Table 1 summarizes the single-station queueing systems on
+which the metamodeling method has been successfully applied.
+These systems are intended to show that the proposed method
+can handle a wide range of service time distributions under nonstationary arrivals. In Table 1, SCV denotes the coefﬁcient of variation (CV) for the distribution of service times. We have investigated
+systems with an SCV ranging from 0.1 to 2. In some cases, random
+failures of servers are also considered. The arrivals to the singlestation systems are modeled as both NSPP and NSNP (see Section
+4.2.1 for the algorithms of generating non-stationary arrivals).
+The NSNP arrivals considered include those that are more and less
+Conﬁgurations for single-station systems.
+F. Yang, J. Liu / European Journal of Operational Research 223 (2012) 150–166
+As an example for illustration, we chose to present the modeling results of a single-server system with the service time following a hyper-exponential distribution with the probability density
+gðt; p1 ; p2 ; k1 ; k2 Þ ¼ p1 hðt; k1 Þ þ p2 hðt; k2 Þ;
+where function h denotes the pdf of an exponentially distributed
+random variable. The distribution parameters are given as
+(p1, p2, k1, k2) = (0.1, 0.9, 0.022, 0.165), which results in an SCV of 2.
+The mean service time is 10 time units, and the service rate is 0.1
+The arrivals in this example are modeled as an NSNP and generated using the thinning algorithm in Gerhardt and Nelson (2009).
+For the thinning algorithm, the renewal base process used to
+generate the NSNP arrivals has Erlang interarrival times with shape
+parameter k = 25 and rate parameter k = 2.5. To obtain the EDS for
+the TFMs estimation, the system was simulated with NSNP arrivals
+following the rate function depicted in Fig. 1a. The input rate for
+the EDS is speciﬁed following the DOE strategies in Section 4.3.
+Speciﬁcally, the ﬁve constant rates are evenly-spaced to cover
+the system utilization range of [0.5, 0.95], and they are sequenced
+in such a way that (8) is achieved; the simulation length of each
+constant-rate period is set as suggested in Section 4.3.2, and the
+total simulation length turns out to be T = 12,000 time units; the
+number of simulation replications performed in this case is
+I = 51,500, which is determined following the two-step process in
+Section 4.3.2 to achieve a relative precision level of c = 5% for the
+in Eq. (7). From the multiple replications,
+the paired estimates {X(t), Y(t), t = 1, 2, . . . , T} were obtained using
+Eq. (7). With the collected EDS, the TFMs are obtained by applying
+the backward selection method (Appendix A.3) with the embedded
+ﬁtting process (Section 5.1.2). The resulting TFMs for this singleserver system are given as follows:
+¼ 0:9929mðt  1Þ  0:4264dðt  1Þ þ 0:5293xðt  1Þ
+ 0:0015dðt  1Þdðt  1Þ þ 0:0721mðt  1Þxðt  1Þ
+^ ¼ 0:0055mðt  1Þ þ 0:5927dðt  1Þ þ 0:3471xðt  1Þ
+ 0:2937xðt  1Þxðt  1Þ þ 0:0007dðt  1Þdðt  1Þ
+Apparently, given the history {x(t), y(t) = (m(t), d(t)), t 6 0}, the ﬁtted TFMs (20) can be used to recursively compute the future performance for any input {x⁄(t), t = 1, 2, . . . , P} with P time units
+representing the length of the future horizon. The computational effort required by the recursive computation is negligible.
+To evaluate the accuracy of the TFMs (20), the VDS were collected by running simulation with the NSNP arrivals following
+the rate function given in Fig. 1b. The arrivals are also generated
+using the thinning algorithm in Gerhardt and Nelson (2009). For
+the VDS, 75,000 simulation replications were performed, and
+P = 8,000 time units were obtained and considered as the ‘‘true’’
+dynamic outputs with ‘‘zero’’ variance under the speciﬁed input
+ﬂow. In Fig. 2, the ‘‘true’’ outputs mðtÞ
+dotted curves in Fig. 2a and b respectively. The solid curves in
+Fig. 2 represent the predicted dynamic outputs resulting from
+the ﬁtted TFMs (20). To obtain the predicted curves, the TFMsbased recursive computation was initiated by using the ﬁrst pair
+of time-series points in the VDS as the seed values, and iteratively
+it leads to the prediction of the system evolution over the entire
+period given that the arrival rate follows Fig. 1b. Fig. 2 shows that
+the predicted dynamics from the TFMs almost coincide with the
+The metamodeling method has been applied on a scale-down
+semiconductor wafer fabrication (fab) system which has been used
+in the literature to evaluate new production planning methods and
+optimal control heuristics (Kayton et al., 1997; Asmundsson et al.,
+2009; Irdem et al., 2010). One type of products is considered, and
+the arrivals are modeled as a Poisson process. The system consists
+of nine workstations and involves the representative features of
+real wafer fab systems such as re-entrant ﬂows, random failures,
+and batch processing. The speciﬁcs of the system are given in
+Appendix A.4. Before the detailed results for the scale-down wafer
+fab are presented in Section 6.2.3, we ﬁrst devote Sections 6.2.1
+and 6.2.2 to the analysis of multi-station systems in general.
+6.2.1. Decomposition vs. aggregation view
+There are two perspectives to approach a multi-station system:
+the decomposition and aggregation views, both of which have been
+used in the steady-state analysis of queueing systems. Examples
+for decomposing a queueing system into individual stations or subsystems include Whitt (1983), Bitran and Tirupati (1988), Hopp
+et al. (2002), and van Vuuren and Adan (2009). For this stream of
+work, appropriate recomposition is required to obtain the overall
+performance of the system from the behavior of each individual
+station. The aggregation approach has been explored by Atherton
+and Dayhoff (1986), Cheng and Kleijnen (1999), Park et al.
+(2002), Yang et al. (2007, 2008), etc. In those work, a multi-station
+system is considered as a whole and directly characterized by
+For the transient analysis of multi-station systems, both perspectives, decomposition and aggregation, can also be adopted.
+The basis of the decomposition method lies in the ability to accurately describe the transient behavior of a single station (or group),
+which has been demonstrated through the empirical examples in
+Section 6.1. In Appendix A.5, a ﬁve-station tandem system is considered and used to illustrate the use of our metamodeling method
+in the decomposition framework: The system is decomposed into
+ﬁve individual stations with each one characterized by a distinct
+set of TFMs as those in (20); the ensemble of the ﬁve sets of TFMs
+is able to predict the system’s transient behavior recognizing that
+the departures from an upstream station serve as the arrivals to
+its downstream station. The details and the pros and cons of the
+decomposition method for transient analysis are discussed in
+The aggregation approach, on the other hand, is the focus of this
+paper. The scale-down wafer fab will be used to illustrate that a
+multi-station system (or subsystem) can be considered as an
+aggregate group and its transient behavior can be accurately
+described by a single set of TFMs. It is worth mentioning that the
+aggregation system can potentially serve as a decomposed group
+in the decomposition approach for analyzing large-scale systems.
+6.2.2. Suitability of the aggregate transient analysis method
+As mentioned in Section 1.4, a single set of TFMs is most suitable to approximate the transient behavior of a system that is
+dominated by one bottleneck (BN) station. Here, we discuss in detail this empirical recommendation.
+First, we specify the meaning of a system being dominated by a
+single BN station. Following the concepts in Section 4.1, a BN station is the one with the heaviest utilization (i.e., the largest fraction
+of busy time); it most constrains the job ﬂow, and it is where the
+queueing time and job congestion are most pronounced. We consider a system as dominated by a single BN if the utilization at
+the second heaviest utilized station does not exceed 80% of the
+BN utilization. The percentage 80% is an empirical value recommended based on the authors’ experience with queueing and real
+F. Yang, J. Liu / European Journal of Operational Research 223 (2012) 150–166
+Fig. 2. Comparison of the predicted dynamic outputs and their ‘‘true’’ values for the single-server system.
+manufacturing systems (Johnson et al., 2004; Yang et al., 2007,
+2008; Yang, 2010): The queueing effects at a station are likely to
+be signiﬁcant when the station utilization is above 0.80.
+A system is operated typically with the BN utilization well
+below one (Hopp, 2007), at most at or slightly above one on a temporary basis. Hence, for a system dominated by one BN, the BN is
+the station where the jobs tend to accumulate and that largely
+determines the departure process from the system; whereas at
+the other stations, the waiting time for jobs in the queue are likely
+to be negligible (Hung and Leachman, 1996). For such a system
+where the allocation of jobs among stations is roughly given, the
+system-level performance metrics imply a good depiction of the
+performance at the BN and other individual stations. This serves
+as a good basis for the aggregation approach, which seeks to characterize the behavior of a system by a single set of TFMs with outputs being system-level performances only: the expected number
+of jobs in the system and the departure rate from the system.
+Needless to say, the aggregate metamodeling is a statistical
+approximation method, and its effectiveness is demonstrated
+Given the scale-down wafer fab described in Appendix A.4, the
+analytical method (Section 4.1) is ﬁrst applied to perform the
+capacity and BN analysis of the system. The analyzing results,
+which are summarized in Appendix A.4, show that the wafer fab
+is dominated by a single BN station, and assist to specify the design
+of simulation experiments (Section 4.3). Also, based on the analytically-derived system capacity l, the time unit Dt is set as 1/8 of 1/
+l (Section 4.2.2). The metamodeling procedure is then applied to
+To obtain the EDS, Poisson arrivals were fed to the simulation
+model with the input rate being a piecewise constant function similar to the one in Fig. 1a. The ﬁve distinct constant arrival rates are
+also selected in such a way that they correspond to ﬁve evenlyspaced system (i.e., BN) utilizations {0.5, 0.6125, 0.725, 0.8375,
+0.95}. The length of a simulation replication is set as T = 5000 time
+units. A total of 56,200 replications were performed for the EDS,
+from which the TFMs are estimated. The ﬁtted TFMs take as input
+the arrival rate x(t) into the system, and output mðtÞ,
+To evaluate the ability of the TFMs to predict the system evolution, two cases were considered with the input rate following (i) a
+sine function as shown in Fig. 3a and (ii) a piece-wise constant
+function as shown in Fig. 3b. In each of the two cases, a large
+number of simulation replications were carried out to obtain the
+corresponding VDS, and the outputs estimated from the VDS are
+considered as the ‘‘true’’ system performance and used to evaluate
+6.2.3.1. Case 1. The TFMs were used to predict the system performance under Poisson arrivals with the rate following the sine function in Fig. 3a. In the sine function, the highest and lowest arrival
+rates correspond to a system utilization of 0.9 and 0.66 respectively. To obtain the VDS that provides the ‘‘true’’ system behavior,
+75,000 simulation replications were carried out by feeding to the
+system the non-stationary Poisson arrivals that follow the sine
+rate. Fig. 4 compares the ‘‘true’’ dynamic behavior ðmðtÞ;
+which is obtained from the VDS and represented by the dotted
+curves in the graphs, with the system evolution ðmðtÞ;
+predicted by the TFMs, which is depicted by the solid curves. As can
+be seen from Fig. 4, the curves predicted by the TFMs are able to
+accurately describe the system’s evolution under the input rate
+To quantify the prediction quality, the relative absolute errors
+(RAE) are also obtained over the time period t = 1, 2, . . . , P shown
+The statistics are summarized as follows for the error set
+{RAE[m(t)]; t = 1, 2, . . . , P}: The maximum is 7.05%, the 95th percentile is 3.00%, and the 50th percentile is 0.96%. Similarly, the RAE set
+and the statistics are given as: The maximum equals to 9.17%, the
+95th percentile 2.06%, and the 50th percentile 0.33%.
+6.2.3.2. Case 2. The TFMs were used to predict the system performance under Poisson arrivals with the rate following Fig. 3b, in
+which the ten constant rates (from the left to right) correspond
+f0:65; 0:71; 0:78; 0:84; 0:90; 1:04; 0:90; 0:84; 0:78; 0:71; 0:65g
+with the highest utilization being 1.04. To obtain the VDS, 75,000
+simulation replications were performed with arrival rate following
+Fig. 3b. This case is designed to illustrate the TFMs’ ability to predict
+(i) the transient behavior, (ii) the steady-state behavior, and (iii) the
+temporarily overloaded behavior of the system.
+As in Case 1, Fig. 5 compares the ‘‘true’’ dynamic behavior,
+which is obtained from the VDS and represented by the dotted
+F. Yang, J. Liu / European Journal of Operational Research 223 (2012) 150–166
+Fig. 4. Comparison of the predicted dynamic outputs and their ‘‘true’’ values for the multi-station system (Case 1).
+Fig. 5. Comparison of the predicted dynamic outputs and their ‘‘true’’ values for the multi-station system (Case 2).
+curves in the graphs, with the system evolution predicted by the
+TFMs, which is depicted by the solid curves. As shown in Fig. 5,
+some segments of the curve have reached steady state and some
+have not, and in both situations, the TFMs provide good prediction.
+F. Yang, J. Liu / European Journal of Operational Research 223 (2012) 150–166
+The RAE sets were also obtained for this case over the time period
+t = 1, 2, . . . , P as shown in Fig. 5: For {RAE[m(t)]; t = 1, 2, . . . , P}, the
+maximum, 95th percentile, and 50th percentile are 3.70%, 1.78%,
+and 0.43% respectively; for {RAE[d(t)]; t = 1, 2, . . . , P}, the maximum, 95th percentile, and 50th percentile are 6.76%,2.26%, and
+The overloaded (highest) segment in Fig. 5 deserves more
+discussions here. The metamodeling method is applicable to
+accommodate overloaded system behavior. As can be seen in
+Fig. 5, the ﬁtted TFMs are able to track the outputs of the system
+when it is temporarily overloaded. However, compared to the
+non-overloaded segments, the prediction results for the overloaded part is worse; and in our experience, the prediction quality of the TFMs deteriorates with the increase of the overloaded
+period. We believe that the inadequacy of our TFMs to predict
+overloaded behavior is due to the following reasons. The TFMs
+are estimated from the EDS which only includes non-overloaded
+data, and predicting overloaded behavior requires extrapolation
+(as opposed to interpolation), which is recognized as risky in
+statistical prediction in general (Tamhane and Dunlop, 2000). It
+is known and also evident from Fig. 5 that overloaded behaviors
+have distinct features that are not shared by non-overloaded
+ones. Hence, the resulting TFMs here fall short in terms of
+extrapolating the overloaded performance. We do not recommend including overloaded data in the EDS unless overloaded
+behaviors are of particular interest; overloaded data are highly
+variable, and extremely large number of simulation replications
+are needed to obtain good performance estimates when a system
+is overloaded, which may not be an efﬁcient use of computation
+the TFMs-based prediction needs to be embedded in an optimization framework to evaluate each candidate solution. Such an
+optimization scheme could be an iterative mathematical programming algorithm as that in Hung and Leachman (1996) or
+Hung and Hou (2001), a metaheuristic (Talbi, 2009), or a
+simulation optimization method (e.g., Hong and Nelson, 2006;
+Xu et al., 2010) using TFMs instead of simulation for candidate
+evaluation. A thorough investigation of the TFMs-based optimization for production planning will be performed in a subsequent
+This research was supported by National Science Foundation
+Grant CMMI-1068131. Sincere thanks go to the editors and anonymous referees.
+A.1. Analytical results for a general single-server queue
+Following the notations in Sections 2 and 6.2, we derive Eq. (5)
+for a general single-server queue with orderly arrivals and departures. The service time of jobs follows distribution G(s), s 2 (sL, sU)
+The state probabilities pn(t) = Pr{Q(t) = n} satisfy the differential
+p0n ðtÞ ¼ xn1 ðtÞ þ dnþ1 ðtÞ  xn ðtÞ  dn ðtÞ;
+The originality of this work lies in the integration of statistical
+methods, computer simulation, and queueing theory to tackle the
+ever-difﬁcult yet critical research problem of characterizing the
+transient behavior of general queueing systems. Such an approach
+is expected to overcome the computational burden of simulation
+and the intractability of analytical methods for realistic systems,
+and thereby to support responsive decision making.
+Our simulation-based metamodeling method supplements the
+current literature of transient analysis in the following aspects.
+First, it can accommodate the various features of manufacturing
+systems including non-Markovian arrivals and services, multi-servers, multi-stations, re-entrant ﬂows, batch processing, and random
+failures. Second, the TFMs resulting from our methods can be used
+to timely predict the system’s performance since they are difference
+equations relating the future output performance to history. In
+addition, it is worth mentioning that the metamodeling method
+can be straightforwardly extended to describe the second and higher moments of the system’s output performance (that is, the number of jobs in the system and the departures from the system). The
+set of TFMs considered in this paper can be expanded to include one
+additional transfer function model for each new higher-order
+moment measure. The sample data required for estimating all the
+transfer function models can be collected simultaneously through
+simulation experiments. Since high-moment data are much more
+variable than its ﬁrst-moment counterpart, a larger number of
+simulation replications are likely to be needed for estimating the
+The TFMs of a system are able to timely predict its output y(t)
+for any input ﬂow x(t) over a future period. For applications
+where the input ﬂow is controllable (e.g., production planning),
+this provides a good basis to optimize in real time the system’s
+performance, which directly depends on y(t), with respect to
+the input x(t). To ﬁnd good (or near optimum) input control,
+Multiplying both sides of (21) by n and taking the sum across all
+which is the ﬁrst equation in (5). Recall that x(t) is the independent
+input variable representing the arrival rate of jobs, and m(t) and d(t)
+characterize the output processes of interest. Next, we proceed to
+We ﬁrst consider dn ðtÞ ¼ limd!0þ d1 PrfDðt; t þ dÞ ¼ 1; Q ðtÞ ¼ ng.
+A departure will occur during the interval (t, t + d] with n jobs in
+the system at time t if one of the two following conditions holds:
+(i) The system was empty at time t  s, and one job entered
+during the instant (t  s,t  s + d]. During the service of this
+job, which lasted for a period of s, there were n  1 new
+(ii) A departure occurred during the instant (t  s, t  s + d]
+while there are k P 2 jobs in the system at time t  s. Immediately after the departure, the service for the ﬁrst job in the
+queue was initiated and lasted for a period of s. During the
+service of this job, n  k + 1 new jobs entered the system.
+¼ 1; Q ðt  sÞ ¼ 0; Aðt  x; tÞ ¼ n  1gdGðsÞ
+F. Yang, J. Liu / European Journal of Operational Research 223 (2012) 150–166
+¼ 1; Qðt  sÞ ¼ k; Aðt  s; tÞ ¼ n  k þ 1gdGðsÞ
+Following the notations in Appendix A.2, we consider the
+the starting model. The transformed model e
+h = (theta1,theta2), an (N1 + N2)  1 vector. Denote the transformed
+the model parameters h, it can be written as Y
+linear models, the design matrix D, as deﬁned in (25), only depends
+on the data observations and does not involve any unknown
+parameters. Each column vector in D corresponds to a linear
+regressor in the TFMs. The least square ﬁtting is to project the
+e onto the subspace spanned by the columns of
+D. The dimension of this subspace is implied by the rank of D,
+say r. If r < N1 + N2, it means that N1 + N2  r regressors can be eliminated from the model due to linear redundancy. The rank r can be
+obtained using the single value decomposition method (Golub and
+¼ 1g  PrfDðt  s; t  s þ dÞ ¼ 1; Q ðt  sÞ
+The notation used in Section 5 is inherited here. For convenience of the discussion, we rewrite the transformed models (15)
+The history of the system prior to time t is denoted as
+Suppose that T time-series pairs {X(t), Y(t), t = 1, . . . , T} have
+been obtained for the estimation of the models (23) and (24). We
+deﬁne the additional notation as follows:
+ D1 ðh^1 Þ ¼ @f 1 ðh^1 Þ=@h01 is a T  N1 ﬁrst-derivative matrix, where N1
+ D2 ðh^2 Þ ¼ @f 2 ðh^2 Þ=@h02 is a T  N2 ﬁrst-derivative matrix, where N2
+model selection is based on the corresponding transformed forms
+(15) and (16) in Section 5.1 (or equivalently, (23) and (24) in
+Appendix A.2). Since the starting model (19) includes a large number of regressors, we propose the following two steps to complete
+the backward model selection: the initial ad hoc screening and the
+A.3.2. Hypothesis test-based model selection
+Denote the model resulting from the previous screening as M0 .
+For M0 , the backward stepwise regression method (Tamhane and
+Dunlop, 2000) is used to remove potentially redundant regressors
+one at a time, and is detailed as follows. (i) Let MF ¼ M0 , estimate
+c F using the ﬁtting method in Section 5.1.2, and obtain
+the sum of square error (SSE) denoted as SSEð M
+regressor from MF , and denote the resulting model as MP ; estic P using the ﬁtting method in Section 5.1.2, and obtain
+c P Þ. (iii) Evaluate the signiﬁcance of the dropped regressor
+where DFF is the degree of freedom for model M
+signiﬁcant, then go to Step (v); otherwise, set MF ¼ MP . (v) Repeat
+steps (ii)–(iv) until all the regressors in M0 have been evaluated.
+c F resulting from the backward selection is the TFMs that
+will be used to describe the system behavior.
+A.4. Conﬁguration for the multi-station system
+The system being investigated is a scale-down semiconductor
+wafer fabrication (fab) facility developed in Kayton et al. (1997).
+One type of wafer (product) ﬂow is considered whose processing
+routing is illustrated in Fig. 6. It takes 13 steps to process the wafers, and the numbers 1–13 in Fig. 6 show the sequence of stations
+Let h = (h1, h2), then the estimated parameters ^
+normally distributed with the variance–covariance matrix:
+where r = Var[w(t)] = 1 for models (23) and (24).
+Starting from the most complicated functional form (19), we
+search for a parsimonious model in the backward manner. Due
+to the non-i.i.d errors associated with the original model, the
+Fig. 6. Product ﬂow through the scale-down wafter fab.
+F. Yang, J. Liu / European Journal of Operational Research 223 (2012) 150–166
+that each wafer has to visit. Wafers are released into the fab in a
+ﬁxed lot size of 50. A ‘‘lot’’ is a number of wafers of the same type
+being processed and traveling as a whole between workstations.
+As pointed out in Kayton et al. (1997), this system includes the
+ Re-entrant ﬂows: As shown in Fig. 6, Stations 1, 4, and 6 are
+ Machine failures: Stations 3 and 7 involve machine failures and
+repairs. Denote the gamma distribution as
+Distribution parameters for the processing times in the ﬁve-station system.
+For the machines at both stations, the time to fail follows the gamma distribution with parameters being (a, b) = (720, 1); the time to
+repair also follows the gamma distribution with (a, b) = (120, 1.5).
+The times are given in terms of time units.
+Fig. 7. The ﬁve tandem stations characterized by ﬁve sets of TFMs.
+Fig. 8. Comparison of the predicted dynamic outputs and their ‘‘true’’ values for Station 1.
+Fig. 9. Comparison of the predicted dynamic outputs and their ‘‘true’’ values for Station 2.
+F. Yang, J. Liu / European Journal of Operational Research 223 (2012) 150–166
+Fig. 10. Comparison of the predicted dynamic outputs and their ‘‘true’’ values for Station 3.
+Fig. 11. Comparison of the predicted dynamic outputs and their ‘‘true’’ values for Station 4.
+Fig. 12. Comparison of the predicted dynamic outputs and their ‘‘true’’ values for Station 5.
+ Batch processing: Stations 1 and 2 process products in batches;
+at both stations, the minimum and maximum batch sizes
+allowed for processing are 2 and 4 lots respectively.
+The processing times at all the workstations follow lognormal
+distributions. Table 2 gives the number of machines, and the mean
+and standard deviation (Stdev) of the processing time (in terms of
+Before the simulation-based metamodeling method is applied
+on a multi-station system, analytical capacity/bottleneck analysis
+(Section 4.1) can be performed. Using the analytical models in
+Hopp et al. (2002), Station 4 was identiﬁed as the BN with a capac-
+F. Yang, J. Liu / European Journal of Operational Research 223 (2012) 150–166
+ity of 0.125 lots per time unit, which is also the system capacity.
+The second heaviest utilized station is Station 2 with a capacity
+of 0.1815 lots per time unit. Thus, this wafer fab is considered as
+A.5. The decomposition approach for the transient analysis of a multistation system
+As pointed out in Section 6.2.1, the aggregation approach for
+multi-station systems is the focus of this paper. However, for the
+sake of completeness, here we provide a preliminary exploration
+of the decomposition version of the transient analysis method by
+applying it on a simple multi-station system.
+The system consists of ﬁve tandem stations. Each station includes three identical servers, and all the service times follow gamma distribution (28) with parameters given as in Table 3. Each
+server in the system is subject to random failures. Both the time
+to failure and the time to repair follow exponential distributions
+with mean time to failure being 900 time units and mean time
+to repair being 100 time units. The arrivals are modeled as Poisson.
+The basic idea of the decomposition method is to decompose
+the system into ﬁve stations (or groups), and to characterize each
+of them by its own set of TFMs. Recall that each set of TFMs takes
+forms as those in models (20). The dynamic behavior of the entire
+system can be described by the multiple sets of TFMs as shown in
+Fig. 7. Speciﬁcally, Station i is characterized by the TFMs[i], with the
+superscript [i] denoting station i (i = 1, 2, . . . , 5). The input rate to
+the ﬁrst station x[1](t) is the input rate to the entire system x(t),
+and the input rate to a downstream station i(i = 2, 3, . . . , 5) is the
+departure rate from its upstream station d[i1](t). The ensemble
+of TFMs {TFMs[i]; i = 1, 2, . . . , 5} can be used to predict the system’s
+dynamic performance over the time period 1, 2, . . . , P under any
+input {x⁄(t), t = 1, 2, . . . , P}. The prediction process is given as
+Step 1: With {x[1](t) = x⁄(t); t = 1, 2, . . . , P} and the history for Station 1 over (1, 0], the TFMs[1] are used to recursively
+^½i1 ðtÞ; t ¼ 1; 2; . . . ; Pg and the history for
+Station i over (1, 0], the TFMs[i] are then used to recur^½i ðtÞÞ for t = 1, 2, . . . , P. Set
+Step 3: If i > 5, then stop; otherwise, go to Step 2.
+As the empirical examples in Section 6, EDS were collected for
+the ﬁtting of the ﬁve TFMs. For the EDS, the arrival rate in the simulation follows a piecewise constant function like the one in
+Fig. 1a. Note that when simulating the system, the data needed
+for estimating each set of TFMs can be obtained for the ﬁve stations
+simultaneously. To evaluate the prediction ability of the sequence
+of ﬁve TFMs, VDS were also obtained by running simulation under
+the sine arrival rate like that in Fig. 1b. Plots were made to compare
+the ‘‘true’’ system evolution from the VDS and that predicted by
+the ﬁve TFMs. Figs. 8–12 show the comparisons for stations 1–5
+We next discuss the pros and cons of the decomposition approach compared to the aggregation one. Obviously, the decomposition approach intends to describe the system’s behavior on an
+individual station basis, and provides more information regarding
+the performance of each station in the system. However, the
+decomposition approach relies on an additional assumption aside
+from the three constraints presented in Section 1.4. Recall that
+applying a single set of TFMs on an individual station requires
+the arrivals to that station to be fully characterized by the arrival
+rate (Constraint 3 in Section 1.4). As can be seen from Fig. 7, the
+departures from station i  1 serve as the arrivals to station
+i(i = 2, 3, . . . , 5). Hence, to describe the downstream station i by
+TFMs[i], the assumption needed is that the departures from station
+i  1 (equivalently, the arrivals to station i) can be characterized by
+its ﬁrst moment measure, departure (arrival) rate. This assumption
+apparently introduces an additional layer of approximation to the
+To evaluate the impact of the departure approximation on the
+accuracy of the transient behavior represented by the ensemble of
+multiple sets of TFMs, extensive real system experiments need to
+be performed, which is beyond the scope of this paper. Here, we intend to empirically demonstrate the potential of the decomposition
+method through the simple system with ﬁve tandem stations.
+Ankenman, B.E., Nelson, B.L., Staum, J., 2010. Stochastic kriging for simulation
+metamodeling. Operations Research 58 (2), 371–382.
+Armbruster, D., Marthaler, D.E., Ringhofer, C., Kempf, K., Jo, T.C., 2006. A continuum
+model for a re-entrant factory. Operations Research 54 (5), 933–950.
+Asmundsson, J.M., Rardin, R.L., Turkseven, C.H., Uzsoy, R., 2009. Production planning
+with resources subject to congestion. Naval Research Logistics 56 (2), 142–157.
+Atherton, R.W., Dayhoff, J.E., 1986. Signature analysis: simulation of inventory, cycle
+time, and throughput trade-offs in wafer fabrication. IEEE Transactions On
+Components, Hybrids, Manufacturing Technology CHMT 9 (4), 498–507.
+Bitran, G.R., Tirupati, D., 1988. Multiproduct queueing networks with deterministic
+routing: decomposition approach and the notion of interference. Management
+Box, G., Jenkins, G.M., Reinsel, G., 2008. Time Series Analysis: Forecasting & Control,
+Chen, H.B., Mandelbaum, A. 1994. In: Yao, D.D. (Ed.), Hierarchical Modelling of
+Stochastic Networks. Part I: Fluid Models, Stochastic Modeling and Analysis of
+Manufacturing Systems. Springer, New York.
+Cheng, R.C.H., Kleijnen, J.P.C., 1999. Improved design of queueing simulation
+experiments with highly heteroscedastic responses. Operations Research 47,
+Clark, G.M., 1981. Use of polya distributions in approximate solutions to
+nonstationary M/M/s queues. Communications of the ACM 24, 206–217.
+Daley, D.J., Vere-Jones, D., 2002. An Introduction to the Theory of Point Processes, .
+second ed. Elementary Theory and Methods second ed., vol. 1 Springer.
+Datta, P.P., Christopher, M., Allen, P., 2007. Agent-based modelling of complex
+production/distribution systems to improve resilience. International Journal of
+Eick, S.G., Massey, W.A., Whitt, W., 1993a. The physics of the Mt/G/infty queue.
+Eick, S.G., Massey, W.A., Whitt, W., 1993b. Mt/G/infty queues with sinusoidal arrival
+rates. Management Science 39 (2), 241–252.
+Gerhardt, I., Nelson, B.L., 2009. Transforming renewal processes for simulation of
+nonstationary arrival processes. INFORMS Journal on Computing 21 (4), 630–
+Golub, G.H., Charles, V.L.F., 1996. Matrix Computations, third ed. Johns Hopkins.
+Green, L.V., Kolesar, P.J., 1991. The pointwise stationary approximation with for
+queues with nonstationary arrivals. Management Science 37 (1), 84–97.
+Green, L.V., Kolesar, P.J., Svornos, A., 1991. Some effects of nonstationarity on
+multiserver Markovian queueing systems. Operations Research 39 (3), 502–
+Gross, D., Harris, C., 1985. Fundamentals of Queueing Theory. John Wiley & Sons,
+Gross, D., Miller, D., 1984. The randomization technique as a modeling tool and
+solution procedure for transient Markov processes. Operations Research 32 (6),
+Hackman, S.T., 2008. Production Economics: Integrating the Microeconomic and
+Engineering Perspectives. Springer-Verlag, New York.
+Harrod, S., Kelton, W.D., 2006. Numerical methods for realizing nonstationary
+Poisson processes with piecewise-constant instantaneous-rate functions.
+Henderson, S.G., Nelson, B.L., 2006. Handbooks in Operations Research and
+Management Science: Simulation. Elsevier Science, Amsterdam, Netherlands.
+Hong, L.J., Nelson, B.L., 2006. Discrete optimization via simulation using COMPASS.
+Hopp, W., 2007. Supply Chain Science. Irwin/McGraw-Hill, New York.
+Hopp, W.J., Spearman, M.L., Chayet, S., Donohue, K., Senturk, E., 2002. Using an
+optimized queueing network model to support wafer fab design. IIE
+Hung, Y.F., Hou, M.C., 2001. A production planning approach based on iterations of
+linear programming optimization and ﬂow time prediction. Journal of the
+Chinese Institute of Industrial Engineers 18 (3), 55–67.
+Hung, Y.F., Leachman, R.C., 1996. A production planning methodology for
+semiconductor manufacturing based on iterative simulation and linear
+programming calculations. IEEE Transactions on Semiconductor Manufacturing 9 (2), 257–269.
+F. Yang, J. Liu / European Journal of Operational Research 223 (2012) 150–166
+Ingolfsson, A., Akhmetshina, E., Budge, S., Li, Y., Wu, X., 2007. A survey and
+experimental comparison of service level approximation methods for nonstationary M/M/s queueing systems. INFORMS Journal on Computing 19 (2),
+Irdem, D.F., Kacar, N.B., Uzsoy, R., 2010. An exploratory analysis of two iterative
+linear programming-simulation approaches for production planning. IEEE
+Transactions on Semiconductor Manufacturing 23 (3), 442–455.
+Jennings, O.B., Mandelbaum, A., Massey, W.A., Whitt, W., 1996. Server stafﬁng to
+meet time-varying demand. Management Science 42 (10), 1383–1394.
+Johnson, R., Yang, F., Ankenman, B.E., Nelson, B.L. 2004. Nonlinear regression ﬁts for
+simulated cycle time vs. throughput curves for semiconductor manufacturing.
+In: Proceedings of the 2004 Winter Simulation Conference, pp. 1951–1955.
+Kayton, D., Teyner, T., Schwartz, C., Uzsoy, R., 1997. Focusing maintenance
+improvement efforts in a wafer fabrication facility operating under theory of
+constraints. Production and Inventory Management Journal 38 (4), 51–57.
+Kelly, F.P., Zachary, S., Ziedins, I., 1996. Stochastic Networks: Theory and
+Applications. Royal Statistical Society Lecture Note Series. Oxford University
+Kleinrock, L., 1975. Queueing Systems. John Wiley & Sons, New York.
+Kumar, S., Kumar, P.R., 2001. Queueing network models in the design and analysis
+of semiconductorwafer fabs. IEEE Transactions on Robotics and Automation 17
+Law, A.M., Kelton, W.D., 2000. Simulation Modeling and Analysis, third ed.
+Leemis, L.M., 1991. Nonparametric estimation of the cumulative intensity function
+for a nonhomogeneous Poisson process. Management Sciences. 37, 886–900.
+Lewis, P.A.W., Shedler, G.S., 1979. Simulation of nonhomogenous Poisson processes
+by thinning. Naval Research Logistics Quarterly 26 (3), 403–413.
+Ljung, L., 1999. System Identiﬁcation: Theory for the User, second ed. Prentice Hall.
+Mandelbaum, A., Massey, W.A., 1995. Strong Approximations for Time–Dependent
+Queues. Mathematics of Operations Research 20 (11), 33–64.
+Massey, W.A., Whitt, W., 1997. Peak congestion in multi-server service systems
+with slowly varying arrival rates. Queueing Systems 25, 157–172.
+McKenzie, E., 2003. Discrete variate time series. In: Shanbhag, D.N., Rao, C.R. (Eds.),
+Handbook of Statistics 21. Stochastic Processes: Modelling and Simulation.
+Meng, G., Heragu, S., 2004. Batch size modeling in a multi-item, discrete
+manufacturing system via an open queueing network. IIE Transactions 36,
+Missbauer, H., Uzsoy, R., 2010. Optimization formulations of production planning
+problems. In: Kempf, K.G., Keskinocak, P., Uzsoy, R. (Eds.), Planning Production
+and Inventories in the Extended Enterprise: A State of the Art Handbook.
+Nelson, B.L., Taaffe, M.R., 2004a. ThePht/Pht/1 queueing system: Part I – The single
+node. INFORMS Journal on Computing 16 (3), 266–274.
+Nelson, B.L., Taaffe, M.R., 2004b. The [Pht/Pht/1]K queueing system: Part II – The
+multiclass network. INFORMS Journal on Computing 16 (3), 275–283.
+Papadopolous, H.T., Heavey, C., Browne, J., 1993. Queueing Theory in Manufacturing
+Systems Analysis and Design, ﬁrst ed. Springer, New York.
+Park, S., Fowler, J.W., Mackulak, G.T., Keats, J.B., Carlyle, W.M., 2002. D-optimal
+sequential experiments for generating a simulation-based cycle timethroughput curve. Operations Research 50, 981–990.
+Pinedo, M.L., 2007. Planning and Scheduling in Manufacturing and Services.
+Riano, G. 2003. Transient Behavior of Stochastic Networks: Application to
+Production Planning with Load-Dependent Lead Times. Dissertation, School of
+Industrial and Systems Engineering, Georgia Institute of Technology. Atlanta,
+Ross, S.M., 1995. Stochastic Processes, second ed. John Wiley & Sons, NJ.
+Rothkopf, M.H., Oren, S.S., 1979. A closure approximation for the nonstationary M/
+M/s queue. Management Science 25, 522–534.
+Shanthikumar, J.G., Ding, S., Zhang, M.T., 2007. Queueing theory for semiconductor
+manufacturing systems: a survey and open problems. IEEE Transactions on
+Automation Science and Engineering 4 (4), 513–522.
+Shefﬁ, Y., Rice, J.B., 2005. A supply chain view of the resilient enterprise. Sloan
+Stadtler, H., Kilger, C., 2007. Supply Chain Management and Advanced Planning:
+Concepts, Models, Software, and Case Studies, fourth ed. Springer, New York.
+Taaffe, M.R., Ong, K.L., 1987. Approximating nonstationary Ph(t)/M(t)/S/C queueing
+systems. Annals of Operations Research 8, 103–116.
+Talbi, E.G., 2009. Metaheuristics: From Design to Implementation. John Wiley &
+Tamhane, A.C., Dunlop, D.D., 2000. Statistics and Data Analysis from Elementary to
+Uzsoy, R., Lee, C.Y., Martin-Vega, L.A., 1992. A review of production planning and
+scheduling in the semiconductor industry. Part I: System characteristics,
+performance evaluation, and production planning. IIE Transactions 24 (4), 47–61.
+van Vuuren, M., Adan, I.J.B.F., 2009. Performance analysis of tandem queues with
+small buffers. IIE Transactions 41 (10), 882–892.
+Whitt, W., 1983. The queueing network analyzer. Bell System Technical Journal 62
+Xu, J., Hong, L.J., Nelson, B.L., 2010. Industrial strength COMPASS: a comprehensive
+algorithm and software for optimization via simulation. ACM TOMACS 20, 1–29.
+Yang, F., 2010. Neural network metamodeling for cycle–time based performance
+proﬁles in manufacturing. European Journal of Operational Research. 205 (1),
+Yang, F., Ankenman, B.E., Nelson, B.L., 2007. Efﬁcient generation of cycle time–
+throughput curves through simulation and metamodeling. Naval Research
+Yang, Y., Ankenman, B.E., Nelson, B.L., 2008. Cycle time percentile curves for
+manufacturing systems. INFORMS Journal on Computing 20 (4), 628–643.
+Zäpfel, G., Missbauer, H., 1993. Production planning and control (PPC) systems
+including load-oriented order release-problems and research perspectives.
+International Journal of Production Economics, 107–122.

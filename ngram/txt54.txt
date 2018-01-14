@@ -1,0 +1,61 @@
+Institut für Wirtschaftsinformatik, Produktionswirtschaft und Logistik
+Tätigkeitsbereich Produktionswirtschaft und Logistik
+Leiter: o.Univ.‐Prof. Dr. Hubert Missbauer
+Bei der kdg mediatech AG handelt es sich um einen Kundenauftragsfertiger, der mittels flexibler
+Fließfertigung CDs und DVDs in unterschiedlichen Variationen herstellt. Die spezifische Produktva‐
+riante ergibt sich dabei aus dem Speichermedium (CD, DVD), der Art der Bedruckung (Siebdruck,
+Kammann Offsetdruck, Metronik Offsetdruck) und der Art der Verpackung (CD‐Boxen, Spin‐
+delschrumpfer, DVD‐Boxen, Papier‐, Karton‐ und Plastiktaschen), die beliebig kombiniert werden
+können. Daraus ergeben sich insgesamt 363 unterschiedliche Produktvarianten, von denen im Jahr
+2005 181 hergestellt wurden. Die Anzahl an produzierten CDs bzw. DVDs betrug in diesem Zeit‐
+raum 91.785.490 Stück, wodurch sich bei einer Anzahl von 31.526 abgewickelten Aufträgen eine
+mittlere Anzahl pro Auftrag von 2.911 Stück ergab. Die Werte der einzelnen Monate schwankten um
+diesen Mittelwert wie aus Abbildung 1 ersichtlich ist. Vor allem in den Monaten März, September,
+Oktober und November mußten überdurchschnittlich viele Aufträge abgewickelt werden, was auf
+die erhöhte Kundennachfrage in der Oster‐ und Weihnachtszeit zurückgeführt werden kann.
+Die Herstellung der unterschiedlichen Produktvarianten erfolgt in fünf Arbeitschritten, die in den
+Abteilungen Pre‐Produktion, Produktion, Grafik, Druck und Verpackung durchgeführt werden. Da
+die Pre‐Produktions‐ und Grafikabteilung (Herstellung des Glasmasters, Stampers und Labels) kei‐
+ne planerischen Probleme verursachen und sehr flexibel sind, werden im Folgenden lediglich die
+Produktions‐, Druck‐ und Verpackungsabteilung betrachtet. Jeder Auftrag durchläuft diese in der in
+Abbildung 3 dargestellten Reihenfolge, wobei in Abhängigkeit von der zu produzierenden Produkt‐
+variante unterschiedliche Betriebsmittelgruppen (Compact Disc CD, Digital Versatile Disc DVD,
+Siebdruck SD, Kammann Offsetdruck KOD, Metronik Offsetdruck MOD, CD‐Boxen V1, Spin‐
+delschrumpfer V2, DVD‐Boxen V3, Papier‐, Karton‐ und Plastiktaschen V4) belegt werden. Diese
+bestehen in der Produktionsabteilung aus parallel arbeitenden, sich ersetzenden Arbeitssystemen.
+Gleiches gilt für die Betriebsmittelgruppe KOD in der Druckabteilung, die sich von den beiden ande‐
+ren Betriebsmittelgruppen unterscheidet. Während die Betriebsmittelgruppe MOD über lediglich
+ein Arbeitssystem verfügt, besteht die Betriebsmittelgruppe SD aus parallel arbeitenden, sich je‐
+doch nur teilweise ersetzenden Arbeitssystemen. Somit kann ein Arbeitsschritt eines bestimmten
+Auftrags der diese Betriebsmittelgruppe belegt, nur von einer Teilmenge der vorhandenen Arbeits
+systeme ausgeführt werden. Ähnliches trifft auch auf die Betriebsmittelgruppen V1, V3 und V4 in
+der Verpackungsabteilung zu, bei denen sich bei einem Arbeitssystem der Betriebsmittelgruppe V3
+die einzig relevanten Rüstzeiten im Produktionssystem ergeben, die nicht reihenfolgeabhängig sind.
+Betriebsmittelgruppe V2 besteht so wie Betriebsmittelgruppe MOD in der Druckabteilung aus ei‐
+Gearbeitet wird im 4‐Schichtbetrieb (24 Stunden, 7 Tage in der Woche). Engpässe treten in Abhän‐
+gigkeit vom stark schwankenden Produktmix in der Druck‐ und Verpackungsabteilung auf. Um die‐
+sen entgegenzuwirken werden die angenommenen Aufträge, die vom Kunden bis zur Auftragsfrei‐
+gabe abgeändert werden können, je nach Auftragsgröße in Teillosen zu 3.500 Stück unterteilt.
+Telefon +43 (0) 512 / 507 ‐ 7501 | Fax +43 (0) 512 / 507 ‐ 2847
+E‐Mail: produktionswirtschaft@uibk.ac.at | Internet: http://iwis1.uibk.ac.at/pl/
+Institut für Wirtschaftsinformatik, Produktionswirtschaft und Logistik
+Tätigkeitsbereich Produktionswirtschaft und Logistik
+Leiter: o.Univ.‐Prof. Dr. Hubert Missbauer
+Abbildung 1: Überblick über die Auftragssituation im Jahr 2005
+0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30
+Telefon +43 (0) 512 / 507 ‐ 7501 | Fax +43 (0) 512 / 507 ‐ 2847
+E‐Mail: produktionswirtschaft@uibk.ac.at | Internet: http://iwis1.uibk.ac.at/pl/
+Institut für Wirtschaftsinformatik, Produktionswirtschaft und Logistik
+Tätigkeitsbereich Produktionswirtschaft und Logistik
+Leiter: o.Univ.‐Prof. Dr. Hubert Missbauer
+Abbildung 2: Relative Häufigkeitsverteilung der Auftragsdurchlaufzeit
+Abbildung 3: Aufbau des Produktionssystems
+Neben den Überlappungen kommt es bei sehr großen Aufträgen aber auch zur Auftragssplittung
+um die Auftragsdurchlaufzeit verkürzen zu können. Diese betrug im Jahr 2005 im Mittel 6,5 Schich‐
+ten bei einer Standardabweichung von 4,5 Schichten und einem mittleren Durchführungszeitanteil
+von 7,44% (siehe Abbildung 2). Dadurch befanden sich im Mittel über eine Zeitspanne von einem
+Tag 322 Aufträge (Standardabweichung 93 Aufträge) beziehungsweise zeitpunktbezogen 235 Auf‐
+träge (Standardabweichung 71 Aufträge) im Produktionssystem (Detaillierte Informationen zu den
+Daten und deren Auswertung befinden sich im Anhang in der Präsentation zur Materialflussanaly‐
+Telefon +43 (0) 512 / 507 ‐ 7501 | Fax +43 (0) 512 / 507 ‐ 2847
+E‐Mail: produktionswirtschaft@uibk.ac.at | Internet: http://iwis1.uibk.ac.at/pl/

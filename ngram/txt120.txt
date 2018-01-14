@@ -1,0 +1,300 @@
+Neuro-Genetic Order Acceptance in a Job Shop setting
+In this paper a new neuro-genetic architecture
+is presented that solves a profit oriented dynamic
+job shop problem. In the job shop order acceptance
+and scheduling problem new jobs arrive continuously and because of insufficient job shop capacity,
+a selection has to be made among the offered jobs.
+The goal is to find an order acceptance policy, which
+is supported by a scheduling policy, that maximizes
+the long-term profit for the job shop. The acceptance policy is learned through training a neural network using reinforcement learning and the scheduling policy is based on a genetic search driven by
+the same neural network. The obtained acceptance
+and scheduling policy is found to outperform two
+heuristic policies under various manufacturing environments.
+The research presented in this paper is part of
+an effort to device new logistic control strategies in
+The deterministic job shop scheduling problem
+is the most general of the classical scheduling problems. An instance of this problem consists of a finite
+set of jobs that must be processed on a finite set of
+inexchangeable machines for a number of ordered
+operations. The static job shop scheduling problem is shown to be N P-hard and has received a
+considerable amount of attention since it was first
+posted in the early 50’s. Many optimization and
+approximation methods, including many evolutionary oriented approaches have been developed for
+it [1]. The larger part of the research has been directed at optimizing the makespan or similar simple
+Various alternative job shop problems, such as
+the flexible job shop problem, where each machine
+can handle every operation, or the open job shop
+problem, where the operations have no a priori ordering, have also been considered. Dynamic job
+shops on the other hand, though very common in
+practice, have only recently began to attract their
+fair share of scientific attention. The addition (or
+cancellation) of a job logically provides an attractive opportunity for rescheduling. Simple objectives, such as makespan minimization, are not realistic for these activities. In practice, job shops are
+businesses and want to maximize a certain longterm, for example γ-discounted profit.
+A job shop receiving a sequence of jobs over time
+is a natural setting. In deterministic job shops the
+arrival times are known and in stochastic job shops
+they are not. By rescheduling every time a new job
+arrives at the shop, a stochastic arrival process can
+be broken down into a series of deterministic job
+The above considerations show the relevance of
+a profit-driven dynamic job shop, for which the following framework was used.
+It is reasonable to assume that each job adds
+to the job shop profit if it is completed within its
+customer-supplied deadline. If a deadline cannot
+be met or a job is not profitable it should be refused. Two hierarchical problems can be identified:
+an order acceptance problem (or admission control
+problem) and a resulting scheduling problem. Usually the problems are dealt with independently. After the job admission decision is taken, the specific
+consequences for the job shop are considered. The
+objective in the order acceptance problem is some
+profit measure, while the scheduling objective usually relies on some strict heuristic measure, such
+as maximum tardiness, weighted flow time, and
+weighted number of tardy jobs, which carry only
+It is easy to see that this practice leads to suboptimal decision making, since the resulting policies
+were not designed for the same objective. Moreover, all simple objectives are in contrast with a
+long-term objective as profit maximization, since
+they do not take into account the dynamics of the
+job shop environment. This emphasizes the need
+for more advanced logistic control tools.
+The aforementioned suboptimality can be offset
+in two ways. First, the rescheduling objective can
+be adapted to be more in line with the objective
+for the admission control problem. As an example,
+new jobs can be judged on their capability to not
+only fit well into the present schedule, but also into
+future schedules. Next to this, past experience with
+rescheduling could be used to improve the evaluation of a schedule.
+An integral neuro-genetic reinforcement learning approach
+For the scheduling part of the problem a genetic algorithm will be used since it can easily deal
+with complex objective functions in a job shop setting [3]. The fitness function should be able to
+judge whether a certain job shop schedule is a good
+starting point to accumulate future profits in the
+job shop environment. A natural way to implement this is to let a neural network determine the
+desirability of a schedule based on a set of identified
+Observations, such as inefficient schedules leading to lower profits, are the basis for learning this
+mapping. For incorporating this experience into
+the model a reinforcement learning method is used.
+Note that a tool that can assess the profitability of
+a certain schedule can logically be used for scheduling, but it can also be used for order acceptance
+if the impact of adding an extra job on the schedule is known. Combining reinforcement learning
+admission control with a genetic rescheduler here
+makes sense, because on the one hand past experience should be used as an instrument for the genetic
+algorithm to identify fit schedules and on the other
+new jobs that lead to efficient schedules should be
+In this article the problem of order acceptance
+and the consecutive scheduling is tackled in an integral way.
+rescheduling tool based on genetic algorithms [4].
+This tool can be used when rescheduling is necessary while part of the current schedule is already
+in progress (pre-emption is generally not allowed).
+This is the case when a new job arrives at a busy
+job shop. However, their focus was mainly on small
+problem revisions like a change in the start or processing time of an operation. For more intrusive
+changes such as the insertion of an additional job
+their approach is less appealing and is therefore not
+used here. The schedule encoding technique presented in [4] was used here. It is a permutation
+of all operations that need to be scheduled, only
+designated by their corresponding job, and comes
+with a schedule builder that is straightforward and
+Lin, Goodman, and Punch have shown that genetic algorithms can perform robustly with regard
+to a number of heuristic objectives [5]. As argued
+before, a more realistic objective should be derived
+from the actual situation of a job shop in its en-
+vironment. Dagli and Sittisathanchai successfully
+proposed a neuro-genetic scheduler (NGS), that
+learned the relevant aspects of a schedule through
+supervised learning [3]. The neural network model
+mapped a set of scheduling criteria (flow time, lateness, a.o.) to the fitness values provided by experienced schedulers. This nonlinear mapping was then
+used as a realistic objective for the genetic search.
+In practice experienced schedulers are not always
+present. In situations, where the needed inputoutput relations are not available, we propose, they
+should be learned by the NGS through gaining experience in the job shop environment. The neural
+network architecture is a simple feed forward network with one hidden layer. The learning process
+The input feature set consists of schedule features that possibly contain some relevant information on expected future profits. Five inputs were
+chosen without extensive testing. These are the
+presence of at least one late job, the fraction of
+late jobs, the workload, the average slack per job,
+and the minimum slack. By constructing an input feature by hand the feature set becomes biased. However, the amount of incorporated domain
+knowledge as compared to the system by Dagli and
+A final extension of the NGS was made through
+the use of case-based reasoning techniques. During each simulation several consecutive rescheduling problems must be solved. Since each of these
+problems resembles the next to a certain extent in
+terms of problem characteristics, such as workload,
+it is possible to use the previously found solution
+to introduce a search bias in order to improve the
+solution quality [6]. Using the old problem and its
+solution as a case-base a previous solution can be
+adapted to fit the new workload and is thereafter
+introduced into the population at a certain point
+The rescheduling process supplies important information for solving the job admission control
+Each order acceptance decision is based on the
+desirability of the new job within the context of the
+present schedule in terms of profitability.
+When a new job arrives a decision must be taken
+to either accept or to reject the extra workload and
+the corresponding reward or profit. An intuitive
+decision making process involves creating a new
+schedule with the tendered job and comparing it
+to the present remaining schedule without the new
+job. If the reward of the new job does not weigh
+up to the change in the desirability of the schedule,
+rejection is the obvious choice. More precise one
+V µ (−) + rrejection < V µ (+) + radmission
+V µ (−) + rrejection > V µ (+) + radmission
+where V µ ( ) is the value function, representing the
+summed expected discounted future rewards according to the policy µ, (−) and (+) are the states
+without and with the tendered job respectively, and
+rrejection and radmission are the rewards received for
+rejecting and accepting a job respectively. Ties can
+The value function is actually an afterstate value
+function [7]. These are beneficial when there is
+some domain knowledge available on the dynamics of the scheduling system. The direct effect of
+accepting a job is completely known, since it is possible to construct the schedule resulting from incorporating the new job into the remaining workload
+at the time of arrival before actually accepting the
+tendered job. So, by using some features of the new
+schedule as input to the value function instead of
+some features of the old schedule and some features
+of the offered job, the need to learn this relation can
+After each rejection or admission new information becomes available, with which the model used
+for the previously made forecast (here designated
+by V µ (prev)) can be improved [8]. The corresponding reinforcement learning update if the next job is
+If the next job is accepted the reinforcement learning update becomes:
+where γ is a given discount factor, α is the learning
+rate, ∆t is the timespan between the previous decision and the moment of update, and c is a constant
+The neural network is continuously updated with
+new experiences from the order admission process
+and will therefore improve its performance over
+time. In the mean while, the NGS is able to improve its performance too (measured in overall system performance), since its fitness function is improved. To test whether both processes indeed positively contribute to each others performance some
+testing was done. No effort was made to optimize
+the performance of the hybrid system. From now
+on the term NGS will be used for the complete control system described in this paragraph.
+The following problem data are assumed to be
+provided by the environment. The reward or profit
+for accepting a job is fixed at 1.0, the reward for rejection is -0.1, and the reward for scheduling a job
+to finish after its deadline is -2.0. Since this penalty
+is easily avoided by the NGS it was excluded from
+the discussion in the previous paragraph. Note,
+that the NGS copes just as easily with environments containing jobs with variable rewards.
+The duration of an operation is uniformly distributed between 6 and 13 time units. The timelap
+in between job arrivals is uniformly distributed between 8 and 11 time units. The discount factor is
+set at 0.987 per time unit, meaning that a reward
+8 time units in the future is only worth 90 % of
+its original value now. Different job shop sizes and
+deadline settings were used for simulation.
+The NGS settings received very little attention
+and were not optimized. For the genetic search a
+population consisting of 12 individuals was evolved
+for 20 generations. Each generation the best individual survives (elitist) untouched. The other individuals are recombinated using a rank based selection method and possibly mutated afterwards.
+The recombination operator was taken from [9].
+As mentioned before, halfway through the search
+an adapted individual from the previous search is
+During each simulation 11000 jobs are offered
+to the job shop. The neural network has one hidden layer consisting of sigmoid neurons and a linear output neuron. All weights are initialized at
+random. The learning parameter α is gradually decreased from 1 to 0.002 after 10000 job arrivals.
+The final 1000 job arrivals are only used to assess
+the learned control strategy. Since all interesting
+policies for this environment avoid the occurrence
+of late jobs a good overall performance measure is
+the service rate or the percentage of accepted jobs.
+This measure is highly correlated with accumulated
+(discounted) profit and the job shop capacity utilization rate.
+As mentioned before, the goal of the tests is to
+assess the viability of the new architecture within
+the presented framework. The performance of the
+system was tested in different scenarios. Three job
+shop sizes and two deadline settings account for 6
+different manufacturing environments. Simulations
+were run with 3, 5, and 10 machine job shops. The
+corresponding jobs consist of 3, 5, and 10 operations
+respectively, since one operation must be performed
+on each machine for a job. For each job the deadline
+is set at the arrival time plus the amount of time
+in which it can complete the job exactly times 1.5
+and 3.0 (the deadline tightness parameter).
+Comparisons were made between the NGS and
+two simple heuristic policies, which are computationally less demanding. For the order admission problem these policies both accept the new
+job whenever it can be finished before its deadline without compromising any of the deadlines of
+the jobs already in progress at the job shop. For
+the rescheduling problem two policies were obtained
+based on genetic searches which are executed under
+the same conditions as were applied in the neurogenetic rescheduler. As fitness measures the average slack (AS) and minimum slack (MS) were used.
+Other measures, such as minimum makespan, do
+not take into account the presence of deadlines and
+For the job shop environment with tight deadlines, i.e. a deadline tightness parameter equal to
+1.5, the accomplished service levels are shown in
+Obviously the NGS outperforms both alternative policies and the alternative policy based on
+the minimum slack outperforms the alternative policy based on the average slack. The results for the
+job shop environment with less constraining deadlines, as shown below, concur with these findings.
+The attained service levels here are higher since operations can be scheduled over a longer timespan,
+which adds to the flexibility of the scheduler.
+Note that the standard deviations corresponding
+to the presented results are in the order of 0.7 %.
+In addition two other experiments have been performed. First, the effect of increasing the information available to the NGS on its performance
+was examined. By adding two input features, being the short term machine utilization and the
+medium term machine utilization, the performance
+improved. For example, in the 10 machine manufacturing environment with a deadline tightness
+parameter setting of 1.5 the NGS showed a service
+Secondly, it was checked whether the found results are still valid if the reward for acceptance of a
+job was made linear to the workload of that job.
+Experiments demonstrate that the NGS outperforms the alternative methods comparable to the
+In the application discussed in this paper the
+neural network simultaneously performs as fitness
+function in a (job shop rescheduling) genetic search
+process and as a value function in a (job admission
+control) reinforcement learning process. The experience gained, while rejecting or accepting tendered
+jobs and observing the resulting consequences for
+the job shop, is used to train the neural network.
+The two processes are hierarchically connected and
+the main advantage of this new architecture is the
+possibility of solving two hierarchically connected
+Results show that the neuro-genetic scheduler
+(NGS) outperforms both the approach based on the
+average slack and the approach based on the minimum slack. Many aspects of the NGS have not
+been optimized and offer opportunities to further
+increase its performance: optimization of the schedule features, the reinforcement learning parameters,
+and the genetic search parameters in relation with
+the problem size and complexity. Next to this, the
+NGS can easily be adapted for other manufacturing
+Some domain knowledge was incorporated in the
+NGS to improve its performance. First of all, the
+schedule builder, which translates the genetic code
+into a valid schedule introduces a bias to a certain beneficent part of the search space. Next to
+this, the schedule features that are input to the
+neural network are hand-engineered. Zhang and
+Dietterich have shown that such a bias can be replaced through the use of a time-delay neural network [10], which can learn interesting higher-level
+features from raw input features. Note that in
+this paper the domain knowledge present in the
+fitness function of the NGS by Dagli and Sittisathanchai [3] was replaced by the reinforcement
+It should be mentioned that although the order
+acceptance problem and the consecutive job shop
+scheduling problem often occur together in practice, it is not always possible to solve them simultaneously. Our approach requires the availability of
+all job characteristics, such as operation durations,
+at the moment the job is offered. This limits the
+This paper extends previous research on dynamic job shop scheduling and fits in the prevalent
+research direction of tackling complex problems in
+[1] A.S. Jain and S. Meeran. Deterministic jobshop scheduling; past, present and future.
+European Journal of Operational Research,
+[2] C. Bierwirth and D.C. Mattfeld. Production
+scheduling and rescheduling with genetic algorithms. Evolutionary Computation, 7:1–19,
+[3] C.H. Dagli and S. Sittisathanchai. Genetic
+neuro-scheduler: A new approach for job shop
+scheduling. Int. J. Production Economics,
+[4] P. Ross H. Fang and D. Corne. A promising genetic algorithm approach to job-shop scheduling, rescheduling, and open-shop scheduling
+problems. In S. Forrest, editor, Proceedings of the Fifth International Conference on
+Genetic Algorithms, pages 375–382. Morgan
+William F. Punch. A genetic algorithm approach to dynamic job shop scheduling problems. In Bäck [11], pages 481–488.
+[6] Sushil J. Louis and Judy Johnson. Solving
+similar problems using genetic algorithms and
+case-based memory. In Bäck [11], pages 283–
+[7] R.S. Sutton and A.G. Barto. Reinforcement
+Learning; An Introduction. MIT Press, 1998.
+[8] Dimitri P. Bertsekas and John N. Tsitsiklis.
+and Neural Computation Series. Athena Scientific, Belmont, MA, 1996.
+[9] Christian Bierwirth, Dirk C. Mattfeld, and
+Herbert Kopfer. On permutation representations for scheduling problems. In Hans-Michael
+Voigt, Werner Ebeling, Ingo Rechenberg, and
+Hans-Paul Schwefel, editors, Parallel Problem
+Solving from Nature – PPSN IV, pages 310–
+[10] Wei Zhang and Thomas G. Dietterich. Highperformance job-shop scheduling with a TimeDelay TD(λ) network. In David S. Touretzky,
+Michael C. Mozer, and Michael E. Hasselmo,
+editors, Advances in Neural Information Processing Systems, volume 8, pages 1024–1030.
+[11] Thomas Bäck, editor. Proceedings of the
+7th International Conference on Genetic Algorithms, San Francisco, july 19–23 1997. Morgan Kauffman.

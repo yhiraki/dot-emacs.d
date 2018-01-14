@@ -1,0 +1,285 @@
+From: Proceedings of the Eleventh International FLAIRS Conference. Copyright © 1998, AAAI (www.aaai.org). All rights reserved.
+Sridhar Mahadevanand Georgios Theocharous
+Manyindustrial processes involve makingparts with
+an assembly of machines, where each machinecarries
+out an operation on a part, and the finished product
+requires a whole series of operations. A well-studied
+exampleof such a factory structure is the transfer line,
+which involves a sequence of machines. Optimizing
+transfer lines has been a subject of muchstudy in the
+industrial engineering and operations research fields.
+A desirable goal of a lean manufacturing system is
+to maximizedemand, while keeping inventory levels
+of unfinished product as low as possible. This problem is intractable since the numberof states is usually
+very large, and the underlying modelsare stochastic.
+In this paper wepresent an artificial intelligence approach to optimization based on a simulation-based
+dynamic programming method called reinforcement
+learning. Wedescribe a reinforcement learning algorithm called SMART,
+optimizing manufacturing systems with that of standard heuristics used in industry.
+parts with an assembly of flexible machines. The machines are programmablein some way in that their operations can be selected from a repertoire of basic operations, including doing one of several operations on a
+part, or doing maintenance. Optimizing manufacturing requires making parts with the lowest cost, which
+is usually a function of the number of parts stored in
+inventory (not yet finished), maintenance and failure
+costs of the machines involved etc. Although there
+are well-known stochastic models for optimization of
+such machine assemblies, these models are intractable
+to solve for large numbers of machines (usually three
+An alternative approach to optimization is through
+the use of simulation models, which are a time-honored
+approach to modeling complex systems (Law & Kelton
+1991). Manysoftware tools are available to simulate
+a wide range of systems including manufacturing, process control systems, and robotic control. These tools,
+however, rely on a human decision-maker to supply a
+fixed procedure or policy, and only provide a statistical
+profile on the quality of the policy. In this paper, we
+describe a new approach to automatically find good
+policies to intelligently control a complex simulation
+model. Our approach is based on a machine learning framework for autonomousagents called l~i.n/o~ement learning (RL) (Mahadevan & Kaelbling 1996;
+Kaelbling, Littman, & Moore 1996; Sutton & Barto
+1998). This framework models the sequential decision
+making problem faced by an agent (i.e., what action
+should the agent do in a particular state) as a Markov
+Decision Process (MDP) (Puterman 1994). The
+of the agent is to learn a policy (mapping states to
+actions) that maximizes its performance on the task.
+Reinforcement, learning is an ideal approach to optimize simulation models, since these generate sample
+trajectories through the state space as the agent experiments with its current policy. Classical optimization
+methods, such as dynamic programming (Bertsekas
+1995), cannot, be applied here because they require
+transition model to predict the next state distribution,
+given the current state and action. Simulation models
+can generate sample next states, but cannot directly
+provide the information needed by dynamic programming.
+In this paper, we are interested in studying a broad
+class of optimization problems in the general area of
+manufacturing, such as flexible product manufacturing, product scheduling, maintenance, inventory control, and transfer line optimization. In particular, we
+will focus on the problem of optimizing a transfer line
+(as shownin Figure 1). Transfer line optimization
+a well-studied problem (Gershwin 1994), but the analytical modelsare intractable to analyze for lines with
+more than 2-3 markdnes. Transfer lines with 20 machines are standard in industry, but generate state
+spaces with 102° states or more, which seems out of
+the realm of possibility for optimization using analytical models (as noted by (Gershwin 1994)). We
+present empirical results comparing the performance
+of an average reward reinforcement learning algorithm
+such a transfer line, and compare it with a well-known
+heuristic from the Literature called Kanban, originally
+developed by Toyota Motor company (Shingo 1989;
+Figure h A transfer line models an assembly line operation in many factories, where a sequence of machines
+(M) make parts, that are isolated by product buffers
+(B). The machines are unreliable, and may fail occasionally. The problem is to optimize the throughput
+of the transfer line, while minimizing the in-product
+The approach proposed in this paper can be applied
+to manyother problems, including flexible manufacturing, product switching, ATMoptimization, admission
+Decision-making in man}’ domains can be abstractly
+viewed as follows. At each step, the agent perceives
+(perhaps imperfectly) the underlying environment
+being in one of a (possibly very large, but finite) set
+of states. The agent can choose one of a set of finite
+actions in a given state, and carry it out. The action
+modifies the environment in some way (or transports
+the agent around), thereby modifying the perceived
+state into a new state. Much recent work in AI on
+autonomous agents, ranging from reinforcement learning (Sutton & Barto 1998), to robotics (Simmons
+Koenig 1995), has adopted this framework.
+For the purpose of optimizing simulation, we need
+to extend the discrete-time framework to a discreteevent framework, thereby generalizing it in two ways.
+Time is explicitly modeled as a continuous variable,
+but the agent observes the environment and makes
+decisions only at certain discrete points (or decision
+epochs). In between these epochs, the state of the system can be changing in some complex way, but these
+changes may not provide the agent with any additional
+information. Furthermore, actions take non-constant
+time periods, modeled by some arbitrary time distribution. It is not possible to modelthe optimization of factory processes as a discrete-time MDP,without drastic
+loss of information (for example, Poisson demandprocesses or failure distributions require using real-valued
+the simulation community, since discrete-event models have been used as the basis for simulation studies
+in a multitude of domains, ranging from manufacturing, queueing, networking, and transportation (Law
+Formally, the evolution of the environment at decision epochs can be modeled as a semi-Markov decision process (SMDP)(Puterman 1994). It is termed
+a semi-Markov model, because the transition depends
+not only on the current state and action, but also on
+how long the system has been in the current state. An
+SMDPis defined as a five tuple (S,A,P,R,F), where
+S is a finite set of states, Ais a set of actions, P is a set
+of state and action dependent transition probabilities,
+R is a reward function, and F specifies the probability distribution of transition times for each state-action
+pair. P(y [ x., a) denotes the probability that action a
+will cause the system to transition from state x E S to
+y E S. This transition probability function describes
+The reward function for SMDP’sis more complex
+than in the MDPmodel. In addition to the fixed
+reward k(x,a), accrued due to an action taken at a
+decision epoch, an additional reward may be accumulated at rate c(y,z, a) for the time the natural process remains in state y between the decision epochs.
+Note that the natural process may change state several
+times between decision epochs, and therefore, the rate
+at which the rewards are accumulated between decision
+epochs may vary. For example, in our experiments, the
+average size of the inventory level is translated into a
+rate cost that is computedas the area under the buffer
+size curve. Wewill describe the cost model in more
+Reinforcement learning infers the optimal policy indirectly by inferring instead a value function (mapping
+states or state-action pairs to real numbers). Policies determine a value function based on an optimality
+metric, which is usually either a discounted model, or
+an average-reward model. Wewill primarily use the
+The expected reward between two decision epochs,
+given that the system in state x, and a is chosen at
+the first decision epoch, maybe expressed as
+decisionepoch.The averagerewardp= for a policy
+is the utility of doing action a in state x. These action
+values can be learned by running a simulation model
+of the manufacturing domain, and using a feedforward
+neural net to approximate the action values.
+algorithm can be derived straightforwardly from the Bellman equation for SMDP’s(Equation 5). First, we reformulate Equation 5 using the
+concept of action-values. The average-adjusted sum of
+rewards received for the non-stationary policy of doing action a once, and then subsequently following a
+Thetemporal difference betweenthe action-values of
+the current state and the actual next state is used to
+update the action values. In this case, the expected
+transition time is replaced by the actual transition
+time, and the expected reward is replaced by the actual immediate reward. Therefore, the action values
+The Bellman optimality equation for unichain average reward SMDP’s is analogous to that for the
+discrete-time model, and can be written as
+We now describe an average-reward algorithm called
+SMART(for Semi-Markov Average Reward Technique), which was originally described in (Mahade~’an
+et al. 1997). This algorithm is based on representing
+the value function using action values R(x, a), which
+Here, V* is the optimal value function and p* is the
+optimal average reward. Note that we are assuming
+unichain SMDP’s, where the average reward is constant across states. Manyreal-world SMDP’s,including the elevator task (Crites & Barto 1996) and the
+production inventory task and transfer line problems
+earned between decision epochs due to taking action
+a in state x, z is the successor state, p is the average reward, and a,~ is a learning rate parameter. Note
+that p is actually the reward rate, and it is estimated
+by taking the ratio of the total reward so far, to the
+V*(x)="ax r(x’a) -p*y(x’a) +E Pzz(a)V*(z))zes
+whererimm(xn, an) is the total reward accumulated
+betweenthe nth, and (n -t- 1)th decision epochs,and
+rn is the corresponding transition time. Details of the
+algorithm axe given in Figure 2. The learning rate an
+and the exploration rate Pn are both decayed slowly
+to 0 (we used a Moody-Darken search-then-converge
+In most interesting problems, such as the transfer line
+problem in Figure 1, the numberof states is quite large,
+and rules out tabular representation of the action values. One standard approach, which we followed, is
+to use a feedforward net to represent the action value
+tWeline the notation u 2,-. v as an abbreviation for the
+stochastic approximationupdate rule u ~-- (1 - e~)u + av.
+1. Set decision epoch n - 0, and initialize action values
+Rn(x, a) = O. Choosethe current state x arbitrarily.
+Set the total reward c,~ and total time tn to 0.
+(a) With high probability p,~, choose an action a that
+maximizes R,~(x,a), otherwise choose a random
+(b) Perform action a. Let the state at the next decision epoch be z, the transition time be r, and rimm
+be the cumulative reward earned in this epoch as
+¯ Productiontime for each producthas a Gamma
+(d) In case a nonrandom action was chosen in step
+¯ Time for repair has a Gamma(r, &) distribution
+(e) Set current state x to new state z, and n +- n-t-1.
+(Mahadevan et al. 1997). A single fiexible manufacturing machine can make several parts, each of which go into a
+separate buffer. The transfer line generalizes this example to several interconnected machines. The system
+we consider consists of a machine capable of producing 5 different products. The main parameters for the
+function (Crites & Barto 1996). Equation 7 used
+is replaced by a step which involves updating the the weights of the net. So after each action
+choice, in step 2(c) of the algorithm, the weights of the
+corresponding action net is updated according to:
+and ~ is the vector of weights of the net, an is the
+learning rate, and V~Rn(x,a, ~) is thc vector of partial
+derivatives of R,~(x, a, ~b) with respect to each component of ~b.
+Wenow present detailed results of the SMART
+algorithm for optimization of manufacturing processes. To
+set the context, we begin by reviewing our earlier work
+The reinforcement learning algorithm is implemented using CSIM,a commercially available discreteevent simulator (see Figure 3). An example result of using the reinforcement learning algorithm to
+optimize a single flexible manufacturing machine is
+shown in Figure 4. As the figure shows, the production/maintenance policy learned by reinforcement
+learning is muchbetter than the ones derived from two
+We now present results of optimizing a 3 machine
+transfer line, as shownin Figure 1, and compare it to
+the performance of a standard well-accepted heuristic
+called Kanban. The goal of optimizing a transfer line
+is to maximize satisfied demand(which means delivering finished product to customers, any time a such a
+demand occurs), while keeping the inventory levels as
+was developed at the Toyota Motor company, which is usually
+credited as an originator of the concept of lean manufacturing (Shingo 1989). The basic idea behind the
+heuristic is illustrated in Figure 5. The heuristic uses
+the concept of cards (or Kanbans) that circulate between a buffer and the immediate upstream machine,
+and are a signal for a machineto stop or start production. Essentially, in this method a machine produces
+until its output buffer is full. If a unit of finished product is consumedby demand, the last machine receives
+a Kanbancard authorizing it to produce an additional
+~ ..... ....................................................................
+..............................................
+learning algorithm is implemented using CSIM, a commercial
+discrete-event simulator. CSIMallows construction of
+simulation modelsof arbitrary size, since it is directly
+part. This machine then picks up its raw materials
+from the buffer immediately behind it, which releases
+the Kanban card for that part. This way, information
+flows back upstream to all the machines for them to
+The following cost model for optimizing a transfer
+line was adopted. Repairs are modeled as incurring a
+cost of -1000. Each unit of satisfied demandis worth a
+positive reward of 10. In addition, there is a continual
+rate cost based on the average inventory levels, which
+is scaled by 0.1. In our experiments, each of the three
+Table 1 compares the performance of the SMART
+algorithm with the Kanban heuristic. The table shows
+the total inventory levels needed by SMART
+and Kanban for various target demand levels. In each case,
+the fill rate (percentage of demandsatisfied) was about
+98%, indicating that most of the demandwas satisfied.
+heuristic in needing muchfewer items in the inventory.
+Table 1: Comparison of Total Average Inventory Levels of SMART
+Figure 4: All curves show median-averaged costs of
+production of 5 parts using an unreliable machine. The
+top curve corresponds to the policy learned by the reinforcement learning algorithm. The bottom two correspond to fixed policies representing two heuristic methods.
+Figure 5: Diagram showing the Kanban heuristic
+Inventory levels are of course, only part of the overall improvement offered by SMART.In particular, because SMART
+addition to a production policy, the total number of
+failures is far fewer when using SMART.Table 2 compares the number of failures incurred under SMART
+and under Kanban. Note that since the Kanbanheuristic does not incorporate any maintenancepolicy, it will
+obviously incur a far higher numberof failures, as the
+table shows. The higher number of failures implies
+that the Kanbanheuristic will result in a muchlower
+Table 2: Comparisonof Total Numberof Machine Failures for SMART
+The results described in this paper should be viewed as
+preliminary, particularly those for optimizing a transfer line. Weare currently running additional experi-
+: .......I- ........................ ~-......
+Bonvik, A., and Gershwin, S. 1996. Beyond kanban:
+Creating and analyzing lean shop floor control problems. In Conference on Manu/acturing and Service
+:.: ..............~:......4-..............
+Boutilier, C.; Dearden, R.; and Goldszmidt, M. 1995.
+Exploiting structure in policy construction. In Proceedings of the Fourteenth IJCAI.
+Crites, R., and Barto, A. 1996. Improving elevator
+performance using reinforcement learning. In Neural
+Figure 6: This figure compares the average reward of
+ments, which we expect to report during the presentation of this paper. Here, we briefly discuss the nature
+of the additional experiments being planned.
+There are several additional heuristics that have
+1990), as well as hybrid methods (Bonvik & Gershwin 1996) which combines a kanban with a CONWIP
+Another research direction is to investigate hierarchical reinforcement learning methods to scale to large
+transfer lines, as well as generalizations of transfer lines
+to job shops and flow shops. Hierarchical optimization of such assemblies has been theoretically investigated in depth (Sethi & Zhang 1994), but however,
+the computational study of such optimization methods is limited. There is currently muchinterest in the
+reinforcement learning literature on hierarchical methods (Parr & Russell 1998), but there has yet been
+demonstrable results on interesting large scale problems. Webelieve the factory optimization domain to
+be an excellent testbed for hierarchical reinforcement
+learning algorithms. Finally, each machine is given the
+same global reward, and we plan to conduct comparative experiments where each machine is given different
+Gershwin, S. 1994. Manufacturing Systems Engineering. Prentice Hall.
+Kaelbling, L.; Littman, M.; and Moore, A. 1996. Reinforcement learning: A survey. Journal o/ Artificial
+Law, A., and Kelton, W. 1991. Simulation Modeling
+and Analysis. New York, USA: McGraw-Hill.
+Mahadevan, S., and Kaelbling, L. P. 1996. The NSF
+workshop on reinforcement learning: Summaryand
+Mahadevan,S.; Marchalleck, N.; Das, T.; and Gosavi,
+A. 1997. Self-improving factory simulation using
+continuous-time average reward reinforcement learning. In Proceedings of the Fourteenth International
+Machine Learning Conference. Morgan Kaufmann.
+Parr, R., and Russell, S. 1998. Reinforcement learning
+with hierarchies of machincs. In Advances in Neural
+Puterman, M. L. 1994. Markov Decision Processes.
+Sethi, S., and Zhang, Q. 1994. Hierarchical Decision Making in Stochastic Manu/acturing Systems.
+Shingo, S. 1989. A Study of t.he Toyota Production System from an Industrial Engineering Viewpoint. Productivity Press.
+Simmons, R., and Koenig, S. 1995. Probabilistic robot navigation in partially observable environments. In Proceedings of the IJCAI, 1080-1087.
+This research is supported in part by an NSF CAREER
+Spearman, M.; Woodruff, D.; and Hopp, W. 1990.
+Journal of Production Research 28(5):879-894.
+Sutton, R., and Barto, A. 1998. Reinforcement Learning: An Introduction. MITPress.
+Bertsekas, D. 1995. Dynamic Programming and Optimal Control. Belmont, Massachusetts: Athena Scientific.

@@ -1,0 +1,134 @@
+Online decision making involves a fundamental choice:
+Exploitation: make the best decision given current
+The best long–term strategy may involve short–term
+Gather enough information to make the best overall
+Exploitation: Show the most successful advert
+Exploitation: Drill at the best known location
+Exploitation: Play the move you believe is best
+Exploitation: Choose the best treatment so far
+Bias exploration towards promising actions
+Softmax action selection methods grade action
+The action–value is the mean reward for action a
+The regret is the opportunity loss for one step
+The total regret is the total opportunity loss
+Maximize cumulative reward ≡ minimize total regret
+The count Nt (a) is expected number of selections for
+The gap ∆a is the difference in value between action
+a and optimal action a∗ , ∆a = V ∗ − Q(a)
+Regret is a function of gaps and the counts
+A good algorithm ensures small counts for large gaps
+We consider algorithms that estimate Q̂t (a) ≈ Q(a)
+Estimate the value of each action by Monte–Carlo
+The greedy algorithm selects action with highest value
+Greedy can lock onto a suboptimal action forever
+The –greedy algorithm continues to explore forever
+With probability 1 −  select a = arg maxa∈A Q̂(a)
+With probability  select a random action
+All methods depend on Q0 (a), i.e., they are biased
+Encourage exploration: initialize action values
+Pick a decay schedule for 1 , 2 , . . .
+Decaying t –greedy has logarithmic asymptotic total
+Unfortunately, schedule requires advance knowledge
+Goal: find an algorithm with sublinear regret for any
+multi–armed bandit (without knowledge of R)
+(Q(a1 ), Q(a2 ), . . . ) are random variables with prior
+Policy: choose an arm based on the priors (f1 , f2 , . . . )
+Total discounted reward over an infinite horizon:
+(Q(a1 ), Q(a2 ), . . . ) are unknown deterministic
+Policy: choose an arm based on the observation
+Total reward over a finite horizon of length T
+N independent arms with fully observable states
+Active arm changes state (known Markov process)
+Passive arms are frozen and generate no reward
+Why is sampling stochastic processes with unknown
+The state of each arm is the posterior distribution fi (t)
+For an active arm, fi (t + 1) is updated from fi (t) and the
+Solving MAB using DP: exponential complexity w.r.t. N
+The index structure of the optimal policy [Gittins’74]
+Assign each state of each arm a priority index
+Activate the arm with highest current index value
+Arms are decoupled (one N-dim to N separate 1-dim
+Polynomial (cubic) with the state space size of a single
+Computational cost is too high for real-time use
+The more uncertain we are about an action–value
+The more important it is to explore that action
+The performance of any algorithm is determined by
+similarity between optimal arm and other arms
+Hard problems have similar–looking arms with
+This is formally described by the gap ∆a and the
+similarity in distributions KL(R(·|a)||R(·, a∗ ))
+Lai and Robbins Asymptotic total regret is at least
+Estimate an upper confidence Ût (a) for each action
+Such that Q(a) ≤ Q̂t (a) + Ût (a) with high probability
+This depends on the number of items N(a) has been
+Small Nt (a) ⇒ large Ût (a) (estimated value is
+Large Nt (a) ⇒ small Ût (a) (estimated value is
+Select action maximizing Upper Confidence Bound
+variables in [0, 1], and let X t = T1 Tt=1 Xt be the sample
+We will apply Hoeffding’s Inequality to rewards of the bandit
+P[Q(a) > Q̂t (a) + Ut (a)] ≤ e−2Nt (a)Ut (a)
+Pick a probability p that true value exceeds UCB
+Reduce p as we observe more rewards, e.g., p = t −4
+Ensures we select optimal actions as t → ∞
+At time T , the expected total regret of the UCB policy is at
+Upper confidence bounds can be applied to other
+At the same time the adversary selects reward vector
+The learner receives the reward rIt ,t , while the rewards
+It is possible to drive regret down by annealing τ
+EXP3.P: Exponential weight algorithm for exploration
+The probability of choosing arm a at time t is
+η > 0 and β > 0 are the parameters of the algorithm
+Learn a good policy (low regret) for choosing actions
+Run a different MAB for each distinct context
+Multi–armed bandit are one–step decision–making
+MDPs represent sequential decision–making problems
+What exploration–exploitation approaches can be used
+How to measure the efficiency of an RL algorithm in
+Let M be an MDP with N states, K actions, discount
+factor γ ∈ [0, 1) and a maximal reward Rmax > 0
+Let A be an algorithm that acts in the environment,
+producing experience: s0 , a0 , r1 , s1 , a1 , r2 , . . .
+τ =0 γ rt+τ |s0 , a0 , r1 , . . . , st−1 , at−1 , rt , st ]
+Let V ∗ be the value function of the optimal policy
+Let  > 0 be a prescribed accuracy and δ > 0 be an
+allowed probability of failure. The expression
+η(, δ, N, K , γ, Rmax ) is a sample complexity bound for
+algorithm A if independently of the choice of s0 , with
+probability at least 1 − δ, the number of timesteps such that
+VtA < V ∗ (st ) −  is at most η(, δ, N, K , γ, Rmax ).
+An algorithm with sample complexity that is polynomial in
+ , log δ , N, K , 1−γ , Rmax is called PAC-MDP (probably
+–greedy and Boltzmann are not PAC-MDP efficient.
+Their sample complexity is exponential in the number
+Other approaches with exponential complexity:
+state bonuses: frequency, recency, error, . . .
+Bayesian RL: optimal exploration strategy
+Explicit–Exploit–or–Explore (E 3 ) Algorithm
+Model–based approach with polynomial sample
+Maintains counts for state and actions to quantify
+A state s is known if all actions in s have been
+From observed data, E 3 constructs two MDPs
+MDPknown : includes known states with (approximately
+exact) estimates of P and R (drives exploitation)
+MDPunknown : MDPknown without reward + special state s0
+where the agent receives maximum reward (drives
+if resulting plan has value above some threshold then
+return action with the least observations in s
+Similar to E 3 : implicit instead of explicit exploration
+E 3 and R–MAX are called “efficient” because its
+sample complexity scales only polynomially in the
+In natural environments, however, this number of states
+is enormous: it is exponential in the number of state
+Hence E 3 and R–MAX scale exponentially in the
+Generalization over states and actions is crucial for
+Relational Reinforcement Learning: try to model
+KWIK-R–MAX: extension of R–MAX that is polynomial
+in the number of parameters used to approximate the
+Q–learning updates in batches (no learning rate)
+Updates only if values significantly decrease
+Agent maintains a distribution (belief) b(m) over MDP
+typically, MDP structure is fixed; belief over the
+Bayes–optimal policy π ∗ = arg maxπ V π (b, s)
+no other policy leads to more rewards in expectation
+solves the exploration–exploitation tradeoff implicitly:
+minimizes uncertainty about the parameters, while

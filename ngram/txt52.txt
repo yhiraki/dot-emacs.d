@@ -1,0 +1,620 @@
+IEEE TRANSACTIONS ON ENGINEERING MANAGEMENT, VOL. 41, NO. 2, MAY 1994
+A Review of Machine Learning in Scheduling
+Haldun Aytug, Siddhartha Bhattacharyya, Gary J. Koehler, and Jane L. Snowdon
+Absh.act-This paper has two primary purposes: to motivate
+the need for machine learning in scheduling systems and to survey
+work on machine learning in scheduling. In order to motivate
+the need for machine learning in scheduling, we briefly motivate
+the need for systems employing artificial intelligence methods
+for scheduling. This leads to a need for incorporating adaptive
+N THIS PAPER we summarize work done on machine
+learning in scheduling. The backdrop for this activity is
+artificial intelligence (AI) approaches to dynamic scheduling.
+This has been a very active area of research since the early
+According to Mayer, Phillips, and Young [32] over 98%
+of the time work-in-process is involved in non-value-added
+activities. Proper scheduling of activities is an important tool
+However, scheduling is a very difficult task. Manufacturing
+environments have high levels of uncertainty, processes have
+detailed and specific requirements, and management objectives
+are varied, dynamic and often conflicting [54].
+Over time there have been a large number of approaches
+studied to solve scheduling problems. Had these approaches
+been successful, the current interest in artificially intelligencebased methods for scheduling would probably not be as
+In Section I1 we discuss the scheduling problem and the
+context in which scheduling is typically encountered.
+In Section I11 we review various traditional approaches to
+scheduling and offer an assessment of these methods.
+One increasingly popular approach to scheduling uses artificial intelligence methodology. AI approaches to scheduling
+are discussed and assessed in Section IV.
+An exciting new trend in AI approaches to scheduling is
+to add a learning capability. The purpose of this paper is to
+summarize the work in this area. In Section V we motivate
+the need for a learning capability in scheduling systems.
+In Section VI we present an overview of various machine
+Finally, in Section VI1 we suggest areas for future research.
+Manuscript received November 25, 1992. Review of this manuscript was
+processed by Editor S. S. Erenguc. This work was supported by Grant N-UN224 from IBM Cop.
+H. Aytug, S. Bhattacharyya, and G. J. Koehler are with Decision and
+Information Sciences, University of Florida, Gainesville, FL 3261 1 USA.
+J. L. Snowden is with IBM Corporation, Boca Raton, FL 33429 USA.
+Before summarizing traditional approaches to scheduling, it
+is worthwhile to describe our application environment and to
+The complexity of the processing environment can be as
+simple as requiring one processing step on one machine or
+facility. A slight generalization would have multiple parallel
+processing facilities. A flow shop environment is a more
+complex, multi-stage configuration. However, all tasks are
+processed on the same facilities with the same precedence
+requirements. Finally, a job shop environment permits alternative routings.
+The tasks performed at a facility include machining, fabrication, assembly, and inspection. The tasks may be carried
+out by humans, fixed machines, or Numerical Control (NC)
+There are three views of planning and scheduling, depending
+on the time horizon. The highest level is production planning
+which usually covers details at a multi-week level. The output
+of production planning is used for release scheduling. Finally,
+actual item movement planning occurs in real-time. (See [3],
+The first two planning levels “predict” the production plan
+and schedule. The third level is more involved with “reacting”
+to the current local situation and is often called reactive
+It is the area of reactive scheduling that is most difficult
+to analyze and provide meaningful automated help. A large
+number of factors may cause disruptions in a production environment necessitating a new schedule. Machines break down,
+management submits “hot-listed” items requiring immediate
+attention, workers call in sick, critical materials fail quality
+screens, materials are out of stock, due dates change, etc.
+Schedules are obsoleted by such disruptions-requiring a
+new schedule. Foremen and dispatchers are accustomed to
+dealing with such disruptions. However, their decisions are
+often crisis-oriented with little attention given to the bigger
+If a computer-aided method is used for scheduling, it must
+be run often and fast. Both requirements often dictate a
+simplistic model that trades off solution time for realism and
+solution quality. (See [58] for a good discussion of this issue).
+In the next section we look more closely at the traditional
+methods of supporting scheduling decisions.
+IEEE TRANSACTIONS ON ENGINEERING MANAGEMENT, VOL. 41, NO. 2, MAY 1994
+Most traditional approaches to solving scheduling problems
+use either simulation models, analytical models, heuristic
+approaches or combinations of these methods.
+Simulation is primarily used to assess schedules and scheduling heuristics and is most useful for production planning and
+release scheduling. It is also a good tool to explore “what-if’
+scenarios at an experimental level. Seldom is simulation used
+for real-time scheduling. (See [43] for a good discussion of
+Analytical models include mathematical programming models, stochastic models, and control theory approaches. There
+are many algorithmic models developed over the last thirty
+years, mainly by the Operations Research (OR) community.
+Several review papers are available, e.g., [18].
+Analytical approaches are plagued by the complexity of
+the scheduling problem. These problems involve stochastic
+elements in a dynamic environment with complex, multiple
+Even the most simplified models for scheduling are NP
+hard problems. Fox [14] makes the NP-hard point more
+tangible: “85 orders moving through eight operations without
+altematives, with a single machine substitution for each and
+no machine idle time has over losso possible schedules”.
+The implication is obvious-realistically sized problems
+cannot be solved optimally [59]. Furthermore, the static nature
+of most OR models ignores the dynamic nature of most
+real-time scheduling environments [56]. The OR scheduling
+problem is a classic. Yet, although textbooks promote these
+analytical models, few real-life applications are known [SI.
+Largely due to the failure of classic OR approaches to
+scheduling, a wide body of heuristic approaches have been
+investigated. Most work with heuristics has focused on dispatching rules. For example, the EDD dispatching rule says to
+pick the next job to be processed based on earliest due date.
+Blackstone, Phillips, and Hogg [6] provide a good survey of
+Some dispatching rules are known to be optimal in certain
+situations. For example, EDD minimizes maximum lateness.
+Others have been shown to perform well in general, but
+not always. Often, mixtures of dispatching rules out-perform
+The main problem with using such heuristics is that one
+seldom knows whether a given decision will be good or not [4].
+Thesen and Lei [59] showed that human interaction with automated heuristic methods often offers improved performance.
+So it seems that systems that use human insights with
+heuristics have some possible advantages. AI offers a means
+to combine various types of knowledge in a manner that can
+be used in the scheduling environment. This is explored in the
+Over the last ten to fifteen years, considerable effort has
+been devoted to applying AI methods to scheduling. The first
+such application can be traced back to Gere [17].
+AI methods could be considered as sophisticated heuristics.
+However, the emphasis of AI methods is to solve a problem
+Knowledge about a problem domain is encoded in some
+structure (rules, logic, frames, scripts, semantic nets, etc.) and
+manipulated to solve a problem. Manipulation is performed by
+an inference mechanism. The inference mechanism employs a
+search according to one of many control strategies.
+The domain knowledge of interest to a practitioner is knowledge about scheduling in his specific production environment
+[39]. AI methods are flexible and rich enough to capture
+idiosyncratic knowledge while providing an automated way to
+use this knowledge. AI theory and methodology also provides
+a way to study how people do scheduling 1321.
+When an AI scheduling system is built, knowledge about
+a domain becomes explicit. This enables one to study that
+knowledge, to critique the knowledge, to use it in training,
+AI methods are often called knowledge-based systems.
+Expert system (ES) used for scheduling represent a special
+case of knowledge-based scheduling systems. Expert systems
+encompass the knowledge of a human expert. ES’s are more
+simplified versions of more complex AI methods. As a result,
+ES’s were among the early AI approaches used in scheduling.
+The next section investigates ES’s used in scheduling.
+“The primary goal of the ES applications is to consistently
+duplicate the results of a human expert” [32].
+Expert Systems are constructed by first acquiring knowledge
+from a human expert and then codifying this knowledge
+in some knowledge representation scheme (such as rules,
+frames, etc.) This knowledge acquisition usually involves time
+consuming interviews with the human expert.
+Once the knowledge has been verified and validated, it can
+be used to make decisions similar to those that the human
+Reinschmidt, Slater, and Finn [42] provided a list of benefits
+that an ES might provide in scheduling. Basically, the Scheduling ES could make quick decisions on actual or “what-if”
+cases and do so in a way that captures the idiosyncratic nature
+In the next section we provide an assessment of ES’s used
+Miller, Lufg, and Walker [34] reported on an ES used for
+scheduling at a Westinghouse plant which achieved a $10
+Savell, Perez, and Koh [44] explain the success of some
+scheduling ES’s as resulting from the experience gained by
+the scheduling experts over time. However, as the production
+environment complexity increased, human experts seemed to
+be less effective in evaluating alternatives.
+Many researchers are more skeptical that true human experts
+exist in scheduling. Fox [14] believes that expert system
+approaches are not suitable for scheduling because the com-
+al.: A REVIEW OF MACHINE LEARNING IN SCHEDULING
+plexity of most real-life environments is beyond the cognitive
+capabilities of most schedulers and that most environments are
+so dynamic that knowledge becomes obsolete too fast anyway.
+Fox [14] saw that over 80% of a scheduler’s time was
+spent in trying to determine the actual constraints governing
+the situation at a point in time rather than in deciding on a
+schedule. This supports an observation by Steffen and Greene
+[57] that, while schedulers are often very experienced and have
+insights into production problems, they seldom know how to
+Even if human experts exist, Kanet and Adelsberger [23]
+argue that an ES merely automates their decisions-good or
+bad. At the least, an ES could never perform better than the
+human expert from whom the knowledge was acquired.
+Much of the case against expert systems argues against the
+existence of bona fide experts. Do they exist, or not? Steffen
+[55] gives many reasons against their existence or use. Human
+schedulers employ greedy strategies because of the complexity
+of the production environment. They are prone to react to
+management dictates and other disturbances in non-optimal,
+myopic ways. Today’s production environment is so dynamic
+that scheduling knowledge is a “moving target”.
+Not everyone is convinced that human expert schedulers
+don’t exist. Mckay, Buzacott, and Safayeni [33] insists that real
+human expert schedulers exist and that they should be used in
+the development of knowledge-based systems for scheduling.
+In any case, more general AI methods have also been
+applied to scheduling problems. We discuss these approaches
+Drawing from Steffen [55], Kusiak and Villa [27], and Fox
+[14], we note a large number of AI approaches in scheduling.
+AI search can be random, blind or heuristic:
+Random Search: A space of schedules is randomly searched
+to find a satisfactory schedule. Genetic algorithms fall into
+this approach when no information of the environment is
+Blind Search: Methods such as depth-first search, breadthfirst search, or combinations thereof, are used to exhaustively explore the space of schedules.
+Heuristic Search: Here the large space of schedules is
+searched with the aid of heuristics that reflect knowledge
+A common heuristic search uses knowledge about the
+constraints of a scheduling problem to guide and limit
+the search. These methods are called constraint-directed,
+constraint-guided, or constraint-based methods.
+The problem space can be divided in a way to reduce the
+Hierarchical search: Here the scheduling problem is structured as a sequence of progressively more detailed and less
+aggregated problems. This hierarchical approach provides a
+Distributed search: In distributed search, several different
+computing units are involved in solving the scheduling problem. Coordination between different units is often handled
+by a bidding or auction-based system. See
+We will not discuss the details of these various approaches but
+do offer a short assessment in the next section.
+Overall, knowledge-based approaches seem to do a better
+job of capturing the idiosyncrasies and nuances of an environment than, say, OR models. However, AI approaches are not
+Steffen and Greene [56] found the use of constraint-directed
+search useful in capturing expert knowledge, reducing the
+search and in handling the trade-offs between conflicting objectives. On the other hand, Fox [ 141 found that the constraints
+did not yield consistently better search paths.
+There have been criticisms against the use of AI in general.
+Rightly so, the AI community has a historical record of overhyping their abilities. Parnas [37] likens the use of AI to that
+of having a machine wash clothes by having two robotic arms
+A serious limitation of AI methods used in scheduling
+was their inability to adapt. This observation led to including
+learning components in AI systems for scheduling.
+Ebner and Wollmann [13] predicted several trends in
+computer-based scheduling. A key observation is that
+knowledge-based systems will have to be adaptive (that is,
+Steffen [55] forecasts that learning will become the third
+fundamental AI method applied to scheduling problems
+(search and knowledge representation being the other two).
+Machine learning is the name of the class of automated
+methods of knowledge acquisition. Imbuing a system with
+One compelling reason for automated knowledge-acquisition stems from the difficulty of obtaining knowledge from
+experts. This has been realized by many AI researchers,
+including by Yih [61], [62] in the scheduling area.
+The cases where learning systems have been built as part
+of an AI system for scheduling are relatively few in number.
+Fox and Smith, [15] hinted at the need to learn in their early
+work on AI systems for scheduling. Some authors take the
+capability of learning as an integral part of an expert system
+approach. For example, Bitran and Papageorge [5] argue that
+the expert system should be able to learn about the particular
+Several researchers have recognized the need for learning
+in scheduling systems ( e g , [28]). Fox and Smith [16] place
+learning at an important level. A system should be able to
+correct its misconceptions and improve its performance based
+May, et al. [31] insist that we don’t know how to incorporate
+learning into our systems. However, there have been several
+attempts at incorporating learning into knowledge-based systems. In the next section we provide a survey of the more
+The methods used to learn include a large number of different approaches. Several researchers learn from experiments
+on a simulation model. See, for example, [l], [2], who use
+statistical inference; 1381, 1471-1521, [60], who use inductive
+learning methods; and [9], who learn with neural nets.
+One type of learning, called cased-based or exemplarbased reasoning, uses past situations to infer actions for new
+situations [30]. Koton [25], [26] notes that these approaches
+have merit when similar problems recur, when the domain is
+stable under perturbations and when interactions are limited.
+Knowledge Acquisition, has been applied to a circuit board
+production line consisting of a series of chemical process
+tanks. A material handling robot moves jobs through the tanks,
+and adherence to accurate timing constraints between different
+chemical treatments is crucial for maintaining defect free jobs.
+The system operates in three steps: (1) data collection,
+where a trace of decisions and corresponding system states is
+obtained from the simulated system; (2) data analysis, where
+the traces are examined to determine the scheduling rules
+used; and (3) rule evaluation, where the performance of these
+obtained rules is compared against the expert’s performance.
+If found inadequate, the rules are fed back to the second step.
+VI. SURVEY OF MACHINELEARNINGIN SCHEDULING
+A set of variables defines the state space, which is conIn this section we present and summarize a number of papers sidered divided into a number of classes. For each class, a
+where machine learning of scheduling is studied.
+simple decision rule determines the next course of action. The
+set of decision altematives is provided in terms of
+decision rules that specify the possible actions given any state.
+Blessing and Watford [7] describe a FMS scheduling
+A trace is a sequence of {existing state Si,action taken A j }
+system, INFMSS, where the knowledge is represented by tuples. During data analysis, the class that state S; belongs to
+frames. They structure the knowledge base in three dimensions is obtained. In the rule evaluation stage, all decision rules in
+each class are scored according to the number of matches with
+the decision maker’s actions. If the highest score is above
+some predefined threshold, the corresponding decision rule
+is assigned for that class. When the scores do nor meet the
+If any point in that three dimensional space is already defined, minimum requirements, that class is further sub-divided, and
+the expert system uses that point as the best schedule. 0th- the process repeated.
+erwise a search for a few scheduling strategies for the given
+Experiments were conducted with student subjects as human
+part mix and FMS description is carried out, and evaluated by schedulers, and the best amongst them taken as experts. The
+a simulation system. The schedule that gives the best result system-obtained rules were noted to out-perform the human
+is chosen as the answer. Those points are saved for further experts.
+In a later paper Yih, [63], recognizing that true experts
+This mechanism is referred to as rote learning. Even though seldom exist in real-life production environments, utilizes a
+the system saves old decisions that gave good results, it has semi-Markov modeling of the decision traces, together with
+no means of generalizing them and we suspect that in such a an optimization procedure, to enrich the knowledge quality.
+complex environment the chances of observing the same state Here the data analysis phase is replaced by an improvement
+procedure, where transition probabilities are estimated from
+Thesen and Lei [59] use a simulation based approach to the traces, and then an optimal decision policy algorithmically
+construct a rule base for scheduling the operations of a single derived. A third rule formation stage then determines decision
+track material handling robot in an automated electroplating rules from the optimal policy, and the decision rules for each
+line. The performance of several dispatching rules under varied class of the state space are obtained as in the rule evaluation
+system conditions is obtained through simulation, and manual phase.
+analysis of results indicates the best rule to use in different
+Rule formation is, however, noted to be a bottleneck in this
+situations. The system state is continually monitored, and the process, requiring substantial human intervention.
+knowledge base is used to dynamically change the decision
+Piramuthu et al. [38] and Shaw, Raman, and Park [49]
+rules depending on the current conditions.
+present an inductive learning approach from training examThough the expert scheduling system is noted to have ples generated through simulation. The system learns the
+surpassed the performance of any single dispatching heuristic, appropriate dispatching rule to use under different factory
+this approach is limited by the initially chosen set of dis- floor conditions. They characterize an FMS environment by
+patching rules and system states considered in the simulation a set of attributes such as the number of machines, buffer
+experiments. The authors note the need for further research size, machine contention factor, etc. The system is simulated
+to develop an automated approach for knowledge acquisition, under varying values for these attributes. This attribute valued
+which can yield better scheduling methods.
+“pattern” together with the dispatching rule resulting in the
+best performance, is taken as an example to be input to the
+In view of the difficulty that human experts have in verQuinlan’s [40] ID3 inductive learning algorithm is used
+balizing their own decision processes, Yih [61], [62] develops and the resulting knowledge is represented by a decision tree.
+a method for knowledge extraction from a trace of an ex- A critic mechanism monitors the performance of the learned
+pert’s decision sequences. This method, called Trace Driven rules, and if found undesirable, moves to refine the rules by
+AYTUG et al.: A REVIEW OF MACHINE LEARNING IN SCHEDULING
+suggesting further simulation to generate more training examples. A set of meta-rules are utilized to recommend attribute
+values under which to run additional simulations. Experiments
+with the learned rules indicate improved performance over that
+obtained by applying any single dispatching rule.
+Lamatsch et al., [28] describe an expert system named
+SCHEDULE that uses reduction digraphs to match the given
+problem as an instance of a scheduling problem solvable by
+the stored heuristics. All the heuristics are polynomial time
+algorithms that can produce optimal or near optimal results
+published in various journals. If no match is found, the system
+first tries to find a problem that is close to the original problem
+with respect to a metric they define. If that fails, a relaxation
+The system has a learning capability by adaptively adjusting
+the distances between two nodes of the graph. As the user
+prefers a problem to solve as a substitute for the original
+problem, the arc weight is reduced. By this way the system
+learns which problem is a better approximation for a certain
+type of problem. Note that each node is a type of problem that
+can be reduced to each other if there is a path between them.
+Case Based Reasoning (CBR) is another machine learning
+paradigm being considered for application to scheduling problems. CBR seeks to exploit experience gained from past similar
+problem-solving cases. Mark [30] outlines a case based system
+The problem here consists of loading parts of varying
+shapes and sizes into a large convection oven, where the
+process is sensitive to the part layout, and of scheduling the
+flow of parts through the autoclave so as to meet global
+requirements. Jobs arrive with different priority rankings. The
+manual procedure is based on the past experience of an expert
+operator. The proposed Clavier system seeks to obtain good
+autoclave loading patterns through matching the current set
+of jobs and priorities against a case library of previously
+The larger scheduling problem requires the identification of
+salient features of past schedules, generalizing these, and a
+mechanism for determining which stored case best matches
+and is useful in the current problem context. Given the
+large number of interacting constraints inherent in scheduling,
+existing case indexing schemes are noted to be inadequate for
+building the case base and subsequent retrieval, and research
+Another case-based reasoner for scheduling large scale
+airlift operations was proposed by Koton [25], [26].
+A neural network approach to learning appropriate criteria
+weights for multiple criteria decision making for job shop
+scheduling is presented in Chryssolouris et al. [9]. A threelayer network using back-propagation algorithm is applied to
+learn weights to be assigned to local work-center scheduling
+criteria so as to meet a set of global performance objectives.
+A system simulation first provides the performance measure
+values for different operational policies (criteria weights) and
+varying workload levels at the work-centers, and this serves
+as the training inputs to the neural net. The output criteriaweights reflect the relative importance of the different criteria
+for attaining the specified performance levels.
+Three performance objectives and workloads at four workcenters considered require seven input neurons. There are three
+output nodes each corresponding to a local criteria. Ten nodes
+are used in the hidden layer. After training, the network is
+used by specifying the anticipated workload levels and the
+desired performance measures, and necessary criteria weights
+Davis [lo] outlines one of the earliest Genetic Algorithm
+(GA) approaches for the scheduling problem. A job shop
+setting is considered, and a time-dependent preference list
+representation used. A preference list consists of a starting
+time at which the list goes into effect, and a sequence in
+which a machine prefers to process different job types. Idle
+and Wait operations may be included in the sequence to
+indicate the machine’s preference to remain idle, or, if none
+of the specified job types are present, to wait for the next
+job. This representation of schedules ensures that manipulation
+of the lists by GA search operators yields legal schedules.
+Non-conventional GA operators are modeled after manual
+scheduling procedures that have been found to work well in
+Hilliard et al. [19]-[21] present a series of experiments with
+a classifier system approach (using GA search) for learning job
+sequencing heuristics. The first two papers consider a single
+machine scheduling task with an objective of minimizing total
+The optimal strategy for this problem is to order the
+jobs by increasing processing time. In initial experiments,
+environmental detector message lists are comprised of binary
+coded job run-times and run-time rankings, and effectors
+moved jobs to specific queue locations. Different conflict
+resolution and credit assignment strategies are examined in
+The classifier system with this binary representation was
+found deficient in learning optimal rules. In [19], environmental detectors are modeled using high-level predicates that
+compare attribute values of jobs. Job processing time values,
+due dates, and current queue positions were considered.
+Each predicate represents a heuristic strategy. For example,
+Processing-time (job i) < Processing-time (job j) corresponds
+to a shorter run-time first strategy. A bubble sort routine is used
+to compare all job pairs, and tests on the defined predicates
+provide the condition part of a classifier. An action either
+exchanges job positions or leaves the queue unchanged. This
+system was able to obtain the optimal rules.
+The third set of experiments considered the objective of
+minimizing weighted tardiness, known to be an NP-complete
+problem. The classifier system learned rules which were found
+to perform better than the application of any of the single
+Husbands, Mill, and Warrington [22] propose a GA based
+scheme where separate populations simultaneously evolve
+production plans for different components to be manufactured.
+where each (opi mi s i ) set represents an operation opi to be
+performed on machine mi with setup si. Interdependent oper-
+IEEE TRANSACTIONS ON ENGINEERlNG MANAGEMENT, VOL. 41, NO. 2, MAY 1994
+ations are separated into groups demarcated by G. Crossover
+is permitted only at the group boundaries, and mutation is also
+In the first phase of learning, different populations evolve
+independently, based on the machining costs involved in
+the plans embodied by the population members. Different
+populations are ranked according to the summed costs of
+their members. In the second phase, the plans of equally
+ranked populations are simulated simultaneously. Interactions
+amongst the plans for different components are resolved by
+an arbitrator that decides which population’s member to give
+precedence to. The arbitrator is also modeled as another
+population that evolves through genetic learning.
+As can be seen, there have been many types of learning
+studied in the scheduling domain. In the next section we look
+Many types of learning have been explored for scheduling, including rote learning, inductive learning (ID3), neural
+network learning, case-based learning, classifier systems, and
+others. While each particular methodology offers positive and
+negative features, what is most important is that these learning
+systems generally seem to improve a scheduling system’s
+Future research needs to focus on several important dimensions of the scheduling environment. One dimension is
+to provide means to learn how to trade off management goals,
+which are often inconsistent and time-varying. Another is to
+learn about the uncertainties that exists in a given production
+An important issue for future research is validation. With
+few exceptions, very little work has been undertaken to
+validate the results that machine learning has produced.
+Most learning systems in scheduling have used straightforward, simplistic forms of knowledge representation. A
+richer representation is needed to adequately handle the complexities and nuances of production environments.
+This, in turn, dictates more involved learning paradigms
+If the typical production environment is as dynamic as many
+believe them to be, the learning methods need to be dynamic
+themselves. Thus, fixed experiments for inductive learning
+may not be appropriate. Inherently dynamic learning methods
+Ideally, a scheduling system should be able to learn and
+deploy that knowledge in real-time. Learning methods that
+require extensive experimentation are inappropriate under such
+situations. Future research is needed to understand the limitations of and methods for real-time learning.
+T. Adachi, J. J. Talavage, and C. L. Moodie, “A rule based control
+method for a multi-loop production system,” Art. Int. in Eng., vol. 4,
+T. Adachi, C. L. Moodie, and J. J. Talavage, “A pattem-recognitionbased method for controlling a multi-loop production system,” Int. J.
+Prod. Res., vol. 26, no. 12, pp. 1943-1957, 1988.
+J. C. Ammons, T. Govindaraj, and C. M. Mitchell, “A supervisory control paradigm for real-time control of flexible manufacturing systems,”
+Annals of Operations Res., vol. 15, pp. 313-335, 1988.
+G. Bel, E. Bensana, D. Dubois, J. Erschler, and P. Esquirol, “A
+knowledge-based approach to industrial job-shop scheduling,” in
+Knowledge-Based Systems in Manufacturing, A. Kusiak, ed. Taylor &
+G. Bitran and T. Papageorge, “Integration of manufacturing policy and
+corporate strategy with the aid of expert systems,” in Intell. Manufact.,
+Proc. 1st Int. Con$ Expert Systems and the Leading Edge in Production
+J. H. Blackstone, D. T. Phillips, and G. L. Hogg, “The state-of-the-art
+survey of dispatching rules for manufacturing job shop operations,” Int.
+J. Prod. Res., vol. 20, no. 1, pp. 2745, 1982.
+J. A. Blessing and B. A. Watford, “INFMSS, an intelligent fms scheduling system,” in World Productivity Forum and 1987 Ann. Int. Industrial
+G. Buxey, “Production scheduling: Practice and theory,” Eur. J. Operational Res., vol. 39, pp. 17-31, 1989.
+R. Davis and R. Smith, “Negotiation as a metaphor for distributed
+problem solving,” Artificial Intelligence, vol. 20, pp. 63-109, 1983.
+S. De, “A knowledge-based approach to scheduling in an FMS,” Annals
+ofOperations Res., vol. 12, pp. 109-134, 1988.
+M. L. Ebner and T. E. Vollmann, “Manufacturing systems for
+in Intelligent Manufacturing, M. Oliff, ed. BenjamidCummings, 1988, pp. 317-335.
+M. S. Fox, “Constraint-guided scheduling-A short history of research
+at CMU,” Comp. in lndustv, vol. 14, pp. 79-88, 1990.
+M. S. Fox and K. P. Sycara, “Overview of CORTES: A constraint based
+approach to production planning, scheduling and control,” in Proc. 4th
+Int. Con$ Expert Systems in Production and Operations Manage., May
+M. S. Fox and S. F. Smith, “The rote of intelligent reactive processing
+in production management,” Proc. CAM-1’s 13th Ann. Meeting and
+Technical Con$, Clearwater Beach, FL, Nov. 13-15, 1984.
+M. S. Fox and S. F. Smith, “ISIS-A knowledge-based system for
+factory scheduling,” Expert Systems, vol. 1, no. 1, pp. 2 5 4 , 1984.
+W. S. Gere Jr., “A Heuristic Approach to Job Shop Scheduling,” Ph.D.
+dissertaion, Graduate School of Industrial Administration, Carnegie
+S. C. Graves, “A review of production scheduling,” Operations Res.,
+J. J. Kanet and H. H. Adelsberger, “Expert systems in production
+scheduling,” Eur. J. Operational Res., vol. 29, pp. 51-59, 1987.
+F. K. Kemp, “Artificially intelligent tools for manufacturing process
+planners,” in Intelligent Manufacturing, Proc. 1st Int. Con$ Expert
+Systems and the Leading Edge in Production Planning and Control,
+P. Koton, “SMARTplan: A case-based resource allocation and scheduling system,’’ in Pmc. DARPA Workshop on Case-Based Reasoning,
+P. Koton, “Evaluating case-based problem solving,” in Proc. DARPA
+Workshop on Case-Based Reasoning, Pensacola Beach, FL, 1989, pp.
+A. Kusiak and A. Villa, “Architecturesof expert systems for scheduling
+flexible manufacturing systems,” in Proc. IEEE 1987 Int. Con$ Robotics
+A. Lamatsch, M. Morlock, K. Neumann, and T. Rubach, “SCHEDULJ3-An expert-like system for machine scheduling,” Annals of Operations Res., vol. 16, pp. 425438, 1988.
+W. S. Mark, “Case-based reasoning for autoclave management,” in
+Proc. DARPA Workshop on Case-Based Reasoning, Pensacola Beach,
+J. H. May, L. G. Vargas, R. De, S. A. Slotnick, T. E. Morton, D.
+W. Pentico, and G. J. Tatar, “Multex: An integrated N O R system for
+factory scheduling,” in Proc. Northeast DSI Con$, Pittsburgh, PA, Apr.
+J. R. Mayer, D. T. Phillips,and R. E. Young, “Artificial intelligence-Applications in manufacturing,” Smart Manufacturing With
+Artificial Intelligence, pp. 10-24, 1987.
+R. K. Miller, E. Lufg ,and T. C. Walker, Art8cial Intelligence Applications in Manufacturing. 1988, pp. 166-177.
+P. S. Ow, S. F. Smith, and R. Howie, “A cooperative scheduling
+system,” in Proc. 1988 Expert Systems and Intelligent Manufact., pp.
+D. L. Parnas, “Why engineers should not use artificial intelligence,”
+S. Piramuthu, S.-C. Park, N. Raman, and M. J. Shaw, “Integration of
+simulation modeling and inductive learning in an adaptive decision
+AYTUG et al.: A REVIEW OF MACHINE LEARNING IN SCHEDULING
+support system,” in Model Management Systems,\Bonczelc and A. B.
+[31] E. T. Powner and D. H. Walburn, “A knowledge based scheduler,” in
+1st Int. Con$ Expert Planning Systems, Brighton, U . K., June 27-29,
+[32] K. F. Reinschmidt,J. H. Slate, and G. A. Finn, “Expert systems for plant
+scheduling using linear programming,” in Proc. 4th Int. Con$ Expert
+Systems in Production and Operations Manage., Head Island,SC , May
+[33] F. A. Rodammer and K. P. White, “A recent survey of production
+scheduling,” ZEEE Trans. Syst., Man,and Cybenetics, vol SMC-18, pp.
+[34] D. V. Savell, R. A. Perez, and S. W. Koh, “Scheduling semiconductor
+wafer production: An expert system implementation,” IEEE Expert, pp.
+[35] M. J. Shaw, “FMS scheduling as cooperative problem solving,” Operations Res., vol. 17, pp. 323-346, 1988.
+[36] M. J. Shaw, “Dynamic scheduling in cellular manufacturing systems: A
+framework for networked decision making,” J. Manufact. Syst., vol. 7,
+[37] M. J. Shaw, “Knowledge-based scheduling in flexible manufacturing system: An integration of pattem-directed inference and heuristic
+search,” Int. J. Production Res., vol. 26, no. 5, pp. 821-844, 1988.
+[38] M. J. Shaw, N. Raman, and S.-C. Park, “Intelligent Scheduling with
+Machine Learning Capabilities: The Induction of Scheduling Knowledge,’’ Tech. Rep. AI-DSS-91-01, Beckman Institute, Univ. of Illinois,
+[39] M. J. Shaw, S.-C. Park, and U. Menon, “Incorporating Machine Learning
+in Knowledge-Based Process Planning Systems: An Explanation-Based
+Approach,” Tech. Rep., Beckman Institute, Univ. of Illinois, UrbanaChampaign, October, 1988.
+[40] M. J. Shaw, U. Menon, and S.-C. Park, “Machine learning methods for
+computer-aided process planning,” in Expert Systems and Manufacturing
+Designs, A. Kusiak, ed. Dearbom, M I SOC.of Manufact. Eng. Press,
+[411 M. J. Shaw, P. L. Tu, and P. De, “Applying machine learning to model
+management in decision support systems,’’ Decision Support Syst., vol.
+r421 M. J. Shaw and A. B. Whinston, “Task bidding and distributed planning
+in flexible manufacturing,” in 2nd Con$ on Art$cial Intelligence ApDec. 1985, pp.
+plications, IEEE Computer Society, Miami Beach, E,
+S. F. Smith, “Knowledge-based scheduling systems,” in Proc. 1st Znt.
+Con$ Expert Systems and the Leading Edge in Production Planning and
+M. S. Steffen, “A survey of artificial intelligence-based scheduling
+systems,” in Proc. Fall Zndustrial Engineering Con$, Dec. 7-10, 1986,
+M. S. Steffen and T. J. Greene. “Hierarchiesof sub-ueriods in constraintdirected scheduling,” in Symp. Real Eme Optimization in Automated
+Manufact. Facilities, National Bureau of Standards, Gaithersburg, MD,
+[46] M. S. Steffen and T. J. Greene, “A prototype system for scheduling
+parallel processors using artificial intelligence methods,” in 1986 Ann.
+Int. Industrial Eng. Con$ Proc., pp. 156164.
+[47] J. A. Svestka, “a real time rescheduler-Supplying the missing link,” in
+Proc. Ixth ZCPR, Cincinnati, OH, Aug. 1987, pp. 1689-1693.
+[48] A. Thesen and L. Lei, “An ‘expert’ system for scheduling robot in a
+flexible electroplating system with dynamically changing work loads,”
+in Proc. 2nd ORSmIMS Con$ Flexible Manufact. Syst.: Operations
+Res. Models and Appl., 1986, pp. 555-566.
+[49] R. A. Wysk, S. Y. D. Wu, and N. S. Yang, “A multi-pass expert control
+system (MPECS) for flexible manufacturing systems,” in Symp. Real
+Eme Optimization in Automated Manufact. Facilities, National Bureau
+of Standards, Gaithersburg, MD, Jan. 1986pp. 9-25.
+[50] Y. Yih, “Learning decision rules for FMS from the optimal policy of
+user-based semi-Markov decision processes,” in Proc. 4th Znt. Con$
+Expert Systems in Production and Operations Manage., Head Island,
+[51] Y. Yih,“Trace driven knowledge acquisition (TDKA)for rule based
+real time scheduling systems,” working paper, Purdue Univ..
+[52] Y. Yih and A. Thesen, “Semi-Markov decision models for real time
+scheduling,” Int. Journal of Production Res., vol. 29, no. 11, pp.
+Haldun Aytug received the B. S. in industrial
+engineering in 1988 from Bogazici University,
+Turkey and his Ph. D. from the University of
+He is currently an Assistant Professor of
+MISDSS at the School of Business and Engineering Administration at Michigan Technological
+University. His research interests include machine
+learning applications and application of genetic
+algorithms i n production problems, object oriented
+simulation modeling, and simulation generators.
+Dr. Aytug is a member of TIMS, Alpha Iota Delta, and Beta Gamma
+Siddhartha Bhattacharyya received the Ph. D.
+degree from the University of Florida in 1993.
+His work experience includes an assistant professorship in the Department of Management in
+Southem Illinois University at Carbondale. His current research interests are in the areas of machine
+learning, genetic algorithms, and manufacturing.
+Dr. Bhattacharyya is a member of TIMS and DSI.
+Gary J. Koehler received the Ph. D. from Purdue
+University in management science in 1973.
+He has held academic positions at the Univsity
+of Florida, Northwestem University, and Purdue
+University. He is also a founder and past president
+of Micro Data Base Systems, Inc. At present, he is
+a Professor and area head for Management Iinfor
+mation Systems in the Krannert Graduate School of
+Business at Purdue University. His current research
+includes machine learning in manufacturing environments, information systems,and decision support
+Jane L. Snowden received the B. S. degree in industrial and management systems engineering from
+Pennsylvania State University and the M. S. degree
+in industrial and operations engineering from the
+University o f Michigan. She is completing the Ph.
+D. degree at the Georgia Institute of Technology.
+She is a consultant with the Buisness transformation Practice in the IBM Consulting Group.
+She has over 11 years of engineerin experience in
+both project management and technical roles. She
+specializes in business analysis and simplification,
+qu ality function deployment, and expert systems. She is currently Project
+Manager for an Integrated quality management system, which combines
+quality function deployment (QFD) techniques, customer satisfaction surveys,
+statistical process control (SPC), an d a quality monitoring system for
+suppliers. She is also Project Manager for joint research between IBM and
+the University of Florida on dynamic scheduling of manufacturing systems
+using machine learning. She is a frequent speaker on the subject of busin ess
+process simplification and has participated in panel discussions and forums at
+Ms. Snowden is a Senior Member of the Institute of Industrial Engineers,
+and serves as the Vice-President of the West palm Beach, Fl chapter. She is
+a member of the American Society of Quality Control and the Operations
