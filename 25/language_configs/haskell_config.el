@@ -8,7 +8,7 @@
 ;; Version:
 ;; Last-Updated:
 ;;           By:
-;;     Update #: 896
+;;     Update #: 899
 ;; URL:
 ;; Description:
 ;;
@@ -20,6 +20,7 @@
 
 (require 'intero)
 (require 'haskell-mode)
+(require 'hindent)
 ;; (require 'haskell-indent)
 
 
@@ -46,6 +47,7 @@
 
 (add-hook 'haskell-mode-hook 'intero-mode)
 (add-hook 'haskell-mode-hook 'haskell-indentation-mode)
+(add-hook 'haskell-mode-hook 'hindent-mode)
 ;; (add-hook 'haskell-mode-hook 'structured-haskell-mode)
 
 

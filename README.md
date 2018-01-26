@@ -281,6 +281,7 @@ Dependencies:
     We highly encourage you to use stack, as it plays well together with
     flycheck and keeps your systems clean.
   - hasktags ($ cabal install hasktags)
+  - hindent
   - stylish-haskell (format source code nicely)
   - structured-haskell-mode ($ cabal install structured-haskell-mode)
   - ghc-mod ($ cabal install ghc-mod)
