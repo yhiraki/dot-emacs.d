@@ -8,7 +8,7 @@
 ;; Version:
 ;; Last-Updated:
 ;;           By:
-;;     Update #: 899
+;;     Update #: 903
 ;; URL:
 ;; Description:
 ;;
@@ -332,6 +332,7 @@ attention to case differences."
   ;; (add-to-list 'ac-sources 'ac-source-words-in-same-mode-buffers)
 
   ;; (auto-complete-mode)
+  (set (make-local-variable 'whitespace-style) nil)
 
   ;; format source code in sensible way
   ;; (add-hook 'before-save-hook 'haskell-source-code-align nil t)
@@ -347,6 +348,7 @@ attention to case differences."
   ;; Disabled set special keys
   ;; (local-set-key (kbd "=")  'haskell-insert-equals)
   ;; (local-set-key (kbd "|") 'haskell-insert-guard)
+
 
   (local-set-key (kbd "C-c =") (defun insertEquals ()
                                  (interactive)
@@ -385,6 +387,7 @@ attention to case differences."
 
 
 (add-hook 'haskell-mode-hook 'my/haskell-minor-mode)
+
 
 ;; ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 ;; +++++++++++++++++++++++++++++++ Hlint ++++++++++++++++++++++++++++++++

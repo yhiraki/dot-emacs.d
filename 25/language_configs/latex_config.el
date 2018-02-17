@@ -7,9 +7,9 @@
 ;; Created: Sa Nov  2 16:14:09 2013 (+0100)
 ;; Version:
 ;; Package-Requires: ()
-;; Last-Updated: Sun May 10 12:57:23 2015 (+0200)
+;; Last-Updated: Sat Feb 17 11:32:17 2018 (+0100)
 ;;           By: Manuel Schneckenreither
-;;     Update #: 81
+;;     Update #: 83
 ;; URL:
 ;; Doc URL:
 ;; Keywords:
@@ -128,9 +128,8 @@
   (interactive)
   (TeX-texify)
   (shell-command "rm -rf *.blg *.toc *.out *.dvi *.backup *.exl *.exls *.ps" nil)
-  ;; (shell-command "rm -rf *.aux *.bbl *.log *.blg *.toc *.out *.dvi *.backup
-  ;; *.exl *.exls *.ps" nil) ;; need *.aux for syncing with Evince *.log needed for lookup
-  ;; *.bbl is needed for bibliography
+  ;; need *.aux for syncing with Evince *.log needed for lookup, *.bbl is needed for
+  ;; bibliography
   (TeX-command "View" 'TeX-active-master 0)
   )
 
