@@ -8,7 +8,7 @@
 ;; Version:
 ;; Last-Updated:
 ;;           By:
-;;     Update #: 903
+;;     Update #: 907
 ;; URL:
 ;; Description:
 ;;
@@ -333,6 +333,7 @@ attention to case differences."
 
   ;; (auto-complete-mode)
   (set (make-local-variable 'whitespace-style) nil)
+  (set-fill-column 120)
 
   ;; format source code in sensible way
   ;; (add-hook 'before-save-hook 'haskell-source-code-align nil t)
