@@ -8,7 +8,7 @@
 ;; Version:
 ;; Last-Updated:
 ;;           By:
-;;     Update #: 896
+;;     Update #: 907
 ;; URL:
 ;; Description:
 ;;
@@ -20,6 +20,7 @@
 
 (require 'intero)
 (require 'haskell-mode)
+(require 'hindent)
 ;; (require 'haskell-indent)
 
 
@@ -46,6 +47,7 @@
 
 (add-hook 'haskell-mode-hook 'intero-mode)
 (add-hook 'haskell-mode-hook 'haskell-indentation-mode)
+(add-hook 'haskell-mode-hook 'hindent-mode)
 ;; (add-hook 'haskell-mode-hook 'structured-haskell-mode)
 
 
@@ -330,6 +332,8 @@ attention to case differences."
   ;; (add-to-list 'ac-sources 'ac-source-words-in-same-mode-buffers)
 
   ;; (auto-complete-mode)
+  (set (make-local-variable 'whitespace-style) nil)
+  (set-fill-column 120)
 
   ;; format source code in sensible way
   ;; (add-hook 'before-save-hook 'haskell-source-code-align nil t)
@@ -345,6 +349,7 @@ attention to case differences."
   ;; Disabled set special keys
   ;; (local-set-key (kbd "=")  'haskell-insert-equals)
   ;; (local-set-key (kbd "|") 'haskell-insert-guard)
+
 
   (local-set-key (kbd "C-c =") (defun insertEquals ()
                                  (interactive)
@@ -383,6 +388,7 @@ attention to case differences."
 
 
 (add-hook 'haskell-mode-hook 'my/haskell-minor-mode)
+
 
 ;; ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 ;; +++++++++++++++++++++++++++++++ Hlint ++++++++++++++++++++++++++++++++

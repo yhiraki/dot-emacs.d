@@ -7,9 +7,9 @@
 ;; Created: Sa Nov  2 16:14:09 2013 (+0100)
 ;; Version:
 ;; Package-Requires: ()
-;; Last-Updated: Tue Feb  6 14:09:18 2018 (+0100)
+;; Last-Updated: Thu Mar  8 14:31:36 2018 (+0100)
 ;;           By: Manuel Schneckenreither
-;;     Update #: 84
+;;     Update #: 86
 ;; URL:
 ;; Doc URL:
 ;; Keywords:
@@ -127,10 +127,9 @@
   "Comile latex and show in evince"
   (interactive)
   (TeX-texify)
-  (shell-command "rm -rf *.aux *.log *.blg *.toc *.out *.backup *.exl *.exls nil")
-  ;; (shell-command rm -rf *.aux *.bbl *.log *.blg *.toc *.out *.dvi *.backup
-  ;; *.exl *.exls *.ps" nil) ;; need *.aux for syncing with Evince *.log needed for lookup
-  ;; *.bbl is needed for bibliography
+  (shell-command "rm -rf *.blg *.toc *.out *.dvi *.backup *.exl *.exls *.ps" nil)
+  ;; need *.aux for syncing with Evince *.log needed for lookup, *.bbl is needed for
+  ;; bibliography
   (TeX-command "View" 'TeX-active-master 0)
   )
 
