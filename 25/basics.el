@@ -5,9 +5,9 @@
 ;; Author: Manuel Schneckenreither
 ;; Created: Mon Dec 10 22:51:09 2012 (+0100)
 ;; Version:
-;; Last-Updated: Sat Jan 13 20:28:35 2018 (+0100)
-;;           By: Manuel Schneckenreither
-;;     Update #: 861
+;; Last-Updated:Tue Mar 13 15:49:08 2018 (+0100))
+;;           By:Manuel Schneckenreitherr
+;;     Update #:8723
 ;; URL:
 ;; Description:
 ;;    Basic configuration for emacs. In here are all configs of
@@ -244,10 +244,18 @@ mode of the invoking window is in
   "Same as `find-tag-other-window' but doesn't move the point"
   (interactive (find-tag-interactive "View tag other window: "))
   (let ((window (get-buffer-window)))
-    (find-tag-other-window tagname next-p regexp-p)
-    ;; (find-tag-other-frame tagname next-p)
-    (recenter 10)
-    (select-window window)))
+    (if (eq 1 (length (visible-frame-list)))
+        ;; (xref-find-definitions-other-window)
+        (find-tag-other-window tagname next-p regexp-p)
+      (let* ((mypos (seq-position (visible-frame-list) (selected-frame)))
+             (otherpos (mod (+ mypos 1) (length (visible-frame-list))))
+             (my-frame (elt (visible-frame-list) mypos))
+             (target-frame (elt (visible-frame-list) otherpos)))
+        (select-frame target-frame)
+        (find-tag-other-window tagname next-p regexp-p)
+        (recenter 10)
+        (delete-other-windows)
+        (select-frame my-frame)))))
 
 ;; ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 ;; ++++++++++++++++++ CONFIGURE IN MINIBUFFER INFO ++++++++++++++++++++++
