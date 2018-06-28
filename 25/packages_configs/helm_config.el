@@ -24,7 +24,6 @@
 ;; (define-key helm-map (kbd "C-i") 'helm-execute-persistent-action) ; make TAB works in terminal
 ;; (define-key helm-map (kbd "C-z")  'helm-select-action) ; list actions using C-z
 
-(global-set-key (kbd "M-x")                          'undefined)
 (global-set-key (kbd "C-x b")                        'helm-mini)
 (global-set-key (kbd "C-x r b")                      'helm-filtered-bookmarks)
 (global-set-key (kbd "C-x C-f")                      'helm-find-files)
