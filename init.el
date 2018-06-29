@@ -423,6 +423,8 @@
  '(jde-jdk-registry (quote (("1.8" . "/usr/lib/jvm/default/"))))
  '(jde-sourcepath (quote ("./src/main" "./src/test")) t)
  '(kept-new-versions 5000)
+ '(kill-ring-max 600)
+ '(mc/always-run-for-all t)
  '(mpc-host "192.168.178.62")
  '(org-agenda-files
    (quote
