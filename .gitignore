@@ -32,3 +32,4 @@ org-gcal/*
 /.cask/25.1/bootstrap/archives/gnu/archive-contents
 .cask
 .org-id-locations
+/recentf
