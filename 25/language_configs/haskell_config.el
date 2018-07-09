@@ -8,7 +8,7 @@
 ;; Version:
 ;; Last-Updated:
 ;;           By:
-;;     Update #: 907
+;;     Update #: 908
 ;; URL:
 ;; Description:
 ;;
@@ -140,7 +140,7 @@
 ;; ;; ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 
-(add-to-list 'load-path "~/.emacs.d/24/packages/hare")
+(add-to-list 'load-path "~/.emacs.d/25/packages/hare")
 (require 'hare)
 (autoload 'hare-init "hare" nil t)
 

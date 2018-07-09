@@ -286,6 +286,7 @@ Dependencies:
   - structured-haskell-mode ($ cabal install structured-haskell-mode)
   - ghc-mod ($ cabal install ghc-mod)
   - hoogle ($ cabal install hoogle)
+  - hident ($ stack install hident)
   - hlint ($ cabal install hlint): code suggestions
   - HaRe ($ cabal install HaRe)
 
