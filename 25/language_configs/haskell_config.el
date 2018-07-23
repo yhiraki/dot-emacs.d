@@ -8,7 +8,7 @@
 ;; Version:
 ;; Last-Updated:
 ;;           By:
-;;     Update #: 908
+;;     Update #: 926
 ;; URL:
 ;; Description:
 ;;
@@ -236,7 +236,7 @@
     (if (file-exists-p (concat esdir "fay")) (add-to-list 'tagslst "fay"))
     (if (file-exists-p (concat esdir "fay_shared")) (add-to-list 'tagslst "fay_shared"))
     (setq dirs (mapconcat 'identity tagslst " "))
-    ;; (message dirs)
+    (message (concat "dirs: " dirs))
     (shell-command
      (concat "cd " esdir
              ;; " && hasktags --ignore-close-implementation -e --cache . 2>/dev/null 1>/dev/null") nil)
