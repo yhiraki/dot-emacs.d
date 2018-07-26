@@ -410,6 +410,7 @@
  '(haskell-process-args-cabal-repl
    (quote
     ("--ghc-option=-ferror-spans" "--ghc-option=-fbreak-on-error")))
+ '(haskell-process-args-ghci (quote ("-ferror-spans -fbreak-on-error")))
  '(haskell-process-args-stack-ghci nil)
  '(haskell-process-path-ghci "stack")
  '(haskell-process-type (quote stack-ghci))
@@ -432,7 +433,7 @@
  '(helm-split-window-inside-p t)
  '(help-at-pt-display-when-idle (quote (flymake-overlay)) nil (help-at-pt))
  '(help-at-pt-timer-delay 0.1)
- '(hindent-extra-args (quote ("--line-length" "180")))
+ '(hindent-extra-args (quote ("--line-length" "120")))
  '(jde-compile-option-directory "./../classes")
  '(jde-compiler (quote ("javac")))
  '(jde-global-classpath (quote ("./../classes" "./../lib")))
