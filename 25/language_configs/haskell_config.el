@@ -8,7 +8,7 @@
 ;; Version:
 ;; Last-Updated:
 ;;           By:
-;;     Update #: 926
+;;     Update #: 927
 ;; URL:
 ;; Description:
 ;;
@@ -230,7 +230,7 @@
                       (split-string default-directory "src")))))
     (setq esdir (replace-regexp-in-string " " "\\\\ " dir))
     ;; (message esdir)
-    (setq tagslst '("."))
+    (setq tagslst '()) ;; '("."))
     (if (file-exists-p (concat esdir "src")) (add-to-list 'tagslst "src"))
     (if (file-exists-p (concat esdir "app")) (add-to-list 'tagslst "app"))
     (if (file-exists-p (concat esdir "fay")) (add-to-list 'tagslst "fay"))
