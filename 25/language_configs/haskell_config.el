@@ -8,7 +8,7 @@
 ;; Version:
 ;; Last-Updated:
 ;;           By:
-;;     Update #: 932
+;;     Update #: 935
 ;; URL:
 ;; Description:
 ;;
@@ -21,7 +21,7 @@
 (require 'intero)
 (require 'haskell-mode)
 (require 'hindent)
-;; (require 'haskell-indent)
+(require 'hayoo)
 
 
 ;; ;; ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -386,7 +386,8 @@ attention to case differences."
   (define-key intero-mode-map (kbd "C-c i") 'intero-goto-definition)
   (define-key intero-mode-map (kbd "C-c C-b") 'intero-repl)
 
-  (define-key haskell-mode-map (kbd "C-c h h") 'haskell-hoogle)
+  ;; (define-key haskell-mode-map (kbd "C-c h h") 'haskell-hoogle)
+  (define-key haskell-mode-map (kbd "C-c h h") 'hayoo-query)
 
   ;; CREATE AND SET TAGS FILE
   (add-hook 'after-save-hook 'make-haskell-tags nil t)
