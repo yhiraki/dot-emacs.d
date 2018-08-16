@@ -7,7 +7,7 @@
 ;; Version:
 ;; Last-Updated:
 ;;           By:
-;;     Update #: 139
+;;     Update #: 140
 ;; URL:
 ;; Description:
 ;;
@@ -127,8 +127,8 @@
 ;; AUTO FILL COLUMN
 (global-set-key (kbd (concat prefix-command-key " a"))  'auto-fill-mode)
 
-;; browse kill ring
-(global-set-key (kbd "C-c y") 'browse-kill-ring)
+;; browse kill ring (done by counsel, see package_configs/counsel_config.el)
+;; (global-set-key (kbd "C-c y") 'browse-kill-ring)
 
 ;; align with regex
 (global-set-key (kbd "C-x a r") 'align-regexp)

@@ -8,7 +8,7 @@
 ;; Version:
 ;; Last-Updated:
 ;;           By:
-;;     Update #: 926
+;;     Update #: 932
 ;; URL:
 ;; Description:
 ;;
@@ -227,11 +227,18 @@
   (interactive)
   (let ((dir (nth 0 (if (string-match "app/" default-directory)
                         (split-string default-directory "app")
-                      (split-string default-directory "src")))))
+                      (if (string-match "src/" default-directory)
+                          (split-string default-directory "src")
+                        (if (string-match "fay/" default-directory)
+                            (split-string default-directory "fay")
+                          (if (string-match "fay-shared/" default-directory)
+                              (split-string default-directory "fay-shared")
+                            (split-string default-directory "test"))))))))
     (setq esdir (replace-regexp-in-string " " "\\\\ " dir))
     ;; (message esdir)
-    (setq tagslst '("."))
+    (setq tagslst '()) ;; '("."))
     (if (file-exists-p (concat esdir "src")) (add-to-list 'tagslst "src"))
+    (if (file-exists-p (concat esdir "test")) (add-to-list 'tagslst "test"))
     (if (file-exists-p (concat esdir "app")) (add-to-list 'tagslst "app"))
     (if (file-exists-p (concat esdir "fay")) (add-to-list 'tagslst "fay"))
     (if (file-exists-p (concat esdir "fay_shared")) (add-to-list 'tagslst "fay_shared"))
@@ -258,7 +265,7 @@
     (haskell-indent-align-def t 'guard)
     (haskell-indent-align-def t 'rhs)
     )
-   (haskell-mode-format-imports)
+  (haskell-mode-format-imports)
   )
 
 
@@ -366,8 +373,8 @@ attention to case differences."
                                  (insert "]")))
 
   (local-set-key (kbd "C-c C-u") (defun insertUndefined ()
-                                 (interactive)
-                                 (insert "undefined")))
+                                   (interactive)
+                                   (insert "undefined")))
 
   ;; (local-set-key (kbd "C-c |") (defun insertGuard ()
   ;;                                (interactive)

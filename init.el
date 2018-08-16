@@ -170,6 +170,7 @@
         company-math
 				company-shell
         company-try-hard
+        counsel
         dired+
         ecb
         ;; eclim
@@ -418,9 +419,14 @@
  '(helm-M-x-always-save-history t)
  '(helm-M-x-fuzzy-match t)
  '(helm-buffers-fuzzy-matching t)
- '(helm-case-fold-search t)
+ '(helm-case-fold-search (quote (quote smart)))
+ '(helm-comp-read-case-fold-search (quote smart))
  '(helm-ff-file-name-history-use-recentf t)
  '(helm-ff-search-library-in-sexp t)
+ '(helm-file-name-case-fold-search (quote smart))
+ '(helm-flx-mode t)
+ '(helm-fuzzy-matching-highlight-fn (quote helm-flx-fuzzy-highlight-match))
+ '(helm-fuzzy-sort-fn (quote helm-flx-fuzzy-matching-sort))
  '(helm-input-idle-delay 0.1)
  '(helm-locate-case-fold-search (quote smart))
  '(helm-locate-command "locate %.0s %s")
@@ -429,11 +435,15 @@
     (helm-source-buffers-list helm-source-recentf helm-source-buffer-not-found)))
  '(helm-mode t)
  '(helm-move-to-line-cycle-in-source t)
+ '(helm-net-prefer-curl t)
  '(helm-scroll-amount 8)
  '(helm-split-window-inside-p t)
  '(help-at-pt-display-when-idle (quote (flymake-overlay)) nil (help-at-pt))
  '(help-at-pt-timer-delay 0.1)
- '(hindent-extra-args (quote ("--line-length" "120")))
+ '(hindent-extra-args (quote ("--line-length" "180")))
+ '(ivy-count-format "")
+ '(ivy-mode t)
+ '(ivy-use-virtual-buffers t)
  '(jde-compile-option-directory "./../classes")
  '(jde-compiler (quote ("javac")))
  '(jde-global-classpath (quote ("./../classes" "./../lib")))
@@ -463,7 +473,7 @@
  '(org-use-sub-superscripts (quote {}))
  '(package-selected-packages
    (quote
-    (helm-flx 0blayout browse-kill-ring yaml-mode gams-mode flycheck-elm elm-mode elm-yasnippets yasnippet-snippets company company-statistics flycheck-elm elm-mode elm-yasnippets yasnippet-snippets company company-statistics matlab-mode hamlet-mode thesaurus tuareg org org-gcal flyspell-correct flyspell-correct-helm zenburn-theme window-number w3m vc-darcs tex-smart-umlauts smart-mode-line shm shakespeare-mode request rainbow-mode rainbow-delimiters php-mode pager-default-keybindings ov orgtbl-ascii-plot org-plus-contrib org-cua-dwim org-ac multiple-cursors markdown-toc markdown-mode+ magit lenlen-theme latex-pretty-symbols latex-extra jedi javap-mode javadoc-lookup intero ido-ubiquitous ido-hacks ido-gnus htmlize hlint-refactor hindent helm-mode-manager helm-hoogle helm-hayoo helm-google helm-git-files helm-git helm-flycheck helm-dired-recent-dirs helm-c-yasnippet helm-bibtex header2 gnuplot-mode gnuplot ghci-completion fuzzy function-args flycheck-stack flycheck-ledger flycheck-haskell flycheck-google-cpplint flycheck-color-mode-line edbi ecb dired+ company-try-hard company-shell company-math company-ghci company-ghc company-cabal company-c-headers company-auctex change-inner cdlatex bookmark+ bison-mode bbdb backup-walker auto-dictionary auto-complete-clang auto-complete-c-headers auto-complete-auctex arduino-mode android-mode ace-window ace-jump-mode ace-jump-buffer ac-octave ac-math ac-ispell ac-etags ac-dabbrev ac-capf ac-c-headers)))
+    (counsel helm-flx 0blayout browse-kill-ring yaml-mode gams-mode flycheck-elm elm-mode elm-yasnippets yasnippet-snippets company company-statistics flycheck-elm elm-mode elm-yasnippets yasnippet-snippets company company-statistics matlab-mode hamlet-mode thesaurus tuareg org org-gcal flyspell-correct flyspell-correct-helm zenburn-theme window-number w3m vc-darcs tex-smart-umlauts smart-mode-line shm shakespeare-mode request rainbow-mode rainbow-delimiters php-mode pager-default-keybindings ov orgtbl-ascii-plot org-plus-contrib org-cua-dwim org-ac multiple-cursors markdown-toc markdown-mode+ magit lenlen-theme latex-pretty-symbols latex-extra jedi javap-mode javadoc-lookup intero ido-ubiquitous ido-hacks ido-gnus htmlize hlint-refactor hindent helm-mode-manager helm-hoogle helm-hayoo helm-google helm-git-files helm-git helm-flycheck helm-dired-recent-dirs helm-c-yasnippet helm-bibtex header2 gnuplot-mode gnuplot ghci-completion fuzzy function-args flycheck-stack flycheck-ledger flycheck-haskell flycheck-google-cpplint flycheck-color-mode-line edbi ecb dired+ company-try-hard company-shell company-math company-ghci company-ghc company-cabal company-c-headers company-auctex change-inner cdlatex bookmark+ bison-mode bbdb backup-walker auto-dictionary auto-complete-clang auto-complete-c-headers auto-complete-auctex arduino-mode android-mode ace-window ace-jump-mode ace-jump-buffer ac-octave ac-math ac-ispell ac-etags ac-dabbrev ac-capf ac-c-headers)))
  '(safe-local-variable-values
    (quote
     ((intero-targets "simsim:lib" "simsim:exe:simsim-exe" "simsim:test:simsim-test")

@@ -5,9 +5,9 @@
 ;; Author: Manuel Schneckenreither
 ;; Created: Tue Dec 11 00:43:14 2012 (+0100)
 ;; Version:
-;; Last-Updated: Fri Dec 29 19:26:59 2017 (+0100)
+;; Last-Updated: Fri Aug 10 12:55:11 2018 (+0200)
 ;;           By: Manuel Schneckenreither
-;;     Update #: 484
+;;     Update #: 485
 ;; URL:
 ;; Description:
 ;;
@@ -111,6 +111,8 @@
 (load (concat package-conf-folder "function_args_config.el"))
 ;; Helm - narrowing framework
 (load (concat package-conf-folder "helm_config.el"))
+;; Ivy and Counsel mode (much better performance than helm)
+(load (concat package-conf-folder "counsel_config.el"))
 ;; Cdlatex - fast input methods for LaTeX environments
 (load (concat package-conf-folder "cdlatex_config.el"))
 ;; undo tree
