@@ -8,7 +8,7 @@
 ;; Version:
 ;; Package-Requires: ()
 ;;           By: Manuel Schneckenreither
-;;     Update #: 93
+;;     Update #: 95
 ;; URL:
 ;; Doc URL:
 ;; Keywords:
@@ -86,6 +86,12 @@
                                                      (nnimap-address "imap.gmail.com")
                                                      (nnimap-server-port 993)
                                                      ))
+
+;; (add-to-list 'gnus-secondary-select-methods '(nnimap "hasktor"
+;;                                                      (nnimap-stream ssl)
+;;                                                      (nnimap-address "imap.easyname.com")
+;;                                                      (nnimap-server-port 993)
+;;                                                      ))
 
 ;; (add-to-list 'gnus-secondary-select-methods '(nnimap "uibk_exchange"
 ;;                                                      (nnimap-stream tls)
