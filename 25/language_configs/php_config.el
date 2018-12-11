@@ -7,9 +7,9 @@
 ;; Created: Sun Oct 12 21:01:25 2014 (+0200)
 ;; Version:
 ;; Package-Requires: ()
-;; Last-Updated: Mon Oct 12 16:09:22 2015 (+0200)
+;; Last-Updated: Mon Nov 26 13:43:13 2018 (+0100)
 ;;           By: Manuel Schneckenreither
-;;     Update #: 18
+;;     Update #: 21
 ;; URL:
 ;; Doc URL:
 ;; Keywords:
@@ -34,18 +34,37 @@
 ;;
 ;;; Code:
 
+(require 'web-mode)
+;; (add-to-list 'auto-mode-alist '("\\.php\\'" . web-mode))
+(setq web-mode-engines-alist
+      '( ;; ("php"    . "\\.phtml\\'")
+        ("blade"  . "\\.blade\\."))
+      )
+
 
 ;; Create and set tags table
 (defun make-php-tags ()
   "This function reloads the tags by using the command 'make tags'."
   (interactive)
-  (let ((dir (nth 0 (split-string default-directory "src"))))
+  (let ((dir (nth 0 (if (string-match "app/" default-directory)
+                        (split-string default-directory "app")
+                      (if (string-match "src/" default-directory)
+                          (split-string default-directory "src")
+                        (if (string-match "config/" default-directory)
+                            (split-string default-directory "config")
+                          (if (string-match "resources/" default-directory)
+                              (split-string default-directory "resources")
+                            (if (string-match "examples/" default-directory)
+                                (split-string default-directory "examples/")
+                              (split-string default-directory "test")))))))))
+    (setq esdir (replace-regexp-in-string " " "\\\\ " dir))
+    ;; (let ((dir (nth 0 (split-string default-directory "src"))))
     (setq esdir (replace-regexp-in-string " " "\\\\ " dir))
     (shell-command
      (concat "cd " esdir " && find . -name \"*.php\" -not -name \".#*\" | etags - 1>/dev/null 2>/dev/null") nil)
     (message (concat "cd " esdir " && find . -name \"*.php\" -not -name \".#*\" "
-             "| etags - 1>/dev/null 2>/dev/null") nil)
-    (visit-tags-table (concat dir "TAGS")))) 
+                     "| etags - 1>/dev/null 2>/dev/null") nil)
+    (visit-tags-table (concat dir "TAGS"))))
 
 
 ;; PHP MODE
