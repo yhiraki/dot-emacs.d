@@ -175,6 +175,7 @@
         ecb
         ;; eclim
         edbi
+        ess
         expand-region
         flycheck
         flycheck-hdevtools
@@ -236,6 +237,7 @@
         pager
         pager-default-keybindings
         paredit
+        phan
         php-mode
         php-auto-yasnippets
         popup
@@ -398,6 +400,8 @@
    (quote
     ("/usr/include/gtkmm-3.0" "/usr/include/gdkmm-3.0" "/usr/include/glibmm-2.4" "/usr/include/gtkmm-3.0" "/usr/lib/gtkmm-3.0/include" "/usr/include/atkmm-1.6" "/usr/include/gtk-3.0/unix-print" "/usr/include/gdkmm-3.0" "/usr/lib/gdkmm-3.0/include" "/usr/include/giomm-2.4" "/usr/lib/giomm-2.4/include" "/usr/include/pangomm-1.4" "/usr/lib/pangomm-1.4/include" "/usr/include/glibmm-2.4" "/usr/lib/glibmm-2.4/include" "/usr/include/gtk-3.0" "/usr/include/at-spi2-atk/2.0" "/usr/include/at-spi-2.0" "/usr/include/dbus-1.0" "/usr/lib/dbus-1.0/include" "/usr/include/gtk-3.0" "/usr/include/gio-unix-2.0/" "/usr/include/cairo" "/usr/include/pango-1.0" "/usr/include/atk-1.0" "/usr/include/cairo" "/usr/include/cairomm-1.0" "/usr/lib/cairomm-1.0/include" "/usr/include/cairo" "/usr/include/pixman-1" "/usr/include/freetype2" "/usr/include/libpng16" "/usr/include/harfbuzz" "/usr/include/freetype2" "/usr/include/harfbuzz" "/usr/include/libdrm" "/usr/include/libpng16" "/usr/include/sigc++-2.0" "/usr/lib/sigc++-2.0/include" "/usr/include/gdk-pixbuf-2.0" "/usr/include/libpng16" "/usr/include/glib-2.0" "/usr/lib/glib-2.0/include")))
  '(flycheck-clang-includes (quote ("/usr/include/netdb.h")))
+ '(flycheck-php-phpcs-executable nil)
+ '(flycheck-phpcs-standard "PEAR")
  '(flymake-gui-warnings-enabled nil)
  '(frame-background-mode (quote dark))
  '(global-eclim-mode t)
@@ -477,7 +481,7 @@
  '(org-use-sub-superscripts (quote {}))
  '(package-selected-packages
    (quote
-    (php-auto-yasnippets web-mode hayoo counsel helm-flx 0blayout browse-kill-ring yaml-mode gams-mode flycheck-elm elm-mode elm-yasnippets yasnippet-snippets company company-statistics flycheck-elm elm-mode elm-yasnippets yasnippet-snippets company company-statistics matlab-mode hamlet-mode thesaurus tuareg org org-gcal flyspell-correct flyspell-correct-helm zenburn-theme window-number w3m vc-darcs tex-smart-umlauts smart-mode-line shm shakespeare-mode request rainbow-mode rainbow-delimiters php-mode pager-default-keybindings ov orgtbl-ascii-plot org-plus-contrib org-cua-dwim org-ac multiple-cursors markdown-toc markdown-mode+ magit lenlen-theme latex-pretty-symbols latex-extra jedi javap-mode javadoc-lookup intero ido-ubiquitous ido-hacks ido-gnus htmlize hlint-refactor hindent helm-mode-manager helm-hoogle helm-hayoo helm-google helm-git-files helm-git helm-flycheck helm-dired-recent-dirs helm-c-yasnippet helm-bibtex header2 gnuplot-mode gnuplot ghci-completion fuzzy function-args flycheck-stack flycheck-ledger flycheck-haskell flycheck-google-cpplint flycheck-color-mode-line edbi ecb dired+ company-try-hard company-shell company-math company-ghci company-ghc company-cabal company-c-headers company-auctex change-inner cdlatex bookmark+ bison-mode bbdb backup-walker auto-dictionary auto-complete-clang auto-complete-c-headers auto-complete-auctex arduino-mode android-mode ace-window ace-jump-mode ace-jump-buffer ac-octave ac-math ac-ispell ac-etags ac-dabbrev ac-capf ac-c-headers)))
+    (ess phan php-auto-yasnippets web-mode hayoo counsel helm-flx 0blayout browse-kill-ring yaml-mode gams-mode flycheck-elm elm-mode elm-yasnippets yasnippet-snippets company company-statistics flycheck-elm elm-mode elm-yasnippets yasnippet-snippets company company-statistics matlab-mode hamlet-mode thesaurus tuareg org org-gcal flyspell-correct flyspell-correct-helm zenburn-theme window-number w3m vc-darcs tex-smart-umlauts smart-mode-line shm shakespeare-mode request rainbow-mode rainbow-delimiters php-mode pager-default-keybindings ov orgtbl-ascii-plot org-plus-contrib org-cua-dwim org-ac multiple-cursors markdown-toc markdown-mode+ magit lenlen-theme latex-pretty-symbols latex-extra jedi javap-mode javadoc-lookup intero ido-ubiquitous ido-hacks ido-gnus htmlize hlint-refactor hindent helm-mode-manager helm-hoogle helm-hayoo helm-google helm-git-files helm-git helm-flycheck helm-dired-recent-dirs helm-c-yasnippet helm-bibtex header2 gnuplot-mode gnuplot ghci-completion fuzzy function-args flycheck-stack flycheck-ledger flycheck-haskell flycheck-google-cpplint flycheck-color-mode-line edbi ecb dired+ company-try-hard company-shell company-math company-ghci company-ghc company-cabal company-c-headers company-auctex change-inner cdlatex bookmark+ bison-mode bbdb backup-walker auto-dictionary auto-complete-clang auto-complete-c-headers auto-complete-auctex arduino-mode android-mode ace-window ace-jump-mode ace-jump-buffer ac-octave ac-math ac-ispell ac-etags ac-dabbrev ac-capf ac-c-headers)))
  '(safe-local-variable-values
    (quote
     ((TeX-master . paper\.tex)
