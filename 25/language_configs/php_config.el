@@ -7,9 +7,9 @@
 ;; Created: Sun Oct 12 21:01:25 2014 (+0200)
 ;; Version:
 ;; Package-Requires: ()
-;; Last-Updated: Mon Nov 26 13:43:13 2018 (+0100)
+;; Last-Updated: Tue Dec 11 22:34:19 2018 (+0100)
 ;;           By: Manuel Schneckenreither
-;;     Update #: 21
+;;     Update #: 27
 ;; URL:
 ;; Doc URL:
 ;; Keywords:
@@ -105,10 +105,42 @@
   (add-hook 'after-save-hook 'make-php-tags nil t)
   (remove-hook 'after-save-hook 'make-c-tags t)
 
+  (setq phanDir (nth 0 (if (string-match "app/" default-directory)
+                           (split-string default-directory "app")
+                         (if (string-match "src/" default-directory)
+                             (split-string default-directory "src")
+                           (if (string-match "config/" default-directory)
+                               (split-string default-directory "config")
+                             (if (string-match "resources/" default-directory)
+                                 (split-string default-directory "resources")
+                               (if (string-match "examples/" default-directory)
+                                   (split-string default-directory "examples/")
+                                 (split-string default-directory "test"))))))))
+
   )
 
 ;; add hook
 (add-hook 'php-mode-hook 'my-php-mode-hook)
+
+
+;; flycheck for phan
+(require 'flycheck)
+(require 'phan)
+
+(defvar phan-flycheck-directory ""
+  "The direcotry to use to run PHAN in flycheck.")
+
+(setq phanDir "/dev/null")
+
+(flycheck-define-checker php-phan
+  "A PHP statical analyzer using phan.
+See URL `https://github.com/etsy/phan'."
+  :command ("php" (eval (concat phanDir "/vendor/phan/phan/phan")) "--directory" (eval phanDir))
+  :error-patterns ((info line-start (file-name) ":" line " " (message) line-end))
+  :modes (php-mode))
+
+(flycheck-add-next-checker 'php '(info . php-phan))
+(add-to-list 'flycheck-checker 'php-phan)
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
