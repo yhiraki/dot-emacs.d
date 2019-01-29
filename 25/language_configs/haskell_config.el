@@ -8,7 +8,7 @@
 ;; Version:
 ;; Last-Updated:
 ;;           By:
-;;     Update #: 938
+;;     Update #: 939
 ;; URL:
 ;; Description:
 ;;
@@ -250,7 +250,7 @@
     (shell-command
      (concat "cd " esdir
              ;; " && hasktags --ignore-close-implementation -e --cache . 2>/dev/null 1>/dev/null") nil)
-             " && hasktags --ignore-close-implementation -e "
+             " && hasktags -e "
              dirs
              ;; " 2>/dev/null 1>/dev/null"
              ) nil)
