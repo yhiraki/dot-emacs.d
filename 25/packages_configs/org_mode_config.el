@@ -16,6 +16,9 @@
 ;; and see: http://orgmode.org/manual/Evaluating-code-blocks.html
 
 
+(setq org-latex-default-packages-alist
+                 '(("hidelinks" "hyperref" nil)))
+
 (org-babel-do-load-languages
  (quote org-babel-load-languages)
  (quote ((emacs-lisp . t)
