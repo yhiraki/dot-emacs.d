@@ -33,4 +33,3 @@ org-gcal/*
 .cask
 .org-id-locations
 /recentf
-/request/curl-cookie-jar

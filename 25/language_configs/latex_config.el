@@ -7,9 +7,9 @@
 ;; Created: Sa Nov  2 16:14:09 2013 (+0100)
 ;; Version:
 ;; Package-Requires: ()
-;; Last-Updated: Thu Mar  8 14:31:36 2018 (+0100)
+;; Last-Updated: Sun Jan 13 23:09:27 2019 (+0100)
 ;;           By: Manuel Schneckenreither
-;;     Update #: 86
+;;     Update #: 87
 ;; URL:
 ;; Doc URL:
 ;; Keywords:
@@ -60,6 +60,7 @@
 (setq TeX-save-query nil)
 (setq preview-auto-cache-preamble nil)
 (setq TeX-PDF-mode t)
+(setq-default TeX-master nil)
 
 
 (require 'tex-site)
@@ -70,6 +71,10 @@
 (add-hook 'latex-mode-hook 'turn-on-reftex) ; with Emacs latex mode
 ;; (add-hook 'reftex-load-hook 'imenu-add-menubar-index)
 (add-hook 'LaTeX-mode-hook 'turn-on-reftex)
+
+;; Activate nice interface between RefTeX and AUCTeX
+(setq reftex-plug-into-AUCTeX t)
+
 
 (setq LaTeX-eqnarray-label "eq"
       LaTeX-equation-label "eq"

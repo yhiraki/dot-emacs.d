@@ -59,10 +59,6 @@ Major Mode for editing ML-Yacc files.
 
 ;;;***
 
-;;;### (autoloads nil nil ("sml-mode-pkg.el") (0 0 0 0))
-
-;;;***
-
 ;; Local Variables:
 ;; version-control: never
 ;; no-byte-compile: t

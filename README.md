@@ -290,6 +290,10 @@ Dependencies:
   - hlint ($ cabal install hlint): code suggestions
   - HaRe ($ cabal install HaRe)
 
++ PHP
+  - phpmd ($ sudo aura -As phpmd)
+  - phpcf ($ wget http://pear.php.net/go-pear.phar && php go-pear.phar && pear install PHP_CodeSniffer-3.3.2)
+
 + Database Viewer: edbi
   - perl-CPAN
   - and cpan modules:

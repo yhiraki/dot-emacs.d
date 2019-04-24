@@ -7,9 +7,9 @@
 ;; Created: Sun Oct 12 21:01:25 2014 (+0200)
 ;; Version:
 ;; Package-Requires: ()
-;; Last-Updated: Wed Oct 11 13:31:13 2017 (+0200)
+;; Last-Updated: Mon Jan 28 13:23:17 2019 (+0100)
 ;;           By: Manuel Schneckenreither
-;;     Update #: 10
+;;     Update #: 11
 ;; URL:
 ;; Doc URL:
 ;; Keywords:
@@ -91,7 +91,7 @@
 (add-hook 'python-mode-hook 'my-python-mode-hook)
 
 ;; jedi for autocompletion, etc
-(add-hook 'python-mode-hook 'jedi:setup)
+;; (add-hook 'python-mode-hook 'jedi:setup)
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
