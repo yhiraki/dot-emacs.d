@@ -17,7 +17,7 @@
 
 
 (setq org-latex-default-packages-alist
-                 '(("hidelinks" "hyperref" nil)))
+      '(("hidelinks" "hyperref" nil)))
 
 (org-babel-do-load-languages
  (quote org-babel-load-languages)
@@ -108,9 +108,9 @@
 ;; automatically clock in and resume after finishing capture mode
 (setq org-capture-templates
       (append '(("c" "Clocked Task" entry
-         (file+headline org-mode-capture-directory "Tasks")
-         "* TODO %^{Name of Task} %^g     \nAdded: %U  %i\n  %?\n"
-         :clock-in t :clock-resume t))))
+                 (file+headline org-mode-capture-directory "Tasks")
+                 "* TODO %^{Name of Task} %^g     \nAdded: %U  %i\n  %?\n"
+                 :clock-in t :clock-resume t))))
 
 (setq org-default-notes-file "~/Documents/Planning/default.org")
 (define-key global-map "\C-cr" 'org-capture)
@@ -124,26 +124,26 @@
   Expenses:%^{Account}  %^{Amount}
 ")
                 ("lc" "Cash" plain
-                (file "~/Documents/Planning/accounting.ledger")
-	        "%(org-read-date) * %^{Payee}
+                 (file "~/Documents/Planning/accounting.ledger")
+                 "%(org-read-date) * %^{Payee}
   Expenses:Cash
   Expenses:%^{Account}  %^{Amount}
 ")
                 ("g" "Google Calendar")
                 ("gd" "Event in default calendar" plain
-                  (file "~/Documents/Planning/default.org")
-                  "* %^{Subject}
+                 (file "~/Documents/Planning/default.org")
+                 "* %^{Subject}
 %^T
 
 %^{Description}")
-;;                 ("gu" "Event in university calendar" plain
-;;                   (file "~/Documents/Planning/university.org")
-;;                   "* %^{Subject}
-;; %^T
+                ;;                 ("gu" "Event in university calendar" plain
+                ;;                   (file "~/Documents/Planning/university.org")
+                ;;                   "* %^{Subject}
+                ;; %^T
 
-;; %^{Description}")
+                ;; %^{Description}")
                 )
-       org-capture-templates))
+              org-capture-templates))
 
 ;; (setq org-capture-templates nil)
 
@@ -363,6 +363,31 @@
                ("\\paragraph{%s}" . "\\paragraph*{%s}")
                ("\\subparagraph{%s}" . "\\subparagraph*{%s}")))
 
+(add-to-list 'org-latex-classes
+             '("cltreport"
+               "\\documentclass{cltreport}
+               [DEFAULT-PACKAGES]
+               [PACKAGES]
+               [EXTRA]"
+               ("\\section{%s}" . "\\section*{%s}")
+               ("\\subsection{%s}" . "\\subsection*{%s}")
+               ("\\subsubsection{%s}" . "\\subsubsection*{%s}")
+               ("\\paragraph{%s}" . "\\paragraph*{%s}")
+               ("\\subparagraph{%s}" . "\\subparagraph*{%s}")))
+
+(add-to-list 'org-latex-classes
+             '("cltexpose"
+               "\\documentclass{cltexpose}
+               [DEFAULT-PACKAGES]
+               [PACKAGES]
+               [EXTRA]"
+               ("\\section{%s}" . "\\section*{%s}")
+               ("\\subsection{%s}" . "\\subsection*{%s}")
+               ("\\subsubsection{%s}" . "\\subsubsection*{%s}")
+               ("\\paragraph{%s}" . "\\paragraph*{%s}")
+               ("\\subparagraph{%s}" . "\\subparagraph*{%s}")))
+
+
 ;; ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 ;; +++++++++++++++++++++++++++ DEFAULT KEYS +++++++++++++++++++++++++++++
 ;; ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -468,7 +493,7 @@ The diary entry can contain `%s' which will be replaced with
        (if (string= entry "")
            "Sunrise"
          (format entry (eval calendar-location-name))) " "
-         (solar-time-string (caar l) nil)))))
+       (solar-time-string (caar l) nil)))))
 
 (defun diary-sunset ()
   "Local time of sunset as a diary entry.
@@ -480,14 +505,14 @@ The diary entry can contain `%s' which will be replaced with
        (if (string= entry "")
            "Sunset"
          (format entry (eval calendar-location-name))) " "
-         (solar-time-string (caadr l) nil)))))
+       (solar-time-string (caadr l) nil)))))
 
 
 (defun sa-ignore-headline (contents backend info)
   "Ignore headlines with tag `ignoreheading'."
   (when (and (org-export-derived-backend-p backend 'latex 'html 'ascii)
-          (string-match "\\`.*ignoreheading.*\n"
-                (downcase contents)))
+             (string-match "\\`.*ignoreheading.*\n"
+                           (downcase contents)))
     (replace-match "" nil nil contents)))
 
 (add-to-list 'org-export-filter-headline-functions 'sa-ignore-headline)
@@ -499,25 +524,25 @@ The diary entry can contain `%s' which will be replaced with
 
 ;; rather do that for each file separately in header!!!
 ;; (setq org-latex-listings-options
-      ;; '(("basicstyle" "\\small")
-      ;;   ;; ("keywordstyle" "\\color{black}\\bfseries\\underbar")
-      ;;   ("basicstyle" "\\footnotesize")
-      ;;   ("breakatwhitespace" "false")
-      ;;   ("breaklines" "true")
-      ;;   ("captionpos" "b")
-      ;;   ("deletekeywords" "{...}")
-      ;;   ("escapeinside" "{\\%*}{*)}")
-      ;;   ("extendedchars" "true")
-      ;;   ("frame" "single")
-      ;;   ("keepspaces" "true")
-      ;;   ;; ("keywordstyle" "\\color{blue}")
-      ;;   ("otherkeywords" "{*,...}")
-      ;;   ("numbers" "left")
-      ;;   ("numbersep" "5pt")
-      ;;   ("numberstyle" "\\tiny\\color{black}")
-      ;;   ("rulecolor" "\\color{black}")
-      ;;   ("showspaces" "false")
-      ;;   ("showstringspaces" "false")
-      ;;   ("showtabs" "false")
-      ;;   ("stepnumber" "1")
-      ;;   ("tabsize" "2")))
+;; '(("basicstyle" "\\small")
+;;   ;; ("keywordstyle" "\\color{black}\\bfseries\\underbar")
+;;   ("basicstyle" "\\footnotesize")
+;;   ("breakatwhitespace" "false")
+;;   ("breaklines" "true")
+;;   ("captionpos" "b")
+;;   ("deletekeywords" "{...}")
+;;   ("escapeinside" "{\\%*}{*)}")
+;;   ("extendedchars" "true")
+;;   ("frame" "single")
+;;   ("keepspaces" "true")
+;;   ;; ("keywordstyle" "\\color{blue}")
+;;   ("otherkeywords" "{*,...}")
+;;   ("numbers" "left")
+;;   ("numbersep" "5pt")
+;;   ("numberstyle" "\\tiny\\color{black}")
+;;   ("rulecolor" "\\color{black}")
+;;   ("showspaces" "false")
+;;   ("showstringspaces" "false")
+;;   ("showtabs" "false")
+;;   ("stepnumber" "1")
+;;   ("tabsize" "2")))
