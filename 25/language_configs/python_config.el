@@ -7,9 +7,9 @@
 ;; Created: Sun Oct 12 21:01:25 2014 (+0200)
 ;; Version:
 ;; Package-Requires: ()
-;; Last-Updated: Mon Jan 28 13:23:17 2019 (+0100)
+;; Last-Updated: Wed May 15 12:01:32 2019 (+0200)
 ;;           By: Manuel Schneckenreither
-;;     Update #: 11
+;;     Update #: 43
 ;; URL:
 ;; Doc URL:
 ;; Keywords:
@@ -47,6 +47,23 @@
     (visit-tags-table (concat dir "TAGS"))))
 
 
+(defun set-pylint-virutalenv ()
+  "Set (or create) the virtualenv environment for pylint."
+  (interactive)
+  (let ((paths (split-string default-directory "src"))
+        (dir (nth 0 (split-string default-directory "src"))))
+    (if (> (length paths) 1)
+        (let ((esdir (replace-regexp-in-string " " "\\\\ " dir)))
+          (if (file-exists-p (concat esdir "/.venv"))
+              ((lambda () (interactive)
+                 (message "virtualenv found, setting pylint executable path of virtualenv!")
+                 (setq flycheck-python-pylint-executable (concat esdir "/.venv/bin/pylint"))))
+             (shell-command (concat "cd " esdir " && virtualenv .venv && pip install pylint"))
+             (set-pylint-virutalenv)))
+      (message "No project (path piece called 'src' found on path)!"))
+      ))
+
+
 ;; C MODE
 (defun my-python-mode-hook ()
 
@@ -78,6 +95,7 @@
 
   ;; enable auto completion. If it doesn't work try to disable flyspell mode.
   (auto-complete-mode)
+  (set-pylint-virutalenv)
 
   ;; use programming flyspell mode
   (flyspell-prog-mode)
@@ -89,10 +107,23 @@
 
 ;; add hook
 (add-hook 'python-mode-hook 'my-python-mode-hook)
+; (add-hook 'python-mode-hook 'flycheck-mode)
+
 
 ;; jedi for autocompletion, etc
 ;; (add-hook 'python-mode-hook 'jedi:setup)
 
+
+;; (defun set-flychecker-executables ()
+;;   "Configure virtualenv for flake8 and lint."
+;;   (when (get-current-buffer-flake8)
+;;     (flycheck-set-checker-executable (quote python-flake8)
+;;                                      (get-current-buffer-flake8)))
+;;   (when (get-current-buffer-pylint)
+;;     (flycheck-set-checker-executable (quote python-pylint)
+;;                                      (get-current-buffer-pylint))))
+;; (add-hook 'flycheck-before-syntax-check-hook
+;;           #'set-flychecker-executables 'local)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; python_config.el ends here
