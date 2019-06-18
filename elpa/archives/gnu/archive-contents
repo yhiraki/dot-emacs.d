@@ -426,9 +426,9 @@
 	     ((:url . "http://elpa.gnu.org/packages/ediprolog.html")
 	      (:keywords "languages" "processes"))])
  (eev .
-      [(20190517)
+      [(20190410)
        ((emacs
-	 (24 1)))
+	 (24 3)))
        "Support for e-scripts (eepitch blocks, elisp hyperlinks, etc)" tar
        ((:keywords "lisp" "e-scripts")
 	(:url . "http://angg.twu.net/#eev"))])
@@ -958,7 +958,7 @@
 	 ((:keywords "convenience")
 	  (:url . "https://github.com/clemera/objed"))])
  (olivetti .
-	   [(1 7 1)
+	   [(1 7 0)
 	    ((emacs
 	      (24 5)))
 	    "Minor mode for a nice writing environment" single
@@ -1051,7 +1051,7 @@
 	 ((:url . "http://elpa.gnu.org/packages/poker.html")
 	  (:keywords "games"))])
  (posframe .
-	   [(0 5 0)
+	   [(0 4 3)
 	    ((emacs
 	      (26)))
 	    "Pop a posframe (just a frame) at point" single
@@ -1190,9 +1190,9 @@
 		 ((:url . "http://elpa.gnu.org/packages/register-list.html")
 		  (:keywords "register"))])
  (relint .
-	 [(1 8)
+	 [(1 7)
 	  ((xr
-	    (1 12)))
+	    (1 11)))
 	  "Elisp regexp mistake finder" single
 	  ((:url . "https://github.com/mattiase/relint")
 	   (:keywords "lisp" "maint" "regexps"))])
@@ -1543,7 +1543,7 @@
        ((:keywords "multimedia" "xpm")
 	(:url . "http://www.gnuvola.org/software/xpm/"))])
  (xr .
-     [(1 12)
+     [(1 11)
       nil "Convert string regexp to rx notation" tar
       ((:keywords "lisp" "maint" "regexps")
        (:url . "https://github.com/mattiase/xr"))])
