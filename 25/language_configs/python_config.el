@@ -7,9 +7,9 @@
 ;; Created: Sun Oct 12 21:01:25 2014 (+0200)
 ;; Version:
 ;; Package-Requires: ()
-;; Last-Updated: Wed May 15 12:01:32 2019 (+0200)
+;; Last-Updated: Wed May 15 12:30:44 2019 (+0200)
 ;;           By: Manuel Schneckenreither
-;;     Update #: 43
+;;     Update #: 52
 ;; URL:
 ;; Doc URL:
 ;; Keywords:
@@ -94,7 +94,9 @@
   (semantic-mode t)
 
   ;; enable auto completion. If it doesn't work try to disable flyspell mode.
-  (auto-complete-mode)
+  ; (auto-complete-mode)
+  (company-mode)
+
   (set-pylint-virutalenv)
 
   ;; use programming flyspell mode
@@ -109,6 +111,8 @@
 (add-hook 'python-mode-hook 'my-python-mode-hook)
 ; (add-hook 'python-mode-hook 'flycheck-mode)
 
+;; (add-hook 'python-mode-hook 'jedi:setup)
+;; (setq jedi:complete-on-dot t)                 ; optional
 
 ;; jedi for autocompletion, etc
 ;; (add-hook 'python-mode-hook 'jedi:setup)
