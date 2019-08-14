@@ -7,9 +7,9 @@
 ;; Created: Sa Nov  2 16:14:09 2013 (+0100)
 ;; Version:
 ;; Package-Requires: ()
-;; Last-Updated: Sun Jan 13 23:09:27 2019 (+0100)
+;; Last-Updated: Wed Aug 14 16:41:48 2019 (+0200)
 ;;           By: Manuel Schneckenreither
-;;     Update #: 87
+;;     Update #: 95
 ;; URL:
 ;; Doc URL:
 ;; Keywords:
@@ -150,13 +150,13 @@
 (defun make-tex-tags ()
   "This function reloads the tags by using the command 'make tags'."
   (interactive)
-  (let ((dir (nth 0 (split-string default-directory "src"))))
+  (let ((dir (nth 0 (if (string-match "tikz/" default-directory)
+                        (split-string default-directory "tikz")
+                      (split-string default-directory "src")))))
     (setq esdir (replace-regexp-in-string " " "\\\\ " dir))
     (shell-command
      (concat "cd " esdir " && find . -name \"*.tex\" | etags - 1>/dev/null 2>/dev/null") nil)
-    (visit-tags-table (concat dir "TAGS"))
-    )
-  )
+    (visit-tags-table (concat dir "TAGS"))))
 
 ;; auto completion for auctex
 (require 'auto-complete-auctex)

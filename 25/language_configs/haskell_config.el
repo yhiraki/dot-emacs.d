@@ -8,7 +8,7 @@
 ;; Version:
 ;; Last-Updated:
 ;;           By:
-;;     Update #: 939
+;;     Update #: 942
 ;; URL:
 ;; Description:
 ;;
@@ -229,19 +229,22 @@
                         (split-string default-directory "app")
                       (if (string-match "src/" default-directory)
                           (split-string default-directory "src")
-                        (if (string-match "fay/" default-directory)
-                            (split-string default-directory "fay")
-                          (if (string-match "fay-shared/" default-directory)
-                              (split-string default-directory "fay-shared")
-                            (if (string-match "examples/" default-directory)
-                                (split-string default-directory "examples/")
-                              (split-string default-directory "test")))))))))
+                        (if (string-match "exp/" default-directory)
+                            (split-string default-directory "exp")
+                          (if (string-match "fay/" default-directory)
+                              (split-string default-directory "fay")
+                            (if (string-match "fay-shared/" default-directory)
+                                (split-string default-directory "fay-shared")
+                              (if (string-match "examples/" default-directory)
+                                  (split-string default-directory "examples/")
+                                (split-string default-directory "test"))))))))))
     (setq esdir (replace-regexp-in-string " " "\\\\ " dir))
     ;; (message esdir)
     (setq tagslst '()) ;; '("."))
     (if (file-exists-p (concat esdir "src")) (add-to-list 'tagslst "src"))
     (if (file-exists-p (concat esdir "test")) (add-to-list 'tagslst "test"))
     (if (file-exists-p (concat esdir "app")) (add-to-list 'tagslst "app"))
+    (if (file-exists-p (concat esdir "exp")) (add-to-list 'tagslst "exp"))
     (if (file-exists-p (concat esdir "examples")) (add-to-list 'tagslst "examples"))
     (if (file-exists-p (concat esdir "fay")) (add-to-list 'tagslst "fay"))
     (if (file-exists-p (concat esdir "fay_shared")) (add-to-list 'tagslst "fay_shared"))
