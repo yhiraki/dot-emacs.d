@@ -7,9 +7,9 @@
 ;; Created: Mo Feb 24 14:01:15 2014 (+0100)
 ;; Version:
 ;; Package-Requires: ()
-;; Last-Updated: Fr Mär  7 11:52:16 2014 (+0100)
-;;           By: Manuel Schneckenreither
-;;     Update #: 48
+;; Last-Updated: Fri Sep  6 16:04:55 2019 (+0200)
+;;           By: schnecki
+;;     Update #: 50
 ;; URL:
 ;; Doc URL:
 ;; Keywords:
@@ -58,40 +58,44 @@ If you want to modify the font as well, you should customize variable
 The default setting will prevent color themes from installing specific
 fonts."
   (interactive)
-  (color-theme-standard)
-  (let ((color-theme-is-cumulative t))
-    (color-theme-install
-     '(color-theme-bright-environment
-       ((cursor-color . "red")
-	(width . 300)
-	(height . 100)
-	(background . dark))
+  (load-theme 'high-contrast t t)
+  (enable-theme 'high-contrast)
 
-       (default ((t (:stipple nil :background "white" :foreground "magenta" :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant normal :weight ultrabold :height 3000 :width medium :family "adobe-courier"))))
+  ;; (color-theme-standard)
+  ;; (let ((color-theme-is-cumulative t))
+  ;;   (color-theme-install
+  ;;    '(color-theme-bright-environment
+  ;;      ((cursor-color . "red")
+	;; (width . 300)
+	;; (height . 100)
+	;; (background . dark))
 
-       (bold ((t (:bold t :underline t))))
-       (bold-italic ((t (:bold t :underline t))))
-       (font-lock-builtin-face ((t (:bold t :foreground "red"))))
-       (font-lock-comment-face ((t (:bold t :foreground "firebrick"))))
-       (font-lock-constant-face ((t (:bold t :underline t :foreground "blue"))))
-       (font-lock-function-name-face ((t (:bold t :foreground "blue4"))))
-       (font-lock-keyword-face ((t (:bold t :foreground "dark magenta"))))
-       (font-lock-string-face ((t (:bold t :foreground "green4"))))
-       (font-lock-type-face ((t (:bold t :foreground "blue"))))
-       (font-lock-variable-name-face ((t (:bold t :foreground "chocolate2"))))
-       (font-lock-warning-face ((t (:bold t :foreground "red"))))
-       (highlight ((t (:background "light gray" :foreground "white" :bold 1))))
-       (info-menu-5 ((t (:underline t :bold t))))
-       (info-node ((t (:bold t))))
-       (info-xref ((t (:bold t ))))
-       (italic ((t (:bold t :underline t))))
-       (modeline ((t (:background "white" :foreground "black" :bold 1))))
-       (modeline-buffer-id ((t (:background "white" :foreground "black" :bold 1))))
-       (modeline-mousable ((t (:background "white" :foreground "black" :bold 1))))
-       (modeline-mousable-minor-mode ((t (:background "white" :foreground "black" :bold 1))))
-       (region ((t (:background "black" :foreground "white" :bold 1))))
-       (secondary-selection ((t (:background "black" :foreground "white" :bold 1))))
-       (underline ((t (:bold t :underline t))))))))
+  ;;      (default ((t (:stipple nil :background "white" :foreground "magenta" :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant normal :weight ultrabold :height 3000 :width medium :family "adobe-courier"))))
+
+  ;;      (bold ((t (:bold t :underline t))))
+  ;;      (bold-italic ((t (:bold t :underline t))))
+  ;;      (font-lock-builtin-face ((t (:bold t :foreground "red"))))
+  ;;      (font-lock-comment-face ((t (:bold t :foreground "firebrick"))))
+  ;;      (font-lock-constant-face ((t (:bold t :underline t :foreground "blue"))))
+  ;;      (font-lock-function-name-face ((t (:bold t :foreground "blue4"))))
+  ;;      (font-lock-keyword-face ((t (:bold t :foreground "dark magenta"))))
+  ;;      (font-lock-string-face ((t (:bold t :foreground "green4"))))
+  ;;      (font-lock-type-face ((t (:bold t :foreground "blue"))))
+  ;;      (font-lock-variable-name-face ((t (:bold t :foreground "chocolate2"))))
+  ;;      (font-lock-warning-face ((t (:bold t :foreground "red"))))
+  ;;      (highlight ((t (:background "light gray" :foreground "white" :bold 1))))
+  ;;      (info-menu-5 ((t (:underline t :bold t))))
+  ;;      (info-node ((t (:bold t))))
+  ;;      (info-xref ((t (:bold t ))))
+  ;;      (italic ((t (:bold t :underline t))))
+  ;;      (modeline ((t (:background "white" :foreground "black" :bold 1))))
+  ;;      (modeline-buffer-id ((t (:background "white" :foreground "black" :bold 1))))
+  ;;      (modeline-mousable ((t (:background "white" :foreground "black" :bold 1))))
+  ;;      (modeline-mousable-minor-mode ((t (:background "white" :foreground "black" :bold 1))))
+  ;;      (region ((t (:background "black" :foreground "white" :bold 1))))
+  ;;      (secondary-selection ((t (:background "black" :foreground "white" :bold 1))))
+  ;;      (underline ((t (:bold t :underline t)))))))
+  )
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;

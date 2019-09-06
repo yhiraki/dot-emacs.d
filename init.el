@@ -159,8 +159,7 @@
         browse-kill-ring
         cdlatex
         change-inner
-        color-theme
-        color-theme-solarized
+        color-theme-modern
         company-auctex
         company-bibtex
         company-c-headers
@@ -219,7 +218,6 @@
         javap-mode
         jedi
         latex-pretty-symbols
-        lenlen-theme
         magit
         markdown-mode
         markdown-mode+
@@ -257,7 +255,6 @@
         window-number
         yaml-mode
         yasnippet
-        zenburn-theme
         ))
 
 
@@ -304,27 +301,13 @@
 ;; ++++++++++++++++++++++++++++ COLOR THEME +++++++++++++++++++++++++++++
 ;; ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
-(require 'color-theme)
-(color-theme-initialize)
-;;(color-theme-dark-laptop)
-;; eval following to use standard theme:
+(require 'color-theme-modern)
+(load-theme 'gtk-ide t t)
+(enable-theme 'gtk-ide)
+;; (load-theme 'emacs-nw t t)
+;; (enable-theme 'emacs-nw)
 
-(color-theme-standard)
-
-;;(color-theme-aalto-light)
-
-
-;; Color theme solarized dark
-;; (require 'color-theme-solarized)
-
-
-;; solarized light
-;;(require 'lenlen-theme)
-
-;; (defun color-my-emacs-default ()
-;;   "Revert to default emacs theme."
-;;   (interactive)
-;;   (color-theme-standard))
+;; see https://github.com/emacs-jp/replace-colorthemes/blob/master/screenshots.md
 
 ;; ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 ;; ++++++++++++++++++++++++++++ BASIC INFO ++++++++++++++++++++++++++++++
@@ -358,14 +341,9 @@
       (nth 0
            (split-string default-directory "src"))
       "../Common/lib/"))))
- '(color-theme-legal-frame-parameters "\\(color\\|mode\\|font\\|height\\|width\\)$")
  '(column-number-mode t)
  '(company-idle-delay 0.01)
  '(cua-delete-selection nil)
- '(custom-enabled-themes (quote (leuven)))
- '(custom-safe-themes
-   (quote
-    ("8db4b03b9ae654d4a57804286eb3e332725c84d7cdab38463cb6b97d5762ad26" "0f0e3af1ec61d04ff92f238b165dbc6d2a7b4ade7ed9812b4ce6b075e08f49fe" "f350c66dcff6db73192c4819363b7c1992931841e5ab381b1ed57ef8257a498f" default)))
  '(delete-active-region nil)
  '(dired-kept-versions 10)
  '(display-time-mode t)
@@ -478,19 +456,14 @@
  '(org-use-sub-superscripts (quote {}))
  '(package-selected-packages
    (quote
-    (editorconfig editorconfig-generate wolfram-mode flycheck-pyflakes synonymous maude-mode erlang abs-mode hayoo undo-tree latex-pretty-symbols php-auto-yasnippets web-mode counsel helm-flx 0blayout browse-kill-ring yaml-mode gams-mode flycheck-elm elm-mode elm-yasnippets yasnippet-snippets company company-statistics flycheck-elm elm-mode elm-yasnippets yasnippet-snippets company company-statistics matlab-mode hamlet-mode thesaurus tuareg org org-gcal flyspell-correct flyspell-correct-helm zenburn-theme window-number w3m vc-darcs tex-smart-umlauts smart-mode-line shm shakespeare-mode request rainbow-mode rainbow-delimiters php-mode pager-default-keybindings ov orgtbl-ascii-plot org-plus-contrib org-cua-dwim org-ac multiple-cursors markdown-toc markdown-mode+ magit lenlen-theme jedi javap-mode javadoc-lookup intero ido-ubiquitous ido-hacks ido-gnus htmlize hlint-refactor hindent helm-mode-manager helm-hoogle helm-hayoo helm-google helm-git-files helm-git helm-flycheck helm-dired-recent-dirs helm-c-yasnippet helm-bibtex header2 gnuplot-mode gnuplot ghci-completion fuzzy function-args flycheck-stack flycheck-ledger flycheck-haskell flycheck-google-cpplint flycheck-color-mode-line edbi ecb dired+ company-try-hard company-shell company-math company-ghci company-ghc company-cabal company-c-headers change-inner cdlatex bookmark+ bison-mode bbdb backup-walker auto-dictionary auto-complete-clang auto-complete-c-headers auto-complete-auctex arduino-mode android-mode ace-window ace-jump-mode ace-jump-buffer ac-octave ac-math ac-ispell ac-etags ac-dabbrev ac-capf ac-c-headers)))
+    (color-theme-modern editorconfig editorconfig-generate wolfram-mode flycheck-pyflakes synonymous maude-mode erlang abs-mode hayoo undo-tree latex-pretty-symbols php-auto-yasnippets web-mode counsel helm-flx 0blayout browse-kill-ring yaml-mode gams-mode flycheck-elm elm-mode elm-yasnippets yasnippet-snippets company-statistics flycheck-elm elm-mode elm-yasnippets yasnippet-snippets company-statistics matlab-mode hamlet-mode thesaurus tuareg org-gcal flyspell-correct flyspell-correct-helm window-number w3m vc-darcs tex-smart-umlauts smart-mode-line shm shakespeare-mode request rainbow-mode rainbow-delimiters php-mode pager-default-keybindings ov orgtbl-ascii-plot org-plus-contrib org-cua-dwim org-ac multiple-cursors markdown-toc markdown-mode+ magit jedi javap-mode javadoc-lookup intero ido-ubiquitous ido-hacks ido-gnus htmlize hlint-refactor hindent helm-mode-manager helm-hoogle helm-hayoo helm-google helm-git-files helm-git helm-flycheck helm-dired-recent-dirs helm-c-yasnippet helm-bibtex header2 gnuplot-mode gnuplot ghci-completion fuzzy function-args flycheck-stack flycheck-ledger flycheck-haskell flycheck-google-cpplint flycheck-color-mode-line edbi ecb dired+ company-try-hard company-shell company-math company-ghci company-ghc company-cabal company-c-headers change-inner cdlatex bookmark+ bison-mode bbdb backup-walker auto-dictionary auto-complete-clang auto-complete-c-headers auto-complete-auctex arduino-mode android-mode ace-window ace-jump-mode ace-jump-buffer ac-octave ac-math ac-ispell ac-etags ac-dabbrev ac-capf ac-c-headers)))
  '(safe-local-variable-values
    (quote
-<<<<<<< HEAD
     ((intero-targets "borl:lib" "borl:exe:gridworld" "borl:exe:gym" "borl:exe:multichain" "borl:exe:printer-mail" "borl:exe:queuing-system" "borl:exe:tensorflow-test" "borl:exe:three-states")
      (intero-targets "borl:lib" "borl:exe:gridworld" "borl:exe:gridworld-hard" "borl:exe:gym" "borl:exe:multichain" "borl:exe:printer-mail" "borl:exe:tensorflow-test" "borl:exe:three-states")
      (intero-targets "borl-lp:lib")
      (intero-targets "borl-model-based:lib" "examples:exe:gridworld")
      (intero-targets "experimenter:lib" "experimenter:exe:dice" "experimenter:exe:dice-stateless" "experimenter:test:experimenter-test")
-=======
-    ((intero-targets "borl:lib" "borl:exe:gridworld" "borl:exe:gridworld-hard" "borl:exe:gym" "borl:exe:multichain" "borl:exe:printer-mail" "borl:exe:tensorflow-test" "borl:exe:three-states")
-     (intero-targets "borl-model-based:lib" "examples:exe:gridworld")
->>>>>>> 23b37f3ddefbd15d8dd7eb20a4b2144a82d9e38c
      (intero-targets "tensorflow-haskell-high-level-api:lib" "tensorflow-haskell-high-level-api:exe:feedforward")
      (intero-targets "tensorflow-haskell-high-level-api:lib" "tensorflow-haskell-high-level-api:exe:feedfoward")
      (TeX-mast . paper\.tex)
@@ -545,6 +518,7 @@
  '(column-marker-1 ((t nil)))
  '(flymake-error ((((class color)) (:underline (:style wave :color "Red1")))))
  '(flymake-warning ((((class color)) (:underline (:style wave :color "Orange")))))
+ '(fringe ((t nil)))
  '(magit-section-highlight ((t nil)))
  '(rainbow-delimiters-depth-1-face ((t (:foreground "red"))))
  '(rainbow-delimiters-depth-2-face ((t (:foreground "magenta"))))

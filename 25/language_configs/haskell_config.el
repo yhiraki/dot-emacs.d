@@ -8,11 +8,7 @@
 ;; Version:
 ;; Last-Updated:
 ;;           By:
-<<<<<<< HEAD
-;;     Update #: 940
-=======
-;;     Update #: 942
->>>>>>> 23b37f3ddefbd15d8dd7eb20a4b2144a82d9e38c
+;;     Update #: 943
 ;; URL:
 ;; Description:
 ;;
@@ -233,17 +229,8 @@
                         (split-string default-directory "app")
                       (if (string-match "src/" default-directory)
                           (split-string default-directory "src")
-<<<<<<< HEAD
                       (if (string-match "shared/" default-directory)
                           (split-string default-directory "src")
-                        (if (string-match "fay/" default-directory)
-                            (split-string default-directory "fay")
-                          (if (string-match "fay-shared/" default-directory)
-                              (split-string default-directory "fay-shared")
-                            (if (string-match "examples/" default-directory)
-                                (split-string default-directory "examples/")
-                              (split-string default-directory "test"))))))))))
-=======
                         (if (string-match "exp/" default-directory)
                             (split-string default-directory "exp")
                           (if (string-match "fay/" default-directory)
@@ -252,8 +239,7 @@
                                 (split-string default-directory "fay-shared")
                               (if (string-match "examples/" default-directory)
                                   (split-string default-directory "examples/")
-                                (split-string default-directory "test"))))))))))
->>>>>>> 23b37f3ddefbd15d8dd7eb20a4b2144a82d9e38c
+                                (split-string default-directory "test")))))))))))
     (setq esdir (replace-regexp-in-string " " "\\\\ " dir))
     ;; (message esdir)
     (setq tagslst '()) ;; '("."))

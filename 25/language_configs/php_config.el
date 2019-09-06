@@ -7,9 +7,9 @@
 ;; Created: Sun Oct 12 21:01:25 2014 (+0200)
 ;; Version:
 ;; Package-Requires: ()
-;; Last-Updated: Tue Dec 11 22:34:19 2018 (+0100)
-;;           By: Manuel Schneckenreither
-;;     Update #: 27
+;; Last-Updated: Fri Sep  6 15:55:14 2019 (+0200)
+;;           By: schnecki
+;;     Update #: 28
 ;; URL:
 ;; Doc URL:
 ;; Keywords:
@@ -125,7 +125,7 @@
 
 ;; flycheck for phan
 (require 'flycheck)
-(require 'phan)
+;; (require 'phan)
 
 (defvar phan-flycheck-directory ""
   "The direcotry to use to run PHAN in flycheck.")
