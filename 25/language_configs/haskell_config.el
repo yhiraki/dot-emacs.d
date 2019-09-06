@@ -8,7 +8,7 @@
 ;; Version:
 ;; Last-Updated:
 ;;           By:
-;;     Update #: 939
+;;     Update #: 940
 ;; URL:
 ;; Description:
 ;;
@@ -229,17 +229,20 @@
                         (split-string default-directory "app")
                       (if (string-match "src/" default-directory)
                           (split-string default-directory "src")
+                      (if (string-match "shared/" default-directory)
+                          (split-string default-directory "src")
                         (if (string-match "fay/" default-directory)
                             (split-string default-directory "fay")
                           (if (string-match "fay-shared/" default-directory)
                               (split-string default-directory "fay-shared")
                             (if (string-match "examples/" default-directory)
                                 (split-string default-directory "examples/")
-                              (split-string default-directory "test")))))))))
+                              (split-string default-directory "test"))))))))))
     (setq esdir (replace-regexp-in-string " " "\\\\ " dir))
     ;; (message esdir)
     (setq tagslst '()) ;; '("."))
     (if (file-exists-p (concat esdir "src")) (add-to-list 'tagslst "src"))
+    (if (file-exists-p (concat esdir "shared")) (add-to-list 'tagslst "shared"))
     (if (file-exists-p (concat esdir "test")) (add-to-list 'tagslst "test"))
     (if (file-exists-p (concat esdir "app")) (add-to-list 'tagslst "app"))
     (if (file-exists-p (concat esdir "examples")) (add-to-list 'tagslst "examples"))

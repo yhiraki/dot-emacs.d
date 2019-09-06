@@ -621,5 +621,8 @@ mode of the invoking window is in
 (require 're-builder)
 (setq reb-re-syntax 'string)
 
+;; Editorconfig (see https://editorconfig.org/)
+(editorconfig-mode 1)
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; basics.el ends here
