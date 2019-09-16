@@ -8,7 +8,7 @@
 ;; Version:
 ;; Last-Updated:
 ;;           By:
-;;     Update #: 947
+;;     Update #: 948
 ;; URL:
 ;; Description:
 ;;
@@ -422,7 +422,7 @@ attention to case differences."
 ;; ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 ;; use programming flyspell mode
-(add-hook 'haskell-mode-hook 'flyspell-prog-mode)
+;; (add-hook 'haskell-mode-hook 'flyspell-prog-mode)
 
 ;; (add-hook 'haskell-mode-hook 'haskell-decl-scan-mode) ; Scans top-level
 ;;                                         ; declarations, and places

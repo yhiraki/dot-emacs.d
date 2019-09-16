@@ -7,9 +7,9 @@
 ;; Created: Sun Oct 12 21:01:25 2014 (+0200)
 ;; Version:
 ;; Package-Requires: ()
-;; Last-Updated: Wed May 15 12:30:44 2019 (+0200)
+;; Last-Updated: Mon Sep 16 16:24:22 2019 (+0200)
 ;;           By: Manuel Schneckenreither
-;;     Update #: 52
+;;     Update #: 53
 ;; URL:
 ;; Doc URL:
 ;; Keywords:
@@ -100,7 +100,7 @@
   (set-pylint-virutalenv)
 
   ;; use programming flyspell mode
-  (flyspell-prog-mode)
+  ;; (flyspell-prog-mode)
 
   (add-hook 'after-save-hook 'make-python-tags nil t)
 
