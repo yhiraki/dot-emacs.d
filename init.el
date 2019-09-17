@@ -302,8 +302,13 @@
 ;; ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 (require 'color-theme-modern)
-(load-theme 'arjen t t)
-(enable-theme 'arjen)
+(defun load-my-theme ()
+  (interactive)
+  (load-theme 'arjen t t)
+  (enable-theme 'arjen))
+
+(load-my-theme)
+
 ;; (load-theme 'subtle-hacker t t)
 ;; (enable-theme 'subtle-hacker)
 ;; (load-theme 'emacs-nw t t)

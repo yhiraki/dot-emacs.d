@@ -7,9 +7,9 @@
 ;; Created: Mi Mär 19 14:51:22 2014 (+0100)
 ;; Version:
 ;; Package-Requires: ()
-;; Last-Updated: Mon Jul 28 14:17:10 2014 (+0200)
+;; Last-Updated: Tue Sep 17 08:13:41 2019 (+0200)
 ;;           By: Manuel Schneckenreither
-;;     Update #: 81
+;;     Update #: 82
 ;; URL:
 ;; Doc URL:
 ;; Keywords:
@@ -139,7 +139,9 @@ reopen it."
       (when gnusAlive
         (gnus)                          ; open gnus
         (schnecki-gnus)                 ; hide gnus
-        ))))
+        )
+      (load-my-theme)
+      )))
 
 
 ;; save desktop before quitting emacs (in case one was loaded)
