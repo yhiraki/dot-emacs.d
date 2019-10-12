@@ -7,9 +7,9 @@
 ;; Created: Sun Oct 12 21:01:25 2014 (+0200)
 ;; Version:
 ;; Package-Requires: ()
-;; Last-Updated: Mon Sep 16 16:24:22 2019 (+0200)
+;; Last-Updated: Mon Oct  7 12:04:20 2019 (+0200)
 ;;           By: Manuel Schneckenreither
-;;     Update #: 53
+;;     Update #: 54
 ;; URL:
 ;; Doc URL:
 ;; Keywords:
@@ -39,7 +39,10 @@
 (defun make-python-tags ()
   "This function reloads the tags by using the command 'make tags'."
   (interactive)
-  (let ((dir (nth 0 (split-string default-directory "src"))))
+  (let ((dir (nth 0 (if (string-match "tests/" default-directory)
+                        (split-string default-directory "tests")
+                      (if (string-match "src/" default-directory)
+                          (split-string default-directory "src"))))))
     (setq esdir (replace-regexp-in-string " " "\\\\ " dir))
     (shell-command
      (concat "cd " esdir " && find . -name \"*.py\" -not -name \".#*\" -not -name \".*flycheck.*\" "

@@ -7,9 +7,9 @@
 ;; Created: Fr Okt  4 20:40:17 2013 (+0200)
 ;; Version:
 ;; Package-Requires: ()
-;; Last-Updated: Mon Sep 16 16:24:03 2019 (+0200)
+;; Last-Updated: Tue Sep 17 16:46:24 2019 (+0200)
 ;;           By: Manuel Schneckenreither
-;;     Update #: 137
+;;     Update #: 138
 ;; URL:
 ;; Doc URL:
 ;; Keywords:
@@ -99,8 +99,8 @@
 (global-set-key (kbd "<f8>") 'flyspell-switch-dictionary)
 
 ;; fix key
-(eval-after-load "flyspell"
-  '(define-key flyspell-mode-map (kbd "C-.") nil))
+;; (eval-after-load "flyspell"
+;;   '(define-key flyspell-mode-map (kbd "C-.") nil))
 
 ;; (eval-after-load "flyspell"
 ;;   '(define-key flyspell-mode-map (kbd "C-.") 'view-tag-other-window)

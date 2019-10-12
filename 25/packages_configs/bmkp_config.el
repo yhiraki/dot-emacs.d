@@ -7,9 +7,9 @@
 ;; Created: Mi Mär 19 14:51:22 2014 (+0100)
 ;; Version:
 ;; Package-Requires: ()
-;; Last-Updated: Tue Sep 17 08:13:41 2019 (+0200)
+;; Last-Updated: Tue Sep 17 08:15:41 2019 (+0200)
 ;;           By: Manuel Schneckenreither
-;;     Update #: 82
+;;     Update #: 84
 ;; URL:
 ;; Doc URL:
 ;; Keywords:
@@ -135,12 +135,13 @@ reopen it."
                           (bufferp (setq buf (get-buffer "*Group*"))))))
       (when gnusAlive
         (gnus-group-exit))
+
       (schnecki-jump-desktop bookmark)
+      (load-my-theme)
       (when gnusAlive
         (gnus)                          ; open gnus
         (schnecki-gnus)                 ; hide gnus
         )
-      (load-my-theme)
       )))
 
 
