@@ -306,8 +306,10 @@
   (interactive)
   ;; (load-theme 'arjen t t)
   ;; (enable-theme 'arjen)
-  (load-theme 'andreas t t)
-  (enable-theme 'andreas)
+  (load-theme 'leuven t t)
+  (enable-theme 'leuven)
+  ;; (load-theme 'andreas t t)
+  ;; (enable-theme 'andreas)
   )
 
 (load-my-theme)
@@ -354,6 +356,9 @@
  '(column-number-mode t)
  '(company-idle-delay 0.01)
  '(cua-delete-selection nil)
+ '(custom-safe-themes
+   (quote
+    ("a27c00821ccfd5a78b01e4f35dc056706dd9ede09a8b90c6955ae6a390eb1c1e" "cdc2a7ba4ecf0910f13ba207cce7080b58d9ed2234032113b8846a4e44597e41" default)))
  '(delete-active-region nil)
  '(dired-kept-versions 10)
  '(display-time-mode t)
