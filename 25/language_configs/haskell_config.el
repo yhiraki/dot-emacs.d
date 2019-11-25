@@ -8,7 +8,7 @@
 ;; Version:
 ;; Last-Updated:
 ;;           By:
-;;     Update #: 953
+;;     Update #: 954
 ;; URL:
 ;; Description:
 ;;
@@ -230,7 +230,7 @@
                       (if (string-match "src/" default-directory)
                           (split-string default-directory "src")
                       (if (string-match "shared/" default-directory)
-                          (split-string default-directory "src")
+                          (split-string default-directory "shared")
                         (if (string-match "exp/" default-directory)
                             (split-string default-directory "exp")
                           (if (string-match "fay/" default-directory)
