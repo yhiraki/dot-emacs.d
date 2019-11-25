@@ -306,8 +306,10 @@
   (interactive)
   ;; (load-theme 'arjen t t)
   ;; (enable-theme 'arjen)
-  (load-theme 'andreas t t)
-  (enable-theme 'andreas)
+  (load-theme 'leuven t t)
+  (enable-theme 'leuven)
+  ;; (load-theme 'andreas t t)
+  ;; (enable-theme 'andreas)
   )
 
 (load-my-theme)
@@ -354,6 +356,9 @@
  '(column-number-mode t)
  '(company-idle-delay 0.01)
  '(cua-delete-selection nil)
+ '(custom-safe-themes
+   (quote
+    ("a27c00821ccfd5a78b01e4f35dc056706dd9ede09a8b90c6955ae6a390eb1c1e" "cdc2a7ba4ecf0910f13ba207cce7080b58d9ed2234032113b8846a4e44597e41" default)))
  '(delete-active-region nil)
  '(dired-kept-versions 10)
  '(display-time-mode t)
@@ -466,10 +471,17 @@
  '(org-use-sub-superscripts (quote {}))
  '(package-selected-packages
    (quote
+<<<<<<< HEAD
     (ess color-theme-modern editorconfig editorconfig-generate wolfram-mode flycheck-pyflakes synonymous maude-mode erlang abs-mode hayoo undo-tree latex-pretty-symbols php-auto-yasnippets web-mode counsel helm-flx 0blayout browse-kill-ring yaml-mode gams-mode flycheck-elm elm-mode elm-yasnippets yasnippet-snippets company-statistics flycheck-elm elm-mode elm-yasnippets yasnippet-snippets company-statistics matlab-mode hamlet-mode thesaurus tuareg org-gcal flyspell-correct flyspell-correct-helm window-number w3m vc-darcs tex-smart-umlauts smart-mode-line shm shakespeare-mode request rainbow-mode rainbow-delimiters php-mode pager-default-keybindings ov orgtbl-ascii-plot org-plus-contrib org-cua-dwim org-ac multiple-cursors markdown-toc markdown-mode+ magit jedi javap-mode javadoc-lookup intero ido-ubiquitous ido-hacks ido-gnus htmlize hlint-refactor hindent helm-mode-manager helm-hoogle helm-hayoo helm-google helm-git-files helm-git helm-flycheck helm-dired-recent-dirs helm-c-yasnippet helm-bibtex header2 gnuplot-mode gnuplot ghci-completion fuzzy function-args flycheck-stack flycheck-ledger flycheck-haskell flycheck-google-cpplint flycheck-color-mode-line edbi ecb dired+ company-try-hard company-shell company-math company-ghci company-ghc company-cabal company-c-headers change-inner cdlatex bookmark+ bison-mode bbdb backup-walker auto-dictionary auto-complete-clang auto-complete-c-headers auto-complete-auctex arduino-mode android-mode ace-window ace-jump-mode ace-jump-buffer ac-octave ac-math ac-ispell ac-etags ac-dabbrev ac-capf ac-c-headers)))
  '(safe-local-variable-values
    (quote
     ((intero-targets "api-maker:lib")
+=======
+    (tramp color-theme-modern editorconfig editorconfig-generate wolfram-mode flycheck-pyflakes synonymous maude-mode erlang abs-mode hayoo undo-tree latex-pretty-symbols php-auto-yasnippets web-mode counsel helm-flx 0blayout browse-kill-ring yaml-mode gams-mode flycheck-elm elm-mode elm-yasnippets yasnippet-snippets company-statistics flycheck-elm elm-mode elm-yasnippets yasnippet-snippets company-statistics matlab-mode hamlet-mode thesaurus tuareg org-gcal flyspell-correct flyspell-correct-helm window-number w3m vc-darcs tex-smart-umlauts smart-mode-line shm shakespeare-mode request rainbow-mode rainbow-delimiters php-mode pager-default-keybindings ov orgtbl-ascii-plot org-plus-contrib org-cua-dwim org-ac multiple-cursors markdown-toc markdown-mode+ magit jedi javap-mode javadoc-lookup intero ido-ubiquitous ido-hacks ido-gnus htmlize hlint-refactor hindent helm-mode-manager helm-hoogle helm-hayoo helm-google helm-git-files helm-git helm-flycheck helm-dired-recent-dirs helm-c-yasnippet helm-bibtex header2 gnuplot-mode gnuplot ghci-completion fuzzy function-args flycheck-stack flycheck-ledger flycheck-haskell flycheck-google-cpplint flycheck-color-mode-line edbi ecb dired+ company-try-hard company-shell company-math company-ghci company-ghc company-cabal company-c-headers change-inner cdlatex bookmark+ bison-mode bbdb backup-walker auto-dictionary auto-complete-clang auto-complete-c-headers auto-complete-auctex arduino-mode android-mode ace-window ace-jump-mode ace-jump-buffer ac-octave ac-math ac-ispell ac-etags ac-dabbrev ac-capf ac-c-headers)))
+ '(safe-local-variable-values
+   (quote
+    ((intero-targets "borl-model-based:lib" "examples:exe:gridworld" "examples:exe:gridworld-mini" "examples:exe:multichain" "examples:exe:printer-mail" "examples:exe:queuing-system" "examples:exe:three-states" "examples:exe:three-states-model-free")
+>>>>>>> ef0caa58ec4d4fb317dc355723242e62ca8ec8e2
      (intero-targets "borl:lib" "borl:exe:gridworld" "borl:exe:gym" "borl:exe:multichain" "borl:exe:printer-mail" "borl:exe:queuing-system" "borl:exe:tensorflow-test" "borl:exe:three-states")
      (intero-targets "borl:lib" "borl:exe:gridworld" "borl:exe:gridworld-hard" "borl:exe:gym" "borl:exe:multichain" "borl:exe:printer-mail" "borl:exe:tensorflow-test" "borl:exe:three-states")
      (intero-targets "borl-lp:lib")
