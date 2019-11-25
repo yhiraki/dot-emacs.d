@@ -8,7 +8,7 @@
 ;; Version:
 ;; Last-Updated:
 ;;           By:
-;;     Update #: 948
+;;     Update #: 953
 ;; URL:
 ;; Description:
 ;;
@@ -395,12 +395,13 @@ attention to case differences."
   (define-key intero-mode-map (kbd "C-c i") 'intero-goto-definition)
   (define-key intero-mode-map (kbd "C-c C-b") 'intero-repl)
 
-  ;; (define-key haskell-mode-map (kbd "C-c h h") 'haskell-hoogle)
-  (define-key haskell-mode-map (kbd "C-c h h") 'hayoo-query)
+  (define-key haskell-mode-map (kbd "C-c h h") 'haskell-hoogle)
+  ;; (define-key haskell-mode-map (kbd "C-c h h") 'hayoo-query)
 
   ;; CREATE AND SET TAGS FILE
   (add-hook 'after-save-hook 'make-haskell-tags nil t)
   ;; (hare-init)
+  ;; (turn-off-flyspell)
   )
 
 
@@ -422,7 +423,8 @@ attention to case differences."
 ;; ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 ;; use programming flyspell mode
-;; (add-hook 'haskell-mode-hook 'flyspell-prog-mode)
+;; (add-hook 'haskell-mode-hook 'disable-flyspell-prog)
+
 
 ;; (add-hook 'haskell-mode-hook 'haskell-decl-scan-mode) ; Scans top-level
 ;;                                         ; declarations, and places

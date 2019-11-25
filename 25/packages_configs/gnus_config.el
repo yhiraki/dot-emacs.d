@@ -7,9 +7,9 @@
 ;; Created: Di Feb  4 12:54:58 2014 (+0100)
 ;; Version:
 ;; Package-Requires: ()
-;; Last-Updated: Wed Sep 16 10:28:33 2015 (+0200)
+;; Last-Updated: Mon Nov 25 13:20:08 2019 (+0100)
 ;;           By: Manuel Schneckenreither
-;;     Update #: 279
+;;     Update #: 300
 ;; URL:
 ;; Doc URL:
 ;; Keywords:
@@ -240,14 +240,18 @@
 ;; +++++++++++++++++++++++++++ SIGNATURE ++++++++++++++++++++++++++++++++
 ;; ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
-(setq mail-signature t)
-(setq mail-signature-file "~/Mail/signature")
+(setq mail-signature nil)
+(setq message-signature nil)
+(setq mail-signature-file "~/.emacs.d/signature")
 (setq message-cite-reply-position (quote traditional))
-(setq gnus-posting-styles '(
-                            (".*"
-                             (signature-file "~/News/signature")
-                             (name "Manuel Schneckenreither"))
-                            ))
+;; (setq message-cite-reply-position (quote above))
+;; (setq gnus-posting-styles '((".*"
+;;                              (signature "")
+;;                              (name "Manuel Schneckenreither"))
+;;                             (".*oculytics.*"
+;;                              (signature gnus-signature-oculytics)
+;;                              (name "Manuel Schneckenreither"))
+;;                             ))
 
 ;; ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 ;; ++++++++++++++++++++++++++++ SCORES ++++++++++++++++++++++++++++++++++
