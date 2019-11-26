@@ -100,10 +100,11 @@
 ;; ++++++++++++++++++++++++ CAPTURE/REMEMBER ++++++++++++++++++++++++++++
 ;; ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
-(setq org-mode-capture-directory "~/Documents/Planning/default.org")
+(setq org-mode-capture-directory "~/Documents/planning/default.org")
+(setq org-agenda-files '("~/Documents/planning"))
 
 (setq org-default-notes-file org-mode-capture-directory)
-;; (define-key global-map "\C-c\C-c" 'org-capture) ;; define keystroke
+
 
 ;; automatically clock in and resume after finishing capture mode
 (setq org-capture-templates
@@ -112,32 +113,32 @@
                  "* TODO %^{Name of Task} %^g     \nAdded: %U  %i\n  %?\n"
                  :clock-in t :clock-resume t))))
 
-(setq org-default-notes-file "~/Documents/Planning/default.org")
+(setq org-default-notes-file "~/Documents/planning/default.org")
 (define-key global-map "\C-cr" 'org-capture)
 
 (setq org-capture-templates
       (append '(("l" "Ledger entries")
                 ("ld" "Debit/Credit Card" plain
-                 (file "~/Documents/Planning/accounting.ledger")
+                 (file "~/Documents/planning/accounting.ledger")
                  "%(org-read-date) %^{Payee}
   Liabilities:Debit Card
   Expenses:%^{Account}  %^{Amount}
 ")
                 ("lc" "Cash" plain
-                 (file "~/Documents/Planning/accounting.ledger")
+                 (file "~/Documents/planning/accounting.ledger")
                  "%(org-read-date) * %^{Payee}
   Expenses:Cash
   Expenses:%^{Account}  %^{Amount}
 ")
                 ("g" "Google Calendar")
                 ("gd" "Event in default calendar" plain
-                 (file "~/Documents/Planning/default.org")
+                 (file "~/Documents/planning/default.org")
                  "* %^{Subject}
 %^T
 
 %^{Description}")
                 ;;                 ("gu" "Event in university calendar" plain
-                ;;                   (file "~/Documents/Planning/university.org")
+                ;;                   (file "~/Documents/planning/university.org")
                 ;;                   "* %^{Subject}
                 ;; %^T
 
@@ -411,6 +412,8 @@
   (org-agenda))
 
 (global-set-key "\C-ca" 'org-gcal-sync-and-open-agenda)
+(global-set-key (kbd (concat prefix-command-key " C-c")) 'org-capture) ;;  define keystroke
+(global-set-key (kbd (concat prefix-command-key " C-a")) 'org-gcal-sync-and-open-agenda) ;;  define keystroke
 ;; (global-set-key "\C-cb" 'org-iswitchb)
 
 
@@ -434,7 +437,6 @@
 ;; ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 
-(setq org-mobile-directory "~/.grive/Planning")
 (setq org-mobile-inbox-for-pull "~/.grive/index.org")
 
 
