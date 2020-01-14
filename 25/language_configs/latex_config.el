@@ -7,9 +7,9 @@
 ;; Created: Sa Nov  2 16:14:09 2013 (+0100)
 ;; Version:
 ;; Package-Requires: ()
-;; Last-Updated: Wed Aug 14 16:41:48 2019 (+0200)
+;; Last-Updated: Tue Jan 14 13:51:31 2020 (+0100)
 ;;           By: Manuel Schneckenreither
-;;     Update #: 95
+;;     Update #: 208
 ;; URL:
 ;; Doc URL:
 ;; Keywords:
@@ -129,17 +129,14 @@
 
 ;; compile and show latex in one command
 (defun compile-show-latex ()
-  "Comile latex and show in evince"
+  "Compile latex and show in evince."
   (interactive)
   (TeX-texify)
-  (shell-command "rm -rf *.blg *.toc *.out *.dvi *.backup *.exl *.exls *.ps" nil)
+  (TeX-command "View" 'TeX-active-master 0)
   ;; need *.aux for syncing with Evince *.log needed for lookup, *.bbl is needed for
   ;; bibliography
-  (TeX-command "View" 'TeX-active-master 0)
+  (shell-command "rm -rf *.blg *.toc *.out *.dvi *.backup *.exl *.exls *.ps" nil)
   )
-
-
-;; (add-hook 'doc-view-mode-hook 'auto-revert-mode)
 
 (setq TeX-view-program-selection
       '((output-html "xdg-open")
@@ -168,47 +165,68 @@
 
   (TeX-PDF-mode t)
   (setq TeX-master (guess-TeX-master (buffer-file-name)))
-  (flyspell-mode)
-  (flyspell-buffer)
+  ;; (flyspell-mode)
+  ;; (flyspell-buffer)
 
   ;; enable org-table mode
   (orgtbl-mode)
 
   ;; auto complete mode
-  (add-to-list 'ac-sources 'ac-source-etags)
+  ;; (add-to-list 'ac-sources 'ac-source-etags)
 
-  (add-to-list 'ac-sources 'ac-source-abbrev)          ;; edited
-  ;; (add-to-list 'ac-sources 'ac-source-css-property)
-  ;; (add-to-list 'ac-sources 'ac-source-dictionary)
-  ;; (add-to-list 'ac-sources 'ac-source-eclim)
-  (add-to-list 'ac-sources 'ac-source-yasnippet)
-  ;; (add-to-list 'ac-sources 'ac-source-symbols)
-  ;; (add-to-list 'ac-sources 'ac-source-filename)
-  ;; (add-to-list 'ac-sources 'ac-source-files-in-current-dir)
-  ;; (add-to-list 'ac-sources 'ac-source-gtags)
-  (add-to-list 'ac-sources 'ac-source-etags)
-  (add-to-list 'ac-sources 'ac-source-imenu)
-  ;; (add-to-list 'ac-sources 'ac-source-semantic ;; slows down auto complete)
-  ;; (add-to-list 'ac-sources 'ac-source-semantic-raw ;; slows down auto complete)
-  ;; (add-to-list 'ac-sources 'ac-source-words-in-all-buffer)
-  (add-to-list 'ac-sources 'ac-source-words-in-buffer)
-  (add-to-list 'ac-sources 'ac-source-words-in-same-mode-buffers)
-  (add-to-list 'ac-modes 'latex-mode)   ; make auto-complete aware of `latex-mode`
-  (add-to-list 'ac-modes 'gams-mode)
+  ;; (add-to-list 'ac-sources 'ac-source-abbrev)          ;; edited
+  ;; ;; (add-to-list 'ac-sources 'ac-source-css-property)
+  ;; ;; (add-to-list 'ac-sources 'ac-source-dictionary)
+  ;; ;; (add-to-list 'ac-sources 'ac-source-eclim)
+  ;; (add-to-list 'ac-sources 'ac-source-yasnippet)
+  ;; ;; (add-to-list 'ac-sources 'ac-source-symbols)
+  ;; ;; (add-to-list 'ac-sources 'ac-source-filename)
+  ;; ;; (add-to-list 'ac-sources 'ac-source-files-in-current-dir)
+  ;; ;; (add-to-list 'ac-sources 'ac-source-gtags)
+  ;; (add-to-list 'ac-sources 'ac-etags-ac-setup)
+  ;; (add-to-list 'ac-sources 'ac-source-imenu)
+  ;; ;; (add-to-list 'ac-sources 'ac-source-semantic ;; slows down auto complete)
+  ;; ;; (add-to-list 'ac-sources 'ac-source-semantic-raw ;; slows down auto complete)
+  ;; ;; (add-to-list 'ac-sources 'ac-source-words-in-all-buffer)
+  ;; (add-to-list 'ac-sources 'ac-source-words-in-buffer)
+  ;; (add-to-list 'ac-sources 'ac-source-words-in-same-mode-buffers)
+  ;; (add-to-list 'ac-modes 'latex-mode)   ; make auto-complete aware of `latex-mode`
+  ;; (add-to-list 'ac-modes 'gams-mode)
 
-  (auto-complete-mode)
-
+  ;; (auto-complete-mode)
+  ;; (company-mode)
   (auto-fill-mode)
 
   ;; create and set tags file
-  (add-hook 'after-save-hook 'make-tex-tags nil t)
+  (add-hook 'after-save-hook (lambda () (run-with-idle-timer 0.1 nil 'make-tex-tags) nil t))
 
   ;; add to hook
   ;; (add-hook 'LaTeX-mode-hook 'turn-on-auto-fill nil t)
 
-
   ;; set keys
   (local-set-key (kbd "C-x SPC") 'compile-show-latex)
+
+  (add-hook 'after-save-hook (lambda () (TeX-texify)) nil 'make-it-local)
+  ;; (add-hook 'after-save-hook (lambda () (TeX-command "View" 'TeX-active-master 0)) nil 'make-it-local)
+  ;; (add-hook 'after-save-hook (lambda () (funcall-interactively 'compile-show-latex)) nil t)
+  ;; (add-hook 'after-save-hook (lambda () (call-interactively 'compile-show-latex-wrapper)) nil t)
+
+  ;; auctex
+  (require 'company-auctex)
+  (company-auctex-init)
+
+  ;; bibtex
+  (require 'company-bibtex)
+  (add-to-list 'company-backends 'company-bibtex)
+
+  (company-mode)
+
+;; D company-box        20190311.1745 installed             Company front-end with icons
+;; D company-cabal      20170917.1317 installed             company-mode cabal backend
+;; D company-ghc        20170918.833  installed             company-mode ghc-mod backend
+;; D company-ghci       20190707.311  installed             company backend which uses the current ghci process.
+;; D company-quickhelp  20180525.1003 installed             Popup documentation for completion candidates
+
 
   )
 

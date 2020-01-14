@@ -7,9 +7,9 @@
 ;; Created: Mo Okt 14 18:17:43 2013 (+0200)
 ;; Version:
 ;; Package-Requires: ()
-;; Last-Updated: Tue Mar  7 15:16:14 2017 (+0100)
+;; Last-Updated: Tue Jan 14 12:00:06 2020 (+0100)
 ;;           By: Manuel Schneckenreither
-;;     Update #: 345
+;;     Update #: 347
 ;; URL:
 ;; Doc URL:
 ;; Keywords:
@@ -85,10 +85,10 @@
 
   ;; ;; auto complete (if it doesn't work try to disable flyspell mode!)
   ;; (auto-complete-mode)
+  (company-mode)
 
   ;; use programming flyspell mode
   ;; (flyspell-prog-mode)
-
   ;; glasses mode
   ;; (glasses-mode t)
 

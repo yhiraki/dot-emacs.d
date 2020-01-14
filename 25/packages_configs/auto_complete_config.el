@@ -7,9 +7,9 @@
 ;; Created: So Okt 13 19:43:26 2013 (+0200)
 ;; Version:
 ;; Package-Requires: ()
-;; Last-Updated: Wed Dec  2 15:54:10 2015 (+0100)
+;; Last-Updated: Tue Jan 14 11:46:31 2020 (+0100)
 ;;           By: Manuel Schneckenreither
-;;     Update #: 276
+;;     Update #: 279
 ;; URL:
 ;; Doc URL:
 ;; Keywords:
@@ -66,6 +66,12 @@
 ;;     (requires . 3))
 ;;   "Source for etags.")
 
+(custom-set-variables
+  '(ac-etags-requires 1))
+
+(eval-after-load "etags"
+  '(progn
+      (ac-etags-setup)))
 
 ;; ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 ;; ++++++++++++++++++++++ USER OPTIONS, VARIABLES +++++++++++++++++++++++

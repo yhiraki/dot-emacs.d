@@ -8,7 +8,7 @@
 ;; Version:
 ;; Last-Updated:
 ;;           By:
-;;     Update #: 954
+;;     Update #: 958
 ;; URL:
 ;; Description:
 ;;
@@ -329,23 +329,33 @@ attention to case differences."
 (defun my/haskell-minor-mode ()
   "Minor mode hook for Haskell."
 
-  ;; add auto-complete mode
-  (add-to-list 'ac-sources 'ac-source-abbrev)          ;; edited
-  ;; (add-to-list 'ac-sources 'ac-source-css-property)
-  (add-to-list 'ac-sources 'ac-source-dictionary)
-  ;; (add-to-list 'ac-sources 'ac-source-eclim)
-  (add-to-list 'ac-sources 'ac-source-yasnippet)
-  ;; (add-to-list 'ac-sources 'ac-source-symbols)
-  ;; (add-to-list 'ac-sources 'ac-source-filename)
-  ;; (add-to-list 'ac-sources 'ac-source-files-in-current-dir)
-  ;; (add-to-list 'ac-sources 'ac-source-gtags)
-  (add-to-list 'ac-sources 'ac-source-etags)
-  (add-to-list 'ac-sources 'ac-source-imenu) ;; broken !!!
-  ;; (add-to-list 'ac-sources 'ac-source-semantic) ;; slows down auto complete)
-  ;; (add-to-list 'ac-sources 'ac-source-semantic-raw ;; slows down auto complete)
-  ;; (add-to-list 'ac-sources 'ac-source-words-in-all-buffer)
-  (add-to-list 'ac-sources 'ac-source-words-in-buffer)
-  ;; (add-to-list 'ac-sources 'ac-source-words-in-same-mode-buffers)
+  ;; ;; add auto-complete mode
+  ;; (add-to-list 'ac-sources 'ac-source-abbrev)          ;; edited
+  ;; ;; (add-to-list 'ac-sources 'ac-source-css-property)
+  ;; (add-to-list 'ac-sources 'ac-source-dictionary)
+  ;; ;; (add-to-list 'ac-sources 'ac-source-eclim)
+  ;; (add-to-list 'ac-sources 'ac-source-yasnippet)
+  ;; ;; (add-to-list 'ac-sources 'ac-source-symbols)
+  ;; ;; (add-to-list 'ac-sources 'ac-source-filename)
+  ;; ;; (add-to-list 'ac-sources 'ac-source-files-in-current-dir)
+  ;; ;; (add-to-list 'ac-sources 'ac-source-gtags)
+  ;; (add-to-list 'ac-sources 'ac-source-etags)
+  ;; (add-to-list 'ac-sources 'ac-source-imenu) ;; broken !!!
+  ;; ;; (add-to-list 'ac-sources 'ac-source-semantic) ;; slows down auto complete)
+  ;; ;; (add-to-list 'ac-sources 'ac-source-semantic-raw ;; slows down auto complete)
+  ;; ;; (add-to-list 'ac-sources 'ac-source-words-in-all-buffer)
+  ;; (add-to-list 'ac-sources 'ac-source-words-in-buffer)
+  ;; ;; (add-to-list 'ac-sources 'ac-source-words-in-same-mode-buffers)
+
+
+  ;; cabal
+  ;; (add-to-list 'company-backends 'company-cabal)
+
+  ;; ;; ghc
+  ;; (add-to-list 'company-backends 'company-ghc)
+
+
+  ;; (company-mode)
 
   ;; (auto-complete-mode)
   (set (make-local-variable 'whitespace-style) nil)
@@ -402,6 +412,8 @@ attention to case differences."
   (add-hook 'after-save-hook 'make-haskell-tags nil t)
   ;; (hare-init)
   ;; (turn-off-flyspell)
+
+
   )
 
 

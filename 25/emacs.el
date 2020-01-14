@@ -5,9 +5,9 @@
 ;; Author: Manuel Schneckenreither
 ;; Created: Tue Dec 11 00:43:14 2012 (+0100)
 ;; Version:
-;; Last-Updated: Fri Feb  8 11:43:02 2019 (+0100)
+;; Last-Updated: Tue Jan 14 12:39:27 2020 (+0100)
 ;;           By: Manuel Schneckenreither
-;;     Update #: 487
+;;     Update #: 492
 ;; URL:
 ;; Description:
 ;;
@@ -118,9 +118,10 @@
 ;; undo tree
 (load (concat package-conf-folder "undotree_config.el"))
 ;; company mode -- auto completion -- set auto-completion-mode
-(load (concat package-conf-folder "company_config.el"))
+;; (load (concat package-conf-folder "company_config.el"))
 ;; load django
 (load (concat package-conf-folder "python_django_config.el"))
+
 
 ;; ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 ;; ++++++++++++++++++ Load Language Specific Settings +++++++++++++++++++

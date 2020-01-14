@@ -7,9 +7,9 @@
 ;; Created: Fr Okt  4 20:40:17 2013 (+0200)
 ;; Version:
 ;; Package-Requires: ()
-;; Last-Updated: Tue Nov 19 21:33:07 2019 (+0100)
+;; Last-Updated: Tue Jan 14 12:35:41 2020 (+0100)
 ;;           By: Manuel Schneckenreither
-;;     Update #: 140
+;;     Update #: 142
 ;; URL:
 ;; Doc URL:
 ;; Keywords:
@@ -47,6 +47,8 @@
 ;;
 ;;; Code:
 
+(require 'flyspell-lazy)
+(flyspell-lazy-mode 1)
 
 (require 'auto-dictionary)
 (require 'ispell)

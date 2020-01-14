@@ -7,9 +7,9 @@
 ;; Created: Mi Mai 28 10:11:54 2014 (+0200)
 ;; Version:
 ;; Package-Requires: ()
-;; Last-Updated: Wed Nov 15 13:36:52 2017 (+0100)
+;; Last-Updated: Tue Jan 14 11:59:13 2020 (+0100)
 ;;           By: Manuel Schneckenreither
-;;     Update #: 29
+;;     Update #: 31
 ;; URL:
 ;; Doc URL:
 ;; Keywords:
@@ -78,23 +78,23 @@
   ;; (add-to-list 'ac-sources 'ac-source-css-property)
   ;; (add-to-list 'ac-sources 'ac-source-dictionary)
   ;; (add-to-list 'ac-sources 'ac-source-eclim)
-  (add-to-list 'ac-sources 'ac-source-yasnippet)
+  ;; (add-to-list 'ac-sources 'ac-source-yasnippet)
   ;; (add-to-list 'ac-sources 'ac-source-symbols)
   ;; (add-to-list 'ac-sources 'ac-source-filename)
   ;; (add-to-list 'ac-sources 'ac-source-files-in-current-dir)
   ;; (add-to-list 'ac-sources 'ac-source-gtags)
-  (add-to-list 'ac-sources 'ac-source-etags)
+  ;; (add-to-list 'ac-sources 'ac-source-etags)
   ;; (add-to-list 'ac-sources 'ac-source-octave)
   ;; (add-to-list 'ac-sources 'ac-source-imenu)
   ;; (add-to-list 'ac-sources 'ac-source-semantic ;; slows down auto complete)
   ;; (add-to-list 'ac-sources 'ac-source-semantic-raw ;; slows down auto complete)
   ;; (add-to-list 'ac-sources 'ac-source-words-in-all-buffer)
   ;; (add-to-list 'ac-sources 'ac-source-words-in-buffer)
-  (add-to-list 'ac-sources 'ac-source-words-in-same-mode-buffers)
+  ;; (add-to-list 'ac-sources 'ac-source-words-in-same-mode-buffers)
 
   ;; auto complete (if it doesn't work try to disable flyspell mode!)
-  (auto-complete-mode)
-  (setq ac-delay 0.4)
+  ;; (auto-complete-mode)
+  ;; (setq ac-delay 0.4)
 
   ;; use programming flyspell mode
   (flyspell-prog-mode)

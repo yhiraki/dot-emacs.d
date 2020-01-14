@@ -25,29 +25,48 @@
 (add-to-list 'company-backends 'company-yasnippet)
 
 ;; immediate completion
-(setq company-idle-delay 0.01)
+(setq company-idle-delay 0.1)
 
 ;; start completion using company
 (add-hook 'after-init-hook 'global-company-mode)
 
 
 ;; ngram
-(with-eval-after-load 'company-ngram
-  ; ~/data/ngram/*.txt are used as data
-  (setq company-ngram-data-dir "~/.emacs.d/ngram")
-  ; company-ngram supports python 3 or newer
-  (setq company-ngram-python "python3")
-  (company-ngram-init)
-  (cons 'company-ngram-backend company-backends)
-  ; or use `M-x turn-on-company-ngram' and
-  ; `M-x turn-off-company-ngram' on individual buffers
-  ;
-  ; save the cache of candidates
-  (run-with-idle-timer 3600 t
-                       (lambda ()
-                         (company-ngram-command "save_cache")
-                         ))
-  )
-(require 'company-ngram nil t)
+;; (with-eval-after-load 'company-ngram
+;;   ; ~/data/ngram/*.txt are used as data
+;;   (setq company-ngram-data-dir "~/.emacs.d/ngram")
+;;   ; company-ngram supports python 3 or newer
+;;   (setq company-ngram-python "python3")
+;;   (company-ngram-init)
+;;   (cons 'company-ngram-backend company-backends)
+;;   ; or use `M-x turn-on-company-ngram' and
+;;   ; `M-x turn-off-company-ngram' on individual buffers
+;;   ;
+;;   ; save the cache of candidates
+;;   (run-with-idle-timer 3600 t
+;;                        (lambda ()
+;;                          (company-ngram-command "save_cache")
+;;                          ))
+;;   )
+;; (require 'company-ngram nil t)
+
+;; Statistics
+
+(require 'company-statistics)
+(company-statistics-mode)
+
+;; global activation of the unicode symbol completion
+(add-to-list 'company-backends 'company-math-symbols-unicode)
 
 
+;; ;; icons
+;; (require 'company-box)
+;; (add-hook 'company-mode-hook 'company-box-mode)
+
+;; fuzzy
+(require 'company-fuzzy)
+(global-company-fuzzy-mode 1)
+
+;; ;; doc info
+;; (require 'company-quickhelp)
+;; (company-quickhelp-mode)
