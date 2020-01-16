@@ -22,13 +22,14 @@
 ;; (define-key company-active-map (kbd "TAB") 'complete-or-indent)
 
 ;; Add Yasnippet
-(add-to-list 'company-backends 'company-yasnippet)
+;; (add-to-list 'company-backends 'company-yasnippet)
 
 ;; immediate completion
 (setq company-idle-delay 0.1)
+(setq company-minimum-prefix-length 3)
 
 ;; start completion using company
-(add-hook 'after-init-hook 'global-company-mode)
+;; (add-hook 'after-init-hook 'global-company-mode)
 
 
 ;; ngram
@@ -58,15 +59,17 @@
 ;; global activation of the unicode symbol completion
 (add-to-list 'company-backends 'company-math-symbols-unicode)
 
-
-;; ;; icons
-;; (require 'company-box)
-;; (add-hook 'company-mode-hook 'company-box-mode)
-
-;; fuzzy
+;; fuzzy (saves files automatically?)
 (require 'company-fuzzy)
 (global-company-fuzzy-mode 1)
 
+
+(setq company-eclim-auto-save nil)          ; Stop eclim auto save.
+(setq company-dabbrev-downcase nil)         ; No downcase when completion.
+(setq company-tooltip-align-annotations t)  ; Align annotation to the right side.
+
+
 ;; ;; doc info
-;; (require 'company-quickhelp)
-;; (company-quickhelp-mode)
+(require 'company-quickhelp)
+(company-quickhelp-mode)
+
