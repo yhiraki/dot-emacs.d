@@ -59,9 +59,9 @@
 ;; global activation of the unicode symbol completion
 (add-to-list 'company-backends 'company-math-symbols-unicode)
 
-;; fuzzy (saves files automatically?)
-(require 'company-fuzzy)
-(global-company-fuzzy-mode 1)
+;; fuzzy
+;; (require 'company-fuzzy)
+;; (global-company-fuzzy-mode 1)
 
 
 (setq company-eclim-auto-save nil)          ; Stop eclim auto save.
