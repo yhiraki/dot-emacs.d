@@ -7,9 +7,9 @@
 ;; Created: Sa Nov  2 16:14:09 2013 (+0100)
 ;; Version:
 ;; Package-Requires: ()
-;; Last-Updated: Tue Jan 14 13:51:31 2020 (+0100)
+;; Last-Updated: Tue Jan 21 11:51:31 2020 (+0100)
 ;;           By: Manuel Schneckenreither
-;;     Update #: 208
+;;     Update #: 215
 ;; URL:
 ;; Doc URL:
 ;; Keywords:
@@ -149,7 +149,13 @@
   (interactive)
   (let ((dir (nth 0 (if (string-match "tikz/" default-directory)
                         (split-string default-directory "tikz")
-                      (split-string default-directory "src")))))
+                      (if (string-match "figures/" default-directory)
+                          (split-string default-directory "figures")
+                      (if (string-match "paper/" default-directory)
+                          (split-string default-directory "paper")
+                            (split-string default-directory "src")))))))
+
+
     (setq esdir (replace-regexp-in-string " " "\\\\ " dir))
     (shell-command
      (concat "cd " esdir " && find . -name \"*.tex\" | etags - 1>/dev/null 2>/dev/null") nil)
@@ -198,7 +204,7 @@
   (auto-fill-mode)
 
   ;; create and set tags file
-  (add-hook 'after-save-hook (lambda () (run-with-idle-timer 0.1 nil 'make-tex-tags) nil t))
+  (add-hook 'after-save-hook 'make-tex-tags nil t)
 
   ;; add to hook
   ;; (add-hook 'LaTeX-mode-hook 'turn-on-auto-fill nil t)
