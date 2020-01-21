@@ -7,9 +7,9 @@
 ;; Created: Sa Nov  2 16:14:09 2013 (+0100)
 ;; Version:
 ;; Package-Requires: ()
-;; Last-Updated: Tue Jan 21 11:51:31 2020 (+0100)
+;; Last-Updated: Tue Jan 21 11:52:56 2020 (+0100)
 ;;           By: Manuel Schneckenreither
-;;     Update #: 215
+;;     Update #: 216
 ;; URL:
 ;; Doc URL:
 ;; Keywords:
@@ -158,7 +158,7 @@
 
     (setq esdir (replace-regexp-in-string " " "\\\\ " dir))
     (shell-command
-     (concat "cd " esdir " && find . -name \"*.tex\" | etags - 1>/dev/null 2>/dev/null") nil)
+     (concat "cd " esdir " && find . -name \"*.tex\" -not -name \"_*\" -not -name \".*\" | etags - 1>/dev/null 2>/dev/null") nil)
     (visit-tags-table (concat dir "TAGS"))))
 
 ;; auto completion for auctex

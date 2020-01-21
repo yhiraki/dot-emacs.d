@@ -355,6 +355,7 @@
       "../Common/lib/"))))
  '(column-number-mode t)
  '(company-box-icons-alist (quote company-box-icons-icons-in-terminal))
+ '(company-fuzzy-sorting-backend (quote flx))
  '(company-idle-delay 0.01)
  '(cua-delete-selection nil)
  '(custom-safe-themes
@@ -396,6 +397,7 @@
  '(flycheck-flake8-maximum-line-length 160)
  '(flymake-gui-warnings-enabled nil)
  '(frame-background-mode (quote dark))
+ '(global-company-fuzzy-mode t nil (company-fuzzy))
  '(global-eclim-mode t)
  '(global-flycheck-mode t)
  '(global-undo-tree-mode t)
@@ -472,7 +474,7 @@
  '(org-use-sub-superscripts (quote {}))
  '(package-selected-packages
    (quote
-    (company-quickhelp flyspell-lazy company-auctex company-bibtex company-fuzzy pabbrev ess color-theme-modern editorconfig editorconfig-generate wolfram-mode flycheck-pyflakes synonymous maude-mode erlang abs-mode hayoo undo-tree latex-pretty-symbols php-auto-yasnippets web-mode counsel helm-flx 0blayout browse-kill-ring yaml-mode gams-mode flycheck-elm elm-mode elm-yasnippets yasnippet-snippets company-statistics flycheck-elm elm-mode elm-yasnippets yasnippet-snippets company-statistics matlab-mode hamlet-mode thesaurus tuareg org-gcal flyspell-correct flyspell-correct-helm window-number w3m vc-darcs tex-smart-umlauts smart-mode-line shm shakespeare-mode request rainbow-mode rainbow-delimiters php-mode pager-default-keybindings ov orgtbl-ascii-plot org-plus-contrib org-cua-dwim org-ac multiple-cursors markdown-toc markdown-mode+ magit jedi javap-mode javadoc-lookup intero ido-ubiquitous ido-hacks ido-gnus htmlize hlint-refactor hindent helm-mode-manager helm-hoogle helm-hayoo helm-google helm-git-files helm-git helm-flycheck helm-dired-recent-dirs helm-c-yasnippet helm-bibtex header2 gnuplot-mode gnuplot ghci-completion fuzzy function-args flycheck-stack flycheck-ledger flycheck-haskell flycheck-google-cpplint flycheck-color-mode-line edbi ecb dired+ company-try-hard company-shell company-math company-c-headers change-inner cdlatex bookmark+ bison-mode bbdb backup-walker auto-dictionary auto-complete-clang auto-complete-c-headers auto-complete-auctex arduino-mode android-mode ace-window ace-jump-mode ace-jump-buffer ac-octave ac-math ac-ispell ac-etags ac-dabbrev ac-capf ac-c-headers)))
+    (company-quickhelp flyspell-lazy company-auctex company-bibtex company-fuzzy pabbrev ess color-theme-modern editorconfig editorconfig-generate wolfram-mode flycheck-pyflakes synonymous maude-mode erlang abs-mode hayoo undo-tree latex-pretty-symbols php-auto-yasnippets web-mode counsel helm-flx 0blayout browse-kill-ring yaml-mode gams-mode flycheck-elm elm-mode elm-yasnippets yasnippet-snippets company-statistics flycheck-elm elm-mode elm-yasnippets yasnippet-snippets company-statistics matlab-mode hamlet-mode thesaurus tuareg org-gcal flyspell-correct flyspell-correct-helm window-number w3m vc-darcs tex-smart-umlauts smart-mode-line shm shakespeare-mode request rainbow-mode rainbow-delimiters php-mode pager-default-keybindings ov orgtbl-ascii-plot org-plus-contrib org-cua-dwim org-ac multiple-cursors markdown-toc markdown-mode+ magit jedi javap-mode javadoc-lookup intero ido-ubiquitous ido-hacks ido-gnus htmlize hlint-refactor hindent helm-mode-manager helm-hoogle helm-hayoo helm-google helm-git-files helm-git helm-flycheck helm-dired-recent-dirs helm-c-yasnippet helm-bibtex header2 gnuplot-mode gnuplot ghci-completion fuzzy function-args flycheck-stack flycheck-ledger flycheck-haskell flycheck-google-cpplint flycheck-color-mode-line edbi ecb dired+ company-try-hard company-shell company-math company-c-headers change-inner cdlatex bookmark+ bison-mode backup-walker auto-dictionary auto-complete-clang auto-complete-c-headers auto-complete-auctex arduino-mode android-mode ace-window ace-jump-mode ace-jump-buffer ac-octave ac-math ac-ispell ac-etags ac-dabbrev ac-capf ac-c-headers)))
  '(safe-local-variable-values
    (quote
     ((intero-targets "simsim:lib" "simsim:exe:simsim-exe")
