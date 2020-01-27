@@ -70,6 +70,6 @@
 
 
 ;; ;; doc info
-(require 'company-quickhelp)
-(company-quickhelp-mode)
+;; (require 'company-quickhelp)
+;; (company-quickhelp-mode)
 
